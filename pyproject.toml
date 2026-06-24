@@ -1,0 +1,23 @@
+[project]
+name = "qdedu"
+version = "0.1.0"
+description = "Raspagem de Secretarias Municipais de Educação via Querido Diário"
+requires-python = ">=3.10"
+dependencies = [
+    "httpx>=0.27,<0.29",
+    "python-dotenv>=1.0",
+]
+
+[project.scripts]
+qdedu = "qdedu.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["qdedu"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
