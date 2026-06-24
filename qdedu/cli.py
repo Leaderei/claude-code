@@ -81,8 +81,13 @@ def cmd_scrape(args: argparse.Namespace) -> int:
 
 def cmd_export(args: argparse.Namespace) -> int:
     with open_store(args.db) as store:
-        n = store.export_csv(args.uf, args.out)
-    print(f"{n} linhas exportadas para {args.out}")
+        if args.format == "wide":
+            n = store.export_csv_wide(args.uf, args.out)
+            unit = "municípios"
+        else:
+            n = store.export_csv(args.uf, args.out)
+            unit = "linhas"
+    print(f"{n} {unit} exportados para {args.out}")
     return 0
 
 
@@ -132,6 +137,10 @@ def build_parser() -> argparse.ArgumentParser:
     e = sub.add_parser("export", help="Exporta contatos da UF para CSV")
     e.add_argument("--uf", required=True, help="Sigla da UF (ex.: SP)")
     e.add_argument("--out", required=True, help="Arquivo CSV de saída")
+    e.add_argument(
+        "--format", choices=("long", "wide"), default="wide",
+        help="wide = 1 linha por município (prospecção); long = 1 por contato",
+    )
     e.set_defaults(func=cmd_export)
     return p
 

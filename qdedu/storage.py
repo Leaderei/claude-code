@@ -169,6 +169,86 @@ class Store:
                 writer.writerow([r[k] for k in r.keys()])
         return len(rows)
 
+    def export_csv_wide(self, uf: str, out_path: str) -> int:
+        """Exporta CSV consolidado: uma linha por município (p/ prospecção).
+
+        Prioriza contatos do site oficial (`site_prefeitura`) e marcados como
+        de educação. Retorna o nº de municípios escritos.
+        """
+        os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+        # ordem de prioridade: site oficial > educação > demais
+        rows = self.conn.execute(
+            """
+            SELECT m.territory_id, m.name AS municipio, m.uf, c.kind, c.value,
+                   c.title, c.source, c.source_url, c.gazette_date
+            FROM contacts c
+            JOIN municipalities m ON m.territory_id = c.territory_id
+            WHERE m.uf = ?
+            ORDER BY m.name,
+                     (c.source = 'site_prefeitura') DESC,
+                     (c.title = 'educação')          DESC,
+                     c.gazette_date                  DESC,
+                     c.value
+            """,
+            (uf.upper(),),
+        ).fetchall()
+
+        agg: dict[str, dict] = {}
+        for r in rows:
+            d = agg.setdefault(
+                r["territory_id"],
+                {
+                    "municipio": r["municipio"],
+                    "uf": r["uf"],
+                    "codigo_ibge": r["territory_id"],
+                    "emails": [],
+                    "telefones": [],
+                    "secretarios": [],
+                    "fontes": set(),
+                    "url_fonte": r["source_url"] or "",
+                },
+            )
+            d["fontes"].add(r["source"])
+            if r["kind"] == "email" and r["value"] not in d["emails"]:
+                d["emails"].append(r["value"])
+            elif r["kind"] == "phone" and r["value"] not in d["telefones"]:
+                d["telefones"].append(r["value"])
+            elif r["kind"] == "secretary" and r["value"] not in d["secretarios"]:
+                d["secretarios"].append(r["value"])
+
+        with open(out_path, "w", newline="", encoding="utf-8") as fh:
+            writer = csv.writer(fh)
+            writer.writerow(
+                [
+                    "municipio",
+                    "uf",
+                    "codigo_ibge",
+                    "melhor_email",
+                    "melhor_telefone",
+                    "secretario",
+                    "todos_emails",
+                    "todos_telefones",
+                    "fontes",
+                    "url_fonte",
+                ]
+            )
+            for d in agg.values():
+                writer.writerow(
+                    [
+                        d["municipio"],
+                        d["uf"],
+                        d["codigo_ibge"],
+                        d["emails"][0] if d["emails"] else "",
+                        d["telefones"][0] if d["telefones"] else "",
+                        "; ".join(d["secretarios"]),
+                        "; ".join(d["emails"]),
+                        "; ".join(d["telefones"]),
+                        "; ".join(sorted(d["fontes"])),
+                        d["url_fonte"],
+                    ]
+                )
+        return len(agg)
+
     def close(self) -> None:
         self.conn.close()
 

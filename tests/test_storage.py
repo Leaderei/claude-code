@@ -43,3 +43,33 @@ def test_export_csv(tmp_path):
     assert rows[0]["municipio"] == "São Paulo"
     assert {r["tipo"] for r in rows} == {"email", "phone"}
     st.close()
+
+
+def test_export_csv_wide_prioritizes_site_and_education(tmp_path):
+    st = _store(tmp_path)
+    st.upsert_municipalities([("3550308", "São Paulo", "SP")])
+    st.add_contacts(
+        [
+            # do diário (fonte fraca)
+            ContactRow("3550308", "email", "geral@sp.gov.br", source="querido_diario"),
+            # do site, marcado como educação (deve vir primeiro)
+            ContactRow(
+                "3550308", "email", "educacao@sp.gov.br",
+                title="educação", source="site_prefeitura",
+            ),
+            ContactRow("3550308", "phone", "1140028922", source="site_prefeitura"),
+            ContactRow("3550308", "secretary", "Maria Souza"),
+        ]
+    )
+    out = tmp_path / "wide.csv"
+    n = st.export_csv_wide("SP", str(out))
+    assert n == 1  # uma linha por município
+    with open(out, encoding="utf-8") as fh:
+        row = next(csv.DictReader(fh))
+    assert row["municipio"] == "São Paulo"
+    assert row["melhor_email"] == "educacao@sp.gov.br"  # site+educação priorizado
+    assert "geral@sp.gov.br" in row["todos_emails"]
+    assert row["melhor_telefone"] == "1140028922"
+    assert row["secretario"] == "Maria Souza"
+    assert "site_prefeitura" in row["fontes"] and "querido_diario" in row["fontes"]
+    st.close()

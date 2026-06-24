@@ -40,8 +40,18 @@ qdedu cities --uf SP
 qdedu scrape --uf SP --since 2023-01-01 --limit 20
 
 # 3. Exportar contatos para CSV
-qdedu export --uf SP --out data/sp_contatos.csv
+qdedu export --uf SP --out data/sp_contatos.csv            # consolidado (padrão)
+qdedu export --uf SP --out data/sp_long.csv --format long  # 1 linha por contato
 ```
+
+Há dois formatos de CSV:
+
+- **`wide`** (padrão) — **uma linha por município**, pronto para prospecção:
+  `municipio, uf, codigo_ibge, melhor_email, melhor_telefone, secretario,
+  todos_emails, todos_telefones, fontes, url_fonte`. Prioriza contatos do
+  **site oficial** e marcados como **educação**.
+- **`long`** — **uma linha por contato** (auditoria/revisão), com o trecho de
+  contexto do diário/site de onde veio cada dado.
 
 ### Enriquecimento pelo site da prefeitura
 
