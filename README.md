@@ -43,6 +43,26 @@ qdedu scrape --uf SP --since 2023-01-01 --limit 20
 qdedu export --uf SP --out data/sp_contatos.csv
 ```
 
+### Enriquecimento pelo site da prefeitura
+
+Para contatos mais atuais que os do texto dos diários, ative o enricher que
+busca e-mail/telefone da Secretaria de Educação no **site oficial** do
+município (descobre o domínio via `publication_urls` do Querido Diário e/ou um
+mapa curado):
+
+```bash
+# usa o domínio publicado no Querido Diário
+qdedu scrape --uf SP --enrich site
+
+# (recomendado) forneça um mapa curado id_ibge->url para maior precisão
+qdedu scrape --uf SP --enrich site --domain-map dominios_sp.csv
+```
+
+`--domain-map` aceita JSON (`{"3550308": "https://prefeitura.sp.gov.br"}`) ou
+CSV (`3550308,https://prefeitura.sp.gov.br`). Contatos do site são gravados com
+`fonte = site_prefeitura` (vs. `querido_diario`), permitindo priorizá-los na
+prospecção.
+
 Ou sem instalar, via módulo:
 
 ```bash

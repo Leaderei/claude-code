@@ -67,10 +67,30 @@ desatualizados.
 ## Limitação central e enriquecimento
 
 O Querido Diário **não é um diretório de contatos**. E-mails/telefones extraídos
-do texto podem estar desatualizados ou ausentes. Para prospecção confiável,
-implemente um `Enricher` (`enrich.py`) que busca o contato atual em fontes
-melhores — site oficial da prefeitura, portal da transparência — e grava com
-`source` distinto. A interface já está pronta; o `NullEnricher` é o padrão.
+do texto podem estar desatualizados ou ausentes. Por isso há a interface
+`Enricher` (`enrich.py`), com duas implementações:
+
+- **`NullEnricher`** — padrão, no-op.
+- **`SitePrefeituraEnricher`** — busca contatos da Secretaria de Educação no
+  **site oficial** do município. Fluxo:
+  1. **Descobre o domínio**: `domain_map[territory_id]` (mapa curado) →, senão,
+     `publication_urls` de `/cities/{id}` do Querido Diário, descartando
+     plataformas de terceiros (`diariomunicipal`, `imprensaoficial`, etc.).
+  2. **Baixa** caminhos prováveis (`/contato`, `/secretaria-de-educacao`,
+     `/educacao`…), limitado por `max_pages`.
+  3. **Extrai** e-mails/telefones de hrefs `mailto:`/`tel:` (mais confiáveis) e
+     do texto (HTML convertido por `html.parser`, ignorando `<script>/<style>`).
+  4. **Marca** como `título = "educação"` quando o e-mail/página é claramente da
+     pasta de educação, e grava com `source = "site_prefeitura"`.
+
+Ative com `qdedu scrape --enrich site [--domain-map arquivo]`. Contatos do site
+e dos diários convivem na mesma tabela, distinguíveis pela coluna `fonte` —
+priorize `site_prefeitura` na prospecção.
+
+> **Por que `--domain-map` é recomendado:** `publication_urls` às vezes aponta
+> para a plataforma de publicação, não para o site institucional. Um mapa curado
+> (id IBGE → URL oficial) eleva muito a precisão. Pode ser construído uma vez e
+> versionado.
 
 ## Idempotência e retomada
 

@@ -19,6 +19,25 @@ class Municipality:
 
 
 @dataclass
+class City:
+    """Metadados de um município no Querido Diário (endpoint /cities)."""
+
+    territory_id: str
+    name: str
+    state_code: str
+    publication_urls: list[str] = field(default_factory=list)
+
+    @classmethod
+    def from_api(cls, d: dict) -> "City":
+        return cls(
+            territory_id=str(d.get("territory_id", "")),
+            name=d.get("territory_name", "") or d.get("name", "") or "",
+            state_code=d.get("state_code", "") or "",
+            publication_urls=list(d.get("publication_urls") or []),
+        )
+
+
+@dataclass
 class Gazette:
     """Um diário oficial retornado pelo Querido Diário.
 
@@ -71,6 +90,26 @@ class IBGEClient:
             )
         log.info("IBGE: %d municípios em %s", len(out), uf)
         return out
+
+
+class CitiesClient:
+    """Cliente do endpoint /cities do Querido Diário (metadados do município)."""
+
+    def __init__(self, http: HttpClient, base: str | None = None) -> None:
+        self._http = http
+        self._base = (base or settings.qd_api_base).rstrip("/")
+
+    def get(self, territory_id: str) -> City | None:
+        resp = self._http.get(f"{self._base}/cities/{territory_id}")
+        if resp.status_code == 404:
+            return None
+        resp.raise_for_status()
+        data = resp.json()
+        # tolerante: payload pode vir sob "city" ou direto
+        node = data.get("city", data)
+        if not node:
+            return None
+        return City.from_api(node)
 
 
 class QueridoDiarioClient:

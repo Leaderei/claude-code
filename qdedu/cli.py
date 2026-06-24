@@ -2,13 +2,42 @@
 from __future__ import annotations
 
 import argparse
+import csv
+import json
 import logging
 import sys
 
+from .api import CitiesClient
 from .config import DEFAULT_EDU_QUERY, settings
+from .enrich import NullEnricher, SitePrefeituraEnricher
 from .http import HttpClient
 from .scraper import load_cities, scrape_uf
 from .storage import open_store
+
+
+def _load_domain_map(path: str | None) -> dict[str, str]:
+    """Lê um mapa territory_id->url (JSON {id:url} ou CSV id,url)."""
+    if not path:
+        return {}
+    if path.endswith(".json"):
+        with open(path, encoding="utf-8") as fh:
+            return {str(k): v for k, v in json.load(fh).items()}
+    out: dict[str, str] = {}
+    with open(path, encoding="utf-8") as fh:
+        for row in csv.reader(fh):
+            if len(row) >= 2 and row[0].strip().isdigit():
+                out[row[0].strip()] = row[1].strip()
+    return out
+
+
+def _build_enricher(args, http: HttpClient):
+    if args.enrich == "site":
+        return SitePrefeituraEnricher(
+            http=http,
+            cities=CitiesClient(http),
+            domain_map=_load_domain_map(args.domain_map),
+        )
+    return NullEnricher()
 
 
 def _setup_logging(verbose: bool) -> None:
@@ -37,6 +66,7 @@ def cmd_scrape(args: argparse.Namespace) -> int:
             limit_cities=args.limit,
             fetch_full_text=not args.excerpts_only,
             resume=not args.no_resume,
+            enricher=_build_enricher(args, http),
             store=store,
             http=http,
         )
@@ -88,6 +118,14 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument(
         "--no-resume", action="store_true", dest="no_resume",
         help="Reprocessa cidades já marcadas como concluídas",
+    )
+    s.add_argument(
+        "--enrich", choices=("none", "site"), default="none",
+        help="Fonte de enriquecimento de contatos (site = site da prefeitura)",
+    )
+    s.add_argument(
+        "--domain-map", dest="domain_map", default=None,
+        help="Arquivo id->url (JSON ou CSV) com domínios oficiais por município",
     )
     s.set_defaults(func=cmd_scrape)
 
