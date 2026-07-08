@@ -10,6 +10,7 @@ __version__ = "0.1.0"
 from .api import ClienteQueridoDiario, ErroAPI
 from .extracao import extrair_contatos, Contato
 from .pipeline import raspar_municipio, ResultadoMunicipio
+from .qedu import ClienteQEdu, ErroQEdu, ResumoINEP
 
 __all__ = [
     "ClienteQueridoDiario",
@@ -18,4 +19,7 @@ __all__ = [
     "Contato",
     "raspar_municipio",
     "ResultadoMunicipio",
+    "ClienteQEdu",
+    "ErroQEdu",
+    "ResumoINEP",
 ]

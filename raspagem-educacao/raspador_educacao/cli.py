@@ -18,9 +18,12 @@ import logging
 import sys
 from pathlib import Path
 
+import os
+
 from .api import ClienteQueridoDiario
 from .exportar import salvar_csv_contatos, salvar_csv_prospeccao, salvar_json
 from .pipeline import raspar_municipio
+from .qedu import ClienteQEdu, ErroQEdu
 
 
 def _parse_args(argv: list[str]) -> argparse.Namespace:
@@ -59,6 +62,19 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
         default=Path("resultados"),
         help="Diretório de saída (padrão: ./resultados).",
     )
+    # Enriquecimento com dados do Censo Escolar via QEdu
+    p.add_argument(
+        "--qedu-token",
+        default=os.environ.get("QEDU_API_TOKEN"),
+        help="Token da API do QEdu (ou variável de ambiente QEDU_API_TOKEN). "
+        "Habilita nº de escolas municipais e matrículas por município.",
+    )
+    p.add_argument(
+        "--qedu-ano",
+        type=int,
+        default=None,
+        help="Ano do Censo Escolar a consultar no QEdu (padrão: mais recente).",
+    )
     p.add_argument("--verbose", "-v", action="store_true", help="Log detalhado.")
     return p.parse_args(argv)
 
@@ -83,6 +99,21 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     cliente = ClienteQueridoDiario()
+
+    qedu_cliente = None
+    if args.qedu_token:
+        try:
+            qedu_cliente = ClienteQEdu(token=args.qedu_token, ano=args.qedu_ano)
+            print("QEdu habilitado: enriquecendo com escolas/matrículas.", file=sys.stderr)
+        except ErroQEdu as exc:
+            print(f"QEdu desabilitado: {exc}", file=sys.stderr)
+    else:
+        print(
+            "Sem token do QEdu (--qedu-token / QEDU_API_TOKEN): "
+            "seguindo apenas com os contatos do Querido Diário.",
+            file=sys.stderr,
+        )
+
     resultados = []
     for ident in municipios:
         print(f"→ Processando: {ident}", file=sys.stderr)
@@ -94,6 +125,7 @@ def main(argv: list[str] | None = None) -> int:
                 published_until=args.ate,
                 max_diarios=args.max_diarios,
                 apenas_contexto_educacao=not args.sem_filtro_contexto,
+                qedu_cliente=qedu_cliente,
             )
         except Exception as exc:  # não deixa um município derrubar o lote
             logging.exception("Falha ao processar %s", ident)
@@ -102,9 +134,17 @@ def main(argv: list[str] | None = None) -> int:
         resultados.append(r)
         n_email = len(r.emails())
         n_tel = len(r.telefones())
+        extra = ""
+        if r.inep is not None:
+            mat = r.inep.num_matriculas_municipais
+            extra = (
+                f", {r.inep.num_escolas_municipais} escolas municipais"
+                + (f", {mat} matrículas" if mat is not None else "")
+            )
         print(
             f"  {r.municipio.territory_name}/{r.municipio.state_code}: "
             f"{r.diarios_analisados} diários, {n_email} e-mails, {n_tel} telefones"
+            + extra
             + (f" — {r.aviso}" if r.aviso else ""),
             file=sys.stderr,
         )

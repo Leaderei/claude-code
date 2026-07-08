@@ -11,20 +11,32 @@ brasileiros. O fluxo é:
 município (nome/UF)  ──►  GET /cities        ──►  código IBGE (territory_id)
 territory_id + texto ──►  GET /gazettes      ──►  diários que citam a educação
 cada diário (txt_url)──►  download + regex   ──►  e-mails e telefones
-todos os contatos    ──►  dedup + ranking    ──►  CSV / JSON prontos p/ CRM
+territory_id         ──►  QEdu /v1/escolas   ──►  nº escolas + matrículas (rede municipal)
+tudo unido por IBGE  ──►  dedup + ranking    ──►  CSV / JSON prontos p/ CRM
 ```
+
+O **código IBGE de 7 dígitos** é a chave que une as duas fontes: é o
+`territory_id` no Querido Diário e o `municipio_id` no QEdu.
 
 ---
 
 ## ⚠️ Aviso importante sobre este ambiente
 
-O host `api.queridodiario.ok.org.br` está **bloqueado pela política de rede do
-ambiente remoto do Claude Code** (o proxy de egress responde `403` no CONNECT).
-Por isso o código **não foi executado contra a API real aqui** — apenas os testes
-de extração (que rodam offline) e um teste de ponta a ponta com cliente simulado.
+Os hosts `api.queridodiario.ok.org.br` **e** `api.qedu.org.br` estão
+**bloqueados pela política de rede do ambiente remoto do Claude Code** (o proxy
+de egress responde `403` no CONNECT). Por isso o código **não foi executado
+contra as APIs reais aqui** — apenas os testes offline (extração e cliente
+QEdu com sessão simulada) e testes de ponta a ponta com clientes falsos.
 
 Para rodar de verdade, execute **na sua máquina** (ou em um ambiente cuja
-política de rede libere o domínio `*.queridodiario.ok.org.br`).
+política de rede libere `*.queridodiario.ok.org.br` e `*.qedu.org.br`).
+
+> **Sobre a fonte INEP:** a API `api.dadosabertosinep.org` (projeto comunitário
+> de ~2013) foi **descontinuada** — o domínio nem resolve mais no DNS. Por isso
+> os dados do INEP (escolas/matrículas) vêm do **QEdu** (`api.qedu.org.br`),
+> plataforma da Iede que republica o Censo Escolar e está ativa. O contrato do
+> QEdu está centralizado em constantes no topo de `qedu.py`; confirme os nomes
+> de parâmetros/campos contra a doc oficial e ajuste ali se necessário.
 
 ---
 
@@ -49,6 +61,10 @@ python -m raspador_educacao --lista exemplos/municipios.txt --saida resultados/
 
 # Por código IBGE, ampliando o alcance (extrai de todo o diário)
 python -m raspador_educacao --municipio 3550308 --sem-filtro-contexto
+
+# Com enriquecimento do Censo Escolar (nº de escolas municipais e matrículas)
+export QEDU_API_TOKEN="seu_token_do_qedu"
+python -m raspador_educacao --municipio "Sorocaba/SP" --qedu-ano 2024
 ```
 
 ### Principais opções
@@ -62,6 +78,8 @@ python -m raspador_educacao --municipio 3550308 --sem-filtro-contexto
 | `--max-diarios N` | Máximo de diários analisados por município (padrão 60). |
 | `--sem-filtro-contexto` | Extrai contatos de todo o diário, não só perto de "educação". Mais recall, menos precisão. |
 | `--saida DIR` | Diretório de saída (padrão `./resultados`). |
+| `--qedu-token TOKEN` | Token da API do QEdu (ou variável `QEDU_API_TOKEN`). Habilita escolas/matrículas. |
+| `--qedu-ano AAAA` | Ano do Censo Escolar no QEdu (padrão: mais recente). |
 | `-v` | Log detalhado. |
 
 ## Saídas geradas
@@ -69,7 +87,8 @@ python -m raspador_educacao --municipio 3550308 --sem-filtro-contexto
 No diretório de saída são criados três arquivos:
 
 - **`prospeccao.csv`** — uma linha por município, com o melhor e-mail/telefone e
-  alternativos. Colunas alinhadas a CRMs (ex.: HubSpot: *empresa, email, phone*).
+  alternativos, **+ nº de escolas municipais e matrículas** (QEdu). Colunas
+  alinhadas a CRMs (ex.: HubSpot: *empresa, email, phone*).
 - **`contatos.csv`** — uma linha por contato, com pontuação e trecho de evidência.
 - **`contatos.json`** — dados completos, incluindo todas as evidências (trecho +
   URL + data do diário) de cada contato, para conferência manual.
@@ -115,20 +134,22 @@ pytest tests/
 ```
 raspador_educacao/
   api.py        Cliente da API do Querido Diário (retry, rate limit, paginação)
+  qedu.py       Cliente da API do QEdu (Censo Escolar: escolas + matrículas)
   extracao.py   Regex + janelas de contexto + ranking de contatos
-  pipeline.py   Orquestra: resolve município → busca diários → extrai
+  pipeline.py   Orquestra: resolve município → diários + QEdu → extrai
   exportar.py   Exportadores JSON / CSV
   cli.py        Interface de linha de comando
 tests/
   test_extracao.py
+  test_qedu.py
 exemplos/
   municipios.txt
 ```
 
 ## Próximos passos sugeridos
 
+- **Cruzar com o site da prefeitura**: confirmar o contato atual da secretaria
+  no portal oficial / portal da transparência (próxima etapa combinada).
 - **Importar direto no HubSpot**: o `prospeccao.csv` já sai com colunas de CRM;
   dá para automatizar a criação de *companies*/*contacts* via API do HubSpot.
-- **Enriquecimento cruzado**: complementar com o portal da transparência /
-  site oficial da prefeitura para confirmar o contato atual da secretaria.
 - **Agendamento**: rodar periodicamente para captar diários novos.

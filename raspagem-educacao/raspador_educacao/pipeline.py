@@ -8,6 +8,7 @@ from typing import Optional
 
 from .api import ClienteQueridoDiario, Diario, Municipio
 from .extracao import Contato, agregar_contatos, extrair_contatos
+from .qedu import ClienteQEdu, ErroQEdu, ResumoINEP
 
 logger = logging.getLogger(__name__)
 
@@ -25,6 +26,7 @@ class ResultadoMunicipio:
     diarios_analisados: int
     contatos: list[Contato] = field(default_factory=list)
     aviso: Optional[str] = None
+    inep: Optional[ResumoINEP] = None  # enriquecimento QEdu/Censo Escolar
 
     def emails(self) -> list[Contato]:
         return [c for c in self.contatos if c.tipo == "email"]
@@ -33,7 +35,7 @@ class ResultadoMunicipio:
         return [c for c in self.contatos if c.tipo == "telefone"]
 
     def para_dict(self) -> dict:
-        return {
+        d = {
             "territory_id": self.municipio.territory_id,
             "municipio": self.municipio.territory_name,
             "uf": self.municipio.state_code,
@@ -43,6 +45,9 @@ class ResultadoMunicipio:
             "emails": [c.para_dict() for c in self.emails()],
             "telefones": [c.para_dict() for c in self.telefones()],
         }
+        if self.inep is not None:
+            d["inep"] = self.inep.para_dict()
+        return d
 
 
 def resolver_municipio(
@@ -78,6 +83,26 @@ def resolver_municipio(
     return (exatos or candidatos)[0]
 
 
+def _enriquecer_inep(
+    qedu_cliente: "ClienteQEdu", territory_id: str
+) -> Optional[ResumoINEP]:
+    """Busca no QEdu o resumo da rede municipal; nunca derruba o fluxo."""
+    if not territory_id:
+        return None
+    try:
+        return qedu_cliente.resumo_municipio(territory_id)
+    except ErroQEdu as exc:
+        logger.warning("QEdu indisponível para %s: %s", territory_id, exc)
+        return ResumoINEP(
+            codigo_ibge=territory_id,
+            ano=qedu_cliente.ano,
+            num_escolas_municipais=0,
+            num_matriculas_municipais=None,
+            matriculas_disponivel=False,
+            aviso=f"Falha ao consultar QEdu: {exc}",
+        )
+
+
 def raspar_municipio(
     cliente: ClienteQueridoDiario,
     identificador: str,
@@ -86,8 +111,13 @@ def raspar_municipio(
     max_diarios: int = 60,
     querystring: str = QUERY_EDUCACAO,
     apenas_contexto_educacao: bool = True,
+    qedu_cliente: Optional["ClienteQEdu"] = None,
 ) -> ResultadoMunicipio:
-    """Executa o fluxo completo para um município."""
+    """Executa o fluxo completo para um município.
+
+    Se `qedu_cliente` for informado, enriquece o resultado com dados do Censo
+    Escolar (nº de escolas municipais e matrículas) via API do QEdu.
+    """
     municipio = resolver_municipio(cliente, identificador)
     if municipio is None:
         vazio = Municipio("", identificador, "")
@@ -139,10 +169,13 @@ def raspar_municipio(
             "Tente ampliar o período (--desde/--ate) ou usar --sem-filtro-contexto."
         )
 
+    inep = _enriquecer_inep(qedu_cliente, municipio.territory_id) if qedu_cliente else None
+
     return ResultadoMunicipio(
         municipio=municipio,
         total_diarios=len(diarios),
         diarios_analisados=analisados,
         contatos=contatos,
         aviso=aviso,
+        inep=inep,
     )

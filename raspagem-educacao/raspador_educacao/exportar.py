@@ -77,6 +77,9 @@ def salvar_csv_prospeccao(
         "emails_alternativos",
         "telefone_principal",
         "telefones_alternativos",
+        "escolas_municipais",   # INEP/QEdu
+        "matriculas_municipais",  # INEP/QEdu
+        "ano_censo",
         "fonte",
         "data_fonte",
         "observacao",
@@ -96,6 +99,7 @@ def salvar_csv_prospeccao(
                     fonte = c.evidencias[0].fonte_url
                     data_fonte = c.evidencias[0].data
                     break
+            inep = r.inep
             w.writerow(
                 {
                     "empresa": f"Prefeitura de {r.municipio.territory_name} - Secretaria de Educação",
@@ -106,8 +110,17 @@ def salvar_csv_prospeccao(
                     "emails_alternativos": "; ".join(c.valor for c in emails[1:5]),
                     "telefone_principal": tel_princ.valor if tel_princ else "",
                     "telefones_alternativos": "; ".join(c.valor for c in tels[1:5]),
+                    "escolas_municipais": inep.num_escolas_municipais if inep else "",
+                    "matriculas_municipais": (
+                        inep.num_matriculas_municipais
+                        if inep and inep.num_matriculas_municipais is not None
+                        else ""
+                    ),
+                    "ano_censo": inep.ano if inep and inep.ano else "",
                     "fonte": fonte,
                     "data_fonte": data_fonte,
-                    "observacao": r.aviso or "",
+                    "observacao": "; ".join(
+                        x for x in [r.aviso, inep.aviso if inep else None] if x
+                    ),
                 }
             )
