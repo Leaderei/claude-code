@@ -2,7 +2,8 @@
 
 Sistema de raspagem que usa a **API pública do [Querido Diário](https://queridodiario.ok.org.br/)**
 (Open Knowledge Brasil) para localizar, nos Diários Oficiais municipais, menções à
-**Secretaria de Educação** e extrair **e-mails e telefones** para prospecção comercial.
+**Secretaria de Educação**, identificar **o(a) secretário(a) atual** (via atos de
+nomeação) e extrair **e-mails e telefones** para prospecção comercial.
 
 A API indexa o texto completo dos diários oficiais de centenas de municípios
 brasileiros. O fluxo é:
@@ -11,6 +12,7 @@ brasileiros. O fluxo é:
 município (nome/UF)  ──►  GET /cities        ──►  código IBGE (territory_id)
 territory_id + texto ──►  GET /gazettes      ──►  diários que citam a educação
 cada diário (txt_url)──►  download + regex   ──►  e-mails e telefones
+mesmos textos        ──►  atos de pessoal    ──►  nome do(a) secretário(a) atual
 territory_id         ──►  QEdu /v1/escolas   ──►  nº escolas + matrículas (rede municipal)
 tudo unido por IBGE  ──►  dedup + ranking    ──►  CSV / JSON prontos p/ CRM
 ```
@@ -86,7 +88,8 @@ python -m raspador_educacao --municipio "Sorocaba/SP" --qedu-ano 2024
 
 No diretório de saída são criados três arquivos:
 
-- **`prospeccao.csv`** — uma linha por município, com o melhor e-mail/telefone e
+- **`prospeccao.csv`** — uma linha por município, com **o nome do(a)
+  secretário(a) e seu e-mail/telefone**, o melhor contato institucional e
   alternativos, **+ nº de escolas municipais e matrículas** (QEdu). Colunas
   alinhadas a CRMs (ex.: HubSpot: *empresa, email, phone*).
 - **`contatos.csv`** — uma linha por contato, com pontuação e trecho de evidência.
@@ -99,7 +102,32 @@ Cada contato traz:
 - `governamental` — se o e-mail é de domínio `.gov.br`/prefeitura;
 - `evidencias` — de onde o dado foi extraído (fonte + data + trecho).
 
-## Como funciona a extração (precisão)
+## Como o(a) secretário(a) é identificado(a)
+
+O **nome do(a) titular** vem dos **atos de pessoal** publicados nos próprios
+diários — nomeação, designação e exoneração para o cargo de *Secretário(a)
+Municipal de Educação*:
+
+1. Nos textos já baixados (sem custo de rede extra), localiza menções ao cargo
+   e, na vizinhança, um **verbo de ato** (*nomear/designar/exonerar*) e o **nome**
+   da pessoa (sequência de palavras próprias, com filtros anti-falso-positivo).
+2. Monta uma **linha do tempo** dos atos. O titular **atual** é a pessoa da
+   nomeação/designação mais recente **sem exoneração posterior**.
+3. Classifica a **confiança**: `alta` (nomeação recente e datada), `media`
+   (designação/interino) ou `baixa` (só há pistas antigas ou ambíguas).
+4. **Associa o contato**: se algum e-mail tem o nome da pessoa no usuário
+   (ex.: `ana.martins@…`), marca como provável e-mail pessoal; senão, usa o
+   melhor contato institucional da secretaria. Telefone: institucional.
+
+Sai nas colunas `secretario_nome`, `secretario_situacao`, `secretario_desde`,
+`secretario_confianca`, `secretario_email`, `secretario_telefone` e
+`secretario_fonte`, e no JSON com todo o histórico de atos.
+
+> A extração de nomes é heurística: **sempre confira pela `secretario_fonte`**
+> (URL + data do ato). O contato *pessoal* costuma ser melhor confirmado no
+> site da prefeitura — a próxima etapa combinada.
+
+## Como funciona a extração de contatos (precisão)
 
 1. Localiza no texto as **janelas de contexto** ao redor de termos como
    *"secretaria municipal de educação"*, *"SEMED"*, *"fundo municipal de educação"*.
@@ -133,15 +161,17 @@ pytest tests/
 
 ```
 raspador_educacao/
-  api.py        Cliente da API do Querido Diário (retry, rate limit, paginação)
-  qedu.py       Cliente da API do QEdu (Censo Escolar: escolas + matrículas)
-  extracao.py   Regex + janelas de contexto + ranking de contatos
-  pipeline.py   Orquestra: resolve município → diários + QEdu → extrai
-  exportar.py   Exportadores JSON / CSV
-  cli.py        Interface de linha de comando
+  api.py         Cliente da API do Querido Diário (retry, rate limit, paginação)
+  qedu.py        Cliente da API do QEdu (Censo Escolar: escolas + matrículas)
+  extracao.py    Regex + janelas de contexto + ranking de contatos
+  secretarios.py Atos de nomeação/exoneração → titular atual + contato
+  pipeline.py    Orquestra: resolve município → diários + QEdu → extrai
+  exportar.py    Exportadores JSON / CSV
+  cli.py         Interface de linha de comando
 tests/
   test_extracao.py
   test_qedu.py
+  test_secretarios.py
 exemplos/
   municipios.txt
 ```

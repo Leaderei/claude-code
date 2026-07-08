@@ -73,6 +73,13 @@ def salvar_csv_prospeccao(
         "municipio",
         "uf",
         "territory_id",
+        "secretario_nome",       # titular do cargo (diário oficial)
+        "secretario_situacao",   # nomeacao | designacao
+        "secretario_desde",      # data do ato
+        "secretario_confianca",  # alta | media | baixa
+        "secretario_email",
+        "secretario_telefone",
+        "secretario_fonte",
         "email_principal",
         "emails_alternativos",
         "telefone_principal",
@@ -100,12 +107,20 @@ def salvar_csv_prospeccao(
                     data_fonte = c.evidencias[0].data
                     break
             inep = r.inep
+            sec = r.secretario
             w.writerow(
                 {
                     "empresa": f"Prefeitura de {r.municipio.territory_name} - Secretaria de Educação",
                     "municipio": r.municipio.territory_name,
                     "uf": r.municipio.state_code,
                     "territory_id": r.municipio.territory_id,
+                    "secretario_nome": sec.nome if sec else "",
+                    "secretario_situacao": sec.situacao if sec else "",
+                    "secretario_desde": sec.desde if sec else "",
+                    "secretario_confianca": sec.confianca if sec else "",
+                    "secretario_email": (sec.email or "") if sec else "",
+                    "secretario_telefone": (sec.telefone or "") if sec else "",
+                    "secretario_fonte": sec.fonte_url if sec else "",
                     "email_principal": email_princ.valor if email_princ else "",
                     "emails_alternativos": "; ".join(c.valor for c in emails[1:5]),
                     "telefone_principal": tel_princ.valor if tel_princ else "",

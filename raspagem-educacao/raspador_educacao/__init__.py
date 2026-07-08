@@ -11,6 +11,7 @@ from .api import ClienteQueridoDiario, ErroAPI
 from .extracao import extrair_contatos, Contato
 from .pipeline import raspar_municipio, ResultadoMunicipio
 from .qedu import ClienteQEdu, ErroQEdu, ResumoINEP
+from .secretarios import Secretario, extrair_atos, consolidar_secretario
 
 __all__ = [
     "ClienteQueridoDiario",
@@ -22,4 +23,7 @@ __all__ = [
     "ClienteQEdu",
     "ErroQEdu",
     "ResumoINEP",
+    "Secretario",
+    "extrair_atos",
+    "consolidar_secretario",
 ]

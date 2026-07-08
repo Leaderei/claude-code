@@ -9,13 +9,22 @@ from typing import Optional
 from .api import ClienteQueridoDiario, Diario, Municipio
 from .extracao import Contato, agregar_contatos, extrair_contatos
 from .qedu import ClienteQEdu, ErroQEdu, ResumoINEP
+from .secretarios import (
+    AtoSecretario,
+    Secretario,
+    associar_contato,
+    consolidar_secretario,
+    extrair_atos,
+)
 
 logger = logging.getLogger(__name__)
 
 # Consulta padrão: frases entre aspas fazem busca por expressão exata na API.
+# Inclui o cargo no masculino/feminino para captar também os atos de nomeação.
 QUERY_EDUCACAO = (
     '"secretaria municipal de educacao" OR "secretaria de educacao" '
-    'OR "secretaria municipal da educacao"'
+    'OR "secretaria municipal da educacao" '
+    'OR "secretario municipal de educacao" OR "secretaria municipal de educacao"'
 )
 
 
@@ -27,6 +36,7 @@ class ResultadoMunicipio:
     contatos: list[Contato] = field(default_factory=list)
     aviso: Optional[str] = None
     inep: Optional[ResumoINEP] = None  # enriquecimento QEdu/Censo Escolar
+    secretario: Optional[Secretario] = None  # titular atual do cargo
 
     def emails(self) -> list[Contato]:
         return [c for c in self.contatos if c.tipo == "email"]
@@ -47,6 +57,8 @@ class ResultadoMunicipio:
         }
         if self.inep is not None:
             d["inep"] = self.inep.para_dict()
+        if self.secretario is not None:
+            d["secretario"] = self.secretario.para_dict()
         return d
 
 
@@ -141,6 +153,7 @@ def raspar_municipio(
     )
 
     listas_contatos = []
+    atos: list[AtoSecretario] = []
     analisados = 0
     for d in diarios:
         if not d.txt_url:
@@ -159,8 +172,14 @@ def raspar_municipio(
                 apenas_contexto_educacao=apenas_contexto_educacao,
             )
         )
+        # Mesmo texto, sem custo de rede extra: procura atos de nomeação.
+        atos.extend(extrair_atos(texto, fonte_url=d.url, data=d.date))
 
     contatos = agregar_contatos(listas_contatos)
+
+    secretario = consolidar_secretario(atos)
+    if secretario is not None:
+        associar_contato(secretario, contatos)
 
     aviso = None
     if not contatos:
@@ -178,4 +197,5 @@ def raspar_municipio(
         contatos=contatos,
         aviso=aviso,
         inep=inep,
+        secretario=secretario,
     )

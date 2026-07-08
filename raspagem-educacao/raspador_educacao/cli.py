@@ -135,6 +135,8 @@ def main(argv: list[str] | None = None) -> int:
         n_email = len(r.emails())
         n_tel = len(r.telefones())
         extra = ""
+        if r.secretario is not None:
+            extra += f", secretário(a): {r.secretario.nome} ({r.secretario.confianca})"
         if r.inep is not None:
             mat = r.inep.num_matriculas_municipais
             extra = (
