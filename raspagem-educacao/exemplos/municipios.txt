@@ -1,0 +1,9 @@
+# Um município por linha. Formatos aceitos:
+#   Nome/UF        -> "Sorocaba/SP"
+#   Nome           -> "Sorocaba" (usa o primeiro resultado da API)
+#   Código IBGE    -> "3552205" (7 dígitos)
+# Linhas iniciadas por # são ignoradas.
+Sorocaba/SP
+Campinas/SP
+Juiz de Fora/MG
+Feira de Santana/BA
