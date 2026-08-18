@@ -1,0 +1,64 @@
+{
+  "_comment": "Fundido em ~/.claude/settings.json pelo install.sh. Atencao: defaultMode 'auto' SO tem efeito neste arquivo (o do usuario) - em .claude/settings.json do projeto o Claude Code ignora silenciosamente.",
+  "permissions": {
+    "defaultMode": "auto",
+
+    "allow": [
+      "Skill",
+
+      "Bash(ls *)", "Bash(cat *)", "Bash(head *)", "Bash(tail *)",
+      "Bash(wc *)", "Bash(file *)", "Bash(stat *)", "Bash(tree *)",
+      "Bash(which *)", "Bash(pwd)", "Bash(date *)", "Bash(echo *)",
+      "Bash(printenv *)", "Bash(basename *)", "Bash(dirname *)",
+      "Bash(realpath *)", "Bash(du *)", "Bash(df *)",
+
+      "Bash(grep *)", "Bash(rg *)", "Bash(find *)", "Bash(sort *)",
+      "Bash(uniq *)", "Bash(cut *)", "Bash(awk *)", "Bash(sed -n *)",
+      "Bash(jq *)", "Bash(diff *)", "Bash(tr *)",
+
+      "Bash(mkdir *)", "Bash(touch *)", "Bash(cp *)", "Bash(mv *)",
+
+      "Bash(git status *)", "Bash(git log *)", "Bash(git diff *)",
+      "Bash(git show *)", "Bash(git branch *)", "Bash(git remote *)",
+      "Bash(git fetch *)", "Bash(git blame *)", "Bash(git rev-parse *)",
+      "Bash(git ls-files *)", "Bash(git stash list *)",
+      "Bash(git config --get *)", "Bash(git add *)", "Bash(git commit *)",
+      "Bash(git switch *)", "Bash(git checkout -b *)", "Bash(git pull *)",
+
+      "Bash(npm run *)", "Bash(npm test *)", "Bash(npm ls *)",
+      "Bash(npm view *)", "Bash(npm ci)", "Bash(node --version)",
+      "Bash(npx tsc *)", "Bash(pnpm run *)", "Bash(yarn run *)",
+
+      "Bash(clasp status *)", "Bash(clasp pull *)", "Bash(clasp push *)",
+      "Bash(clasp list *)", "Bash(clasp open *)", "Bash(clasp logs *)",
+      "Bash(clasp deployments *)", "Bash(clasp versions *)",
+      "Bash(clasp --version)",
+
+      "Bash(python3 -m json.tool *)", "Bash(python3 --version)"
+    ],
+
+    "ask": [
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git reset --hard *)",
+      "Bash(clasp deploy *)",
+      "Bash(rm -rf *)"
+    ],
+
+    "deny": [
+      "Bash(sudo *)",
+      "Bash(shutdown *)",
+      "Bash(reboot *)",
+      "Bash(mkfs *)",
+      "Bash(dd *)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./**/.env)",
+      "Read(./**/*.pem)",
+      "Read(./**/id_rsa*)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.clasprc.json)"
+    ]
+  }
+}
