@@ -1,0 +1,911 @@
+<title>Kit de Lançamento Viva Noz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bitter:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root{
+    --ground:#E3D3B4; --panel:#F5EDDC; --panel-2:#EADCC0; --recess:#FBF6EA;
+    --ink:#221A0F; --ink-2:#5C4E38; --ink-3:#8A7A5E;
+    --rule:#C3AE87; --rule-soft:#D7C5A2;
+    --lacre:#4B5A31; --caramelo:#9C5E1C; --alerta:#8C3A1D;
+    --chip:#221A0F; --chip-ink:#F5EDDC;
+    --shadow:0 1px 0 rgba(34,26,15,.10);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#16110A; --panel:#211A11; --panel-2:#2A2217; --recess:#100C07;
+      --ink:#F1E6CF; --ink-2:#C0B094; --ink-3:#8B7C61;
+      --rule:#3E3323; --rule-soft:#2F2718;
+      --lacre:#9AAE6B; --caramelo:#D2903F; --alerta:#E0805B;
+      --chip:#F1E6CF; --chip-ink:#16110A;
+      --shadow:0 1px 0 rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#16110A; --panel:#211A11; --panel-2:#2A2217; --recess:#100C07;
+    --ink:#F1E6CF; --ink-2:#C0B094; --ink-3:#8B7C61;
+    --rule:#3E3323; --rule-soft:#2F2718;
+    --lacre:#9AAE6B; --caramelo:#D2903F; --alerta:#E0805B;
+    --chip:#F1E6CF; --chip-ink:#16110A;
+    --shadow:0 1px 0 rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:'Archivo',system-ui,-apple-system,sans-serif;
+    font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .slab{font-family:'Bitter',Georgia,serif}
+  .mono{font-family:'IBM Plex Mono','SFMono-Regular',Consolas,monospace}
+  .num{font-variant-numeric:tabular-nums}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky; top:0; z-index:60; background:var(--chip);
+    display:flex; gap:0; overflow-x:auto; padding:0 10px;
+    border-bottom:1px solid var(--rule);
+  }
+  nav a{
+    color:var(--chip-ink); text-decoration:none; white-space:nowrap;
+    font-family:'IBM Plex Mono',monospace; font-size:11px;
+    letter-spacing:.12em; text-transform:uppercase; padding:14px 13px;
+    opacity:.72;
+  }
+  nav a:hover,nav a:focus-visible{opacity:1; outline:none; box-shadow:inset 0 -3px 0 var(--caramelo)}
+
+  main{max-width:1000px; margin:0 auto; padding:34px 18px 100px; display:flex; flex-direction:column; gap:64px}
+  section{display:flex; flex-direction:column; gap:18px; scroll-margin-top:60px}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--caramelo);
+  }
+  h1{font-family:'Bitter',Georgia,serif; font-weight:700; font-size:clamp(30px,5.2vw,46px); line-height:1.08; letter-spacing:-.015em; text-wrap:balance}
+  h2{font-family:'Bitter',Georgia,serif; font-weight:700; font-size:clamp(23px,3.2vw,31px); line-height:1.15; letter-spacing:-.01em; text-wrap:balance}
+  h3{font-family:'Bitter',Georgia,serif; font-weight:600; font-size:18px; line-height:1.25}
+  h4{font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3)}
+  .lead{color:var(--ink-2); max-width:66ch}
+  p+p{margin-top:10px}
+  a{color:var(--lacre)}
+
+  .card{background:var(--panel); border:1px solid var(--rule); border-radius:2px; padding:20px; box-shadow:var(--shadow)}
+  .card.dashed{border-style:dashed; background:transparent}
+  .grid{display:grid; gap:14px}
+  @media(min-width:800px){.g2{grid-template-columns:1fr 1fr} .g3{grid-template-columns:repeat(3,1fr)}}
+
+  /* ---------- hero ---------- */
+  .hero{display:flex; flex-direction:column; gap:16px; padding-top:8px}
+  .prop{display:flex; height:30px; border:1px solid var(--ink); border-radius:2px; overflow:hidden; max-width:560px}
+  .prop span{display:flex; align-items:center; justify-content:center; color:#FBF6EA; font-size:10.5px; font-weight:600; letter-spacing:.02em}
+  .meta{display:flex; flex-wrap:wrap; gap:8px 20px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-3)}
+  .meta b{color:var(--ink); font-weight:500}
+
+  /* ---------- alertas ---------- */
+  .alerta{background:var(--panel); border:1px solid var(--rule); border-left:4px solid var(--alerta); border-radius:2px; padding:16px 18px}
+  .alerta h3{color:var(--alerta); margin-bottom:6px}
+  .alerta .fix{margin-top:10px; font-size:14px; color:var(--ink-2)}
+  .alerta .fix b{color:var(--ink)}
+
+  /* ---------- ficha de anúncio ---------- */
+  .ficha{background:var(--panel); border:1px solid var(--rule); border-radius:2px; overflow:hidden}
+  .ficha>header{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 16px;
+    padding:16px 20px; background:var(--panel-2); border-bottom:1px solid var(--rule);
+  }
+  .ficha>header .n{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--caramelo); letter-spacing:.1em}
+  .ficha>header .preco{margin-left:auto; font-family:'Bitter',serif; font-weight:700; font-size:23px}
+  .ficha>header .role{font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-3)}
+  .ficha .corpo{padding:20px; display:flex; flex-direction:column; gap:20px}
+
+  .bloco{display:flex; flex-direction:column; gap:8px}
+  .bloco-cab{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+  .contador{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-3); letter-spacing:.04em}
+  .contador.ok{color:var(--lacre)} .contador.estourou{color:var(--alerta); font-weight:500}
+  .btn-copiar{
+    margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em;
+    text-transform:uppercase; background:transparent; color:var(--ink-2);
+    border:1px solid var(--rule); border-radius:2px; padding:5px 11px; cursor:pointer;
+  }
+  .btn-copiar:hover,.btn-copiar:focus-visible{background:var(--chip); color:var(--chip-ink); border-color:var(--chip); outline:none}
+  .btn-copiar[data-estado="feito"]{color:var(--lacre); border-color:var(--lacre)}
+
+  pre.copia{
+    background:var(--recess); border:1px solid var(--rule-soft); border-radius:2px;
+    padding:14px 16px; overflow-x:auto; white-space:pre-wrap; word-break:break-word;
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; line-height:1.65; color:var(--ink);
+  }
+  pre.copia.titulo{white-space:pre-wrap; font-size:14px; font-weight:500}
+
+  .twrap{overflow-x:auto; border:1px solid var(--rule); border-radius:2px; background:var(--recess)}
+  table{width:100%; border-collapse:collapse; font-size:13.5px}
+  th{background:var(--chip); color:var(--chip-ink); text-align:left; padding:9px 12px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; font-weight:500; white-space:nowrap}
+  td{padding:9px 12px; border-bottom:1px solid var(--rule-soft); vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.r{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+
+  ul.lista{list-style:none; display:flex; flex-direction:column; gap:9px}
+  ul.lista li{padding-left:18px; position:relative; font-size:14.5px}
+  ul.lista li::before{content:''; position:absolute; left:0; top:9px; width:7px; height:7px; background:var(--caramelo); border-radius:1px}
+  ol.ord{margin-left:19px; display:flex; flex-direction:column; gap:9px; font-size:14.5px}
+
+  .tag{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:3px 9px; border:1px solid currentColor; border-radius:999px}
+  .tag.ok{color:var(--lacre)} .tag.risco{color:var(--alerta)} .tag.espera{color:var(--caramelo)}
+
+  .lupa{
+    display:inline-flex; align-items:center; gap:7px; background:var(--ink); color:var(--panel);
+    font-family:'Archivo',sans-serif; font-weight:700; font-size:11px; letter-spacing:.02em;
+    padding:6px 11px; border-radius:2px; text-transform:uppercase;
+  }
+  :root[data-theme="dark"] .lupa{background:var(--ink); color:var(--ground)}
+
+  /* ---------- checklist ---------- */
+  .check{list-style:none; display:flex; flex-direction:column; gap:8px}
+  .check li{background:var(--panel); border:1px solid var(--rule); border-radius:2px; padding:12px 14px; display:flex; gap:12px; align-items:flex-start}
+  .check label{display:flex; gap:12px; align-items:flex-start; cursor:pointer; width:100%}
+  .check input{width:18px; height:18px; margin-top:2px; accent-color:var(--lacre); flex-shrink:0}
+  .check .t b{display:block; font-weight:600; font-size:14.5px}
+  .check .t small{color:var(--ink-2); font-size:13px; display:block; margin-top:2px}
+  .check li.feito{opacity:.5}
+  .check li.feito .t b{text-decoration:line-through}
+  .prog{background:var(--recess); border:1px solid var(--rule); border-radius:2px; height:20px; overflow:hidden}
+  .prog div{background:var(--lacre); height:100%; color:#F5EDDC; font-family:'IBM Plex Mono',monospace; font-size:10.5px; display:flex; align-items:center; padding-left:10px; min-width:34px; transition:width .25s ease}
+
+  footer{border-top:1px solid var(--rule); padding-top:22px; color:var(--ink-3); font-size:13px; display:flex; flex-direction:column; gap:6px}
+  .assin{font-family:'Bitter',serif; font-weight:700; font-size:19px; color:var(--ink)}
+
+  :focus-visible{outline:2px solid var(--caramelo); outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} .prog div{transition:none}}
+</style>
+
+<nav aria-label="Seções do kit">
+  <a href="#painel">Painel</a>
+  <a href="#bloqueios">4 bloqueios</a>
+  <a href="#anuncios">Os 4 anúncios</a>
+  <a href="#rotulo">Rótulo</a>
+  <a href="#nutricional">Tabela nutricional</a>
+  <a href="#fotos">Fotos</a>
+  <a href="#diad">Dia D</a>
+</nav>
+
+<main>
+
+<!-- ============ PAINEL ============ -->
+<section id="painel" class="hero">
+  <span class="eyebrow">Fase 0 · produção de conteúdo · itens 4, 5, 6 e 8 do plano</span>
+  <h1>Tudo que precisa ser escrito antes do dia 17/09.</h1>
+  <p class="lead">Os quatro anúncios prontos para colar no Mercado Livre, o conteúdo dos rótulos dos cinco SKUs com a tabela nutricional calculada, e o briefing das fotos. O que não dá para resolver daqui — e é bloqueante — está separado logo abaixo, com o caminho de resolução.</p>
+  <div class="prop" aria-label="Proporção do blend: caju 30%, amêndoa 20%, castanha-do-pará 20%, nozes 20%, macadâmia 10%">
+    <span style="width:30%;background:#8A5A28">Caju 30%</span>
+    <span style="width:20%;background:#A4672A">Amêndoa 20%</span>
+    <span style="width:20%;background:#5C4E3A">Pará 20%</span>
+    <span style="width:20%;background:#4E5A33">Nozes 20%</span>
+    <span style="width:10%;background:#241B10">Mac. 10%</span>
+  </div>
+  <div class="meta">
+    <span>Prazo do lançamento · <b>17/09/2026</b></span>
+    <span>SKUs de estreia · <b>4</b></span>
+    <span>Limite de título no ML · <b>60 caracteres</b></span>
+    <span>Consolidado em · <b>19/08/2026</b></span>
+  </div>
+</section>
+
+<!-- ============ BLOQUEIOS ============ -->
+<section id="bloqueios">
+  <span class="eyebrow">Leia antes de mandar qualquer coisa para a gráfica</span>
+  <h2>Quatro coisas podem custar caro se forem decididas depois</h2>
+  <p class="lead">Nenhuma delas aparece no plano atual. Três são regulatórias e uma é de calendário. Todas têm prazo curto porque travam a compra de adesivo, que é irreversível em lote de 500.</p>
+
+  <div class="alerta">
+    <h3>1. O carro-chefe está 54% acima do gatilho da lupa preta</h3>
+    <p>O blend 30/20/20/20/10 dá <b class="num">9,2 g de gordura saturada por 100 g</b>. A RDC 429/2020 obriga o selo frontal <span class="lupa">Alto em gorduras saturadas</span> a partir de <b class="num">6 g/100 g</b> em alimentos sólidos. Não é margem: é 54% acima.</p>
+    <p>A única coisa que pode manter a frente do pacote limpa é o enquadramento do mix como <b>alimento minimamente processado</b> — castanhas torradas, sem sal, sem açúcar, sem aditivo, apenas fracionadas e misturadas. Essa categoria é dispensada do selo. O argumento é bom, mas quem assume o risco é o responsável técnico, não o rótulo.</p>
+    <p class="fix"><b>Resolver assim:</b> levar esta conta ao responsável técnico junto com a lista de ingredientes e pedir o parecer <b>por escrito</b>. Se o parecer for "precisa da lupa", o layout da frente muda (o selo ocupa o terço superior e não pode dividir espaço com a barra de proporção) — e aí o adesivo tem que ser redesenhado <b>antes</b> de imprimir 500 unidades.</p>
+  </div>
+
+  <div class="alerta">
+    <h3>2. "Sem amendoim" na frente pode ter que conviver com "pode conter amendoim" no verso</h3>
+    <p>A RDC 26/2015 obriga a declaração de traços quando há risco de contaminação cruzada. Se a Divina Castanha fraciona amendoim na mesma linha — e ela vende drágea de amendoim, então provavelmente fraciona —, o verso do pacote vai dizer <b>PODE CONTER AMENDOIM</b>. Embaixo de um rótulo cujo argumento inteiro é "sem amendoim".</p>
+    <p>Isso não mata o posicionamento, mas mata a versão preguiçosa dele. Um comprador alérgico que ler as duas frases e se sentir enganado abre reclamação — e a marca que se vende como honesta é a que menos pode escorregar nisso.</p>
+    <p class="fix"><b>Resolver assim:</b> (a) pedir à Divina a <b>declaração de segregação de linha</b> por escrito, para cada insumo; (b) trocar o claim de "sem amendoim" para <b>"sem amendoim na composição"</b> em rótulo e anúncio — é o que os textos deste kit já usam; (c) se houver traços, dizer isso <b>no anúncio</b>, não só no verso. A frase está pronta na seção de rótulo.</p>
+  </div>
+
+  <div class="alerta">
+    <h3>3. Sem GTIN, o anúncio nasce fora do catálogo</h3>
+    <p>Produto de marca própria sem código de barras entra como anúncio avulso e perde a disputa por posição para quem está no catálogo. O registro no GS1 Brasil não sai no mesmo dia — tem análise e emissão.</p>
+    <p class="fix"><b>Resolver assim:</b> abrir o cadastro GS1 <b>esta semana</b> (associação + prefixo de empresa cobre os 5 SKUs e sobra numeração para a Fase 2). O código também precisa estar impresso no adesivo — então ele trava a gráfica junto com o item 1.</p>
+  </div>
+
+  <div class="alerta">
+    <h3>4. A drágea de chocolate estreia entrando no verão</h3>
+    <p>Lançamento em 17/09 significa que o primeiro trimestre de vida da drágea é outubro, novembro e dezembro. Chocolate 70% em caminhão de transportadora no Sudeste, nesses meses, chega derretido — e a avaliação 1★ por "chegou uma pedra disforme" custa mais do que a margem de 22% do SKU rende.</p>
+    <p class="fix"><b>Resolver assim:</b> escolher uma das três — (a) segurar a drágea e lançar em março; (b) lançar com embalagem térmica e despacho só de segunda a quarta, com o custo entrando na conta; ou (c) lançar assumindo o risco e com política de reembolso automático por derretimento escrita no anúncio. A opção (a) é a mais barata e libera foco total para os dois mixes, que são o carro-chefe.</p>
+  </div>
+</section>
+
+<!-- ============ ANÚNCIOS ============ -->
+<section id="anuncios">
+  <span class="eyebrow">Item 8 do plano · pronto para colar</span>
+  <h2>Os quatro anúncios</h2>
+  <p class="lead">Todo título respeita o limite de 60 caracteres do Mercado Livre — o contador ao lado de cada um conta o texto real do bloco, não uma estimativa. Os títulos abrem com "mix de castanhas", que é o termo mais buscado da categoria. As descrições são texto puro: o ML não aceita HTML, link nem dado de contato.</p>
+  <p class="lead">Onde aparece <b class="mono">[ ]</b>, é dado que só existe depois do CNPJ, do GS1 ou do laudo do fornecedor. Nada de publicar com colchete no ar.</p>
+
+  <!-- ANÚNCIO 1 -->
+  <article class="ficha">
+    <header>
+      <span class="n">SKU 01</span>
+      <h3>Mix Premium 1 kg</h3>
+      <span class="role">ataque ao líder</span>
+      <span class="preco num">R$ 144,90</span>
+    </header>
+    <div class="corpo">
+
+      <div class="bloco">
+        <div class="bloco-cab"><h4>Título</h4><span class="contador" data-limite="60"></span><button class="btn-copiar" type="button">Copiar</button></div>
+        <pre class="copia titulo">Mix de Castanhas Premium Viva Noz 1kg Sem Amendoim Nem Passa</pre>
+      </div>
+
+      <div class="bloco">
+        <div class="bloco-cab"><h4>Ficha técnica — preencher 100%, o ML usa isso para rankear</h4></div>
+        <div class="twrap"><table>
+          <tr><th>Atributo</th><th>Valor</th></tr>
+          <tr><td>Marca</td><td>Viva Noz</td></tr>
+          <tr><td>Linha / Modelo</td><td>Mix Premium</td></tr>
+          <tr><td>Tipo</td><td>Mix de castanhas</td></tr>
+          <tr><td>Formato de venda</td><td>Pacote</td></tr>
+          <tr><td>Unidades por embalagem</td><td>1</td></tr>
+          <tr><td>Peso líquido</td><td>1 kg</td></tr>
+          <tr><td>Ingredientes</td><td>Castanha de caju, amêndoa, castanha-do-pará, nozes, macadâmia</td></tr>
+          <tr><td>É sem glúten</td><td>Sim</td></tr>
+          <tr><td>É sem lactose</td><td>Sim</td></tr>
+          <tr><td>É vegano</td><td>Sim</td></tr>
+          <tr><td>É sem açúcar</td><td>Sim — marcar só se o ML descrever o campo como açúcar <i>adicionado</i>. O mix tem 3,9 g de açúcar naturalmente presente por 100 g.</td></tr>
+          <tr><td>Prazo de validade</td><td>[meses — definir com o fornecedor a partir da data de envase]</td></tr>
+          <tr><td>GTIN</td><td>[EAN-13 do GS1]</td></tr>
+          <tr><td>Condição</td><td>Novo</td></tr>
+          <tr><td>Tipo de anúncio</td><td>Clássico (12%) — acima de R$ 79 o frete grátis é obrigatório</td></tr>
+        </table></div>
+      </div>
+
+      <div class="bloco">
+        <div class="bloco-cab"><h4>Descrição</h4><span class="contador"></span><button class="btn-copiar" type="button">Copiar</button></div>
+        <pre class="copia">O QUE ESTÁ NA FOTO ESTÁ NO PACOTE.
+
+Proporção declarada e cumprida, impressa no rótulo:
+
+30% castanha de caju
+20% amêndoa
+20% castanha-do-pará
+20% nozes
+10% macadâmia
+
+Sem amendoim na composição. Sem uva passa. Nenhum ingrediente barato para fazer peso.
+
+------------------------------------------
+
+POR QUE ESTE MIX É DIFERENTE
+
+1. A proporção vem impressa no pacote.
+A barra de proporção está no rótulo, e ela é cumprida. Você não vai precisar procurar a macadâmia: são 100 g dela em cada quilo, e dá para ver pelo visor antes mesmo de abrir.
+
+2. Data de envase carimbada em cada pacote.
+Castanha velha cria ranço, e o gosto entrega na primeira mordida. Trabalhamos em lote pequeno: o que sai daqui foi envasado nesta semana, não guardado meses em galpão.
+
+3. O peso é conferido, e a foto está aí.
+Uma das imagens deste anúncio é o pacote em cima da balança. 1 kg líquido é 1 kg.
+
+------------------------------------------
+
+O QUE VOCÊ RECEBE
+
+1 pacote de 1 kg em embalagem kraft com visor e fecho zip, para continuar fechando bem depois de aberto.
+
+------------------------------------------
+
+COMO CONSERVAR
+
+Em local seco e fresco, protegido da luz e do calor. Depois de aberto, feche o zip. Para guardar por mais de 30 dias, mantenha em pote fechado na geladeira.
+
+------------------------------------------
+
+INGREDIENTES
+
+Castanha de caju torrada sem sal, amêndoa torrada, castanha-do-pará, nozes e macadâmia. Sem sal, sem açúcar, sem conservantes.
+
+ALÉRGICOS: CONTÉM CASTANHA-DE-CAJU, AMÊNDOA, CASTANHA-DO-PARÁ, NOZES E MACADÂMIA. [PODE CONTER AMENDOIM — manter esta frase se houver traços; ver bloqueio 2]
+NÃO CONTÉM GLÚTEN.
+
+Fracionado e embalado por [razão social], CNPJ [número].
+
+------------------------------------------
+
+Dúvida sobre proporção, safra ou data de envase? Pergunte aqui. A gente responde.</pre>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ANÚNCIO 2 -->
+  <article class="ficha">
+    <header>
+      <span class="n">SKU 02</span>
+      <h3>Mix Premium 500 g</h3>
+      <span class="role">vitrine da marca</span>
+      <span class="preco num">R$ 64,90</span>
+    </header>
+    <div class="corpo">
+
+      <div class="bloco">
+        <div class="bloco-cab"><h4>Título</h4><span class="contador" data-limite="60"></span><button class="btn-copiar" type="button">Copiar</button></div>
+        <pre class="copia titulo">Mix de Castanhas Premium Viva Noz 500g Sem Amendoim</pre>
+      </div>
+
+      <div class="bloco">
+        <div class="bloco-cab"><h4>Ficha técnica — muda o que está marcado</h4></div>
+        <div class="twrap"><table>
+          <tr><th>Atributo</th><th>Valor</th></tr>
+          <tr><td>Peso líquido</td><td>500 g</td></tr>
+          <tr><td>Tipo de anúncio</td><td>Clássico — abaixo de R$ 79, custo fixo de R$ 6,75/venda e <b>o comprador paga o frete</b></td></tr>
+          <tr><td>Demais atributos</td><td>Idênticos ao SKU 01</td></tr>
+        </table></div>
+      </div>
+
+      <div class="bloco">
+        <div class="bloco-cab"><h4>Descrição</h4><span class="contador"></span><button class="btn-copiar" type="button">Copiar</button></div>
+        <pre class="copia">O QUE ESTÁ NA FOTO ESTÁ NO PACOTE.
+
+Proporção declarada e cumprida, impressa no rótulo:
+
+30% castanha de caju
+20% amêndoa
+20% castanha-do-pará
+20% nozes
+10% macadâmia
+
+Sem amendoim na composição. Sem uva passa. Nenhum ingrediente barato para fazer peso.
+
+------------------------------------------
+
+O PACOTE PARA CONHECER A MARCA
+
+500 g é a medida de quem quer provar antes de comprar o quilo. É o mesmo blend, o mesmo envase em lote pequeno e a mesma data carimbada do pacote grande, na quantidade que dura de uma a duas semanas em casa.
+
+------------------------------------------
+
+POR QUE ESTE MIX É DIFERENTE
+
+1. A proporção vem impressa no pacote.
+São 50 g de macadâmia em cada 500 g, e dá para ver pelo visor antes de abrir.
+
+2. Data de envase carimbada em cada pacote.
+Lote pequeno, envasado na semana. Castanha velha cria ranço, e o gosto entrega.
+
+3. O peso é conferido, e a foto está aí.
+Uma das imagens deste anúncio é o pacote em cima da balança.
+
+------------------------------------------
+
+O QUE VOCÊ RECEBE
+
+1 pacote de 500 g em embalagem kraft com visor e fecho zip.
+
+------------------------------------------
+
+COMO CONSERVAR
+
+Em local seco e fresco, protegido da luz e do calor. Depois de aberto, feche o zip.
+
+------------------------------------------
+
+INGREDIENTES
+
+Castanha de caju torrada sem sal, amêndoa torrada, castanha-do-pará, nozes e macadâmia. Sem sal, sem açúcar, sem conservantes.
+
+ALÉRGICOS: CONTÉM CASTANHA-DE-CAJU, AMÊNDOA, CASTANHA-DO-PARÁ, NOZES E MACADÂMIA. [PODE CONTER AMENDOIM — ver bloqueio 2]
+NÃO CONTÉM GLÚTEN.
+
+Fracionado e embalado por [razão social], CNPJ [número].
+
+------------------------------------------
+
+Dúvida sobre proporção, safra ou data de envase? Pergunte aqui. A gente responde.</pre>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ANÚNCIO 3 -->
+  <article class="ficha">
+    <header>
+      <span class="n">SKU 03</span>
+      <h3>Caju Caramelizada com Gergelim 500 g</h3>
+      <span class="role">demanda já provada</span>
+      <span class="preco num">R$ 49,90</span>
+    </header>
+    <div class="corpo">
+
+      <div class="bloco">
+        <div class="bloco-cab"><h4>Título</h4><span class="contador" data-limite="60"></span><button class="btn-copiar" type="button">Copiar</button></div>
+        <pre class="copia titulo">Castanha de Caju Caramelizada com Gergelim Viva Noz 500g</pre>
+      </div>
+
+      <div class="bloco">
+        <div class="bloco-cab"><h4>Ficha técnica</h4></div>
+        <div class="twrap"><table>
+          <tr><th>Atributo</th><th>Valor</th></tr>
+          <tr><td>Marca</td><td>Viva Noz</td></tr>
+          <tr><td>Tipo</td><td>Castanha de caju caramelizada</td></tr>
+          <tr><td>Peso líquido</td><td>500 g</td></tr>
+          <tr><td>Ingredientes</td><td>[copiar a lista exata do laudo da Divina — provável: castanha de caju, açúcar, gergelim, sal]</td></tr>
+          <tr><td>É sem glúten</td><td>[confirmar com o fornecedor — o gergelim costuma ser processado em linha com cereais]</td></tr>
+          <tr><td>É vegano</td><td>[confirmar]</td></tr>
+          <tr><td>É sem açúcar</td><td>Não</td></tr>
+          <tr><td>Tipo de anúncio</td><td>Clássico — abaixo de R$ 79, comprador paga o frete</td></tr>
+        </table></div>
+      </div>
+
+      <div class="bloco">
+        <div class="bloco-cab"><h4>Descrição</h4><span class="contador"></span><button class="btn-copiar" type="button">Copiar</button></div>
+        <pre class="copia">CROCANTE POR FORA, CASTANHA INTEIRA POR DENTRO.
+
+Castanha de caju coberta em caramelo e gergelim tostado. Doce na medida, sem virar bala: o caramelo é uma casca fina, e o que você morde é castanha.
+
+------------------------------------------
+
+PARA QUEM É
+
+Para quem come castanha vendo série e some com o pacote. Para café da tarde, para levar no trabalho, para pôr na mesa quando chega visita. Também funciona como presente pequeno.
+
+------------------------------------------
+
+O QUE ESPERAR
+
+- Castanha de caju inteira, não quebrada nem em banda
+- Caramelo em camada fina, crocante, que não gruda nos dentes
+- Gergelim tostado por cima, que dá o amargo que equilibra o doce
+- Envasado em lote pequeno, com data de envase carimbada no pacote
+
+------------------------------------------
+
+O QUE VOCÊ RECEBE
+
+1 pacote de 500 g em embalagem kraft com visor e fecho zip.
+
+------------------------------------------
+
+COMO CONSERVAR
+
+Em local seco e fresco, longe do calor. Depois de aberto, feche o zip para manter a crocância. Umidade é o inimigo do caramelo.
+
+------------------------------------------
+
+INGREDIENTES
+
+[Transcrever exatamente a lista do laudo do fornecedor.]
+
+ALÉRGICOS: CONTÉM CASTANHA-DE-CAJU E GERGELIM. [PODE CONTER — completar com o laudo]
+[NÃO CONTÉM GLÚTEN / CONTÉM GLÚTEN — completar com o laudo]
+
+Fracionado e embalado por [razão social], CNPJ [número].
+
+------------------------------------------
+
+Alguma dúvida sobre ingredientes ou validade? Pergunte aqui. A gente responde.</pre>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ANÚNCIO 4 -->
+  <article class="ficha">
+    <header>
+      <span class="n">SKU 04</span>
+      <h3>Drágea de Caju com Chocolate 70% 200 g</h3>
+      <span class="role">aposta de margem · ver bloqueio 4</span>
+      <span class="preco num">R$ 54,90</span>
+    </header>
+    <div class="corpo">
+
+      <div class="bloco">
+        <div class="bloco-cab"><h4>Título</h4><span class="contador" data-limite="60"></span><button class="btn-copiar" type="button">Copiar</button></div>
+        <pre class="copia titulo">Drágea de Castanha de Caju com Chocolate 70% Viva Noz 200g</pre>
+      </div>
+
+      <div class="bloco">
+        <div class="bloco-cab"><h4>Ficha técnica</h4></div>
+        <div class="twrap"><table>
+          <tr><th>Atributo</th><th>Valor</th></tr>
+          <tr><td>Marca</td><td>Viva Noz</td></tr>
+          <tr><td>Tipo</td><td>Drágea / castanha drageada</td></tr>
+          <tr><td>Peso líquido</td><td>200 g</td></tr>
+          <tr><td>Teor de cacau</td><td>70%</td></tr>
+          <tr><td>Ingredientes</td><td>[copiar do laudo da Divina — inclui a lista completa do chocolate]</td></tr>
+          <tr><td>É sem lactose</td><td>[confirmar: chocolate 70% costuma declarar "pode conter leite"]</td></tr>
+          <tr><td>É vegano</td><td>[confirmar pelo mesmo motivo]</td></tr>
+          <tr><td>Tipo de anúncio</td><td>Clássico — abaixo de R$ 79, comprador paga o frete</td></tr>
+        </table></div>
+      </div>
+
+      <div class="bloco">
+        <div class="bloco-cab"><h4>Descrição</h4><span class="contador"></span><button class="btn-copiar" type="button">Copiar</button></div>
+        <pre class="copia">CASTANHA DE CAJU INTEIRA DENTRO DE CHOCOLATE 70%.
+
+Cacau de verdade, com 70% de teor — amargo o suficiente para você sentir o chocolate, doce o suficiente para o pote acabar rápido. E dentro de cada drágea, uma castanha de caju inteira.
+
+------------------------------------------
+
+O QUE ESPERAR
+
+- Castanha de caju inteira em cada drágea, não pedaço
+- Chocolate 70% cacau, não cobertura sabor chocolate
+- 200 g, o formato de pote de mesa
+- Envasado em lote pequeno, com data de envase carimbada
+
+------------------------------------------
+
+SOBRE O TRANSPORTE NO CALOR
+
+Chocolate derrete. É física, e a gente não vai fingir o contrário.
+
+[ESCOLHER UMA DAS DUAS FRASES ABAIXO E APAGAR A OUTRA:]
+
+[A] Despachamos de segunda a quarta, em embalagem térmica, para o pacote passar o menor tempo possível em trânsito. Se mesmo assim chegar deformado pelo calor, resolvemos: mande a mensagem com a foto e a gente reembolsa ou reenvia.
+
+[B] Entre outubro e março, este produto fica fora do ar. Preferimos não vender a vender derretido.
+
+------------------------------------------
+
+COMO CONSERVAR
+
+Em local seco e fresco, entre 18 °C e 22 °C, longe do sol. Se a casa for quente, guarde na geladeira em pote fechado — o chocolate pode esbranquiçar na superfície, o que não altera o sabor.
+
+------------------------------------------
+
+INGREDIENTES
+
+[Transcrever exatamente a lista do laudo do fornecedor, incluindo os ingredientes do chocolate.]
+
+ALÉRGICOS: CONTÉM CASTANHA-DE-CAJU. [COMPLETAR COM O LAUDO: leite, soja e derivados costumam aparecer.]
+
+Fracionado e embalado por [razão social], CNPJ [número].
+
+------------------------------------------
+
+Alguma dúvida sobre ingredientes, validade ou envio no calor? Pergunte aqui. A gente responde.</pre>
+      </div>
+
+    </div>
+  </article>
+</section>
+
+<!-- ============ RÓTULO ============ -->
+<section id="rotulo">
+  <span class="eyebrow">Itens 4 e 5 do plano · conteúdo para a gráfica</span>
+  <h2>O que vai impresso, frente e verso</h2>
+  <p class="lead">Isto é o conteúdo, não a arte. Serve como briefing fechado para quem for diagramar o adesivo: cada item abaixo tem obrigação legal ou função de venda, e nenhum pode cair no corte.</p>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>Frente</h3>
+      <ul class="lista">
+        <li><b>Assinatura Viva Noz</b> — manuscrita, no topo.</li>
+        <li><b>Denominação de venda</b> — o que o produto é, em letra legível: "Mix de castanhas", "Castanha de caju caramelizada com gergelim", "Drágea de castanha de caju com chocolate 70%". Não é o nome comercial: é a identificação obrigatória.</li>
+        <li><b>Barra de proporção</b> (só nos mixes) — 30/20/20/20/10, com os percentuais escritos. É a assinatura visual da marca.</li>
+        <li><b>Claim</b> — "sem amendoim <i>na composição</i>". A palavra "na composição" é o que separa a frase de um problema com o verso.</li>
+        <li><b>Conteúdo líquido</b> — canto inferior direito. A Portaria Inmetro 157/2002 define altura mínima do numeral por faixa de peso; confirmar a faixa de 500 g e 1 kg com a gráfica antes de fechar a arte.</li>
+        <li><b>Selo frontal (lupa)</b>, se o responsável técnico disser que é devido — terço superior da face principal, e ele não divide espaço com nada.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Verso</h3>
+      <ul class="lista">
+        <li><b>INGREDIENTES</b> — em ordem decrescente de quantidade.</li>
+        <li><b>ALÉRGICOS</b> — caixa alta, negrito, em cor contrastante, logo abaixo dos ingredientes (RDC 26/2015). Primeiro "CONTÉM", depois "PODE CONTER".</li>
+        <li><b>NÃO CONTÉM GLÚTEN</b> — obrigatório e destacado (Lei 10.674/2003).</li>
+        <li><b>Tabela nutricional</b> — no modelo da IN 75/2020, com as colunas de 100 g e de porção.</li>
+        <li><b>Conservação</b> — uma linha, antes e depois de aberto.</li>
+        <li><b>LOTE · VALIDADE · ENVASADO EM</b> — os três em campo carimbável. O "envasado em" não é obrigatório por lei; é a promessa da marca, e é o que o concorrente grande não consegue copiar.</li>
+        <li><b>Identificação de origem</b> — "Fracionado e embalado por [razão social], CNPJ, endereço completo com município e UF, CEP". Indústria Brasileira.</li>
+        <li><b>SAC</b> — canal de atendimento ao consumidor (e-mail e/ou telefone).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card dashed">
+    <h3>Texto de alérgenos — versão pronta para o mix</h3>
+    <p class="lead" style="margin-bottom:12px">Use exatamente esta grafia. Os nomes dos alérgenos seguem a lista da RDC 26/2015 e não podem ser trocados por sinônimos comerciais.</p>
+    <div class="bloco">
+      <div class="bloco-cab"><h4>Bloco de alérgenos</h4><button class="btn-copiar" type="button">Copiar</button></div>
+      <pre class="copia">ALÉRGICOS: CONTÉM CASTANHA-DE-CAJU, AMÊNDOA, CASTANHA-DO-PARÁ, NOZES E MACADÂMIA.
+ALÉRGICOS: PODE CONTER AMENDOIM E OUTRAS CASTANHAS.
+NÃO CONTÉM GLÚTEN.</pre>
+    </div>
+    <p class="fix" style="margin-top:12px;font-size:14px;color:var(--ink-2)">A segunda linha só sai do rótulo se a Divina entregar a declaração de segregação de linha por escrito. Sem o documento, ela fica.</p>
+  </div>
+
+  <div class="card">
+    <h3>Selo frontal (lupa) — situação de cada SKU</h3>
+    <p class="lead" style="margin-bottom:12px">Gatilhos da RDC 429/2020 para alimentos sólidos, por 100 g: açúcar adicionado ≥ 15 g, gordura saturada ≥ 6 g, sódio ≥ 600 mg.</p>
+    <div class="twrap"><table>
+      <tr><th>SKU</th><th>Gord. saturada /100 g</th><th>Situação</th><th>O que fazer</th></tr>
+      <tr>
+        <td>Mix Premium 500 g e 1 kg</td>
+        <td class="r num">9,2 g</td>
+        <td><span class="tag risco">Acima do gatilho</span></td>
+        <td>Depende do enquadramento como minimamente processado. Parecer do responsável técnico, por escrito. Ver bloqueio 1.</td>
+      </tr>
+      <tr>
+        <td>Caju caramelizada c/ gergelim</td>
+        <td class="r">a obter</td>
+        <td><span class="tag risco">Provavelmente duas lupas</span></td>
+        <td>Tem açúcar adicionado e a gordura da castanha. Pedir a tabela nutricional à Divina — sem ela não dá para desenhar a frente.</td>
+      </tr>
+      <tr>
+        <td>Drágea de caju c/ chocolate 70%</td>
+        <td class="r">a obter</td>
+        <td><span class="tag risco">Quase certo: duas lupas</span></td>
+        <td>Chocolate 70% carrega gordura saturada e açúcar. Assumir que vem com selo e desenhar a frente já com espaço para ele.</td>
+      </tr>
+      <tr>
+        <td>Kit 2× Mix 500 g (Fase 2)</td>
+        <td class="r num">9,2 g</td>
+        <td><span class="tag espera">Segue o mix</span></td>
+        <td>Mesmo produto, mesma decisão. A caixa de presente também é embalagem e leva rotulagem.</td>
+      </tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h3>O que pedir à Divina Castanha — texto pronto</h3>
+    <div class="bloco">
+      <div class="bloco-cab"><h4>Mensagem ao fornecedor</h4><button class="btn-copiar" type="button">Copiar</button></div>
+      <pre class="copia">Olá! Estamos montando o rótulo de produtos fracionados a partir dos itens de vocês e precisamos de três documentos, por escrito:
+
+1. FICHA TÉCNICA E TABELA NUTRICIONAL de cada item abaixo, com os valores por 100 g:
+   - Castanha de Caju torrada sem sal W1
+   - Amêndoa Torrada
+   - Castanha do Pará Inteira - Safra 2026
+   - Nozes Chilena Quartz
+   - Nozes Macadâmia sem casca
+   - Castanha de Caju Caramelizada com Gergelim
+   - Drágea Caju - choco 70%
+   Precisamos de: valor energético, carboidratos totais, açúcares totais, açúcares adicionados, proteínas, gorduras totais, gorduras saturadas, gorduras trans, fibra alimentar e sódio.
+
+2. LISTA DE INGREDIENTES completa de cada item, na ordem decrescente de quantidade, exatamente como deve constar em rótulo — incluindo a lista do chocolate no caso da drágea.
+
+3. DECLARAÇÃO DE ALÉRGENOS E SEGREGAÇÃO DE LINHA: quais alérgenos cada item contém e se há contaminação cruzada com amendoim, glúten, leite ou soja no processamento e no envase.
+
+Também precisamos saber o prazo de validade de cada item a partir da data de fabricação.
+
+Obrigado!</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NUTRICIONAL ============ -->
+<section id="nutricional">
+  <span class="eyebrow">Item 5 do plano · cálculo do mix</span>
+  <h2>Tabela nutricional do Mix Premium</h2>
+  <p class="lead">Calculada a partir da receita 30/20/20/20/10 da planilha, usando composição de referência das cinco castanhas e o método de cálculo energético da ANVISA (4 kcal/g para carboidrato disponível e proteína, 9 para gordura, 2 para fibra). Vale para os dois mixes: 500 g e 1 kg têm a mesma composição por 100 g.</p>
+
+  <div class="twrap"><table>
+    <tr><th>Nutriente</th><th>100 g</th><th>%VD*</th><th>Porção 30 g</th><th>%VD*</th></tr>
+    <tr><td>Valor energético</td><td class="r num">657 kcal = 2.747 kJ</td><td class="r num">33%</td><td class="r num">197 kcal = 824 kJ</td><td class="r num">10%</td></tr>
+    <tr><td>Carboidratos totais</td><td class="r num">20,6 g</td><td class="r num">7%</td><td class="r num">6,2 g</td><td class="r num">2%</td></tr>
+    <tr><td>&nbsp;&nbsp;Açúcares totais</td><td class="r num">3,9 g</td><td class="r">—</td><td class="r num">1,2 g</td><td class="r">—</td></tr>
+    <tr><td>&nbsp;&nbsp;Açúcares adicionados</td><td class="r num">0 g</td><td class="r num">0%</td><td class="r num">0 g</td><td class="r num">0%</td></tr>
+    <tr><td>Proteínas</td><td class="r num">15,5 g</td><td class="r num">31%</td><td class="r num">4,6 g</td><td class="r num">9%</td></tr>
+    <tr><td>Gorduras totais</td><td class="r num">58,5 g</td><td class="r num">106%</td><td class="r num">17,5 g</td><td class="r num">32%</td></tr>
+    <tr><td>&nbsp;&nbsp;Gorduras saturadas</td><td class="r num">9,2 g</td><td class="r num">42%</td><td class="r num">2,8 g</td><td class="r num">13%</td></tr>
+    <tr><td>&nbsp;&nbsp;Gorduras trans</td><td class="r num">0 g</td><td class="r">—</td><td class="r num">0 g</td><td class="r">—</td></tr>
+    <tr><td>Fibra alimentar</td><td class="r num">6,9 g</td><td class="r num">27%</td><td class="r num">2,1 g</td><td class="r num">8%</td></tr>
+    <tr><td>Sódio</td><td class="r num">7 mg</td><td class="r num">0%</td><td class="r num">2 mg</td><td class="r num">0%</td></tr>
+  </table></div>
+  <p style="font-size:13px;color:var(--ink-3)">*Percentual de valores diários com base em dieta de 2.000 kcal. Seus valores diários podem ser maiores ou menores dependendo de suas necessidades energéticas.</p>
+
+  <div class="card dashed">
+    <h3>Três coisas a checar antes de mandar isto para a gráfica</h3>
+    <ol class="ord">
+      <li><b>Trocar a fonte dos números pelos do fornecedor.</b> Este cálculo usa composição de referência de castanha genérica. Assim que a Divina mandar as tabelas dos cinco insumos, refazer a conta com os números dela — a diferença costuma ficar em 3% a 8%, o suficiente para mudar o arredondamento de alguma linha.</li>
+      <li><b>Confirmar a porção de 30 g.</b> A IN 75/2020 fixa a porção de referência por categoria de alimento. Confirmar o valor da categoria de frutas oleaginosas antes de imprimir — se for outro, a coluna inteira muda.</li>
+      <li><b>Usar o modelo de tabela da IN 75/2020.</b> Formato, ordem das linhas, fonte mínima e a moldura têm forma definida em norma. Quem diagramar precisa partir do modelo oficial, não desta tabela — esta aqui é o conteúdo, não a arte.</li>
+    </ol>
+    <p style="margin-top:12px;font-size:14px;color:var(--ink-2)">O plano prevê R$ 180/SKU com nutricionista ou um serviço automatizado. Com esta tabela pronta e as fichas do fornecedor em mãos, o serviço vira conferência e validação — que é onde o dinheiro compra segurança de verdade.</p>
+  </div>
+</section>
+
+<!-- ============ FOTOS ============ -->
+<section id="fotos">
+  <span class="eyebrow">Item 6 do plano · briefing para o fotógrafo</span>
+  <h2>Oito fotos, e cada uma tem um trabalho</h2>
+  <p class="lead">O padrão do top 100 da categoria é de 5 a 8 imagens. Aqui são 8, e nenhuma é decorativa: cinco delas existem para responder, por antecipação, a uma reclamação documentada dos concorrentes. Especificação técnica: mínimo 1200 × 1200 px, quadrada, JPG ou PNG.</p>
+
+  <div class="twrap"><table>
+    <tr><th>#</th><th>Foto</th><th>Trabalho que ela faz</th></tr>
+    <tr><td class="num">1</td><td><b>Capa: pacote de frente, fundo branco puro</b></td><td>É a miniatura na busca. Sem texto, sem selo, sem moldura, sem marca d'água — o ML exige a capa limpa. O rótulo tem que estar legível no tamanho de miniatura.</td></tr>
+    <tr><td class="num">2</td><td><b>Conteúdo despejado em tábua ou tigela rasa</b></td><td>Mostra a proporção real acontecendo. É a resposta a "quase não veio a macadâmia".</td></tr>
+    <tr><td class="num">3</td><td><b>Pacote fechado sobre balança digital, visor legível</b></td><td>Responde a "peso menor que o anunciado" antes de a dúvida existir. Peso na tela igual ou acima do declarado, e a foto tem que ser nítida no visor.</td></tr>
+    <tr><td class="num">4</td><td><b>Macro da macadâmia e da castanha-do-pará</b></td><td>São exatamente as duas que o concorrente é acusado de esconder. Close curto, luz lateral.</td></tr>
+    <tr><td class="num">5</td><td><b>Infográfico da barra de proporção</b></td><td>30/20/20/20/10 em imagem, sobre fundo kraft. É a única foto com texto pesado, e é a que faz o comprador entender a marca em dois segundos.</td></tr>
+    <tr><td class="num">6</td><td><b>Close do carimbo de lote e data de envase</b></td><td>Prova o "envasado esta semana". É a foto que o concorrente grande não consegue tirar.</td></tr>
+    <tr><td class="num">7</td><td><b>Mão segurando o pacote</b></td><td>Dá escala. Metade das devoluções de mercearia começa em "achei que era maior".</td></tr>
+    <tr><td class="num">8</td><td><b>O que não tem</b></td><td>Fundo kraft, tipografia da marca: sem amendoim na composição · sem uva passa · sem sal · sem açúcar. Honesto e direto ao nicho.</td></tr>
+  </table></div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3>Direção de arte</h3>
+      <ul class="lista">
+        <li>Luz difusa e natural. Sem flash duro, sem sombra dura — castanha com brilho especular parece plástica.</li>
+        <li>Fundo kraft ou madeira clara nas secundárias; branco puro só na capa.</li>
+        <li>Nada de props de banco de imagem: sem tábua de mármore, sem folhagem tropical, sem xícara de café fora de contexto. A marca é armazém, não revista.</li>
+        <li>Enquadramento quadrado desde a captura, para o corte não comer o rótulo.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Vídeo de 30 segundos — vale o esforço</h3>
+      <p style="font-size:14.5px">O ML aceita vídeo no anúncio e quase ninguém na categoria usa. Roteiro: a balança zerando, as castanhas caindo no pacote uma variedade por vez na proporção da barra, o zip fechando, o carimbo da data batendo no verso. Sem narração, sem trilha genérica, só som ambiente. Grava em uma tarde com celular em tripé.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIA D ============ -->
+<section id="diad">
+  <span class="eyebrow">17/09 · a subida</span>
+  <h2>Dia D</h2>
+  <p class="lead">Os quatro anúncios sobem no mesmo dia, com Ads ligado desde a hora zero — o Mercado Livre dá impulso de visibilidade a anúncio novo, e esse impulso não volta. Marque conforme fechar; o progresso fica salvo neste navegador.</p>
+  <div class="prog"><div id="barra">0%</div></div>
+
+  <ul class="check" id="lista-diad">
+    <li><label><input type="checkbox" id="d1"><span class="t"><b>Parecer do responsável técnico sobre a lupa, por escrito</b><small>Trava o adesivo. Sem isso, não manda nada para a gráfica.</small></span></label></li>
+    <li><label><input type="checkbox" id="d2"><span class="t"><b>Documentos da Divina recebidos</b><small>Tabelas nutricionais, listas de ingredientes e declaração de segregação de linha. A mensagem pronta está na seção de rótulo.</small></span></label></li>
+    <li><label><input type="checkbox" id="d3"><span class="t"><b>GTIN emitido pelo GS1 e impresso no adesivo</b><small>Sem código, o anúncio nasce fora do catálogo.</small></span></label></li>
+    <li><label><input type="checkbox" id="d4"><span class="t"><b>Decisão sobre a drágea no verão</b><small>Segurar até março, lançar com térmica, ou lançar com política de reembolso escrita. Uma das três, decidida.</small></span></label></li>
+    <li><label><input type="checkbox" id="d5"><span class="t"><b>Tabela nutricional refeita com os números do fornecedor</b><small>A deste kit é o cálculo teórico. Vira definitiva quando chegarem as fichas.</small></span></label></li>
+    <li><label><input type="checkbox" id="d6"><span class="t"><b>Adesivos frente e verso aprovados em prova impressa</b><small>Aprovar em papel, nunca em tela. Conferir se o bloco de alérgenos ficou legível no tamanho final.</small></span></label></li>
+    <li><label><input type="checkbox" id="d7"><span class="t"><b>As 8 fotos e o vídeo prontos, quadrados, 1200 px ou mais</b></span></label></li>
+    <li><label><input type="checkbox" id="d8"><span class="t"><b>Tarifa de frete e taxa reais conferidas no Seller Center</b><small>Dois minutos. Se divergirem da planilha, reprecificar antes de publicar.</small></span></label></li>
+    <li><label><input type="checkbox" id="d9"><span class="t"><b>Fichas técnicas dos 4 anúncios preenchidas a 100%</b><small>Atributo em branco derruba posição. Nenhum colchete no ar.</small></span></label></li>
+    <li><label><input type="checkbox" id="d10"><span class="t"><b>Ads ligado nos 4, orçamento de lançamento em 15%</b></span></label></li>
+    <li><label><input type="checkbox" id="d11"><span class="t"><b>Cartão com QR de avaliação impresso e dentro do pacote</b><small>Reputação é o ativo da Fase 1.</small></span></label></li>
+    <li><label><input type="checkbox" id="d12"><span class="t"><b>Respostas prontas salvas para as perguntas de sempre</b><small>Estão logo abaixo. Responder em minutos, não em horas — tempo de resposta conta na reputação.</small></span></label></li>
+  </ul>
+
+  <div class="card">
+    <h3>Respostas prontas</h3>
+    <p class="lead" style="margin-bottom:14px">Sete perguntas cobrem quase tudo que chega na categoria. Deixe salvas e responda em minutos.</p>
+    <div class="bloco">
+      <div class="bloco-cab"><h4>Banco de respostas</h4><button class="btn-copiar" type="button">Copiar</button></div>
+      <pre class="copia">"Tem amendoim?"
+Não. Amendoim não entra na composição — o mix é caju, amêndoa, castanha-do-pará, nozes e macadâmia, nessa proporção. [Se houver traços: O produto é fracionado em ambiente que também processa amendoim, então declaramos "pode conter" no rótulo, como manda a norma.]
+
+"Qual a validade?"
+São [X] meses a partir da data de envase, que vem carimbada no verso do pacote. A gente trabalha em lote pequeno, então o pacote que sai daqui foi envasado há dias, não há meses.
+
+"A proporção é essa mesma?"
+É, e está impressa no rótulo: 30% caju, 20% amêndoa, 20% castanha-do-pará, 20% nozes e 10% macadâmia. Dá para conferir pelo visor antes de abrir.
+
+"Faz desconto para 2 pacotes?"
+Consegue ver o valor com o frete somado colocando 2 unidades no carrinho. Se precisar de quantidade maior, me chame por aqui que a gente vê.
+
+"Manda para [cidade]?"
+Mandamos para todo o Brasil. O prazo e o valor aparecem quando você coloca o CEP na página do anúncio.
+
+"É salgada?"
+Não. Nenhum sal e nenhum açúcar adicionados — é castanha torrada pura.
+
+"Chega derretido?" (drágea)
+[Escolher conforme a decisão do bloqueio 4.] Despachamos de segunda a quarta em embalagem térmica para reduzir o tempo em trânsito. Se chegar deformado pelo calor, manda a foto por aqui que a gente reembolsa ou reenvia.</pre>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="assin">Viva Noz</p>
+  <p>Kit de lançamento · 19/08/2026 · continuação do Guia de Marca &amp; Estratégia ML de 16/08</p>
+  <p>Cálculo nutricional a partir da receita da planilha central. Enquadramento regulatório sujeito a parecer do responsável técnico.</p>
+</footer>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- contadores de caracteres (contam o texto real do bloco) ----
+  document.querySelectorAll('.bloco').forEach(function(bloco){
+    var alvo = bloco.querySelector('pre.copia');
+    var cont = bloco.querySelector('.contador');
+    if(!alvo || !cont) return;
+    var n = alvo.textContent.length;
+    var limite = cont.getAttribute('data-limite');
+    if(limite){
+      limite = parseInt(limite, 10);
+      cont.textContent = n + '/' + limite + ' caracteres';
+      cont.classList.add(n > limite ? 'estourou' : 'ok');
+    } else {
+      cont.textContent = n.toLocaleString('pt-BR') + ' caracteres';
+    }
+  });
+
+  // ---- copiar ----
+  function selecionar(el){
+    try{
+      var r = document.createRange();
+      r.selectNodeContents(el);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+      return true;
+    }catch(e){ return false; }
+  }
+
+  document.querySelectorAll('.btn-copiar').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var caixa = btn.closest('.bloco') || btn.closest('.card');
+      var alvo = caixa && caixa.querySelector('pre.copia');
+      if(!alvo) return;
+      var texto = alvo.textContent;
+      var original = 'Copiar';
+
+      function avisar(msg){
+        btn.textContent = msg;
+        btn.setAttribute('data-estado','feito');
+        setTimeout(function(){
+          btn.textContent = original;
+          btn.removeAttribute('data-estado');
+        }, 2200);
+      }
+
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texto).then(function(){
+          avisar('Copiado');
+        }).catch(function(){
+          avisar(selecionar(alvo) ? 'Selecionado — Ctrl+C' : 'Selecione e copie');
+        });
+      } else {
+        avisar(selecionar(alvo) ? 'Selecionado — Ctrl+C' : 'Selecione e copie');
+      }
+    });
+  });
+
+  // ---- checklist com progresso salvo ----
+  var CHAVE = 'vivanoz-diad-v1';
+  var caixas = Array.prototype.slice.call(document.querySelectorAll('#lista-diad input[type=checkbox]'));
+  var barra = document.getElementById('barra');
+
+  function ler(){
+    try{ return JSON.parse(localStorage.getItem(CHAVE)) || {}; }
+    catch(e){ return {}; }
+  }
+  function gravar(estado){
+    try{ localStorage.setItem(CHAVE, JSON.stringify(estado)); }catch(e){}
+  }
+  function pintar(){
+    var feitos = 0;
+    caixas.forEach(function(c){
+      var li = c.closest('li');
+      if(c.checked){ feitos++; li.classList.add('feito'); }
+      else { li.classList.remove('feito'); }
+    });
+    var pct = caixas.length ? Math.round(feitos / caixas.length * 100) : 0;
+    barra.style.width = Math.max(pct, 4) + '%';
+    barra.textContent = pct + '%';
+  }
+
+  var estado = ler();
+  caixas.forEach(function(c){
+    if(estado[c.id]) c.checked = true;
+    c.addEventListener('change', function(){
+      var e = ler();
+      e[c.id] = c.checked;
+      gravar(e);
+      pintar();
+    });
+  });
+  pintar();
+})();
+</script>
