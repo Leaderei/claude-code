@@ -11,6 +11,8 @@ Uso:
     clasp-refresh.py              # renova se faltar menos de 10 min pro vencimento
     clasp-refresh.py --force      # renova sempre
     clasp-refresh.py --status     # so mostra o estado, nao escreve nada
+    clasp-refresh.py --info       # diz se o cliente OAuth e o padrao ou seu,
+                                  # e se ha algo a ajustar no Cloud Console
     clasp-refresh.py --file PATH  # usa outro arquivo de credenciais
 
 Saida: 0 = tudo certo (ou nao precisava renovar)
@@ -21,6 +23,7 @@ Saida: 0 = tudo certo (ou nao precisava renovar)
 import argparse
 import json
 import os
+import re
 import shutil
 import sys
 import time
@@ -29,6 +32,10 @@ import urllib.parse
 import urllib.request
 
 TOKEN_URL = "https://oauth2.googleapis.com/token"
+# Numero do projeto Google Cloud dono do cliente OAuth embutido no clasp.
+# Esse projeto e do Google e ja esta publicado, entao quem usa o cliente padrao
+# nao esta sujeito a expiracao de 7 dias do modo "Testing".
+PROJETO_CLASP_PADRAO = "1072944905499"
 MARGEM_MS = 10 * 60 * 1000  # renova quando faltar menos de 10 minutos
 BACKUP_DIR = os.path.expanduser("~/.claude/clasp")
 
@@ -111,6 +118,7 @@ def main():
     ap.add_argument("--file", default=os.path.expanduser("~/.clasprc.json"))
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--status", action="store_true")
+    ap.add_argument("--info", action="store_true")
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--timeout", type=float, default=20.0)
     args = ap.parse_args()
@@ -137,6 +145,51 @@ def main():
     d_refresh, _, refresh_token = primeira_chave(dicts, "refresh_token", "refreshToken")
     _, _, client_id = primeira_chave(dicts, "client_id", "clientId")
     _, _, client_secret = primeira_chave(dicts, "client_secret", "clientSecret")
+
+    if args.info:
+        print(f"arquivo: {caminho}")
+
+        if not client_id:
+            print("cliente OAuth: nao identificado no arquivo")
+            print("\nVEREDITO: rode `clasp login` uma vez e repita esta checagem.")
+            return 3
+
+        # O client_id comeca com o numero do projeto do Google Cloud que o criou.
+        # Existem os dois formatos: "123-aleatorio.apps..." e "123.apps...",
+        # entao pega o bloco inicial de digitos em vez de cortar num separador.
+        casou = re.match(r"^(\d+)", client_id)
+        projeto = casou.group(1) if casou else "(desconhecido)"
+        print(f"cliente OAuth: projeto {projeto} (...{client_id[-28:]})")
+
+        local = None
+        for d in dicts:
+            if isinstance(d.get("isLocalCreds"), bool):
+                local = d["isLocalCreds"]
+                break
+        if local is not None:
+            print(f"isLocalCreds: {local}")
+
+        escopos = None
+        for d in dicts:
+            if isinstance(d.get("scope"), str) and d["scope"]:
+                escopos = d["scope"]
+                break
+        if escopos:
+            print(f"escopos: {len(escopos.split())}")
+
+        print()
+        if projeto == PROJETO_CLASP_PADRAO and not local:
+            print("VEREDITO: voce usa o cliente OAuth PADRAO do clasp, que pertence")
+            print("ao Google e ja esta publicado em producao.")
+            print("A regra dos 7 dias do modo 'Testing' NAO se aplica a voce.")
+            print("Nao ha nada para ajustar no Google Cloud Console.")
+        else:
+            print("VEREDITO: voce usa um cliente OAuth PROPRIO.")
+            print(f"Abra o Google Cloud Console no projeto {projeto} e confira")
+            print("APIs e servicos -> Tela de permissao OAuth -> Status de publicacao.")
+            print("Se estiver em 'Testing', publique como 'In production': em 'Testing'")
+            print("o Google expira todo refresh token em 7 dias.")
+        return 0
 
     if not refresh_token:
         log("nenhum refresh_token no arquivo -- `clasp login` e inevitavel.")
