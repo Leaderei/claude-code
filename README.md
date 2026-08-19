@@ -5,11 +5,25 @@ e fim do `clasp login` diário.
 
 ## Instalação
 
+**Windows (PowerShell):**
+
+```powershell
+git clone https://github.com/Leaderei/claude-code
+cd claude-code
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+**Linux / Mac:**
+
 ```bash
-git clone <este-repo> && cd claude-code
+git clone https://github.com/Leaderei/claude-code && cd claude-code
 ./install.sh --dry-run   # confere o que vai mudar
 ./install.sh             # aplica
 ```
+
+Os scripts em `bin/*.sh` são só para Linux/Mac. No Windows, use
+`python "$env:USERPROFILE\.claude\clasp\clasp-refresh.py" --status` para
+inspecionar o token do clasp.
 
 Faz backup do seu `~/.claude/settings.json` antes de qualquer coisa, e é
 idempotente — rodar duas vezes não duplica nada.
