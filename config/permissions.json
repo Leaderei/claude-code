@@ -6,11 +6,12 @@
     "allow": [
       "Skill",
 
-      "Bash(ls *)", "Bash(cat *)", "Bash(head *)", "Bash(tail *)",
+      "Bash(cd *)", "Bash(ls *)", "Bash(cat *)", "Bash(head *)", "Bash(tail *)",
       "Bash(wc *)", "Bash(file *)", "Bash(stat *)", "Bash(tree *)",
       "Bash(which *)", "Bash(pwd)", "Bash(date *)", "Bash(echo *)",
-      "Bash(printenv *)", "Bash(basename *)", "Bash(dirname *)",
-      "Bash(realpath *)", "Bash(du *)", "Bash(df *)",
+      "Bash(printenv *)", "Bash(env)", "Bash(basename *)", "Bash(dirname *)",
+      "Bash(realpath *)", "Bash(du *)", "Bash(df *)", "Bash(less *)",
+      "Bash(more *)", "Bash(command -v *)", "Bash(whoami)", "Bash(uname *)",
 
       "Bash(grep *)", "Bash(rg *)", "Bash(find *)", "Bash(sort *)",
       "Bash(uniq *)", "Bash(cut *)", "Bash(awk *)", "Bash(sed -n *)",
