@@ -3,11 +3,15 @@
 Censo de construtoras, engenharias e arquiteturas via Google Places API (New).
 
 Uso:
-  python3 scripts/places_census.py coleta --key SUA_CHAVE [--tier 1|2|3] [--grid]
+  python3 scripts/places_census.py coleta    --key SUA_CHAVE [--tier 1|2|3] [--grid]
+  python3 scripts/places_census.py enriquece --key SUA_CHAVE [--prioridade A,B] [--limite N]
   python3 scripts/places_census.py consolida
 
-Estagio 'coleta'  -> varre a API e grava dados/raw_places.jsonl (resumivel)
-Estagio 'consolida' -> normaliza, deduplica e gera o CSV no schema da base
+coleta    -> varre a API com field mask enxuto (SKU Pro, 5.000 gratis/mes)
+             e grava dados/raw_places.jsonl (resumivel)
+enriquece -> busca telefone/site/nota via Place Details (SKU Enterprise,
+             1.000 gratis/mes) so para o subconjunto que interessa
+consolida -> mescla, deduplica e gera o CSV no schema da base
 """
 import argparse, csv, json, os, re, sys, time, unicodedata
 import urllib.request, urllib.error
@@ -17,12 +21,21 @@ OUT = "dados/censo_construcao_macro_louveira.csv"
 ENDPOINT_TEXT = "https://places.googleapis.com/v1/places:searchText"
 ENDPOINT_NEAR = "https://places.googleapis.com/v1/places:searchNearby"
 
-FIELDS = ",".join("places." + f for f in [
-    "id", "displayName", "formattedAddress", "shortFormattedAddress", "addressComponents",
-    "nationalPhoneNumber", "internationalPhoneNumber", "websiteUri", "googleMapsUri",
-    "rating", "userRatingCount", "businessStatus", "types", "primaryType",
-    "primaryTypeDisplayName", "location",
+# O SKU cobrado e o mais caro entre os campos pedidos. Telefone, site, rating e
+# userRatingCount disparam o SKU Enterprise. Por isso a varredura usa mask enxuto
+# (SKU Pro) e o contato vem depois, via Place Details, so para quem interessa.
+FIELDS_DESCOBERTA = ",".join("places." + f for f in [
+    "id", "displayName", "formattedAddress", "addressComponents",
+    "location", "types", "primaryType", "primaryTypeDisplayName",
+    "googleMapsUri", "businessStatus",
 ]) + ",nextPageToken"
+
+FIELDS_DETALHE = ",".join([
+    "id", "displayName", "nationalPhoneNumber", "internationalPhoneNumber",
+    "websiteUri", "rating", "userRatingCount", "businessStatus",
+])
+
+ENDPOINT_DETALHE = "https://places.googleapis.com/v1/places/"
 
 # (municipio, lat, lon, raio_m, tier) - tier 1 = nucleo <=25km de Louveira
 MUNICIPIOS = [
@@ -59,11 +72,7 @@ TERMOS = [
 TIPOS_GRID = ["general_contractor", "roofing_contractor", "electrician", "plumber"]
 
 
-def post(url, body, key):
-    req = urllib.request.Request(
-        url, data=json.dumps(body).encode("utf-8"), method="POST",
-        headers={"Content-Type": "application/json", "X-Goog-Api-Key": key,
-                 "X-Goog-FieldMask": FIELDS})
+def _chama(req):
     for tentativa in range(5):
         try:
             with urllib.request.urlopen(req, timeout=45) as r:
@@ -78,6 +87,19 @@ def post(url, body, key):
         except Exception as e:
             time.sleep(2 ** tentativa)
     return None
+
+
+def post(url, body, key, mask):
+    return _chama(urllib.request.Request(
+        url, data=json.dumps(body).encode("utf-8"), method="POST",
+        headers={"Content-Type": "application/json", "X-Goog-Api-Key": key,
+                 "X-Goog-FieldMask": mask}))
+
+
+def get(url, key, mask):
+    return _chama(urllib.request.Request(
+        url, method="GET",
+        headers={"X-Goog-Api-Key": key, "X-Goog-FieldMask": mask}))
 
 
 def coleta(key, tier, usar_grid):
@@ -124,7 +146,7 @@ def coleta(key, tier, usar_grid):
                              "radius": float(raio)}}}
                 if token:
                     corpo["pageToken"] = token
-                resp = post(ENDPOINT_TEXT, corpo, key)
+                resp = post(ENDPOINT_TEXT, corpo, key, FIELDS_DESCOBERTA)
                 chamadas += 1
                 if not resp:
                     break
@@ -152,7 +174,7 @@ def coleta(key, tier, usar_grid):
                              "locationRestriction": {"circle": {
                                  "center": {"latitude": plat, "longitude": plon},
                                  "radius": 2000.0}}}
-                    resp = post(ENDPOINT_NEAR, corpo, key)
+                    resp = post(ENDPOINT_NEAR, corpo, key, FIELDS_DESCOBERTA)
                     chamadas += 1
                     if resp:
                         novos = grava(resp.get("places"), consulta, nome)
@@ -161,6 +183,63 @@ def coleta(key, tier, usar_grid):
 
     saida.close()
     print(f"\nfim: {len(vistos)} lugares unicos em {chamadas} chamadas de API")
+
+
+DETALHES = "dados/raw_detalhes.jsonl"
+
+
+def enriquece(key, limite, so_prioridade):
+    """Busca telefone/site/nota (SKU Enterprise) apenas para o subconjunto escolhido."""
+    if not os.path.exists(RAW):
+        sys.exit(f"nao encontrei {RAW} - rode 'coleta' primeiro")
+
+    alvos, vistos = [], set()
+    with open(RAW, encoding="utf-8") as f:
+        for linha in f:
+            p_ = json.loads(linha)
+            if p_["id"] in vistos:
+                continue
+            vistos.add(p_["id"])
+            nome = (p_.get("displayName") or {}).get("text", "")
+            cat = classifica(nome, p_.get("types"))
+            if cat == "Servicos correlatos":
+                continue
+            cid = sem_acento(cidade_de(p_)).title()
+            d = DIST.get(cid, 999)
+            prio = "A" if d <= 22 else ("B" if d <= 45 else "C")
+            if so_prioridade and prio not in so_prioridade:
+                continue
+            alvos.append((p_["id"], nome, prio))
+
+    feitos = set()
+    if os.path.exists(DETALHES):
+        with open(DETALHES, encoding="utf-8") as f:
+            for linha in f:
+                try:
+                    feitos.add(json.loads(linha)["id"])
+                except Exception:
+                    pass
+    alvos = [a for a in alvos if a[0] not in feitos]
+    alvos.sort(key=lambda a: a[2])
+    if limite:
+        alvos = alvos[:limite]
+
+    custo_1k = 25.0  # USD/1000 - PREMISSA: confirmar o valor do SKU no console
+    print(f"{len(alvos)} a enriquecer | {len(feitos)} ja feitos")
+    print(f"estimativa: ~US$ {max(0, len(alvos) - 1000) * custo_1k / 1000:.2f} "
+          f"(assumindo 1.000 gratuitos/mes no SKU Enterprise)")
+
+    saida = open(DETALHES, "a", encoding="utf-8")
+    for i, (pid, nome, prio) in enumerate(alvos, 1):
+        resp = get(ENDPOINT_DETALHE + pid, key, FIELDS_DETALHE)
+        if resp:
+            saida.write(json.dumps(resp, ensure_ascii=False) + "\n")
+            saida.flush()
+        if i % 25 == 0 or i == len(alvos):
+            print(f"  {i}/{len(alvos)}  [{prio}] {nome[:45]}")
+        time.sleep(0.05)
+    saida.close()
+    print(f"fim: detalhes em {DETALHES}")
 
 
 # ---------------- consolidacao ----------------
@@ -232,8 +311,20 @@ def consolida():
             vistos.add(p["id"])
             registros.append(p)
 
+    det = {}
+    if os.path.exists(DETALHES):
+        with open(DETALHES, encoding="utf-8") as f:
+            for linha in f:
+                try:
+                    d_ = json.loads(linha)
+                    det[d_["id"]] = d_
+                except Exception:
+                    pass
+        print(f"mesclando {len(det)} registros enriquecidos")
+
     linhas = []
     for p in registros:
+        p.update({k: v for k, v in det.get(p["id"], {}).items() if k != "displayName"})
         nome = (p.get("displayName") or {}).get("text", "")
         cat = classifica(nome, p.get("types"))
         if cat == "Servicos correlatos" and not re.search(
@@ -254,7 +345,8 @@ def consolida():
             "Endereco": p.get("formattedAddress", ""), "Social": "",
             "Decisor_Alvo_Cargo": DEC.get(cat, ""), "Nome_Decisor": "", "Email": "",
             "Gatilho_Comercial": "", "Prioridade_ICP": prio,
-            "Confianca_do_Dado": "Alta", "Fonte": "Google Places API",
+            "Confianca_do_Dado": "Alta",
+            "Fonte": "Google Places API" + (" + Details" if p["id"] in det else ""),
             "Status_Prospeccao": "Nao iniciado",
             "Proxima_Acao": "Validar site e decisor",
             "Observacoes": "", "Google_Maps": p.get("googleMapsUri", ""),
@@ -285,9 +377,15 @@ if __name__ == "__main__":
     c.add_argument("--key", required=True)
     c.add_argument("--tier", type=int, default=2, choices=[1, 2, 3])
     c.add_argument("--grid", action="store_true")
+    e = sub.add_parser("enriquece")
+    e.add_argument("--key", required=True)
+    e.add_argument("--limite", type=int, default=0, help="teto de chamadas (0 = sem teto)")
+    e.add_argument("--prioridade", default="A,B", help="ex: A ou A,B ou A,B,C")
     sub.add_parser("consolida")
     a = ap.parse_args()
     if a.cmd == "coleta":
         coleta(a.key, a.tier, a.grid)
+    elif a.cmd == "enriquece":
+        enriquece(a.key, a.limite, set(a.prioridade.split(",")))
     else:
         consolida()
