@@ -212,6 +212,9 @@ def main():
     ap.add_argument("--mes", help="competencia AAAA-MM (padrao: mais recente)")
     ap.add_argument("--manter-zips", action="store_true",
                     help="nao apagar os zips (permite re-rodar filtros offline)")
+    ap.add_argument("--indice-amplo", action="store_true",
+                    help="tambem gerar indice regional sem filtro de CNAE/capital "
+                         "(necessario para calibrar_icp.py)")
     args = ap.parse_args()
 
     os.makedirs(TMP, exist_ok=True)
@@ -222,13 +225,16 @@ def main():
 
     # --- municipios-alvo -----------------------------------------------------
     alvo_nomes = {}
+    # Com --indice-amplo varremos todos os aneis: o objetivo e descobrir se os
+    # clientes atuais caem FORA do recorte, entao o recorte nao pode limitar.
+    teto = 99 if args.indice_amplo else C.ANEL_MAXIMO
     for anel in sorted(C.ANEIS):
-        if anel > C.ANEL_MAXIMO:
+        if anel > teto:
             continue
         for nome in C.ANEIS[anel]:
             alvo_nomes.setdefault(sem_acento(nome), anel)   # menor anel vence
 
-    log(f"Municipios-alvo: {len(alvo_nomes)} (ate o anel {C.ANEL_MAXIMO})")
+    log(f"Municipios-alvo: {len(alvo_nomes)} (ate o anel {teto if teto < 99 else 3})")
 
     codigo_para_anel, codigo_para_nome = {}, {}
 
@@ -256,6 +262,7 @@ def main():
     # --- Etapa 2: estabelecimentos ------------------------------------------
     estabelecimentos = []
     basicos = set()
+    indice = []          # indice regional amplo (todos os CNAEs)
     stats = defaultdict(int)
 
     def ler_estabelecimento(l):
@@ -271,6 +278,26 @@ def main():
         if l[5].strip() != C.SITUACAO_ATIVA:
             stats["inativa"] += 1
             return
+        basico = l[0].strip()
+        if args.indice_amplo:
+            # Sem filtro de CNAE nem de capital: e o universo contra o qual a
+            # lista de clientes do Ricardo sera casada.
+            basicos.add(basico)
+            indice.append({
+                "_basico": basico,
+                "cnpj": formatar_cnpj(basico, l[1].strip(), l[2].strip()),
+                "nome_fantasia": l[4].strip(),
+                "cnae_principal": l[11].strip(),
+                "cnaes_secundarios": l[12].strip(),
+                "municipio": codigo_para_nome.get(l[20].strip(), ""),
+                "anel": anel,
+                "data_inicio": l[10].strip(),
+                "telefone_1": formatar_telefone(l[21], l[22]),
+                "email": l[27].strip().lower(),
+            })
+        # O indice amplo varre ate o anel 3; a base filtrada respeita ANEL_MAXIMO.
+        if anel > C.ANEL_MAXIMO:
+            return
         cn = cnaes_da_linha(l[11], l[12])
         se_encaixa = cn & cnaes_alvo
         if not se_encaixa:
@@ -280,7 +307,6 @@ def main():
         if idade is not None and idade < C.IDADE_MINIMA_MESES:
             stats["nova_demais"] += 1
             return
-        basico = l[0].strip()
         basicos.add(basico)
         estabelecimentos.append({
             "_basico": basico,
@@ -404,6 +430,27 @@ def main():
                           "status_sdr", "obs"):
                 r[vazia] = ""
             w.writerow(r)
+
+    # --- indice regional amplo ----------------------------------------------
+    if args.indice_amplo:
+        cols_idx = ["cnpj", "razao_social", "nome_fantasia", "municipio", "anel",
+                    "cnae_principal", "cnaes_secundarios", "capital_social",
+                    "porte", "data_inicio", "telefone_1", "email"]
+        caminho_idx = os.path.join(OUT, f"indice_regional_{mes}.csv")
+        with open(caminho_idx, "w", encoding="utf-8-sig", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=cols_idx, extrasaction="ignore")
+            w.writeheader()
+            gravadas = 0
+            for r in indice:
+                emp = empresas.get(r["_basico"])
+                if not emp:
+                    continue
+                r["razao_social"] = emp["razao_social"]
+                r["porte"] = emp["porte"]
+                r["capital_social"] = f"{emp['capital']:.2f}"
+                w.writerow(r)
+                gravadas += 1
+        log(f"Indice regional: {caminho_idx} ({gravadas:,} estabelecimentos)")
 
     # --- relatorio -----------------------------------------------------------
     com_dominio = sum(1 for r in unicos if r["dominio"])

@@ -78,13 +78,47 @@ telefone/e-mail/domínio e idade da empresa. `A` ≥ 60 · `B` 40-59 · `C` < 40
 tipologia de obra (casa × prédio), e essa só sai do scraping do site — coluna
 `tipologia_obra`, ainda vazia.
 
+## Calibrar o ICP com os clientes reais — faça isto primeiro
+
+Antes de gerar a base definitiva, descubra o perfil de quem **já compra**. Sem
+isso o recorte do `config.py` é achismo com aparência de dado.
+
+```bash
+python gerar_base.py --indice-amplo          # uma vez, gera o índice regional
+python calibrar_icp.py clientes_ricardo.xlsx
+```
+
+`--indice-amplo` produz `saida/indice_regional_AAAA-MM.csv`: **todos** os
+estabelecimentos ativos da região, sem filtro de CNAE nem de capital, incluindo
+o anel 3. O filtro amplo é proposital — só assim dá para ver se os clientes
+atuais caem *fora* do recorte.
+
+### O que o script responde
+
+1. **Qual o perfil real** — distribuição de CNAE, município, anel, porte, capital
+   social (percentis) e idade das empresas que já compram.
+2. **Quantos clientes atuais o filtro mataria** — e, se a planilha trouxer valor
+   de venda, **quanto faturamento** isso representa. Este é o número que decide
+   se o `config.py` está certo.
+3. **Quais CNAEs de clientes reais estão ausentes** do `config.py`, ranqueados
+   por volume e faturamento.
+
+### A planilha pode vir suja
+
+O script detecta as colunas sozinho (`CNPJ`, `Cliente`, `Cidade`, `Valor`),
+acha o cabeçalho mesmo com linhas de título acima, aceita CNPJ formatado ou não,
+lê `R$ 45.000,00` e `45000.00`, casa por nome quando não houver CNPJ, e soma o
+faturamento de clientes recorrentes num único CNPJ.
+
+Casamentos por aproximação vêm marcados com a coluna `confianca` —
+**confira antes de decidir com base neles.** Ajuste o rigor com `--corte 0.80`.
+
+Saídas: `saida/icp_clientes_casados.csv` e `saida/icp_nao_encontrados.csv`
+(normalmente pessoa física, obra particular ou empresa fora da região).
+
 ## Próximas etapas
 
-1. **Calibrar o ICP com a lista do Ricardo.** Rodar os CNPJs dos clientes atuais
-   contra a base e extrair o perfil real: CNAE, capital, cidade, porte. É isso
-   que valida (ou derruba) os filtros do `config.py`. **Faça antes de gerar a
-   base definitiva** — sem isso o recorte é achismo.
-2. **Enriquecer o site do resto.** Google Places API (Text Search) com
+1. **Enriquecer o site do resto.** Google Places API (Text Search) com
    `razão social + município`. Ordem de grandeza: ~US$32/1.000 buscas.
 3. **Scraping.** Extrair contato, responsável técnico e — o que importa —
    tipologia do portfólio.
@@ -97,3 +131,7 @@ O pipeline foi testado contra fixtures no layout exato da Receita, cobrindo 15
 casos: filtro de UF, situação cadastral, CNAE principal e secundário, idade
 mínima, MEI, capital fora da faixa, capital zero, natureza jurídica excluída,
 e-mail genérico, ausência de telefone e deduplicação matriz/filial.
+
+O `calibrar_icp.py` foi testado com uma planilha propositalmente suja — cabeçalho
+na terceira linha, CNPJ ora formatado ora não, cliente recorrente em duas linhas,
+pessoa física no meio e clientes fora de cada um dos filtros.
