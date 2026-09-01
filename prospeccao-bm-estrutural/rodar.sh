@@ -39,4 +39,7 @@ echo "   Planilha ...: saida/base_bm_estrutural.xlsx"
 echo
 echo " Agora arraste o .xlsx para o Google Drive e abra"
 echo " como Google Sheets."
+echo
+echo " Proximo passo (opcional, leva horas):"
+echo "   $PY raspar_sites.py \"$CSV\" --limite 50"
 echo "======================================================="

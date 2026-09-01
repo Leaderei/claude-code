@@ -157,10 +157,51 @@ importadas.
 
 1. **Enriquecer o site do resto.** Google Places API (Text Search) com
    `razão social + município`. Ordem de grandeza: ~US$32/1.000 buscas.
-3. **Scraping.** Extrair contato, responsável técnico e — o que importa —
-   tipologia do portfólio.
+3. **Scraping.** Já implementado — ver seção abaixo.
 4. **Importar no Pipedrive** e distribuir por anel: anel 1 para vendedor externo,
    anel 2 para SDR interno.
+
+## Scraping dos sites
+
+```bash
+pip install httpx selectolax
+python raspar_sites.py saida/base_bm_estrutural_2026-08.csv --limite 50   # piloto
+python raspar_sites.py saida/base_bm_estrutural_2026-08.csv               # tudo
+```
+
+Gera `*_raspado.csv`, ordenado por `score_final`. Retomável: rode de novo e ele
+pula o que já raspou.
+
+### O que extrai
+
+| Coluna | O que é |
+|---|---|
+| `tipologia_obra` | **O sinal que decide o lead.** Casa térrea, Sobrado, Condomínio residencial, Prédio até 4 pav, Prédio alto, Industrial |
+| `crea_cau` | Registro profissional — confirma engenharia real, não intermediário |
+| `mencoes_laje` | Quantas vezes o site cita laje treliçada, vigota, alvenaria estrutural |
+| `email_site`, `telefone_site`, `whatsapp` | Contato direto, melhor que o cadastro da Receita |
+| `instagram`, `linkedin` | Onde escritório de arquitetura realmente vive |
+| `score_final` | Recalculado com o site — o da Receita entra com peso 0,5 |
+| `evidencia` | Quais termos dispararam a classificação, para auditar |
+
+### Por que `score_final` rebaixa o score da Receita
+
+Cadastro não prova adequação. Uma construtora com CNAE e capital perfeitos pode
+só fazer galpão — e o filtro da Receita jamais descobriria. A tipologia vale até
+±25 pontos: obra compatível sobe, galpão e prédio alto derrubam.
+
+No teste, uma engenharia de casas saiu com **100** e uma construtora industrial
+com CNAE igualmente válido saiu com **15**. Essa distância é o produto do scraping.
+
+### Educado por padrão
+
+Respeita `robots.txt`, 1 requisição por segundo por domínio, no máximo 4 páginas
+por site, User-Agent identificado com e-mail de contato. Prioriza `/contato`,
+`/sobre`, `/projetos`, `/obras` — com e sem extensão (`.html`, `.php`), e por
+texto do link quando a URL é opaca.
+
+Não use `--concorrencia` acima de 10: o limite é por domínio, mas subir demais
+derruba a taxa de sucesso e é má prática.
 
 ## Validação
 
@@ -168,6 +209,10 @@ O pipeline foi testado contra fixtures no layout exato da Receita, cobrindo 15
 casos: filtro de UF, situação cadastral, CNAE principal e secundário, idade
 mínima, MEI, capital fora da faixa, capital zero, natureza jurídica excluída,
 e-mail genérico, ausência de telefone e deduplicação matriz/filial.
+
+O raspador foi testado contra um servidor local com quatro cenários — site com
+navegação interna, site bloqueado por `robots.txt`, empresa sem site e site fora
+do ar (404) — verificando classificação, extração de contato e respeito ao robots.
 
 O `calibrar_icp.py` foi testado com uma planilha propositalmente suja — cabeçalho
 na terceira linha, CNPJ ora formatado ora não, cliente recorrente em duas linhas,
