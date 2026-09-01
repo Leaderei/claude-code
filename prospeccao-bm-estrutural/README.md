@@ -116,6 +116,35 @@ Casamentos por aproximação vêm marcados com a coluna `confianca` —
 Saídas: `saida/icp_clientes_casados.csv` e `saida/icp_nao_encontrados.csv`
 (normalmente pessoa física, obra particular ou empresa fora da região).
 
+## Levar para o Google Sheets
+
+```bash
+python montar_sheets.py saida/base_bm_estrutural_2026-08.csv
+```
+
+Gera `saida/base_bm_estrutural.xlsx` já formatado. Arraste para o Google Drive e
+abra como Google Sheets — dropdowns, filtros e formatação são preservados na
+conversão.
+
+A planilha tem duas abas:
+
+- **Base** — cabeçalho fixo, filtro automático, colunas dimensionadas, prioridade
+  A destacada em laranja e listas suspensas em `status_sdr`, `tipologia_obra` e
+  `responsavel`.
+- **Como usar** — briefing para a equipe de SDR: como a fila funciona, divisão
+  por anel, o que preencher em `tipologia_obra` e a regra de LGPD.
+
+Os status seguem a cadência multicanal de 13 dias (`D1 LinkedIn` → `D13 Breakup`).
+A referência de 6 a 12 tentativas por lead está na aba de instruções — abaixo de 6
+a conversão cai de forma relevante, e é o erro mais comum de SDR sem processo.
+
+Rodar `python montar_sheets.py` sem argumento gera a planilha vazia, só com a
+estrutura — útil para preparar o Sheets e dar acesso ao time antes da base existir.
+
+As duas últimas colunas (`data_ultimo_contato`, `proximo_passo`) não vêm do CSV:
+existem só para uso manual da SDR, e por isso ficam depois de todas as colunas
+importadas.
+
 ## Próximas etapas
 
 1. **Enriquecer o site do resto.** Google Places API (Text Search) com
