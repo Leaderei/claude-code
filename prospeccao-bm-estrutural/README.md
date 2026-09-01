@@ -4,7 +4,15 @@ Gera a lista de CNPJs de engenharias, construtoras e escritórios de arquitetura
 na macro-região de Louveira a partir dos **Dados Abertos do CNPJ** da Receita
 Federal. Fonte oficial, gratuita, atualizada mensalmente.
 
-## Rodar
+## Rodar — caminho rápido
+
+**Windows:** clique duas vezes em `rodar.bat`
+**Mac / Linux:** `./rodar.sh`
+
+Faz tudo: instala dependências, baixa e filtra a Receita, e monta a planilha
+formatada. No fim é só arrastar o `.xlsx` para o Google Drive.
+
+## Rodar — passo a passo
 
 ```bash
 pip install -r requirements.txt
