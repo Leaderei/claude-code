@@ -1,0 +1,975 @@
+ID,Empresa,Categoria,Cidade_Sede,Dist_Louveira_km,Telefone,Site,Endereco,Avaliacao,Qtd_Avaliacoes,Status_Negocio,Prioridade_ICP,Status_Prospeccao
+0001,AC Tampelli Arquitetura do bem-estar,Arquitetura,Itupeva,22,(11) 93287-5757,http://www.actampelli.com/,"Tv. Familia Tozzi, 349 - Res. Tosi, Itupeva - SP, 13296-050",5,8,OPERATIONAL,A,Nao iniciado
+0002,AG MANUTENÇÃO PREDIAL,Construtora,Itupeva,22,(11) 95871-0808,https://agmanutencaopredial.com.br/,"R. São Sebastião, 152 - Santo Antônio 1, Itupeva - SP, 13295-642",5,6,OPERATIONAL,A,Nao iniciado
+0003,ALS Serviços,Construtora,Itupeva,22,(11) 98783-2265,http://alsservicos.com.br/,"Rua Augusta Freitas Nogueira, 83 - Residencial Pacaembu II, Itupeva - SP, 13295-406",4.5,2,OPERATIONAL,A,Nao iniciado
+0004,ASJ | Fabrica de Telas em Itupeva,Construtora,Itupeva,22,(11) 91461-3987,http://asjtelas.com.br/,"R. Jundiaí, 371 - Jardim Primavera, Itupeva - SP, 13295-160",4.8,20,OPERATIONAL,A,Nao iniciado
+0005,Adail Engenharia,Engenharia,Itupeva,22,(11) 97346-7973,,"R. Santo Antônio, 270 - Moradia Do Sol, Itupeva - SP, 13295-000",4.8,10,OPERATIONAL,A,Nao iniciado
+0006,Alex André Terraplenagem,Construtora,Itupeva,22,(11) 4591-1192,https://www.aaterra.com.br/,"Rod. Akzo Nobel, 200 - São Roque da Chave, Itupeva - SP, 13295-422",4.5,54,OPERATIONAL,A,Nao iniciado
+0007,Anabia Decor - Loja de Decoração de Interiores,Arquitetura,Itupeva,22,(11) 4593-1740,http://www.anabiadecor.com.br/,"Av. Brasil, 1120 - Jardim Primavera, Itupeva - SP, 13295-059",4.9,88,OPERATIONAL,A,Nao iniciado
+0008,Anderson Silva - Marido de Aluguel,Construtora,Itupeva,22,(11) 95997-0774,,"R. Benedito Zonho, 170 - Vila Independencia, Itupeva - SP, 13295-626",,,OPERATIONAL,A,Nao iniciado
+0009,Anzo Engenharia Elétrica,Engenharia,Itupeva,22,(11) 2580-3406,https://www.anzo.eng.br/,"R. José Marchi, 400 - São José, Itupeva - SP, 13298-014",4.7,38,OPERATIONAL,A,Nao iniciado
+0010,Arch Beit Arquitetura e Engenharia,Arquitetura,Itupeva,22,(11) 96133-0524,https://www.instagram.com/archbeit/,"R. Santa Clara - Santo Antônio 1, Itupeva - SP, 13295-644",5,4,OPERATIONAL,A,Nao iniciado
+0011,Art em Concreto,Servicos correlatos,Itupeva,22,,,"R. Americo Simões, 87 - Bairro da Chave, Itupeva - SP, 13295-500",,,OPERATIONAL,A,Nao iniciado
+0012,Barão construção,Construtora,Itupeva,22,(19) 99404-6372,http://www.baraoconstrucao.com.br/,"R. A - Barão Da Boa Vista, Itupeva - SP, 13299-634",4.8,12,OPERATIONAL,A,Nao iniciado
+0013,Base Forte Construção e Reforma,Construtora,Itupeva,22,(11) 98709-6900,http://jmnconstrucao.com.br/,"Av. Brasil, 2151 - Jardim Primavera, Itupeva - SP, 13295-152",,,OPERATIONAL,A,Nao iniciado
+0014,Bemarco Estruturas,Servicos correlatos,Itupeva,22,,,"Rod. Vice Pref. Hermenegildo Tonoli, 6 - Conj. Industrial Belville, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0015,Biosfera Garden Center Paisagismo,Construtora,Itupeva,22,(11) 96473-1957,https://biosferagardenpaisagismo.com.br/,"R. Antonio Polli, 373 - Jardim Sao Vicente, Itupeva - SP, 13295-000",4.9,63,OPERATIONAL,A,Nao iniciado
+0016,BmDmconstrucoes civil,Construtora,Itupeva,22,(11) 94354-0086,https://bmdmconstrucoes-civil.negocio.site/,"R. Walter Fregnani, 9 - Rio Das Pedras, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0017,Brasil Ferro e Aço,Construtora,Itupeva,22,(11) 4593-3091,http://brasilferroeaco.com.br/,"Av. Brasil, 1973 - B - Da Lagoa, Itupeva - SP, 13295-000",4.6,9,OPERATIONAL,A,Nao iniciado
+0018,Bruna Falcuci - Interiores,Arquitetura,Itupeva,22,(11) 91161-1478,https://linkr.bio/brunafalcuci,"R. Juruna, 1004 - Parque Residencial Paraiso - Terras Brasilis, Itupeva - SP, 13295-374",,,OPERATIONAL,A,Nao iniciado
+0019,C.L.O construção e reformas - empreiteiro,Construtora,Itupeva,22,(11) 97887-8830,,"R. João Gonçalves Lopes, 297 - Parque Das Hortensias, Itupeva - SP, 13295-334",5,21,OPERATIONAL,A,Nao iniciado
+0020,Casa do Construtor Itupeva | Aluguel de Equipamentos,Construtora,Itupeva,22,(11) 92627-8093,https://www.casadoconstrutor.com.br/loja/itupeva/,"Av. Brasil, 720 - Jardim Sao Vicente, Itupeva - SP, 13295-000",4.8,238,OPERATIONAL,A,Nao iniciado
+0021,Casote Materiais de Construção,Construtora,Itupeva,22,(11) 96858-5442,,"Av. Emílio Chechinato, 156 - Jardim Alegria, Itupeva - SP, 13295-166",5,18,OPERATIONAL,A,Nao iniciado
+0022,Caçambinhas Itupeva,Construtora,Itupeva,22,(11) 4591-2471,http://cacambinhas.com.br/,"Av. Brasil, 254 - Jardim Sao Vicente, Itupeva - SP, 13295-000",4.7,10,OPERATIONAL,A,Nao iniciado
+0023,Checchinato Participações,Construtora,Itupeva,22,(11) 99944-6898,https://www.checchinato.com.br/,"Rod. Akzo Nobel, 300 - Conj. Industrial Belville, Itupeva - SP, 13295-000",4.7,6,OPERATIONAL,A,Nao iniciado
+0024,Cimento Itupeva,Construtora,Itupeva,22,(11) 4496-6969,http://cimentoitupeva.com.br/,"R. Miguel Philomeno, 500 - Portal da Santa Fe, Itupeva - SP, 13295-000",5,1,OPERATIONAL,A,Nao iniciado
+0025,Cipolla Empreendimentos Imobiliários Ltda,Incorporadora,Itupeva,22,99835-1056,,"BL Ramal Cafundo, 827 - Chácara, Itupeva - SP, 13295-154",,,OPERATIONAL,A,Nao iniciado
+0026,Consran Engenharia e Construtora Ranciar,Construtora,Itupeva,22,(11) 4496-4783,,"Av. Brasil, 1400 - Do Pinherinho, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0027,Construtora Andrade Silva,Construtora,Itupeva,22,(11) 94707-0747,,"Av Brasil ,1756 Complexo Império, sala 1 - Parque das Laranjeiras, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0028,Construtora GR,Construtora,Itupeva,22,(11) 94737-0249,https://www.construcoesgr.com.br/,"R. Miguel Madani, 45 - Jardim Sao Vicente, Itupeva - SP, 13295-000",4.4,7,OPERATIONAL,A,Nao iniciado
+0029,Construtora Mattone,Construtora,Itupeva,22,(11) 99648-1234,http://www.mattone.net.br/,"R. Emiliano Cavalcanti - Residencial Colinas De Itupeva, Itupeva - SP, 13295-000",5,30,OPERATIONAL,A,Nao iniciado
+0030,Construtora Sattler,Construtora,Itupeva,22,(11) 4593-3285,,"Rod. Vice Pref. Hermenegildo Tonoli, 588 - Sobreloja - Santa Júlia, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0031,Couto Camargo Construção Civil,Construtora,Itupeva,22,(11) 94018-3809,https://couto-camargo-construcao-civil.ueniweb.com/?utm_campaign=gmb,"R. Cabo Sérgio Luis Casaroli, 59 - Parque Das Hortensias, Itupeva - SP, 13295-000",5,2,OPERATIONAL,A,Nao iniciado
+0032,Cândido Associados Construções Pré-Fabricados,Construtora,Itupeva,22,(11) 7880-1501,,"Av. Itália, 661 - Jardim Sao Vicente, Itupeva - SP, 13295-000",5,2,OPERATIONAL,A,Nao iniciado
+0033,D.R Baús reformas de baú,Servicos correlatos,Itupeva,22,,,"Estr. Mun IVA_120, 1035 - Região Metropolitana de Jundiaí, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0034,DC ENGENHARIA LTDA,Engenharia,Itupeva,22,(11) 95949-0891,https://www.instagram.com/dcengenharialtda/,"R. Miguel Philomeno, 362 - Portal da Santa Fe, Itupeva - SP, 13295-566",,,OPERATIONAL,A,Nao iniciado
+0035,DL instalações,Construtora,Itupeva,22,(19) 99122-0677,,"R. Adélia de Oliveira - Pacaembu, Itupeva - SP, 13295-478",5,10,OPERATIONAL,A,Nao iniciado
+0036,DPS Engenharia e Serviços Tercerizados,Engenharia,Itupeva,22,(13) 99608-0418,,"R. Adélia de Oliveira, 28 - Residencial Pacaembu, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0037,Daits Metais,Construtora,Itupeva,22,(11) 4591-9242,http://www.daitsmetais.com.br/,"R. Antonio Polli, 385 A - Jardim Sao Vicente, Itupeva - SP, 13295-128",4.7,17,OPERATIONAL,A,Nao iniciado
+0038,De Carvalho Negócios Imobiliários - Construtora e imobiliária em Itupeva e região,Construtora,Itupeva,22,(11) 98370-0002,https://imoveisdecarvalho.com.br/,"Av. Brasil, 1782 - Sl 23 - Do Pinherinho, Itupeva - SP, 13295-000",5,8,OPERATIONAL,A,Nao iniciado
+0039,Depósito Materiais para Construção Mantovanelli,Construtora,Itupeva,22,(11) 4591-1338,,"R. Rio Grande do Sul, 48 - Vila Paraizo, Itupeva - SP, 13295-176",4.6,138,OPERATIONAL,A,Nao iniciado
+0040,Do Lado Di Cá Interiores,Arquitetura,Itupeva,22,,http://www.doladodica.com.br/,"R. Emancipadores do Município, 356 - | Sala 09 - Marchi, Itupeva - SP, 13295-154",5,31,OPERATIONAL,A,Nao iniciado
+0041,ESTÚDIO CACTUS INTERIORES | TAILANI MOURA,Arquitetura,Itupeva,22,(11) 99913-3711,,"R. Antonio Poli, 699 - Sl 07 - Jardim Sao Vicente, Itupeva - SP, 13295-128",5,8,OPERATIONAL,A,Nao iniciado
+0042,Edrox Soluções em Engenharia,Engenharia,Itupeva,22,(11) 96347-2556,,"Rod. Mário Tonoli - Estância Hidromineral Santa Eliza, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0043,"Eletricista Resistência , predial Itupeva",Servicos correlatos,Itupeva,22,,,"Jardim Ana Luiza, Itupeva - SP, 13295-548",,,OPERATIONAL,A,Nao iniciado
+0044,Empreiteira Mão Obra Favero,Empreiteira,Itupeva,22,(11) 4591-3141,,"Tr 3, 198 - Rio Das Pedras, Itupeva - SP, 13295-000",4.7,3,OPERATIONAL,A,Nao iniciado
+0045,Empreiteira de Mão-de-Obra Favero,Empreiteira,Itupeva,22,(11) 4591-3634,,"Av. Emílio Chechinato, 431 - Jardim Samambaia, Itupeva - SP, 13295-000",4,1,OPERATIONAL,A,Nao iniciado
+0046,Engenharia Civil - Monise Dutra,Engenharia,Itupeva,22,(11) 97229-9349,,"Rua: Francisco Cardoso da Silva - Portal da Santa Fe, Itupeva - SP, 13295-564",,,OPERATIONAL,A,Nao iniciado
+0047,Equipar Locações,Construtora,Itupeva,22,(11) 4591-8590,,"R. Maria Soldeira Lourençon, 230 - Região Metropolitana de Jundiaí, Itupeva - SP, 13295-620",3,2,OPERATIONAL,A,Nao iniciado
+0048,F&Oliveira Empreendimentos Imobiliários,Incorporadora,Itupeva,22,(11) 2580-0126,https://www.foliveiraimoveis.com/,"Thereza Beteli - R. Emílio Tosi, 247 - Res. Tosi, Itupeva - SP, 13296-064",,,OPERATIONAL,A,Nao iniciado
+0049,F3V Arquitetura e Construção,Arquitetura,Itupeva,22,(11) 97268-0651,,"R. Emancipadores do Município, 407 - do Pinheirinho, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0050,Fabiana Pelegrini Engenharia,Engenharia,Itupeva,22,(11) 4591-1810,http://www.fabianapelegrini.com.br/,"R. Thereza Beteli Tosi, 531 - Res. Tosi, Itupeva - SP, 13295-000",4.8,8,OPERATIONAL,A,Nao iniciado
+0051,Fernandes Costa Engenharia,Engenharia,Itupeva,22,(11) 96187-6692,https://fernandescostaengenharia.com.br/,"Av. Guanabara, 79 - segundo andar Sala 05 - Jardim Sao Vicente, Itupeva - SP, 13295-090",5,19,OPERATIONAL,A,Nao iniciado
+0052,Fiducia Locação e Infraestrutura,Construtora,Itupeva,22,(11) 91890-1967,https://fiducialocacoes.com.br/,"R. Maria Clara Almeida Santos, 92 - Parque Das Vinhas, Itupeva - SP, 13295-524",5,1,OPERATIONAL,A,Nao iniciado
+0053,Foco - Regularização de Obras,Servicos correlatos,Itupeva,22,,,"Tv. Maria Clara Almeida Santos, 92 - Jardim Primavera, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0054,França Terraplanagem,Construtora,Itupeva,22,(11) 98799-8492,,"R. Isac de Mesquita Jr - Região Metropolitana de Jundiaí, Itupeva - SP, 13296-762",5,8,OPERATIONAL,A,Nao iniciado
+0055,Fênix Construções Incorporações,Construtora,Itupeva,22,(11) 4591-3047,,"Rua Benedita C Madeira, 1 - Parque Amarylis, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0056,GAV Engenharia Projetos e Construções,Construtora,Itupeva,22,(11) 99949-6823,https://gavengenharia.com.br/,"R. Antonio Polli, 384 - Sl 2 e 4 - Jardim Sao Vicente, Itupeva - SP, 13295-000",1,1,OPERATIONAL,A,Nao iniciado
+0057,GSC Sistema Construtivo,Construtora,Itupeva,22,(11) 4496-2992,,"Rodovia Vice Hermenegildo Tonolli º 469 - Sl 02 - Jardim Ana Luiza, Itupeva - SP, 13295-000",5,1,OPERATIONAL,A,Nao iniciado
+0058,Galpao,Servicos correlatos,Itupeva,22,,,"R. Maria Covagnoli Mulunhone, 373 - Jardim Santa Barbara, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0059,Gercons Arquitetura,Arquitetura,Itupeva,22,(11) 4496-0700,https://admgercons.wixsite.com/gerconsarquitetura,"R. Juliana de Oliveira Borges, 100 - Parque Das Vinhas, Itupeva - SP, 13295-528",5,14,OPERATIONAL,A,Nao iniciado
+0060,Grupo Zerbinatti Engenharia,Engenharia,Itupeva,22,(11) 92002-4988,,"R. Ercília Vicentini Fabricio, 272 - Parque Santa Isabel, Itupeva - SP, 13296-174",4.6,9,OPERATIONAL,A,Nao iniciado
+0061,HL POSTE PADRÃO & ENGENHARIA,Engenharia,Itupeva,22,(19) 97405-1034,https://www.facebook.com/hlpostepadraoitupeva/,"R. Jundiaí, n°377 - Sl 2 - Jardim Primavera, Itupeva - SP, 13295-000",5,1,OPERATIONAL,A,Nao iniciado
+0062,Habitar Engenharia e Construções,Construtora,Itupeva,22,(11) 4496-1120,https://www.facebook.com/habitaritupeva/,"Rua Rachel Del Acqua Marchi, 161 - sala 2 - Jardim Primavera, Itupeva - SP, 13295-000",5,5,OPERATIONAL,A,Nao iniciado
+0063,Habitare Engenharia,Engenharia,Itupeva,22,(11) 4496-3267,http://habitareengenharia.com.br/,"R. Maria Clara Almeida Santos, 92 - Parque Das Vinhas, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0064,History Center Comercial e Industrial Ltda,Construtora,Itupeva,22,(11) 4591-2179,http://www.estacashc.com.br/,"R. Pref. José Carlos, 2450 - Região Metropolitana de Jundiaí, Itupeva - SP, 13295-000",5,1,OPERATIONAL,A,Nao iniciado
+0065,Imobiliária Itupeva SP,Construtora,Itupeva,22,(11) 4496-5829,http://www.imobiliariaitupevasp.com.br/,"Av. Brasil, 1520 - Sala 05 - Parque das Laranjeiras, Itupeva - SP, 13298-036",4.2,29,OPERATIONAL,A,Nao iniciado
+0066,Ipê Construtora,Construtora,Itupeva,22,(11) 4591-1989,,"R. José Marchi, 162 - Jardim Arco Iris, Itupeva - SP, 13295-000",4.5,2,OPERATIONAL,A,Nao iniciado
+0067,Itupeva,Construtora,Itupeva,22,,,"Região Metropolitana de Jundiaí, Itupeva - SP, 13295-154",5,1,OPERATIONAL,A,Nao iniciado
+0068,J A Itupeva,Construtora,Itupeva,22,(11) 92002-1762,https://sites.google.com/view/jaitupeva/p%C3%A1gina-inicial,"Caça Vazamento - R. Antonio Polli, 6 - Sl 6 - Jardim Primavera, Itupeva - SP, 13295-000",4.8,16,OPERATIONAL,A,Nao iniciado
+0069,J G C Construtora & Planejamento,Construtora,Itupeva,22,(11) 4591-2096,,"Av. Emílio Chechinato, 2700 - Parque Residencial Paraiso - Terras Brasilis, Itupeva - SP, 13295-000",3,2,OPERATIONAL,A,Nao iniciado
+0070,J Junior Empreendimentos Imobiliários,Incorporadora,Itupeva,22,(11) 4496-4522,,"Av. Emílio Chechinato, 3610 - Residencial Pacaembu, Itupeva - SP, 13295-000",3.5,2,OPERATIONAL,A,Nao iniciado
+0071,J.J.A CONSTRUÇÕES E REFORMAS,Construtora,Itupeva,22,(11) 94734-8916,,"lucia queiroz guimaraes paraiso 382 - Rio Das Pedras, Itupeva - SP, 13295-000",5,1,OPERATIONAL,A,Nao iniciado
+0072,JIM Engenharia de automação LTDA,Engenharia,Itupeva,22,(11) 97206-4992,http://www.jimengenharia.com.br/,"R. Miguel Philomeno, 550 - Portal da Santa Fe, Itupeva - SP, 13295-566",5,16,OPERATIONAL,A,Nao iniciado
+0073,JM Soluções Engenharia,Engenharia,Itupeva,22,(11) 97471-8674,,"R. Sebastião Deonísio - Parque Residencial Paraiso - Terras Brasilis, Itupeva - SP, 13295-000",2.5,2,OPERATIONAL,A,Nao iniciado
+0074,JP ELÉTRICA E CLIMATIZAÇÃO ITUPEVA E JUNDIAÍ,Construtora,Itupeva,22,(11) 94240-2413,https://wa.me/message/BUPBLNPWRNGQH1,"Estrada vereador Waldomiro fregnhani - Nova, 551 - Rio Das Pedras, Itupeva - SP, 13299-130",5,214,OPERATIONAL,A,Nao iniciado
+0075,JPR Empreendimentos Imobiliários,Incorporadora,Itupeva,22,(11) 4496-6577,https://jprempreendimentos.com.br/contato,"Av. Brasil, 1753 - Piso Superior - Jardim Brasil, Itupeva - SP, 13296-082",1,3,OPERATIONAL,A,Nao iniciado
+0076,Jatobás Engenharia e Construção,Construtora,Itupeva,22,(11) 4496-1319,http://www.ojatobas.com.br/,"Av. Itália, 395 - Sl 06 - Jardim Sao Vicente, Itupeva - SP, 13295-000",4.7,26,OPERATIONAL,A,Nao iniciado
+0077,Jean café construção,Construtora,Itupeva,22,(11) 99414-4205,,"Av. José Tonoli - Jardim Samambaia, Itupeva - SP, 13295-208",,,OPERATIONAL,A,Nao iniciado
+0078,Juvenil Materiais para Construção,Construtora,Itupeva,22,(11) 94461-0980,,"R. João Saí, 273 - Portal da Santa Fe, Itupeva - SP, 13295-000",4.4,106,OPERATIONAL,A,Nao iniciado
+0079,Kramer • Remoção de Entulho | Terraplenagem | Container (por @sitedacidade),Servicos correlatos,Itupeva,22,,,"R. José Philomeno, 370 - Jardim Alegria, Itupeva - SP, 13295-238",,,OPERATIONAL,A,Nao iniciado
+0080,Kronan Sistema Construtivo,Construtora,Itupeva,22,(11) 95315-8156,http://www.kronan.com.br/,"R. Lino Peixoto Amorim, 991 - Das Paineiras, Itupeva - SP, 13295-000",4.4,18,OPERATIONAL,A,Nao iniciado
+0081,L A terraplenagem e locação,Construtora,Itupeva,22,,,"Rod. Mário Tonoli - Vila Paraizo, Itupeva - SP, 13295-000",5,1,OPERATIONAL,A,Nao iniciado
+0082,L.A ENGENHARIA ELÉTRICA & ILUMINAÇÃO,Engenharia,Itupeva,22,(11) 94685-3330,http://www.laengeletrica.com.br/,"Rod. Vice Pref. Hermenegildo Tonoli, 1011 - salão 03 - Jardim Ana Luiza, Itupeva - SP, 13295-000",5,32,OPERATIONAL,A,Nao iniciado
+0083,LGP Consultoria LTDA,Construtora,Itupeva,22,(11) 3963-6441,http://www.consultorialgp.com.br/,"Av. Brasil, 1782 - Sl 26 - Laranjeiras, Itupeva - SP, 13296-032",5,1,OPERATIONAL,A,Nao iniciado
+0084,LHC TERRAPLENAGEM,Construtora,Itupeva,22,(11) 4591-1142,,"Av. Brasil, 134 - Vila Paraizo, Itupeva - SP, 13295-000",5,1,OPERATIONAL,A,Nao iniciado
+0085,Lajomar Lajes e Artefatos de Concreto,Servicos correlatos,Itupeva,22,,,"R. Aristodemo Polli, 250 - Santa Júlia, Itupeva - SP, 13295-611",,,OPERATIONAL,A,Nao iniciado
+0086,Leal Engenharia e Construtora Itupeva,Construtora,Itupeva,22,(11) 94723-3581,https://engenharialeal.com.br/,"Av. Guanabara, 151 - Jardim Sao Vicente, Itupeva - SP, 13295-090",5,91,OPERATIONAL,A,Nao iniciado
+0087,Lorena Campos Arquitetura e Construção,Arquitetura,Itupeva,22,(11) 96187-1664,https://www.lorenacampos.com.br/escritorio-de-arquitetura-em-itupeva/,"Av. Guanabara, 140 - Sl 02 - Jardim Sao Vicente, Itupeva - SP, 13295-090",4.9,39,OPERATIONAL,A,Nao iniciado
+0088,Luciano Araújo de Moraes Empreiteira M,Empreiteira,Itupeva,22,(11) 4593-3075,,"Av. Guanabara, 335 - Jardim Sao Vicente, Itupeva - SP, 13295-000",4.5,2,OPERATIONAL,A,Nao iniciado
+0089,MMM SP Engenharia Civil Indústria e Comércio de Pré-Moldados,Engenharia,Itupeva,22,(11) 5671-7820,,"R. João Batista Pessine, 648 - Região Metropolitana de Jundiaí, Itupeva - SP, 13295-000",5,1,OPERATIONAL,A,Nao iniciado
+0090,Marcelo Cazarin Terraplenagem | Itupeva-SP,Construtora,Itupeva,22,(11) 99944-3594,,"Estr. Oreste Favotto - Dos Medeiros, Itupeva - SP, 13295-826",5,20,OPERATIONAL,A,Nao iniciado
+0091,Marcio Cazarin Terraplenagem | Itupeva,Construtora,Itupeva,22,(11) 95497-7131,https://omelhoremitupeva.com.br/marcio-cazarin-terraplanagem-em-itupeva/,"Estr. Oreste Favotto, 1445 - Dos Medeiros, Itupeva - SP, 13295-000",4.5,16,OPERATIONAL,A,Nao iniciado
+0092,Materiais Para Construção Casa do Zé,Construtora,Itupeva,22,,https://omelhoremitupeva.com.br/materiais-para-construcao-em-itupeva/,"R. Mairinque, 34 - Residencial Pacaembu, Itupeva - SP, 13295-482",4.2,5,OPERATIONAL,A,Nao iniciado
+0093,Max Terra Planagem,Construtora,Itupeva,22,(11) 4593-1365,,"R. Sabiá, 850 - Chácaras Do Guacuri, Itupeva - SP, 13295-000",3.7,11,OPERATIONAL,A,Nao iniciado
+0094,Mega Decor Itupeva,Construtora,Itupeva,22,(11) 96383-2201,,"R. Hildebrando Ferraz, 192 - Jardim Primavera, Itupeva - SP, 13295-164",5,2,OPERATIONAL,A,Nao iniciado
+0095,Mendes Terraplanagem e fundações,Construtora,Itupeva,22,(19) 97411-8832,,"R. A, 1129 - Barão Da Boa Vista, Itupeva - SP, 13299-694",,,OPERATIONAL,A,Nao iniciado
+0096,Mestre da Obra,Servicos correlatos,Itupeva,22,,,"R. Juliana de Oliveira Borges, 39 - Parque Das Vinhas, Itupeva - SP, 13295-528",,,OPERATIONAL,A,Nao iniciado
+0097,Mia Casa Arquitetura e Construção,Arquitetura,Itupeva,22,(11) 99655-0286,https://linktr.ee/miacasa.arq,"Av. Guanabara, 147 - Jardim Sao Vicente, Itupeva - SP, 13295-090",,,OPERATIONAL,A,Nao iniciado
+0098,Modularis,Construtora,Itupeva,22,(11) 4591-1444,http://www.modularis.com.br/,"R. Francisco Codarin, 305 - São Roque da Chave, Itupeva - SP, 13295-000",4.2,43,OPERATIONAL,A,Nao iniciado
+0099,Moreira e Silva Construtora,Construtora,Itupeva,22,(11) 99632-8630,,"R. José Marchi, 168 - Jardim Primavera, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0100,Munndo Arquitetura e Engenharia,Arquitetura,Itupeva,22,(11) 98305-1028,,"Tv. Aldeci Evangelista Campos, 420 - Parque das Vinhas, Itupeva - SP, 13295-534",5,2,OPERATIONAL,A,Nao iniciado
+0101,Mzinho construçâo,Construtora,Itupeva,22,(11) 99642-0198,https://mzinhowww.com/,"R. Nica Preta - Jardim Italia, Itupeva - SP, 13299-007",5,14,OPERATIONAL,A,Nao iniciado
+0102,Mônica Peres Imobiliária,Construtora,Itupeva,22,(11) 99997-7565,https://monicaperes.com.br/,"rua miguel madane 45 - Jardim Primavera, Itupeva - SP, 13295-000",2.5,4,OPERATIONAL,A,Nao iniciado
+0103,Natan escavações,Construtora,Itupeva,22,(11) 97523-5859,https://mylink.sbs/Natan-escava%C3%A7%C3%B5es,"Geraldo Ferraz - Nova, 551 - Rio Das Pedras, Itupeva - SP, 13299-144",5,15,OPERATIONAL,A,Nao iniciado
+0104,Netuno construtora e empreiteira,Construtora,Itupeva,22,(11) 99686-3242,,"R. Pedro V de Beneditis - Jardim Ana Luiza, Itupeva - SP, 13295-000",3.7,3,OPERATIONAL,A,Nao iniciado
+0105,Obrafácil Locação | Itupeva,Construtora,Itupeva,22,(11) 93436-7090,https://obrafacillocacao.lovable.app/,"R. Vicente Tonoli, 286 - Monte Serrat, Itupeva - SP, 13299-090",5,15,OPERATIONAL,A,Nao iniciado
+0106,Oseias Oliveira Engenheiro Civil,Construtora,Itupeva,22,(11) 98760-5265,,"R. Angelina Marques Bonequini, 400 - Parque Das Hortensias, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0107,PEREIRA LIMA,Construtora,Itupeva,22,(11) 4593-3374,,"R. Anambé, 301 - Parque Residencial Paraiso - Terras Brasilis, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0108,PHM Arquitetura,Arquitetura,Itupeva,22,(11) 97085-5319,https://linktr.ee/phmarquitetura,"Av. Antônio de Almeida, 135 - Parque Amarylis, Itupeva - SP, 13295-186",5,34,OPERATIONAL,A,Nao iniciado
+0109,PLANTÃO Gran Ville Sto. ANGELO,Construtora,Itupeva,22,(11) 99764-5169,,"Rod. Mário Tonoli, 415 - 0bairro - Do Bonfim, Itupeva - SP, 13297-502",5,1,OPERATIONAL,A,Nao iniciado
+0110,Pilar Arquitetura,Arquitetura,Itupeva,22,(11) 99583-7518,https://www.pilararquitetura.arq.br/,"Av. Natal - São Venâncio, Itupeva - SP, 13296-354",,,OPERATIONAL,A,Nao iniciado
+0111,Plantão Vila Triunfo,Construtora,Itupeva,22,,,"R. Eduardo Aníbal Lourençon - Jardim Primavera, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0112,ProCap Engenharia Ltda.,Engenharia,Itupeva,22,(11) 4496-5709,http://www.procap.eng.br/,"Av. Guanabara, 79 - Sl 06 - Jardim Sao Vicente, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0113,Prolima Arquitetura,Arquitetura,Itupeva,22,(11) 98303-6623,https://prolimaarquitetura.com.br/,"R. Antonio Poli, 699 - Jardim Sao Vicente, Itupeva - SP, 13295-000",4.7,31,OPERATIONAL,A,Nao iniciado
+0114,Qualifer,Construtora,Itupeva,22,(11) 4496-4328,http://www.qualifer.com.br/,"Rod. Vice Pref. Hermenegildo Tonoli, 2777 - Portal da Santa Fe, Itupeva - SP, 13295-000",4.8,21,OPERATIONAL,A,Nao iniciado
+0115,R&Santos construções Ltda,Construtora,Itupeva,22,(11) 97088-2560,https://www.rsantosconstrucoes.com.br/,"Av. Itália - Jardim Primavera, Itupeva - SP, 13295-155",5,2,OPERATIONAL,A,Nao iniciado
+0116,"R. Emancipadores do Município, 356 - sala 9",Construtora,Itupeva,22,(11) 98204-9544,https://www.doladodica.com.br/?utm_source=google&utm_medium=wix_google_business_profile&utm_campaign=10680759915866793819,"R. Emancipadores do Município, 356 - Sl 9 - Jardim Primavera, Itupeva - SP, 13295-154",,,OPERATIONAL,A,Nao iniciado
+0117,RC Construções,Construtora,Itupeva,22,(11) 4593-3708,,"Rua Alberto Mondin, 48 - Parque Das Hortensias, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0118,RC Projetos & Construções,Construtora,Itupeva,22,(11) 94591-2850,,"Av Brasil, 1120 Boa Chapeleira - Jardim Primavera, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0119,RC2 Arquitetura e Construção,Arquitetura,Itupeva,22,(11) 95871-3467,https://construtoraecampos.com.br/lp/,"Rodovia Vice Prefeito Hermenegildo Tonoli, 469 – CEP: 13295-000 - Região Metropolitana de Jundiaí, Itupeva - SP, 13295-000",4.8,18,OPERATIONAL,A,Nao iniciado
+0120,RS CONSTRUÇÃO E REFORMA,Construtora,Itupeva,22,(11) 94192-3571,http://www.rsconstrucaoereforma.com/,"alberto betelli - nova, numero 83 - Rio Das Pedras, Itupeva - SP, 13295-000",5,1,OPERATIONAL,A,Nao iniciado
+0121,Red Engenharia,Engenharia,Itupeva,22,(11) 4496-1855,,"R. João Canova, 122 - Laranjeiras, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0122,Redoma Arquitetura,Arquitetura,Itupeva,22,(11) 96446-0698,https://redomaarquitetura.com/,"R. José Firmino da Silva, 43 - Jardim Brasil, Itupeva - SP, 13296-098",5,15,OPERATIONAL,A,Nao iniciado
+0123,Renato Coelho Engenharia Civil,Engenharia,Itupeva,22,(11) 99631-7104,,"R. José Virillo, 358 - Portal da Santa Fe, Itupeva - SP, 13295-000",2.7,3,OPERATIONAL,A,Nao iniciado
+0124,Residencial Ibi Aram 1,Construtora,Itupeva,22,(11) 4496-1760,http://www.ibiaram.com.br/,"Estr. da Mina - Residencial Ibi-aram, Itupeva - SP, 13295-000",4.7,687,OPERATIONAL,A,Nao iniciado
+0125,SANSI Arquitetura Interiores,Arquitetura,Itupeva,22,(11) 97520-8739,https://www.instagram.com/elainesansi.arq?igsh=d3Jqd2d0bWwxZGJl&utm_source=qr,"R. Maria Clara Almeida Santos, 92 - Sl 04 - Parque Das Vinhas, Itupeva - SP, 13295-970",5,15,OPERATIONAL,A,Nao iniciado
+0126,SOS Lazer Itupeva,Construtora,Itupeva,22,(11) 4591-1964,,"R. 21 de Março, 15 - Parque Amarylis, Itupeva - SP, 13295-000",4.1,11,OPERATIONAL,A,Nao iniciado
+0127,Safeimper,Construtora,Itupeva,22,(15) 99799-5794,http://www.safeimper.com.br/,"Av. Brasil - Jardim Sao Vicente, Itupeva - SP, 13295-000",4.8,6,OPERATIONAL,A,Nao iniciado
+0128,Savio Engenharia,Engenharia,Itupeva,22,(11) 99857-7560,https://savioengenharia.com.br/,"R. José Stella, 395 - Jardim Ana Luiza, Itupeva - SP, 13295-000",5,17,OPERATIONAL,A,Nao iniciado
+0129,Silvio Savio Engenharia - Projetos e Regularizações,Engenharia,Itupeva,22,(11) 93290-0505,https://www.silviosavioengenharia.com.br/,"R. Arthur Sandaniel - Estância Hidromineral Santa Eliza, Itupeva - SP, 13297-504",5,9,OPERATIONAL,A,Nao iniciado
+0130,Soares Montagens,Construtora,Itupeva,22,(11) 4496-5726,,"R. Santa Rita de Cassia, 365 - Santo Antonio, Itupeva - SP, 13295-000",3.7,3,OPERATIONAL,A,Nao iniciado
+0131,Start Baus Reformas e Manurtenção,Servicos correlatos,Itupeva,22,,,"R. Pref. José Carlos, 1745 - Santa Julia, Itupeva - SP, 13295-607",,,OPERATIONAL,A,Nao iniciado
+0132,T.r Queiroz Construtora,Construtora,Itupeva,22,,,"R. Aristides Francisco da Silva, 53 - Jardim Arco Iris, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0133,TALENT | Ar condicionado | Itupeva,Construtora,Itupeva,22,(11) 98612-0901,,"R. Santa Rita de Cassia, 1 - Res. Santo Antônio, Itupeva - SP, 13295-640",5,3,OPERATIONAL,A,Nao iniciado
+0134,TLS terraplanagem,Construtora,Itupeva,22,(11) 97213-8498,,"R. Joana Madalena Ferreira, 116 - Residencial Botânica, Itupeva - SP, 13299-077",,,OPERATIONAL,A,Nao iniciado
+0135,TNL TERRAPLENAGEM,Construtora,Itupeva,22,(11) 94863-4103,,"Rod. Mário Tonoli, 1530 - Morro alto, Itupeva - SP, 13297-002",,,OPERATIONAL,A,Nao iniciado
+0136,Tartalia Empreendimentos Imobiliários,Incorporadora,Itupeva,22,(11) 4591-2585,http://www.tartalia.com.br/,"Av. Brasil, 755 - Jardim Primavera, Itupeva - SP, 13295-000",4.3,28,OPERATIONAL,A,Nao iniciado
+0137,Tecsel Seleção Mão-de-Obra Temporária,Servicos correlatos,Itupeva,22,,,"R. Emancipadores do Município, 389 - Do Pinherinho, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0138,Terraplanagem Itupeva,Construtora,Itupeva,22,(11) 96191-9951,https://www.instagram.com/terraplanagemitupeva?igsh=NnE1ejJuMzd3Zzdq,"R. Ver. José Poli, 50 - Jardim Sao Vicente, Itupeva - SP, 13295-000",5,5,OPERATIONAL,A,Nao iniciado
+0139,Terrão Terraplanagem Itupeva,Construtora,Itupeva,22,(11) 99862-4068,http://www.terraplanagemitupeva.com.br/,"Via Adalberto de La Fuente y Rodrigues, 300 - Monte Serrat, Itupeva - SP, 13298-732",5,10,OPERATIONAL,A,Nao iniciado
+0140,Tonoli Terraplanagem,Construtora,Itupeva,22,,,"424 - R. Arthur Sandaniel, 198 - Estância Hidromineral Santa Eliza, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0141,Tonoli Terraplenagem,Construtora,Itupeva,22,(11) 4593-1072,,"Caixa Post. 191 - Rod. Mário Tonoli, 1530 - Morro Alto, Itupeva - SP, 13295-000",4.8,13,OPERATIONAL,A,Nao iniciado
+0142,UNIT PROJETOS E EMPREENDIMENTOS,Construtora,Itupeva,22,(11) 4496-1843,https://www.unitprojetos.com.br/,"R. Cabreúva, 130 - Jardim Samambaia, Itupeva - SP, 13295-000",4.8,18,OPERATIONAL,A,Nao iniciado
+0143,VC Engenharia & Construções,Construtora,Itupeva,22,(11) 4592-1264,https://vcconstrucao.com.br/,"Av. Brasil, 1782 - Sl 03 - Do Pinherinho, Itupeva - SP, 13296-032",5,1,OPERATIONAL,A,Nao iniciado
+0144,VMJ construtora,Construtora,Itupeva,22,(11) 96084-3773,https://vmjconstrutora.com.br/contato,"R. Adélia de Oliveira, 01 - Residencial Pacaembu, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0145,Vazazano Hidráulica,Construtora,Itupeva,22,(11) 2222-2464,,"Caça Vazamentos Itupeva - Caça Vazamento - R. Jundiaí, 2 - Jardim Primavera, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0146,Viotto Engenharia e Topografia,Engenharia,Itupeva,22,(11) 4591-2652,,"R. Benedita Cardoso Madeira, 945 - Residencial Pacaembu, Itupeva - SP, 13295-000",,,OPERATIONAL,A,Nao iniciado
+0147,Viável Projetos,Construtora,Itupeva,22,(11) 94197-4883,https://viavelprojetos.com.br/,"R. Conceição Degelo Lourençon, 55 - Jardim Primavera, Itupeva - SP, 13295-067",5,21,OPERATIONAL,A,Nao iniciado
+0148,WM reforma em geral,Construtora,Itupeva,22,(19) 98457-6572,,"R. A - Residencial Barão da Boa vista, Itupeva - SP, 13295-616",,,OPERATIONAL,A,Nao iniciado
+0149,Wakabayashi Engenharia,Engenharia,Itupeva,22,(11) 4591-1636,,"R. Emancipadores do Município, 363 - Do Pinherinho, Itupeva - SP, 13295-000",5,2,OPERATIONAL,A,Nao iniciado
+0150,Wogel Lar & Construção,Construtora,Itupeva,22,(11) 4591-7676,http://www.wogel.com.br/,"Rod. Vice Pref. Hermenegildo Tonoli, 480 - Santa Julia, Itupeva - SP, 13295-609",4.4,1445,OPERATIONAL,A,Nao iniciado
+0151,aTTo Arquitetura,Arquitetura,Itupeva,22,(11) 4496-1977,https://www.attoarquitetura.arq.br/,"Av. Brasil, 607 - 13 - Jardim Nova Itupeva, Itupeva - SP, 13295-000",4.5,11,OPERATIONAL,A,Nao iniciado
+0152,construções y.s.a,Construtora,Itupeva,22,(11) 93461-4243,,"Rua antonio romera y - romera, Itupeva - SP, 13295-269",,,OPERATIONAL,A,Nao iniciado
+0153,2V Locações de Equipamentos e terraplanagem,Construtora,Jundiai,18,(11) 93334-2000,https://www.2vlocacoes.com.br/,"R. dos Bandeirantes, 130 - Pte. de Campinas, Jundiaí - SP, 13201-130",4.9,19,OPERATIONAL,A,Nao iniciado
+0154,A.M OLIVEIRA Materiais para contrução e Terraplenagem,Servicos correlatos,Jundiai,18,,,"R. Arcangelo Bianchini, 242 - Ivoturucaia, Jundiaí - SP, 13218-780",,,OPERATIONAL,A,Nao iniciado
+0155,ABMONT ENGENHARIA CONSTRUÇÕES,Construtora,Jundiai,18,(11) 95138-7311,https://projetosabmont.wixsite.com/website,"R. Hilda Del Nero Bisquolo, 102 - sala: 1006 - Jardim Florida, Jundiaí - SP, 13208-703",3,2,OPERATIONAL,A,Nao iniciado
+0156,AMBTE ARQUITETOS & ASSOCIADOS,Arquitetura,Jundiai,18,(11) 4806-0272,http://ambte.com.br/,"nº Sala 57 - R. Eduardo Tomanik, 900 - Chácara Urbana, Jundiaí - SP, 13209-090",5,6,OPERATIONAL,A,Nao iniciado
+0157,ARQUITETURA JUNDIAI,Arquitetura,Jundiai,18,(11) 97241-5142,,"Jardim Samambaia, Jundiaí - SP, 13200-000",,,OPERATIONAL,A,Nao iniciado
+0158,ARV Construções,Construtora,Jundiai,18,(11) 4521-4143,,"R. do Retiro, 444 - Vila Virginia, Jundiaí - SP, 13209-000",5,2,OPERATIONAL,A,Nao iniciado
+0159,AUGUSTO ENGENHARIA JUNDIAI LTDA,Engenharia,Jundiai,18,(11) 95040-9236,https://www.augustoengenharia.com.br/,"R. 23 de Maio - Vila Vianelo, Jundiaí - SP, 13207-070",5,6,OPERATIONAL,A,Nao iniciado
+0160,Adapt Arquitetura e Interiores,Arquitetura,Jundiai,18,(11) 93700-6371,http://www.adapt-arquitetura.com/,"R. Abílio Figueiredo, 123 - Sl 225 - Anhangabaú, Jundiaí - SP, 13208-140",4.8,16,OPERATIONAL,A,Nao iniciado
+0161,Administração e Gerenciamento de Obras,Servicos correlatos,Jundiai,18,,,"R. do Rosário, 203 - Centro, Jundiaí - SP, 13201-014",,,OPERATIONAL,A,Nao iniciado
+0162,Aisthesis - Arquitetura e interiores,Arquitetura,Jundiai,18,(11) 96642-4639,,"R. João Canela, N° 197 - Jardim Brasil, Jundiaí - SP, 13209-010",,,OPERATIONAL,A,Nao iniciado
+0163,Alburi Arquitetura e Interiores,Arquitetura,Jundiai,18,(11) 91190-1466,,"R. Barão de Teffé, 530 - Jardim Ana Maria, Jundiaí - SP, 13208-760",5,9,OPERATIONAL,A,Nao iniciado
+0164,Aline Santos | MOOD Arquitetura e Interiores,Arquitetura,Jundiai,18,(11) 97270-1043,https://www.instagram.com/arquitetura_mood/,"R. do Retiro, 1597 - sala 03 - Jardim Paris, Jundiaí - SP, 13209-201",4.2,21,OPERATIONAL,A,Nao iniciado
+0165,Almeida & Ito Engenharia,Engenharia,Jundiai,18,(11) 99292-2666,,"R. dos Bandeirantes, 635 - Pte. de Campinas, Jundiaí - SP, 13201-130",,,OPERATIONAL,A,Nao iniciado
+0166,Amancio Engenharia,Engenharia,Jundiai,18,(11) 96182-0267,https://sites.google.com/view/amancio-projetos-estruturais,"R. Osvaldo Canalli, 228 - Região Metropolitana de Jundiaí, Jundiaí - SP, 13210-001",,,OPERATIONAL,A,Nao iniciado
+0167,Amanda Ferraz Arquitetura e Construção,Arquitetura,Jundiai,18,(11) 94076-1458,https://lp.arqamandaferraz.com/,"R. Cap. Cassiano Ricardo de Toledo, 191 - Sl 1310 - Chácara Urbana, Jundiaí - SP, 13201-840",4.5,19,OPERATIONAL,A,Nao iniciado
+0168,Amea Construtora e Empreendimentos Imobiliários Ltda,Incorporadora,Jundiai,18,(11) 4587-2753,http://www.ameaconstrutora.com.br/,"Av. Francisco Pereira de Castro, 559 - Anhangabaú, Jundiaí - SP, 13208-110",5,2,OPERATIONAL,A,Nao iniciado
+0169,Aolar - Arquitetura Tradicional,Arquitetura,Jundiai,18,(11) 91619-1125,https://www.aolararquitetura.com.br/,"R. do Retiro - Vila das Hortencias, Jundiaí - SP, 13209-355",,,OPERATIONAL,A,Nao iniciado
+0170,Applausi,Construtora,Jundiai,18,(11) 4521-0994,https://applausiconstrutora.com.br/,"Av. das Indústrias, 2101 - Distrito Industrial, Jundiaí - SP, 13213-100",4.5,39,OPERATIONAL,A,Nao iniciado
+0171,Architectari - Arquitetura & Design,Arquitetura,Jundiai,18,(11) 4526-6524,http://www.architectari.com.br/,"R. Dr. Paschoal de Muzzio, 179 - Vila Vianelo, Jundiaí - SP, 13207-080",4.8,26,OPERATIONAL,A,Nao iniciado
+0172,Aresto Arquitetura,Arquitetura,Jundiai,18,(11) 99112-2630,http://www.arestoarquitetura.com.br/,"Avenida Nove de Julho 3405 Edifício Mondial - sala 318 - Anhangabaú, Jundiaí - SP, 13208-056",5,1,OPERATIONAL,A,Nao iniciado
+0173,Arkesi Incorporações e Construções Ltda,Construtora,Jundiai,18,(11) 4601-1503,http://www.arkesi.com.br/,"R. Vig. J. J. Rodrigues, 905 - Sl 44 - Centro, Jundiaí - SP, 13201-001",4.8,5,OPERATIONAL,A,Nao iniciado
+0174,Arquitech Engenharia e Construção,Construtora,Jundiai,18,(11) 99632-8630,http://arquitechconstrutora.com.br/,"R. Barão de Teffé, 160 - Jardim Ana Maria, Jundiaí - SP, 13208-760",4.5,11,OPERATIONAL,A,Nao iniciado
+0175,Arquiteta Bárbara A. Ramada | Arquitetos Jundiaí,Arquitetura,Jundiai,18,(11) 99986-4524,http://arquitetosjundiai.com.br/,"R. Santa Catarina, 749 - Jardim Esplanada, Jundiaí - SP, 13202-150",5,3,OPERATIONAL,A,Nao iniciado
+0176,Arquiteta Priscila Azevedo - Arquitetura e Interiores em Jundiaí,Arquitetura,Jundiai,18,(11) 97450-9551,https://linktr.ee/arq.priscilaazevedo,"R. São Bernardo, 185 - Vila Pirapora, Jundiaí - SP, 13207-645",,,OPERATIONAL,A,Nao iniciado
+0177,Arquiteta Tallita Rosa,Arquitetura,Jundiai,18,(11) 96383-8293,http://www.tallitarosa.com.br/,"Av. Jundiaí, 1349 - Jardim Ana Maria, Jundiaí - SP, 13208-053",5,3,OPERATIONAL,A,Nao iniciado
+0178,Arquiteta Érica Domingos,Arquitetura,Jundiai,18,(11) 98177-9473,,"Street Zip code - R. Paschoal Segre, 283 - Garden Pacaembú, Jundiaí - SP, 13218-200",4,1,OPERATIONAL,A,Nao iniciado
+0179,Arquiteto Wesley Rodrigues,Arquitetura,Jundiai,18,(11) 99989-2473,https://www.arqwesleyrodrigues.com.br/,"Av. Arquimedes, 1475 - Jardim Guanabara, Jundiaí - SP, 13211-840",5,1,OPERATIONAL,A,Nao iniciado
+0180,Arquitetura Japi Projetos e Consultoria,Arquitetura,Jundiai,18,(11) 4808-1218,http://www.arquiteturajapi.com.br/,"Av. Dr. Sebastião Mendes da Silva, 268 - Anhangabaú, Jundiaí - SP, 13208-090",5,6,OPERATIONAL,A,Nao iniciado
+0181,Arquitetura e Urbanismo AU Quadrado (AU²),Arquitetura,Jundiai,18,(11) 97403-6565,http://www.au2.com.br/,"R. Reg. Feijó, 208 - Sl 01 - Vila Arens, Jundiaí - SP, 13202-620",5,8,OPERATIONAL,A,Nao iniciado
+0182,"Arvani Arquitetura, Engenharia e Gerenciadora de obras",Arquitetura,Jundiai,18,(11) 99892-3236,https://www.arvaniarquitetura.com.br/lp,"R. Diógenes Duarte Paes, 100 - Parque do Colégio, Jundiaí - SP, 13209-150",4.3,12,OPERATIONAL,A,Nao iniciado
+0183,BRAP Engenharia,Engenharia,Jundiai,18,(11) 3395-9506,http://www.brapengenharia.com.br/,"R. Anchieta, 204 - Sl 409 - Vila Boaventura, Jundiaí - SP, 13201-804",5,1,OPERATIONAL,A,Nao iniciado
+0184,BSIG engenharia,Engenharia,Jundiai,18,(11) 4586-1202,,"R. dos Bandeirantes, 290 - Pte. de Campinas, Jundiaí - SP, 13201-130",5,1,OPERATIONAL,A,Nao iniciado
+0185,BSS Engenharia,Engenharia,Jundiai,18,(11) 99339-6254,https://www.bssengenharia.com.br/,"R. Eduardo Tomanik, 900 - 6º andar 61 - Chácara Urbana, Jundiaí - SP, 13209-090",,,OPERATIONAL,A,Nao iniciado
+0186,Beatriz Giorgi Arquitetura,Arquitetura,Jundiai,18,(11) 97335-0077,http://beatrizgiorgiarquitetura.com/,"Av. 9 de Julho, 2989 - Anhangabaú, Jundiaí - SP, 13208-046",4.9,9,OPERATIONAL,A,Nao iniciado
+0187,Beatriz Martins Arquitetura,Arquitetura,Jundiai,18,,http://www.beatrizmartins.com/,"R. Eduardo Tomanik, 95 - Chácara Urbana, Jundiaí - SP, 13201-835",5,12,OPERATIONAL,A,Nao iniciado
+0188,"Bianchi | Areia, Pedra, Terraplenagem e Transporte de Máquinas",Construtora,Jundiai,18,(11) 94763-8014,https://bianchitransportes.com.br/,"Av. Engenheiro Tasso Pinheiro, 495 - Fds, Jundiaí - SP, 13210-045",5,5,OPERATIONAL,A,Nao iniciado
+0189,Braz Luiz Arquitetura,Arquitetura,Jundiai,18,(11) 94030-6778,https://lp.brazluizarquitetura.com.br/,"Nino Plaza - R. Abílio Figueiredo, 92 - 16° andar - Centro, Jundiaí - SP, 13208-140",5,16,OPERATIONAL,A,Nao iniciado
+0190,Bremser Engenharia,Engenharia,Jundiai,18,(11) 94100-4815,https://bremser.com.br/,"Av. 9 de Julho, 3575 - Sl 1310 - Anhangabaú, Jundiaí - SP, 13208-056",5,1,OPERATIONAL,A,Nao iniciado
+0191,Bruna Gunnella Arquitetura,Arquitetura,Jundiai,18,,https://instagram.com/brunagunnellaarquitetura?igshid=YmMyMTA2M2Y=,"Av. 9 de Julho, 3575 - Sl 1307 - Anhangabaú, Jundiaí - SP, 13208-600",,,OPERATIONAL,A,Nao iniciado
+0192,Buildtek Engenharia e Projetos,Engenharia,Jundiai,18,(19) 99908-6404,,"R. Bahia - Jardim Tarumã, Jundiaí - SP, 13216-490",5,2,OPERATIONAL,A,Nao iniciado
+0193,C L A Jundiaí Empreendimento Imobiliar,Construtora,Jundiai,18,(11) 4492-5953,,"Av. Antonieta Piva Barranqueiros, 62 - Chacara Aeroporto, Jundiaí - SP, 13212-000",4,55,OPERATIONAL,A,Nao iniciado
+0194,"CAPE Consultoria, Avaliações e Perícias de Engenharia SC Ltda",Engenharia,Jundiai,18,(11) 4586-7571,http://www.cape.eng.br/,"Unit Concept - R. Eduardo Tomanik, 900 - 63 - Chácara Urbana, Jundiaí - SP, 13209-090",5,8,OPERATIONAL,A,Nao iniciado
+0195,"CAQP Engenharia, Administração Ltda",Engenharia,Jundiai,18,(11) 95756-8215,https://caqp.com.br/,"R. João Batista Robbi, 799 - Jardim Merci I, Jundiaí - SP, 13202-210",,,OPERATIONAL,A,Nao iniciado
+0196,CARBONE Arquitetura e Design,Arquitetura,Jundiai,18,(11) 97822-7557,,"R. Paulino Corado, 20 - cj. 307 - Jardim Santa Teresa, Jundiaí - SP, 13211-413",4.4,9,OPERATIONAL,A,Nao iniciado
+0197,CBT CONSULTORIA,Construtora,Jundiai,18,(11) 99688-1400,http://www.cbtconsultoria.com/,"R. Hilda Del Nero Bisquolo, n° 10 - Jardim Florida, Jundiaí - SP, 13208-703",3.7,3,OPERATIONAL,A,Nao iniciado
+0198,CECA - Terraplenagem & Pavimentação,Construtora,Jundiai,18,(11) 98635-2064,,"R. Clodoaldo Francisco Póli, 33 - Parque Uniao, Jundiaí - SP, 13206-651",5,3,OPERATIONAL,A,Nao iniciado
+0199,CME Arquitetura&Engenharia,Arquitetura,Jundiai,18,(11) 3964-9547,http://cmeengenharia.com.br/,"R. Luiz Scavone, 86 - Sala 3 - Jardim Ana Maria, Jundiaí - SP, 13208-790",4.7,25,OPERATIONAL,A,Nao iniciado
+0200,Cardoso Arquitetura,Arquitetura,Jundiai,18,(11) 99526-7534,,"R. Pedro Kramer, 106 - Parque Cidade Jardim II, Jundiaí - SP, 13203-526",5,1,OPERATIONAL,A,Nao iniciado
+0201,Casa & Aço Construtora Ltda,Construtora,Jundiai,18,(11) 4533-8189,,"Av. Bento do Amaral Gurgel, n° 1568 - Vila Nambi, Jundiaí - SP, 13219-070",3,2,OPERATIONAL,A,Nao iniciado
+0202,Casa C Arquitetura,Arquitetura,Jundiai,18,(11) 96581-1970,,"R. do Retiro, 177 - Anhangabaú, Jundiaí - SP, 13013-000",5,9,OPERATIONAL,A,Nao iniciado
+0203,Casa Gesso Jundiaí,Construtora,Jundiai,18,(11) 97394-3201,,"R. Mal.Deodoro da Fonseca, 793 - Centro, Jundiaí - SP, 13201-002",4.5,37,OPERATIONAL,A,Nao iniciado
+0204,Casa de Taipa Arquitetura e Restauro,Arquitetura,Jundiai,18,(11) 91564-0156,,"Rua 23 de Maio - R. Atílio Vianelo, 195 - Jardim Sao Bento, Jundiaí - SP, 13207-070",5,11,OPERATIONAL,A,Nao iniciado
+0205,Chinelatto Sua Empreiteira de Obras,Empreiteira,Jundiai,18,(11) 4533-3208,,"Av. Armênio Ladeira, 282 - Jardim Pacaembu, Jundiaí - SP, 13218-310",,,OPERATIONAL,A,Nao iniciado
+0206,Civilsolo Sondagens e Fundações Ltda,Construtora,Jundiai,18,(11) 97203-3539,https://www.civilsolo.com.br/,"R. Fortunato Mori, 280 - Vila Vianelo, Jundiaí - SP, 13207-150",4.9,69,OPERATIONAL,A,Nao iniciado
+0207,Civiltech Engenharia e Projetos Ltda,Engenharia,Jundiai,18,(11) 4587-8833,http://civiltech.eng.br/,"R. Frei Caneca, 400 - Vila Arens II, Jundiaí - SP, 13202-580",5,2,OPERATIONAL,A,Nao iniciado
+0208,Companhia Paulista Urbanizadora e Incorporadora,Incorporadora,Jundiai,18,(11) 97191-8000,http://www.companhiapaulista.com.br/,"Av. Cmte. Videlmo Munhoz, 165 - Anhangabaú, Jundiaí - SP, 13208-050",,,OPERATIONAL,A,Nao iniciado
+0209,Concrebem Concreto Usinado,Servicos correlatos,Jundiai,18,,,"Rod. Pres. Tancredo de Almeida Neves, km 54 - Bairro do Castanho, Jundiaí - SP, 13205-005",,,OPERATIONAL,A,Nao iniciado
+0210,Concretizeja Engenharia,Engenharia,Jundiai,18,(11) 97040-3533,http://www.concretizeja.com.br/,"R. Acre, 145 - Vila Didi, Jundiaí - SP, 13203-280",5,5,OPERATIONAL,A,Nao iniciado
+0211,Concretos JB,Servicos correlatos,Jundiai,18,,,"Tv. Egídio Mateo, de - Matheo, 125 - Colônia, Jundiaí - SP, 13219-810",,,OPERATIONAL,A,Nao iniciado
+0212,Condomínio Brisas do Japi - Plantão de Vendas - Medeiros -Jundiaí,Construtora,Jundiai,18,(11) 3964-8836,http://brisasdojapi.com.br/,"Av. Pref. Luis Latorre, 5005 - Vila das Hortencias, Jundiaí - SP, 13209-430",4.8,20,OPERATIONAL,A,Nao iniciado
+0213,Construtor V.A FERREIRA CONSTRUCAO CIVIL,Construtora,Jundiai,18,(11) 94204-1906,,"Av. Antônio Frederico Ozanan - Vila Rio Branco, Jundiaí - SP, 13214-205",,,OPERATIONAL,A,Nao iniciado
+0214,Construtora & Hidráulica Guarany,Construtora,Jundiai,18,(11) 4586-8906,,"R. do Retiro, 444 - Parque do Colégio, Jundiaí - SP, 13209-000",5,1,OPERATIONAL,A,Nao iniciado
+0215,Construtora Andrade Jundiaí Ltda,Construtora,Jundiai,18,,,"Av. Dr. Cavalcanti, 951 - Centro, Jundiaí - SP, 13201-003",5,1,OPERATIONAL,A,Nao iniciado
+0216,Construtora Bianchini,Construtora,Jundiai,18,(11) 4586-0308,https://construtorabianchini.wordpress.com/2013/04/24/coopercica-jundiai-sp/,"Edifício Liberal Century - R. do Retiro - Anhangabaú, Jundiaí - SP, 13201-030",,,OPERATIONAL,A,Nao iniciado
+0217,Construtora Donadelli Mano,Construtora,Jundiai,18,(11) 4521-5223,,"Av. Francisco Pereira de Castro, 317 - Anhangabaú, Jundiaí - SP, 13208-110",3,2,OPERATIONAL,A,Nao iniciado
+0218,Construtora Faz Tudo,Construtora,Jundiai,18,(11) 94266-8211,https://faz-tudo.ueniweb.com/?utm_campaign=gmb,"R. Augusto Maia, 196 - Jardim Sales, Jundiaí - SP, 13214-649",5,1,OPERATIONAL,A,Nao iniciado
+0219,Construtora Gomes Lourenço,Construtora,Jundiai,18,(11) 4522-5797,,"Av. Amélia Latorre, 257 - Jardim Guanabara, Jundiaí - SP, 13211-815",5,1,OPERATIONAL,A,Nao iniciado
+0220,Construtora IP,Construtora,Jundiai,18,(11) 98935-1644,,"Tv. Altinópolis, 73 - SALA 03 - Vila Vianelo, Jundiaí - SP, 13207-160",5,16,OPERATIONAL,A,Nao iniciado
+0221,Construtora Jundiaí | Facilita Obras,Construtora,Jundiai,18,(11) 94678-4000,https://www.facilitaobras.com/construtora-jundiai,"R. Hilda Del Nero Bisquolo - Região Metropolitana de Jundiaí, Jundiaí - SP, 13208-703",5,3,OPERATIONAL,A,Nao iniciado
+0222,Construtora Labore,Construtora,Jundiai,18,(11) 3963-0131,,"R. Benjamin Constant, 88 - Centro, Jundiaí - SP, 13201-046",2.3,3,OPERATIONAL,A,Nao iniciado
+0223,Construtora Pacto Ltda.,Construtora,Jundiai,18,(11) 2816-8591,http://construtorapacto.com.br/,"Av. 9 de Julho, 3575 - Sala206 - Anhangabaú, Jundiaí - SP, 13208-056",1,2,OPERATIONAL,A,Nao iniciado
+0224,Construtora Terra Nacional,Construtora,Jundiai,18,(11) 4583-3220,http://www.terranacional.com.br/,"R. Prudente de Moraes, 1521 - Centro, Jundiaí - SP, 13201-004",5,12,OPERATIONAL,A,Nao iniciado
+0225,Construtora WB,Construtora,Jundiai,18,(11) 4521-6661,http://www.portalwb.com.br/,"R. do Retiro, 432 - Vila Virginia, Jundiaí - SP, 13209-000",5,3,OPERATIONAL,A,Nao iniciado
+0226,Construvision Construtora Jundiaí,Construtora,Jundiai,18,(11) 2709-9117,http://www.construvision.com.br/,"Av. 9 de Julho, 3575 - Sl 1215 - Anhangabaú, Jundiaí - SP, 13208-056",4,4,OPERATIONAL,A,Nao iniciado
+0227,Construção Civil e Reformas,Construtora,Jundiai,18,(11) 97835-0242,,"R. José Benedito Rosa, 80 - Jardim Santa Gertrudes, Jundiaí - SP, 13205-531",5,1,OPERATIONAL,A,Nao iniciado
+0228,Cristiano Vitturi Arquitetura,Arquitetura,Jundiai,18,(11) 97215-1265,https://cristianovitturi.netlify.app/,"Edifício the one office tower - R. Hilda Del Nero Bisquolo, 102 - Jardim Florida, Jundiaí - SP, 13208-703",5,7,OPERATIONAL,A,Nao iniciado
+0229,Cristiele Salles - Arquitetura e Interiores,Arquitetura,Jundiai,18,(11) 98606-0014,https://www.cristielesalles.com.br/,"The One Office Tower - R. Hilda Del Nero Bisquolo, 102 - Sl 2504 - Jardim Florida, Jundiaí - SP, 13208-703",5,10,OPERATIONAL,A,Nao iniciado
+0230,Cristina Lucchini Arquitetura,Arquitetura,Jundiai,18,(11) 99657-5342,https://www.cristinalucchini.com/,"R. Eduardo Tomanik, 900 - Chácara Urbana, Jundiaí - SP, 13209-090",5,4,OPERATIONAL,A,Nao iniciado
+0231,Cypriani Engenharia,Engenharia,Jundiai,18,(11) 97451-0528,https://www.cyprianiengenharia.com.br/,"Av. Samuel Martins, 731 - Vila Arens/Vila Progresso, Jundiaí - SP, 13202-251",5,16,OPERATIONAL,A,Nao iniciado
+0232,DCenco Engenharia de Instalações,Engenharia,Jundiai,18,(11) 3963-4515,https://dcenco.com.br/,"R. Prof. José Leme do Prado, 147 - Jardim Primavera, Jundiaí - SP, 13209-680",4.7,24,OPERATIONAL,A,Nao iniciado
+0233,DG Terraplanagem Gratidão LTDA,Construtora,Jundiai,18,(11) 91360-0997,https://dg-terraplanagem-a2rj9vy.gamma.site/,"Av. José Mezzalira, 6581 - Ivoturucaia, Jundiaí - SP, 13218-740",,,OPERATIONAL,A,Nao iniciado
+0234,DR CONSTRUÇÕES E REFORMA LTDA,Construtora,Jundiai,18,(11) 99408-4390,,"Av. José Gothard, 106 - Medeiros, Jundiaí - SP, 13212-245",5,1,OPERATIONAL,A,Nao iniciado
+0235,Daniel Mendes Engenheiro Civil,Construtora,Jundiai,18,(11) 98320-0142,,"R. dos Pinheiros, 405 - Jardim Samambaia, Jundiaí - SP, 13211-620",,,OPERATIONAL,A,Nao iniciado
+0236,Daniel Santana Arquitetos | Jundiaí,Arquitetura,Jundiai,18,(11) 91372-0980,http://arquitetosdanielsantana.com/,"Edifício Mondial - Av. 9 de Julho, Sala 201 - Anhangabaú, Jundiaí - SP, 13208-056",5,16,OPERATIONAL,A,Nao iniciado
+0237,Dantech Engenharia,Engenharia,Jundiai,18,(11) 2709-0588,http://dantech.eng.br/,"Av. Humberto Cereser, 2225 - Jardim Caxambu, Jundiaí - SP, 13218-711",4.3,26,OPERATIONAL,A,Nao iniciado
+0238,Definitiva Construtora,Construtora,Jundiai,18,(11) 91012-2200,https://www.definitivaconstrutora.com.br/,"R. Anchieta, 204 - Sl 102 - Vila Boaventura, Jundiaí - SP, 13201-804",,,OPERATIONAL,A,Nao iniciado
+0239,Deise Gavioli Arquitetura,Arquitetura,Jundiai,18,(11) 99969-4966,https://www.facebook.com/deisegavioliarquitetura,"Av - R. Vig. J. J. Rodrigues, 21 - Sl 1601 - Vila Arens, Jundiaí - SP, 13201-001",5,3,OPERATIONAL,A,Nao iniciado
+0240,Deizianny Antunes - Arquitetura,Arquitetura,Jundiai,18,(19) 99606-2675,https://www.instagram.com/arquitetadeiziannyantunes?igsh=MXF5bWF3dWhpM3d1cQ==&utm_source=qr,"R. Bom Jesus de Pirapora, 2.632 - sala: 02 - Vila Rami, Jundiaí - SP, 13206-305",5,10,OPERATIONAL,A,Nao iniciado
+0241,Demarchi estruturas de pré moldados e metálica,Servicos correlatos,Jundiai,18,,,"Av. da Uva, 1208 - Bairro do Poste, Jundiaí - SP, 13213-235",,,OPERATIONAL,A,Nao iniciado
+0242,Demolidora BC4,Construtora,Jundiai,18,(11) 94774-2341,https://demolidorabc4.com.br/,"R. Mario Borin, 500 - Vila Virginia, Jundiaí - SP, 13209-030",4.9,8,OPERATIONAL,A,Nao iniciado
+0243,Denis Reformas e Construção Civil,Construtora,Jundiai,18,(11) 97741-6338,,"R. Campinas, 490 - Vila Formosa, Jundiaí - SP, 13214-290",5,3,OPERATIONAL,A,Nao iniciado
+0244,Diego Terraplanagem em Jundiai,Construtora,Jundiai,18,(11) 96185-7006,https://www.guiadeassinantes.com.br/anuncio/diego-terraplanagem-em-jundiai,"Av. Maria Negrini Negro, 1638 - Caxambu, Jundiaí - SP, 13218-549",5,1,OPERATIONAL,A,Nao iniciado
+0245,Diretiva Engenharia Construções,Construtora,Jundiai,18,(11) 4583-3666,http://www.diretivaengenharia.com.br/,"R. Aderbal da Costa Moreira, 163 - Retiro, Jundiaí - SP, 13209-550",4.7,50,OPERATIONAL,A,Nao iniciado
+0246,Dodi Terraplanagem e Infraestrutura,Construtora,Jundiai,18,(11) 99988-6557,https://doditerraplanagem.com.br/,"R. Hubert Schledorn, 660 - Jardim das Tulipas, Jundiaí - SP, 13212-793",5,4,OPERATIONAL,A,Nao iniciado
+0247,Domus Engenharia,Engenharia,Jundiai,18,(11) 4497-0750,http://www.domusengenharia.com.br/,"R. Anchieta, 204 - Sl 408 - Vila Boaventura, Jundiaí - SP, 13201-804",4,4,OPERATIONAL,A,Nao iniciado
+0248,Domus Engenharia,Engenharia,Jundiai,18,(11) 4497-0750,http://domusengenharia.com.br/,"5 - R. Siqueira de Moraes, 555 - Centro, Jundiaí - SP, 13201-032",5,1,OPERATIONAL,A,Nao iniciado
+0249,Duo Assessoria e Planejamento de Obras,Construtora,Jundiai,18,(11) 95286-6060,,"Avenida Bento dia Amaral Gurgel, 1623 - Vila Nambi, Jundiaí - SP, 13219-070",5,1,OPERATIONAL,A,Nao iniciado
+0250,E.F Engenharia & Consultoria,Engenharia,Jundiai,18,(11) 95045-6268,,"Rua Chiara Lubich, 371 - Jardim Ermida I, Jundiaí - SP, 13212-117",5,1,OPERATIONAL,A,Nao iniciado
+0251,E2C Arquitetura,Arquitetura,Jundiai,18,(11) 98882-1089,,"Apenas com Agendamento - R. Hilda Del Nero Bisquolo, 102 - Jardim Florida, Jundiaí - SP, 13208-703",5,64,OPERATIONAL,A,Nao iniciado
+0252,ELEMENTO - Projetos Estruturais,Engenharia,Jundiai,18,(11) 97293-0033,http://www.elementoprojetos.com.br/,"R. Emílio Fehr, 283 - Vila das Hortencias, Jundiaí - SP, 13209-380",5,20,OPERATIONAL,A,Nao iniciado
+0253,ENGETESB,Construtora,Jundiai,18,(11) 99674-6609,https://engetesb.com.br/,"R. Cap. Cassiano Ricardo de Toledo, 191 - Sl 912 - Chácara Urbana, Jundiaí - SP, 13201-840",5,4,OPERATIONAL,A,Nao iniciado
+0254,ENGPLAN - Engenharia e Planejamento de Obras,Engenharia,Jundiai,18,(11) 93369-1026,https://contatoengplan.wixsite.com/website,"Rua: Cap Cassiano Ricardo de Toledo - 191 - Chácara Urbana, Jundiaí - SP, 13209-000",,,OPERATIONAL,A,Nao iniciado
+0255,EPS Suits Brasil,Construtora,Jundiai,18,(11) 91902-0010,http://suitsbrasil.com.br/,"Rua Nicolau Carderelli, 198 - Jardim Paris, Jundiaí - SP, 13209-190",4.5,20,OPERATIONAL,A,Nao iniciado
+0256,Edifica Engenharia e Empreendimentos LTDA,Engenharia,Jundiai,18,(11) 94627-2596,https://edifica.emp.br/,"Av. Dona Manoela Lacerda de Vergueiro, 59 - Anhangabaú, Jundiaí - SP, 13208-057",4.5,2,OPERATIONAL,A,Nao iniciado
+0257,Empreiteira Jundiaí,Empreiteira,Jundiai,18,(11) 98461-1532,https://empreiteirajundiai.com.br/,"Edifício Uffizi - R. Anchieta, 204 - Sl 102 - Vila Boaventura, Jundiaí - SP, 13201-804",4.6,74,OPERATIONAL,A,Nao iniciado
+0258,Empreiteiro de obra,Empreiteira,Jundiai,18,(11) 93313-3581,https://construcoes.my.canva.site/,"R. do Rosário, 664 - Centro, Jundiaí - SP, 13201-015",4.9,68,OPERATIONAL,A,Nao iniciado
+0259,Empresa de Construção Reforma Jundiaí,Construtora,Jundiai,18,(11) 3963-6663,,"R. Irineu Dolce, 171 - Parque Eloy Chaves, Jundiaí - SP, 13212-120",,,OPERATIONAL,A,Nao iniciado
+0260,EngPro Solutions Construções e Instalações,Construtora,Jundiai,18,(11) 4492-5034,,"Av. Dr.Odil Campos de Sáes, 376 - Jardim Sao Bento, Jundiaí - SP, 13207-145",5,1,OPERATIONAL,A,Nao iniciado
+0261,Engenharia Civil - Paula Moreira,Engenharia,Jundiai,18,(11) 97629-8648,http://wix.to/12v3oHJ?utm_source=google&utm_medium=wix_google_business_profile,"Barueri, Jundiaí - SP, 13203-614",,,OPERATIONAL,A,Nao iniciado
+0262,Engenharia Civil e Construção - M. Ferreira,Construtora,Jundiai,18,(11) 7800-0985,https://www.mferreiraengenharia.com.br/,"R. Carmela Nano, 432 - Jardim das Samambaias, Jundiaí - SP, 13211-710",,,OPERATIONAL,A,Nao iniciado
+0263,Engenharia EA3,Engenharia,Jundiai,18,(11) 91273-1736,https://www.ea3engenharia.com.br/,"Alameda dos Ingás, n° 36 - Medeiros, Jundiaí - SP, 13211-251",3,2,OPERATIONAL,A,Nao iniciado
+0264,Engenharia Honorio,Engenharia,Jundiai,18,(11) 94566-4044,http://www.engenhariahonorio.com.br/,"Av. Gumercindo Soares de Camargo - Jardim Estadio, Jundiaí - SP, 13203-565",5,7,OPERATIONAL,A,Nao iniciado
+0265,Eric Harada Arquitetura e Construção | Projetos e Obras Residenciais,Arquitetura,Jundiai,18,(11) 99570-5189,https://www.ericharadaarquitetura.com/,"R. Helena Conci Gáspari - Jardim Campos Elisios, Jundiaí - SP, 13209-810",5,4,OPERATIONAL,A,Nao iniciado
+0266,Escritório Aberto de Arquitetura,Arquitetura,Jundiai,18,(11) 3379-0967,,"R. Cap. Cassiano Ricardo de Toledo, 191 - L51 - Centro, Jundiaí - SP, 13201-840",5,9,OPERATIONAL,A,Nao iniciado
+0267,Espaço AU - Arquitetura e Interiores,Arquitetura,Jundiai,18,(11) 96375-0912,https://www.espacoau.com.br/,"R. Elias José Cavalcanti, 1201 - Eloy Chaves, Jundiaí - SP, 13212-109",5,72,OPERATIONAL,A,Nao iniciado
+0268,Estati Engenharia,Engenharia,Jundiai,18,(11) 3109-2684,http://www.estatiengenharia.com.br/,"R. Cap. Cassiano Ricardo de Toledo, 191 - Sala 207 - Chácara Urbana, Jundiaí - SP, 13201-840",5,32,OPERATIONAL,A,Nao iniciado
+0269,FBS Construção Civil Pavimentação,Construtora,Jundiai,18,(11) 4521-9960,,"R. Diógenes Duarte Paes, 100 - Parque do Colégio, Jundiaí - SP, 13209-150",,,OPERATIONAL,A,Nao iniciado
+0270,FF Engenharia e Projetos,Engenharia,Jundiai,18,(11) 99724-5055,https://ffengenhariaeprojetos.com.br/,"R. Dr. Paschoal de Muzzio, 20 - Vila Vianelo, Jundiaí - SP, 13207-080",,,OPERATIONAL,A,Nao iniciado
+0271,FH 10 Empreendimentos Imobiliários,Incorporadora,Jundiai,18,(11) 4497-0740,,"R. Elias Juvenal de Mello, 1126 - Jardim Ana Maria, Jundiaí - SP, 13208-820",3.6,5,OPERATIONAL,A,Nao iniciado
+0272,FLUXO ENGENHARIA,Engenharia,Jundiai,18,(11) 3379-0203,http://fluxoengenharia.com/,"Av. Dr. Sebastião Mendes da Silva, 248 - Anhangabaú, Jundiaí - SP, 13208-090",5,2,OPERATIONAL,A,Nao iniciado
+0273,FME - Soluções em Engenharia,Engenharia,Jundiai,18,(11) 97175-9914,http://www.engenhariafme.com.br/,"Rua Rangel Pestana 828, Edifício Jatobá - Sala 18 - Centro, Jundiaí - SP, 13211-771",5,18,OPERATIONAL,A,Nao iniciado
+0274,FMS Terraplenagem e Locação de Equipamentos,Construtora,Jundiai,18,(11) 4584-7559,https://www.fmsterraplenagem.com.br/,"Av. Comendador Antônio Borin, 4938 - Portão 68 - Caxambu, Jundiaí - SP, 13218-668",4.2,10,OPERATIONAL,A,Nao iniciado
+0275,FS+lirah Arquitetura,Arquitetura,Jundiai,18,(11) 98925-6768,http://www.fslirah.com/,"R. Alegrete, 293 - Vila Sao Paulo, Jundiaí - SP, 13203-510",5,16,OPERATIONAL,A,Nao iniciado
+0276,Fauke Engenharia,Engenharia,Jundiai,18,(11) 98207-0977,http://fauke.com.br/,"Condomínio Uffizi Medical & Business Center - R. Anchieta, 204 - 1107 - Vila Boaventura, Jundiaí - SP, 13201-804",,,OPERATIONAL,A,Nao iniciado
+0277,Fernanda Faidiga Arquitetura e Interiores,Arquitetura,Jundiai,18,(11) 98635-5120,https://www.instagram.com/ffarqeinteriores/,"R. Maj. Gustavo Adolfo Storch, 86 - Chácara Urbana, Jundiaí - SP, 13209-080",5,9,OPERATIONAL,A,Nao iniciado
+0278,Ferrão Engenharia,Engenharia,Jundiai,18,(11) 4521-0801,http://www.ricardoferrao.com.br/,"191 Sala 1116 - R. Cap. Cassiano Ricardo de Toledo - Chácara Urbana, Jundiaí - SP, 13201-840",5,1,OPERATIONAL,A,Nao iniciado
+0279,G + A Engenharia e Construção,Construtora,Jundiai,18,,,"Rua Kênia, 37 - Jardim Bonfiglioli, Jundiaí - SP, 13207-389",3.9,11,OPERATIONAL,A,Nao iniciado
+0280,GC Reformas - Jundiaí SP,Construtora,Jundiai,18,(11) 97206-2692,https://sites.google.com/view/gcreformas/in%C3%ADcio,"R. Armando Carraro, 59 - Jardim Tamoio, Jundiaí - SP, 13219-302",5,4,OPERATIONAL,A,Nao iniciado
+0281,GOLDRush Retroescavadeira,Construtora,Jundiai,18,(11) 97889-9607,,"R. Luiz Scavone, 86 - Jardim Ana Maria, Jundiaí - SP, 13208-790",,,OPERATIONAL,A,Nao iniciado
+0282,Galpão Comercial,Construtora,Jundiai,18,(11) 4521-4175,,"Rod. Dom Gabriel Paulino Bueno Couto, 73 - Medeiros, Jundiaí - SP, 13212-240",3,1,OPERATIONAL,A,Nao iniciado
+0283,Galpão da Locação,Servicos correlatos,Jundiai,18,,,"Av. Romeu Paschoal Milani, 110 - Medeiros, Jundiaí - SP, 13212-365",,,OPERATIONAL,A,Nao iniciado
+0284,Galpões Brasil,Construtora,Jundiai,18,(11) 4586-0598,http://galpoesbrasil.com.br/,"Rua Coronel Boaventura Mendes Pereira, 173 - Sala 21A - Vila Boaventura, Jundiaí - SP, 13201-801",,,OPERATIONAL,A,Nao iniciado
+0285,Galpões Brasil e Montecalvo Arq. e Const.,Construtora,Jundiai,18,(11) 4586-0598,http://galpoesbrasil.com/,"R. Bonifácio José da Rocha, 47 - Vila Boaventura, Jundiaí - SP, 13201-812",4.7,3,OPERATIONAL,A,Nao iniciado
+0286,Gaspar Construções e Engenharia,Construtora,Jundiai,18,(11) 98691-2171,,"R. Cap. Cassiano Ricardo de Toledo, 191 - Chácara Urbana, Jundiaí - SP, 13201-840",5,13,OPERATIONAL,A,Nao iniciado
+0287,GerEnge Engenharia,Engenharia,Jundiai,18,(11) 94114-8172,https://gerenge.eng.br/,"R. do Retiro, 1295 - Centro, Jundiaí - SP, 13209-201",5,1,OPERATIONAL,A,Nao iniciado
+0288,Giovana Feres Arquitetura (atual Téses Arquitetura),Arquitetura,Jundiai,18,(11) 99970-2061,https://tesesarquitetura.com.br/,"R. Bela Vista, 91 - Bela Vista, Jundiaí - SP, 13207-780",4.8,5,OPERATIONAL,A,Nao iniciado
+0289,Gnering Engenharia e Gerenciamento,Engenharia,Jundiai,18,(11) 94722-3565,http://www.gnering.com.br/,"Av. Humberto Cereser, 2850 - Caxambu, Jundiaí - SP, 13218-711",,,OPERATIONAL,A,Nao iniciado
+0290,Gobbo Terraplenagem,Construtora,Jundiai,18,(11) 4599-9137,,"Av. Atílio Gobo, 2983 - Santa Clara, Jundiaí - SP, 13210-473",5,1,OPERATIONAL,A,Nao iniciado
+0291,Gomes Projetos de Engenharia,Engenharia,Jundiai,18,(11) 95474-4664,,"Av. Amélia Latorre - Vila Nova Esperia, Jundiaí - SP, 13211-000",,,OPERATIONAL,A,Nao iniciado
+0292,Gonçalves Mão de Obra em Alvenaria,Construtora,Jundiai,18,(11) 99295-6547,https://goncalves-mao-de-obra-em-alvenaria.ueniweb.com/?utm_campaign=gmb,"R. Cecília Meireles, 323 - Vila Rio Branco, Jundiaí - SP, 13215-400",5,1,OPERATIONAL,A,Nao iniciado
+0293,Grupo Candido Irias,Construtora,Jundiai,18,(11) 97396-2098,https://grupocandidoirias.eng.br/,"R. do Retiro, 432 - Sl 104 - Vila Virginia, Jundiaí - SP, 13209-000",5,31,OPERATIONAL,A,Nao iniciado
+0294,Grupo Ferreira Soluções Visuais,Construtora,Jundiai,18,(11) 94037-8478,https://www.instagram.com/grferreiravisual/,"R. Maestro José Bovolenta, 362 - Vila Arens/Vila Progresso, Jundiaí - SP, 13202-270",4.9,36,OPERATIONAL,A,Nao iniciado
+0295,Guilherme Tucci Arquitetura e Interiores,Arquitetura,Jundiai,18,(11) 99912-5151,http://www.guilhermetucciarquitetura.com.br/,"R. Cap. Cassiano Ricardo de Toledo, 191 - Sl 805 - Região Metropolitana de Jundiaí, Jundiaí - SP, 13201-840",5,26,OPERATIONAL,A,Nao iniciado
+0296,HERF Engenharia e Projetos,Engenharia,Jundiai,18,(11) 4521-4882,http://www.herf.com.br/,"R. Leonor Pinheiro da Silva, 144 - Anhangabaú, Jundiaí - SP, 13209-130",4.8,19,OPERATIONAL,A,Nao iniciado
+0297,HIROKADO ARQUITETURA,Arquitetura,Jundiai,18,(11) 98980-7920,https://www.hirokadoarquitetura.com/,"R. Henrique Olaf Hedmann, 231 - Vila Rafael de Oliveira, Jundiaí - SP, 13201-096",5,8,OPERATIONAL,A,Nao iniciado
+0298,HOLDER STEEL ESTRUTURAS METÁLICAS,Construtora,Jundiai,18,(11) 99655-0887,https://holdersteel.com.br/,"R. Francisco Pereira Coutinho, 321 - Vila Rafael de Oliveira, Jundiaí - SP, 13201-100",5,28,OPERATIONAL,A,Nao iniciado
+0299,HS Empreendimentos e Participações,Construtora,Jundiai,18,(11) 4522-1096,,"R. do Retiro, 1381 - Jardim Paris, Jundiaí - SP, 13209-000",5,1,OPERATIONAL,A,Nao iniciado
+0300,Helbor,Construtora,Jundiai,18,(11) 3174-1241,http://www.helbor.com.br/,"R. Barão de Teffé, 160 - Anhangabaú, Jundiaí - SP, 13208-760",4.6,135,OPERATIONAL,A,Nao iniciado
+0301,Hoch Arquitetura,Arquitetura,Jundiai,18,(11) 4587-9799,http://www.hoch.arq.br/,"Av. Pedro Blanco da Silva, 729 - Sl 45 - Jardim Santa Adelaide, Jundiaí - SP, 13208-630",5,7,OPERATIONAL,A,Nao iniciado
+0302,Hoek Arquitetura,Arquitetura,Jundiai,18,(11) 98334-6674,http://www.hoekarquitetura.com.br/,"Av. 9 de Julho, 3405 - Anhangabaú, Jundiaí - SP, 13208-056",5,8,OPERATIONAL,A,Nao iniciado
+0303,House 10,Construtora,Jundiai,18,(11) 97169-7110,https://house10jundiai.com.br/,"Edif Mondial - Av. 9 de Julho, 3405 - Sl 211 - Vianelo/Bonfiglioli, Jundiaí - SP, 13208-056",4.8,17,OPERATIONAL,A,Nao iniciado
+0304,"Hs Empreiteira - Construções, Reformas e Projetos - Jundiaí e região SP",Construtora,Jundiai,18,(11) 97305-9945,http://www.hsempreiteira.com.br/,"R. Barão de Teffé, 50 - Piso Superior - Jardim Ana Maria, Jundiaí - SP, 13208-760",4.9,73,OPERATIONAL,A,Nao iniciado
+0305,INNOVARY ENGENHARIA,Engenharia,Jundiai,18,(11) 99993-8934,,"R. Santo Ferreti, 115 - Vila Joana, Jundiaí - SP, 13216-090",4.8,6,OPERATIONAL,A,Nao iniciado
+0306,Iagrovias Construção Pavimentação e Terraplenagem,Construtora,Jundiai,18,(11) 4525-0022,,"R. Bela Vista, 126 - Bela Vista, Jundiaí - SP, 13207-780",5,1,OPERATIONAL,A,Nao iniciado
+0307,Iagrovias Construção Pavimentação e Terraplenagem,Construtora,Jundiai,18,(11) 4522-4864,,"R. do Rosário, 765 - Centro, Jundiaí - SP, 13200-040",,,OPERATIONAL,A,Nao iniciado
+0308,Iagrovias Construção Pavimentação e Terraplenagem,Construtora,Jundiai,18,(11) 4525-0022,,"Av. Maria Aparecida Pansarim Porcari, 850 - Chácara Planalto, Jundiaí - SP, 13212-265",5,1,OPERATIONAL,A,Nao iniciado
+0309,Isometria Arquitetura,Arquitetura,Jundiai,18,(11) 97258-2227,http://www.isometriaarquitetura.com.br/,"Av. Benedicto Castilho de Andrade, 1007 - Parque Eloy Chaves, Jundiaí - SP, 13212-070",4.9,14,OPERATIONAL,A,Nao iniciado
+0310,Italico Arquitetura Jundiaí,Arquitetura,Jundiai,18,(19) 98133-7909,https://italicohomes.com/,"R. Hilda Del Nero Bisquolo, 102 - Sl 713 - Jardim Florida, Jundiaí - SP, 13208-703",5,21,OPERATIONAL,A,Nao iniciado
+0311,JC Obra & Construção Preventiva,Construtora,Jundiai,18,(11) 97749-1157,,"R. Mario Borin, 659 - Lj 2 - Vila Virginia, Jundiaí - SP, 13209-030",,,OPERATIONAL,A,Nao iniciado
+0312,JCF Engenharia,Engenharia,Jundiai,18,(11) 4522-2160,,"R. Voluntários da Pátria, 286 - Jardim das Orquideas, Jundiaí - SP, 13209-310",5,1,OPERATIONAL,A,Nao iniciado
+0313,JCF Engenharia - Ar Condicionado - Projeto e Consultoria,Engenharia,Jundiai,18,(11) 99294-5377,http://jcfengenharia.com/,"R. Voluntários da Pátria, 77 - Jardim das Orquideas, Jundiaí - SP, 13209-310",,,OPERATIONAL,A,Nao iniciado
+0314,JF Engenharia - Projetos BIM,Engenharia,Jundiai,18,(11) 98499-7912,,"Av. Rubbo, 332 - Vila Nova Jundiainopolis, Jundiaí - SP, 13206-570",,,OPERATIONAL,A,Nao iniciado
+0315,JPM Construtora,Construtora,Jundiai,18,(11) 4806-8740,,"R. André Zancopé, 21 - Pte. de Campinas, Jundiaí - SP, 13201-140",4.6,13,OPERATIONAL,A,Nao iniciado
+0316,Japy Engenharia e Comércio,Engenharia,Jundiai,18,(11) 4587-8750,http://www.japyengenharia.com.br/,"R. XV de Novembro, 221 - Centro, Jundiaí - SP, 13201-005",4.4,9,OPERATIONAL,A,Nao iniciado
+0317,Japy Engenharia e Comércio,Engenharia,Jundiai,18,,https://japyengenharia.com.br/,"R. Princesa Isabel, 187 - Vila Princesa Isabel, Jundiaí - SP, 13201-650",5,1,OPERATIONAL,A,Nao iniciado
+0318,Jessica Ruy Arquitetura,Arquitetura,Jundiai,18,(11) 99913-2814,https://beacons.ai/jessicaruy,"Rua Cica, 410 - Jardim Cica, Jundiaí - SP, 13206-765",5,1,OPERATIONAL,A,Nao iniciado
+0319,Jhony Dias Engenharia Civil,Engenharia,Jundiai,18,(11) 99748-6540,https://linktr.ee/engjhonydias,"The one Office Tower - Sala 308 - Jardim Florida, Jundiaí - SP, 13208-703",5,1,OPERATIONAL,A,Nao iniciado
+0320,Join Construções,Construtora,Jundiai,18,(11) 4431-1982,,"Rua Várzea Paulista, 487, piso inferior - Vila Agricola, Jundiaí - SP, 13202-700",1.6,7,OPERATIONAL,A,Nao iniciado
+0321,Jéssica Mingotti - arquitetura e interiores,Arquitetura,Jundiai,18,(11) 96382-4759,https://www.instagram.com/arq_jessicamingotti/,"R. São Francisco de Assis - Anhangabaú, Jundiaí - SP, 13208-155",5,6,OPERATIONAL,A,Nao iniciado
+0322,K.A. Terraplanagem Jundiaí,Construtora,Jundiai,18,(11) 97677-4943,,"R. Casimiro Martho, 63 - Vila Maria Luiza, Jundiaí - SP, 13209-270",,,OPERATIONAL,A,Nao iniciado
+0323,Kelly Oliveira Arquitetura,Arquitetura,Jundiai,18,(11) 99919-5585,,"R. da Glória, 99 - Vila Helena, Jundiaí - SP, 13206-690",4.8,4,OPERATIONAL,A,Nao iniciado
+0324,Krios Construções,Construtora,Jundiai,18,(11) 4521-6609,,"R. Cap. Cassiano Ricardo de Toledo, 200 - Chácara Urbana, Jundiaí - SP, 13201-840",5,6,OPERATIONAL,A,Nao iniciado
+0325,L&L Arquitetura — Escritório de Arquitetura em Jundiaí | Arquiteto e Design de Interiores,Arquitetura,Jundiai,18,(11) 97251-4047,http://www.lelarquitetura.com.br/,"R. das Pitangueiras, 18 - Jardim Pitangueiras II, Jundiaí - SP, 13202-450",5,54,OPERATIONAL,A,Nao iniciado
+0326,L.Ventura empreiteira de obras cívil,Empreiteira,Jundiai,18,(11) 98492-6501,,"R. José Aparecido Barbosa, 54 - Jardim Guanabara, Jundiaí - SP, 13211-810",,,OPERATIONAL,A,Nao iniciado
+0327,LAB Engenharia,Engenharia,Jundiai,18,,https://www.instagram.com/lab.engenharia/,"Avenida 9 de julho, 3575 Maxime Tower - Sl 1615 - Anhangabaú, Jundiaí - SP, 13208-056",4.9,50,OPERATIONAL,A,Nao iniciado
+0328,LARS Arquitetura & Design,Arquitetura,Jundiai,18,(11) 91035-8021,https://larsarquitetura.carrd.co/,"R. Mal.Deodoro da Fonseca, 479 - Sl 7 - Centro, Jundiaí - SP, 13201-002",5,7,OPERATIONAL,A,Nao iniciado
+0329,"LAUDOS PERICIAIS , VISTORIA DE IMÓVEL , AVALIAÇÕES DE IMÓVEIS, LAUDO DE RECEBIMENTO DE IMÓVEIS, ART DE REFORMA",Servicos correlatos,Jundiai,18,,,"Av. Osmundo dos Santos Pellegrini, 1251 - Recanto Quarto Centenario, Jundiaí - SP, 13211-745",,,OPERATIONAL,A,Nao iniciado
+0330,LAX Construções Industriais,Construtora,Jundiai,18,(19) 99708-9556,http://www.lax.ind.br/,"R. Hilda Del Nero Bisquolo, 102 - Jardim Florida, Jundiaí - SP, 13208-703",5,4,OPERATIONAL,A,Nao iniciado
+0331,LC Maion Terraplanagem.,Construtora,Jundiai,18,(11) 99178-5855,,"R. Flávio Rossi - Vila Maria Luiza, Jundiaí - SP, 13209-301",,,OPERATIONAL,A,Nao iniciado
+0332,LCB Terraplenagem,Construtora,Jundiai,18,(11) 94702-7984,https://www.instagram.com/lcb_terraplenagem?igsh=b2NnbDZmejJnY3Iw&utm_source=qr,"Av. Antônio Raimundo de Oliveira, 152 - Mirim, Jundiaí - SP, 13216-645",5,1,OPERATIONAL,A,Nao iniciado
+0333,LOCAMAC TERRAPLENAGEM E CONSTRUÇÕES,Construtora,Jundiai,18,(11) 94228-7675,https://www.locamac.com.br/,"Av. Quatorze de Dezembro, 2127 - Vila Mafalda, Jundiaí - SP, 13206-105",,,OPERATIONAL,A,Nao iniciado
+0334,LTA VISA CONFORMIDADE,Construtora,Jundiai,18,(11) 95080-1575,https://www.instagram.com/ltavisaconformidade/,"R. Barão de Teffé, 1000 - Jardim Ana Maria, Jundiaí - SP, 13208-760",,,OPERATIONAL,A,Nao iniciado
+0335,Lajes Jundiaí,Construtora,Jundiai,18,(11) 99595-0011,https://lajesjundiai.com.br/,"R. Palmira Cervi Bárbaro, 860 - Vila Hortolandia, Jundiaí - SP, 13214-370",4.9,106,OPERATIONAL,A,Nao iniciado
+0336,Lajes Jundiaí - Fábrica,Construtora,Jundiai,18,(11) 4582-0011,https://lajesjundiai.com.br/,"Av. da Uva, 2500 - Bairro do Poste, Jundiaí - SP, 13213-235",5,3,OPERATIONAL,A,Nao iniciado
+0337,"Laudos, Documentação de imóveis e Fiscalização de obras- Thelu Engenharia Inteligente",Engenharia,Jundiai,18,(11) 91082-7639,https://theluengenharia.com.br/,"R. Tocantins, 54 - Jardim Guanabara, Jundiaí - SP, 13211-818",5,5,OPERATIONAL,A,Nao iniciado
+0338,Levinci Construtora,Construtora,Jundiai,18,(11) 99950-4492,http://levinciconstrutora.com/,"R. Barão de Teffé, 160 - Cj.505 - Jardim Ana Maria, Jundiaí - SP, 13208-760",5,8,OPERATIONAL,A,Nao iniciado
+0339,Lilian Mariano Interiores - Autent&Co. Studio,Arquitetura,Jundiai,18,(11) 99874-0420,,"R. Messina, 70 - Jardim Messina, Jundiaí - SP, 13208-480",4.8,20,OPERATIONAL,A,Nao iniciado
+0340,Liria Engenharia,Engenharia,Jundiai,18,(11) 4521-3977,http://www.liriaengenharia.com.br/,"R. Visc. de Mauá, 85 - Vila Mun., Jundiaí - SP, 13201-260",5,13,OPERATIONAL,A,Nao iniciado
+0341,Lopo Arquitetura,Arquitetura,Jundiai,18,(11) 97683-5550,http://lopoarquitetura.com.br/,"R. Vig. J. J. Rodrigues, 21 - Sl 1412 - Jardim Sao Bento, Jundiaí - SP, 13201-001",5,26,OPERATIONAL,A,Nao iniciado
+0342,Lucio terraplanagem,Construtora,Jundiai,18,(11) 99907-9926,https://wa.me/5511915847266,"R. Francisco Pedroso, 116 - Ivoturucaia, Jundiaí - SP, 13218-823",5,4,OPERATIONAL,A,Nao iniciado
+0343,Lutsot - Engenharia de Projetos Industriais,Engenharia,Jundiai,18,(11) 98792-1125,http://www.lutsot.com.br/,"R. Costa Azul, 195 - Bairro do Poste, Jundiaí - SP, 13213-076",5,2,OPERATIONAL,A,Nao iniciado
+0344,MAILSON REPAROS & MANUTENÇÕES LTDA,Construtora,Jundiai,18,(96) 99169-5118,,"R. Jefferson Silva, 222 - Residencial, Jundiaí - SP, 13212-514",5,62,OPERATIONAL,A,Nao iniciado
+0345,MC Engenharia,Engenharia,Jundiai,18,(11) 93904-5100,https://mcengenhariabrasil.com.br/,"Av. Luiz Pellizzari, 391 - Bairro Industrial, Jundiaí - SP, 13213-073",5,7,OPERATIONAL,A,Nao iniciado
+0346,MCALC Engenharia Estrutural,Engenharia,Jundiai,18,(11) 97516-5515,,"R. Hilda Del Nero Bisquolo, 102 - Jardim Florida, Jundiaí - SP, 13208-703",5,14,OPERATIONAL,A,Nao iniciado
+0347,MK GERENCIAMENTO DE SERVIÇOS,Construtora,Jundiai,18,(11) 96058-7454,https://www.mkoe.com.br/obras,"R. Voluntários da Pátria, 72 - Unid 2 - Jardim das Orquideas, Jundiaí - SP, 13209-310",5,2,OPERATIONAL,A,Nao iniciado
+0348,MPEZZI LTDA - Jundiaí - SP,Construtora,Jundiai,18,(11) 99369-2814,http://www.mpezzi.com.br/,"Rua Jol Fuller, 138 - Sl 04 - Vila Boaventura, Jundiaí - SP, 13201-810",5,1,OPERATIONAL,A,Nao iniciado
+0349,MPR. Construção Civil do alicerce ao acabamento.,Construtora,Jundiai,18,(11) 95703-3667,,"R. José Amâncio de Freitas, 207 - Parque Res. Jundiaí, Jundiaí - SP, 13212-505",5,1,OPERATIONAL,A,Nao iniciado
+0350,MR Terraplanagem I Demolição,Construtora,Jundiai,18,(11) 94725-6845,http://mrterraplenagemjundiai.com.br/,"R. Dora Franco, 51 - Bela Vista, Jundiaí - SP, 13207-781",4.6,18,OPERATIONAL,A,Nao iniciado
+0351,MVS LOCACOES,Construtora,Jundiai,18,(11) 95416-1195,,"Alameda Ibérica - Tamboré - Santana de Parnaíba - Av. Dr. Wady Badra, 360 - Jardim das Tulipas, Jundiaí - SP, 13212-790",5,1,OPERATIONAL,A,Nao iniciado
+0352,Mais Viver Edificações,Construtora,Jundiai,18,(11) 94024-3246,https://maisviveredificacoes.com/,"R. 7, 71 - Gramadão, Jundiaí - SP, 13211-775",,,OPERATIONAL,A,Nao iniciado
+0353,Mari Zambon - Studio PontoCO,Construtora,Jundiai,18,(11) 96866-1936,http://www.marizambon.com/,"Rua Cica, 396 - Sl 127 - Vila Angelica, Jundiaí - SP, 13206-765",5,18,OPERATIONAL,A,Nao iniciado
+0354,Masche Construtora & Incorporadora,Incorporadora,Jundiai,18,(11) 94525-0226,http://www.mascheconstrutora.com.br/,"Av. São João, 588 - Pte. Sao Joao, Jundiaí - SP, 13216-000",5,9,OPERATIONAL,A,Nao iniciado
+0355,Mattias Construção Reforma e Manutenção,Construtora,Jundiai,18,(11) 99146-3021,https://instagram.com/mattias_construcao,"R. Pastor Moacir Coco, 226 - Parque Res. Jundiaí, Jundiaí - SP, 13212-512",5,4,OPERATIONAL,A,Nao iniciado
+0356,Mega Projetos & Construções,Construtora,Jundiai,18,(11) 4586-9025,http://www.construtoramega.com.br/,"R. Rhodesia, 58 - Jardim Bonfiglioli, Jundiaí - SP, 13207-310",4.6,12,OPERATIONAL,A,Nao iniciado
+0357,Mello&Condini Arquitetura e Interiores,Arquitetura,Jundiai,18,(11) 94149-1188,https://www.gustavomello.com.br/,"The One Office Tower - R. Hilda Del Nero Bisquolo, 102 - Sala108 - Jardim Florida, Jundiaí - SP, 13208-703",5,5,OPERATIONAL,A,Nao iniciado
+0358,Milena Santos | Arquitetura de Interiores Corporativo,Arquitetura,Jundiai,18,,https://www.instagram.com/milenasantosarquitetura/,"R. Pio XII, 175 - Vila Argos Nova, Jundiaí - SP, 13201-544",5,22,OPERATIONAL,A,Nao iniciado
+0359,Mistral Jundiaí e Epic Jundiaí - Construtora Inkkorp,Construtora,Jundiai,18,(11) 98708-4610,https://inkkorp.com.br/,"Av. Ver. Wanderley Pires - Vila Mun., Jundiaí - SP, 13201-134",5,5,OPERATIONAL,A,Nao iniciado
+0360,Modelar Construtora,Construtora,Jundiai,18,(11) 4582-7070,http://www.modelarconstrutora.com.br/,"R. Piratininga, 150 - Vila Bandeirantes, Jundiaí - SP, 13214-023",4.8,6,OPERATIONAL,A,Nao iniciado
+0361,Modelar Construtora,Construtora,Jundiai,18,(11) 4521-7293,,"R. Bonifácio José da Rocha, 190 - Vila Boaventura, Jundiaí - SP, 13201-812",,,OPERATIONAL,A,Nao iniciado
+0362,Monolite Brasil,Construtora,Jundiai,18,(11) 93333-5406,http://monolitebrasil.com.br/,"R. Barão de Teffé, 1000 - SALA 141 - Jardim Ana Maria, Jundiaí - SP, 13208-761",5,9,OPERATIONAL,A,Nao iniciado
+0363,Morasco Engenharia e Arquitetura,Arquitetura,Jundiai,18,(11) 93079-8152,,"R. Rio Claro, 110 - Vila Hortolandia, Jundiaí - SP, 13214-308",5,50,OPERATIONAL,A,Nao iniciado
+0364,Moretti Arquitetura,Arquitetura,Jundiai,18,(11) 99869-5004,,"R. Bom Jesus de Pirapora, 295 - Vila Vianelo, Jundiaí - SP, 13207-270",5,2,OPERATIONAL,A,Nao iniciado
+0365,Multi Civil Engenharia,Engenharia,Jundiai,18,(11) 94798-1088,https://mechameaqui.com.br/v2/multi-civil-engenharia-jundiai-sp,"R. Cândido Rodrigues, 77 - Sl 13 - Centro, Jundiaí - SP, 13201-067",5,29,OPERATIONAL,A,Nao iniciado
+0366,Márcia Campos - Arquitetura e Designer de Interiores,Arquitetura,Jundiai,18,(11) 4522-7127,http://marciacampos.com.br/,"R. Paulino Corado, 20 - 205 - Jardim Santa Teresa, Jundiaí - SP, 13211-405",5,1,OPERATIONAL,A,Nao iniciado
+0367,NDC ENGENHARIA CIVIL E DIAGNÓSTICA,Engenharia,Jundiai,18,(11) 99606-4012,,"R. da Jamaica, 1099 - Poste, Jundiaí - SP, 13213-235",,,OPERATIONAL,A,Nao iniciado
+0368,Nanni Arquitetura e Design,Arquitetura,Jundiai,18,(11) 96532-3332,,"R. Jundiainopolis, 330 - Vila Aielo, Jundiaí - SP, 13206-540",5,51,OPERATIONAL,A,Nao iniciado
+0369,Nayara Vian Arquitetura e Interiores,Arquitetura,Jundiai,18,(11) 97525-7074,https://nayaravian.com.br/,"Av. 9 de Julho, 3575 - Sl 2101 - Anhangabaú, Jundiaí - SP, 13208-010",4.8,18,OPERATIONAL,A,Nao iniciado
+0370,Nilsinho terraplenagem.,Construtora,Jundiai,18,(11) 97382-9369,,"Rua Armando Davini - Residencial Jundiaí, Jundiaí - SP, 13212-475",5,7,OPERATIONAL,A,Nao iniciado
+0371,Niró Albiero + Arquitetos,Arquitetura,Jundiai,18,(11) 97711-9994,,"R. dos Toneleiros, 41 - Anhangabaú, Jundiaí - SP, 13208-052",5,1,OPERATIONAL,A,Nao iniciado
+0372,Nivoloni Projetos,Construtora,Jundiai,18,(11) 4588-7777,http://nivoloniprojetos.com.br/,"R. Vig. J. J. Rodrigues, 905 - glyph icon, Jundiaí - SP, 13201-001",5,3,OPERATIONAL,A,Nao iniciado
+0373,Nuovo Arquitetura e Interiores - by Laura Grassi,Arquitetura,Jundiai,18,(11) 97756-0900,,"R. João Batista Figueiredo, 162 - Jardim Brasil, Jundiaí - SP, 13201-848",5,2,OPERATIONAL,A,Nao iniciado
+0374,OBRA,Construtora,Jundiai,18,,,"R. Profa. Adelaíde Pontes Laureano, 360 - Jardim America, Jundiaí - SP, 13211-652",,,OPERATIONAL,A,Nao iniciado
+0375,Obra Fácil,Servicos correlatos,Jundiai,18,,,"Av. 9 de Julho, 2811 - Anhangabaú, Jundiaí - SP, 13201-019",,,OPERATIONAL,A,Nao iniciado
+0376,Ometro Construções,Construtora,Jundiai,18,(11) 3964-8500,,"R. Aurora Germano de Lemos, 56 - Vila Guarani, Jundiaí - SP, 13209-460",5,4,OPERATIONAL,A,Nao iniciado
+0377,Opera Arquitetura,Arquitetura,Jundiai,18,(11) 99919-2670,https://linktr.ee/opraarquitetura,"Av. 9 de Julho, 550 - Jardim Paris, Jundiaí - SP, 13209-010",4.5,2,OPERATIONAL,A,Nao iniciado
+0378,Operacional Projetos E Construções Ltda,Construtora,Jundiai,18,,,"R. Dr. Antenor Soares Gandra, 658 - Jardim Pacaembu, Jundiaí - SP, 13218-335",3.7,3,OPERATIONAL,A,Nao iniciado
+0379,P H Engenharia Elétrica e Hidráulica Ltda.,Engenharia,Jundiai,18,(11) 4521-2999,http://phengenharia.com.br/,"R. 23 de Maio, 790 - Sl 72B - Vianelo/Bonfiglioli, Jundiaí - SP, 13207-070",5,3,OPERATIONAL,A,Nao iniciado
+0380,P&G Construções e Reformas,Construtora,Jundiai,18,(11) 99792-5162,http://www.pegconstrucao.com.br/,"R. Atibaia, 500 - Jardim Colonia, Jundiaí - SP, 13216-470",3.9,24,OPERATIONAL,A,Nao iniciado
+0381,PCA PROJETOS,Construtora,Jundiai,18,(11) 4586-2127,https://www.pcaproj.com.br/,"R. Prudente de Moraes, 1260 - Centro, Jundiaí - SP, 13201-004",,,OPERATIONAL,A,Nao iniciado
+0382,Padovan Terraplenagem,Construtora,Jundiai,18,(11) 4599-9287,,"Av. Atílio Gobo, 3177 - Santa Clara, Jundiaí - SP, 13210-473",3.4,5,OPERATIONAL,A,Nao iniciado
+0383,Pagani Engenharia e Manutenção Elétrica,Engenharia,Jundiai,18,(11) 97840-9413,https://paganiengenharia.com.br/,"R. Anchieta, 204 - Vila Boaventura, Jundiaí - SP, 13201-804",5,7,OPERATIONAL,A,Nao iniciado
+0384,Paradise Arquitetura,Arquitetura,Jundiai,18,(11) 97565-5522,http://paradisearquitetura.com.br/,"R. Deolinda Copeli, 49 - Jardim da Serra, Jundiaí - SP, 13208-680",5,32,OPERATIONAL,A,Nao iniciado
+0385,Pass Arquitetura,Arquitetura,Jundiai,18,(11) 4583-2844,http://www.passarquitetura.com.br/,"R. Dom Amaury Castanho, 150 - Anhangabaú, Jundiaí - SP, 13208-270",4.9,27,OPERATIONAL,A,Nao iniciado
+0386,Pedro Leite Engenharia - Obras e Reformas,Engenharia,Jundiai,18,(11) 94336-0810,,"Av. Benedicto Castilho de Andrade, 1007 - Bl 2 Apartamento 43 - Parque Eloy Chaves, Jundiaí - SP, 13212-070",5,8,OPERATIONAL,A,Nao iniciado
+0387,Perfurações de estacas em Jundiaí - ENGELUC,Construtora,Jundiai,18,(11) 94446-0253,https://engeluc.org/,"R. Atibaia, 925 - Colônia, Jundiaí - SP, 13219-816",5,41,OPERATIONAL,A,Nao iniciado
+0388,Piaia Máquinas e Transportes,Construtora,Jundiai,18,(11) 4581-5579,http://www.piaiamaquinasetransportes.com.br/,"R. Antônio Demarchi, 481 - Engordadouro, Jundiaí - SP, 13214-721",5,4,OPERATIONAL,A,Nao iniciado
+0389,Polimix Concreto,Servicos correlatos,Jundiai,18,,,"Avenida Professora Maria do Carmo Guimar, 320 - Retiro, Jundiaí - SP, 13209-500",,,OPERATIONAL,A,Nao iniciado
+0390,Prado Arquitetura,Arquitetura,Jundiai,18,(11) 4807-1749,http://www.pradoarquitetura.com.br/,"R. Moreira César, 222 - Vila Arens, Jundiaí - SP, 13202-600",,,OPERATIONAL,A,Nao iniciado
+0391,Pratcasas Construtora,Construtora,Jundiai,18,(11) 4863-1611,https://www.instagram.com/pratcasas/,"Av. Dr. Pedro Soares de Camargo, 232 - Sl 73/74 - Anhangabaú, Jundiaí - SP, 13208-080",,,OPERATIONAL,A,Nao iniciado
+0392,Privato Lima Construtora,Construtora,Jundiai,18,(11) 95071-4998,https://www.instagram.com/privatolimaconstrutora/profilecard/?igsh=MWlsNXppNjVqaGk1cw==,"R. do Retiro, 444 - Vila Virginia, Jundiaí - SP, 13209-000",4.8,20,OPERATIONAL,A,Nao iniciado
+0393,Progettolar Engenharia e Arquitetura,Arquitetura,Jundiai,18,(11) 99262-1880,https://www.progettolar.com/,"R. São Vicente de Paulo, 25 - Vila Argos Velha, Jundiaí - SP, 13201-625",5,4,OPERATIONAL,A,Nao iniciado
+0394,ProjFund Projetos e Fundações,Construtora,Jundiai,18,(11) 98329-0900,https://www.projfund.com.br/,"R. Graça Aranha, 66 - Pte. Sao Joao, Jundiaí - SP, 13219-040",5,18,OPERATIONAL,A,Nao iniciado
+0395,Projetos RZP,Construtora,Jundiai,18,(11) 99908-2316,https://www.instagram.com/rodrigo_zambotto_pastro?igsh=Znlhb2doNmtiZ25w,"R. Emílio Fehr, 163 - Jardim das Hortências, Jundiaí - SP, 13209-380",,,OPERATIONAL,A,Nao iniciado
+0396,Pétrus construtora,Construtora,Jundiai,18,(11) 91342-7792,https://www.construpetrus.com.br/,"R. do Retiro, 814 - Retiro, Jundiaí - SP, 13209-000",5,1,OPERATIONAL,A,Nao iniciado
+0397,QSM Engenharia e Gestão Ltda,Engenharia,Jundiai,18,(11) 94201-0105,http://www.qsmengenharia.com.br/,"Av. Valter Tozetto Júnior, 971 - Morada das Vinhas, Jundiaí - SP, 13214-366",5,29,OPERATIONAL,A,Nao iniciado
+0398,QualyForma,Construtora,Jundiai,18,,,"R. Elias Juvenal de Mello, 1140 - 32 - Jardim Ana Maria, Jundiaí - SP, 13208-820",3.7,3,OPERATIONAL,A,Nao iniciado
+0399,R Alves Engenharia Contra Incêndio,Engenharia,Jundiai,18,(11) 99444-2860,,"Rua Nelci Cassiano da Silva Parque Residencial Jundiaí II - Parque Res. Jundiaí, Jundiaí - SP, 13213-108",,,OPERATIONAL,A,Nao iniciado
+0400,R S Terraplenagem Locação e Transportes,Construtora,Jundiai,18,(11) 4526-4888,,"R. Goiânia, 310 - Vila M Genoveva, Jundiaí - SP, 13203-080",4,1,OPERATIONAL,A,Nao iniciado
+0401,RD5 Arquitetura,Arquitetura,Jundiai,18,(11) 91398-3861,,"R. Hilda Del Nero Bisquolo, 102 - Jardim Florida, Jundiaí - SP, 13208-703",5,2,OPERATIONAL,A,Nao iniciado
+0402,RNS AMBIENTAL Engenharia e Gestão Ambiental,Engenharia,Jundiai,18,(11) 91077-4501,http://www.rnsambiental.com.br/,"R. Anchieta, 204 - Sl 107 - Vila Boaventura, Jundiaí - SP, 13201-804",4.8,5,OPERATIONAL,A,Nao iniciado
+0403,RO2 Arquitetura,Arquitetura,Jundiai,18,(11) 97226-9861,https://www.ro2arquitetura.com.br/,"Av. Álvares de Azevedo, 338 - Vila Liberdade, Jundiaí - SP, 13215-150",5,6,OPERATIONAL,A,Nao iniciado
+0404,ROMME CONSTRUTORA LTDA,Construtora,Jundiai,18,(11) 99860-3215,http://www.romme.com.br/,"Rua João Puttini, 81 - Jardim Ermida I, Jundiaí - SP, 13212-124",4.4,8,OPERATIONAL,A,Nao iniciado
+0405,ROSSI ARQUITETURA E CONSTRUÇÃO,Arquitetura,Jundiai,18,(11) 93473-2986,https://www.instagram.com/construcoesrossi/,"Rua Cica, 396 - Vila Garcia, Jundiaí - SP, 13206-765",5,2,OPERATIONAL,A,Nao iniciado
+0406,RP Engenharia e Projetos,Engenharia,Jundiai,18,(11) 91533-4167,https://rpengenhariaprojetos.com.br/,"R. Moreira César, 222 - Sl 107 - Vila Arens, Jundiaí - SP, 13202-600",5,8,OPERATIONAL,A,Nao iniciado
+0407,RR Construtora,Construtora,Jundiai,18,(11) 2709-9120,,"R. Antônio Liberato, 33 - Vila Pirapora, Jundiaí - SP, 13207-630",3.3,3,OPERATIONAL,A,Nao iniciado
+0408,RW Engenharia,Engenharia,Jundiai,18,(11) 4521-7307,https://www.rwengenharia.com.br/,"R. Hisaschi Nagaoka, 3525 - Jardim Sao Vicente, Jundiaí - SP, 13214-692",4.3,8,OPERATIONAL,A,Nao iniciado
+0409,Reforma e Construção Construtora em Jundiaí e Região,Construtora,Jundiai,18,(11) 94775-7688,,"R. João Chiaramonte, 241 - CASA 01 - FRENTE, Jundiaí - SP, 13218-670",,,OPERATIONAL,A,Nao iniciado
+0410,Reforma e Manutenção Predial RD Góis,Servicos correlatos,Jundiai,18,,,"R. Alfredo Luís Ferreira, 38 - Vila Nova República, Jundiaí - SP, 13219-141",,,OPERATIONAL,A,Nao iniciado
+0411,Reformas Jundiaí,Servicos correlatos,Jundiai,18,,,"R. Adolpho Carrel, 21 B - Chácara Malota, Jundiaí - SP, 13211-527",,,OPERATIONAL,A,Nao iniciado
+0412,Renzeti Arquitetura e Construção,Arquitetura,Jundiai,18,0800 464 2727,http://www.renzeti.com.br/,"Uffizi Business Center - R. Anchieta, 204 - 1° andar - Vila Boaventura, Jundiaí - SP, 13201-804",4.3,32,OPERATIONAL,A,Nao iniciado
+0413,Ricardi Engenharia Estrutural Reforço de Fundações,Engenharia,Jundiai,18,(11) 99956-5616,https://mechamenozap.com.br/ricardi-engenharia-estrutural-reforco-de-fundacoes-e-recuperacao-estrutural/,"R. Cândido Rodrigues, 77 - Sl 13 b - Centro, Jundiaí - SP, 13201-067",5,39,OPERATIONAL,A,Nao iniciado
+0414,Ricardo Gaspari - Arquiteto e Urbanista,Arquitetura,Jundiai,18,(11) 97437-2565,,"R. Bonifácio José da Rocha, 174 - Vila Boaventura, Jundiaí - SP, 13201-812",5,7,OPERATIONAL,A,Nao iniciado
+0415,Ronaldo Costa Arquitetura,Arquitetura,Jundiai,18,(11) 99164-3008,https://www.instagram.com/ronaldocostaarquitetura/,"R. Benedita Maria de Oliveira, 81 - Jardim das Tulipas, Jundiaí - SP, 13212-809",4.8,30,OPERATIONAL,A,Nao iniciado
+0416,Roofing Construtora.,Construtora,Jundiai,18,(11) 94026-0114,https://www.roofingconstrutora.com.br/,"R. Hilda Del Nero Bisquolo - Região Metropolitana de Jundiaí, Jundiaí - SP, 13208-703",5,15,OPERATIONAL,A,Nao iniciado
+0417,Rs Construcoes E Empreendimentos Imobiliarios Ltda.,Incorporadora,Jundiai,18,(11) 4583-1574,http://www.rsconstrucoes.com/,"R. Barão de Jundiaí, 209 - Centro, Jundiaí - SP, 13201-010",4.9,24,OPERATIONAL,A,Nao iniciado
+0418,Ruiz e Cáceres Arquitetos,Arquitetura,Jundiai,18,(11) 94734-6324,https://ruizecaceresarquitetos.com.br/,"R. França, 65 - Vila Mun., Jundiaí - SP, 13201-280",5,6,OPERATIONAL,A,Nao iniciado
+0419,S9 ENGENHARIA,Engenharia,Jundiai,18,(11) 99631-5662,,"R. Sócrates Fernandes de Oliveira, 160 - Loja 54 - Chácara Urbana, Jundiaí - SP, 13201-838",3.7,3,OPERATIONAL,A,Nao iniciado
+0420,SB Pré-Fabricados,Construtora,Jundiai,18,(11) 3963-0585,http://sbprefabricados.eng.br/,"Rua Barão de Teffé, 1.000 14º andar - Sala 146 - Edifício Campos Elísios - Anhangabaú, Jundiaí - SP, 13208-761",5,3,OPERATIONAL,A,Nao iniciado
+0421,SEGMENTO ARQUITETURA E GERENCIAMENTO DE OBRAS,Arquitetura,Jundiai,18,(11) 97407-3646,http://segmentoarquitetura.com.br/,"R. Visc. de Taunay, 137 - Vila Arens II, Jundiaí - SP, 13202-540",4.5,2,OPERATIONAL,A,Nao iniciado
+0422,SHARPLAN ENGENHARIA,Engenharia,Jundiai,18,(19) 99895-6751,http://sharplanengenharia.com.br/,"Av. Cezar Brunholi, 1026 - Res. Santa Giovana, Jundiaí - SP, 13212-826",,,OPERATIONAL,A,Nao iniciado
+0423,SLP Engenharia & Consultoria,Engenharia,Jundiai,18,(11) 97145-0957,http://slpengenharia.com.br/,"Região Metropolitana de Jundiaí, Jundiaí - SP, 17490-050",,,OPERATIONAL,A,Nao iniciado
+0424,SOUL Construções e Projetos,Construtora,Jundiai,18,(11) 97399-4894,http://soulconstrucoeseprojetos.com.br/,"R. Cap. Cassiano Ricardo de Toledo, 191 - Chácara Urbana, Jundiaí - SP, 13201-840",5,7,OPERATIONAL,A,Nao iniciado
+0425,SPASSOS ENGENHARIA CONSTRUTORA E PAVIMENTADORA,Construtora,Jundiai,18,(11) 93002-5503,https://spassos-engenharia.com.br/,"Mondial Office - Av. 9 de Julho, 3405 - Sl 806 - Vianelo/Bonfiglioli, Jundiaí - SP, 13208-056",5,3,OPERATIONAL,A,Nao iniciado
+0426,STUDIO IVE OLIVEIRA. - Arquitetura Jundiaí,Arquitetura,Jundiai,18,(11) 97664-6638,http://www.iveoliveira.com.br/,"R. Cap. Cassiano Ricardo de Toledo, 191 - SL 1016 - Chácara Urbana, Jundiaí - SP, 13201-840",4.9,58,OPERATIONAL,A,Nao iniciado
+0427,STUDIO ROMA ARQUITETURA & INTERIORES,Arquitetura,Jundiai,18,(11) 97640-6884,http://www.studioromaarquitetura.com.br/,"R. Cap. Cassiano Ricardo de Toledo, 191 - 9º Andar Sala 914 - Chácara Urbana, Jundiaí - SP, 13201-840",4.3,6,OPERATIONAL,A,Nao iniciado
+0428,SUSTINERI CONSTRUTORA JUNDIAÍ,Construtora,Jundiai,18,(11) 96920-6410,https://sustinericonstrutora.com.br/,"R. Hilda Del Nero Bisquolo, 102 - Jardim Florida, Jundiaí - SP, 13208-703",5,8,OPERATIONAL,A,Nao iniciado
+0429,Sabaoth Gesso Drywall Obras e Reformas,Construtora,Jundiai,18,(11) 91341-2914,"https://api.whatsapp.com/send?phone=5511913412914&text=Ol%C3%A1,%20venho%20pelo%20Google,%20quero%20or%C3%A7ar%20um%20servi%C3%A7o%20de%20Gesso%20e%20Drywall%20por%20favor.","R. Joaquim Nabuco, 450 - Sala-2 - Pte. Sao Joao, Jundiaí - SP, 13218-050",5,22,OPERATIONAL,A,Nao iniciado
+0430,Samtrin Engenharia e Pavimentações,Engenharia,Jundiai,18,(11) 95059-6660,http://samtrinengenharia.com.br/,"R. Dr. José Napoleão Mazali, 68 - Jardim Esplanada, Jundiaí - SP, 13202-050",,,OPERATIONAL,A,Nao iniciado
+0431,Santa Angela Construtora,Construtora,Jundiai,18,(11) 3109-7000,http://santaangelaconstrutora.com.br/,"Av. Prof. Pedro Clarismundo Fornari, 2009 - Engordadouro, Jundiaí - SP, 13214-660",4.1,269,OPERATIONAL,A,Nao iniciado
+0432,Sareng Engenharia,Engenharia,Jundiai,18,(11) 94783-1510,http://www.sareng.com.br/,"R. Anchieta, 204 - Sl 102 - Vila Boaventura, Jundiaí - SP, 13201-804",5,5,OPERATIONAL,A,Nao iniciado
+0433,Savietto Engenharia,Engenharia,Jundiai,18,(11) 94122-5234,https://www.saviettoengenharia.com.br/,"R. João Café Filho, 241 - Jardim Danubio, Jundiaí - SP, 13215-081",5,1,OPERATIONAL,A,Nao iniciado
+0434,Saúvas Construtora,Construtora,Jundiai,18,(11) 3378-2100,,"Rua 17, 157 - Parque do Colégio, Jundiaí - SP, 13209-010",4.8,4,OPERATIONAL,A,Nao iniciado
+0435,Saúvas Construtora,Construtora,Jundiai,18,(11) 4521-3190,https://sauvas.com/,"R. Valter Campos, 157 - Jardim Florestal, Jundiaí - SP, 13215-725",4.3,4,OPERATIONAL,A,Nao iniciado
+0436,Scatto Arquitetura,Arquitetura,Jundiai,18,(11) 95893-6165,https://scattoarquitetura.wixsite.com/meusite,"R. Frei Caneca, 400 - Vila Arens II, Jundiaí - SP, 13202-580",5,21,OPERATIONAL,A,Nao iniciado
+0437,Scav Terraplanagem Areia e Brita,Construtora,Jundiai,18,(11) 94499-0740,https://www.instagram.com/scavterraplanagem/,"R. Antônio Lucato, 289 - Jardim Ermida I, Jundiaí - SP, 13212-111",5,4,OPERATIONAL,A,Nao iniciado
+0438,Schinalle,Construtora,Jundiai,18,(11) 4586-2387,https://schinalle.com.br/,"R. Hilda Del Nero Bisquolo, 102 - Sl 707 - Jardim Florida, Jundiaí - SP, 13208-703",4.8,5,OPERATIONAL,A,Nao iniciado
+0439,Schio Arquitetura e Interiores,Arquitetura,Jundiai,18,(11) 98185-4856,https://www.schioarquitetura.com/,"R. Cap. Cassiano Ricardo de Toledo, 191 - Chácara Urbana, Jundiaí - SP, 13201-840",5,8,OPERATIONAL,A,Nao iniciado
+0440,Senty Arquitetura,Arquitetura,Jundiai,18,(11) 4586-2033,https://senty.com.br/,"Av. Carlos Salles Block, 658 - Sl 23 - Anhangabaú, Jundiaí - SP, 13208-100",4.3,13,OPERATIONAL,A,Nao iniciado
+0441,Setec Engenharia,Engenharia,Jundiai,18,(11) 4521-9573,,"R. Aldemar Pereira de Barros, 21 - Centro, Jundiaí - SP, 13201-019",,,OPERATIONAL,A,Nao iniciado
+0442,Seven Incorporadora e Construtora,Incorporadora,Jundiai,18,(11) 97209-2817,https://www.incorporadoraseven.com/,"R. Barão de Teffé, n° 1000 - Sl 153 - Jardim Ana Maria, Jundiaí - SP, 13208-761",5,26,OPERATIONAL,A,Nao iniciado
+0443,Sistema Pré-Fabricados,Construtora,Jundiai,18,(11) 4815-1511,http://sistemaprefabricados.com.br/,"R. Prof. Laérte Ramos Carvalho, 133 - Jardim Trevo, Jundiaí - SP, 13211-370",4.5,4,OPERATIONAL,A,Nao iniciado
+0444,Solange Leão | Arquitetura | Design de Interiores,Arquitetura,Jundiai,18,(11) 95932-6005,http://solangeleao.com.br/,"Av. Dr. Paulo Moutram, 55 - Sl 304 - Jd Paulista, Jundiaí - SP, 13208-360",5,14,OPERATIONAL,A,Nao iniciado
+0445,Souza Casarin Arquitetura e Design,Arquitetura,Jundiai,18,(11) 99615-1333,https://www.instagram.com/souzacasarinarq/,"R. Moisés Abaid, 181 - Jardim Sao Bento, Jundiaí - SP, 13202-500",5,26,OPERATIONAL,A,Nao iniciado
+0446,Stoa Arquitetura e Design de Interiores,Arquitetura,Jundiai,18,(11) 94274-6514,https://www.facebook.com/StoaArquitetura/,"R. Bélgica, 80 - Jardim Cica, Jundiaí - SP, 13206-830",5,7,OPERATIONAL,A,Nao iniciado
+0447,Stratum Obras E Engenharia Ltda,Engenharia,Jundiai,18,(11) 99242-2063,https://www.stratumobras.com.br/,"R. do Retiro, 120 - Parque do Colégio, Jundiaí - SP, 13209-000",5,2,OPERATIONAL,A,Nao iniciado
+0448,Studio Agnes Livinalli - Arquitetura e Interiores,Arquitetura,Jundiai,18,(11) 94573-6644,http://linktr.ee/AgnesLivinalli,"Av. Jundiaí - Jardim Ana Maria, Jundiaí - SP, 13208-750",5,43,OPERATIONAL,A,Nao iniciado
+0449,Studio Gabriela Franco - Arquitetura e Design de Interiores,Arquitetura,Jundiai,18,(11) 93469-0729,,"R. Pedro Alexandrino, 73 - Sala 23 - Anhangabaú, Jundiaí - SP, 13208-160",5,9,OPERATIONAL,A,Nao iniciado
+0450,Studio V12 Arquitetura e Consultoria,Arquitetura,Jundiai,18,(11) 99809-5618,,"Av. Antônio Frederico Ozanan - Vila Rio Branco, Jundiaí - SP, 13215-275",5,4,OPERATIONAL,A,Nao iniciado
+0451,T2R Arquitetura + Construção,Arquitetura,Jundiai,18,(11) 2449-0900,http://www.t2rarquitetura.com.br/,"R. Cap. Cassiano Ricardo de Toledo, 191 - Sl 1804 - Chácara Urbana, Jundiaí - SP, 13201-096",5,15,OPERATIONAL,A,Nao iniciado
+0452,TR7 Engenharia e Construção,Construtora,Jundiai,18,,,"R. Bom Jesus de Pirapora, 1550 - Vianelo/Bonfiglioli, Jundiaí - SP, 13207-379",5,2,OPERATIONAL,A,Nao iniciado
+0453,Tebas Incorporadora,Incorporadora,Jundiai,18,(11) 4521-5766,http://tebas.com.br/,"R. Paulino Corado, 20 - conj. 501 - Jardim Santa Teresa, Jundiaí - SP, 13211-413",4.6,11,OPERATIONAL,A,Nao iniciado
+0454,Terra Forte Terraplenagem e Demolições Jundiaí,Construtora,Jundiai,18,(11) 98607-6538,https://wa.me/5511986076538?text=Ol%C3%A1%2C%20vim%20do%20Google%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es,"R. Petronilha Antunes, 108 - sala 03 - Centro, Jundiaí - SP, 13201-080",5,86,OPERATIONAL,A,Nao iniciado
+0455,Terra Viva Construtora,Construtora,Jundiai,18,(11) 96786-3234,http://www.terravivaconstrutora.com.br/,"R. Barão de Teffé, 160 - Anhangabaú, Jundiaí - SP, 13208-760",,,OPERATIONAL,A,Nao iniciado
+0456,Terraplanagem Cortonezi,Construtora,Jundiai,18,(11) 97295-6164,,"M Campos - R. Eulália Siqueira de Campos - Santa Gertrudes, Jundiaí - SP, 13205-160",5,3,OPERATIONAL,A,Nao iniciado
+0457,Terraplanagem Thiago,Construtora,Jundiai,18,(11) 99845-5917,http://terraplanagemthiago.com.br/,"Av. Geraldo Azzoni, 2720 - Rio Acima, Jundiaí - SP, 13215-840",5,1,OPERATIONAL,A,Nao iniciado
+0458,Terraplanagem e Perfuração de Brocas - Covalente Engenharia,Engenharia,Jundiai,18,(11) 98257-8398,https://covalenteengenharia.com/terraplanagem-jundiai/,"Av. Luiz Pellizzari - Distrito Industrial, Jundiaí - SP, 13213-073",5,4,OPERATIONAL,A,Nao iniciado
+0459,Terraplenagem Chita,Construtora,Jundiai,18,(11) 4863-1464,http://www.terraplenagememjundiai.com.br/,"Av. Benedito Chrispim, 212 - Jardim Santa Gertrudes, Jundiaí - SP, 13205-510",,,OPERATIONAL,A,Nao iniciado
+0460,"Terraplenagem Jundiai, Escavações, Vemba Ltda.",Construtora,Jundiai,18,(11) 4533-4546,http://www.artsterra.com.br/,"R. Eugênio Gerola, 42 - Jardim Roma, Jundiaí - SP, 13218-395",4.7,3,OPERATIONAL,A,Nao iniciado
+0461,Terraplenagem LAVORO Ltda,Construtora,Jundiai,18,(11) 4599-8176,http://terraplenagemlavoro.com.br/,"Av. Santo Ceolin, 1102 - Bairro dos Fernandes, Jundiaí - SP, 13214-890",4.6,29,OPERATIONAL,A,Nao iniciado
+0462,Terraplenagem Molinari,Construtora,Jundiai,18,,,"Av. Humberto Cereser, 2529 - Jardim Caxambu, Jundiaí - SP, 13218-711",5,1,OPERATIONAL,A,Nao iniciado
+0463,Terraplenagem Pas,Construtora,Jundiai,18,,,"R. Guaicurus, 185 - Jardim Guanabara, Jundiaí - SP, 13211-780",,,OPERATIONAL,A,Nao iniciado
+0464,Terraplenagem Progresso Ltda,Construtora,Jundiai,18,(11) 4587-8383,http://terraprogresso.com/?utm_source=google&utm_medium=wix_google_business_profile&utm_campaign=11948921189557885566,"Av. Quatorze de Dezembro, 1667 - Vila Mafalda, Jundiaí - SP, 13206-105",4,4,OPERATIONAL,A,Nao iniciado
+0465,Terraplenagem e Transportadora A Fernandes,Construtora,Jundiai,18,(11) 4582-5841,,"Av. Prof. Pedro Clarismundo Fornari, 1500 - Engordadouro, Jundiaí - SP, 13214-660",5,1,OPERATIONAL,A,Nao iniciado
+0466,Toledo Concreto,Servicos correlatos,Jundiai,18,,,"R. do Rosário, 765 - Centro, Jundiaí - SP, 13201-015",,,OPERATIONAL,A,Nao iniciado
+0467,Torres R. A Empreiteira,Empreiteira,Jundiai,18,(11) 2449-0589,http://torresra.com.br/,"417 - R. Srg. Maurício Vicente da Silva - Jardim Marambaia II, Jundiaí - SP, 13205-750",4.3,3,OPERATIONAL,A,Nao iniciado
+0468,Trevezzi Arquitetura e Engenharia,Arquitetura,Jundiai,18,(11) 91006-6006,,"Avenida - R. Comendador Vicente Rossi, 273 - Jardim Morumbi, Jundiaí - SP, 13209-250",4,4,OPERATIONAL,A,Nao iniciado
+0469,Trivero Loteamentos,Incorporadora,Jundiai,18,(11) 4807-2623,http://www.trivero.com.br/,"Av. Cmte. Videlmo Munhoz, 155 - Anhangabaú, Jundiaí - SP, 13208-050",5,3,OPERATIONAL,A,Nao iniciado
+0470,Turatti Terraplenagem,Construtora,Jundiai,18,(11) 97391-5787,https://turattiterraplenagem.com.br/,"R. Acre, 380 - Vila Didi, Jundiaí - SP, 13203-280",5,49,OPERATIONAL,A,Nao iniciado
+0471,Téses Arquitetura,Arquitetura,Jundiai,18,(11) 99970-2061,http://www.tesesarquitetura.com.br/,"R. Bela Vista, 91 - Bela Vista, Jundiaí - SP, 13207-780",5,25,OPERATIONAL,A,Nao iniciado
+0472,Urbitec Construções,Construtora,Jundiai,18,(11) 4523-5111,https://www.urbitecconstrucoes.com.br/,"R. Prof. José Leme do Prado, no 85 - Jardim Primavera, Jundiaí - SP, 13209-690",4.6,12,OPERATIONAL,A,Nao iniciado
+0473,VOS Obras e Serviços jundiaí,Construtora,Jundiai,18,(11) 5035-5050,,"Ceramica Ibetel, Jundiaí - SP",4.8,17,OPERATIONAL,A,Nao iniciado
+0474,VVC Construtora,Construtora,Jundiai,18,(11) 4521-7641,https://vvcconstrutora.com.br/sobre,"R. Barão de Teffé, 160 - Anhangabaú, Jundiaí - SP, 13208-760",4.3,16,OPERATIONAL,A,Nao iniciado
+0475,Veiga Lopes Engenharia Ltda,Engenharia,Jundiai,18,(11) 98350-8788,,"R. Cap. Cassiano Ricardo de Toledo, 191 - Chácara Urbana, Jundiaí - SP, 13201-840",,,OPERATIONAL,A,Nao iniciado
+0476,Vettori Arquitetura,Arquitetura,Jundiai,18,(11) 4522-5833,https://www.facebook.com/anapaulavettoriarquitetura/,"R. XV de Novembro, 1583 - Centro, Jundiaí - SP, 13201-421",5,2,OPERATIONAL,A,Nao iniciado
+0477,Vimpla Blocos - Jundiaí/SP,Construtora,Jundiai,18,(11) 4582-6982,https://www.vimplablocos.com.br/,"R. Antenor Camargo, 85 - Jardim Scala, Jundiaí - SP, 13214-714",4.9,303,OPERATIONAL,A,Nao iniciado
+0478,Vinícius Ferrari Borges Arquitetura e Interiores,Arquitetura,Jundiai,18,(11) 4587-6616,,"R. Wately, 379 - Vila Arens II, Jundiaí - SP, 13202-520",5,7,OPERATIONAL,A,Nao iniciado
+0479,Vitor Dias Arquitetura,Arquitetura,Jundiai,18,(11) 99622-7354,http://vdarquitetura.com/,"Av. 9 de Julho, 3.575 - Sl 2112 - Anhangabaú, Jundiaí - SP, 13208-010",4.7,15,OPERATIONAL,A,Nao iniciado
+0480,Vitor Mesquita Arquiteto em Jundiaí,Arquitetura,Jundiai,18,(11) 97483-1481,https://mesquitarquitetura.com.br/,"R. Elizia Machado Benassi, 315 - Nova Cidade Jardim, Jundiaí - SP, 13203-552",5,33,OPERATIONAL,A,Nao iniciado
+0481,Vivian Vicentin - Arquitetura & Interiores,Arquitetura,Jundiai,18,(11) 97101-0494,,"Av. Osmundo dos Santos Pellegrini, 215 - Jardim Trevo, Jundiaí - SP, 13211-377",,,OPERATIONAL,A,Nao iniciado
+0482,Viviane Bernucci Arquitetura,Arquitetura,Jundiai,18,(11) 94720-3337,http://www.vivianebernucci.com.br/,"R. Paulino Corado, 20 - Sl 205 - Jardim Samambaia, Jundiaí - SP, 13211-413",4.9,33,OPERATIONAL,A,Nao iniciado
+0483,Viviane Bonini Arquitetura e Interiores | Arquiteta em Jundiai | Escritório de Arquitetura em Jundiaí SP,Arquitetura,Jundiai,18,(11) 99721-3674,"https://api.whatsapp.com/send?phone=5511997213674&text=Ol%C3%A1%20Viviane,%20vim%20atrav%C3%A9s%20do%20Google!%20Meu%20nome%20%C3%A9%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20e%20estou%20precisando%20de","R. São Lázaro, 115 - Jardim Brasil, Jundiaí - SP, 13201-857",5,48,OPERATIONAL,A,Nao iniciado
+0484,Vão Livre Projetos e Construção Civil Ltda,Construtora,Jundiai,18,(11) 3395-5117,https://vaolivreconstrutora.com.br/,"R. José de Oliveira Brochado, 35 - Centro, Jundiaí - SP, 13201-045",5,2,OPERATIONAL,A,Nao iniciado
+0485,WES ENGENHARIA,Engenharia,Jundiai,18,(11) 4587-6341,https://wesengenharia.com.br/,"Rua Salvador Laureano, 26 - Vila Santa Rosa, Jundiaí - SP, 13201-685",,,OPERATIONAL,A,Nao iniciado
+0486,WS.ARQ - Arquitetura,Arquitetura,Jundiai,18,(11) 99523-8908,https://www.wsarq.com.br/,"Av. Reserva do Japy, 385 - Recanto 4o Centenário, Jundiaí - SP, 13211-772",5,2,OPERATIONAL,A,Nao iniciado
+0487,Wcon Engenharia - Soluções Estruturais,Engenharia,Jundiai,18,(11) 96646-7328,https://wcon.eng.br/,"R. Cel. Leme da Fonseca, 386 - Centro, Jundiaí - SP, 13201-031",5,1,OPERATIONAL,A,Nao iniciado
+0488,Wtorre Engenharia Construção,Construtora,Jundiai,18,(11) 4525-2093,,"Rodoviária Vice Prefeito Hermenegildo Tonoli, s/n - gl A1 A - Região Metropolitana de Jundiaí, Jundiaí - SP, 13209-010",,,OPERATIONAL,A,Nao iniciado
+0489,Xterra Terraplanagem,Construtora,Jundiai,18,(11) 97828-5205,,"Av. Capitão Francisco Copelli, 1329 - Jardim Tarumã, Jundiaí - SP, 13216-600",5,1,OPERATIONAL,A,Nao iniciado
+0490,construção civil em jundiaí,Construtora,Jundiai,18,(11) 96411-2093,,"R. Prudente de Moraes, 1551 - Centro, Jundiaí - SP, 13201-004",3,1,OPERATIONAL,A,Nao iniciado
+0491,iG4 CONSTRUTORA,Construtora,Jundiai,18,(11) 4497-1477,http://ig4.com.br/,"Edifício Djanira - Av. Francisco Pereira de Castro, 1063 - Sl 06 - Anhangabaú, Jundiaí - SP, 13208-110",5,1,OPERATIONAL,A,Nao iniciado
+0492,Álamo Engenharia,Engenharia,Jundiai,18,(11) 4815-1854,https://alamoengenharia.com.br/sobre/,"Rodoviária Dom Gabriel P Bueno Couto - s/n Km 65 - Chácara Urbana, Jundiaí - SP, 13209-010",,,OPERATIONAL,A,Nao iniciado
+0493,3BX Empreendimentos,Construtora,Louveira,0,,http://3bxempreendimentos.com.br/,"R. Armando Steck, 417 - Centro, Louveira - SP, 13290-000",1,21,OPERATIONAL,A,Nao iniciado
+0494,A&J Engenharia e Projetos,Engenharia,Louveira,0,(19) 99972-2227,,"R. Marcelo Patrão de Seba - Fazenda Santa Isabel, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0495,ABC da Construção Louveira,Construtora,Louveira,0,(19) 3948-5210,https://www.abcdaconstrucao.com.br/,"R. Euríco Dutra, 54 fundos - Jardim Niero II, Louveira - SP, 13290-000",4.7,12,OPERATIONAL,A,Nao iniciado
+0496,AFCRUZ CONSULTORIA E GESTAO DE OBRAS,Servicos correlatos,Louveira,0,,,"R. Evaristo Cavali, 244 - Santo Antônio, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0497,AHR Engenharia,Engenharia,Louveira,0,(19) 99360-8542,,"R. Silvio Benvegnu - Jardim Lago Azul, Louveira - SP, 13294-362",5,6,OPERATIONAL,A,Nao iniciado
+0498,Alcel Pintura e Construção Civil Ltda,Construtora,Louveira,0,(19) 99994-0028,http://alcel.com.br/,"Av. Silvério Finamore, 1325 - Leitão, Louveira - SP, 13293-262",5,6,OPERATIONAL,A,Nao iniciado
+0499,Alessandra Luqui Viera,Construtora,Louveira,0,(19) 3848-4721,,"R. das Rosas, 188 - pt 1 sl 3 - Santo Antônio, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0500,Almeida Rocha Facilites e Empreiteira,Empreiteira,Louveira,0,(11) 99904-1076,https://www.grupoalmeidarocha.com.br/,"R. Afonso Pena, 148 - Jardim Niero, Louveira - SP, 13291-030",,,OPERATIONAL,A,Nao iniciado
+0501,Alves construções civil,Construtora,Louveira,0,(19) 98894-6188,,"Estr. Maria Joana da Cruz - Santo Antônio, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0502,Astana Engenharia & Construção,Construtora,Louveira,0,(19) 98437-7560,http://www.astanaengenharia.com.br/,"R. Nerina, 92 - Res. Serra Azul, Louveira - SP, 13290-000",5,2,OPERATIONAL,A,Nao iniciado
+0503,Avanci Engenharia & Construtora,Construtora,Louveira,0,(19) 97406-5221,,"Rua - Av. Silvério Finamore, 744 - Sl 04 - Centro, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0504,BIGUETO TERRAPLENAGEM,Construtora,Louveira,0,(19) 99892-1907,https://instagram.com/terraplenagembigueto?igshid=YTQwZjQ0NmI0OA==,"R. Francisco Steck, 385 - Vila Bossi, Louveira - SP, 13290-000",4.2,20,OPERATIONAL,A,Nao iniciado
+0505,BM Estrutural - Lajes e Aço,Servicos correlatos,Louveira,0,,,"Estr. das Abelhas, 445 - Fazenda Santa Isabel, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0506,BMC CLIMATIZAÇÃO,Construtora,Louveira,0,(19) 99410-9817,,"R. Monsenhor Dom H. Casarim, 204 - Vila Bossi, Louveira - SP, 13290-266",4.2,5,OPERATIONAL,A,Nao iniciado
+0507,BRITO CONSTRUTORA E PINTURA,Construtora,Louveira,0,(19) 98990-5751,,"Manoel Antonio Chiquetto, 207 - Ipiranga, Louveira - SP, 13290-000",5,1,OPERATIONAL,A,Nao iniciado
+0508,Bastos Materiais de Construção,Construtora,Louveira,0,(19) 3848-1972,,"Av. Ricieri Chiqueto, 500 - Res. Serra Azul, Louveira - SP, 13290-000",4.3,339,OPERATIONAL,A,Nao iniciado
+0509,Bella Vida Santo Antônio Louveira I,Construtora,Louveira,0,(19) 98385-6445,http://www.bellavidasantoantonio.com.br/,"R. Pedro Bassi, 525 - Jardim Diamante, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0510,Bellini Materiais para Construção e Acabamentos,Construtora,Louveira,0,(19) 3948-5210,http://www.belliniconstrucoes.com.br,"R. Armando Steck, 500 - Jardim Niero, Louveira - SP, 13290-000",4.4,265,OPERATIONAL,A,Nao iniciado
+0511,Bia Bossi Arquitetura & Interiores,Arquitetura,Louveira,0,,,"R. Armando Steck, 159 - Sl 15 - Vila Bossi, Louveira - SP, 13290-000",5,1,OPERATIONAL,A,Nao iniciado
+0512,Biasi Engenharia e Instalações,Engenharia,Louveira,0,(19) 3948-5030,http://biasiengenharia.com.br/,"R. Nicola Argentieri, 99 - Vila Bossi, Louveira - SP, 13290-278",4.8,5,OPERATIONAL,A,Nao iniciado
+0513,Buildtek Engenharia e Projetos,Engenharia,Louveira,0,(19) 99908-6404,,"R. Santa Ângela, 210 - Colinas de São José, Louveira - SP, 13294-142",5,10,OPERATIONAL,A,Nao iniciado
+0514,CDR INFRA INSTALAÇÃO E MONTAGEM LTDA,Construtora,Louveira,0,(19) 3848-4175,http://cdrinfra.com.br/,"R. José do Patrocínio, 75 - Jardim Niero, Louveira - SP, 13290-296",5,8,OPERATIONAL,A,Nao iniciado
+0515,CONSTRU +Locação locação de equipamentos para construção civil,Construtora,Louveira,0,(19) 99964-7936,,"R. Airton Pagoto, 29 - Jardim Lago Azul, Louveira - SP, 13290-000",4.3,7,OPERATIONAL,A,Nao iniciado
+0516,Casa do Construtor Louveira,Construtora,Louveira,0,(19) 2142-2808,https://www.casadoconstrutor.com.br/loja/louveira/,"em frente a Santa Casa - Av. Arthur de Souza Sygel, 503 - Jardim Vera Cruz, Louveira - SP, 13290-000",4.9,17,OPERATIONAL,A,Nao iniciado
+0517,Concreserv Louveira,Construtora,Louveira,0,,,"Rod. Ver. Geraldo Dias, 480 - Leitão, Louveira - SP, 13293-260",,,OPERATIONAL,A,Nao iniciado
+0518,Condomínio Forest Houses,Construtora,Louveira,0,(11) 99563-4935,https://foresthouses.com.br/,"Estr. do Bugio, 500 - Região Metropolitana de Jundiaí, Louveira - SP, 13293-266",4.7,12,OPERATIONAL,A,Nao iniciado
+0519,Construdaher Construções,Construtora,Louveira,0,(19) 3878-4588,,"R. João Burck, 524 - Res. Burck, Louveira - SP, 13290-000",4,2,OPERATIONAL,A,Nao iniciado
+0520,Construlaud Engenharia,Engenharia,Louveira,0,(11) 94242-9508,http://www.construlaud.com.br/,"Av. Helíaco, 378 - Monterrey, Louveira - SP, 13293-760",5,39,OPERATIONAL,A,Nao iniciado
+0521,Construtora Catagua,Construtora,Louveira,0,(19) 3878-7546,,"Rua Ermelinda Martini Steck, 104 - Vila Pasti, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0522,Construtora Três Alianças,Construtora,Louveira,0,(19) 3878-7954,,"R. Atílio Bigueto, 1641 - Sagrado Coração de Jesus, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0523,ConstrutoraLS,Construtora,Louveira,0,(19) 97115-9954,,"R. Ouro Verde - Jardim Vista Alegre, Louveira - SP, 13290-000",2.5,2,OPERATIONAL,A,Nao iniciado
+0524,Denilson Azulejista,Construtora,Louveira,0,(19) 99813-3125,,"Rua São José - Ana Maria, Louveira - SP, 13290-000",5,23,OPERATIONAL,A,Nao iniciado
+0525,Depósito de Materiais para Construção Louveira,Construtora,Louveira,0,(19) 3848-1301,http://www.depositolouveira.com.br/,"R. Paschoal Cavali, 10 - Santo Antônio, Louveira - SP, 13290-000",4.7,137,OPERATIONAL,A,Nao iniciado
+0526,Designin Gesso & CIA,Construtora,Louveira,0,(19) 98108-7977,,"R. Abílio Furlan, 43 - Jardim Juliana, Louveira - SP, 13290-000",5,2,OPERATIONAL,A,Nao iniciado
+0527,Dezotti Mendes Arquitetura e Engenharia,Arquitetura,Louveira,0,(19) 99734-8287,https://dezottimendes.com.br/,"R. Nicola Argentieri, 30 - Vila Bossi, Louveira - SP, 13290-278",4.8,22,OPERATIONAL,A,Nao iniciado
+0528,Du Terraplanagem,Construtora,Louveira,0,(11) 94324-7706,,"R. Francisco Pereira Dutra, 2040 - Cs 2 - Leitão, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0529,Durasteck Montagens Industriais LTDA,Construtora,Louveira,0,(19) 3878-1772,,"R. Bento Martins Cruz, 224 - Vila Pasti, Louveira - SP, 13290-000",4.5,4,OPERATIONAL,A,Nao iniciado
+0530,Débora Bonetto Projetos Arquitetônicos e Interiores,Arquitetura,Louveira,0,(19) 99727-7330,http://deborabonettoarquitetura.com.br/,"R. das Rosas, 379 - Santo Antônio, Louveira - SP, 13290-000",4.9,31,OPERATIONAL,A,Nao iniciado
+0531,EBO ENGENHARIA,Engenharia,Louveira,0,,,"R. Líbano Miguel Batista, 86 - Cidade Jardim, Louveira - SP, 13290-000",5,7,OPERATIONAL,A,Nao iniciado
+0532,EFFE ESSE ENGENHARIA,Engenharia,Louveira,0,(11) 96456-3995,https://www.effeesseeng.com.br/,"Av. Paulo Prado, 541 - Irmãos Chiquetto, Louveira - SP, 13290-000",5,1,OPERATIONAL,A,Nao iniciado
+0533,Empo Tijolos,Construtora,Louveira,0,(19) 99967-9146,https://www.empotijolos.com.br/,"R. Nícola Tarallo, 300 - Sl 4 - Vila Nova, Louveira - SP, 13290-000",4.7,39,OPERATIONAL,A,Nao iniciado
+0534,Encalso Construções,Construtora,Louveira,0,(11) 4447-5139,,"Estrada Municipal Gato Preto, s/n - Engenho Seco, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0535,Enercity Engenharia e Comércio,Engenharia,Louveira,0,(19) 3878-2581,,"Rua Vereador José A Argentieri 520 - Vila Pasti, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0536,Engenharia Eletrotécnica,Engenharia,Louveira,0,(11) 98951-5536,http://www.engenhariaeletrotecnica.com.br/,"R. João Tarallo, 52 - Jardim Diamante, Louveira - SP, 13290-000",4.5,2,OPERATIONAL,A,Nao iniciado
+0537,Engetec Indústria e Comércio de Lajes,Construtora,Louveira,0,(19) 3878-0992,http://www.engeteclajes.com.br/,"R. Antonio Biscuola, n° 300 - Capivari, Louveira - SP, 12505-300",4.7,23,OPERATIONAL,A,Nao iniciado
+0538,Engflex - Engenharia e Consultoria,Engenharia,Louveira,0,(19) 99768-9799,https://engflex.eng.br/,"Av. Monsenhor Antonio Benedito Spoladori, 227 - Parque das Videiras, Louveira - SP, 13290-000",5,4,OPERATIONAL,A,Nao iniciado
+0539,FMS Engenharia,Engenharia,Louveira,0,(19) 98103-4580,http://www.fms.eng.br/,"R. Armando Steck, 390 - sala13 - Vila Bossi, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0540,Fazenda Histórica - Louveira - Linda Arquitetura | SPfz36,Arquitetura,Louveira,0,,https://www.airconcierge.com.br/pt/apartment/RI05G,"Vila Pasti, Louveira - SP, 13290-000, Brasil",,,OPERATIONAL,A,Nao iniciado
+0541,Fiber Tec,Construtora,Louveira,0,(19) 3878-3513,https://www.fibertecfibras.com.br/,"Cx. Postal 189 - Estr. Miguel Bossi, 587 - Jd. Bandeirantes, Louveira - SP, 13290-000",4.9,10,OPERATIONAL,A,Nao iniciado
+0542,GO Instalações Emontagens,Construtora,Louveira,0,(19) 99650-6181,,"R. Santa Ângela, 308 - Região Metropolitana de Jundiaí, Louveira - SP, 13290-000",4.3,3,OPERATIONAL,A,Nao iniciado
+0543,GRUPO FREZZA,Construtora,Louveira,0,(19) 3878-0420,http://www.grupofrezza.com.br/,"R. Monsenhor Dom H. Casarim - Domingos Herculano Casarim, Louveira - SP, 13290-000",5,21,OPERATIONAL,A,Nao iniciado
+0544,Gesso ap . empreiteira do serviço di gesso,Empreiteira,Louveira,0,(11) 93400-7355,,"R. Luís Gonzaga - Sagrado Coração de Jesus, Louveira - SP, 13290-000",5,1,OPERATIONAL,A,Nao iniciado
+0545,JD Pisos Industriais,Construtora,Louveira,0,(19) 99286-3791,,"R. Ecológica, 455 - Jardim Nova América, Louveira - SP, 13293-418",4.4,23,OPERATIONAL,A,Nao iniciado
+0546,JULIANA FREZZA ARQUITETURA,Arquitetura,Louveira,0,(19) 3878-0420,https://www.instagram.com/jf.arquitetura/,"R. Monsenhor Dom H. Casarim, 106 - VILA NOVA, Louveira - SP, 13290-000",5,22,OPERATIONAL,A,Nao iniciado
+0547,Jare Engenharia,Engenharia,Louveira,0,(19) 3848-5191,https://jareengenharia.com.br/,"R. das Rosas, 188 - Santo Antônio, Louveira - SP, 13290-000",5,3,OPERATIONAL,A,Nao iniciado
+0548,José,Construtora,Louveira,0,,https://jose-8.ueniweb.com/?utm_campaign=gmb,"Estr. Pau a Pique, 1553 - Jardim Vista Alegre, Louveira - SP, 13290-000",3.7,3,OPERATIONAL,A,Nao iniciado
+0549,KERTIS ENGENHARIA E CONSTRUTORA - Projetos e Construções de Casas,Construtora,Louveira,0,(19) 99678-0768,https://www.instagram.com/kertisengenharia?igsh=azhnazVrNGN0dmdn,"R. Carlos Pagotto, 72 - Cidade Jardim, Louveira - SP, 13294-240",5,7,OPERATIONAL,A,Nao iniciado
+0550,LACA ARQUITETURA E DESIGN,Arquitetura,Louveira,0,(19) 99263-1010,https://www.instagram.com/lacaarqdesign/?igsh=MWhkc2F5cG5xbzBkbQ==,"R. Afonso Pena, 136 - Jardim Niero, Louveira - SP, 13290-300",4.9,15,OPERATIONAL,A,Nao iniciado
+0551,"Laudos, Projetos e Adequações, Serviços Elétricos e Segurança do Trabalho (Empresa MATHÉO ENGENHARIA)",Engenharia,Louveira,0,(11) 94885-6280,https://matheoengenharia.com.br/,"R. Bento Pereira Dutra - Estiva, Louveira - SP, 13293-078",,,OPERATIONAL,A,Nao iniciado
+0552,Luxor Engenharia Construções Pavimentação,Construtora,Louveira,0,(19) 3878-4498,,"R. Armando Steck, 467 - Vila Bossi, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0553,M.F Engenharia e Manutenção,Engenharia,Louveira,0,(19) 99754-9445,,"R. das Acácias - Jardim Diamante, Louveira - SP, 13294-284",4,1,OPERATIONAL,A,Nao iniciado
+0554,MAX3D PLACAS,Construtora,Louveira,0,,,"Região Metropolitana de Jundiaí, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0555,MAXTER Blocos de Concreto,Servicos correlatos,Louveira,0,,,"Rua Atílio Biscuola, 1540 - Ipiranga, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0556,ML Assessoria Construção Civil,Construtora,Louveira,0,(19) 3878-7013,,"RUA : ANTÔNIO DELLA TORRE, 65 - SALA 02 - VILA NOVA, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0557,Marcenaria Cavalheiros,Construtora,Louveira,0,(19) 98456-5698,,"R. Rosa Polozzi Caldana, 23 - 092462, -46.940586 - Região Metropolitana de Jundiaí, Louveira - SP, 13293-402",4.8,36,OPERATIONAL,A,Nao iniciado
+0558,Marini Engenharia,Engenharia,Louveira,0,(19) 99930-7986,http://www.marinieng.com.br/,"R. Ângelo Steck, 104 - Parque dos Sabias, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0559,Martarello,Construtora,Louveira,0,(19) 3878-1545,http://martarello.com.br/,"R. Maura Terezinha Kwasek, 210 - Vila Pasti, Louveira - SP, 13290-000",4.6,25,OPERATIONAL,A,Nao iniciado
+0560,Melo Engenharia,Engenharia,Louveira,0,(19) 3878-1750,http://meloengenharia.eng.br/,"R. Armando Steck, 431 - 3 - Jardim Niero, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0561,Nobrex Manutenção em Telhado Industrial,Construtora,Louveira,0,(19) 3886-3543,http://nobrexfacilities.com/,"Av. Monsenhor Antonio Benedito Spoladori, 234 - Capivari, Louveira - SP, 13290-340",5,3,OPERATIONAL,A,Nao iniciado
+0562,Obra Divina - Distribuidora de Gesso e Drywall,Servicos correlatos,Louveira,0,,,"R. Reducino Martins Cruz, 220 - Jardim Vera Cruz, Louveira - SP, 13293-004",,,OPERATIONAL,A,Nao iniciado
+0563,Pass Arquitetura Comércio,Arquitetura,Louveira,0,(11) 4522-5972,,"R. da Colina, 115 - Colina da Bela Vista, Louveira - SP, 13290-000",4,1,OPERATIONAL,A,Nao iniciado
+0564,Pereira Construtora,Construtora,Louveira,0,(19) 97405-7548,http://www.pereirablanco.com.br/,"Rua Antônio Antoniolli, 51 - Centro, Louveira - SP, 13290-005",3.7,6,OPERATIONAL,A,Nao iniciado
+0565,R&D Gestão Ambiental,Construtora,Louveira,0,(11) 97085-7158,,"Rua Emília Nunes Eide - Parque das Videiras, Louveira - SP, 13290-330",,,OPERATIONAL,A,Nao iniciado
+0566,RSC Construtora e incorporadora,Incorporadora,Louveira,0,(32) 98438-9246,https://construtora-rsc.my.canva.site/rsc-construtora#%C3%ADnicio,"R. Brasília - Terra Nobre, Louveira - SP, 13290-164",5,10,OPERATIONAL,A,Nao iniciado
+0567,Rodrigues Materiais P/ Construção,Construtora,Louveira,0,(19) 99972-2806,,"R. dos Imigrantes Italianos, 124 - Região Metropolitana de Jundiaí, Louveira - SP, 13294-160",4.7,17,OPERATIONAL,A,Nao iniciado
+0568,Sanear Projetos de Engenharia LTDA,Engenharia,Louveira,0,(19) 3878-4455,https://www.sanear.eng.br/,"R. Salvador Paris, 51 - Vila Pasti, Louveira - SP, 13291-018",5,2,OPERATIONAL,A,Nao iniciado
+0569,Secretaria de obras,Servicos correlatos,Louveira,0,,,"Região Metropolitana de Jundiaí, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0570,Studio Migliorini - Arquitetura e Interiores [ arquiteta Beatriz Migliorini ],Arquitetura,Louveira,0,(11) 98346-5241,http://www.studiomigliorini.com.br/,"R. Cap Álvaro Pereira, 253 - Sl 02 - jd bandeirantes, Louveira - SP, 13290-234",4.8,20,OPERATIONAL,A,Nao iniciado
+0571,TORRES CONSTRUÇAO,Construtora,Louveira,0,(19) 98767-7321,,"rua umberti bhetie - Santo Antônio, Louveira - SP, 13280-000",5,4,OPERATIONAL,A,Nao iniciado
+0572,Terraplenagem Zé Branco,Construtora,Louveira,0,(11) 95314-3609,,"Estr. Leopoldino Bortolossi, 1890 - Arataba, Louveira - SP, 13290-000",4.2,5,OPERATIONAL,A,Nao iniciado
+0573,UF Agentes Imobiliarios,Construtora,Louveira,0,(19) 99689-5120,https://www.ufagentesimobiliarios.com.br/fale-conosco%20%20https://www.vindilino.com.br/,"Izaura Lorenção Caldana - Região Metropolitana de Jundiaí, Louveira - SP, 13293-272",5,32,OPERATIONAL,A,Nao iniciado
+0574,Verardo Engenharia e Arquitetura,Arquitetura,Louveira,0,(19) 97413-3127,,"Av. Paulo Prado, 541 - Sala 06 - Galeria Artemis - Jardim Lago Azul - Bairro - Santo Antônio, Louveira - SP, 13290-000",5,1,OPERATIONAL,A,Nao iniciado
+0575,Z & D Manutenção e construções,Construtora,Louveira,0,(11) 97437-0238,,"R. Antônio Chicalhone, 320 - Santo Antônio, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0576,ZAHFER ARQUITETURA E CONSTRUÇÃO,Arquitetura,Louveira,0,(11) 95310-8201,https://www.instagram.com/zahfer_bim/,"Estr. Mun. Rio Acima, 3830 - Monterrey, Louveira - SP, 13293-700",5,14,OPERATIONAL,A,Nao iniciado
+0577,casa nova construtora,Construtora,Louveira,0,(19) 7818-6378,http://cnvconstrutora.com.br/index.php/contato,"R. Antônio Montelatto, 198 - Res. Serra Azul, Louveira - SP, 13290-000",,,OPERATIONAL,A,Nao iniciado
+0578,A Avare Terraplenagem,Construtora,Valinhos,17,(19) 3027-5408,,"Rua F S Cajado, 35 - Vila Embare, Valinhos - SP, 13274-465",5,1,OPERATIONAL,A,Nao iniciado
+0579,A Fuchs Arquitetura,Arquitetura,Valinhos,17,(19) 3849-7372,http://afuchsarquitetura.com/,"Rua Luis Spiandorelli Netto 60 Torre Paineiras - Edifício Vértice - Sala 211 - Lot. Paiquere, Valinhos - SP, 13271-570",,,OPERATIONAL,A,Nao iniciado
+0580,ADNS Arquitetura e design | Arquiteto em Campinas | Escritório de Arquitetura,Arquitetura,Valinhos,17,(19) 98300-4948,https://api.whatsapp.com/send?phone=5519983004948&text=Ol%C3%A1%20Anderson%2C%20vim%20atrav%C3%A9s%20do%20Google%20e%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es%21,"Rua Carlos Alberto Binachim - Jardim das Palmeiras, Valinhos - SP, 13273-063",5,50,OPERATIONAL,A,Nao iniciado
+0581,ADNS Arquitetura em Valinhos | Arquiteto Anderson Souza,Arquitetura,Valinhos,17,(19) 98300-4948,"https://api.whatsapp.com/send?phone=5519983004948&text=Ol%C3%A1%20Anderson,%20vim%20atrav%C3%A9s%20do%20Google%20e%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es!","Rua Carlos Alberto Bianchin 142 - Jardim das Palmeiras, Valinhos - SP, 13273-063",,,OPERATIONAL,A,Nao iniciado
+0582,AF LIMPEZA DE TERRENOS,Construtora,Valinhos,17,(19) 99252-5669,https://www.facebook.com/profile.php?id=100093835786812,"R. Me. Maria do Calvário, 120 - Jardim Jurema, Valinhos - SP, 13272-451",5,5,OPERATIONAL,A,Nao iniciado
+0583,AMR TERRAPLENAGEM,Construtora,Valinhos,17,(19) 99867-2433,,"R. Eliza Bucioli Ribeiro - Jardim Sao Francisco, Valinhos - SP, 13272-156",,,OPERATIONAL,A,Nao iniciado
+0584,ARRUDA Projetos e Construções,Construtora,Valinhos,17,(19) 98115-4043,,"R. Marcos Antônio Bissoto, 255 - Vila Capuava, Valinhos - SP, 13273-567",4.9,11,OPERATIONAL,A,Nao iniciado
+0585,Aguiar Engenharia & Regularizações,Engenharia,Valinhos,17,(11) 95298-9558,,"R. Horácio Amaral, 528 - Jardim Pinheiros, Valinhos - SP, 13274-360",,,OPERATIONAL,A,Nao iniciado
+0586,Alexandre Campos Arquitetura,Arquitetura,Valinhos,17,(19) 99900-7682,,"Alameda Aldo Marini, 453 - Vale do Itamaracá, Valinhos - SP, 13278-407",,,OPERATIONAL,A,Nao iniciado
+0587,Aline Moraes - Serviços de Engenharia,Engenharia,Valinhos,17,(19) 99890-5662,,"R. João Previtale, 1229 - Jardim Alto da Colina, Valinhos - SP, 13272-315",5,36,OPERATIONAL,A,Nao iniciado
+0588,Almeida Gaspar Engenharia e Construções LTDA,Construtora,Valinhos,17,(19) 98902-5874,https://www.instagram.com/almeidagasparengenharia/,"R. dos Bolivianos, 99 - Nova Suíça, Valinhos - SP, 13271-400",5,16,OPERATIONAL,A,Nao iniciado
+0589,Ariely Lima | Arte e Design de Interiores,Arquitetura,Valinhos,17,(19) 99580-5340,https://instabio.cc/arielylimainteriores,"Av. Remo Oscar Beseggio, 975 - Parque das Colinas, Valinhos - SP, 13273-649",5,3,OPERATIONAL,A,Nao iniciado
+0590,Arkous Arquitetura,Arquitetura,Valinhos,17,(19) 97409-8690,http://www.arkous.com.br/,"R. Raimundo Bissoto, 239 - Vila Nova Valinhos, Valinhos - SP, 13270-320",5,3,OPERATIONAL,A,Nao iniciado
+0591,Arquitetura Mão Livre,Arquitetura,Valinhos,17,(19) 3327-7957,,"R. Lázara da Cruz Barbosa, 116 - Vila Nova Valinhos, Valinhos - SP, 13271-240",,,OPERATIONAL,A,Nao iniciado
+0592,Arquitetura e Urbanismo,Arquitetura,Valinhos,17,(19) 99899-0991,,"R. Carlos Penteado Stevenson - Jardim Recanto, Valinhos - SP, 13271-510",,,OPERATIONAL,A,Nao iniciado
+0593,As engenharia e construção,Construtora,Valinhos,17,(19) 99965-0009,https://asengenhariaeconstrucao.com.br/,"R. Manoel Augusto, 354 - Jardim America II, Valinhos - SP, 13272-511",5,1,OPERATIONAL,A,Nao iniciado
+0594,"Associação de Engenheiros, Arquitetos e Agrônomos de Valinhos",Arquitetura,Valinhos,17,(19) 3849-3824,http://www.aeaav.org.br/,"Av. Joaquim Alves Corrêa, 3819 - Jardim Santo Antonio, Valinhos - SP, 13277-055",4.6,17,OPERATIONAL,A,Nao iniciado
+0595,Austrais Emprendimentos,Construtora,Valinhos,17,(19) 99611-3855,http://austraisempreendimentos.com.br/,"Av. Joaquim Alves Corrêa, 3664 - Sala 09 - Jardim Santo Antonio, Valinhos - SP, 13271-430",,,OPERATIONAL,A,Nao iniciado
+0596,Auxillia Serviços,Construtora,Valinhos,17,(19) 3299-1441,,"R. Italia, 274 - Jdm Ribeiro, Valinhos - SP, 13270-180",5,1,OPERATIONAL,A,Nao iniciado
+0597,BNO ENGENHARIA,Engenharia,Valinhos,17,(19) 3327-7919,https://bnoengenharia.com.br/,"R. Paulo Setúbal, 204 - Sl 11 - Vila Angeli, Valinhos - SP, 13271-070",3.9,12,OPERATIONAL,A,Nao iniciado
+0598,BRACCHI ENGENHARIA,Engenharia,Valinhos,17,(19) 2144-8199,https://www.bracchiengenharia.com.br/,"Av. dos Esportes, 1103 - Sl 01 - Vila Bissoto, Valinhos - SP, 13270-210",5,10,OPERATIONAL,A,Nao iniciado
+0599,BRUNO LIMA ENGENHARIA,Engenharia,Valinhos,17,(19) 97408-8799,https://calendly.com/engbrunoalvesdelima/30min,"Vila Boa Esperanca, Valinhos - SP, 13270-372",5,1,OPERATIONAL,A,Nao iniciado
+0600,BVS Engenharia e Gestão de obras LTDA,Engenharia,Valinhos,17,(19) 99724-7760,https://bvsengenharia.com/,"Av. Invernada, 1987 - Sl 6 - Parque Nova Suica, Valinhos - SP, 13271-450",4.9,46,OPERATIONAL,A,Nao iniciado
+0601,Bastos Construtora e Incorporadora,Incorporadora,Valinhos,17,(19) 3829-5900,,"Av. Onze de Agosto, 232 - Vila Clayton, Valinhos - SP, 13274-465",1.8,5,OPERATIONAL,A,Nao iniciado
+0602,Beatriz Bertoni Arquitetura,Arquitetura,Valinhos,17,(19) 99782-8186,http://www.beatrizbertoniarquitetura.com/,"Rod. Flávio de Carvalho, 1200 - Jardim Portugal, Valinhos - SP, 13273-250",5,4,OPERATIONAL,A,Nao iniciado
+0603,Bergamasco Arquitetura Valinhos,Arquitetura,Valinhos,17,(19) 3244-3709,https://www.instagram.com/bergamasco_arquitetura/,"Av. Onze de Agosto, 1451 - Sl 511 - Jardim Ribeiro, Valinhos - SP, 13270-190",,,OPERATIONAL,A,Nao iniciado
+0604,Boulder Engenharia,Engenharia,Valinhos,17,(19) 3254-3078,http://www.boulderengenharia.com.br/,"Rua Írio Giardelli 47, torre Jequitibá sala 509 - R. Paiquerê - Vila Santo Antonio, Valinhos - SP, 13271-565",3.5,27,OPERATIONAL,A,Nao iniciado
+0605,C+TAFE - Arquitetura e Engenharia,Arquitetura,Valinhos,17,(19) 99805-2451,https://www.cmaistafe.com.br/,"R. Samuel Fragoso Coimbra, 421 - Vila Nova Valinhos, Valinhos - SP, 13271-280",4,4,OPERATIONAL,A,Nao iniciado
+0606,CADS ENGENHARIA,Engenharia,Valinhos,17,,,"R. Luís Spiandorelli Neto - R. das Paineiras, 30 - 608 - Jardim Paiquere, Valinhos - SP, 13272-576",,,OPERATIONAL,A,Nao iniciado
+0607,CAUÊ Terraplenagem,Construtora,Valinhos,17,(19) 98126-1876,,"Rod. dos Agricultores, 185 - Jardim Portugal, Valinhos - SP, 13273-250",5,5,OPERATIONAL,A,Nao iniciado
+0608,CIBELLI GOMES ARQUITETURA,Arquitetura,Valinhos,17,(19) 98434-0284,,"R. Samuel Fragoso Coimbra, 421 - sala 4 - Vila Nova Valinhos, Valinhos - SP, 13271-280",5,2,OPERATIONAL,A,Nao iniciado
+0609,CONSTRUVAL - Materiais para COnstrução,Construtora,Valinhos,17,(19) 3869-8724,,"R. Dr. Marino Costa Terra, 2487 - Vila Pagano, Valinhos - SP, 13277-200",4.5,125,OPERATIONAL,A,Nao iniciado
+0610,CP4 Engenharia,Engenharia,Valinhos,17,(19) 3327-5004,http://www.cp4engenharia.com.br/,"Av. Joaquim Alves Corrêa, 3664 - Sl D - Jardim Primavera, Valinhos - SP, 13270-320",4.6,16,OPERATIONAL,A,Nao iniciado
+0611,Cabana Arquitetura,Arquitetura,Valinhos,17,(19) 99663-5651,http://www.cabana.arq.br/,"R. Campos Salles, 2276 - Sala 02 - Vila Faustina II, Valinhos - SP, 13272-350",5,6,OPERATIONAL,A,Nao iniciado
+0612,Calti Engenharia e Construções Ltda.,Construtora,Valinhos,17,(19) 99250-8306,https://www.distribuigov.com.br/,"R. Paulo Setúbal, 302 - Sl 07 - Vila Angeli, Valinhos - SP, 13271-070",,,OPERATIONAL,A,Nao iniciado
+0613,Camolezi Arquitetos,Arquitetura,Valinhos,17,(19) 98189-3049,https://camoleziarquitetos.com.br/,"Torre Jequitiba - R. Luís Spiandorelli Neto, 30 - Jardim Paiquere, Valinhos - SP, 13271-570",,,OPERATIONAL,A,Nao iniciado
+0614,Campidellis Arquitetura e Engenharia,Arquitetura,Valinhos,17,(19) 98331-3038,https://www.campidellis.com.br/,"Av. Invernada, 1987 - NOVA SUÍÇA, Valinhos - SP, 13271-450",5,1,OPERATIONAL,A,Nao iniciado
+0615,Carajás Empreendimentos Imobiliários,Incorporadora,Valinhos,17,(19) 3849-6499,,"Av. Rosa Belmiro Ramos, 626 - Centro, Valinhos - SP, 13275-400",1.8,4,OPERATIONAL,A,Nao iniciado
+0616,Carlão Terraplanagem em Valinhos,Construtora,Valinhos,17,(19) 97423-2621,,"R. Dr. Antônio B. Ferraz, nº505 - Dois Córregos, Valinhos - SP, 13270-000",5,1,OPERATIONAL,A,Nao iniciado
+0617,Carolina Camolezi Arquitetura,Arquitetura,Valinhos,17,(19) 98189-3049,,"Av. Invernada, 1945 - Parque Nova Suica, Valinhos - SP, 13271-450",,,OPERATIONAL,A,Nao iniciado
+0618,Catarina Cordeiro - Arquitetura e Interiores,Arquitetura,Valinhos,17,(19) 98221-8409,https://www.instagram.com/catarinacordeiro.arquitetura/,"R. Dr. Cândido Ferreira, 26 - Centro, Valinhos - SP, 13270-040",5,3,OPERATIONAL,A,Nao iniciado
+0619,CenterVip Materiais para Construção Ltda,Construtora,Valinhos,17,(19) 3849-0659,http://centervip.com.br/,"Rod. dos Agricultores, 15 - Jardim Nova Espirito Santo, Valinhos - SP, 13273-250",4.6,250,OPERATIONAL,A,Nao iniciado
+0620,Cesar Mayer Engenharia,Engenharia,Valinhos,17,(19) 3871-0064,http://www.cesarmayer.com.br/localizacao.htm,"R. Antônio Carlos - Jardim Monte Verde, Valinhos - SP, 13270-005",5,6,OPERATIONAL,A,Nao iniciado
+0621,Chico Terraplenagem,Construtora,Valinhos,17,(19) 97409-7844,,"R. João Previtale, 363 - Santa Cruz, Valinhos - SP, 13272-400",5,9,OPERATIONAL,A,Nao iniciado
+0622,City Engenharia - City Eng,Engenharia,Valinhos,17,(11) 97617-2417,https://www.cityeng.com.br/,"R. Lázara da Cruz Barbosa, 281 - Sl 112 - Vila Nova Valinhos, Valinhos - SP, 13271-240",,,OPERATIONAL,A,Nao iniciado
+0623,Cobe Construções,Construtora,Valinhos,17,(19) 99297-2812,https://construtoracobe.com.br/,"R. Luís Spiandorelli Neto, 30 - Conj 312 - Jardim Paiquere, Valinhos - SP, 13271-570",,,OPERATIONAL,A,Nao iniciado
+0624,Com Engenharia e Comércio,Engenharia,Valinhos,17,(19) 3869-1123,http://www.comeng.com.br/,"R. Eliza Bucioli Ribeiro, 44 - Jardim Sao Francisco, Valinhos - SP, 13272-156",5,8,OPERATIONAL,A,Nao iniciado
+0625,Conesan Construção e Saneamento Ltda.,Construtora,Valinhos,17,(19) 3871-5111,http://conesan.com.br/,"R. José Von Zuben, 330 - Parque Res. Colina do Sol, Valinhos - SP, 13270-510",4.7,3,OPERATIONAL,A,Nao iniciado
+0626,Conserta Loja da Construção Valinhos,Construtora,Valinhos,17,(19) 97824-0762,,"Av. Gessy Lever, 724 - Lenheiro, Valinhos - SP, 13272-000",4.8,19,OPERATIONAL,A,Nao iniciado
+0627,Construloca Obras - Locação de Equipamentos,Servicos correlatos,Valinhos,17,,,"Av. Independência, 2061 - Jardim Santo Antonio, Valinhos - SP, 13277-000",,,OPERATIONAL,A,Nao iniciado
+0628,Construteq Construtora,Construtora,Valinhos,17,(19) 3849-1143,http://construteq.com.br/,"Av. Invernada, 1647 - Sl 4 - Parque Nova Suica, Valinhos - SP, 13274-465",3.7,14,OPERATIONAL,A,Nao iniciado
+0629,Construteq Construtora,Construtora,Valinhos,17,(19) 99185-8711,,"Av. Invernada, 1644 - Parque Nova Suica, Valinhos - SP, 13274-120",,,OPERATIONAL,A,Nao iniciado
+0630,Construtora Bandina Ltda,Construtora,Valinhos,17,(19) 3849-4655,,"R. Luís Spiandorelli Neto, 47 - Jardim Paiquere, Valinhos - SP, 13271-570",4.7,10,OPERATIONAL,A,Nao iniciado
+0631,Construtora Carvalho,Construtora,Valinhos,17,(19) 3244-2841,,"R. Samuel Fragoso Coimbra, 38 - Vila Nova, Valinhos - SP, 13271-280",5,1,OPERATIONAL,A,Nao iniciado
+0632,Construtora Minas Bahia,Construtora,Valinhos,17,(19) 3929-6990,,"R. Mario Olivo, 573 - Jardim Maracana, Valinhos - SP, 13277-540",1,1,OPERATIONAL,A,Nao iniciado
+0633,Construtora e Incorporadora Tordin,Incorporadora,Valinhos,17,(19) 3244-4907,,"R. Paschoal Nicolau, Nº21 - Lenheiro, Valinhos - SP, 13272-060",5,3,OPERATIONAL,A,Nao iniciado
+0634,Construção de galpões industrial e comercial,Construtora,Valinhos,17,(19) 3871-1549,http://www.recetic.com/,"R. Wilton Fernando Rezende, 12 - Jardim das Figueiras, Valinhos - SP, 13275-622",,,OPERATIONAL,A,Nao iniciado
+0635,Conte & Garcia Soluções e Arquitetura,Arquitetura,Valinhos,17,(19) 3929-9308,,"Jardim Bom Retiro, Valinhos - SP, 13270-000",,,OPERATIONAL,A,Nao iniciado
+0636,Corpus Saneamento Obras,Servicos correlatos,Valinhos,17,,,"R. Geraldo de Gasperi, 4981 - Chácaras São Bento, Valinhos - SP, 13278-085",,,OPERATIONAL,A,Nao iniciado
+0637,D & D Locação de Máquinas e Equipamentos - Construção Civil - Obras - Reformas,Construtora,Valinhos,17,(19) 99915-0683,,"Avenida João Antunes dos Santos, 258 - Jardim Pinheiros, Valinhos - SP, 13274-290",5,1,OPERATIONAL,A,Nao iniciado
+0638,DC Arquitetura Paisagismo e Irrigação,Arquitetura,Valinhos,17,(19) 98817-3308,,"R. Antônio Cremasco, 413 - Res. Santa Maria, Valinhos - SP, 13272-790",4.8,6,OPERATIONAL,A,Nao iniciado
+0639,DEGESSO - SERVIÇOS,Construtora,Valinhos,17,(19) 98918-3803,https://www.facebook.com/artnobremarmoraria/,"R. Campos Salles, 1610 - Jardim Jurema, Valinhos - SP, 13272-350",5,20,OPERATIONAL,A,Nao iniciado
+0640,DUTRA COMERCIO & SERVIÇOS,Construtora,Valinhos,17,(19) 3229-0835,,"R. Barcelos, 96 - Parque Portugal, Valinhos - SP, 13273-275",,,OPERATIONAL,A,Nao iniciado
+0641,Dadazio Arquitetura e Paizagismo,Arquitetura,Valinhos,17,,,"R. Dr. Eraldo Aurélio Franzese - Jardim Paiquere, Valinhos - SP, 13271-608",,,OPERATIONAL,A,Nao iniciado
+0642,Daniela Tucumantel Arquitetura,Arquitetura,Valinhos,17,(19) 99324-6473,https://www.instagram.com/danitucumantel_arq/,"Av. dos Esportes, 542 - Vila Bissoto, Valinhos - SP, 13270-210",5,22,OPERATIONAL,A,Nao iniciado
+0643,Decornali,Construtora,Valinhos,17,(19) 99104-3150,,"R. Rui Barbosa, 243 - Lj 3 - Jardim Primavera, Valinhos - SP, 13270-340",5,5,OPERATIONAL,A,Nao iniciado
+0644,Demacol - Materiais para Construção,Construtora,Valinhos,17,(19) 3871-4781,,"R. João Previtale, 976 - Jardim Alto da Colina, Valinhos - SP, 13272-400",4.5,470,OPERATIONAL,A,Nao iniciado
+0645,E.p.g.construcoesltda,Construtora,Valinhos,17,(19) 98176-6918,,"R. Maria de Lourdes Rodrigues de Souza, quadra G lote 8 Quadra g lote 08 - R. Água Nova, Valinhos - SP, 13273-565",,,OPERATIONAL,A,Nao iniciado
+0646,ECE -Soluções de Engenharia (Vivus Engenharia),Engenharia,Valinhos,17,(19) 3869-5748,http://www.vivusengenharia.com.br/,"Av. dos Esportes, 855 - Sala 9 - Vila Clayton, Valinhos - SP, 13276-130",5,17,OPERATIONAL,A,Nao iniciado
+0647,ETI - CONSTRUÇÃO E REFORMAS,Construtora,Valinhos,17,(19) 97420-1007,,"R. Abolição, 584 - Vila Angeli, Valinhos - SP, 13271-090",,,OPERATIONAL,A,Nao iniciado
+0648,Edison Alves Corrêa - arquiteto,Arquitetura,Valinhos,17,(19) 3829-1588,,"R. Paiquerê, 766 - Jardim Paiquere, Valinhos - SP, 13271-600",3.5,2,OPERATIONAL,A,Nao iniciado
+0649,Emgeo Empreiteira Geral de Obras,Empreiteira,Valinhos,17,(19) 3871-8883,,"R. Ângelo Trento, 31 - Jardim Alto da Boa Vista, Valinhos - SP, 13272-103",1,1,OPERATIONAL,A,Nao iniciado
+0650,Empreendimento Maestro Carlos Gomes,Construtora,Valinhos,17,(19) 98443-3379,,"R. Padre Manoel da Nóbrega, 66 - Santa Cruz, Valinhos - SP, 13271-080",4.7,3,OPERATIONAL,A,Nao iniciado
+0651,Empreendimentos Cobe,Construtora,Valinhos,17,(19) 99297-2812,,"R. Luís Spiandorelli Neto, 30 - Sala 311 - Jardim Paiquere, Valinhos - SP, 13271-570",5,1,OPERATIONAL,A,Nao iniciado
+0652,Engenharia Ramos,Engenharia,Valinhos,17,(19) 3869-1691,,"R. Vitória Colombo Rossi, 401 - Vila Martins - Centro, Valinhos - SP, 13270-260",,,OPERATIONAL,A,Nao iniciado
+0653,Epcon Engenharia,Engenharia,Valinhos,17,(19) 99617-5757,https://epconengenharia.com.br/,"R. dos Portugueses, 49 - Parque Nova Suica, Valinhos - SP, 13271-414",5,5,OPERATIONAL,A,Nao iniciado
+0654,Escavadora Santa Cruz Valinhos,Construtora,Valinhos,17,(19) 3871-2734,,"R. Campos Salles, 607 - Vila Sao Sebastiao, Valinhos - SP, 13271-000",5,3,OPERATIONAL,A,Nao iniciado
+0655,Estrutura Elétrica - Eletricista Valinhos,Servicos correlatos,Valinhos,17,,,"R. José Rubens Trivelato - Jardim Uniao, Valinhos - SP, 13275-641",,,OPERATIONAL,A,Nao iniciado
+0656,Estúdio Athena Conte Arquitetura e Interiores,Arquitetura,Valinhos,17,(19) 3500-2694,,"R. Ângelo Capelato, 111 - Sala 01 - Jardim Bela Vista, Valinhos - SP, 13276-050",,,OPERATIONAL,A,Nao iniciado
+0657,Eustaquio Leite Arquitetura,Arquitetura,Valinhos,17,(19) 3849-5803,https://eustaquioleite.com.br/,"R. Dr. Eraldo Aurélio Franzese, 38 - Jardim Paiquere, Valinhos - SP, 13271-608",5,1,OPERATIONAL,A,Nao iniciado
+0658,Evolução Engenharia,Engenharia,Valinhos,17,(19) 3327-6020,http://evengenharia.com.br/,"R. Ulisses Pedroso de Oliveira Filho, 578 - Sl 10 - Boa Esperança, Valinhos - SP, 13270-393",4,4,OPERATIONAL,A,Nao iniciado
+0659,FDS Construção Civil Eireli,Construtora,Valinhos,17,(19) 3141-1999,,"R. Antônio Moisés, 264 - Vila Pagano, Valinhos - SP, 13277-240",,,OPERATIONAL,A,Nao iniciado
+0660,Fdf Construtora,Construtora,Valinhos,17,,,"R. Gervásio José Marchiori, 251 - Castelo, Valinhos - SP, 13271-300",5,1,OPERATIONAL,A,Nao iniciado
+0661,Fernanda Guizi Interiores,Arquitetura,Valinhos,17,(19) 99184-5201,https://fernandaguizi.com.br/,"R. Vicente Pedro Caciato, 43 - Sl 95 - Jardim Maracana, Valinhos - SP, 13277-603",4.9,11,OPERATIONAL,A,Nao iniciado
+0662,Flarrel Engenharia,Engenharia,Valinhos,17,(19) 3886-6982,http://www.flarrel.com.br/,"R. Luís Spiandorelli Neto, 47 - Sl 507 - Jardim Paiquere, Valinhos - SP, 13271-570",4.7,14,OPERATIONAL,A,Nao iniciado
+0663,Forma!varejo - Arquitetura de Resultados,Arquitetura,Valinhos,17,(19) 3327-9611,,"R. Italia, 159 - 01 - Jardim Ribeiro, Valinhos - SP, 13270-180",,,OPERATIONAL,A,Nao iniciado
+0664,Fundações e Terraplenagem Oliveira,Construtora,Valinhos,17,(19) 99383-4208,,"Condomínio Residencial Parque dos Passaros I - R. João Bissoto Filho, 99 - Bl 7 Apartamento 3 - Dos Ortizes, Valinhos - SP, 13275-410",4.8,13,OPERATIONAL,A,Nao iniciado
+0665,GR Engenharia e Construções,Construtora,Valinhos,17,(19) 3859-9346,,"R. Visc. de Cairú, 251 - Jardim Bela Vista, Valinhos - SP, 13276-280",5,1,OPERATIONAL,A,Nao iniciado
+0666,Gabi Toretti Arquitetura e Interiores,Arquitetura,Valinhos,17,(19) 98828-9633,https://www.instagram.com/arq.gabitoretti/,"R. Vitória Colombo Rossi, 383 - Jardim Vila Rosa, Valinhos - SP, 13270-260",,,OPERATIONAL,A,Nao iniciado
+0667,Giovana Carvalho Arquitetura e Interiores,Arquitetura,Valinhos,17,(19) 98300-4285,,"Alameda Itambé, 426 - Joapiranga, Valinhos - SP, 13278-470",5,1,OPERATIONAL,A,Nao iniciado
+0668,Giseli Mary Colleto ARQUITETURA,Arquitetura,Valinhos,17,(19) 4117-0379,http://www.gmc.arq.br/,"R. dos Espanhóis, 169 - Jardim Nova Suica, Valinhos - SP, 13271-413",4,2,OPERATIONAL,A,Nao iniciado
+0669,Gláucia Brito,Construtora,Valinhos,17,(19) 99167-8284,http://glauciabritointeriores.com.br/,"R. Luís Spiandorelli Neto, 47 - Rm 507 - Jardim Paiquere, Valinhos - SP, 13271-570",5,1,OPERATIONAL,A,Nao iniciado
+0670,Gramazan Locações e Terraplenagem,Construtora,Valinhos,17,(19) 97418-2596,http://www.gramazan.com.br/,"Alameda Itaipú, 33 - lote 33 - Joapiranga, Valinhos - SP, 13278-500",4.8,26,OPERATIONAL,A,Nao iniciado
+0671,Grandini e Pedrotti Interiores,Arquitetura,Valinhos,17,(19) 99753-3686,https://grandiniepedrotti.com.br/,"Rua das Araras, 206 - Jardim Paiquere, Valinhos - SP, 13271-606",,,OPERATIONAL,A,Nao iniciado
+0672,Grupo DAP Engenharia,Engenharia,Valinhos,17,(19) 3849-2714,http://dapmanutencao.com.br/,"R. Marcílio Aníbal, 152 - Parque dos Cocais, Valinhos - SP, 13273-184",4.9,38,OPERATIONAL,A,Nao iniciado
+0673,Guatti Empreendimentos Imobiliários,Incorporadora,Valinhos,17,(19) 3871-7006,,"Av. Invernada, 590 - Parque Nova Suica, Valinhos - SP, 13274-465",1,1,OPERATIONAL,A,Nao iniciado
+0674,H2O SOLUÇÕES EM ENGENHARIA DE INCÊNDIO,Engenharia,Valinhos,17,(19) 3244-2661,http://h2osolucoes.com.br/,"R. Marcílio Aníbal, 214 - Parque dos Cocais, Valinhos - SP, 13273-184",5,5,OPERATIONAL,A,Nao iniciado
+0675,Home Arquitetos,Arquitetura,Valinhos,17,(19) 99131-4888,https://www.home.pro.br/,"R. Luís Spiandorelli Neto, 60 - Jardim Paiquere, Valinhos - SP, 13271-570",,,OPERATIONAL,A,Nao iniciado
+0676,IAS Construtora,Construtora,Valinhos,17,(19) 99764-3290,https://www.iasconstrutora.com.br/,"R. Luís Bissoto, 50 - Jardim Santa Rosa, Valinhos - SP, 13275-110",3.6,76,OPERATIONAL,A,Nao iniciado
+0677,IRPA Engenharia,Engenharia,Valinhos,17,,http://irpa.com.br/,"R. Ver. Antonio de Castro, 157 - NV ESPIRITO SANTO, Valinhos - SP, 13273-201",5,49,OPERATIONAL,A,Nao iniciado
+0678,Iamar Decor,Construtora,Valinhos,17,(19) 99951-5877,http://www.iamar.com.br/,"Av. dos Esportes, 486 - Vila Bissoto, Valinhos - SP, 13270-210",4.8,20,OPERATIONAL,A,Nao iniciado
+0679,Igor Mendes Arquitetura,Arquitetura,Valinhos,17,(19) 99594-1388,https://www.imarquitetura.com/,"R. Treze de Maio, 691 - Vila Olivo, Valinhos - SP, 13276-020",5,21,OPERATIONAL,A,Nao iniciado
+0680,Incorporadora Irmãos Leite,Incorporadora,Valinhos,17,,https://irmaosleite.com.br/,"R. Dr. Eraldo Aurélio Franzese, 38 - Jardim Paiquere, Valinhos - SP, 13271-608",,,OPERATIONAL,A,Nao iniciado
+0681,Itajubá Construção Civil e Mecânica Ltda,Construtora,Valinhos,17,(19) 3871-2602,http://www.itajuba.eng.br/,"R. Campos Salles, 943 - Vila Faustina II, Valinhos - SP, 13272-350",4.8,6,OPERATIONAL,A,Nao iniciado
+0682,Izaque Araújo Construções e Reformas,Construtora,Valinhos,17,(11) 99470-6231,https://www.bairro013.com.br/construtora/index.html,"Rua Fatima, 99 Jardim - Parque Portugal, Valinhos - SP, 13273-264",,,OPERATIONAL,A,Nao iniciado
+0683,J Fonseca Construtora,Construtora,Valinhos,17,(19) 3253-4025,,"Av. Rosa Belmiro Ramos, 913 - Ortizes, Valinhos - SP, 13275-400",5,1,OPERATIONAL,A,Nao iniciado
+0684,J LI Construtora,Construtora,Valinhos,17,(19) 99892-7228,,"R. Sen. Feijó, 30 - Centro, Valinhos - SP, 13270-110",,,OPERATIONAL,A,Nao iniciado
+0685,JJ Escadas Pré Moldadas,Construtora,Valinhos,17,(19) 98291-1730,https://jjescadas.com.br/,"Av. Joaquim Alves Corrêa, 4984 - Jardim Nova Suica, Valinhos - SP, 13271-430",4.6,22,OPERATIONAL,A,Nao iniciado
+0686,JS Construções e serviços Valinhos,Construtora,Valinhos,17,(19) 99101-8567,https://www.jsreformas.com.br/,"R. Treze de Maio, 331 - Sl 04 - Centro, Valinhos - SP, 13270-020",5,8,OPERATIONAL,A,Nao iniciado
+0687,JS TERRAPLENAGEM,Construtora,Valinhos,17,,,"R. Ettore Bertoli - Santa Gertrudes, Valinhos - SP, 13272-764",5,4,OPERATIONAL,A,Nao iniciado
+0688,Jane Keller Designer de Interiores Valinhos,Arquitetura,Valinhos,17,(19) 98139-6651,http://www.janekeller.com.br/,"R. Lourenço Barbizan, 111 - Jardim Panorama, Valinhos - SP, 13277-440",,,OPERATIONAL,A,Nao iniciado
+0689,Jola Materiais Construção,Construtora,Valinhos,17,(19) 3869-3677,https://www.jola.com.br/,"Av. Paulista, 600 - Jardim Paulista, Valinhos - SP, 13276-340",4.3,332,OPERATIONAL,A,Nao iniciado
+0690,Kiko Ferreira Arquitetura e Gerencia de Obras,Arquitetura,Valinhos,17,(19) 3871-0391,http://www.kikoferreira.arq.br/,"Pq - Av. Invernada, 1657 - Jardim Nova Suica, Valinhos - SP, 13271-450",4.4,18,OPERATIONAL,A,Nao iniciado
+0691,LIM Engenharia,Engenharia,Valinhos,17,(19) 4040-4534,http://www.limengenharia.com/,"R. Dr. Eraldo Aurélio Franzese, 62 - 2º andar - Jardim Paiquere, Valinhos - SP, 13271-608",,,OPERATIONAL,A,Nao iniciado
+0692,LK ENGENHARIA,Engenharia,Valinhos,17,(19) 98610-8289,https://www.lkengenharia.com/?utm_source=google&utm_medium=wix_google_business_profile&utm_campaign=9763792233499987352,"Av. Remo Oscar Beseggio, 975 - Parque das Colinas, Valinhos - SP, 13273-649",5,1,OPERATIONAL,A,Nao iniciado
+0693,LL Planejamento e Controle de Obras,Construtora,Valinhos,17,(19) 99989-7787,,"R. Luís Borin, 5 - Quadra C, 225 - Res. Jardim Paraná, Valinhos - SP, 13272-472",,,OPERATIONAL,A,Nao iniciado
+0694,LM Blocos de Concreto,Servicos correlatos,Valinhos,17,,,"Rod. Flávio de Carvalho, 1807 - Vila Capuava, Valinhos - SP, 13273-000",,,OPERATIONAL,A,Nao iniciado
+0695,Leandro Pina | Arquitetura & Design,Arquitetura,Valinhos,17,(19) 97410-0115,,"R. Paulo Prado - Jardim Panorama, Valinhos - SP, 13277-410",,,OPERATIONAL,A,Nao iniciado
+0696,Loteamento Residencial Mont'Alcino,Incorporadora,Valinhos,17,(19) 99816-2679,,"Estr. Mun. do Roncáglia, 1090 - Jardim America II, Valinhos - SP, 13272-721",4.6,294,OPERATIONAL,A,Nao iniciado
+0697,Luciana Bello Arquitetura,Arquitetura,Valinhos,17,(19) 99440-0229,http://www.lucianabello.com/,"R. Samuel Fragoso Coimbra, 421 - sala 4 - Vila Nova Valinhos, Valinhos - SP, 13271-280",,,OPERATIONAL,A,Nao iniciado
+0698,MAIS AÇO,Construtora,Valinhos,17,(19) 99346-1746,https://maisaco.eng.br/,"R. Agostinho Capovila, 80 - Jardim Bom Retiro, Valinhos - SP, 13275-200",5,1,OPERATIONAL,A,Nao iniciado
+0699,MC2 Incorporadora e Construtora,Incorporadora,Valinhos,17,(19) 3829-4215,,"R. José Antônio Gemi, 155 - Vila Independencia, Valinhos - SP, 13275-520",1,1,OPERATIONAL,A,Nao iniciado
+0700,MICI Engenharia,Engenharia,Valinhos,17,(19) 99850-4571,https://micieng.com/,"R. Modesta Polli Martins, 56 - Vila Norma, Valinhos - SP, 13270-280",5,3,OPERATIONAL,A,Nao iniciado
+0701,MM Arquitetura e Urbanismo,Arquitetura,Valinhos,17,,,"Ed. Vértice - R. Luís Spiandorelli Neto, 60 - 403 - Centro, Valinhos - SP, 13024-411",3,1,OPERATIONAL,A,Nao iniciado
+0702,Macerata Empreendimentos Imobiliários,Incorporadora,Valinhos,17,(19) 3849-6842,http://www.macerata.com.br/,"Av. Joaquim Alves Corrêa, 3668 - Jardim Planalto, Valinhos - SP, 13271-430",2.6,10,OPERATIONAL,A,Nao iniciado
+0703,Madreal Empreendimentos Participações,Construtora,Valinhos,17,(19) 3829-1616,http://www.madreal.com.br/,"Vila Embare, Valinhos - SP, 13270-600",5,1,OPERATIONAL,A,Nao iniciado
+0704,Magon Engenharia,Engenharia,Valinhos,17,(19) 99775-7785,https://www.magonengenharia.com/,"Av. Onze de Agosto, 650 - Sl 1 - Vila Clayton, Valinhos - SP, 13276-130",5,6,OPERATIONAL,A,Nao iniciado
+0705,Manetia Empreendimentos,Construtora,Valinhos,17,(19) 3871-2320,,"Ed Paineiras - R. Luís Spiandorelli Neto, 60 - Lj 7 - Jardim Paiquere, Valinhos - SP, 13271-570",5,1,OPERATIONAL,A,Nao iniciado
+0706,Mansões Valinhos Empreendimentos Imobiliários,Incorporadora,Valinhos,17,(19) 3849-1276,,"Av. Rosa Belmiro Ramos, 310 - Ortizes, Valinhos - SP, 13275-400",1,1,OPERATIONAL,A,Nao iniciado
+0707,Marcela Cardinalli Arquitetura,Arquitetura,Valinhos,17,(19) 99210-3101,http://www.marcelacardinalli.com.br/,"R. José de Oliveira, 359 - Chácaras Silvânia, Valinhos - SP, 13271-653",,,OPERATIONAL,A,Nao iniciado
+0708,Marcenaria Monteiro Alves,Construtora,Valinhos,17,(19) 99379-3649,,"R. João Casácio, 21 - Jardim Maracana, Valinhos - SP, 13277-521",5,11,OPERATIONAL,A,Nao iniciado
+0709,Marcfort Blocos,Construtora,Valinhos,17,(19) 3871-2482,,"Rod. Mun. dos Andradas, 2960 - Jardim Lorena, Valinhos - SP, 13277-650",4.5,20,OPERATIONAL,A,Nao iniciado
+0710,Marcia Mayer Arquitetura,Arquitetura,Valinhos,17,(19) 99349-5389,https://www.mayerarquitetura.com.br/,"R. Francisco Glicério, 455 - Vila Embare, Valinhos - SP, 13271-200",,,OPERATIONAL,A,Nao iniciado
+0711,Marcos Terraplenagem Valinhos,Construtora,Valinhos,17,(19) 97408-1962,,"Rua Azael Stopiglia, 108 - Vale Verde, Valinhos - SP, 13279-100",5,3,OPERATIONAL,A,Nao iniciado
+0712,Martinati Cia,Construtora,Valinhos,17,(19) 3871-2047,,"R. Máximo Piton, 162 - Jardim Santa Rosa, Valinhos - SP, 13275-090",4,7,OPERATIONAL,A,Nao iniciado
+0713,Mestre da Obra - Valinhos,Servicos correlatos,Valinhos,17,,,"R. João Previtale, 2175 - Lot. Res. Santa Gertrudes, Valinhos - SP, 13272-315",,,OPERATIONAL,A,Nao iniciado
+0714,Mogmo Construtora Incorporadora,Incorporadora,Valinhos,17,(19) 3829-5060,,"Av. Onze de Agosto, 232 - Vila Clayton, Valinhos - SP, 13274-465",,,OPERATIONAL,A,Nao iniciado
+0715,Momento,Construtora,Valinhos,17,(19) 3859-9313,,"Rua Luis Spiandorelli Neto, 60 | Edifício Paineira Sala 604 - 6º andar - Jardim Paiquere, Valinhos - SP, 13271-570",5,1,OPERATIONAL,A,Nao iniciado
+0716,Moysés Engenharia,Engenharia,Valinhos,17,(19) 3869-2620,,"R. Francisco Glicério, 990 - Vila Embare, Valinhos - SP, 13271-200",4.3,7,OPERATIONAL,A,Nao iniciado
+0717,Murus - MURO PRÉ MOLDADO DE CONCRETO,Servicos correlatos,Valinhos,17,,,"R. Júlio Barchesi, 191 - Vale Verde, Valinhos - SP, 13279-074",,,OPERATIONAL,A,Nao iniciado
+0718,NSG Empreendimentos Imobiliários Ltda.,Incorporadora,Valinhos,17,(19) 3327-8453,https://www.nsg3.com.br/contact,"Av. Joaquim Alves Corrêa, 4934 - Jardim Santo Antonio, Valinhos - SP, 13271-430",,,OPERATIONAL,A,Nao iniciado
+0719,Novo Lar Terraplenagem,Construtora,Valinhos,17,(19) 99198-8851,https://m.facebook.com/Novolar-terraplenagem-102768938021831/,"Rodoviária Doutor Flávio Carvalho, 1618, Valinhos - SP, 13273-000",5,1,OPERATIONAL,A,Nao iniciado
+0720,O La Bamba Empreendimentos Imobiliários,Incorporadora,Valinhos,17,(19) 3849-6761,,"Av. Onze de Agosto, 244 - Vila Clayton, Valinhos - SP, 13274-465",4.5,2,OPERATIONAL,A,Nao iniciado
+0721,ON FIRE ENGENHARIA,Engenharia,Valinhos,17,(19) 99833-7279,http://www.onfireengenharia.com.br/,"R. Antonio Lorençato, 37 - Jardim Santa Emilia, Valinhos - SP, 13273-149",5,1,OPERATIONAL,A,Nao iniciado
+0722,Oportuna Empreendimentos,Construtora,Valinhos,17,(19) 3881-3142,https://www.oportunaempreendimentos.com.br/,"Torre Jequitibá, Condomínio Vertice - R. Luís Spiandorelli Neto, 47 - Jardim Paiquere, Valinhos - SP, 13271-570",,,OPERATIONAL,A,Nao iniciado
+0723,PLF Construtora Ltda,Construtora,Valinhos,17,(19) 3829-3693,,"R. Paulo Setúbal, 506 - Vila Angeli, Valinhos - SP, 13271-070",,,OPERATIONAL,A,Nao iniciado
+0724,POCA Engenharia e Dispositivos,Engenharia,Valinhos,17,(19) 99417-4732,,"R. Sete de Setembro, 210 - Sl 5 - Centro, Valinhos - SP, 13270-100",,,OPERATIONAL,A,Nao iniciado
+0725,PORTALE ARQUITETURA,Arquitetura,Valinhos,17,(19) 98123-8404,,"Alameda Maria Tereza, 4500 - Dois Córregos, Valinhos - SP, 13278-181",5,1,OPERATIONAL,A,Nao iniciado
+0726,Patricia Parreiras Arquitetura de Interiores,Arquitetura,Valinhos,17,(19) 99936-6981,,"Edifício Araucária - R. Luís Spiandorelli Neto, 30 - Sl 101 - Jardim Paiquere, Valinhos - SP, 13271-570",5,2,OPERATIONAL,A,Nao iniciado
+0727,Paula Santos Arquitetura,Arquitetura,Valinhos,17,(19) 99808-9893,https://www.paulasantosarquitetura.com.br/,"R. dos Japoneses, 355 - Parque Nova Suica, Valinhos - SP, 13271-440",5,17,OPERATIONAL,A,Nao iniciado
+0728,Pedras Abílio,Construtora,Valinhos,17,(19) 99880-8233,https://pedrasabilio.com.br/,"Av. Onze de Agosto, 488 - Vila Clayton, Valinhos - SP, 13276-130",,,OPERATIONAL,A,Nao iniciado
+0729,Pelacani Gestão de Risco e Engenharia,Engenharia,Valinhos,17,(19) 3327-5600,http://www.pelacani.com/contato/,"R. Luís Spiandorelli Neto, 60 - Lot. Paiquere, Valinhos - SP, 13271-570",,,OPERATIONAL,A,Nao iniciado
+0730,Perfi Solo Fundações - Perfuração de solo,Construtora,Valinhos,17,(19) 99627-7788,https://perfisolofundacoes.com.br/,"R. Antônio Matiazzo, 103 - Jardim Sao Pedro, Valinhos - SP, 13275-422",5,5,OPERATIONAL,A,Nao iniciado
+0731,Perini Representações para Obras,Servicos correlatos,Valinhos,17,,,"R. Vicente Pedro Caciato, nº43 - Jardim Maracana, Valinhos - SP, 13277-603",,,OPERATIONAL,A,Nao iniciado
+0732,Ponto Exatum Construtora e Incorporadora Ltda,Incorporadora,Valinhos,17,(19) 3327-7802,,"Ed. Jequitibá - R. Luís Spiandorelli Neto, 47 - Sl 903 - Jardim Paiquere, Valinhos - SP, 13271-565",5,7,OPERATIONAL,A,Nao iniciado
+0733,Portela Arquitetos,Arquitetura,Valinhos,17,(19) 3305-1130,http://www.portela.arq.br/contato.php,"R. Luís Spiandorelli Neto, 60 - Jardim Paiquere, Valinhos - SP, 13271-570",,,OPERATIONAL,A,Nao iniciado
+0734,Pria Arquitetura,Arquitetura,Valinhos,17,,,"R. Paiquerê, 1520 - Sl 03 - Jardim Paiquere, Valinhos - SP, 13271-600",,,OPERATIONAL,A,Nao iniciado
+0735,Primeiro Plano Arquitetura,Arquitetura,Valinhos,17,(19) 99616-6214,,"Rua Ferdinando Borin, 600 - Jardim Alto da Boa Vista, Valinhos - SP, 13272-100",4.9,11,OPERATIONAL,A,Nao iniciado
+0736,Projecamp Engenharia,Engenharia,Valinhos,17,(19) 4117-7770,http://projecamp.eng.br/,"R. Paulo Setúbal, 204 - Vila Sao Sebastiao, Valinhos - SP, 13271-070",5,2,OPERATIONAL,A,Nao iniciado
+0737,Projector Engenharia,Engenharia,Valinhos,17,(19) 3844-4111,http://www.projector.com.br/,"R. Luís Spiandorelli Neto, 30 - Vila Santo Antonio, Valinhos - SP, 13274-465",5,1,OPERATIONAL,A,Nao iniciado
+0738,Projeto Sign - Comunicação visual - Valinhos - SP,Construtora,Valinhos,17,(19) 3881-7130,http://www.projetosign.com.br/,"R. Luiz Lazaretti, 152 - Vale Verde, Valinhos - SP, 13279-010",4.6,156,OPERATIONAL,A,Nao iniciado
+0739,Projetos l Regularização | Habite-se | Construções e Reformas.,Construtora,Valinhos,17,(19) 99815-6356,,"Estr. Mun. do Roncáglia, 450 - Jardim America, Valinhos - SP, 13272-721",,,OPERATIONAL,A,Nao iniciado
+0740,Pronext Engenharia,Engenharia,Valinhos,17,(19) 4117-0285,https://pronextengenharia.com.br/,"R. Nicolau Vinícius Parodi, 422 - Jardim Monte Verde, Valinhos - SP, 13275-052",5,3,OPERATIONAL,A,Nao iniciado
+0741,Pró Apoio Engenharia,Engenharia,Valinhos,17,(19) 3231-5545,http://www.proapoio.com.br/,"R. Vitória Colombo Rossi, 467 - Jardim Vila Rosa, Valinhos - SP, 13270-260",,,OPERATIONAL,A,Nao iniciado
+0742,Quintal da Obra,Servicos correlatos,Valinhos,17,,,"R. das Vitórias Régias, 560 - Jardim das Vitorias Regias, Valinhos - SP, 13273-053",,,OPERATIONAL,A,Nao iniciado
+0743,R. Almeida Construtora,Construtora,Valinhos,17,(19) 3871-5417,,"R. Valdomiro Rossi, 151 - Jardim Nova Espirito Santo, Valinhos - SP, 13273-202",5,1,OPERATIONAL,A,Nao iniciado
+0744,RL Terraplenagem,Construtora,Valinhos,17,(19) 99860-8440,,"R. Eliza Bucioli Ribeiro - Jardim Sao Francisco, Valinhos - SP, 13272-156",5,5,OPERATIONAL,A,Nao iniciado
+0745,ROS ENGENHARIA E CONSTRUÇÃO,Construtora,Valinhos,17,(19) 99724-5072,,"Av. Remo Oscar Beseggio, 365 - Nova Espírito Santo, Valinhos - SP, 13273-649",,,OPERATIONAL,A,Nao iniciado
+0746,ROS | Regularização e Aprovação de Obras em Prefeitura -,Construtora,Valinhos,17,(19) 99724-5072,,"R. Natalino Spiandorelli, 20 - 2º Andar, Sala 04 - Bela Vista, Valinhos - SP, 13276-070",5,37,OPERATIONAL,A,Nao iniciado
+0747,RV Caçambas Valinhos,Construtora,Valinhos,17,(19) 99648-2224,,"R. das Azaléias, nº 3875 - Fonte Nova, Valinhos - SP, 13273-450",5,1,OPERATIONAL,A,Nao iniciado
+0748,Realfa Tubos e Bloquetes de Concreto Valinhos-Campinas,Servicos correlatos,Valinhos,17,,,"Av. Invernada, 2213 - Parque Nova Suica, Valinhos - SP, 13277-055",,,OPERATIONAL,A,Nao iniciado
+0749,Residencial Bella Vita Valinhos SP,Construtora,Valinhos,17,(19) 3869-6368,https://www.seinaimoveis.com.br/imoveis/lancamentos/525/apartamento/valinhos/sp/lancamento-bella-vita-residence-valinhos-/vila-olivo/,"Av. Independência, 945 - Vila Olivo, Valinhos - SP, 13276-030",5,3,OPERATIONAL,A,Nao iniciado
+0750,Revima Empreendimentos e Construções LTDA,Construtora,Valinhos,17,(19) 3237-0017,http://www.revima.com.br/,"Lot. Paiquere, Valinhos - SP, 13271-565",5,1,OPERATIONAL,A,Nao iniciado
+0751,Rincal Materiais para Construção,Construtora,Valinhos,17,(19) 97414-2425,https://www.rincal.com.br/,"R. Dr. Eraldo Aurélio Franzese, 266 - Jardim Paiquere, Valinhos - SP, 13271-608",4.8,471,OPERATIONAL,A,Nao iniciado
+0752,Rua vereador Antonio castro,Construtora,Valinhos,17,(19) 3871-3005,http://www.pticonexoes.com.br/,"Jardim Celani, Valinhos - SP, 13274-465",5,1,OPERATIONAL,A,Nao iniciado
+0753,SAD Topografia e Engenharia,Engenharia,Valinhos,17,(19) 99248-4676,https://sad.eng.br/,"Av. Joaquim Alves Corrêa, 4184 - Jardim Santo Antonio, Valinhos - SP, 13277-055",5,3,OPERATIONAL,A,Nao iniciado
+0754,SANEINFRA Engenharia e Projetos,Engenharia,Valinhos,17,(19) 3929-7202,https://saneinfra.com.br/,"R. José de Oliveira, 359 - Chácaras Silvânia, Valinhos - SP, 13271-653",5,9,OPERATIONAL,A,Nao iniciado
+0755,SKYE Studio Design,Construtora,Valinhos,17,(19) 99999-3005,http://www.skyestudiodesign.com/,"ATENDIMENTO COM HORA MARCADA - R. Paulo Setúbal, 302 - Sl 01 - Vila Angeli, Valinhos - SP, 13271-070",5,9,OPERATIONAL,A,Nao iniciado
+0756,SM2 Engenharia & Ambientes Planejados,Engenharia,Valinhos,17,(19) 3327-3143,,"Av. Onze de Agosto, nº1501 - Sl 04 - Jardim Ribeiro, Valinhos - SP, 13270-190",,,OPERATIONAL,A,Nao iniciado
+0757,Saneares Engenharia,Engenharia,Valinhos,17,(19) 3869-6461,http://www.saneares.com.br/,"R. Paiquerê, 1615 - Jardim Paiquere, Valinhos - SP, 13271-600",4.5,10,OPERATIONAL,A,Nao iniciado
+0758,Schery Construção Civil,Construtora,Valinhos,17,(19) 3929-5197,,"Av. Joaquim Alves Corrêa, 2988 - Jardim Imperial, Valinhos - SP, 13270-400",4.8,13,OPERATIONAL,A,Nao iniciado
+0759,Seeng Serviços Engenharia,Engenharia,Valinhos,17,(19) 3849-1713,https://www.seengengenharia.com.br/,"R. João Previtale, 888 - Santa Cruz, Valinhos - SP, 13272-315",3,2,OPERATIONAL,A,Nao iniciado
+0760,Senhor do Lar Materiais de Construção,Construtora,Valinhos,17,(19) 98460-9798,https://www.senhordolar.com.br/,"Av. Independência, 2122 - Jardim Santo Antonio, Valinhos - SP, 13277-000",4.8,158,OPERATIONAL,A,Nao iniciado
+0761,Silcon Construtora,Construtora,Valinhos,17,(19) 99296-9470,https://silconconstrutorae.wixsite.com/my-site,"R. José de Oliveira, 359 - Sl 12 - Chácaras Silvânia, Valinhos - SP, 13271-653",5,4,OPERATIONAL,A,Nao iniciado
+0762,Silmazi Materiais Para Construção,Construtora,Valinhos,17,(19) 3869-6994,,"R. Campos Salles, 2411 - Vila Faustina II, Valinhos - SP, 13272-350",4.5,122,OPERATIONAL,A,Nao iniciado
+0763,SondaMais - Sondagem de Solo e Engenharia,Engenharia,Valinhos,17,(19) 97426-6252,https://www.sondamais.com.br/,"R. Luís Spiandorelli Neto, 60 - Lot. Paiquere, Valinhos - SP, 13271-570",5,210,OPERATIONAL,A,Nao iniciado
+0764,Stal Engenharia,Engenharia,Valinhos,17,(19) 3327-8991,http://www.stalengenharia.com.br/,"Av. Brasil, 464 - Vila Santana, Valinhos - SP, 13274-010",4.5,10,OPERATIONAL,A,Nao iniciado
+0765,Stolarski Terraplanagem,Construtora,Valinhos,17,(19) 98885-2495,,"R. Palmira dos Santos Pupo - Jardim Panorama, Valinhos - SP, 13277-420",4.5,8,OPERATIONAL,A,Nao iniciado
+0766,Studio Gasan,Construtora,Valinhos,17,(19) 99665-2543,https://www.instagram.com/studio.gasan/,"Rod. Francisco Von Zuben, 1296 - Vila Faustina II, Valinhos - SP, 13274-465",,,OPERATIONAL,A,Nao iniciado
+0767,TAMARA ARQUITETURA E INTERIORES,Arquitetura,Valinhos,17,(19) 99312-2542,https://www.instagram.com/tamaramagalhaes.arq/,"R. Vitório Randi, 135 - Jardim Alto da Boa Vista, Valinhos - SP, 13727-106",,,OPERATIONAL,A,Nao iniciado
+0768,TERRASIL TERRAPLENAGEM E LOCAÇÕES,Construtora,Valinhos,17,(19) 97407-6613,,"R. João Juliato, 55 - Jardim Panorama, Valinhos - SP, 13277-414",4.9,38,OPERATIONAL,A,Nao iniciado
+0769,Tatu Terraplenagem,Construtora,Valinhos,17,(19) 97416-3430,,"Rua Hum, 04 - qd C - Jardim Samaritano, Valinhos - SP, 13272-716",3.8,10,OPERATIONAL,A,Nao iniciado
+0770,Terranova Terraplenagem,Construtora,Valinhos,17,(19) 3871-7474,,"Av. Independência, 2123 - Jardim Santo Antonio, Valinhos - SP, 13277-000",3.7,3,OPERATIONAL,A,Nao iniciado
+0771,Terraplenagem Bom Jesus,Construtora,Valinhos,17,(19) 99104-6615,,"R. Goiás, 208 - Vila Santana, Valinhos - SP, 13274-150",5,2,OPERATIONAL,A,Nao iniciado
+0772,Terraplenagem THGHumberto Guimarães,Construtora,Valinhos,17,(19) 97408-0472,,"Estr.Mun.Gov.Mario Covas km 4,5 Camping - Macuco, Valinhos - SP, 13279-411",,,OPERATIONAL,A,Nao iniciado
+0773,Tonetti & Associados - Arquitetura e Urbanismo,Arquitetura,Valinhos,17,(19) 3869-6950,,"Rua Fioravante Agnello, 1612 - Jardim Maria Ilydia, Valinhos - SP, 13272-006",,,OPERATIONAL,A,Nao iniciado
+0774,Topografia e Terraplenagem,Servicos correlatos,Valinhos,17,,,"R. Luís Bissoto, 662 - Jardim Bom Retiro, Valinhos - SP, 13275-900",,,OPERATIONAL,A,Nao iniciado
+0775,Transversal Engenharia - Elétrica e Hidráulica,Engenharia,Valinhos,17,(19) 97407-1321,,"R. Valdomiro Rossi, 805 - Jardim Nova Espirito Santo, Valinhos - SP, 13272-203",4.1,8,OPERATIONAL,A,Nao iniciado
+0776,UCP Engenharia Ltda,Engenharia,Valinhos,17,(19) 3829-1397,http://www.ucpengenharia.com/,"R. Antônio Moisés, 396 - Vila Pagano, Valinhos - SP, 13277-240",4.8,6,OPERATIONAL,A,Nao iniciado
+0777,União Caçambas,Construtora,Valinhos,17,(19) 99648-2224,https://www.googlenegocioslocais.com.br/uniao-cacambas-valinhos/,"R. Maria Andréoli Roveri, 61 - Jardim Novo Horizonte, Valinhos - SP, 13272-025",4.8,36,OPERATIONAL,A,Nao iniciado
+0778,VALITERRA TERRAPLENAGEM,Construtora,Valinhos,17,(19) 99326-9277,,"Rod. Flávio de Carvalho, 1633 - Vila Capuava, Valinhos - SP, 13273-000",4.8,18,OPERATIONAL,A,Nao iniciado
+0779,VALY Engenharia - Regularização de Imóveis - ART de Reforma,Engenharia,Valinhos,17,,,"Nova Espírito Santo, Valinhos - SP, 13274-465",5,1,OPERATIONAL,A,Nao iniciado
+0780,VIDALAR MATERIAIS DE CONSTRUÇÃO,Construtora,Valinhos,17,(19) 3869-2860,,"Rod. Flávio de Carvalho, 1633 - Vila Capuava, Valinhos - SP, 13273-000",4.6,40,OPERATIONAL,A,Nao iniciado
+0781,VISANA ENGENHARIA E EQUIPAMENTOS,Engenharia,Valinhos,17,(19) 3363-5138,https://www.visanaengenharia.com.br/,"R. João Previtale, 2760 - No40, Valinhos - SP, 13272-400",,,OPERATIONAL,A,Nao iniciado
+0782,Val Incorporadora,Incorporadora,Valinhos,17,(19) 3829-4290,,"R. Luís Bissoto - Jardim Bom Retiro, Valinhos - SP, 13275-110",3,1,OPERATIONAL,A,Nao iniciado
+0783,Valente terraplenagem | Caçamba entulho,Construtora,Valinhos,17,(19) 99114-8009,,"Rod. dos Agricultores, 185 - Nova Espírito Santo, Valinhos - SP, 13270-000",4.8,5,OPERATIONAL,A,Nao iniciado
+0784,Vifran Comercial Construtora,Construtora,Valinhos,17,(19) 3517-8250,https://vifranconstrutora.com.br/,"R. Luís Spiandorelli Neto, 47 - Lot. Paiquere, Valinhos - SP, 13270-020",3.4,36,OPERATIONAL,A,Nao iniciado
+0785,Vila Itália Residence,Construtora,Valinhos,17,(11) 91314-1100,https://maclucer.com.br/,"R. Alexandre Pedroni, 181 - Castelo, Valinhos - SP, 13274-465",5,1,OPERATIONAL,A,Nao iniciado
+0786,Vivace Empreendimentos Imobiliários,Incorporadora,Valinhos,17,(19) 3849-4414,http://www.vivaceemp.com.br/,"Av. dos Esportes, 855 - Bela Vista, Valinhos - SP, 13270-210",3.3,7,OPERATIONAL,A,Nao iniciado
+0787,Vivus Engenharia,Engenharia,Valinhos,17,(19) 99787-0328,http://www.vivusengenharia.com.br/,"Av. dos Esportes, 855 - Sl 09 - Vila Clayton, Valinhos - SP, 13270-210",5,4,OPERATIONAL,A,Nao iniciado
+0788,ZARE ARQUITETURA,Arquitetura,Valinhos,17,(19) 99499-7739,https://www.zarearquitetura.com/,"R. Luís Spiandorelli Neto, 60 - Jardim Paiquere, Valinhos - SP, 13271-570",5,2,OPERATIONAL,A,Nao iniciado
+0789,iBUILD Construções Inteligentes | Construtora em Valinhos,Construtora,Valinhos,17,(19) 97139-5698,https://ibuildconstrutora.com.br/,"Rua Luís Spiandorelli Neto - Empreendimento Vértice, Torre Jequitibá - R. Paiquerê, 47 - sala 202 - Lot. Paiquere, Valinhos - SP, 13271-570",,,OPERATIONAL,A,Nao iniciado
+0790,marcos valente terraplenagem,Construtora,Valinhos,17,(19) 99637-8565,,"R. Rio Grande do Sul - Vila Santana, Valinhos - SP, 13274-110",,,OPERATIONAL,A,Nao iniciado
+0791,4e Engenharia e Energia,Engenharia,Vinhedo,9,(19) 99744-7344,,"Avenida Benedito Storani, 1425 - Sala, 107 B - Torre 2 - Santa Rosa, Vinhedo - SP, 13289-014",,,OPERATIONAL,A,Nao iniciado
+0792,A Ess Construções,Construtora,Vinhedo,9,(19) 3432-7952,,"R. João Edueta, nº 1550 - Parque das Paineiras, Vinhedo - SP, 13280-000",1,1,OPERATIONAL,A,Nao iniciado
+0793,ABN Bertazzoli,Construtora,Vinhedo,9,(19) 3836-2250,http://bertazzoli.com.br/engenharia,"Av. dos Imigrantes, 636 - Jardim Italia, Vinhedo - SP, 13280-000",5,6,OPERATIONAL,A,Nao iniciado
+0794,ARQTETOS!Contemporary Architecture & CO.,Construtora,Vinhedo,9,(19) 4119-1555,,"Av. Otávio Tasca, 317 - Vila Junqueira, Vinhedo - SP, 13280-000",5,2,OPERATIONAL,A,Nao iniciado
+0795,Addon Engenharia,Engenharia,Vinhedo,9,(19) 99922-0917,,"R. Miguel Ferragut, 35 - Sl 15 - Pinheirinho, Vinhedo - SP, 13289-448",5,1,OPERATIONAL,A,Nao iniciado
+0796,Aguiar Engenharia Trabalho e Treinamentos NR,Engenharia,Vinhedo,9,(19) 99139-6180,http://aguiarengtrabalho.com.br/,"R. Aquarela do Brasil, 137 - Vila Joao XXIII, Vinhedo - SP, 13283-184",5,3,OPERATIONAL,A,Nao iniciado
+0797,Alan Jones Cardoso - Arquiteto,Arquitetura,Vinhedo,9,(19) 3876-1999,,"Av. Arnaldo Biagioli, 711 - Pinheirinho, Vinhedo - SP, 13280-000",5,3,OPERATIONAL,A,Nao iniciado
+0798,Alcione de Oliveira Arquitetura,Arquitetura,Vinhedo,9,(19) 99216-0258,http://www.alcionedeoliveira.com.br/,"R. dos Pardais, 411 - Jardim Italia, Vinhedo - SP, 13280-000",5,5,OPERATIONAL,A,Nao iniciado
+0799,Alexandre O Mineiro Construtor,Construtora,Vinhedo,9,(19) 98253-6327,,"R. Diogo de Freitas, 76 - Altos do Morumbi, Vinhedo - SP, 13285-414",,,OPERATIONAL,A,Nao iniciado
+0800,Alfe Engenharia e Empreendimentos Imobiliários Ltda,Incorporadora,Vinhedo,9,(19) 3876-3057,http://alfe.com.br/,"Av. Rosa Zanetti Ferragut, 499 - Pinheirinho, Vinhedo - SP, 13280-000",4.9,9,OPERATIONAL,A,Nao iniciado
+0801,Alice Sturari Interiores,Arquitetura,Vinhedo,9,(19) 99808-9922,https://www.alicesturari.com.br/,"Rua Magdalena Ferragut, 60 - Sl 301 - Pinheirinho, Vinhedo - SP, 13289-324",4.8,54,OPERATIONAL,A,Nao iniciado
+0802,AlineLachi Arquitetura e Interiores,Arquitetura,Vinhedo,9,(19) 99126-8704,https://www.instagram.com/alinelachiarquitetura/,"Alameda Japurá - vista alegre, Vinhedo - SP, 13285-104",4,1,OPERATIONAL,A,Nao iniciado
+0803,Alvino Rocha - Construtor,Construtora,Vinhedo,9,(19) 3876-3321,,"R. Papa Pio X, 221 - Vila Joao XXIII, Vinhedo - SP, 13280-000",5,1,OPERATIONAL,A,Nao iniciado
+0804,Amaro Arquitetura,Arquitetura,Vinhedo,9,(19) 99178-3686,,"R. Augusto César Monteiro, 45 - Jardim Melle, Vinhedo - SP, 13283-474",,,OPERATIONAL,A,Nao iniciado
+0805,Ampliar Ambientes Vinhedo,Construtora,Vinhedo,9,(19) 99360-1633,,"R. Henrique Trevisan, 43 - Jd trevisan, Vinhedo - SP, 13280-000",4.8,25,OPERATIONAL,A,Nao iniciado
+0806,Apolinário Neto Construções e Empreendimentos,Construtora,Vinhedo,9,(19) 3826-4301,,"R. Santos Dumont, 410 - Vila Thereza, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0807,Araújo Engenharia Integridade de Equipamentos Industriais,Engenharia,Vinhedo,9,(19) 3826-5436,https://araujoengenharia.com.br/,"R. Manoel Matheus, 1645 - Jardim dos Passaros, Vinhedo - SP, 13289-190",4.6,45,OPERATIONAL,A,Nao iniciado
+0808,Argos Construções,Construtora,Vinhedo,9,(19) 97105-7335,http://argosconstrucoes.com/,"AV. BENEDITO STORANI, 1425 – SALA 104 – TORRE I (A - Santa Rosa, Vinhedo - SP, 13289-004",5,1,OPERATIONAL,A,Nao iniciado
+0809,Arquitetas e Arquitetos Grupo Guia-se em Vinhedo,Arquitetura,Vinhedo,9,(19) 3000-0002,http://www.guia-se.com.br/arquitetos/vinhedo/sp,"819 - Av. Brasil - Jd. Brasil, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0810,Arquiteto André Pescarini,Arquitetura,Vinhedo,9,(19) 99199-5868,,"R. Amazonas, 176 - Vila Planalto, Vinhedo - SP, 13280-081",,,OPERATIONAL,A,Nao iniciado
+0811,Arquitetos CuryCamargo,Arquitetura,Vinhedo,9,(19) 99641-3785,http://www.curycamargo.com.br/,"Alameda das Acácias, 125 - Bosque das Grevíleas, Vinhedo - SP, 13280-000",5,31,OPERATIONAL,A,Nao iniciado
+0812,Arquitetura & Design Juliana Pedraza,Arquitetura,Vinhedo,9,(19) 99177-4806,,"R. Eduardo Ferragut, 82 - Sl 04 - Pinheirinho, Vinhedo - SP, 13289-322",,,OPERATIONAL,A,Nao iniciado
+0813,Arquitetura idEA,Arquitetura,Vinhedo,9,(19) 3886-6789,http://www.arquiteturaidea.com.br/,"Rod. Edenor João Tasca, 3126 - Mirante Estrelas, Vinhedo - SP, 13280-000",4.7,13,OPERATIONAL,A,Nao iniciado
+0814,Arte Século - Ambientes Planejados,Construtora,Vinhedo,9,(19) 99379-0928,https://arteseculo.com.br/,"Av. Independência, 2655 - Estância das Flores, Vinhedo - SP, 13289-692",5,1,OPERATIONAL,A,Nao iniciado
+0815,Asmontec Salas Limpas,Construtora,Vinhedo,9,(19) 3846-1161,https://asmontec.com.br/,"R. Anésio Marciano, 92 - Nova Vinhedo, Vinhedo - SP, 13284-070",4.7,43,OPERATIONAL,A,Nao iniciado
+0816,Bacana & Jhow Terraplenagem,Construtora,Vinhedo,9,(19) 99156-9216,https://blog.tonasbuscascampinas.com/empresa-para-servicos-de-abertura-de-piscina-terraplenagem-em-campinas/,"R. Rubi, 604 - Paineiras, Vinhedo - SP, 13285-858",4,4,OPERATIONAL,A,Nao iniciado
+0817,Beth Araujo Arquitetura e Interiores,Arquitetura,Vinhedo,9,(19) 99287-9781,http://www.betharaujo.com.br/,"Rua Rua Siena, 500 - Cond Campo de Toscana - bairro Monte Alegre - Vinhedo/SP Cep: 13281-016 - Monte Alegre, Vinhedo - SP, 13281-016",4.4,9,OPERATIONAL,A,Nao iniciado
+0818,Bia Rohwedder Arquitetura,Arquitetura,Vinhedo,9,(19) 99797-3799,https://biarohwarquitetura.com.br/,"R. Brasília - Centro, Vinhedo - SP, 13280-105",5,5,OPERATIONAL,A,Nao iniciado
+0819,C2F Engenharia,Engenharia,Vinhedo,9,(19) 99779-0075,https://c2fengenharia.com.br/,"Polo Monteiro - Rua Célia P. Monteiro, 250 - Marambaia, Vinhedo - SP, 13287-004",5,13,OPERATIONAL,A,Nao iniciado
+0820,CANTEIRO DE OBRAS LD BELENUS,Construtora,Vinhedo,9,,,"Distrito Industrial Benedito Storani, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0821,CKalil - CRISTIANO KALIL ENGENHARIA,Engenharia,Vinhedo,9,(19) 3836-3467,https://www.instagram.com/cristianokalil.eng/,"Estr. da Boiada, 1500 - Pinheirinho, Vinhedo - SP, 13289-462",5,11,OPERATIONAL,A,Nao iniciado
+0822,CONSTRUÇÃO VINHEDO LOUVEIRA JUNDIAÍ ITUPEVA ITATIBA CAMPINAS,Construtora,Vinhedo,9,(19) 99779-4801,http://www.construsystem.com/,"R. Santo Antônio, 215 - Vila Thereza, Vinhedo - SP, 13280-000",4,1,OPERATIONAL,A,Nao iniciado
+0823,Caio Vinhedo,Construtora,Vinhedo,9,(19) 99762-7827,,"R. Humberto Pescarini, 330 - Centro, Vinhedo - SP, 13280-091",,,OPERATIONAL,A,Nao iniciado
+0824,Carolina Rizzo - Arquitetura e Interiores,Arquitetura,Vinhedo,9,(19) 99131-4386,https://www.instagram.com/carolinarizzo.arq/,"R. Henrique Pó - Villa João XXIII, Vinhedo - SP, 13283-306",4.9,49,OPERATIONAL,A,Nao iniciado
+0825,Carolina Rotella Arquitetura e Interiores,Arquitetura,Vinhedo,9,(19) 99858-1336,,"R. Fernando Costa, 1051 - Sl 18 - Vila Planalto, Vinhedo - SP, 13280-270",5,7,OPERATIONAL,A,Nao iniciado
+0826,Casa Gorski Decoração,Construtora,Vinhedo,9,(11) 99238-2366,https://www.casagorski.com.br/,"Av. Rosa Zanetti Ferragut, 645 - Lj 11 - Pinheirinho, Vinhedo - SP, 13289-300",5,27,OPERATIONAL,A,Nao iniciado
+0827,Cidinaldo Construções e Reformas,Construtora,Vinhedo,9,(35) 98701-4774,https://mechamenozap.com.br/cidinaldo-construcoes-e-reformas/,"R. Padre Joaquim Ap. da Rocha, 268 - Altos do Morumbi, Vinhedo - SP, 13285-442",,,OPERATIONAL,A,Nao iniciado
+0828,Cimcal Vinhedo Materiais p/Construção,Construtora,Vinhedo,9,(19) 3876-2527,http://cimcalvinhedo.com.br/,"_Estr. da Boiada, 134 - Santa Rosa, Vinhedo - SP, 13289-084",4.3,327,OPERATIONAL,A,Nao iniciado
+0829,Cineplast Cenotecnia,Construtora,Vinhedo,9,(19) 3309-1632,http://www.cineplast.com.br/,"Av. Otávio Tasca, 317 - Vila Joao XXIII, Vinhedo - SP, 13283-200",4.9,18,OPERATIONAL,A,Nao iniciado
+0830,"Cintia Francatto Arquitetura, Interiores e Paisagismo",Arquitetura,Vinhedo,9,(19) 99729-0690,https://cintiafrancatto.com.br/,"Caminho do Planalto, 487 - Santa Fé, Vinhedo - SP, 13282-562",5,11,OPERATIONAL,A,Nao iniciado
+0831,Cintia Rua Paisagismo,Construtora,Vinhedo,9,(19) 98112-1103,http://www.cintiarua.com.br/,"Av. dos Imigrantes, 291 - Jardim Italia, Vinhedo - SP, 13280-000",4.9,155,OPERATIONAL,A,Nao iniciado
+0832,Cleclim Arquitetura e Design,Arquitetura,Vinhedo,9,(11) 97274-7071,http://www.cleclim.com.br/,"Av. Independência, 2090 - Jardim Primavera, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0833,Comercial Ruzalem,Construtora,Vinhedo,9,(19) 3826-3707,http://www.ruzalem.com.br/,"Av. Independência, 4830 - Barra Funda, Vinhedo - SP, 13280-000",4.7,96,OPERATIONAL,A,Nao iniciado
+0834,Comércio e Construção Carlinhos Ltda EPP,Construtora,Vinhedo,9,(19) 97411-0753,http://www.comerciocarlinhos.com.br/,"Av. Otávio Tasca, 1210 - Vila Joao XXIII, Vinhedo - SP, 13283-000",4.4,608,OPERATIONAL,A,Nao iniciado
+0835,ConstruBest - Comércio e Representações Comerciais - Construção Civil / EPI,Construtora,Vinhedo,9,(19) 4119-1440,,"Av. Independência, 1329 - Vila Thereza, Vinhedo - SP, 13280-000",4,2,OPERATIONAL,A,Nao iniciado
+0836,Construmister construtora Prestação de serviços de construção civil ltda,Construtora,Vinhedo,9,(19) 99972-6132,,"R. São Paulo, 316 - Nova Vinhedo, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0837,Construtora Chirelli,Construtora,Vinhedo,9,(11) 94507-9787,,"Estrada Municipal da Fazenda 1320 Jd Mirian CEP 13283314 - Santa Rosa, Vinhedo - SP, 13289-170",,,OPERATIONAL,A,Nao iniciado
+0838,Construtora Levendoschi,Construtora,Vinhedo,9,(19) 99771-3460,https://instagram.com/construtora.levendoschi?igshid=YmMyMTA2M2Y=,"Al. Bauru, 49 - Jardim Paulista, Vinhedo - SP, 13280-000",5,1,OPERATIONAL,A,Nao iniciado
+0839,Construtora Riglau,Construtora,Vinhedo,9,(19) 99866-0803,,"Av. Independência, 2117 - Estância das Flores, Vinhedo - SP, 13289-700",5,5,OPERATIONAL,A,Nao iniciado
+0840,Construtora The Pool,Construtora,Vinhedo,9,,,"R. Fábio Junqueira Meirelles, 640 - Vila Santa Fe, Vinhedo - SP, 13280-000",5,2,OPERATIONAL,A,Nao iniciado
+0841,Convergente Engenharia Ltda,Engenharia,Vinhedo,9,(19) 2042-0062,https://www.convergente.eng.br/,"R. Fernando Costa, 374 - 2o andar - Barra Funda, Vinhedo - SP, 13280-087",,,OPERATIONAL,A,Nao iniciado
+0842,Creative Interior Design - Designer de Interiores - Vinhedo,Arquitetura,Vinhedo,9,(11) 99841-6190,https://creative-interior-design.webnode.com/,"R. empoli, 73 - Monte Alegre, Vinhedo - SP, 13281-066",5,1,OPERATIONAL,A,Nao iniciado
+0843,Cyro Gaspar Empreendimentos ltda,Construtora,Vinhedo,9,(19) 98120-6817,,"Rua: Joao Bertani - Vila Joao XIII, Vinhedo - SP, 13280-000",4,1,OPERATIONAL,A,Nao iniciado
+0844,Daniella Fray Arquitetura e Urbanismo,Arquitetura,Vinhedo,9,(19) 3886-3729,http://dfrayarquitetura.com.br/,"R. Eugênio Trevisan, 89 - 03 - Jardim Italia, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0845,Definitiva Decor,Construtora,Vinhedo,9,(19) 3201-9296,http://www.definitivadecor.com.br/,"TEMOS ESTACIONAMENTO - R. Aníbal Lélis de Miranda, 148 - Centro, Vinhedo - SP, 13280-057",4.9,144,OPERATIONAL,A,Nao iniciado
+0846,DellaBruna Arquitetura,Arquitetura,Vinhedo,9,(19) 3515-5571,http://dellabrunaarquitetura.com.br/,"Av. João Pescarini, 630 - Centro, Vinhedo - SP, 13280-144",4.9,11,OPERATIONAL,A,Nao iniciado
+0847,EDUARDO MUZI ARQUITETURA,Arquitetura,Vinhedo,9,(19) 3878-4505,,"R. Manoel Matheus, 1443 - Jardim Junco, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0848,Eduardo Muzi Arquitetura,Arquitetura,Vinhedo,9,(19) 99915-4505,http://www.eduardomuzi.com.br/,"R. Osvaldo Cruz, 266 - Centro, Vinhedo - SP, 13280-093",4.9,16,OPERATIONAL,A,Nao iniciado
+0849,Eisenreste Engenharia,Engenharia,Vinhedo,9,(19) 98330-3231,http://www.eisenreste.com/,"R. Fernandópolis, 122 - Marambaia, Vinhedo - SP, 13287-130",4.9,7,OPERATIONAL,A,Nao iniciado
+0850,Elemento Construtora e Incorporadora,Incorporadora,Vinhedo,9,(19) 97145-7664,https://www.elemento.com.br/,"R. Canários, 184 - Jardim Italia, Vinhedo - SP, 13280-000",4,25,OPERATIONAL,A,Nao iniciado
+0851,Elisa Lavie + Carol Araújo Arquitetura e Interiores,Arquitetura,Vinhedo,9,(19) 99260-7776,https://elisaecarolarquitetura.com.br/,"R. Manoel Matheus, 1646 - Sala 03 - Jardim dos Passaros, Vinhedo - SP, 13280-000",5,8,OPERATIONAL,A,Nao iniciado
+0852,Enertek Engenharia Projetos e Construção ME LTDA,Construtora,Vinhedo,9,,http://www.enertek.com.br/,"R. Sebastião Cardoso, 170 - Vista Alegre, Vinhedo - SP, 13285-336",,,OPERATIONAL,A,Nao iniciado
+0853,Engecon Construtora e Incorporadora,Incorporadora,Vinhedo,9,(19) 3886-5522,http://www.engeconsp.com.br/,"R. Humberto Pescarini, 500 - Centro, Vinhedo - SP, 13280-085",4.8,16,OPERATIONAL,A,Nao iniciado
+0854,Engefort Engenharia e Gerenciamento de Obras,Engenharia,Vinhedo,9,(19) 99206-1223,https://engefort-engenharia-e-gerenciamento-de-obras.negocio.site/?utm_source=gmb&utm_medium=referral,"Av. Salvador - R. Odair Rotella, 322 - Centro, Vinhedo - SP, 13280-158",5,1,OPERATIONAL,A,Nao iniciado
+0855,Engemape Construções e Comércio,Construtora,Vinhedo,9,(19) 3876-6641,http://www.engemape.com.br/,"Av. Páscoa Zanetti Trevisan, 222 - Jardim Italia, Vinhedo - SP, 13280-000",4.3,10,OPERATIONAL,A,Nao iniciado
+0856,Engenharia da Preparação,Engenharia,Vinhedo,9,(11) 93347-1629,https://engenhariadapreparacao.com.br/,"R. José Gallo, 30 - Vista Alegre, Vinhedo - SP, 13289-708",4.8,133,OPERATIONAL,A,Nao iniciado
+0857,Engethec Construções Engenharia,Construtora,Vinhedo,9,(19) 3836-3673,http://www.patriciazampieri.com.br/,"Av. Benedito Storani, 1300 - Res. Aquário, Vinhedo - SP, 13280-000",4.4,9,OPERATIONAL,A,Nao iniciado
+0858,Engetreli Engenharia,Engenharia,Vinhedo,9,(19) 3876-2329,http://www.engetreli.com/,"R. Geraldo Pinhata, 44 - Sl 3 - Jardim Alba, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0859,Engevilla Regularização de Imóveis e Serviços de Engenharia,Engenharia,Vinhedo,9,(19) 99779-8395,https://engevilla.com.br/,"R. Corvina, 127 - Sl 06 - Res. Joana, Vinhedo - SP, 13284-040",,,OPERATIONAL,A,Nao iniciado
+0860,Escritório arquitetura ID.AD,Arquitetura,Vinhedo,9,(19) 97408-7647,,"Rod. Edenor João Tasca, 970 A, Vinhedo - SP, 13283-652",5,2,OPERATIONAL,A,Nao iniciado
+0861,Everaldo Camilo Arquitetura Engenharia e Construção,Arquitetura,Vinhedo,9,(11) 97030-3680,http://www.everaldocamilo.com.br/,"R. Manoel Matheus, 623 - Barra Funda, Vinhedo - SP, 13280-000",5,9,OPERATIONAL,A,Nao iniciado
+0862,FARIA E FARIA MANUTENÇOES,Construtora,Vinhedo,9,(19) 98606-9365,,"Av. Benedito Storani, 1218 - Res. Joana, Vinhedo - SP, 13280-000",5,1,OPERATIONAL,A,Nao iniciado
+0863,FCS Engenharia LTDA,Engenharia,Vinhedo,9,(19) 3846-6831,http://www.engenhariafcs.com.br/,"R. Olívio Piton, 100 - Nova Vinhedo, Vinhedo - SP, 13284-202",5,6,OPERATIONAL,A,Nao iniciado
+0864,FERRAGUT MATERIAIS DE CONSTRUÇÃO,Construtora,Vinhedo,9,(19) 3886-5629,,"__Av. Independência, 4410 - Jardim Italia, Vinhedo - SP, 13280-000",4.5,216,OPERATIONAL,A,Nao iniciado
+0865,FL Engenharia e Cálculo Estrutural em Vinhedo SP,Engenharia,Vinhedo,9,(19) 99140-7335,https://abre.ai/flengenharia,"Av. Brasil, 265 - Jardim Brasil, Vinhedo - SP, 13280-000",5,8,OPERATIONAL,A,Nao iniciado
+0866,Fazenda Bahia Industrial Complex,Construtora,Vinhedo,9,(19) 99800-4060,https://fazendabahia.com/,"R. Comendador João Lucas Vinhedo, 101 - Loja 13 - Distrito Industrial de Vinhedo, Vinhedo - SP, 13288-970",5,9,OPERATIONAL,A,Nao iniciado
+0867,Fox 9 Terraplenagem,Construtora,Vinhedo,9,(19) 3886-0729,http://fox9terraplenagem.com.br/,"Av. dos Pinheiros, 25 - Sl 1 - Vila Lorenzon, Vinhedo - SP, 13280-000",2,2,OPERATIONAL,A,Nao iniciado
+0868,Fratesi e Bonásio Empreendimentos Imobiliários,Incorporadora,Vinhedo,9,(19) 3826-4403,,"Rua João Batista Falsarella, 29 - Jardim America, Vinhedo - SP, 13280-000",5,1,OPERATIONAL,A,Nao iniciado
+0869,Fruco Empreendimentos Imobiliários e Construtora,Incorporadora,Vinhedo,9,(19) 3876-1987,,"R. João Miguel Pafaro, 19 - Fazenda Santana, Vinhedo - SP, 13280-000",5,3,OPERATIONAL,A,Nao iniciado
+0870,GG Obras e Construção,Construtora,Vinhedo,9,(19) 99162-4709,https://ggobraseconstrucao.com.br/,"Rua Cinco de Junho - Capela, Vinhedo - SP, 13285-530",5,1,OPERATIONAL,A,Nao iniciado
+0871,Gabriel Bampa Arquitetura,Arquitetura,Vinhedo,9,(19) 3876-1665,http://www.gabrielbampa.com.br/,"Rua 24 de Outubro, 419 - Santa Rosa, Vinhedo - SP, 13280-000",5,3,OPERATIONAL,A,Nao iniciado
+0872,Genere Materiais para Construção Civil e Decorações,Construtora,Vinhedo,9,(19) 3886-5839,,"R. Santa Cruz, 525 - Vila Thereza, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0873,Gesso Decorativo/Contrução Reforma em Vinhedo,Construtora,Vinhedo,9,(19) 99123-3981,https://gessodecorativo.com.br/,"Jardim Bela Vista, Vinhedo - SP, 13285-832",5,57,OPERATIONAL,A,Nao iniciado
+0874,Gesso Líder Vinhedo,Construtora,Vinhedo,9,(19) 99119-5462,https://gessolidervinhedo.com.br/,"R. Theodoro Sebastião Pisoni, 655 - Fazenda Santana, Vinhedo - SP, 13283-270",5,57,OPERATIONAL,A,Nao iniciado
+0875,HJCON,Construtora,Vinhedo,9,(19) 3030-3573,https://hjcon.com.br/,"Av Benedito Storani, 1425 Anexo Torre 1 - Sala 208 - Santa Rosa, Vinhedo - SP, 13289-004",,,OPERATIONAL,A,Nao iniciado
+0876,HL ARQUITETA E ASSOCIADOS,Arquitetura,Vinhedo,9,(19) 98128-8089,http://hlarquiteta.com.br/,"288 - R. Piauí, 66 - Centro, Vinhedo - SP",,,OPERATIONAL,A,Nao iniciado
+0877,HM Engenharia Costeira e Portuária,Engenharia,Vinhedo,9,(19) 3826-1204,http://hm.eng.br/,"R. Rancho Fundo, 411 - Vila Pompéia, Vinhedo - SP, 13280-000",5,1,OPERATIONAL,A,Nao iniciado
+0878,Habitaoka Construções e Empreendimentos,Construtora,Vinhedo,9,(19) 3826-3359,,"Rua Ricardo Braghetto, 45 - Vila Thereza, Vinhedo - SP, 13280-000",3,1,OPERATIONAL,A,Nao iniciado
+0879,Harmonia Arquitetura,Arquitetura,Vinhedo,9,(19) 98109-4236,,"R. dos Cardeais, 179 - Jardim Italia, Vinhedo - SP, 13280-000",5,3,OPERATIONAL,A,Nao iniciado
+0880,Hoga Construções,Construtora,Vinhedo,9,(19) 3876-3532,,"Av. Benedito Storani, 1659 - c, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0881,Home Inspiration,Construtora,Vinhedo,9,(19) 3876-5085,,"Av. Benedito Storani, 901 - Santa Rosa, Vinhedo - SP, 13289-004",5,3,OPERATIONAL,A,Nao iniciado
+0882,IJ Construtora,Construtora,Vinhedo,9,(11) 97137-1010,https://www.construtoraij.com.br/,"R. Miguel Ferragut, 35 - Sl 10 - Pinheirinho, Vinhedo - SP, 13289-448",4.2,10,OPERATIONAL,A,Nao iniciado
+0883,Ias Construtora,Construtora,Vinhedo,9,(19) 99764-3290,https://www.iasconstrutora.com.br/,"R. Riachuelo, 107 - Barra Funda, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0884,"Ihmes Bobcat, Perfuração Solo e Terraplanagem",Construtora,Vinhedo,9,(19) 99198-9645,,"R. Bruxelas, 595 - Altos do Morumbi, Vinhedo - SP, 13280-000",5,6,OPERATIONAL,A,Nao iniciado
+0885,Innov Home Engenharia e Design,Engenharia,Vinhedo,9,(19) 3030-3334,https://innovhome.com.br/,"Av. Benedito Storani, 1.425 - Torre 1 - Sala 202 - Res. Aquário, Vinhedo - SP, 13280-000",1,1,OPERATIONAL,A,Nao iniciado
+0886,InovaEstruturas – Projetos de Concreto Armado,Servicos correlatos,Vinhedo,9,,,"R. Celso Geraldini, 160 - Capela, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0887,Iso Construções e Incorporações,Construtora,Vinhedo,9,(19) 3876-3069,,"R. Bruxelas, 29 - Altos do Morumbi, Vinhedo - SP, 13280-000",4,3,OPERATIONAL,A,Nao iniciado
+0888,Isoville Engenharia e Indústria,Engenharia,Vinhedo,9,(47) 99656-9684,http://isoville.com.br/,"R. Graciosa Trevisan Saltori - Nova Vinhedo, Vinhedo - SP, 13280-000",5,1,OPERATIONAL,A,Nao iniciado
+0889,J P O Construtora,Construtora,Vinhedo,9,(19) 3856-4148,,"Av. Theodoro Gogola, 213 - Distrito Industrial Benedito Storani, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0890,JBF Engenharia,Engenharia,Vinhedo,9,(19) 3886-4227,,"R. Humberto Pescarini, 276 - Centro, Vinhedo - SP, 13280-262",,,OPERATIONAL,A,Nao iniciado
+0891,Jf Construtora Vinhedo,Construtora,Vinhedo,9,,,"R. Giuseppe Urso, 720, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0892,KARINA MALVEZZI Arquitetura & Interiores,Arquitetura,Vinhedo,9,(19) 99761-3775,https://www.karinamalvezzi.com.br/,"R. Manoel Matheus, 1646 - Sl 10 - Jardim dos Passaros, Vinhedo - SP, 13289-190",5,2,OPERATIONAL,A,Nao iniciado
+0893,KCC Arquitetos Associados,Arquitetura,Vinhedo,9,(19) 99641-3785,http://arquitetoskcc.com/,"Al. das Acacias, 125 - Bosques de Grevílea - Santa Rosa, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0894,L. Marcussi Arquitetura e Engenharia,Arquitetura,Vinhedo,9,(19) 3826-4073,,"Estr. da Boiada, 510 - Lot. Banespa, Vinhedo - SP, 13289-084",5,3,OPERATIONAL,A,Nao iniciado
+0895,"LM Arquitetura, Paisagismo e Interiores",Arquitetura,Vinhedo,9,(19) 99126-8015,https://www.luizmatheus.arq.br/,"Caminho do Planalto, 265 - Vale da Santa Fé, Vinhedo - SP, 13282-562",5,19,OPERATIONAL,A,Nao iniciado
+0896,Lara Arquitetura e Criação,Arquitetura,Vinhedo,9,(19) 98300-1201,https://laraarqcria.netlify.app/?fbclid=PAVERFWAST_CJleHRuA2FlbQIxMABzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAaeOtDypiprQB02xSE4vSHE1V8z_VykjfrBS52bbjP9GJtQEanU3Rk4Uan_Vyg_aem_WJY9MzHXOI69uVxSWDsegw#contato,"Rua Antônio Viel - Jardim Eldorado, Vinhedo - SP, 13285-410",5,26,OPERATIONAL,A,Nao iniciado
+0897,Links Consultoria em Projetos de Engenharia,Engenharia,Vinhedo,9,(19) 3876-0094,,"R das Arapongas, 90 - Jardim Italia, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0898,Litucera Limpeza e Engenharia Ltda.,Engenharia,Vinhedo,9,(19) 3826-2260,http://litucera.com.br/,"R. Eduardo Ferragut, 55 - Pinheirinho, Vinhedo - SP, 13289-322",3.2,62,OPERATIONAL,A,Nao iniciado
+0899,M.A. Arquitetura,Arquitetura,Vinhedo,9,,,"Av. Benedito Storani, 95 - Vila Thereza, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0900,M2P LAB ARQUITETURA E DESIGN ESTRATÉGICO,Arquitetura,Vinhedo,9,(19) 99946-4720,http://www.instagram.com/M2PLAB,"PREMIUM OFFICE & MALL - Av. Benedito Storani, 1425 - Sl 201 - TORRE 01 - Santa Rosa, Vinhedo - SP, 13284-002",,,OPERATIONAL,A,Nao iniciado
+0901,M3 SOLUÇÕES - CAÇA VAZAMENTOS E OBRAS EM GERAL,Servicos correlatos,Vinhedo,9,,,"R. João Pinheiro, 121 - Barra Funda, Vinhedo - SP, 13280-111",,,OPERATIONAL,A,Nao iniciado
+0902,MARANHÃO ENGENHARIA,Engenharia,Vinhedo,9,(19) 99702-2538,https://www.engenhariamaranhao.com.br/,"R. Humberto Pescarini, 176 - Centro, Vinhedo - SP, 13280-085",5,1,OPERATIONAL,A,Nao iniciado
+0903,MATIAS MATERIAIS PARA CONSTRUÇÃO,Construtora,Vinhedo,9,(11) 97701-0115,,"On-line WhatsApp; 19 97169 - 6245___R. Arnaldo Mamprin, 200 - Parque São José, Vinhedo - SP, 13286-408",5,47,OPERATIONAL,A,Nao iniciado
+0904,Magro Engenharia e Arquitetura Ltda,Arquitetura,Vinhedo,9,(19) 3876-1570,http://www.magroengenharia.com.br/,"R. João Corazzari, 305 - Centro, Vinhedo - SP, 13280-091",4.8,5,OPERATIONAL,A,Nao iniciado
+0905,Maira Lago Arquitetura,Arquitetura,Vinhedo,9,(19) 99685-4772,,"Av. Benedito Storani, 1314 - Sl 8 - Res. Aquário, Vinhedo - SP, 13284-002",,,OPERATIONAL,A,Nao iniciado
+0906,Marcenaria Antonio Soares,Construtora,Vinhedo,9,(19) 99870-9898,,"R. Antônio Ferragut, 826 - Jardim Primavera, Vinhedo - SP, 13289-328",5,3,OPERATIONAL,A,Nao iniciado
+0907,Martini Arquitetura,Arquitetura,Vinhedo,9,(19) 3876-4844,https://martiniarquitetura.com.br/,"R. Luíz Mingarelli, 57 - Centro, Vinhedo - SP, 13280-000",4.7,22,OPERATIONAL,A,Nao iniciado
+0908,Mateus de Oliveira - Engenharia de Climatização,Engenharia,Vinhedo,9,(16) 98118-5635,https://www.instagram.com/mateusoliveira_hvac/,"Estrada Municipal da Capela, 1617 - Vista Alegre, Vinhedo - SP, 13285-018",5,2,OPERATIONAL,A,Nao iniciado
+0909,Melle Empreendimentos Imobiliários,Incorporadora,Vinhedo,9,(19) 3886-2013,,"R. João Corazzari, 305 - Centro, Vinhedo - SP, 13280-000",2.5,2,OPERATIONAL,A,Nao iniciado
+0910,Mestre da Obra Locações,Servicos correlatos,Vinhedo,9,,,"Av. Salvador Rotella, 154 - Centro, Vinhedo - SP, 13280-158",,,OPERATIONAL,A,Nao iniciado
+0911,Mpinturas,Construtora,Vinhedo,9,(19) 99900-9652,,"R. Santa Cruz, 851 - Centro, Vinhedo - SP, 13280-041",5,1,OPERATIONAL,A,Nao iniciado
+0912,Muril'Ex Gesso,Construtora,Vinhedo,9,(19) 99768-2783,,"R. Sete de Setembro - Nova Vinhedo, Vinhedo - SP, 13284-056",5,39,OPERATIONAL,A,Nao iniciado
+0913,Natalia Salcedo Arquitetura,Arquitetura,Vinhedo,9,,,"Rua Antonio Maria - R. Antônio M Tôrres Filho, 32 - sala 02 - Jardim Flora, Vinhedo - SP, 13280-000",5,3,OPERATIONAL,A,Nao iniciado
+0914,PATRÍCIA ZAMPIERI Arquitetura Engenharia Interiores e Gestão Ltda,Arquitetura,Vinhedo,9,(19) 97402-9882,http://www.patriciazampieri.com.br/,"R. Canários, 65 - Sl 08 - Jardim Italia, Vinhedo - SP, 13289-150",5,46,OPERATIONAL,A,Nao iniciado
+0915,PAULA NAMORATO ARQUITETURA E INTERIORES,Arquitetura,Vinhedo,9,(19) 98191-1720,http://paulanamoratoarquitetura.com/,"Av. Brasil, 819 - Sl 02 - Jardim brasil, Vinhedo - SP, 13289-068",5,4,OPERATIONAL,A,Nao iniciado
+0916,PETER O PINTOR .O Pincel Mais Rápido de Vinhedo e Região,Construtora,Vinhedo,9,(19) 99887-8720,http://peterpintoreletricistadevinhedo.com/,"25 de Julho, 125 - Capela, Vinhedo - SP, 13285-528",5,31,OPERATIONAL,A,Nao iniciado
+0917,PINA ARQUITETURA,Arquitetura,Vinhedo,9,(19) 99710-0725,http://www.pinaarquitetura.com.br/,"R. Pica Paus, 81 - Jardim Brasil, Vinhedo - SP, 13280-000",4.6,13,OPERATIONAL,A,Nao iniciado
+0918,Patricia Madureira - Arquitetura e Design de Interiores,Arquitetura,Vinhedo,9,(19) 99761-9373,http://patriciamadureira.com.br/,"Rua Antônio - Maria - R. Antônio M Tôrres Filho, 73 - Sl 1 - Jardim Primavera, Vinhedo - SP, 13280-166",5,5,OPERATIONAL,A,Nao iniciado
+0919,Pillar Construtora Ltda.,Construtora,Vinhedo,9,(19) 3836-2628,https://construtorapillar.eng.br/,"R. Bel João Marquês, 79 - João Xxiii, Vinhedo - SP, 13283-276",5,1,OPERATIONAL,A,Nao iniciado
+0920,Planterra,Construtora,Vinhedo,9,(19) 3876-4588,http://www.planterraterraplenagem.com.br/,"Av. João Paffaro, 2415 - Pinheirinho, Vinhedo - SP, 13280-000",4,6,OPERATIONAL,A,Nao iniciado
+0921,Prado e Zechin Arquitetura,Arquitetura,Vinhedo,9,(19) 99939-7939,,"R. Manoel Matheus, 1056 - Jardim Italia, Vinhedo - SP, 13280-304",5,4,OPERATIONAL,A,Nao iniciado
+0922,Primavera Incorporações e Participações,Construtora,Vinhedo,9,(19) 3886-1551,,"R. Manoel Matheus, 239 - sl - Barra Funda, Vinhedo - SP, 13280-000",4,4,OPERATIONAL,A,Nao iniciado
+0923,Prisco Arquitetos,Arquitetura,Vinhedo,9,(19) 99795-7778,,"Av. Benedito Storani, 1425 - Sl 201 - TORRE 01 - Santa Rosa, Vinhedo - SP, 13284-002",,,OPERATIONAL,A,Nao iniciado
+0924,Projetare Arquitetura e Engenharia,Arquitetura,Vinhedo,9,(19) 99801-9315,,"R. Manoel Matheus, 1440 - Sl 4 - Santa Rosa, Vinhedo - SP, 13289-144",5,4,OPERATIONAL,A,Nao iniciado
+0925,R&B Engenharia,Engenharia,Vinhedo,9,(19) 99748-5709,https://www.rebengenharia.com.br/,"R. Sete de Setembro, 210 - Res. Aquário, Vinhedo - SP, 13284-056",,,OPERATIONAL,A,Nao iniciado
+0926,REENG Projetos e Obras Ltda,Servicos correlatos,Vinhedo,9,,,"Alameda das Araucárias, 77 - Bosque das Grevíleas, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0927,RJ Manutenções e Reparos | Serviços,Construtora,Vinhedo,9,(19) 3826-1040,https://www.manutencaovinhedo.com.br/?utm_source=google&utm_medium=wix_google_business_profile&utm_campaign=14660315098144180302,"R. Aristóteles Mendes, 39 - Vida Nova 3, Vinhedo - SP, 13285-884",,,OPERATIONAL,A,Nao iniciado
+0928,RM Mais Engenharia,Engenharia,Vinhedo,9,(19) 3876-1009,http://www.rmmais.com.br/,"R. Humberto Pescarini, 735 - Centro, Vinhedo - SP, 13280-262",5,17,OPERATIONAL,A,Nao iniciado
+0929,Renata Anchieta Arquitetura e Interiores,Arquitetura,Vinhedo,9,(19) 99456-0076,,"Av. Pres. Castelo Branco, 1062 - Nova Vinhedo, Vinhedo - SP, 13284-204",,,OPERATIONAL,A,Nao iniciado
+0930,Renata Guastelli Paisagismo,Construtora,Vinhedo,9,(19) 99835-8657,https://www.renataguastelli.com.br/,"Av. dos Imigrantes, 327 - Sl 1 - Jardim Italia, Vinhedo - SP, 13289-130",5,4,OPERATIONAL,A,Nao iniciado
+0931,RiskSeg Engenharia de Riscos,Engenharia,Vinhedo,9,(11) 2613-9367,http://www.riskseg.com.br/,"Av. Brasil, 716 - Aquário, Vinhedo - SP, 13289-068",4.9,27,OPERATIONAL,A,Nao iniciado
+0932,Rma Rental Terraplenagem Ltda,Construtora,Vinhedo,9,,,"Av. João Paffaro, 1728 - Jardim Primavera, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0933,Rocan Construtora e Empreendimentos Imob,Incorporadora,Vinhedo,9,(19) 3836-3776,,"R das Arapongas, 90 - Jardim Italia, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0934,S & A Engenharia e Comércio Ltda - Infraestrutura - Civil - Ambiental,Engenharia,Vinhedo,9,(19) 3876-3190,,"R. Cavala, 10 - Res. Aquário, Vinhedo - SP, 13280-000",5,1,OPERATIONAL,A,Nao iniciado
+0935,SC Projetos e Engenharia,Engenharia,Vinhedo,9,(19) 99525-5436,http://scprojeng.eng.br/,"R. dos Cardeais, 44 - Room 03 - Jardim Italia, Vinhedo - SP, 13289-188",,,OPERATIONAL,A,Nao iniciado
+0936,"SSR TECNOLOGIA, ENGENHARIA E AEROLEVANTAMENTOS LTDA",Engenharia,Vinhedo,9,(19) 3886-4800,http://www.ssr.com.br/,"R. Luíz Briski, 1020 - Nova Vinhedo, Vinhedo - SP, 13284-198",4.7,39,OPERATIONAL,A,Nao iniciado
+0937,Santa Rita Materiais para Construção - Vinhedo,Construtora,Vinhedo,9,(19) 99910-8329,,"On-line WhatsApp; 19 97169 - 6245___R. do Café, 593 - Jardim Palmares, Vinhedo - SP, 13285-554",4.7,76,OPERATIONAL,A,Nao iniciado
+0938,Secretaria de Obras de Vinhedo,Servicos correlatos,Vinhedo,9,,,"R. João Corazzari, 361 - Centro, Vinhedo - SP, 13280-091",,,OPERATIONAL,A,Nao iniciado
+0939,Seveplan terraplenagem,Servicos correlatos,Vinhedo,9,,,"R. Fluminense, 428 - Marambaia, Vinhedo - SP, 13287-164",,,OPERATIONAL,A,Nao iniciado
+0940,Silva& construção,Construtora,Vinhedo,9,(19) 95326-0938,,"R. Mato Grosso - Vila Joao XXIII, Vinhedo - SP, 13283-058",5,2,OPERATIONAL,A,Nao iniciado
+0941,Singapura Construção e Montagens Industriais,Construtora,Vinhedo,9,,http://www.singapura.eng.br/,"R. José Gallo, 320 - Vista Alegre, Vinhedo - SP, 13285-332",4.3,11,OPERATIONAL,A,Nao iniciado
+0942,Sol Vinhedo Empreendimentos Imobiliários,Incorporadora,Vinhedo,9,(19) 3876-1103,,"Estr. da Boiada, 500 - Lot. Banespa, Vinhedo - SP, 13280-000",3,3,OPERATIONAL,A,Nao iniciado
+0943,Studio 146 Arquitetura e Interiores,Arquitetura,Vinhedo,9,(19) 98133-3684,https://studio146arquitetura.com/,"R. João Gasparini, 75 - Centro, Vinhedo - SP, 13280-306",5,21,OPERATIONAL,A,Nao iniciado
+0944,Studio 146 Arquitetura e Interiores,Arquitetura,Vinhedo,9,(19) 98133-3684,,"R. João Gasparini, 75 - Centro, Vinhedo - SP, 13280-302",,,OPERATIONAL,A,Nao iniciado
+0945,Studio Andrietta | Ligia Andrietta,Construtora,Vinhedo,9,(19) 99202-5858,,"Av. Independência, 5600 - Sl 1 - Vila Thereza, Vinhedo - SP, 13280-019",5,25,OPERATIONAL,A,Nao iniciado
+0946,Studio DUO. arquitetura,Arquitetura,Vinhedo,9,(19) 3309-1601,,"R. dos Cardeais, 110 - Jardim Italia, Vinhedo - SP, 13289-188",5,1,OPERATIONAL,A,Nao iniciado
+0947,Studio KT Arquitetura e Interiores,Arquitetura,Vinhedo,9,(19) 3246-1188,http://www.studiokt.com.br/,"Av. Páscoa Zanetti Trevisan, 609 - Jardim Italia, Vinhedo - SP, 13289-172",4.2,5,OPERATIONAL,A,Nao iniciado
+0948,Studio i9 Arquitetura,Arquitetura,Vinhedo,9,(19) 98818-3264,http://www.instagram.com/studioi9arquitetura,"R. Palmeiras, 172 b - Residencial Flora, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0949,São José Empreendimentos Imobiliários e Participações,Incorporadora,Vinhedo,9,(19) 3856-4430,,"R. Edgar Genezini, 255 - Fazenda Santana, Vinhedo - SP, 13280-000",3,2,OPERATIONAL,A,Nao iniciado
+0950,Sólido Engenharia e Automação,Engenharia,Vinhedo,9,(19) 3886-7287,,"Av. Avelino Capellato, 1060 - Sl 1 - Vila Santa Claudina, Vinhedo - SP, 13284-480",,,OPERATIONAL,A,Nao iniciado
+0951,Tais Bichara Arquitetura,Arquitetura,Vinhedo,9,(19) 99791-9132,http://www.taisbichara.com.br/,"R. Eugênio Trevisan, 89 - Sl 7 - Jardim Italia, Vinhedo - SP, 13280-000",5,2,OPERATIONAL,A,Nao iniciado
+0952,Tatu Terraplenagem,Construtora,Vinhedo,9,(19) 3929-5254,,"R. Augusto Zanotti - Chácaras São Bento, Vinhedo - SP, 13280-000",2,9,OPERATIONAL,A,Nao iniciado
+0953,Tecno Blocos Em Concreto,Construtora,Vinhedo,9,(19) 99612-5147,https://tecnoblocosemconcreto.com.br/,"R. Carborundum, 114 - Vista Alegre, Vinhedo - SP, 13285-326",,,OPERATIONAL,A,Nao iniciado
+0954,Tecnocorp,Construtora,Vinhedo,9,(11) 98262-1155,,"R. São Sebastião, 1971 - Banespa, Vinhedo - SP, 13280-000",4,1,OPERATIONAL,A,Nao iniciado
+0955,Tek Casa - Juliana Bandina Maurício Projetos e Construções,Construtora,Vinhedo,9,(19) 99255-5815,http://jubm.com.br/,"Av. Benedito Storani, 1425 - Res. Aquário, Vinhedo - SP, 13280-000",5,2,OPERATIONAL,A,Nao iniciado
+0956,Terraplanagem Alemão do trevo 🍀,Construtora,Vinhedo,9,(19) 98886-3783,,"Rua Tokio, 119 - Altos do Morumbi, Vinhedo - SP, 13285-322",,,OPERATIONAL,A,Nao iniciado
+0957,Terraplenagem musselli planterra,Construtora,Vinhedo,9,(19) 3876-4588,,"R. Riachuelo, 687 - Vila Gallo, Vinhedo - SP, 13280-000",,,OPERATIONAL,A,Nao iniciado
+0958,The Pool Piscinas em Concreto Armado e Alvenaria Estrutural,Construtora,Vinhedo,9,(11) 98441-8600,http://www.thepool.com.br/,"R. Fábio Junqueira Meirelles, 640 - Res. Vida Nova III, Vinhedo - SP, 13285-872",5,81,OPERATIONAL,A,Nao iniciado
+0959,Tiago Morselli Pinturas,Construtora,Vinhedo,9,(19) 99959-7815,,"R. Antonio Von Zuben, 111 - Jardim Alba, Vinhedo - SP, 13289-034",4.9,9,OPERATIONAL,A,Nao iniciado
+0960,Tripe Arquitetura,Arquitetura,Vinhedo,9,(19) 97117-4030,https://www.tripearq.com.br/,"Rua 24 de Outubro, 330 - Centro, Vinhedo - SP, 13280-089",4.7,13,OPERATIONAL,A,Nao iniciado
+0961,"VEC Engenharia, Arquitetura, Restauro e Gestão",Arquitetura,Vinhedo,9,,,"vec@vecprojetos.com.br - R. Manoel Matheus, 623 - Centro, Vinhedo - SP, 13280-103",5,1,OPERATIONAL,A,Nao iniciado
+0962,VI Engenharia e Construção,Construtora,Vinhedo,9,(19) 99249-0660,,"Premium Portal-Mall - Rua Magdalena Ferragut, 80 - Sl 306 - OFFICE 1 - Pinheirinho, Vinhedo - SP, 13289-324",,,OPERATIONAL,A,Nao iniciado
+0963,Vagner S. Bellini - Engenheiro Civil | Engenheiro de Segurança do Trabalho,Construtora,Vinhedo,9,(19) 98393-6522,,"R. Afonso Garbuio, 800 - Santa Claudina, Vinhedo - SP, 13284-400",,,OPERATIONAL,A,Nao iniciado
+0964,Vicorp Empreendimentos Imobiliários,Incorporadora,Vinhedo,9,(19) 3876-5957,https://www.vicorp.com.br/,"R. João Corazzari, N 196 - Barra Funda, Vinhedo - SP, 13280-091",3.9,10,OPERATIONAL,A,Nao iniciado
+0965,Victória Ribeiro Arquitetura,Arquitetura,Vinhedo,9,(19) 99982-0456,http://www.victoriaribeiro.com.br/,"R. Nove de Julho, 430 - Centro, Vinhedo - SP, 13280-103",5,1,OPERATIONAL,A,Nao iniciado
+0966,Vig Art Arquitetura,Arquitetura,Vinhedo,9,(19) 98207-0006,,"R. Humberto Pescarini, 40 - Centro, Vinhedo - SP, 13280-178",1,1,OPERATIONAL,A,Nao iniciado
+0967,Vigneto Desenvolvimento Imobiliário,Construtora,Vinhedo,9,(19) 3836-3269,http://www.vigneto.com.br/,"R. Humberto Pescarini, 30 - Centro, Vinhedo - SP, 13280-085",3.5,43,OPERATIONAL,A,Nao iniciado
+0968,Vintage Arquitetura e Interiores,Arquitetura,Vinhedo,9,(19) 99174-8804,https://vintage.arq.br/,"Av. Benedito Storani, 1425 - torre 2 sala 106 - Res. Aquário, Vinhedo - SP, 13289-014",5,9,OPERATIONAL,A,Nao iniciado
+0969,WM Sistec Engenharia e Construção,Construtora,Vinhedo,9,(19) 3886-4714,https://wmsistec.com.br/,"Av. Pres. Castelo Branco, 1000 - Nova Vinhedo, Vinhedo - SP, 13284-408",5,6,OPERATIONAL,A,Nao iniciado
+0970,WV Arquitetos - Waldemar e Vera Schilling Arquitetos,Arquitetura,Vinhedo,9,(19) 3826-1618,,"R. dos Vereadores, 40 - Centro, Vinhedo - SP, 13280-274",5,3,OPERATIONAL,A,Nao iniciado
+0971,i9 Regularização de Projetos,Construtora,Vinhedo,9,(19) 99206-1223,,"Avenida Salvador Rotella, 322 - Sl 02 - Centro, Vinhedo - SP, 13280-158",,,OPERATIONAL,A,Nao iniciado
+0972,i9M2 Engenharia e Construções,Construtora,Vinhedo,9,(11) 96398-5892,https://i9m2.com.br/,"R. Anésio Augusto do Amaral, 41 - Jardim - Santa Rosa, Vinhedo - SP, 13289-158",5,2,OPERATIONAL,A,Nao iniciado
+0973,melix arquitetura,Arquitetura,Vinhedo,9,(11) 99103-8208,https://www.instagram.com/melixarquitetura,"Av. Arnaldo Biagioli, 81 - Sala 2 - Jardim dos Passaros, Vinhedo - SP, 13289-236",5,5,OPERATIONAL,A,Nao iniciado
+0974,"senior servicos gerais, pedreiro, pintor ,marceneiro, eletricista",Construtora,Vinhedo,9,(19) 99170-6196,,"R. Ayrton Senna da Silva, 155 - jardim miriam, Vinhedo - SP, 13283-286",4.8,16,OPERATIONAL,A,Nao iniciado
