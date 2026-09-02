@@ -35,15 +35,18 @@ FIELDS_DETALHE = ",".join([
     "websiteUri", "rating", "userRatingCount", "businessStatus",
 ])
 
+# searchNearby nao aceita nextPageToken no field mask (retorna HTTP 400)
+FIELDS_GRADE = FIELDS_DESCOBERTA.replace(",nextPageToken", "")
+
 ENDPOINT_DETALHE = "https://places.googleapis.com/v1/places/"
 
 # (municipio, lat, lon, raio_m, tier) - tier 1 = nucleo <=25km de Louveira
 MUNICIPIOS = [
-    ("Louveira",             -23.0872, -46.9508,  8000, 1),
-    ("Vinhedo",              -23.0299, -46.9750,  9000, 1),
-    ("Valinhos",             -22.9707, -46.9958, 11000, 1),
-    ("Jundiai",              -23.1857, -46.8978, 16000, 1),
-    ("Itupeva",              -23.1528, -47.0578, 11000, 1),
+    ("Louveira",             -23.0872, -46.9508,  8000, 0),
+    ("Vinhedo",              -23.0299, -46.9750,  9000, 0),
+    ("Valinhos",             -22.9707, -46.9958, 11000, 0),
+    ("Jundiai",              -23.1857, -46.8978, 16000, 0),
+    ("Itupeva",              -23.1528, -47.0578, 11000, 0),
     ("Itatiba",              -23.0053, -46.8389, 12000, 1),
     ("Jarinu",               -23.1017, -46.7283, 11000, 2),
     ("Campinas",             -22.9099, -47.0626, 20000, 2),
@@ -67,6 +70,11 @@ TERMOS = [
     "arquiteto", "arquitetura e interiores", "projetos de engenharia",
     "gerenciamento de obras", "reforma e construcao", "construcao de galpao industrial",
     "pre-moldados de concreto", "terraplenagem", "projeto estrutural",
+    # 2a passada - termos adicionados apos medir 21% de resultados ineditos
+    "engenheiro civil", "empresa de construcao", "construtora residencial",
+    "reforma predial", "estruturas metalicas", "steel frame",
+    "alvenaria estrutural", "impermeabilizacao de obras", "obras comerciais",
+    "projeto hidraulico predial",
 ]
 
 TIPOS_GRID = ["general_contractor", "roofing_contractor", "electrician", "plumber"]
@@ -102,7 +110,7 @@ def get(url, key, mask):
         headers={"X-Goog-Api-Key": key, "X-Goog-FieldMask": mask}))
 
 
-def coleta(key, tier, usar_grid):
+def coleta(key, tier, usar_grid=False):
     os.makedirs("dados", exist_ok=True)
     vistos, feitas = set(), set()
     if os.path.exists(RAW):
@@ -158,31 +166,80 @@ def coleta(key, tier, usar_grid):
                 time.sleep(0.4)
             print(f"[{chamadas:4d}] {nome:22s} {termo:32s} +{novos:3d}  (total {len(vistos)})")
 
-    if usar_grid:
-        print("\n--- varredura em grade (nearby) ---")
-        for nome, lat, lon, raio, _ in alvos:
-            passo = 0.025  # ~2.7 km
-            n = max(1, int((raio / 111000) / passo))
-            for i in range(-n, n + 1):
-                for j in range(-n, n + 1):
-                    plat, plon = lat + i * passo, lon + j * passo
-                    consulta = f"grid|{plat:.4f}|{plon:.4f}"
-                    if consulta in feitas:
-                        continue
-                    corpo = {"includedTypes": TIPOS_GRID, "maxResultCount": 20,
-                             "languageCode": "pt-BR", "regionCode": "BR",
-                             "locationRestriction": {"circle": {
-                                 "center": {"latitude": plat, "longitude": plon},
-                                 "radius": 2000.0}}}
-                    resp = post(ENDPOINT_NEAR, corpo, key, FIELDS_DESCOBERTA)
-                    chamadas += 1
-                    if resp:
-                        novos = grava(resp.get("places"), consulta, nome)
-                        if novos:
-                            print(f"[grid {chamadas:4d}] {nome:18s} +{novos:3d} (total {len(vistos)})")
-
     saida.close()
     print(f"\nfim: {len(vistos)} lugares unicos em {chamadas} chamadas de API")
+
+
+# Bounding box do nucleo <=22 km (Louveira, Vinhedo, Valinhos, Jundiai, Itupeva)
+CAIXA_NUCLEO = dict(lat_min=-23.24, lat_max=-22.92, lon_min=-47.11, lon_max=-46.83)
+PASSO = 0.03           # ~3,3 km por celula
+TERMOS_GRADE = ["construtora", "engenharia civil", "escritorio de arquitetura"]
+
+
+def grade(key, caixa=None, passo=PASSO):
+    """Varre a regiao em retangulos pequenos. searchText aceita
+    locationRestriction.rectangle - e assim nenhuma consulta chega no teto de
+    60 resultados, que era o que truncava a busca por cidade inteira."""
+    caixa = caixa or CAIXA_NUCLEO
+    os.makedirs("dados", exist_ok=True)
+    vistos, feitas = set(), set()
+    if os.path.exists(RAW):
+        for linha in open(RAW, encoding="utf-8"):
+            try:
+                r = json.loads(linha); vistos.add(r["id"]); feitas.add(r.get("_consulta", ""))
+            except Exception:
+                pass
+    print(f"base atual: {len(vistos)} lugares")
+
+    lats, lons = [], []
+    v = caixa["lat_min"]
+    while v < caixa["lat_max"]:
+        lats.append(v); v = round(v + passo, 4)
+    v = caixa["lon_min"]
+    while v < caixa["lon_max"]:
+        lons.append(v); v = round(v + passo, 4)
+    celulas = [(a, b) for a in lats for b in lons]
+    print(f"grade: {len(lats)}x{len(lons)} = {len(celulas)} celulas x {len(TERMOS_GRADE)} termos")
+
+    saida = open(RAW, "a", encoding="utf-8")
+    chamadas = novos_total = 0
+    for n, (la, lo) in enumerate(celulas, 1):
+        for termo in TERMOS_GRADE:
+            consulta = f"grade|{la:.3f}|{lo:.3f}|{termo}"
+            if consulta in feitas:
+                continue
+            token, pagina, novos = None, 0, 0
+            while pagina < 3:
+                corpo = {"textQuery": termo, "languageCode": "pt-BR", "regionCode": "BR",
+                         "pageSize": 20,
+                         "locationRestriction": {"rectangle": {
+                             "low": {"latitude": la, "longitude": lo},
+                             "high": {"latitude": round(la + passo, 4),
+                                      "longitude": round(lo + passo, 4)}}}}
+                if token:
+                    corpo["pageToken"] = token
+                resp = post(ENDPOINT_TEXT, corpo, key, FIELDS_DESCOBERTA)
+                chamadas += 1
+                if not resp:
+                    break
+                for pl in resp.get("places") or []:
+                    if pl.get("id") in vistos:
+                        continue
+                    vistos.add(pl["id"])
+                    pl["_consulta"], pl["_municipio_busca"] = consulta, "grade"
+                    saida.write(json.dumps(pl, ensure_ascii=False) + "\n")
+                    novos += 1
+                token = resp.get("nextPageToken")
+                pagina += 1
+                if not token:
+                    break
+                time.sleep(0.3)
+            saida.flush()
+            novos_total += novos
+        if n % 10 == 0 or n == len(celulas):
+            print(f"  celula {n}/{len(celulas)}  {chamadas} chamadas  +{novos_total} novos  (total {len(vistos)})")
+    saida.close()
+    print(f"\nfim: +{novos_total} novos em {chamadas} chamadas | base = {len(vistos)}")
 
 
 DETALHES = "dados/raw_detalhes.jsonl"
@@ -375,8 +432,11 @@ if __name__ == "__main__":
     sub = ap.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("coleta")
     c.add_argument("--key", required=True)
-    c.add_argument("--tier", type=int, default=2, choices=[1, 2, 3])
+    c.add_argument("--tier", type=int, default=2, choices=[0, 1, 2, 3])
     c.add_argument("--grid", action="store_true")
+    g = sub.add_parser("grade")
+    g.add_argument("--key", required=True)
+    g.add_argument("--passo", type=float, default=PASSO)
     e = sub.add_parser("enriquece")
     e.add_argument("--key", required=True)
     e.add_argument("--limite", type=int, default=0, help="teto de chamadas (0 = sem teto)")
@@ -385,6 +445,8 @@ if __name__ == "__main__":
     a = ap.parse_args()
     if a.cmd == "coleta":
         coleta(a.key, a.tier, a.grid)
+    elif a.cmd == "grade":
+        grade(a.key, passo=a.passo)
     elif a.cmd == "enriquece":
         enriquece(a.key, a.limite, set(a.prioridade.split(",")))
     else:
