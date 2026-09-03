@@ -172,6 +172,9 @@ def coleta(key, tier, usar_grid=False):
 
 # Bounding box do nucleo <=22 km (Louveira, Vinhedo, Valinhos, Jundiai, Itupeva)
 CAIXA_NUCLEO = dict(lat_min=-23.24, lat_max=-22.92, lon_min=-47.11, lon_max=-46.83)
+# Itatiba entrou nas cidades de foco depois da 1a grade e fica fora da caixa acima
+CAIXA_ITATIBA = dict(lat_min=-23.10, lat_max=-22.91, lon_min=-46.92, lon_max=-46.73)
+CAIXAS = {"nucleo": CAIXA_NUCLEO, "itatiba": CAIXA_ITATIBA}
 PASSO = 0.03           # ~3,3 km por celula
 TERMOS_GRADE = ["construtora", "engenharia civil", "escritorio de arquitetura"]
 
@@ -437,6 +440,7 @@ if __name__ == "__main__":
     g = sub.add_parser("grade")
     g.add_argument("--key", required=True)
     g.add_argument("--passo", type=float, default=PASSO)
+    g.add_argument("--caixa", default="nucleo", choices=list(CAIXAS))
     e = sub.add_parser("enriquece")
     e.add_argument("--key", required=True)
     e.add_argument("--limite", type=int, default=0, help="teto de chamadas (0 = sem teto)")
@@ -446,7 +450,7 @@ if __name__ == "__main__":
     if a.cmd == "coleta":
         coleta(a.key, a.tier, a.grid)
     elif a.cmd == "grade":
-        grade(a.key, passo=a.passo)
+        grade(a.key, caixa=CAIXAS[a.caixa], passo=a.passo)
     elif a.cmd == "enriquece":
         enriquece(a.key, a.limite, set(a.prioridade.split(",")))
     else:
