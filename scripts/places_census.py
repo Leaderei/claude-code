@@ -248,7 +248,7 @@ def grade(key, caixa=None, passo=PASSO):
 DETALHES = "dados/raw_detalhes.jsonl"
 
 
-def enriquece(key, limite, so_prioridade):
+def enriquece(key, limite, so_prioridade, so_cidades=None):
     """Busca telefone/site/nota (SKU Enterprise) apenas para o subconjunto escolhido."""
     if not os.path.exists(RAW):
         sys.exit(f"nao encontrei {RAW} - rode 'coleta' primeiro")
@@ -267,7 +267,10 @@ def enriquece(key, limite, so_prioridade):
             cid = sem_acento(cidade_de(p_)).title()
             d = DIST.get(cid, 999)
             prio = "A" if d <= 22 else ("B" if d <= 45 else "C")
-            if so_prioridade and prio not in so_prioridade:
+            if so_cidades:
+                if sem_acento(cid) not in so_cidades:
+                    continue
+            elif so_prioridade and prio not in so_prioridade:
                 continue
             alvos.append((p_["id"], nome, prio))
 
@@ -445,6 +448,7 @@ if __name__ == "__main__":
     e.add_argument("--key", required=True)
     e.add_argument("--limite", type=int, default=0, help="teto de chamadas (0 = sem teto)")
     e.add_argument("--prioridade", default="A,B", help="ex: A ou A,B ou A,B,C")
+    e.add_argument("--cidades", default="", help="ex: Louveira,Vinhedo (ignora --prioridade)")
     sub.add_parser("consolida")
     a = ap.parse_args()
     if a.cmd == "coleta":
@@ -452,6 +456,7 @@ if __name__ == "__main__":
     elif a.cmd == "grade":
         grade(a.key, caixa=CAIXAS[a.caixa], passo=a.passo)
     elif a.cmd == "enriquece":
-        enriquece(a.key, a.limite, set(a.prioridade.split(",")))
+        enriquece(a.key, a.limite, set(a.prioridade.split(",")),
+                  {sem_acento(c) for c in a.cidades.split(",") if c.strip()} or None)
     else:
         consolida()
