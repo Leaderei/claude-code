@@ -1,13 +1,34 @@
-# Educa Open — Slide executivo de performance comercial
+# Educa Open — Apresentação de performance comercial
 
-Slide único (16:9) para abrir a apresentação de performance da equipe de vendas.
-Padrão visual Leaderei: fundo preto com bloom laranja, Manrope, filetes de 1px.
+Deck de 13 slides (16:9) para a reunião de performance do time de vendas.
+Padrão visual Leaderei: fundo preto com bloom laranja, Manrope, filetes de 1px,
+um layout diferente por slide.
+
+## Roteiro
+
+| # | Slide | Papel |
+|---|---|---|
+| 1 | Capa | Abertura |
+| 2 | Panorama do período | Os 4 números e as 4 leituras do período |
+| 3 | Topo de funil x meta | Realizado x meta mês a mês |
+| 4 | Resultado financeiro | Ganhos, valor e ticket médio por mês |
+| 5 | Saúde do funil | As 9 etapas com conversão e perda absoluta |
+| 6 | Comparação com o padrão Leaderei | No-show, reunião→proposta e fechamento |
+| 7 | Desempenho por canal | Quem agenda x quem fecha |
+| 8 | Diagnóstico dos canais frios | Webinar, Dripify e ABM |
+| 9 | Alocação de esforço | Plano de agosto x de onde vieram os ganhos |
+| 10 | Consistência do plano de metas | 9,6% realizado x 18% assumido |
+| 11 | Setembro | Ritmo diário e distribuição semanal |
+| 12 | Plano de ação | Seis ações nas próximas 4 semanas |
+| 13 | Fechamento | Três decisões |
+
+Todos os slides têm notas do apresentador.
 
 ## Como regerar
 
 ```bash
 npm install pptxgenjs
-node slide.js          # gera educaopen-performance-comercial.pptx
+node deck.js          # gera educaopen-performance-comercial.pptx
 ```
 
 A fonte **Manrope** precisa estar instalada na máquina que abre o arquivo.
@@ -46,13 +67,46 @@ agendado 125 (51%) → Diagnóstico realizado 114 (91%) → Validação externa
 
 ### Funil por canal (acumulado)
 
-| Canal | Entradas | Diag. agendado | Ganhos | Taxa de ganho |
-|---|---|---|---|---|
-| Parcerias / Indicações | 30 | 25 | 7 | 23% |
-| Eventos | 38 | 25 | 1 | 3% |
-| ABM* | 24 | 2 | 2 | 8% |
-| Dripify | 175 | 7 | 0 | 0% |
-| Webinar | 510 | 15 | 1 | 0,2% |
+| Canal | Entradas | Cadência | Engajado | Diag. agend. | Diag. real. | Validação | Proposta | Contrato | Ganho |
+|---|---|---|---|---|---|---|---|---|---|
+| Parcerias / Indicações | 30 | 30 | 29 | 25 | 25 | 23 | 14 | 8 | 7 |
+| Eventos | 38 | 36 | 30 | 25 | 23 | 21 | 13 | 3 | 1 |
+| ABM* | 24 | 24 | 4 | 2 | 2 | 2 | 2 | 2 | 2 |
+| Dripify | 175 | 103 | 95 | 7 | 7 | 7 | 3 | 2 | 0 |
+| Webinar | 510 | 486 | 31 | 15 | 9 | 8 | 4 | 1 | 1 |
+
+Derivadas usadas no deck:
+
+| Canal | Vira reunião (agend. ÷ entradas) | No-show | Fecha (ganhos ÷ propostas) |
+|---|---|---|---|
+| Parcerias / Indicações | 83% | 0% | 50% |
+| Eventos | 66% | 8% | 8% |
+| ABM | 8% | 0% | 100% |
+| Dripify | 4% | 0% | 0% |
+| Webinar | 3% | 40% | 25% |
+
+A soma dos canais não fecha com o funil geral: 41% dos negócios de meio de funil
+estão sem canal de origem preenchido no CRM (51 dos 125 diagnósticos agendados,
+26 das 62 propostas, 1 dos 12 ganhos).
+
+### Plano semanal de agosto (planilha de metas por SDR)
+
+| Origem | S1 | S2 | S3 | S4 | Total | % da meta |
+|---|---|---|---|---|---|---|
+| ABM | 3 | 3 | 3 | 3 | 12 | 43% |
+| Dripify | 2 | 2 | 2 | 2 | 8 | 29% |
+| Parceiros / Indicações | 2 | 2 | 2 | 2 | 8 | 29% |
+| **Meta de agendamentos** | 7 | 7 | 7 | 7 | **28** | |
+
+Realizado registrado na planilha: 6 na S1. Total do mês pelo Pipedrive: 36.
+
+### Comparação com os benchmarks Leaderei
+
+| Métrica | Educa Open | Padrão Leaderei | Situação |
+|---|---|---|---|
+| No-show sobre agendados | 9% (114 de 125) | até 10–20% | acima do padrão |
+| Reunião → proposta | 54% (62 de 114) | 50–70% | dentro do padrão |
+| Fechamento sobre propostas | 19% (12 de 62) | 25–40% | abaixo do padrão |
 
 \* Entradas de ABM sinalizadas como inconsistentes na origem (o deck original
 já trazia a ressalva no título do slide).
@@ -80,6 +134,11 @@ Referência de 1,33 cliente por ponto; ticket implícito de ~R$ 49.988 por clien
   podem fechar e elevar a taxa realizada.
 - **Setembro tem 21 dias úteis** (22 dias de semana menos o feriado de 07/09).
   Meta de 44 = 2,1 reuniões/dia útil. Ritmo dos 4 primeiros dias = 1,0/dia.
+  Restam 40 agendamentos em 17 dias úteis = 2,4/dia útil.
+- **Ticket médio realizado** = R$ 498,5 mil ÷ 12 = R$ 41,5 mil, contra R$ 50 mil
+  implícitos no plano. Julho puxa a média para baixo (dois negócios de R$ 4,8 mil).
+- **R$ 25 mil por ponto percentual de fechamento** = 62 propostas × 1% × ticket
+  médio de R$ 41,5 mil.
 - **Topo de funil** = reuniões de diagnóstico criadas no mês (atividade).
   **Funil por canal** = negócios por etapa, acumulado do projeto. São recortes
   diferentes e não devem ser somados entre si.
