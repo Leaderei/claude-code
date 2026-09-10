@@ -18,7 +18,9 @@ COLS = ["#","Empresa","Segmento","Cidade","UF","Regiao","Telefone","Site","Email
         "Nome_Decisor","Status_Prospeccao","Observacoes"]
 
 FOCO = {"vinhedo","louveira","itatiba","jundiai","itupeva","valinhos",
-        "campinas","barueri","sao paulo","cajamar"}
+        "campinas","barueri","sao paulo","cajamar",
+        # 2a leva de cidades-foco
+        "indaiatuba","atibaia","braganca paulista","paulinia"}
 
 def sa(s):
     return "".join(c for c in unicodedata.normalize("NFD", s or "")

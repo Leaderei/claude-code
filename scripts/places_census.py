@@ -59,6 +59,7 @@ MUNICIPIOS = [
     ("Hortolandia",          -22.8583, -47.2200,  8000, 3),
     ("Sumare",               -22.8219, -47.2669, 11000, 3),
     ("Paulinia",             -22.7614, -47.1542, 10000, 3),
+    ("Braganca Paulista",    -22.9526, -46.5416, 13000, 3),
     ("Monte Mor",            -22.9469, -47.3153,  9000, 3),
     ("Salto",                -23.2008, -47.2872, 10000, 3),
     ("Americana",            -22.7397, -47.3313, 11000, 3),
@@ -182,6 +183,10 @@ CAIXAS = {
     "barueri":  dict(lat_min=-23.57, lat_max=-23.45, lon_min=-46.95, lon_max=-46.80),
     "saopaulo": dict(lat_min=-23.78, lat_max=-23.38, lon_min=-46.84, lon_max=-46.34),
     "cajamar":  dict(lat_min=-23.42, lat_max=-23.26, lon_min=-46.94, lon_max=-46.78),
+    "indaiatuba": dict(lat_min=-23.20, lat_max=-22.98, lon_min=-47.32, lon_max=-47.13),
+    "atibaia":    dict(lat_min=-23.22, lat_max=-23.03, lon_min=-46.68, lon_max=-46.46),
+    "braganca":   dict(lat_min=-23.05, lat_max=-22.86, lon_min=-46.66, lon_max=-46.46),
+    "paulinia":   dict(lat_min=-22.83, lat_max=-22.70, lon_min=-47.24, lon_max=-47.08),
 }
 PASSO = 0.03           # ~3,3 km por celula
 TERMOS_GRADE = ["construtora", "engenharia civil", "escritorio de arquitetura",
@@ -339,7 +344,7 @@ COLS = ["ID","Empresa","Razao_Social_CNPJ","Categoria","Especialidade","Cidade_S
 DIST = {"Louveira":0,"Vinhedo":9,"Valinhos":17,"Jundiai":18,"Itupeva":22,"Itatiba":27,
         "Jarinu":30,"Campinas":30,"Varzea Paulista":30,"Campo Limpo Paulista":32,
         "Cabreuva":35,"Morungaba":38,"Indaiatuba":45,"Atibaia":45,"Hortolandia":40,
-        "Sumare":45,"Paulinia":45,"Monte Mor":50,"Salto":50,"Americana":60}
+        "Sumare":45,"Paulinia":45,"Monte Mor":50,"Salto":50,"Americana":60,"Braganca Paulista":50}
 
 EIXO = {"Louveira":"Eixo Louveira","Vinhedo":"Eixo Louveira","Valinhos":"Eixo Louveira",
         "Itupeva":"Eixo Louveira","Jundiai":"Eixo Jundiai","Jarinu":"Eixo Jundiai",
