@@ -188,11 +188,12 @@ TERMOS_GRADE = ["construtora", "engenharia civil", "escritorio de arquitetura",
                 "arquiteto", "incorporadora"]
 
 
-def grade(key, caixa=None, passo=PASSO):
+def grade(key, caixa=None, passo=PASSO, termos=None):
     """Varre a regiao em retangulos pequenos. searchText aceita
     locationRestriction.rectangle - e assim nenhuma consulta chega no teto de
     60 resultados, que era o que truncava a busca por cidade inteira."""
     caixa = caixa or CAIXA_NUCLEO
+    termos = termos or TERMOS_GRADE
     os.makedirs("dados", exist_ok=True)
     vistos, feitas = set(), set()
     if os.path.exists(RAW):
@@ -211,12 +212,12 @@ def grade(key, caixa=None, passo=PASSO):
     while v < caixa["lon_max"]:
         lons.append(v); v = round(v + passo, 4)
     celulas = [(a, b) for a in lats for b in lons]
-    print(f"grade: {len(lats)}x{len(lons)} = {len(celulas)} celulas x {len(TERMOS_GRADE)} termos")
+    print(f"grade: {len(lats)}x{len(lons)} = {len(celulas)} celulas x {len(termos)} termos")
 
     saida = open(RAW, "a", encoding="utf-8")
     chamadas = novos_total = 0
     for n, (la, lo) in enumerate(celulas, 1):
-        for termo in TERMOS_GRADE:
+        for termo in termos:
             consulta = f"grade|{la:.3f}|{lo:.3f}|{termo}"
             if consulta in feitas:
                 continue
@@ -300,7 +301,8 @@ def enriquece(key, limite, so_prioridade, so_cidades=None, so_segmentos=None):
     alvos = [a for a in alvos if a[0] not in feitos]
     # Ordem de prioridade do ICP: engenharia, arquitetura, construtora. Dentro de
     # cada segmento, mais avaliacoes primeiro (proxy de empresa ativa).
-    ORDEM = {"Engenharia": 0, "Arquitetura": 1, "Construtora": 2, "Incorporadora": 3}
+    ORDEM = {"Engenharia": 0, "Arquitetura": 1, "Construtora": 2,
+             "Incorporadora": 3, "Loteadora": 4, "Empreiteira": 5}
     alvos.sort(key=lambda a: (ORDEM.get(a[3], 9), -a[4]))
     if limite:
         alvos = alvos[:limite]
@@ -350,6 +352,7 @@ DEC = {"Arquitetura":"Socio / Arquiteto titular",
        "Incorporadora":"Diretor Comercial / Diretor de Incorporacao",
        "Engenharia":"Socio-Diretor / Engenheiro responsavel",
        "Empreiteira":"Proprietario / Encarregado geral",
+       "Loteadora":"Diretor de Incorporacao / Gerente de Empreendimentos",
        "Servicos correlatos":"Proprietario"}
 
 
@@ -360,6 +363,8 @@ def sem_acento(s):
 
 def classifica(nome, tipos):
     n, t = sem_acento(nome), " ".join(tipos or [])
+    if re.search(r"loteador|loteament|urbanizador|\bloteador", n):
+        return "Loteadora"
     if re.search(r"arquitet|interiores|design de interior", n):
         return "Arquitetura"
     if re.search(r"incorporad|empreendimentos imob|urbanismo|loteament", n):
@@ -465,6 +470,7 @@ if __name__ == "__main__":
     g.add_argument("--key", required=True)
     g.add_argument("--passo", type=float, default=PASSO)
     g.add_argument("--caixa", default="nucleo", choices=list(CAIXAS))
+    g.add_argument("--termos", default="")
     e = sub.add_parser("enriquece")
     e.add_argument("--key", required=True)
     e.add_argument("--limite", type=int, default=0, help="teto de chamadas (0 = sem teto)")
@@ -476,7 +482,8 @@ if __name__ == "__main__":
     if a.cmd == "coleta":
         coleta(a.key, a.tier, a.grid)
     elif a.cmd == "grade":
-        grade(a.key, caixa=CAIXAS[a.caixa], passo=a.passo)
+        grade(a.key, caixa=CAIXAS[a.caixa], passo=a.passo,
+              termos=[t.strip() for t in a.termos.split(",") if t.strip()] or None)
     elif a.cmd == "enriquece":
         enriquece(a.key, a.limite, set(a.prioridade.split(",")),
                   {sem_acento(c) for c in a.cidades.split(",") if c.strip()} or None,
