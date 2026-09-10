@@ -312,13 +312,16 @@ def enriquece(key, limite, so_prioridade, so_cidades=None, so_segmentos=None):
     if limite:
         alvos = alvos[:limite]
 
-    # PREMISSA: ~US$25/1000 no SKU Place Details Enterprise. A cota gratuita mensal
-    # ja foi consumida, entao nao se desconta nada dela - estimar por baixo ja custou
-    # um relatorio errado antes.
-    custo_1k = 25.0
+    # Medido no relatorio de SKUs do Cloud Billing (set/2026): 1.426 chamadas de
+    # Place Details Enterprise custaram R$ 50,02 -> R$ 35/1.000 na leitura direta,
+    # ou R$ 117/1.000 sobre o excedente se houver franquia de 1.000/mes. Usamos o
+    # teto para nao subestimar. Text Search Pro saiu R$ 0,00 em 1.458 chamadas:
+    # a varredura e gratuita neste volume, so o enriquecimento cobra.
+    # A cota gratuita reseta todo mes - nao assumir que ja foi consumida.
+    custo_1k_brl = 117.0
     print(f"{len(alvos)} a enriquecer | {len(feitos)} ja feitos")
-    print(f"custo estimado: ~US$ {len(alvos) * custo_1k / 1000:.2f} "
-          f"(~R$ {len(alvos) * custo_1k / 1000 * 5.7:.0f}) - confirmar no relatorio de faturamento")
+    print(f"custo estimado (teto): ~R$ {len(alvos) * custo_1k_brl / 1000:.0f} "
+          f"- confirmar no relatorio de SKUs do Cloud Billing")
 
     saida = open(DETALHES, "a", encoding="utf-8")
     for i, (pid, nome, prio, cat, _av) in enumerate(alvos, 1):
