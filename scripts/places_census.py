@@ -296,10 +296,13 @@ def enriquece(key, limite, so_prioridade, so_cidades=None):
     if limite:
         alvos = alvos[:limite]
 
-    custo_1k = 25.0  # USD/1000 - PREMISSA: confirmar o valor do SKU no console
+    # PREMISSA: ~US$25/1000 no SKU Place Details Enterprise. A cota gratuita mensal
+    # ja foi consumida, entao nao se desconta nada dela - estimar por baixo ja custou
+    # um relatorio errado antes.
+    custo_1k = 25.0
     print(f"{len(alvos)} a enriquecer | {len(feitos)} ja feitos")
-    print(f"estimativa: ~US$ {max(0, len(alvos) - 1000) * custo_1k / 1000:.2f} "
-          f"(assumindo 1.000 gratuitos/mes no SKU Enterprise)")
+    print(f"custo estimado: ~US$ {len(alvos) * custo_1k / 1000:.2f} "
+          f"(~R$ {len(alvos) * custo_1k / 1000 * 5.7:.0f}) - confirmar no relatorio de faturamento")
 
     saida = open(DETALHES, "a", encoding="utf-8")
     for i, (pid, nome, prio) in enumerate(alvos, 1):
