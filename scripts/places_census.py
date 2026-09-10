@@ -49,7 +49,7 @@ MUNICIPIOS = [
     ("Itupeva",              -23.1528, -47.0578, 11000, 0),
     ("Itatiba",              -23.0053, -46.8389, 12000, 1),
     ("Jarinu",               -23.1017, -46.7283, 11000, 2),
-    ("Campinas",             -22.9099, -47.0626, 20000, 2),
+    ("Campinas",             -22.9099, -47.0626, 20000, 0),
     ("Cabreuva",             -23.3078, -47.1325, 12000, 2),
     ("Varzea Paulista",      -23.2119, -46.8283,  6000, 2),
     ("Campo Limpo Paulista", -23.2069, -46.7825,  7000, 2),
@@ -174,9 +174,18 @@ def coleta(key, tier, usar_grid=False):
 CAIXA_NUCLEO = dict(lat_min=-23.24, lat_max=-22.92, lon_min=-47.11, lon_max=-46.83)
 # Itatiba entrou nas cidades de foco depois da 1a grade e fica fora da caixa acima
 CAIXA_ITATIBA = dict(lat_min=-23.10, lat_max=-22.91, lon_min=-46.92, lon_max=-46.73)
-CAIXAS = {"nucleo": CAIXA_NUCLEO, "itatiba": CAIXA_ITATIBA}
+CAIXAS = {
+    "nucleo":   CAIXA_NUCLEO,
+    "itatiba":  CAIXA_ITATIBA,
+    "valinhos": dict(lat_min=-23.04, lat_max=-22.90, lon_min=-47.05, lon_max=-46.91),
+    "campinas": dict(lat_min=-23.04, lat_max=-22.76, lon_min=-47.20, lon_max=-46.94),
+    "barueri":  dict(lat_min=-23.57, lat_max=-23.45, lon_min=-46.95, lon_max=-46.80),
+    "saopaulo": dict(lat_min=-23.78, lat_max=-23.38, lon_min=-46.84, lon_max=-46.34),
+    "cajamar":  dict(lat_min=-23.42, lat_max=-23.26, lon_min=-46.94, lon_max=-46.78),
+}
 PASSO = 0.03           # ~3,3 km por celula
-TERMOS_GRADE = ["construtora", "engenharia civil", "escritorio de arquitetura"]
+TERMOS_GRADE = ["construtora", "engenharia civil", "escritorio de arquitetura",
+                "arquiteto", "incorporadora"]
 
 
 def grade(key, caixa=None, passo=PASSO):
