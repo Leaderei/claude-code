@@ -257,7 +257,7 @@ def grade(key, caixa=None, passo=PASSO):
 DETALHES = "dados/raw_detalhes.jsonl"
 
 
-def enriquece(key, limite, so_prioridade, so_cidades=None):
+def enriquece(key, limite, so_prioridade, so_cidades=None, so_segmentos=None):
     """Busca telefone/site/nota (SKU Enterprise) apenas para o subconjunto escolhido."""
     if not os.path.exists(RAW):
         sys.exit(f"nao encontrei {RAW} - rode 'coleta' primeiro")
@@ -281,7 +281,13 @@ def enriquece(key, limite, so_prioridade, so_cidades=None):
                     continue
             elif so_prioridade and prio not in so_prioridade:
                 continue
-            alvos.append((p_["id"], nome, prio))
+            if so_segmentos and cat not in so_segmentos:
+                continue
+            try:
+                avals = int(p_.get("userRatingCount") or 0)
+            except (TypeError, ValueError):
+                avals = 0
+            alvos.append((p_["id"], nome, prio, cat, avals))
 
     feitos = set()
     if os.path.exists(DETALHES):
@@ -292,7 +298,10 @@ def enriquece(key, limite, so_prioridade, so_cidades=None):
                 except Exception:
                     pass
     alvos = [a for a in alvos if a[0] not in feitos]
-    alvos.sort(key=lambda a: a[2])
+    # Ordem de prioridade do ICP: engenharia, arquitetura, construtora. Dentro de
+    # cada segmento, mais avaliacoes primeiro (proxy de empresa ativa).
+    ORDEM = {"Engenharia": 0, "Arquitetura": 1, "Construtora": 2, "Incorporadora": 3}
+    alvos.sort(key=lambda a: (ORDEM.get(a[3], 9), -a[4]))
     if limite:
         alvos = alvos[:limite]
 
@@ -305,13 +314,13 @@ def enriquece(key, limite, so_prioridade, so_cidades=None):
           f"(~R$ {len(alvos) * custo_1k / 1000 * 5.7:.0f}) - confirmar no relatorio de faturamento")
 
     saida = open(DETALHES, "a", encoding="utf-8")
-    for i, (pid, nome, prio) in enumerate(alvos, 1):
+    for i, (pid, nome, prio, cat, _av) in enumerate(alvos, 1):
         resp = get(ENDPOINT_DETALHE + pid, key, FIELDS_DETALHE)
         if resp:
             saida.write(json.dumps(resp, ensure_ascii=False) + "\n")
             saida.flush()
         if i % 25 == 0 or i == len(alvos):
-            print(f"  {i}/{len(alvos)}  [{prio}] {nome[:45]}")
+            print(f"  {i}/{len(alvos)}  [{cat[:6]}] {nome[:45]}")
         time.sleep(0.05)
     saida.close()
     print(f"fim: detalhes em {DETALHES}")
@@ -461,6 +470,7 @@ if __name__ == "__main__":
     e.add_argument("--limite", type=int, default=0, help="teto de chamadas (0 = sem teto)")
     e.add_argument("--prioridade", default="A,B", help="ex: A ou A,B ou A,B,C")
     e.add_argument("--cidades", default="", help="ex: Louveira,Vinhedo (ignora --prioridade)")
+    e.add_argument("--segmentos", default="", help="ex: Engenharia,Arquitetura,Construtora")
     sub.add_parser("consolida")
     a = ap.parse_args()
     if a.cmd == "coleta":
@@ -469,6 +479,7 @@ if __name__ == "__main__":
         grade(a.key, caixa=CAIXAS[a.caixa], passo=a.passo)
     elif a.cmd == "enriquece":
         enriquece(a.key, a.limite, set(a.prioridade.split(",")),
-                  {sem_acento(c) for c in a.cidades.split(",") if c.strip()} or None)
+                  {sem_acento(c) for c in a.cidades.split(",") if c.strip()} or None,
+                  {x.strip() for x in a.segmentos.split(",") if x.strip()} or None)
     else:
         consolida()
