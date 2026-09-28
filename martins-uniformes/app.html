@@ -508,6 +508,11 @@ button.ola{border:0;background:none;text-align:left;padding:0;display:flex;flex-
 .sync{display:block;margin:10px 0 -4px;font-size:15px}.sync.s-ok,.sync.s-salvando,.sync:empty{display:none}
 button.faixa{width:100%;text-align:left;font:inherit;cursor:pointer}.quem-f{border-color:var(--blue)}.quem-f>svg.ic{color:var(--blue)}
 .fim-ajuda{display:flex;justify-content:center;margin:26px 0 0}
+
+/* v0.25: terceirizados por serviço, ícones com nome */
+.srv-h{display:flex;align-items:center;gap:12px;margin-bottom:10px}.srv-h h2{margin:0;margin-right:auto;font-size:22px}
+.add-f{border-style:dashed;color:var(--go-dark)}.add-f svg.ic{width:28px;height:28px;color:var(--go)}
+.depc.icn{flex-direction:column;gap:2px;min-width:78px;padding:8px 6px}.depc.icn small{font-size:13px;font-weight:700}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1257,30 +1262,33 @@ function cMaquinas(){const P=plano();return `<p style="margin:-6px 0 14px;color:
       <div class="qtdbox"><button class="stp" data-a="tQtd" data-t="${t.id}" data-d="-1" aria-label="Menos uma ${esc(t.nome)}">−</button><output>${t.qtd}</output><button class="stp" data-a="tQtd" data-t="${t.id}" data-d="1" aria-label="Mais uma ${esc(t.nome)}">+</button></div></div>`}).join('')}`}).join('')}
   <button class="prodc add" data-a="tipoEd" data-t="" style="width:100%;margin-top:6px">${ic('i-mais')}<b>Adicionar máquina ou mesa</b></button>`}
 const ICONES=['i-maquina','i-botao','i-corte','i-estampa','i-bordado','i-lupa','i-caixa','i-regua'];
+const ICN={'i-maquina':'Costura','i-botao':'Botão','i-corte':'Corte','i-estampa':'Estampa','i-bordado':'Bordado','i-lupa':'Revisão','i-caixa':'Embalagem','i-regua':'Medida'};
 function sTipoEd(){const e=ui.sheet;const usoP=e.id?state.produtos.filter(p=>p.steps.some(z=>z.posto===e.id)).map(p=>p.nome):[];
   return `${voltar('Cancelar')}<h1>${e.id?(e.externo?'Editar serviço':'Editar máquina'):(e.externo?'Novo serviço terceirizado':'Nova máquina ou mesa')}</h1>
   <div class="rotulo">Nome</div><input class="campo" id="xNome" value="${esc(e.nome)}" placeholder="Ex.: Travete" autocomplete="off">
   <div class="rotulo">Setor</div><div class="linha-dep">${GRUPOS.map(g=>`<button class="depc" data-a="tG" data-v="${g.id}" aria-pressed="${e.grupo===g.id}">${ic(g.i)}${esc(g.nome)}</button>`).join('')}</div>
-  <div class="rotulo">Desenho</div><div class="linha-dep">${ICONES.map(i=>`<button class="depc" data-a="tI" data-v="${i}" aria-pressed="${e.i===i}" aria-label="Ícone">${ic(i)}</button>`).join('')}</div>
+  <div class="rotulo">Desenho</div><div class="linha-dep">${ICONES.map(i=>`<button class="depc icn" data-a="tI" data-v="${i}" aria-pressed="${e.i===i}" title="${ICN[i]}">${ic(i)}<small>${ICN[i]}</small></button>`).join('')}</div>
   <div class="linha-dep" style="margin-top:14px"><button class="depc" data-a="tExt" aria-pressed="${!!e.externo}">${ic('i-caminhao')}Feito fora (terceirizado)</button></div>
   ${e.grupo==='pers'?`<div class="rotulo">Tempo por peça na personalização (minutos)</div><div class="contador" style="justify-content:flex-start"><button class="stp" data-a="tMin" data-d="-0.1" aria-label="Menos tempo">−</button><output>${nf(e.min)}</output><button class="stp" data-a="tMin" data-d="0.1" aria-label="Mais tempo">+</button></div>`:''}
+  ${e.externo&&!e.id?`<div class="rotulo">Quem faz esse serviço? (fornecedor)</div><input class="campo" id="xForn" value="${esc(e.forn||'')}" placeholder="Ex.: Junior Bordados" autocomplete="off">
+    <div class="rotulo">Prazo do fornecedor (dias)</div><div class="contador" style="justify-content:flex-start"><button class="stp" data-a="tPrazo" data-d="-1" aria-label="Menos um dia">−</button><output>${e.prazo||3}</output><button class="stp" data-a="tPrazo" data-d="1" aria-label="Mais um dia">+</button></div>`:''}
   ${e.externo?'':`<div class="rotulo">Quantas existem?</div><div class="contador" style="justify-content:flex-start"><button class="stp" data-a="tQ" data-d="-1" aria-label="Menos uma">−</button><output>${e.qtd}</output><button class="stp" data-a="tQ" data-d="1" aria-label="Mais uma">+</button></div>`}
   ${usoP.length?`<p style="color:var(--ink2)">Usada nos produtos: ${esc(usoP.join(', '))}</p>`:''}
   ${e.err?`<div class="aviso">${ic('i-alerta')}${esc(e.err)}</div>`:''}
-  <div class="acoes"><button class="big go" data-a="tOk">${ic('i-check')}Salvar</button>${e.id?`<button class="big neutro" data-a="tRm">Tirar esta máquina</button>`:''}</div>`}
+  <div class="acoes"><button class="big go" data-a="tOk">${ic('i-check')}Salvar</button>${e.id?`<button class="big neutro" data-a="tRm">${e.externo?'Tirar este serviço':'Tirar esta máquina'}</button>`:''}</div>`}
 function cEquipe(){const ord=['costura','corte','pers','acab','vendas','compras'];const o1=p=>Math.min(99,...(p.papeis||[]).map(k=>ord.indexOf(k)));
   const SET=[['Costura','i-maquina',[0]],['Corte','i-corte',[1]],['Personalização','i-estampa',[2]],['Acabamento','i-caixa',[3]],['Escritório e entregas','i-vias',[4,5]],['Sem cargo','i-pessoas',[99]]];
   return `<p class="sub-l" style="margin-top:-6px">Toque na pessoa para ver e mudar o que ela faz.</p>
   ${SET.map(([n,i,ks])=>{const ps=state.pessoas.filter(p=>ks.includes(o1(p)));if(!ps.length)return '';
     return `<section class="eq-g"><h2 class="grupo-h">${ic(i)}${n} <small>${ps.length}</small></h2><div class="eq-l">${ps.map(p=>`<button class="eq" data-a="pesEd" data-id="${p.id}">${av(p.id)}<span class="eq-t"><b>${esc(p.nome)}</b><span>${esc(papeisTxt(p))}${p.disp===false?' · <em>fora agora</em>':''}</span></span><span class="eq-go">›</span></button>`).join('')}</div></section>`}).join('')}
   <button class="prodc add" data-a="pesEd" data-id="" style="width:100%">${ic('i-mais')}<b>Adicionar pessoa</b></button>`}
-function cForn(){return `<div class="tipo-h" style="margin-top:0">Serviços feitos fora</div>
-  ${state.tipos.filter(t=>t.externo).map(t=>`<div class="cad-row"><span class="m-ic" style="background:#F3ECFB;color:#6B2F8C">${ic(t.i)}</span><div><b>${esc(t.nome)}</b><span>${fornDe(t.id).map(f=>esc(f.nome)).join(', ')||'<b style="color:var(--red);display:inline">sem fornecedor</b>'}</span></div><button class="mbtn" data-a="tipoEd" data-t="${t.id}">Editar</button></div>`).join('')}
-  <button class="prodc add" data-a="tipoEd" data-t="" data-ext="1" style="width:100%;margin:6px 0 20px">${ic('i-mais')}<b>Adicionar serviço terceirizado</b></button>
-  <div class="tipo-h">Fornecedores</div>
-  <div class="pess">${state.forn.map(f=>`<button class="pes" data-a="fornEd" data-id="${f.id}"><div class="pes-h"><span class="m-ic" style="background:#F3ECFB;color:#6B2F8C">${ic(tipo(f.servico).i)}</span><div><b>${esc(f.nome)}</b><span>${esc(tNome(f.servico))}</span></div></div>
-    <div class="skills"><span class="sk">${ic('i-relogio')}Prazo ${f.prazo} ${f.prazo>1?'dias':'dia'}</span><span class="sk">${ic('i-caminhao')}${esc(pNome(f.leva)||'ninguém')}</span></div></button>`).join('')}
-  <button class="prodc add" data-a="fornEd" data-id="">${ic('i-mais')}<b>Adicionar terceirizado</b></button></div>`}
+function cForn(){const ext=state.tipos.filter(t=>t.externo);
+  return `<p class="sub-l" style="margin-top:-6px">Cada serviço feito fora (bordado, DTF…) e quem faz para vocês.</p>
+  ${ext.map(t=>{const fs=fornDe(t.id);return `<section class="eq-g"><div class="srv-h"><span class="m-ic" style="background:#F3ECFB;color:#6B2F8C">${ic(t.i)}</span><h2>${esc(t.nome)}</h2><button class="x azul" data-a="tipoEd" data-t="${t.id}">Editar serviço</button></div>
+    ${fs.length?'':`<div class="aviso" style="margin-bottom:10px">${ic('i-alerta')}Ninguém cadastrado para fazer ${esc(t.nome)}.</div>`}
+    <div class="eq-l">${fs.map(f=>`<button class="eq" data-a="fornEd" data-id="${f.id}"><span class="m-ic" style="background:#F3ECFB;color:#6B2F8C">${ic('i-predio')}</span><span class="eq-t"><b>${esc(f.nome)}</b><span>Prazo ${f.prazo} ${f.prazo>1?'dias':'dia'} · leva: ${esc(pNome(f.leva)||'ninguém')}</span></span><span class="eq-go">›</span></button>`).join('')}
+      <button class="eq add-f" data-a="fornEd" data-id="" data-serv="${t.id}">${ic('i-mais')}<span class="eq-t"><b>Adicionar fornecedor de ${esc(t.nome)}</b></span></button></div></section>`}).join('')}
+  <button class="prodc add" data-a="tipoEd" data-t="" data-ext="1" style="width:100%">${ic('i-mais')}<b>Novo tipo de serviço feito fora</b><span style="font-size:15px;color:var(--muted)">Ex.: silk, sublimação terceirizada</span></button>`}
 function listaEst(){const q=(ui.eq||'').toLowerCase();const it=Object.entries(state.estoque).filter(([k])=>k.toLowerCase().includes(q)).sort((a,b)=>a[0].localeCompare(b[0]));
   return it.map(([k,v])=>`<div class="est-row"><span>${esc(k)}</span><input class="campo" type="number" min="0" step="1" data-est="${esc(k)}" value="${v}" aria-label="Quantidade de ${esc(k)}"><button class="x" data-a="rmEst" data-v="${esc(k)}" aria-label="Tirar ${esc(k)}">×</button></div>`).join('')||'<p class="dica">Nada encontrado.</p>'}
 function cEstoque(){return `<div class="nota">O sistema usa estes números para sugerir compras. São o registro do app: confira sempre o estoque real antes de comprar.</div>
@@ -1346,7 +1354,7 @@ function sPesEd(){const e=ui.sheet,internos=state.tipos.filter(t=>!t.externo);
   ${e.err?`<div class="aviso">${ic('i-alerta')}${esc(e.err)}</div>`:''}
   <div class="acoes"><button class="big go" data-a="xOk">${ic('i-check')}Salvar</button>${e.id?`<button class="big neutro" data-a="xRm">Tirar da equipe</button>`:''}</div>`}
 function sFornEd(){const e=ui.sheet,ext=state.tipos.filter(t=>t.externo);
-  return `${voltar('Cancelar')}<h1>${e.id?esc(e.nome):'Novo terceirizado'}</h1>
+  return `${voltar('Cancelar')}<h1>${e.id?esc(e.nome):'Novo fornecedor'}</h1>
   <div class="rotulo">Nome do fornecedor</div><input class="campo" id="xNome" value="${esc(e.nome)}" autocomplete="off">
   <div class="rotulo">Serviço</div><div class="escolhe">${ext.map(t=>`<button class="opc" data-a="fServ" data-v="${t.id}" aria-pressed="${e.servico===t.id}">${ic(t.i)}${esc(t.nome)}</button>`).join('')}</div>
   <div class="rotulo">Prazo (dias)</div><div class="contador" style="justify-content:flex-start"><button class="stp" data-a="fPrazo" data-d="-1" aria-label="Menos um dia">−</button><output>${e.prazo}</output><button class="stp" data-a="fPrazo" data-d="1" aria-label="Mais um dia">+</button></div>
@@ -1387,7 +1395,7 @@ function sProduto(pid){const p=prod(pid);if(!p)return voltar();const key='P'+p.i
     <div class="novo-in"><input class="campo" id="novaParte" placeholder="Nova parte (ex.: Bolso)" autocomplete="off"><button class="mbtn" data-a="addParte" data-p="${p.id}">Adicionar</button></div></div>
   <div class="card"><h2>Etapas por máquina</h2>${porMaq.map(x=>`<div class="mat">${ic(x.t.i)}<div><b>${esc(x.t.nome)}</b><span>${x.ss.map(s=>esc(s.nome)).join(' · ')}</span></div><span class="tagp">${x.t.externo?'fora':nf(sum(x.ss.map(s=>s.min)))+' min'}</span></div>`).join('')}</div>
   <div class="acoes"><button class="big neutro" data-a="rmProd" data-p="${p.id}">Excluir este produto</button></div>`}
-function eRead(){const e=ui.sheet;[['eNome','nome'],['eObs','obs'],['pNome','nome'],['pTec','tecido'],['xNome','nome']].forEach(([id,k])=>{const n=document.getElementById(id);if(n)e[k]=n.value})}
+function eRead(){const e=ui.sheet;[['xForn','forn'],['eNome','nome'],['eObs','obs'],['pNome','nome'],['pTec','tecido'],['xNome','nome']].forEach(([id,k])=>{const n=document.getElementById(id);if(n)e[k]=n.value})}
 function sEtapa(){const e=ui.sheet,p=prod(e.p),proib=e.sid?desc(p,e.sid):new Set();
   return `${voltar('Cancelar')}<h1>${e.sid?'Editar etapa':'Nova etapa em '+esc(p.nome)}</h1>
   <div class="rotulo">Nome da etapa</div><input class="campo" id="eNome" value="${esc(e.nome)}" placeholder="Ex.: Pregar vivo na gola" autocomplete="off">
@@ -1565,6 +1573,7 @@ function render(){RC={};
   const html=({tipo:sTipoEd,troca:sTroca,maq:sMaq,pedido:()=>sPedido(s.id),prob:sProblema,novo:sNovo,ajuda:sAjuda,produto:()=>sProduto(s.p),etapa:sEtapa,nprod:sNovoProd,pes:sPesEd,forn:sFornEd,quem:sQuem,he:sHE}[s.t]||(()=>''))();
   sh.innerHTML=`<div class="sheet ${['pedido','produto'].includes(s.t)?'largo':''}" data-id="${esc(sheetId(s))}" role="dialog" aria-modal="true"><div class="wrap">${html}</div></div>`;document.body.style.overflow='hidden';
   if(keep){const n=sh.querySelector('.sheet');n.scrollTop=keep.top;keep.x.forEach(([k,x])=>{const e=n.querySelector(`.fx-wrap[data-k="${k}"]`);if(e)e.scrollLeft=x})}
+  document.querySelectorAll('[aria-label]:not([title])').forEach(el=>el.title=el.getAttribute('aria-label'));
   const f=document.getElementById('wCli');if(f&&!f.value)f.focus()}
 function snap(){undo=JSON.stringify(state)}
 function toast(msg,comDesfazer=true){const el=document.getElementById('toast');clearTimeout(toastT);
@@ -1624,6 +1633,7 @@ const A={
   disp:d=>{const p=pessoa(d.id);snap();p.disp=p.disp===false;commit();toast(p.disp?`${p.nome} disponível`:`${p.nome} fora agora: tarefas foram redistribuídas`)},
   troca:d=>openSheet({t:'troca',key:d.key,f:d.f}),
   tipoEd:d=>{const t=state.tipos.find(x=>x.id===d.t);openSheet(t?{t:'tipo',id:t.id,nome:t.nome,grupo:t.grupo,i:t.i,qtd:t.qtd||0,externo:!!t.externo,min:t.min||1,err:''}:{t:'tipo',id:null,nome:'',grupo:d.ext?'pers':'costura',i:d.ext?'i-bordado':'i-maquina',qtd:d.ext?0:1,externo:!!d.ext,min:1,err:''})},
+  tPrazo:d=>{eRead();ui.sheet.prazo=Math.max(1,(ui.sheet.prazo||3)+(+d.d));render()},
   tExt:d=>{eRead();ui.sheet.externo=!ui.sheet.externo;render()},
   tMin:d=>{eRead();ui.sheet.min=Math.max(0.1,Math.round((ui.sheet.min+(+d.d))*10)/10);render()},
   tG:d=>{eRead();ui.sheet.grupo=d.v;render()},
@@ -1632,12 +1642,13 @@ const A={
   tOk:()=>{eRead();const e=ui.sheet;e.err='';if(!e.nome.trim()){e.err='Escreva o nome';return render()}
     const uso=plano().uso;if(e.id&&Object.keys(uso).some(u=>u.startsWith(e.id+'-')&&+u.split('-').pop()>e.qtd)){e.err='Uma das máquinas que sairiam está em uso agora. Termine o trabalho antes.';return render()}
     snap();const ext={externo:!!e.externo||undefined,min:e.min,qtd:e.externo?0:e.qtd};if(e.id){const t=state.tipos.find(x=>x.id===e.id);Object.assign(t,{nome:e.nome.trim(),curto:e.nome.trim(),grupo:e.grupo,i:e.i,...ext})}
-    else{const base=e.nome.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g,'')||'maq';let id=base,k=2;while(state.tipos.some(x=>x.id===id))id=base+k++;state.tipos.push({id,nome:e.nome.trim(),curto:e.nome.trim(),grupo:e.grupo,i:e.i,...ext})}
+    else{const base=e.nome.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g,'')||'maq';let id=base,k=2;while(state.tipos.some(x=>x.id===id))id=base+k++;state.tipos.push({id,nome:e.nome.trim(),curto:e.nome.trim(),grupo:e.grupo,i:e.i,...ext});
+      if(e.externo&&(e.forn||'').trim())state.forn.push({id:uid('f'),nome:e.forn.trim(),servico:id,prazo:e.prazo||3,leva:state.pessoas.find(p=>(p.funcoes||[]).includes('levar'))?.id||''})}
     ui.sheet=null;commit();toast(`${e.nome.trim()} salva`)},
   tRm:()=>{const e=ui.sheet,usoP=state.produtos.filter(p=>p.steps.some(z=>z.posto===e.id)).map(p=>p.nome);
     if(usoP.length){e.err=`Não dá para tirar: tem etapas em ${usoP.join(', ')}. Mude essas etapas para outra máquina antes.`;return render()}
     if(Object.keys(plano().uso).some(u=>u.startsWith(e.id+'-'))){e.err='Está em uso agora.';return render()}
-    snap();state.tipos=state.tipos.filter(x=>x.id!==e.id);state.pessoas.forEach(p=>{p.sabe=p.sabe.filter(x=>x!==e.id);p.melhor=p.melhor.filter(x=>x!==e.id)});ui.sheet=null;commit();toast(`${e.nome} tirada`)},
+    snap();state.tipos=state.tipos.filter(x=>x.id!==e.id);if(e.externo)state.forn=state.forn.filter(f=>f.servico!==e.id);state.pessoas.forEach(p=>{p.sabe=p.sabe.filter(x=>x!==e.id);p.melhor=p.melhor.filter(x=>x!==e.id)});ui.sheet=null;commit();toast(`${e.nome} tirada`)},
   trocaSel:d=>{snap();{const t=tarefasEsc().find(x=>x.key===ui.sheet.key);if(t)registrar({tipo:'troca',f:t.f,de:t.resp||'',para:d.v||'',ped:t.ped.id,cli:t.ped.cliente,step:t.t})}if(d.v)state.atrib[ui.sheet.key]=d.v;else delete state.atrib[ui.sheet.key];ui.sheet=null;commit();toast(d.v?`Tarefa passada para ${pNome(d.v)}`:'O sistema volta a escolher')},
   xFun:d=>{eRead();const e=ui.sheet;togl(e.funcoes,d.v);if(!e.funcoes.includes(d.v))e.melhor=e.melhor.filter(x=>x!==d.v);render()},
   xApp:d=>{eRead();ui.sheet.viaApp=!ui.sheet.viaApp;render()},
@@ -1656,7 +1667,7 @@ const A={
   xOk:()=>{eRead();const e=ui.sheet;if(!e.nome.trim()){e.err='Escreva o nome';return render()}snap();
     const obj={id:e.id||uid('p'),nome:e.nome.trim(),foto:e.foto||undefined,fotoOk:pessoa(e.id)?.fotoOk,papeis:e.papeis,sabe:e.sabe,melhor:e.melhor,funcoes:e.funcoes,viaApp:e.viaApp&&e.funcoes.some(f=>['levar','entregar'].includes(f)),disp:e.disp};const i=state.pessoas.findIndex(p=>p.id===e.id);i<0?state.pessoas.push(obj):state.pessoas[i]=obj;ui.sheet=null;commit();toast(`${obj.nome} salvo`)},
   xRm:()=>{const e=ui.sheet;if(plano().ocup.has(e.id)){e.err='Esta pessoa está trabalhando agora. Termine antes de tirar.';return render()}snap();state.pessoas=state.pessoas.filter(p=>p.id!==e.id);ui.sheet=null;commit();toast(`${e.nome} saiu da equipe`)},
-  fornEd:d=>{const f=fornById(d.id);openSheet(f?{t:'forn',...JSON.parse(JSON.stringify(f)),err:''}:{t:'forn',id:null,nome:'',servico:'bordado',prazo:3,leva:state.pessoas.find(p=>temPapel(p,'compras'))?.id||'',err:''})},
+  fornEd:d=>{const f=fornById(d.id);openSheet(f?{t:'forn',...JSON.parse(JSON.stringify(f)),err:''}:{t:'forn',id:null,nome:'',servico:d.serv||state.tipos.find(t=>t.externo)?.id||'bordado',prazo:3,leva:state.pessoas.find(p=>temPapel(p,'compras'))?.id||'',err:''})},
   fServ:d=>{eRead();ui.sheet.servico=d.v;render()},
   fPrazo:d=>{eRead();ui.sheet.prazo=Math.max(1,ui.sheet.prazo+(+d.d));render()},
   fLeva:d=>{eRead();ui.sheet.leva=d.v;render()},
