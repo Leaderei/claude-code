@@ -622,6 +622,20 @@ svg.prod.mock{cursor:zoom-in}
 .ins-b{display:flex;gap:6px}.ins-b .depc.ok[aria-pressed="true"]{border-color:var(--go);background:var(--go-soft);color:var(--go-dark)}.ins-b .depc.no[aria-pressed="true"]{border-color:var(--red);background:var(--red-soft);color:var(--red)}
 .ins.tem b{color:var(--go-dark)}.ins-add{display:grid;grid-template-columns:minmax(0,1fr) 90px 120px auto;gap:8px}
 @media (max-width:640px){.ins-add{grid-template-columns:1fr 1fr}.ins{grid-template-columns:1fr}}
+
+/* v0.30: arquivos da empresa */
+.aq-g{margin-bottom:12px}.aq-gh{display:flex;align-items:center;gap:8px;margin:6px 0}.aq-gh svg.ic{width:24px;height:24px;color:var(--muted)}.aq-gh b{font-size:18px}.aq-gh small{color:var(--muted);margin-right:auto}.aq-gh .mbtn{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;font-size:16px}
+.aq{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px 0;border-top:1px solid var(--grey-soft)}
+.aq-th{width:64px;height:64px;border-radius:10px;object-fit:contain;background:#fff;border:1px solid var(--line);display:block}.aq-th.p{width:44px;height:44px}
+.aq-ext{display:grid;place-items:center;align-content:center;gap:0;color:var(--ink2)}.aq-ext svg.ic{width:24px;height:24px}.aq-ext b{font-size:12px}
+.aq-v{border:0;background:none;padding:0;cursor:zoom-in}.aq-t b{display:block;font-size:17px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.aq-t span{font-size:14px;color:var(--muted)}
+.aq-b{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.pz-arq{display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap;font-size:15px}.pz-arq svg.ic{width:18px;height:18px}
+.pc-pzi{grid-template-columns:30px auto 1fr!important}.pc-arte{width:56px;height:56px;object-fit:contain;background:#fff;border-radius:8px;border:1px solid #E3E8F0}
+@media (max-width:640px){.aq{grid-template-columns:56px minmax(0,1fr)}.aq-b{grid-column:1/-1;justify-content:flex-start}}
+.alrt{width:100%;text-align:left;border:0;background:none;font:inherit;color:inherit;border-top:1px solid var(--grey-soft);grid-template-columns:34px minmax(0,1fr) auto!important}.alrt[data-a]{cursor:pointer}.alrt[data-a]:hover{background:var(--grey-soft)}
+.alrt-go{align-self:center;font-size:15px!important;font-weight:700;color:var(--blue)!important;white-space:nowrap}.g-link{cursor:pointer}.g-link:hover{background:var(--grey-soft)}
+@media (max-width:640px){.alrt{grid-template-columns:34px minmax(0,1fr)!important}.alrt-go{grid-column:2}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -666,7 +680,7 @@ svg.prod.mock{cursor:zoom-in}
   <symbol id="i-engr" viewBox="0 0 48 48"><circle cx="24" cy="24" r="6"/><path d="M24 4v7M24 37v7M4 24h7M37 24h7M10 10l5 5M33 33l5 5M38 10l-5 5M15 33l-5 5"/></symbol>
 </svg>
 
-<input type="file" id="fImpF" accept="application/pdf" multiple hidden><input type="file" id="fImpM" accept="image/*,application/pdf" multiple hidden><input type="file" id="fImpM1" accept="image/*,application/pdf" hidden>
+<input type="file" id="fArq" multiple hidden><input type="file" id="fImpF" accept="application/pdf" multiple hidden><input type="file" id="fImpM" accept="image/*,application/pdf" multiple hidden><input type="file" id="fImpM1" accept="image/*,application/pdf" hidden>
 <main><div class="wrap"><div id="sync" class="sync"></div></div><div class="wrap" id="app"></div></main>
 <nav class="nav" aria-label="Menu"><div class="wrap">
   <button class="nb" data-a="tela" data-t="fabrica"><svg class="ic"><use href="#i-fabrica"/></svg>Fábrica</button>
@@ -753,7 +767,7 @@ const PESSOAS0=[
   {id:'fabio',nome:'Fábio',papeis:['corte'],sabe:['corte'],melhor:['corte']},
   {id:'layara',nome:'Laiara',papeis:['vendas'],sabe:[],funcoes:['vias','arte_prep','arte_aprov','arte_env','levar','entregar'],viaApp:true,melhor:['arte_prep','arte_env']},
   {id:'paula',nome:'Paula',papeis:['vendas'],sabe:[],funcoes:['vias','arte_prep','arte_aprov','arte_env'],melhor:[]},
-  {id:'roger',nome:'Roger',papeis:['compras','vendas'],sabe:[],funcoes:['vias','arte_prep','arte_aprov','arte_env','comprar','levar','entregar'],melhor:['comprar','levar','entregar']},
+  {id:'roger',nome:'Roger',papeis:['compras','vendas'],sabe:[],funcoes:['vias','arte_prep','arte_aprov','arte_env','conferir','comprar','levar','entregar'],melhor:['comprar','levar','entregar']},
   {id:'alexandra',nome:'Alexandra',papeis:['acab'],sabe:['arremate','embalagem'],melhor:[]},
 ];
 const FUNCOES=[
@@ -1144,8 +1158,8 @@ const APELIDO={laiara:'layara',nilda:'anilda',leu:'leo'};
 function aplicaFotos(s){(s.pessoas||[]).forEach(p=>{const k0=chaveNome(p.nome),k=APELIDO[k0]||k0;if(FOTOS0[k]&&!(p.fotoOk||[]).includes(k)){if(!p.foto)p.foto=FOTOS0[k];p.fotoOk=[...(p.fotoOk||[]),k]}})}
 const NOMES_V1={'Léo':'Leu','Layara':'Laiara','Anilda':'Nilda'};
 function normalizar(s){if(!s.insV){(s.pedidos||[]).forEach(p=>{const come=(s.lotes||[]).some(l=>l.ped===p.id&&Object.keys(l.steps||{}).length);if(come||p.concluido)(p.materiais||[]).forEach(m=>m.conf=true)});(s.pessoas||[]).forEach(p=>{if((p.funcoes||[]).includes('comprar')&&!(p.funcoes||[]).includes('conferir'))p.funcoes.push('conferir')});s.insV=1}
-s.clientes=s.clientes||[];if(s.mockups&&s.mockups.length){s.mockups.forEach(m=>{if(m&&m.id&&m.img&&!MOCKG[m.id])guardaMockG(m.id,m.img)})}delete s.mockups;s.apelidos=s.apelidos||{};['tecido','cor','prod','local','serv'].forEach(k=>{if(!s.apelidos[k])s.apelidos[k]={}});
-  (s.pedidos||[]).forEach(p=>{if(p.cli&&s.clientes.some(c=>c.id===p.cli))return;const c=acharCliente(s,p.cliente,p.cnpj);if(c){p.cli=c.id;if(!c.cnpj&&p.cnpj)c.cnpj=p.cnpj;if(!c.contato&&p.contato)c.contato=p.contato}else{const n={id:'c'+(s.clientes.length+1)+'-'+Math.random().toString(36).slice(2,6),nome:(p.cliente||'').trim(),cnpj:p.cnpj||'',contato:p.contato||'',apelidos:[]};s.clientes.push(n);p.cli=n.id}});if(!s.nomesV){(s.pessoas||[]).forEach(p=>{if(NOMES_V1[p.nome])p.nome=NOMES_V1[p.nome]});s.nomesV=1}if(!s.alexV){if(!(s.pessoas||[]).some(p=>chaveNome(p.nome)==='alexandra'))s.pessoas.push({id:'alexandra',nome:'Alexandra',papeis:['acab'],sabe:['arremate','embalagem'],melhor:[]});s.alexV=1}aplicaFotos(s);if(s.expediente&&!s.expediente.v2){if(!s.expediente.pausas.some(p=>hm(p.h)>=hm('11:00')&&hm(p.h)<=hm('13:00')))s.expediente.pausas.push({nome:'Almoço',h:'12:00',min:60});s.expediente.pausas.sort((a,b)=>hm(a.h)-hm(b.h));s.expediente.v2=true}s.log=s.log||[];s.pessoas=s.pessoas||[];s.consertos=s.consertos||[];s.cores={...CORES,...(s.cores||{})};const EXC={'0402':['Marcos Lima','12.345.678/0001-90'],'0409':['Juliana Prado','23.456.789/0001-01'],'0412':['Paulo Reis','34.567.890/0001-12'],'0415':['Carla Mendes','45.678.901/0001-23'],'0416':['Rafael Souza','56.789.012/0001-34'],'0419':['Renata Alves','78.901.234/0001-56'],'0418':['Teresa Nogueira','67.890.123/0001-45'],'0420':['Fernanda Rocha','89.012.345/0001-67']};s.pedidos.forEach(p=>{const x=EXC[p.id];p.contato=p.contato||(x?x[0]:'');p.cnpj=p.cnpj||(x?x[1]:'')});s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});const mg=x=>{if(x.parte==='Mangas'&&!x.lado)x.lado='esq'};s.produtos.forEach(p=>{(p.persPadrao||[]).forEach(mg);ajustaGola(p)});Object.entries({'Gola polo Marinho':260,'Gola polo Branca':120,'Gola polo Cinza':150,'Gola ribana Branca':300,'Gola ribana Preta':150}).forEach(([k,v])=>{if(s.estoque[k]==null)s.estoque[k]=v});s.lotes.forEach(l=>(l.pers||[]).forEach(mg));cfgDefaults(s);return s}
+s.clientes=s.clientes||[];s.arquivos=s.arquivos||[];if(s.mockups&&s.mockups.length){s.mockups.forEach(m=>{if(m&&m.id&&m.img&&!MOCKG[m.id])guardaMockG(m.id,m.img)})}delete s.mockups;s.apelidos=s.apelidos||{};['tecido','cor','prod','local','serv'].forEach(k=>{if(!s.apelidos[k])s.apelidos[k]={}});
+  (s.pedidos||[]).forEach(p=>{if(p.cli&&s.clientes.some(c=>c.id===p.cli))return;const c=acharCliente(s,p.cliente,p.cnpj);if(c){p.cli=c.id;if(!c.cnpj&&p.cnpj)c.cnpj=p.cnpj;if(!c.contato&&p.contato)c.contato=p.contato}else{const n={id:'c'+(s.clientes.length+1)+'-'+Math.random().toString(36).slice(2,6),nome:(p.cliente||'').trim(),cnpj:p.cnpj||'',contato:p.contato||'',apelidos:[]};s.clientes.push(n);p.cli=n.id}});if(!s.nomesV){(s.pessoas||[]).forEach(p=>{if(NOMES_V1[p.nome])p.nome=NOMES_V1[p.nome]});s.nomesV=1}if(!s.alexV){if(!(s.pessoas||[]).some(p=>chaveNome(p.nome)==='alexandra'))s.pessoas.push({id:'alexandra',nome:'Alexandra',papeis:['acab'],sabe:['arremate','embalagem'],melhor:[]});s.alexV=1}aplicaFotos(s);if(s.expediente&&!s.expediente.v2){if(!s.expediente.pausas.some(p=>hm(p.h)>=hm('11:00')&&hm(p.h)<=hm('13:00')))s.expediente.pausas.push({nome:'Almoço',h:'12:00',min:60});s.expediente.pausas.sort((a,b)=>hm(a.h)-hm(b.h));s.expediente.v2=true}s.log=s.log||[];s.pessoas=s.pessoas||[];s.consertos=s.consertos||[];s.cores={...CORES,...(s.cores||{})};const EXC={'0402':['Marcos Lima','12.345.678/0001-90'],'0409':['Juliana Prado','23.456.789/0001-01'],'0412':['Paulo Reis','34.567.890/0001-12'],'0415':['Carla Mendes','45.678.901/0001-23'],'0416':['Rafael Souza','56.789.012/0001-34'],'0419':['Renata Alves','78.901.234/0001-56'],'0418':['Teresa Nogueira','67.890.123/0001-45'],'0420':['Fernanda Rocha','89.012.345/0001-67']};s.pedidos.forEach(p=>{const x=EXC[p.id];p.contato=p.contato||(x?x[0]:'');p.cnpj=p.cnpj||(x?x[1]:'')});s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});const mg=x=>{if(x.parte==='Mangas'&&!x.lado)x.lado='esq'};s.produtos.forEach(p=>{(p.persPadrao||[]).forEach(mg);ajustaGola(p)});Object.entries({'Gola polo Marinho':260,'Gola polo Branca':120,'Gola polo Cinza':150,'Gola ribana Branca':300,'Gola ribana Preta':150}).forEach(([k,v])=>{if(s.estoque[k]==null)s.estoque[k]=v});s.lotes.forEach(l=>(l.pers||[]).forEach(mg));cfgDefaults(s);mockNaBib(s);return s}
 const nCli=x=>String(x||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 function acharCliente(st,nome,cnpj){const n=nCli(nome),d=String(cnpj||'').replace(/\D/g,'');return (st.clientes||[]).find(c=>(n&&(nCli(c.nome)===n||(c.apelidos||[]).includes(n)))||(d.length>=14&&String(c.cnpj||'').replace(/\D/g,'')===d))||null}
 const cliById=id=>(state.clientes||[]).find(c=>c.id===id);
@@ -1153,6 +1167,7 @@ const pedsDoCli=id=>state.pedidos.filter(p=>p.cli===id);
 function garanteCliente(nome,cnpj,contato,cliId){let c=cliId&&cliById(cliId)||acharCliente(state,nome,cnpj);
   if(!c){c={id:uid('c'),nome:nome.trim(),cnpj:cnpj||'',contato:contato||'',apelidos:[]};state.clientes.push(c)}
   else{if(!c.cnpj&&cnpj)c.cnpj=cnpj;if(!c.contato&&contato)c.contato=contato;const n=nCli(nome);if(n&&nCli(c.nome)!==n&&!(c.apelidos||[]).includes(n))(c.apelidos=c.apelidos||[]).push(n)}return c}
+function mockNaBib(s){(s.lotes||[]).forEach(l=>{if(l.rework||!l.mock||l.mockArq)return;const p=(s.pedidos||[]).find(x=>x.id===l.ped);if(!p||!p.cli)return;const pr=(s.produtos||[]).find(x=>x.id===l.prod);const a={id:'a'+Date.now().toString(36)+Math.floor(Math.random()*1e4),cli:p.cli,tipo:'mockup',nome:`${pr?pr.nome:'Peça'} ${l.cor} · pedido ${l.ped}`,prev:l.mock,bin:l.id,ts:p.chegada||Date.now()};s.arquivos.push(a);l.mockArq=a.id})}
 function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===8&&s.pedidos){const semLog=!s.log;normalizar(s);state=s;if(semLog){seedN=11;logExemplo(now())}if(s.exemplo==null)s.exemplo=true;return}}catch(e){}seed();state.exemplo=true;normalizar(state)}
 
 /* ================= desenho dos produtos ================= */
@@ -1171,9 +1186,11 @@ async function nuvemMockGet(id){if(!NV.db||NV.modo!=='nuvem')return null;try{con
   const ps=await Promise.all(Array.from({length:n},(_,k)=>NV.db.doc(`mockp/${id}~${k}`).get()));if(ps.some(x=>!x.exists))return null;return ps.map(x=>x.data().d).join('')}catch(e){return null}}
 async function mockPendentes(){for(const id of [...MOCK_PEND]){const v=MOCKG[id]||await IDB.get(id);if(v)await nuvemMockPut(id,v);else{MOCK_PEND.delete(id);pendSalva()}}}
 function guardaMockG(id,g){MOCKG[id]=g;IDB.set(id,g);nuvemMockPut(id,g)}
-async function pegaMock(l){if(!l)return '';for(const id of [l.id,l.parent].filter(Boolean)){if(MOCKG[id])return MOCKG[id];let v=await IDB.get(id);if(!v){v=await nuvemMockGet(id);if(v)IDB.set(id,v)}if(v){MOCKG[id]=v;return v}}return l.mock||''}
-const mockGrande=l=>l?(MOCKG[l.id]||(l.parent&&MOCKG[l.parent])||l.mock||''):'';
-function setMock(l,p,g){l.mock=p;state.lotes.filter(r=>r.parent===l.id).forEach(r=>r.mock=p);if(g)guardaMockG(l.id,g)}
+async function pegaBin(k){if(!k)return '';if(MOCKG[k])return MOCKG[k];let v=await IDB.get(k);if(!v){v=await nuvemMockGet(k);if(v)IDB.set(k,v)}if(v)MOCKG[k]=v;return v||''}
+async function pegaMock(l){if(!l)return '';for(const id of [l.mockBin,l.id,l.parent].filter(Boolean)){if(MOCKG[id])return MOCKG[id];let v=await IDB.get(id);if(!v){v=await nuvemMockGet(id);if(v)IDB.set(id,v)}if(v){MOCKG[id]=v;return v}}return l.mock||''}
+const mockGrande=l=>l?((l.mockBin&&MOCKG[l.mockBin])||MOCKG[l.id]||(l.parent&&MOCKG[l.parent])||l.mock||''):'';
+function setMock(l,p,g,arq){l.mock=p;if(arq){l.mockBin=arq.bin;l.mockArq=arq.id}else{l.mockBin=undefined;if(g)guardaMockG(l.id,g);const ped=pedById(l.ped);if(ped&&ped.cli){const a={id:uid('a'),cli:ped.cli,tipo:'mockup',nome:`${prod(l.prod).nome} ${l.cor} · pedido ${l.ped}`,prev:p,bin:l.id,ts:now()};(state.arquivos=state.arquivos||[]).push(a);l.mockArq=a.id}}
+  state.lotes.filter(r=>r.parent===l.id).forEach(r=>{r.mock=p;r.mockBin=l.mockBin;r.mockArq=l.mockArq})}
 function loteSvg(l){return l&&l.mock?`<svg class="prod mock" viewBox="0 0 120 120" role="img" aria-label="Mockup: toque para ampliar" ${l.id?`data-z="L:${l.id}"`:''}><image href="${l.mock}" x="0" y="0" width="120" height="120" preserveAspectRatio="xMidYMid meet"/></svg>`:prodSvg(l.prod,l.cor,l.cores2)}
 function prodSvg(pid,cor,c2){const p=prod(pid);let sv=shapeSvg(p?p.forma:'polo',cor,p?p.nome:'');if(c2&&c2.length){const dots=c2.slice(0,4).map((c,i)=>`<circle cx="${104-i*15}" cy="106" r="8" fill="${coresAll()[c.cor]||'#999'}" stroke="#fff" stroke-width="2.5"/>`).join('');sv=sv.replace('</svg>',dots+'</svg>')}return sv}
 const coresAll=()=>(state&&state.cores)||CORES;
@@ -1313,6 +1330,7 @@ function sCli(){const e=ui.sheet,c=cliById(e.id);if(!c)return voltar();const ps=
   return `${voltar()}<div class="card"><div class="imp-h"><span class="m-ic" style="width:64px;height:64px">${ic('i-predio')}</span><div><h1 style="margin:0">${esc(c.nome)}</h1><span class="lido">${c.cnpj?`CNPJ ${esc(c.cnpj)}`:'Sem CNPJ'}${c.contato?` · ${esc(c.contato)}`:''}</span></div></div>
     <div class="kpis" style="margin:12px 0 0">${[[ps.length,'pedidos'],[ps.length-ent.length,'em aberto'],[nf(pecas,0),'peças'],[ent.length?Math.round((ent.length-late.length)/ent.length*100)+'%':'—','entregues no prazo']].map(([v,l])=>`<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join('')}</div></div>
   <div class="card"><h2>Pedidos</h2>${ps.map(p=>{const i=info(p);return `<button class="rk" data-a="pedido" data-id="${p.id}" style="width:100%;text-align:left;background:none;border-left:0;border-right:0;border-bottom:0"><span class="pill u-${i.u}"><span class="dot"></span>${ULAB[i.u]}</span><div class="rk-t"><b>Pedido ${esc(p.id)}${p.ficha&&p.ficha!==p.id?` · ficha ${esc(p.ficha)}`:''}</b><span>Feito ${fD(p.chegada)} · entrega ${fD(p.entrega)} · ${nf(sum(lotesDe(p.id).filter(l=>!l.rework).map(l=>l.qtd||0)),0)} peças</span></div><div class="rk-p">${lotesDe(p.id).filter(l=>!l.rework).slice(0,2).map(loteSvg).join('')}</div></button>`}).join('')||'<p class="dica">Nenhum pedido ainda.</p>'}</div>
+  ${secArquivos(c.id)}
   <div class="card"><h2>Dados da empresa</h2>
     <div class="rotulo">Nome</div><input class="campo" id="cNome" value="${esc(c.nome)}"><div class="rotulo">CNPJ</div><input class="campo" id="cCnpj" value="${esc(c.cnpj||'')}" inputmode="numeric"><div class="rotulo">Contato</div><input class="campo" id="cCont" value="${esc(c.contato||'')}">
     ${(c.apelidos||[]).length?`<div class="rotulo">Também aparece nas fichas como</div><div class="linha-dep">${c.apelidos.map((a,j)=>`<span class="sk">${esc(a.toUpperCase())} <button class="x" data-a="cliApRm" data-j="${j}" aria-label="Esquecer">×</button></span>`).join('')}</div>`:''}
@@ -1335,8 +1353,8 @@ function sPedido(id){const ped=pedById(id),i=info(ped),mats=ped.materiais.filter
     ${mats.filter(m=>m.st!=='recebido'&&m.conf).map(m=>{const k=ped.materiais.indexOf(m);return `<div class="mat">${ic(m.st==='pedido'?'i-caminhao':'i-carrinho')}<div><b>${esc(m.item)}</b><span>${m.st==='pedido'?'Comprado, esperando chegar':'Comprar '+qtdTxt(m.nec-m.est,m.un)}</span></div><button class="mbtn" data-a="${m.st==='pedido'?'chegou':'comprei'}" data-id="${id}" data-k="${k}">${m.st==='pedido'?'Chegou':'Comprei'}</button></div>`}).join('')}
     ${mats.some(m=>m.st==='comprar'&&m.conf)?avisoEst():''}
     <div class="lib ${lib?'u-ok':'u-warn'}">${ic(lib?'i-check':'i-cadeado')}${lib?'Pode cortar':'Ainda não pode cortar'}</div></div>
-  ${envs.length?`<div class="card"><h2>Arte para quem aplica</h2><p style="margin:0 0 6px;color:var(--ink2)">Cada personalização só começa quando a arte chegou em quem aplica.</p>
-    ${envs.map(e=>{const fo=isExt(e.z)?fornDe(e.z.posto)[0]:null;const r=resp('arteEnv',{l:e.l.id,s:e.z.id});return `<div class="mat">${ic(tipo(e.z.posto).i)}<div><b>${esc(e.z.nome)} · ${esc(prod(e.l.prod).nome)} ${esc(e.l.cor)}</b><span>Para ${esc(fo?fo.nome:tipo(e.z.posto).nome)}${!e.ok&&r?' · '+esc(r):''}${(e.l.pers||[]).find(x=>x.id===e.z.id)?.desc?`<br>Arte: ${esc((e.l.pers||[]).find(x=>x.id===e.z.id).desc)}`:''}${(()=>{const x=(e.l.pers||[]).find(x=>x.id===e.z.id);if(!x)return '';const tm=tamTxt(x);return `<label class="tam-in">Tamanho: <input class="campo" data-tam="${e.l.id}|${x.id}" value="${esc(x.tam||'')}" placeholder="${esc(tm?tm.t:'ex.: 8 × 8 cm')}"></label>`})()}</span></div>
+  ${envs.length?`<div class="card"><h2>Arte para quem aplica</h2><p style="margin:0 0 6px;color:var(--ink2)">Cada personalização só começa quando a arte chegou em quem aplica.</p>${(()=>{const L=arqsDoPedido(ped);return L.length?`<button class="mbtn neutro2" data-a="arqsPed" data-id="${id}" style="margin:4px 0 8px">${ic('i-lista')}Baixar todos os arquivos (${L.length})</button>`:''})()}
+    ${envs.map(e=>{const fo=isExt(e.z)?fornDe(e.z.posto)[0]:null;const r=resp('arteEnv',{l:e.l.id,s:e.z.id});return `<div class="mat">${ic(tipo(e.z.posto).i)}<div><b>${esc(e.z.nome)} · ${esc(prod(e.l.prod).nome)} ${esc(e.l.cor)}</b><span>Para ${esc(fo?fo.nome:tipo(e.z.posto).nome)}${!e.ok&&r?' · '+esc(r):''}${(e.l.pers||[]).find(x=>x.id===e.z.id)?.desc?`<br>Arte: ${esc((e.l.pers||[]).find(x=>x.id===e.z.id).desc)}`:''}${(()=>{const x=(e.l.pers||[]).find(x=>x.id===e.z.id);if(!x)return '';const tm=tamTxt(x);return `<label class="tam-in">Tamanho: <input class="campo" data-tam="${e.l.id}|${x.id}" value="${esc(x.tam||'')}" placeholder="${esc(tm?tm.t:'ex.: 8 × 8 cm')}"></label>${pzArquivos(e.l,x)}`})()}</span></div>
       ${e.ok?`<span class="pill u-ok">${ic('i-check')}Enviada</span>`:`<button class="mbtn" data-a="arteEnv" data-id="${id}" data-l="${e.l.id}" data-s="${e.z.id}" ${ped.arte?'':'disabled style="opacity:.4"'}>Enviei</button>`}</div>`}).join('')}</div>`:''}`}
   <div class="card"><h2>Peças e etapas</h2>${legendaStatus()}${i.ls.filter(l=>!l.rework).map(l=>prodLine(l,ped)+i.ls.filter(r=>r.parent===l.id&&!loteDone(r)).map(r=>prodLine(r,ped)).join('')).join('')}</div>`}
 const ETAPAS=[{nome:'Corte',i:'i-corte',g:['corte']},{nome:'Personalização',i:'i-estampa',g:['pers']},{nome:'Costura',i:'i-maquina',g:['costura']},{nome:'Arremate',i:'i-lupa',t:['arremate']},{nome:'Embalar',i:'i-caixa',t:['embalagem']}];
@@ -1345,7 +1363,7 @@ function prodLine(l,ped){const p=rp(l);
     const c=n===ss.length?'ok':fo?'fora':(and||n>0)?'and':'';return `<div class="tp ${c}"><span class="tc">${ic(c==='ok'?'i-check':c==='fora'?'i-caminhao':e.i)}</span>${e.nome}${ss.length>1&&c!=='ok'?`<small>${n} de ${ss.length}</small>`:''}</div>`}).join('');
   const ands=p.steps.filter(s=>stOf(l,s.id).st==='and'),fo=p.steps.filter(s=>stOf(l,s.id).st==='fora');
   const agora=loteDone(l)?'Pronto':fo.length?`No fornecedor: ${fo.map(s=>s.nome).join(', ')}`:ands.length?'Agora: '+ands.map(s=>`${s.nome} (${pNome(stOf(l,s.id).op)})`).join(', '):!liberado(ped)?'Esperando liberar o corte':'Esperando a próxima máquina';
-  return `<div class="prodbloco"><div class="prodline">${loteSvg(l)}<div><h3>${l.rework?`<span class="pill cons">${ic('i-conserto')}Conserto</span> `:''}${esc(p.nome)} · ${esc(modeloTxt(l))} · ${qtdEf(l)} peças</h3><div class="agora">${esc(agora)}</div>${l.obs?`<div class="obs-f">${ic('i-lista')}${esc(l.obs)}</div>`:''}${l.rework?'':`<button class="x azul" data-a="mockUm" data-l="${l.id}" style="margin:4px 0 8px;font-size:15px">${ic('i-camisa')}${l.mock?'Trocar mockup':'Pôr mockup'}</button>`}<div class="trilha">${et}</div></div></div>${fluxo(rotaV(l,ped),'L'+l.id,l,ped)}</div>`}
+  return `<div class="prodbloco"><div class="prodline">${loteSvg(l)}<div><h3>${l.rework?`<span class="pill cons">${ic('i-conserto')}Conserto</span> `:''}${esc(p.nome)} · ${esc(modeloTxt(l))} · ${qtdEf(l)} peças</h3><div class="agora">${esc(agora)}</div>${l.obs?`<div class="obs-f">${ic('i-lista')}${esc(l.obs)}</div>`:''}${l.rework?'':`<button class="x azul" data-a="mockUm" data-l="${l.id}" style="margin:4px 0 8px;font-size:15px">${ic('i-camisa')}${l.mock?'Trocar mockup':'Pôr mockup'}</button>${ped.cli&&arqsDoCli(ped.cli,'mockup').filter(a=>a.id!==l.mockArq).length?` <button class="x azul" data-a="mockBib" data-l="${l.id}" style="margin:4px 0 8px;font-size:15px">Usar mockup já guardado</button>`:''}`}<div class="trilha">${et}</div></div></div>${fluxo(rotaV(l,ped),'L'+l.id,l,ped)}</div>`}
 
 /* ================= mapa de etapas ================= */
 const NW=200,NH=104,GX=48,GY=14;
@@ -1908,6 +1926,7 @@ function abreZoom(z){const [k,v]=[z.slice(0,1),z.slice(2)];let src='',tit='Mocku
   else if(k==='I'){const it=ui.sheet.grupos[ui.sheet.gi].itens[+v];src=it.mockG||it.mock;tit=`Peça ${+v+1}`}
   else if(k==='W'){const it=ui.sheet.w.itens[+v];src=it.mockG||it.mock;tit=prod(it.prod).nome}
   else if(k==='M'){const m=ui.sheet.itens[+v];src=m.g||m.img;tit=m.nome}
+  else if(k==='A'){const a=arqById(v);if(!a)return;src=a.prev;tit=a.nome;const kb=a.vis||(a.tipo==='mockup'?a.bin:null);if(kb)setTimeout(()=>pegaBin(kb).then(u=>{const im=document.querySelector('#zoom .zm-area img');if(u&&im&&im.dataset.k===undefined){im.dataset.k=1;im.dispatchEvent(new CustomEvent('trocar',{detail:u}))}}),0)}
   if(!src)return;const Z=document.getElementById('zoom');
   Z.innerHTML=`<div class="zm" role="dialog" aria-modal="true" aria-label="${esc(tit)}"><div class="zm-bar"><b>${esc(tit)}</b><button class="zm-b" data-zm="-" aria-label="Diminuir">−</button><button class="zm-b" data-zm="0" aria-label="Tamanho normal">⤢</button><button class="zm-b" data-zm="+" aria-label="Aumentar">+</button><button class="zm-b zm-x" data-zm="x" aria-label="Fechar">×</button></div><div class="zm-area"><img alt="${esc(tit)}" draggable="false"></div><p class="zm-dica"><span class="zm-res"></span> Use + e −, dois dedos ou a rodinha do mouse. Arraste para mover.</p></div>`;
   const img=Z.querySelector('img'),area=Z.querySelector('.zm-area'),res=Z.querySelector('.zm-res');let base=1,esc_=1,x=0,y=0,max=6;
@@ -1916,7 +1935,7 @@ function abreZoom(z){const [k,v]=[z.slice(0,1),z.slice(2)];let src='',tit='Mocku
     img.style.width=w+'px';img.style.height=h+'px';img.style.left=((r.width-w)/2+x)+'px';img.style.top=((r.height-h)/2+y)+'px'};
   const zoom=(f,cx,cy)=>{const r=area.getBoundingClientRect();cx=cx??r.width/2;cy=cy??r.height/2;const n=Math.min(max,Math.max(1,esc_*f));const px=cx-r.width/2-x,py=cy-r.height/2-y;x-=px*(n/esc_-1);y-=py*(n/esc_-1);esc_=n;if(n===1){x=0;y=0}ap()};
   const carrega=u=>{const i2=new Image();i2.onload=()=>{const keep=esc_;img.src=u;cabe();esc_=keep;ap();res.textContent=`${i2.naturalWidth} px ·`};i2.src=u};
-  carrega(src);if(lt)pegaMock(lt).then(u=>{if(u&&u!==src)carrega(u)});
+  carrega(src);if(lt)pegaMock(lt).then(u=>{if(u&&u!==src)carrega(u)});img.addEventListener('trocar',ev=>carrega(ev.detail));
   window.addEventListener('resize',()=>{if(img.naturalWidth){cabe();ap()}},{once:true});
   Z.querySelectorAll('[data-zm]').forEach(b=>b.onclick=()=>{const v=b.dataset.zm;if(v==='x')Z.innerHTML='';else if(v==='0'){esc_=1;x=0;y=0;ap()}else zoom(v==='+'?1.6:1/1.6)});
   area.onwheel=ev=>{ev.preventDefault();const r=area.getBoundingClientRect();zoom(ev.deltaY<0?1.2:1/1.2,ev.clientX-r.left,ev.clientY-r.top)};
@@ -1971,7 +1990,7 @@ function docFicha(l,ped,via,n,N,gray){const p=prod(l.prod),G=gradeOrd(l),tot=sum
       <div class="fp-l"><span>TECIDO</span><b>${esc(l.tecido||'—')}</b></div>
       <div class="fp-l"><span>COR</span><b class="xl">${esc(l.cor)}</b>${c2?`<em>+ ${esc(c2)}</em>`:''}</div>
       ${(p.opcoes||[]).filter(o=>(l.opcoes||[]).includes(o.id)).length?`<div class="fp-l"><span>MODELO</span><b>${esc((p.opcoes||[]).filter(o=>(l.opcoes||[]).includes(o.id)).map(o=>o.nome).join(', '))}</b></div>`:''}</div></div>
-  <div class="fp-sec">PERSONALIZAÇÃO</div>${pz.length?`<table class="fp-t"><tr><th>#</th><th>TÉCNICA</th><th>ONDE</th><th>ARTE</th><th>TAMANHO</th></tr>${pz.map((x,i)=>{const tm=tamTxt(x);return `<tr><td>${i+1}</td><td><b>${esc(tNome(x.tipo))}</b></td><td>${esc(posTxt(x))}</td><td>${esc(x.desc||'—')}</td><td>${tm?esc(tm.t)+(tm.aprox?' <small>aprox.</small>':''):'—'}</td></tr>`}).join('')}</table>`:'<p class="fp-nada">Sem personalização</p>'}
+  <div class="fp-sec">PERSONALIZAÇÃO</div>${pz.length?`<table class="fp-t"><tr><th>#</th><th>TÉCNICA</th><th>ONDE</th><th>ARTE</th><th>TAMANHO</th></tr>${pz.map((x,i)=>{const tm=tamTxt(x);return `<tr><td>${i+1}</td><td><b>${esc(tNome(x.tipo))}</b></td><td>${esc(posTxt(x))}</td><td>${esc(x.desc||'—')}${x.bord&&arqById(x.bord)?`<br><small>Bordado: ${esc(arqById(x.bord).nome)}</small>`:''}</td><td>${tm?esc(tm.t)+(tm.aprox?' <small>aprox.</small>':''):'—'}</td></tr>`}).join('')}</table>`:'<p class="fp-nada">Sem personalização</p>'}
   <div class="fp-sec">TAMANHOS</div><table class="fp-g"><tr>${G.map(([z])=>`<th>${z}</th>`).join('')}<th class="tt">TOTAL</th></tr><tr>${G.map(([,q])=>`<td>${q}</td>`).join('')}<td class="tt">${tot}</td></tr></table>
   <div class="fp-bx"><div class="fp-sec">ETAPAS <small>marque ao terminar</small></div><div class="fp-et">${st.map((s,i)=>`<span>☐ ${i+1}. ${esc(s.nome)}</span>`).join('')}</div></div>
   <div class="fp-bx"><div class="fp-sec">OBSERVAÇÕES</div><div class="fp-obs">${l.obs?esc(l.obs):''}</div></div>
@@ -1999,7 +2018,7 @@ function docPedido(ped){const m=marca(),ls=lotesDe(ped.id).filter(l=>!l.rework),
         ${c2.length?`<div><span>Outras cores</span><b>${c2.map(c=>`<span class="pc-bol" style="background:${coresAll()[c.cor]||'#ccc'}"></span>${esc(c.cor)} <small>(${esc((c.partes||[]).join(', '))})</small>`).join('<br>')}</b></div>`:''}
         ${(p.opcoes||[]).filter(o=>(l.opcoes||[]).includes(o.id)).length?`<div><span>Modelo</span><b>${esc((p.opcoes||[]).filter(o=>(l.opcoes||[]).includes(o.id)).map(o=>o.nome).join(', '))}</b></div>`:''}
         <div><span>Partes da peça</span><b style="font-weight:600">${esc((p.partes||[]).join(', '))}</b></div></div></div>
-    <h2 class="pc-h2">Personalização</h2>${pz.length?`<div class="pc-pz">${diagrama(l,'#12BFD0')}<div class="pc-pzl">${pz.map((x,j)=>{const tm=tamTxt(x);return `<div class="pc-pzi"><span class="pc-n">${j+1}</span><div><b>${esc(tNome(x.tipo))} · ${esc(posTxt(x))}</b><span>${x.desc?`Arte: ${esc(x.desc)}`:'Arte enviada pelo cliente'}</span><span>Tamanho: <b>${tm?esc(tm.t):'a definir'}</b>${tm&&tm.aprox?' (aproximado)':''}</span></div></div>`}).join('')}</div></div>`:'<p class="pc-p">Esta peça não tem personalização.</p>'}
+    <h2 class="pc-h2">Personalização</h2>${pz.length?`<div class="pc-pz">${diagrama(l,'#12BFD0')}<div class="pc-pzl">${pz.map((x,j)=>{const tm=tamTxt(x);return `<div class="pc-pzi"><span class="pc-n">${j+1}</span>${x.arte&&arqById(x.arte)?.prev?`<img class="pc-arte" src="${arqById(x.arte).prev}" alt="">`:''}<div><b>${esc(tNome(x.tipo))} · ${esc(posTxt(x))}</b><span>${x.desc?`Arte: ${esc(x.desc)}`:'Arte enviada pelo cliente'}</span><span>Tamanho: <b>${tm?esc(tm.t):'a definir'}</b>${tm&&tm.aprox?' (aproximado)':''}</span></div></div>`}).join('')}</div></div>`:'<p class="pc-p">Esta peça não tem personalização.</p>'}
     <h2 class="pc-h2">Tamanhos</h2><table class="pc-g"><tr>${G.map(([z])=>`<th>${z}</th>`).join('')}<th>Total</th></tr><tr>${G.map(([,q])=>`<td>${q}</td>`).join('')}<td><b>${sum(G.map(x=>x[1]))}</b></td></tr></table>
     ${l.obs?`<p class="pc-p"><b>Observação:</b> ${esc(l.obs)}</p>`:''}${rod(i+2)}</div>`)});
   const T=state.termos||TERMOS0;
@@ -2052,6 +2071,56 @@ function sIns(){const e=ui.sheet,ped=pedById(e.id);const M=ped.materiais;const n
   <div class="card"><h2>Faltou algum item na lista?</h2><p class="dica" style="margin:-4px 0 8px">Ex.: zíper, entretela, etiqueta especial.</p><div class="ins-add"><input class="campo" id="insN" placeholder="Nome do insumo"><input class="campo" id="insQ" type="number" min="0" placeholder="Qtd."><select class="campo" id="insU"><option value="un">unidades</option><option value="m">metros</option><option value="cone">cones</option></select><button class="mbtn" data-a="insAdd" data-id="${ped.id}">${ic('i-mais')}Pôr</button></div></div>
   <div class="acoes"><button class="big go" data-a="fechar">${ic('i-check')}${nc?`Faltam ${nc} para conferir`:'Tudo conferido'}</button></div>`}
 
+/* ================= arquivos da empresa: artes, bordados e mockups ================= */
+const ARQ_T={arte:['Artes','i-arte','Arte'],bordado:['Arquivos de bordado','i-bordado','Arquivo de bordado'],mockup:['Mockups','i-camisa','Mockup']};
+const arqById=id=>(state.arquivos||[]).find(a=>a.id===id);
+const arqsDoCli=(cli,t)=>(state.arquivos||[]).filter(a=>a.cli===cli&&(!t||a.tipo===t)).sort((a,b)=>b.ts-a.ts);
+const extDe=n=>(String(n||'').split('.').pop()||'').toLowerCase();
+const tamArq=b=>b>1048576?`${nf(b/1048576,1)} MB`:`${Math.max(1,Math.round(b/1024))} KB`;
+const ehImg=a=>/^image\//.test(a.mime||'')||['png','jpg','jpeg','webp','gif','svg'].includes(extDe(a.nome));
+function arqThumb(a,cls=''){if(a.prev)return `<img class="aq-th ${cls}" src="${a.prev}" alt="">`;return `<span class="aq-th aq-ext ${cls}">${ic(ARQ_T[a.tipo]?.[1]||'i-lista')}<b>.${esc(extDe(a.nome)||'?')}</b></span>`}
+const arqsDoPedido=ped=>{const S=new Set();lotesDe(ped.id).filter(l=>!l.rework).forEach(l=>(l.pers||[]).forEach(x=>{if(x.arte)S.add(x.arte);if(x.bord)S.add(x.bord)}));return [...S].map(arqById).filter(Boolean)};
+const usoArq=a=>state.lotes.filter(l=>!l.rework&&(l.mockArq===a.id||(l.pers||[]).some(x=>x.arte===a.id||x.bord===a.id))).map(l=>l.ped).filter((v,i,A)=>A.indexOf(v)===i);
+async function thumbDe(src,ehPdf,N){const im=new Image();if(ehPdf){const pdf=await pdfLib();const d=await pdf.getDocument({data:Uint8Array.from(atob(src.split(',')[1]),c=>c.charCodeAt(0)),isEvalSupported:false}).promise;const pg=await d.getPage(1);const v1=pg.getViewport({scale:1}),vp=pg.getViewport({scale:N/Math.max(v1.width,v1.height)});const c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);await pg.render({canvasContext:g,viewport:vp}).promise;return c.toDataURL('image/jpeg',.85)}
+  im.src=src;await im.decode();const k=Math.min(1,N/Math.max(im.naturalWidth||N,im.naturalHeight||N));const c=document.createElement('canvas');c.width=Math.max(1,Math.round((im.naturalWidth||N)*k));c.height=Math.max(1,Math.round((im.naturalHeight||N)*k));const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);g.drawImage(im,0,0,c.width,c.height);return c.toDataURL('image/jpeg',.85)}
+async function arqSalvar(file,cli,tipo){if(file.size>15*1048576){toast(`${file.name} passa de 15 MB. Envie uma versão menor.`,false);return null}
+  const id=uid('a'),e=extDe(file.name),mime=file.type||'';const a={id,cli,tipo,nome:file.name,mime,tam:file.size,ts:now(),bin:'A-'+id};
+  if(tipo==='mockup'){const m=await mockDeArquivo(file);a.prev=m.p;a.bin='A-'+id;guardaMockG(a.bin,m.g)}
+  else{const data=await lerURL(file);guardaMockG(a.bin,data);
+    try{if(/^image\//.test(mime)||['png','jpg','jpeg','webp','gif','svg'].includes(e)){a.prev=await thumbDe(data,false,240);a.vis=a.bin}
+      else if(e==='pdf'||mime==='application/pdf'){a.prev=await thumbDe(data,true,240);const v=await thumbDe(data,true,1800);a.vis='V-'+id;guardaMockG(a.vis,v)}}catch(er){}}
+  (state.arquivos=state.arquivos||[]).push(a);return a}
+// zip simples (sem compressão) para arquivos que o navegador não deixa baixar direto (.dst, .pes, .emb, .ai, .cdr...)
+const CRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+const crc32=b=>{let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=CRC[(c^b[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0};
+function zipar(files){const enc=new TextEncoder(),parts=[],cen=[];let off=0;const u16=v=>[v&255,(v>>8)&255],u32=v=>[v&255,(v>>8)&255,(v>>16)&255,(v>>>24)&255];
+  const nomes=new Set();files.forEach(f=>{let n=f.name,k=2;while(nomes.has(n)){n=f.name.replace(/(\.[^.]*)?$/,m=>` (${k++})`+m)}nomes.add(n);const nb=enc.encode(n),d=f.bytes,c=crc32(d);
+    const h=new Uint8Array([...u32(0x04034b50),...u16(20),...u16(0x0800),...u16(0),...u16(0),...u16(0x21),...u32(c),...u32(d.length),...u32(d.length),...u16(nb.length),...u16(0)]);
+    parts.push(h,nb,d);cen.push(new Uint8Array([...u32(0x02014b50),...u16(20),...u16(20),...u16(0x0800),...u16(0),...u16(0),...u16(0x21),...u32(c),...u32(d.length),...u32(d.length),...u16(nb.length),...u16(0),...u16(0),...u16(0),...u16(0),...u32(0),...u32(off)]),nb);off+=h.length+nb.length+d.length});
+  const cs=cen.reduce((a,b)=>a+b.length,0);const fim=new Uint8Array([...u32(0x06054b50),...u16(0),...u16(0),...u16(files.length),...u16(files.length),...u32(cs),...u32(off),...u16(0)]);return new Blob([...parts,...cen,fim],{type:'application/zip'})}
+const bytesDe=du=>{const b=atob(du.split(',')[1]||'');const u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u};
+const OK_EXT=new Set('gif png jpg jpeg webp mp4 webm txt json md docx pptx epub csv ttf html svg pdf xlsx zip'.split(' '));
+async function baixarBlob(nome,blob){let dl=null;try{dl=await window.claude?.use?.('downloads')}catch(e){}
+  if(dl){try{await dl.save({filename:nome,data:blob});return}catch(e){if(e&&e.code==='declined')return}}
+  const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=nome;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),60000)}
+async function baixarArqs(lista,nomeZip){toast('Preparando os arquivos…',false);const fs=[];for(const a of lista){const d=await pegaBin(a.bin);if(d)fs.push({name:a.tipo==='mockup'&&!/\.\w+$/.test(a.nome)?a.nome+'.jpg':a.nome,bytes:bytesDe(d)})}
+  document.getElementById('toast').innerHTML='';if(!fs.length){toast('Arquivo não encontrado neste aparelho nem na nuvem',false);return}
+  if(fs.length===1&&OK_EXT.has(extDe(fs[0].name)))return baixarBlob(fs[0].name,new Blob([fs[0].bytes]));
+  await baixarBlob(nomeZip||(fs.length===1?fs[0].name+'.zip':'arquivos.zip'),zipar(fs))}
+function arqCard(a,ctx){const u=usoArq(a);return `<div class="aq">${ehImg(a)||a.vis||a.tipo==='mockup'?`<button class="aq-v" data-a="arqVer" data-id="${a.id}" title="Ver">${arqThumb(a)}</button>`:arqThumb(a)}<div class="aq-t"><b title="${esc(a.nome)}">${esc(a.nome)}</b><span>${a.tam?tamArq(a.tam)+' · ':''}${dataCurta(a.ts)}${u.length?` · usado em ${u.length} ${u.length===1?'pedido':'pedidos'}`:''}</span></div>
+  <div class="aq-b">${ctx||''}<button class="x azul" data-a="arqBaixar" data-id="${a.id}">Baixar</button>${ctx?'':`<button class="x" data-a="arqRm" data-id="${a.id}">Tirar</button>`}</div></div>`}
+function secArquivos(cli){return `<div class="card"><h2>Arquivos da empresa</h2><p class="dica" style="margin:-4px 0 10px">Ficam guardados para usar de novo nos próximos pedidos.</p>
+  ${Object.entries(ARQ_T).map(([t,[n,i,um]])=>{const L=arqsDoCli(cli,t);return `<div class="aq-g"><div class="aq-gh">${ic(i)}<b>${n}</b><small>${L.length}</small><button class="mbtn neutro2" data-a="arqNovo" data-cli="${cli}" data-t="${t}">${ic('i-mais')}Pôr ${um.toLowerCase()}</button></div>${L.map(a=>arqCard(a)).join('')||`<p class="dica" style="margin:4px 0 10px">Nenhum ainda.</p>`}</div>`}).join('')}</div>`}
+function usaArq(a,alvo){if(!a||!alvo)return;const l=lote(alvo.l);if(!l)return;
+  if(alvo.k==='mock'){setMock(l,a.prev,null,a);pegaBin(a.bin)}
+  else{const x=(l.pers||[]).find(y=>y.id===alvo.x);if(x)x[alvo.k==='arte'?'arte':'bord']=a.id}}
+function sArqPick(){const e=ui.sheet,L=arqsDoCli(e.cli,e.tipo);return `${voltar()}<h1>${ARQ_T[e.tipo][0]} da empresa</h1><p class="sub-l">${esc(cliById(e.cli)?.nome||'')} · toque em “Usar este”.</p>
+  ${L.map(a=>arqCard(a,`<button class="mbtn" data-a="arqUsar" data-id="${a.id}">Usar este</button>`)).join('')||'<p class="dica">Nenhum arquivo guardado ainda.</p>'}
+  <div class="acoes"><button class="big neutro" data-a="arqNovoAlvo">${ic('i-mais')}Enviar um arquivo novo</button></div>`}
+function pzArquivos(l,x){const ped=pedById(l.ped),cli=ped&&ped.cli;if(!cli)return '';const ar=x.arte&&arqById(x.arte),bd=x.bord&&arqById(x.bord);const ehB=/bord/i.test(x.tipo+' '+tNome(x.tipo));
+  const linha=(k,a,rot)=>`<div class="pz-arq">${a?`${ehImg(a)||a.vis?`<button class="aq-v" data-a="arqVer" data-id="${a.id}">${arqThumb(a,'p')}</button>`:arqThumb(a,'p')}<span><b>${rot}:</b> ${esc(a.nome)}</span><button class="x azul" data-a="arqBaixar" data-id="${a.id}">Baixar</button><button class="x" data-a="pzArq" data-l="${l.id}" data-x="${x.id}" data-k="${k}">Trocar</button>`:`<button class="x azul" data-a="pzArq" data-l="${l.id}" data-x="${x.id}" data-k="${k}">${ic(k==='arte'?'i-arte':'i-bordado')}Pôr ${rot.toLowerCase()}</button>`}</div>`;
+  return linha('arte',ar,'Arte')+(ehB||bd?linha('bord',bd,'Arquivo de bordado'):'')}
+
 /* ================= painel do gestor ================= */
 const PERIODOS=[[1,'Hoje'],[7,'7 dias'],[30,'30 dias']];
 function gDesde(){const d=ui.gp||7;return d===1?sod(now()).getTime():now()-d*DIA}
@@ -2074,25 +2143,25 @@ function gDados(desde){const T=now(),P=plano(),st={};
   return {T,P,rank,disp,porEt:Object.values(porEt)}}
 const pctTxt=x=>x==null?'—':Math.round(x*100)+'%';
 function gAlertas(){const T=now(),P=plano(),sit=situacao(),out=[],lim=(prm().parado||20)*MIN,esc_=tarefasEsc();
-  const A=(sev,i,t,d)=>out.push({sev,i,t,d});
+  const A=(sev,i,t,d,to,ir)=>out.push({sev,i,t,d,to,ir});
   state.pedidos.filter(p=>!p.concluido).map(p=>({p,f:info(p)})).filter(x=>x.f.u==='crit'||x.f.u==='warn').sort((a,b)=>a.f.folga-b.f.folga).forEach(({p,f})=>
-    A(f.u==='crit'?'crit':'warn','i-alerta',`${p.cliente}: ${f.u==='crit'?'vai atrasar':'prazo apertado'}`,`Entrega ${fD(p.entrega)} · ${Math.round(f.prog*100)}% feito · faltam ~${nf(f.need,0)} dias de trabalho para ${f.du} dias úteis`));
+    A(f.u==='crit'?'crit':'warn','i-alerta',`${p.cliente}: ${f.u==='crit'?'vai atrasar':'prazo apertado'}`,`Entrega ${fD(p.entrega)} · ${Math.round(f.prog*100)}% feito · faltam ~${nf(f.need,0)} dias de trabalho para ${f.du} dias úteis`,'ped:'+p.id,'Abrir o pedido'));
   if(sit.k==='trab'||Object.values(P.uso).some(t=>heAtiva(t.x)))state.pessoas.filter(p=>p.sabe.length&&p.disp!==false&&!P.ocup.has(p.id)).forEach(p=>{
     let ult=0;state.lotes.forEach(l=>Object.values(l.steps).forEach(x=>{if(x.op===p.id&&x.fim&&x.fim>ult)ult=x.fim}));
     const ini0=janelasDia(sod(T))[0]?.[0]||T,de=Math.max(ult,ini0),par=util2(de,T,[]);if(par<lim)return;
     const tem=Object.values(P.plan).some(pl=>pl.pessoa===p.id);
-    A(tem?'crit':'warn','i-dormir',`${p.nome}: sem processo há ${fDur(par)}`,tem?'Tem trabalho esperando por essa pessoa. Veja o botão Começar na Fábrica.':'Não há trabalho que essa pessoa saiba fazer agora. Treinar em outra máquina ou adiantar outro pedido?')});
-  Object.values(P.uso).forEach(t=>{const real=tempoUtil(t.x),pad=t.s.min*qtdEf(t.l)*MIN;if(real>30*MIN&&real>1.5*pad)A('warn','i-relogio',`${t.s.nome} na ${unidade(t.x.maq)?.nome||''} está demorando`,`${pNome(t.x.op)} · ${fDur(real)} até agora, o previsto era ${fDur(pad)} (${nf(real/pad,1)}×). Algum problema na máquina ou no material?`)});
+    A(tem?'crit':'warn','i-dormir',`${p.nome}: sem processo há ${fDur(par)}`,tem?'Tem trabalho esperando por essa pessoa. Veja o botão Começar na Fábrica.':'Não há trabalho que essa pessoa saiba fazer agora. Treinar em outra máquina ou adiantar outro pedido?',tem?'fab:maq':'pes:'+p.id,tem?'Ir para as máquinas':'Ver o que a pessoa sabe fazer')});
+  Object.values(P.uso).forEach(t=>{const real=tempoUtil(t.x),pad=t.s.min*qtdEf(t.l)*MIN;if(real>30*MIN&&real>1.5*pad)A('warn','i-relogio',`${t.s.nome} na ${unidade(t.x.maq)?.nome||''} está demorando`,`${pNome(t.x.op)} · ${fDur(real)} até agora, o previsto era ${fDur(pad)} (${nf(real/pad,1)}×). Algum problema na máquina ou no material?`,'maq:'+t.x.maq,'Abrir a máquina')});
   state.tipos.forEach(t=>{const e=(P.espera[t.id]||[]).length,sp=(P.semPessoa[t.id]||[]).length;
-    if(e>=2)A('warn','i-maquina',`Fila na ${t.nome}: ${e} processos esperando máquina`,'Gargalo. Vale ver se outra máquina pode fazer, ou hora extra nessa.');
-    if(sp)A('warn','i-pessoas',`${sp} ${sp>1?'processos':'processo'} na ${t.nome} sem ninguém livre que saiba usar`,`Hoje sabem usar: ${aptos(t.id).map(p=>p.nome).join(', ')||'ninguém'}. Treinar mais alguém reduz esse risco.`)});
-  esc_.filter(t=>t.late).forEach(t=>A('crit','i-caminhao',`${t.t}: passou do prazo do fornecedor`,`${t.ped.cliente} · ${t.sub||''}`));
-  const semR=esc_.filter(t=>!t.resp).length;if(semR)A('warn','i-vias',`${semR} ${semR>1?'tarefas':'tarefa'} de escritório sem responsável`,'Ninguém com essa função está disponível.');
-  state.pessoas.forEach(p=>{const n=esc_.filter(t=>t.resp===p.id).length;if(n>=6)A('warn','i-vias',`${p.nome} está com ${n} tarefas de escritório`,'Acúmulo: dá para passar algumas para outra pessoa em Fábrica › Escritório.')});
+    if(e>=2)A('warn','i-maquina',`Fila na ${t.nome}: ${e} processos esperando máquina`,'Gargalo. Vale ver se outra máquina pode fazer, ou hora extra nessa.','fab:maq','Ir para as máquinas');
+    if(sp)A('warn','i-pessoas',`${sp} ${sp>1?'processos':'processo'} na ${t.nome} sem ninguém livre que saiba usar`,`Hoje sabem usar: ${aptos(t.id).map(p=>p.nome).join(', ')||'ninguém'}. Treinar mais alguém reduz esse risco.`,'cad:equipe','Abrir a equipe')});
+  esc_.filter(t=>t.late).forEach(t=>A('crit','i-caminhao',`${t.t}: passou do prazo do fornecedor`,`${t.ped.cliente} · ${t.sub||''}`,'fab:fora','Ver terceirizados'));
+  const semR=esc_.filter(t=>!t.resp).length;if(semR)A('warn','i-vias',`${semR} ${semR>1?'tarefas':'tarefa'} de escritório sem responsável`,'Ninguém com essa função está disponível.','fab:esc','Atribuir responsáveis');
+  state.pessoas.forEach(p=>{const n=esc_.filter(t=>t.resp===p.id).length;if(n>=6)A('warn','i-vias',`${p.nome} está com ${n} tarefas de escritório`,'Acúmulo: dá para passar algumas para outra pessoa em Fábrica › Escritório.','fab:esc','Redistribuir tarefas')});
   return out.sort((a,b)=>(a.sev==='crit'?0:1)-(b.sev==='crit'?0:1))}
 function gAgora(){const al=gAlertas(),P=plano(),tr=Object.keys(P.uso).length,prod=state.pessoas.filter(p=>p.sabe.length&&p.disp!==false);
   return `<div class="kpis">${[[tr,'trabalhando agora'],[prod.length-P.ocup.size,'sem processo agora'],[state.pedidos.filter(p=>!p.concluido&&info(p).u==='crit').length,'pedidos vão atrasar'],[al.length,'pontos de atenção']].map(([v,l])=>`<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join('')}</div>
-  ${al.length?`<div class="card"><h2>Precisa de atenção</h2>${al.map(a=>`<div class="alrt a-${a.sev}">${ic(a.i)}<div><b>${esc(a.t)}</b><span>${esc(a.d)}</span></div></div>`).join('')}</div>`:`<div class="card"><h2>Tudo em ordem</h2><p class="dica" style="margin:0">Nenhum atraso, ninguém parado além do normal e sem filas.</p></div>`}`}
+  ${al.length?`<div class="card"><h2>Precisa de atenção</h2>${al.map(a=>`<button class="alrt a-${a.sev}" ${a.to?`data-a="ir" data-to="${esc(a.to)}"`:''}>${ic(a.i)}<div><b>${esc(a.t)}</b><span>${esc(a.d)}</span></div>${a.to?`<span class="alrt-go">${esc(a.ir)} ›</span>`:''}</button>`).join('')}</div>`:`<div class="card"><h2>Tudo em ordem</h2><p class="dica" style="margin:0">Nenhum atraso, ninguém parado além do normal e sem filas.</p></div>`}`}
 function gEquipe(desde){const D=gDados(desde),R=D.rank,tot=k=>sum(R.map(r=>r[k]));const pe=tot('padEf'),re=tot('realEf');
   const medal=i=>i<3?`<span class="med m${i}">${i+1}º</span>`:`<span class="med">${i+1}º</span>`;const maxP=Math.max(1,...R.map(r=>r.pontos));
   return `<div class="kpis">${[[nf(tot('pecas'),0),'peças produzidas'],[tot('proc'),'processos feitos'],[pctTxt(re?pe/re:null),'eficiência da equipe'],[pctTxt(R.length?sum(R.map(r=>r.ocup))/R.length:null),'ocupação média'],[fDur(tot('he')),'horas extras'],[nf(tot('retr'),0),'peças refeitas']].map(([v,l])=>`<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join('')}</div>
@@ -2107,10 +2176,10 @@ function gAtrasos(desde){const at=state.pedidos.filter(p=>!p.concluido).map(p=>(
   return `<div class="kpis">${[[ent.length,'pedidos entregues'],[pctTxt(ent.length?(ent.length-late.length)/ent.length:null),'entregues no prazo'],[at.filter(x=>x.f.u==='crit').length,'vão atrasar'],[at.filter(x=>x.f.u==='warn').length,'prazo apertado'],[esc_.length,'terceirizados atrasados']].map(([v,l])=>`<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join('')}</div>
   <div class="card"><h2>Pedidos em aberto, do mais apertado</h2>${at.map(({p,f})=>`<button class="rk" data-a="pedido" data-id="${p.id}" style="width:100%;text-align:left;background:none;border-left:0;border-right:0;border-bottom:0"><span class="pill u-${f.u}"><span class="dot"></span>${ULAB[f.u]}</span><div class="rk-t"><b>${esc(p.cliente)}</b><span>Entrega ${fD(p.entrega)} · ${f.du} dias úteis · falta ~${nf(f.need,0)} de trabalho · folga ${nf(f.folga,0)}</span>${barra(f.prog,1,f.u==='crit'?'var(--red)':f.u==='warn'?'var(--atn)':'var(--go)')}</div><div class="rk-p"><b>${Math.round(f.prog*100)}%</b><small>feito</small></div></button>`).join('')||'<p class="dica">Nenhum pedido em aberto.</p>'}</div>
   ${late.length?`<div class="card"><h2>Entregues com atraso no período</h2>${late.map(p=>`<div class="grow"><span>${esc(p.cliente)}</span><span>prazo ${fD(p.entrega)}, entregue ${fD(p.concluido)}</span><b>+${Math.max(1,-wdUntil(p.concluido)+wdUntil(p.entrega))}d</b></div>`).join('')}</div>`:''}
-  ${esc_.length?`<div class="card"><h2>Terceirizados atrasados</h2>${esc_.map(t=>`<div class="alrt a-crit">${ic('i-caminhao')}<div><b>${esc(t.t)}</b><span>${esc(t.ped.cliente)} · ${esc(t.sub||'')}</span></div></div>`).join('')}</div>`:''}`}
+  ${esc_.length?`<div class="card"><h2>Terceirizados atrasados</h2>${esc_.map(t=>`<button class="alrt a-crit" data-a="ir" data-to="fab:fora">${ic('i-caminhao')}<div><b>${esc(t.t)}</b><span>${esc(t.ped.cliente)} · ${esc(t.sub||'')}</span></div><span class="alrt-go">Ver terceirizados ›</span></button>`).join('')}</div>`:''}`}
 function gTempos(desde){const E=gDados(desde).porEt.filter(e=>e.n>=2).map(e=>({...e,r:e.real/e.pad})).filter(e=>e.r>1.4||e.r<.6).sort((a,b)=>Math.abs(Math.log(b.r))-Math.abs(Math.log(a.r))).slice(0,8);
   return `<div class="card"><h2>Tempos do cadastro fora da realidade</h2><p class="dica" style="margin:-4px 0 8px">Etapas em que o tempo real ficou muito diferente do previsto. Tempo errado bagunça prazos, prioridade e o ranking.</p>
-    ${E.map(e=>`<div class="grow"><span>${esc(e.k)}<br><small>${e.n} vezes · previsto ${nf(e.min,2)} min/peça</small></span><span>real ≈ <b style="display:inline">${nf(e.min*e.r,2)} min/peça</b></span><b class="${e.r>1?'ruim':'ok'}">${nf(e.r,1)}×</b></div>`).join('')||'<p class="dica" style="margin:0">Os tempos cadastrados estão batendo com a realidade.</p>'}</div>`}
+    ${E.map(e=>`<div class="grow g-link" data-a="produto" data-p="${e.p}" title="Abrir o produto para corrigir o tempo"><span>${esc(e.k)}<br><small>${e.n} vezes · previsto ${nf(e.min,2)} min/peça</small></span><span>real ≈ <b style="display:inline">${nf(e.min*e.r,2)} min/peça</b></span><b class="${e.r>1?'ruim':'ok'}">${nf(e.r,1)}×</b></div>`).join('')||'<p class="dica" style="margin:0">Os tempos cadastrados estão batendo com a realidade.</p>'}</div>`}
 function gConsertos(desde){const C=(state.consertos||[]).filter(c=>c.ts>=desde);if(!C.length)return '';const pm={};C.forEach(c=>pm[c.motivo]=(pm[c.motivo]||0)+c.n);const L=Object.entries(pm).sort((a,b)=>b[1]-a[1]);
   return `<div class="card"><h2>Consertos no período</h2>${L.map(([m,n])=>`<div class="grow"><span>${esc(m)}</span>${barra(n,L[0][1],'var(--red)')}<b>${n}</b></div>`).join('')}<p class="dica" style="margin:8px 0 0">${sum(L.map(x=>x[1]))} peças voltaram. O mesmo motivo repetido indica treino ou ajuste de máquina.</p></div>`}
 function vGestor(){const aba=ui.gt||'agora',desde=gDesde(),per=ui.gp||7;
@@ -2129,7 +2198,7 @@ function render(){RC={};
   const sh=document.getElementById('sheet');const s=ui.sheet;
   if(!s){sh.innerHTML='';document.body.style.overflow='';return}
   const old=sh.querySelector('.sheet'),keep=old&&old.dataset.id===sheetId(s)?{top:old.scrollTop,x:[...old.querySelectorAll('.fx-wrap')].map(e=>[e.dataset.k,e.scrollLeft])}:null;
-  const html=({tipo:sTipoEd,troca:sTroca,maq:sMaq,pedido:()=>sPedido(s.id),prob:sProblema,novo:sNovo,ajuda:sAjuda,produto:()=>sProduto(s.p),etapa:sEtapa,nprod:sNovoProd,pes:sPesEd,forn:sFornEd,quem:sQuem,he:sHE,imp:sImp,mock:sMock,cli:sCli,doc:sDoc,ins:sIns}[s.t]||(()=>''))();
+  const html=({tipo:sTipoEd,troca:sTroca,maq:sMaq,pedido:()=>sPedido(s.id),prob:sProblema,novo:sNovo,ajuda:sAjuda,produto:()=>sProduto(s.p),etapa:sEtapa,nprod:sNovoProd,pes:sPesEd,forn:sFornEd,quem:sQuem,he:sHE,imp:sImp,mock:sMock,cli:sCli,doc:sDoc,ins:sIns,arqPick:sArqPick}[s.t]||(()=>''))();
   sh.innerHTML=`<div class="sheet ${['pedido','produto'].includes(s.t)?'largo':''}" data-id="${esc(sheetId(s))}" role="dialog" aria-modal="true"><div class="wrap">${html}</div></div>`;document.body.style.overflow='hidden';
   if(keep){const n=sh.querySelector('.sheet');n.scrollTop=keep.top;keep.x.forEach(([k,x])=>{const e=n.querySelector(`.fx-wrap[data-k="${k}"]`);if(e)e.scrollLeft=x})}
   document.querySelectorAll('[aria-label]:not([title])').forEach(el=>el.title=el.getAttribute('aria-label'));
@@ -2208,6 +2277,22 @@ const A={
   insFalta:d=>{const m=pedById(d.id).materiais[+d.k];snap();m.conf=true;if(m.st!=='pedido')m.st='comprar';commit()},
   insAdd:d=>{const n=document.getElementById('insN').value.trim(),q=parseFloat(document.getElementById('insQ').value)||0,u=document.getElementById('insU').value;if(!n)return;snap();
     pedById(d.id).materiais.push({item:n,un:u,nec:Math.ceil(q),est:state.estoque[n]??0,st:'ok',conf:false,extra:true});commit();toast(`${n} adicionado. Agora confira se tem`)},
+  arqNovo:d=>{ui.arqAlvo={cli:d.cli,tipo:d.t};const i=document.getElementById('fArq');i.accept=d.t==='mockup'?'image/*,application/pdf':'';i.multiple=true;i.value='';i.click()},
+  arqNovoAlvo:()=>{const e=ui.sheet;ui.arqAlvo={cli:e.cli,tipo:e.tipo,alvo:e.alvo};const i=document.getElementById('fArq');i.accept=e.tipo==='mockup'?'image/*,application/pdf':'';i.multiple=false;i.value='';i.click()},
+  pzArq:d=>{const l=lote(d.l),ped=pedById(l.ped);openSheet({t:'arqPick',cli:ped.cli,tipo:d.k==='arte'?'arte':'bordado',alvo:{k:d.k,l:d.l,x:d.x},volta:{t:'pedido',id:ped.id}})},
+  mockBib:d=>{const l=lote(d.l),ped=pedById(l.ped);openSheet({t:'arqPick',cli:ped.cli,tipo:'mockup',alvo:{k:'mock',l:d.l},volta:{t:'pedido',id:ped.id}})},
+  arqUsar:d=>{const e=ui.sheet;usaArq(arqById(d.id),e.alvo);ui.sheet=e.volta||null;commit();toast('Arquivo ligado ao pedido')},
+  arqVer:d=>abreZoom('A:'+d.id),
+  arqBaixar:d=>{const a=arqById(d.id);if(a)baixarArqs([a])},
+  arqsPed:d=>{const ped=pedById(d.id);baixarArqs(arqsDoPedido(ped),nomeArq(`Arquivos pedido ${ped.id} - ${ped.cliente}.zip`))},
+  arqRm:d=>{const a=arqById(d.id);if(!a)return;const u=usoArq(a);if(u.length&&!ui.arqRmOk?.[a.id]){ui.arqRmOk={[a.id]:1};toast(`Está em ${u.length} ${u.length===1?'pedido':'pedidos'}. Toque em Tirar de novo para confirmar.`,false);return}
+    snap();state.arquivos=state.arquivos.filter(x=>x.id!==a.id);state.lotes.forEach(l=>{if(l.mockArq===a.id)l.mockArq=undefined;(l.pers||[]).forEach(x=>{if(x.arte===a.id)x.arte=undefined;if(x.bord===a.id)x.bord=undefined})});ui.arqRmOk=null;commit();toast('Arquivo tirado')},
+  ir:d=>{const [k,v]=d.to.split(':');ui.sheet=null;
+    if(k==='ped'){ui.tela='pedidos';render();openSheet({t:'pedido',id:v})}
+    else if(k==='maq'){ui.tela='fabrica';ui.fz='maq';render();A.maq({m:v})}
+    else if(k==='fab'){ui.tela='fabrica';ui.fz=v;render();scrollTo(0,0)}
+    else if(k==='cad'){ui.tela='cadastros';ui.cad=v;render();scrollTo(0,0)}
+    else if(k==='pes'){ui.tela='cadastros';ui.cad='equipe';render();A.pesEd({id:v})}},
   quem:()=>openSheet({t:'quem'}),
   quemSel:d=>{quemSet(d.v);ui.sheet=null;render();tick();toast(`Pronto, este aparelho é de ${quemNome()}`,false)},
   inicio:d=>{nuvemIniciar(d.v)},
@@ -2375,6 +2460,8 @@ const A={
 };
 document.addEventListener('click',e=>{const z=e.target.closest('svg.mock[data-z]');if(z){e.preventDefault();e.stopPropagation();abreZoom(z.dataset.z);return}const b=e.target.closest('[data-a]');if(!b||b.disabled)return;const f=A[b.dataset.a];if(f){e.preventDefault();f(b.dataset)}});
 document.addEventListener('change',e=>{const t=e.target,d=t.dataset;if(!state)return;
+  if(t.id==='fArq'&&t.files.length){const fs=[...t.files],al=ui.arqAlvo;if(!al)return;(async()=>{toast('Guardando…',false);let ult=null;for(const fl of fs){try{ult=await arqSalvar(fl,al.cli,al.tipo)||ult}catch(er){toast(`Não consegui abrir ${fl.name}`,false)}}
+      document.getElementById('toast').innerHTML='';if(!ult)return;snap();if(al.alvo){usaArq(ult,al.alvo);if(ui.sheet&&ui.sheet.t==='arqPick')ui.sheet=ui.sheet.volta||null}commit();toast(fs.length>1?`${fs.length} arquivos guardados na empresa`:'Arquivo guardado na empresa')})();return}
   if(t.id==='fImpF'&&t.files.length){importarFichas([...t.files]);return}
   if((t.id==='fImpM'||t.id==='fImpM1')&&t.files.length){const fs=[...t.files];(async()=>{toast('Preparando o mockup…',false);const out=[];
       for(const f of fs){try{const m=await mockDeArquivo(f);out.push({img:m.p,g:m.g,nome:f.name})}catch(er){toast(`Não consegui abrir ${f.name}`,false)}}document.getElementById('toast').innerHTML='';if(!out.length)return;
@@ -2420,7 +2507,7 @@ function sQuem(){return `${voltar('Voltar')}<h1>Quem está usando este aparelho?
   <div class="eq-l">${state.pessoas.map(p=>`<button class="eq" data-a="quemSel" data-v="${p.id}" aria-pressed="${QUEM===p.id}">${av(p.id)}<span class="eq-t"><b>${esc(p.nome)}</b><span>${esc(papeisTxt(p))}</span></span>${QUEM===p.id?ic('i-check'):''}</button>`).join('')}</div>`}
 
 /* ================= nuvem (banco de dados compartilhado) ================= */
-const COLS=['tipos','pessoas','forn','produtos','pedidos','lotes','consertos','clientes'];
+const COLS=['tipos','pessoas','forn','produtos','pedidos','lotes','consertos','clientes','arquivos'];
 const NV={db:null,modo:'local',st:'',Q:new Set(),acked:{},last:{},busy:false,subs:[],pendR:false,timer:null};
 const stab=v=>JSON.stringify(v,(k,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.keys(x).sort().reduce((o,k2)=>(o[k2]=x[k2],o),{}):x);
 const limpo=v=>JSON.parse(JSON.stringify(v));
