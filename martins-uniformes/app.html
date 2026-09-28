@@ -503,6 +503,11 @@ button.ola{border:0;background:none;text-align:left;padding:0;display:flex;flex-
 .pz-row{display:grid;grid-template-columns:minmax(0,1fr) 150px 120px auto;gap:8px;align-items:center;margin-bottom:10px}.pz-row .campo,.aj-in input[type=time]{min-width:0;width:100%}.aj-in input[type=time]{width:150px}
 .pz-row{padding-bottom:10px;border-bottom:2px solid var(--grey-soft)}
 @media (max-width:640px){.pz-row{grid-template-columns:minmax(0,1fr) 96px auto}.pz-row>input:first-child{grid-column:1/-1}.pz-row input{font-size:18px;padding-inline:10px}.pz-row .aj-in small{display:none}.faixa{flex-wrap:wrap}}
+
+/* v0.24: sem cabeçalho */
+.sync{display:block;margin:10px 0 -4px;font-size:15px}.sync.s-ok,.sync.s-salvando,.sync:empty{display:none}
+button.faixa{width:100%;text-align:left;font:inherit;cursor:pointer}.quem-f{border-color:var(--blue)}.quem-f>svg.ic{color:var(--blue)}
+.fim-ajuda{display:flex;justify-content:center;margin:26px 0 0}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -547,11 +552,7 @@ button.ola{border:0;background:none;text-align:left;padding:0;display:flex;flex-
   <symbol id="i-engr" viewBox="0 0 48 48"><circle cx="24" cy="24" r="6"/><path d="M24 4v7M24 37v7M4 24h7M37 24h7M10 10l5 5M33 33l5 5M38 10l-5 5M15 33l-5 5"/></symbol>
 </svg>
 
-<header class="top"><div class="wrap">
-  <button class="ola" data-a="quem"><b id="ola">Bom dia</b><span><span id="hoje"></span> <span class="exemplo" id="exTag">Exemplo</span> <span class="sync" id="sync"></span></span><span id="olaQ" class="olaQ"></span></button>
-  <button class="help" data-a="ajuda" aria-label="Como usar"><svg class="ic"><use href="#i-duvida"/></svg><span>Como usar</span></button>
-</div></header>
-<main><div class="wrap" id="app"></div></main>
+<main><div class="wrap"><div id="sync" class="sync"></div></div><div class="wrap" id="app"></div></main>
 <nav class="nav" aria-label="Menu"><div class="wrap">
   <button class="nb" data-a="tela" data-t="fabrica"><svg class="ic"><use href="#i-fabrica"/></svg>Fábrica</button>
   <button class="nb" data-a="tela" data-t="pedidos"><svg class="ic"><use href="#i-lista"/></svg>Pedidos</button>
@@ -1068,7 +1069,7 @@ function vFabrica(){const P=plano(),esc_=tarefasEsc();
   const nTrab=P.us.filter(u=>P.uso[u.id]).length,nIni=P.us.filter(u=>!P.uso[u.id]&&P.plan[u.id]).length;
   const z=ui.fz||'maq';
   const zonas=[['maq','Máquinas','i-maquina',nIni],['fora','Fora','i-caminhao',foraN],['esc','Escritório','i-vias',esc_.length]];
-  return `${faixaHora(P)}<button class="ped-l" data-a="tela" data-t="pedidos"><span class="pl-t">Pedidos</span>${res||'<span class="pl-i">nenhum aberto</span>'}<span class="pl-go">›</span></button>
+  return `${quemNome()||!state.pessoas.length?'':`<button class="faixa quem-f" data-a="quem">${ic('i-pessoas')}<span><b>Quem está usando este aparelho?</b> Toque para escolher seu nome.</span></button>`}${faixaHora(P)}<button class="ped-l" data-a="tela" data-t="pedidos"><span class="pl-t">Pedidos</span>${res||'<span class="pl-i">nenhum aberto</span>'}<span class="pl-go">›</span></button>
   <div class="zonas" role="tablist">${zonas.map(([k,n,i,c])=>`<button class="zona" role="tab" data-a="fz" data-v="${k}" aria-pressed="${z===k}">${ic(i)}<span>${n}</span>${c?`<em>${c}</em>`:''}</button>`).join('')}</div>
   ${z==='maq'?`<div class="agora"><span><b>${nIni}</b> para começar</span><span><b>${nTrab}</b> trabalhando</span></div>
   ${livres.length?`<div class="livres"><span class="t">Livres:</span>${livres.map(p=>`<span class="pl-p">${av(p.id,'s')}${esc(p.nome)}</span>`).join('')}</div>`:''}
@@ -1086,7 +1087,7 @@ function vFabrica(){const P=plano(),esc_=tarefasEsc();
     <div class="esc">${state.pessoas.filter(p=>(p.funcoes||[]).length).map(p=>{const ts=esc_.filter(t=>t.resp===p.id);
       return `<div class="escp"><div class="escp-h">${av(p.id)}<div style="margin-right:auto"><b>${esc(p.nome)}</b><span>${ts.length} ${ts.length===1?'tarefa':'tarefas'}</span></div>
         <button class="pchip" data-a="disp" data-id="${p.id}" aria-pressed="${p.disp!==false}" style="padding:6px 14px">${p.disp!==false?'Disponível':'Fora agora'}</button></div>
-        ${ts.map(tarRow).join('')||'<div class="vazio-s">Nada pendente</div>'}</div>`}).join('')}</div></section>`:''}`}
+        ${ts.map(tarRow).join('')||'<div class="vazio-s">Nada pendente</div>'}</div>`}).join('')}</div></section>`:''}<div class="fim-ajuda"><button class="x azul" data-a="ajuda" style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px">${ic('i-duvida')}Como usar o app</button></div>`}
 function tarRow(t){const lab={vias:'Separei',artePrep:'Pronta',arte:'Aprovada',arteEnv:'Enviei',comprei:'Comprei',chegou:'Chegou',levei:viaApp(t)?'Enviado':'Levei',buscou:'Chegou',entregar:'Entregue'}[t.a];
   return `<div class="tar">${ic(t.i)}<div><b>${esc(tarTxt(t))}</b><span>${esc(t.ped.cliente)}${t.sub?' · '+esc(t.sub):''} · ≈ ${minTxt(state.tEsc[t.f]||0)}</span>${t.late?'<span style="display:block;color:var(--red);font-weight:700">Passou do prazo do fornecedor</span>':''}
     <button class="x azul" data-a="troca" data-key="${esc(t.key)}" data-f="${t.f}" style="padding:2px 10px;margin-top:4px;font-size:15px">${t.fixo?'Escolhido à mão · ':''}Trocar pessoa</button></div>
@@ -1291,6 +1292,8 @@ const campoN=(lab,attr,val,suf)=>`<label class="aj-row"><span>${lab}</span><span
 function cAjustes(){const pr=state.params;
   return `${state.exemplo&&state.pedidos.length?`<div class="card" style="border-color:var(--atn)"><h2>Pedidos de exemplo</h2><p style="margin:0 0 12px;color:var(--ink2)">Quando terminar o treino, apague os pedidos de exemplo. Máquinas, equipe, produtos e estoque continuam.</p>
     ${ui.apagaEx?`<div class="aviso">${ic('i-alerta')}Isso apaga os pedidos de todos os aparelhos. Tem certeza?</div><div class="acoes"><button class="big" style="background:var(--red);color:#fff" data-a="apagaEx" data-ok="1">Sim, apagar</button><button class="big neutro" data-a="apagaExN">Não</button></div>`:`<button class="mbtn" data-a="apagaEx">Apagar pedidos de exemplo</button>`}</div>`:''}
+  <div class="card"><h2>Este aparelho</h2><div class="aj-row"><span>Quem usa: <b>${esc(quemNome()||'ninguém escolhido')}</b></span><button class="mbtn" data-a="quem">Trocar</button></div>
+    <div class="aj-row"><span>Dúvidas sobre o app</span><button class="mbtn" data-a="ajuda">${ic('i-duvida')}Como usar</button></div></div>
   <div class="card"><h2>Onde ficam os dados</h2><p style="margin:0;color:var(--ink2)">${NV.modo==='nuvem'?'Na nuvem: todos os aparelhos veem as mesmas informações ao mesmo tempo.':'Só neste aparelho. Abra pelo link do sistema para usar a nuvem.'}</p></div>
   <div class="card"><h2>Horário da fábrica</h2>
     <label class="aj-row"><span>Começa</span><span class="aj-in"><input class="campo" type="time" data-exp="ini" value="${EXP().ini}"></span></label>
@@ -1774,8 +1777,7 @@ document.addEventListener('change',e=>{const t=e.target,d=t.dataset;if(!state)re
   if(ok){save();if(!d.est)render();toast('Salvo',true)}});
 document.addEventListener('input',e=>{if(e.target.id==='estBusca'){ui.eq=e.target.value;const L=document.getElementById('estLista');if(L)L.innerHTML=listaEst()}if(e.target.id==='pedBusca'){ui.pf.q=e.target.value;const L=document.getElementById('pedLista');if(L)L.innerHTML=listaPedidos()}if(e.target.id==='wCnpj'){const v=fmtCnpj(e.target.value);if(v!==e.target.value)e.target.value=v}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ui.sheet)A.fechar();if(e.key==='Enter'&&(['eNome','eObs','pNome','pTec','xNome','wCont','wCnpj','pedBusca','estBusca'].includes(e.target.id)||e.target.closest?.('.card')&&e.target.tagName==='INPUT'))e.preventDefault();if(e.key==='Enter'&&e.target.id==='wCli'){e.preventDefault();A.wNext()}});
-function tick(){const h=new Date().getHours();const qn=quemNome();document.getElementById('ola').textContent=`${h<12?'Bom dia':h<18?'Boa tarde':'Boa noite'}${qn?', '+qn:''}`;document.getElementById('olaQ').textContent=qn?'':'Toque aqui e diga quem é você';const ex=document.getElementById('exTag');if(ex)ex.hidden=!(state&&state.exemplo);
-  const d=new Date();document.getElementById('hoje').textContent=`${DOW[d.getDay()]}, ${d.getDate()} de ${MES[d.getMonth()]}`;
+function tick(){
   document.querySelectorAll('[data-tl]').forEach(el=>{const l=lote(el.dataset.tl),x=l&&l.steps[el.dataset.ts];if(x)el.textContent=fDur(tempoUtil(x))});
   const P=state&&plano(),k=situacao().k+'|'+(P?Object.values(P.uso).filter(t=>heAtiva(t.x)).length:0);if(tick.k&&tick.k!==k){tick.k=k;nuvemRender();return}tick.k=k}
 
