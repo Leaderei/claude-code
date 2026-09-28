@@ -513,6 +513,19 @@ button.faixa{width:100%;text-align:left;font:inherit;cursor:pointer}.quem-f{bord
 .srv-h{display:flex;align-items:center;gap:12px;margin-bottom:10px}.srv-h h2{margin:0;margin-right:auto;font-size:22px}
 .add-f{border-style:dashed;color:var(--go-dark)}.add-f svg.ic{width:28px;height:28px;color:var(--go)}
 .depc.icn{flex-direction:column;gap:2px;min-width:78px;padding:8px 6px}.depc.icn small{font-size:13px;font-weight:700}
+
+/* v0.26: painel do gestor */
+.g-abas{grid-template-columns:repeat(4,1fr)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.kpi{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:12px 14px;display:grid;gap:2px}.kpi b{font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}.kpi span{font-size:15px;color:var(--ink2);font-weight:700}
+.alrt{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start;padding:10px 0;border-top:1px solid var(--grey-soft)}.alrt svg.ic{width:30px;height:30px}
+.alrt b{display:block;font-size:18px}.alrt span{font-size:16px;color:var(--ink2)}.alrt.a-crit svg.ic{color:var(--red)}.alrt.a-warn svg.ic{color:var(--atn-ink)}
+.rk{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--grey-soft);font:inherit;color:inherit}
+.rk-t b{font-size:19px}.rk-t>span{display:block;font-size:15px;color:var(--ink2);margin:2px 0 6px}.rk-t .ok{color:var(--go-dark)}.rk-t .ruim,.grow .ruim{color:var(--red)}.grow .ok{color:var(--go-dark)}
+.rk-p{text-align:right}.rk-p b{display:block;font-size:24px;font-variant-numeric:tabular-nums}.rk-p small{color:var(--muted);font-size:13px}
+.med{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--grey-soft);font-weight:700;font-size:15px}.med.m0{background:#F4C542}.med.m1{background:#C9CFD6}.med.m2{background:#D89A63}
+.como{margin-top:12px;font-size:16px;color:var(--ink2)}.como summary{font-weight:700;color:var(--blue);cursor:pointer}.como p{margin:8px 0}
+@media (max-width:640px){.g-abas .zona{font-size:13px}.rk{grid-template-columns:auto minmax(0,1fr) auto}.rk .av{display:none}.kpi b{font-size:24px}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -829,7 +842,7 @@ const GOLA={'polo-ams':'Gola polo','polo-vie':'Gola polo','cam-mc':'Gola ribana'
 const ajustaGola=p=>{if(GOLA[p.id]&&!p.golaItem){p.golaItem=GOLA[p.id];p.aviam=p.aviam.filter(a=>!/^(Gola ribana|Ribana)$/.test(a[0]));if(p.id==='blusa')p.aviam.push(['Ribana punho e barra','un',1])}};
 PRODUTOS0.forEach(ajustaGola);
 const ESTOQUE={'Gola polo Marinho':260,'Gola polo Branca':120,'Gola polo Cinza':150,'Gola ribana Branca':300,'Gola ribana Preta':150,'Piquet Marinho':140,'Piquet Branca':60,'Piquet Verde':10,'Piquet Cinza':80,'Malha dry Branca':150,'Malha dry Cinza':70,'Helanca Preta':240,'Helanca Marinho':20,'Helanca Cinza':150,'Botão':2200,'Gola ribana':900,'Etiqueta':3000,'Elástico':420,'Cordão':500,'Gabardine Branca':200,'Brim Marinho':220,'Zíper':300,'Entretela':60,'Ribana':500,'Malha PV Branca':300,'Moletom Cinza':90,'Suplex Preta':60};
-const PAR={margem:5,jornada:480,efic:0.85,fila:0.25,leadCompra:5};
+const PAR={parado:20,margem:5,jornada:480,efic:0.85,fila:0.25,leadCompra:5};
 const PROBS=[{k:'Gola torta',i:'i-gola',alvo:['gola','prepgola','cobregola']},{k:'Etiqueta errada',i:'i-etiqueta',alvo:['etiqueta']},{k:'Estampa ou bordado com defeito',i:'i-mancha',alvo:['silk','subl','transfer','bordado','bordmanga']},{k:'Costura torta',i:'i-costura',alvo:[]},{k:'Tamanho trocado',i:'i-regua',alvo:[]},{k:'Defeito no tecido',i:'i-furo',alvo:[]},{k:'Outro problema',i:'i-duvida',alvo:[]}];
 
 /* ================= estado ================= */
@@ -1312,6 +1325,7 @@ function cAjustes(){const pr=state.params;
     <p class="dica" style="margin:10px 0 0">Dá <b>${fDur(jornadaMin()*MIN)}</b> de trabalho por dia. Fora desse horário e nas pausas os contadores param. Trabalho fora dos dias marcados (ex.: sábado) conta como hora extra.</p></div>
   <div class="card"><h2>Prazos e cálculo</h2>
     ${campoN('Margem para imprevistos','data-cfg="params.margem"',pr.margem,'dias úteis')}
+    ${campoN('Avisar pessoa parada depois de','data-cfg="params.parado"',pr.parado??20,'minutos')}
     ${campoN('Eficiência da equipe','data-cfg="params.efic" data-pct="1"',Math.round(pr.efic*100),'%')}
     ${campoN('Espera entre uma etapa e outra','data-cfg="params.fila"',pr.fila,'dias')}
     ${campoN('Prazo para chegar uma compra','data-cfg="params.leadCompra"',pr.leadCompra,'dias úteis')}</div>
@@ -1526,7 +1540,7 @@ function sAjuda(){return `${voltar('Fechar')}<h1>Como usar</h1><div class="ajuda
 const MODOS={sugerido:'Seguiu a sugestão',reserva:'Reservado à mão',fora:'Começou fora da ordem',outro:'Escolheu outro processo',pessoa:'Trocou a pessoa sugerida'};
 const MODO_COR={reserva:'#1E5BB8',fora:'#C9352A',outro:'#B5561B',pessoa:'#7A3E9D'};
 function barra(v,max,cor){return `<div class="gtrack"><i style="width:${max?Math.max(2,v/max*100):0}%;background:${cor||'var(--blue)'}"></i></div>`}
-function vGestor(){const dias=ui.gp||7,desde=now()-dias*DIA,L=(state.log||[]).filter(e=>e.ts>=desde);
+function gOrg(desde){const L=(state.log||[]).filter(e=>e.ts>=desde);
   const ini=L.filter(e=>e.tipo==='inicio'),man=ini.filter(e=>e.modo!=='sugerido'),pct=ini.length?man.length/ini.length:0;
   const sev=pct>.2?'crit':pct>.1?'warn':'ok',res=L.filter(e=>e.tipo==='reserva').length,tro=L.filter(e=>e.tipo==='troca');
   const cnt=(arr,f)=>{const m={};arr.forEach(e=>{const k=f(e);m[k]=(m[k]||0)+1});return Object.entries(m).sort((a,b)=>b[1]-a[1])};
@@ -1541,14 +1555,10 @@ function vGestor(){const dias=ui.gp||7,desde=now()-dias*DIA,L=(state.log||[]).fi
     else dicas.push(`<b>${esc(st)}</b> (${esc(pr)}) foi reservada à mão ${top[1]} vezes. Se é sempre a mesma máquina, pode ser uma regra que falta no sistema.`)});
   tipos.filter(x=>x.n>=4&&x.p>.3).forEach(x=>dicas.push(`Na <b>${esc(tipo(x.t).nome)}</b>, ${Math.round(x.p*100)}% dos inícios foram manuais. Converse com quem opera essa máquina para entender o porquê.`));
   const ativos=state.pedidos.filter(p=>!p.concluido).map(p=>info(p));
-  const heP={};state.lotes.forEach(l=>Object.values(l.steps).forEach(x=>(x.he||[]).forEach(h=>{const m=sobre(h.i,Math.min(h.f,x.fim||now(),now()),desde,now());if(m>0)heP[x.op]=(heP[x.op]||0)+m})));
-  const heL=Object.entries(heP).sort((a,b)=>b[1]-a[1]);
-  return `<h1>Painel do gestor</h1>
-  <div class="linha-dep" style="margin:-4px 0 18px">${[7,30].map(d=>`<button class="depc" data-a="gp" data-v="${d}" aria-pressed="${dias===d}">Últimos ${d} dias</button>`).join('')}</div>
-  <div class="card g-alerta u-${sev}"><div class="g-big"><b>${Math.round(pct*100)}%</b><span>dos inícios de processo foram decididos à mão</span></div>
+  return `${gTempos(desde)}${gConsertos(desde)}
+  <div class="card g-alerta u-${sev}"><h2>Seguem o sistema?</h2><div class="g-big"><b>${Math.round(pct*100)}%</b><span>dos inícios de processo foram decididos à mão</span></div>
     <div style="font-size:18px">${sev==='crit'?`<b>Acima de 20%.</b> A regra está sendo contornada com frequência: provavelmente algum roteiro, dependência ou prioridade está errado no cadastro. Veja abaixo onde corrigir.`:sev==='warn'?'<b>Entre 10% e 20%.</b> Aceitável, mas vale olhar os processos que mais aparecem abaixo.':'<b>Abaixo de 10%.</b> A equipe está seguindo o sistema. Os ajustes à mão são exceção.'}</div>
     <div class="dica">${ini.length} inícios · ${man.length} manuais · ${res} reservas · ${tro.length} tarefas de escritório trocadas de pessoa</div></div>
-  <div class="card"><h2>Horas extras</h2>${heL.length?`${heL.map(([p,m])=>`<div class="grow"><span style="display:flex;align-items:center;gap:8px">${av(p,'s')}${esc(pNome(p))}</span>${barra(m,heL[0][1],'#7A3E9D')}<b>${fDur(m)}</b></div>`).join('')}<p class="dica" style="margin:8px 0 0">Total: <b>${fDur(sum(heL.map(x=>x[1])))}</b> no período.</p>`:'<p class="dica" style="margin:0">Nenhuma hora extra no período.</p>'}</div>
   ${dicas.length?`<div class="card"><h2>O que corrigir no cadastro</h2>${dicas.slice(0,5).map(d=>`<div class="mat">${ic('i-engr')}<div class="dicaG"><span style="font-size:18px;color:var(--ink)">${d}</span></div><span></span></div>`).join('')}</div>`:''}
   <div class="g-grid">
     <div class="card"><h2>Tipos de ajuste manual</h2>${porModo.map(([k,n])=>`<div class="grow"><span>${esc(MODOS[k])}</span>${barra(n,maxM,MODO_COR[k])}<b>${n}</b></div>`).join('')||'<p class="dica">Nenhum ajuste manual no período.</p>'}</div>
@@ -1559,8 +1569,76 @@ function vGestor(){const dias=ui.gp||7,desde=now()-dias*DIA,L=(state.log||[]).fi
   <div class="card"><h2>Últimos ajustes manuais</h2><div class="tw"><table class="gt"><thead><tr><th>Quando</th><th>O quê</th><th>Máquina</th><th>Pessoa</th><th>Tipo</th><th>Registrado por</th></tr></thead><tbody>
     ${[...man,...L.filter(e=>e.tipo!=='inicio')].sort((a,b)=>b.ts-a.ts).slice(0,15).map(e=>`<tr><td>${fD(e.ts)} ${pad(new Date(e.ts).getHours())}:${pad(new Date(e.ts).getMinutes())}</td><td>${esc(e.step)}${e.prod?' · '+esc(e.prod):''}<br><small>${esc(e.cli||'')}</small></td><td>${esc(e.maq?(unidade(e.maq)?.nome||e.maq):'Escritório')}</td><td>${e.tipo==='troca'?`${esc(pNome(e.de)||'—')} → ${esc(pNome(e.para)||'sistema')}`:esc(pNome(e.op)||'—')}${e.modo==='pessoa'&&e.sug?`<br><small>sugerida: ${esc(pNome(e.sug))}</small>`:''}</td><td>${e.tipo==='inicio'?esc(MODOS[e.modo]):e.tipo==='reserva'?'Reserva feita':'Tarefa trocada'}</td><td>${esc(e.por||'')}</td></tr>`).join('')}
   </tbody></table></div><p class="dica">"Registrado por" mostra quem estava usando o aparelho (escolhido tocando no nome, lá em cima).</p></div>
-  <div class="card"><h2>Situação dos pedidos agora</h2><div class="linha-dep">${['crit','warn','ok','pronto'].map(u=>`<span class="pill u-${u}" style="font-size:18px;padding:8px 16px"><span class="dot"></span>${ativos.filter(i=>i.u===u).length} ${ULAB[u].toLowerCase()}</span>`).join('')}</div></div>
   <p class="dica">Os números deste painel juntam os cliques de todos os aparelhos.</p>`}
+
+/* ================= painel do gestor ================= */
+const PERIODOS=[[1,'Hoje'],[7,'7 dias'],[30,'30 dias']];
+function gDesde(){const d=ui.gp||7;return d===1?sod(now()).getTime():now()-d*DIA}
+function util2(ini,fim,he){if(!ini||fim<=ini)return 0;let t=0;const d=sod(ini);let n=0;while(d.getTime()<=fim&&n++<400){janelasDia(d).forEach(([a,b])=>t+=sobre(ini,fim,a,b));d.setDate(d.getDate()+1)}
+  (he||[]).forEach(h=>t+=sobre(h.i,h.f,ini,fim));return t}
+const dispPeriodo=(a,b)=>util2(a,b,[]);
+function gDados(desde){const T=now(),P=plano(),st={};
+  state.pessoas.filter(p=>p.sabe.length).forEach(p=>st[p.id]={p,proc:0,pecas:0,real:0,padrao:0,padEf:0,realEf:0,retr:0,retrMin:0,busy:0,he:0});
+  const porEt={};
+  state.lotes.forEach(l=>{const ped=pedById(l.ped);if(!ped)return;const pr=rp(l),sm=sMap(pr),q=qtdEf(l);
+    Object.entries(l.steps).forEach(([sid,x])=>{const s=sm[sid];if(!s||isExt(s)||!x.op||!x.ini)return;const r=st[x.op];
+      if(r){r.busy+=util2(Math.max(x.ini,desde),Math.min(x.fim||T,T),x.he);(x.he||[]).forEach(h=>r.he+=sobre(h.i,Math.min(h.f,x.fim||T,T),desde,T))}
+      if(x.st!=='ok'||!x.fim||x.fim<desde)return;const real=x.util!=null?x.util*MIN:tempoUtil(x),pad=s.min*q*MIN;
+      if(r){r.proc++;r.pecas+=q;r.padrao+=pad;r.real+=real;if(real>=MIN){r.padEf+=pad;r.realEf+=real}}
+      if(real>=MIN&&!l.rework){const k=prod(l.prod).nome+' · '+s.nome;const e=porEt[k]=porEt[k]||{k,n:0,pad:0,real:0,min:s.min,p:l.prod,sid};e.n++;e.pad+=pad;e.real+=real}})});
+  (state.consertos||[]).forEach(c=>{if(c.ts<desde||!st[c.op])return;const r=lote(c.r);const m=r?sum(rp(r).steps.map(z=>z.min||0))*qtdEf(r)*MIN:0;st[c.op].retr+=c.n;st[c.op].retrMin+=m});
+  const disp=dispPeriodo(desde,T);
+  const rank=Object.values(st).map(r=>{const ef=r.realEf?r.padEf/r.realEf:null,efC=ef==null?1:Math.min(1.5,Math.max(.5,ef));
+    return {...r,ef,ocup:disp?Math.min(1,r.busy/disp):0,pontos:Math.max(0,Math.round((r.padrao*efC-r.retrMin)/MIN))}}).sort((a,b)=>b.pontos-a.pontos||b.pecas-a.pecas);
+  return {T,P,rank,disp,porEt:Object.values(porEt)}}
+const pctTxt=x=>x==null?'—':Math.round(x*100)+'%';
+function gAlertas(){const T=now(),P=plano(),sit=situacao(),out=[],lim=(prm().parado||20)*MIN,esc_=tarefasEsc();
+  const A=(sev,i,t,d)=>out.push({sev,i,t,d});
+  state.pedidos.filter(p=>!p.concluido).map(p=>({p,f:info(p)})).filter(x=>x.f.u==='crit'||x.f.u==='warn').sort((a,b)=>a.f.folga-b.f.folga).forEach(({p,f})=>
+    A(f.u==='crit'?'crit':'warn','i-alerta',`${p.cliente}: ${f.u==='crit'?'vai atrasar':'prazo apertado'}`,`Entrega ${fD(p.entrega)} · ${Math.round(f.prog*100)}% feito · faltam ~${nf(f.need,0)} dias de trabalho para ${f.du} dias úteis`));
+  if(sit.k==='trab'||Object.values(P.uso).some(t=>heAtiva(t.x)))state.pessoas.filter(p=>p.sabe.length&&p.disp!==false&&!P.ocup.has(p.id)).forEach(p=>{
+    let ult=0;state.lotes.forEach(l=>Object.values(l.steps).forEach(x=>{if(x.op===p.id&&x.fim&&x.fim>ult)ult=x.fim}));
+    const ini0=janelasDia(sod(T))[0]?.[0]||T,de=Math.max(ult,ini0),par=util2(de,T,[]);if(par<lim)return;
+    const tem=Object.values(P.plan).some(pl=>pl.pessoa===p.id);
+    A(tem?'crit':'warn','i-dormir',`${p.nome}: sem processo há ${fDur(par)}`,tem?'Tem trabalho esperando por essa pessoa. Veja o botão Começar na Fábrica.':'Não há trabalho que essa pessoa saiba fazer agora. Treinar em outra máquina ou adiantar outro pedido?')});
+  Object.values(P.uso).forEach(t=>{const real=tempoUtil(t.x),pad=t.s.min*qtdEf(t.l)*MIN;if(real>30*MIN&&real>1.5*pad)A('warn','i-relogio',`${t.s.nome} na ${unidade(t.x.maq)?.nome||''} está demorando`,`${pNome(t.x.op)} · ${fDur(real)} até agora, o previsto era ${fDur(pad)} (${nf(real/pad,1)}×). Algum problema na máquina ou no material?`)});
+  state.tipos.forEach(t=>{const e=(P.espera[t.id]||[]).length,sp=(P.semPessoa[t.id]||[]).length;
+    if(e>=2)A('warn','i-maquina',`Fila na ${t.nome}: ${e} processos esperando máquina`,'Gargalo. Vale ver se outra máquina pode fazer, ou hora extra nessa.');
+    if(sp)A('warn','i-pessoas',`${sp} ${sp>1?'processos':'processo'} na ${t.nome} sem ninguém livre que saiba usar`,`Hoje sabem usar: ${aptos(t.id).map(p=>p.nome).join(', ')||'ninguém'}. Treinar mais alguém reduz esse risco.`)});
+  esc_.filter(t=>t.late).forEach(t=>A('crit','i-caminhao',`${t.t}: passou do prazo do fornecedor`,`${t.ped.cliente} · ${t.sub||''}`));
+  const semR=esc_.filter(t=>!t.resp).length;if(semR)A('warn','i-vias',`${semR} ${semR>1?'tarefas':'tarefa'} de escritório sem responsável`,'Ninguém com essa função está disponível.');
+  state.pessoas.forEach(p=>{const n=esc_.filter(t=>t.resp===p.id).length;if(n>=6)A('warn','i-vias',`${p.nome} está com ${n} tarefas de escritório`,'Acúmulo: dá para passar algumas para outra pessoa em Fábrica › Escritório.')});
+  return out.sort((a,b)=>(a.sev==='crit'?0:1)-(b.sev==='crit'?0:1))}
+function gAgora(){const al=gAlertas(),P=plano(),tr=Object.keys(P.uso).length,prod=state.pessoas.filter(p=>p.sabe.length&&p.disp!==false);
+  return `<div class="kpis">${[[tr,'trabalhando agora'],[prod.length-P.ocup.size,'sem processo agora'],[state.pedidos.filter(p=>!p.concluido&&info(p).u==='crit').length,'pedidos vão atrasar'],[al.length,'pontos de atenção']].map(([v,l])=>`<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join('')}</div>
+  ${al.length?`<div class="card"><h2>Precisa de atenção</h2>${al.map(a=>`<div class="alrt a-${a.sev}">${ic(a.i)}<div><b>${esc(a.t)}</b><span>${esc(a.d)}</span></div></div>`).join('')}</div>`:`<div class="card"><h2>Tudo em ordem</h2><p class="dica" style="margin:0">Nenhum atraso, ninguém parado além do normal e sem filas.</p></div>`}`}
+function gEquipe(desde){const D=gDados(desde),R=D.rank,tot=k=>sum(R.map(r=>r[k]));const pe=tot('padEf'),re=tot('realEf');
+  const medal=i=>i<3?`<span class="med m${i}">${i+1}º</span>`:`<span class="med">${i+1}º</span>`;const maxP=Math.max(1,...R.map(r=>r.pontos));
+  return `<div class="kpis">${[[nf(tot('pecas'),0),'peças produzidas'],[tot('proc'),'processos feitos'],[pctTxt(re?pe/re:null),'eficiência da equipe'],[pctTxt(R.length?sum(R.map(r=>r.ocup))/R.length:null),'ocupação média'],[fDur(tot('he')),'horas extras'],[nf(tot('retr'),0),'peças refeitas']].map(([v,l])=>`<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join('')}</div>
+  <div class="card"><h2>Ranking de produção</h2>
+    ${R.map((r,i)=>`<div class="rk">${medal(i)}${av(r.p.id)}<div class="rk-t"><b>${esc(r.p.nome)}</b><span>${r.proc} ${r.proc===1?'processo':'processos'} · ${nf(r.pecas,0)} peças · eficiência <b class="${r.ef==null?'':r.ef>=1?'ok':r.ef<.8?'ruim':''}">${pctTxt(r.ef)}</b>${r.retr?` · <b class="ruim">${r.retr} refeitas</b>`:''}${r.proc<3?' · <i>poucos dados</i>':''}</span>${barra(r.pontos,maxP,i<3?'var(--go)':'var(--blue)')}</div><div class="rk-p"><b>${nf(r.pontos,0)}</b><small>pontos</small></div></div>`).join('')}
+    <details class="como"><summary>Como os pontos são calculados</summary><p>Cada processo terminado vale o <b>tempo previsto</b> dele (minutos por peça × peças). Assim, fazer muitas peças de um processo difícil vale mais que poucas de um fácil.</p><p>Esse total é multiplicado pela <b>eficiência</b>: tempo previsto ÷ tempo que a pessoa levou de verdade (sem contar pausas). Fazer mais rápido que o previsto aumenta os pontos (até 150%). Mais devagar diminui (até 50%).</p><p>Peças que voltaram para <b>conserto</b> descontam o tempo gasto para refazer.</p><p>Atenção: se o tempo previsto de uma etapa estiver errado no cadastro, a eficiência de quem faz essa etapa fica distorcida. Veja a aba Organização.</p></details></div>
+  <div class="card"><h2>Ocupação no período</h2><p class="dica" style="margin:-4px 0 8px">Parte do horário de trabalho (${fDur(D.disp)}) em que a pessoa estava com um processo em andamento. Faltas e folgas aparecem como tempo livre.</p>
+    ${[...R].sort((a,b)=>b.ocup-a.ocup).map(r=>`<div class="grow"><span style="display:flex;gap:8px;align-items:center">${av(r.p.id,'s')}${esc(r.p.nome)}</span>${barra(r.ocup,1,r.ocup>=.7?'var(--go)':r.ocup>=.4?'var(--atn)':'var(--red)')}<b>${pctTxt(r.ocup)}</b></div>`).join('')}</div>
+  <div class="card"><h2>Horas extras</h2>${R.some(r=>r.he>0)?[...R].filter(r=>r.he>0).sort((a,b)=>b.he-a.he).map(r=>`<div class="grow"><span style="display:flex;align-items:center;gap:8px">${av(r.p.id,'s')}${esc(r.p.nome)}</span>${barra(r.he,Math.max(...R.map(x=>x.he)),'#7A3E9D')}<b>${fDur(r.he)}</b></div>`).join('')+`<p class="dica" style="margin:8px 0 0">Total: <b>${fDur(tot('he'))}</b> no período.</p>`:'<p class="dica" style="margin:0">Nenhuma hora extra no período.</p>'}</div>`}
+function gAtrasos(desde){const at=state.pedidos.filter(p=>!p.concluido).map(p=>({p,f:info(p)})).sort((a,b)=>a.f.folga-b.f.folga);
+  const ent=state.pedidos.filter(p=>p.concluido&&p.concluido>=desde),late=ent.filter(p=>p.concluido>p.entrega+12*H);const esc_=tarefasEsc().filter(t=>t.late);
+  return `<div class="kpis">${[[ent.length,'pedidos entregues'],[pctTxt(ent.length?(ent.length-late.length)/ent.length:null),'entregues no prazo'],[at.filter(x=>x.f.u==='crit').length,'vão atrasar'],[at.filter(x=>x.f.u==='warn').length,'prazo apertado'],[esc_.length,'terceirizados atrasados']].map(([v,l])=>`<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join('')}</div>
+  <div class="card"><h2>Pedidos em aberto, do mais apertado</h2>${at.map(({p,f})=>`<button class="rk" data-a="pedido" data-id="${p.id}" style="width:100%;text-align:left;background:none;border-left:0;border-right:0;border-bottom:0"><span class="pill u-${f.u}"><span class="dot"></span>${ULAB[f.u]}</span><div class="rk-t"><b>${esc(p.cliente)}</b><span>Entrega ${fD(p.entrega)} · ${f.du} dias úteis · falta ~${nf(f.need,0)} de trabalho · folga ${nf(f.folga,0)}</span>${barra(f.prog,1,f.u==='crit'?'var(--red)':f.u==='warn'?'var(--atn)':'var(--go)')}</div><div class="rk-p"><b>${Math.round(f.prog*100)}%</b><small>feito</small></div></button>`).join('')||'<p class="dica">Nenhum pedido em aberto.</p>'}</div>
+  ${late.length?`<div class="card"><h2>Entregues com atraso no período</h2>${late.map(p=>`<div class="grow"><span>${esc(p.cliente)}</span><span>prazo ${fD(p.entrega)}, entregue ${fD(p.concluido)}</span><b>+${Math.max(1,-wdUntil(p.concluido)+wdUntil(p.entrega))}d</b></div>`).join('')}</div>`:''}
+  ${esc_.length?`<div class="card"><h2>Terceirizados atrasados</h2>${esc_.map(t=>`<div class="alrt a-crit">${ic('i-caminhao')}<div><b>${esc(t.t)}</b><span>${esc(t.ped.cliente)} · ${esc(t.sub||'')}</span></div></div>`).join('')}</div>`:''}`}
+function gTempos(desde){const E=gDados(desde).porEt.filter(e=>e.n>=2).map(e=>({...e,r:e.real/e.pad})).filter(e=>e.r>1.4||e.r<.6).sort((a,b)=>Math.abs(Math.log(b.r))-Math.abs(Math.log(a.r))).slice(0,8);
+  return `<div class="card"><h2>Tempos do cadastro fora da realidade</h2><p class="dica" style="margin:-4px 0 8px">Etapas em que o tempo real ficou muito diferente do previsto. Tempo errado bagunça prazos, prioridade e o ranking.</p>
+    ${E.map(e=>`<div class="grow"><span>${esc(e.k)}<br><small>${e.n} vezes · previsto ${nf(e.min,2)} min/peça</small></span><span>real ≈ <b style="display:inline">${nf(e.min*e.r,2)} min/peça</b></span><b class="${e.r>1?'ruim':'ok'}">${nf(e.r,1)}×</b></div>`).join('')||'<p class="dica" style="margin:0">Os tempos cadastrados estão batendo com a realidade.</p>'}</div>`}
+function gConsertos(desde){const C=(state.consertos||[]).filter(c=>c.ts>=desde);if(!C.length)return '';const pm={};C.forEach(c=>pm[c.motivo]=(pm[c.motivo]||0)+c.n);const L=Object.entries(pm).sort((a,b)=>b[1]-a[1]);
+  return `<div class="card"><h2>Consertos no período</h2>${L.map(([m,n])=>`<div class="grow"><span>${esc(m)}</span>${barra(n,L[0][1],'var(--red)')}<b>${n}</b></div>`).join('')}<p class="dica" style="margin:8px 0 0">${sum(L.map(x=>x[1]))} peças voltaram. O mesmo motivo repetido indica treino ou ajuste de máquina.</p></div>`}
+function vGestor(){const aba=ui.gt||'agora',desde=gDesde(),per=ui.gp||7;
+  const abas=[['agora','Agora','i-alerta'],['equipe','Equipe','i-pessoas'],['atrasos','Atrasos','i-relogio'],['org','Organização','i-engr']];
+  return `<h1>Painel do gestor</h1>
+  <div class="zonas g-abas">${abas.map(([k,n,i])=>`<button class="zona" data-a="gt" data-v="${k}" aria-pressed="${aba===k}">${ic(i)}<span>${n}</span></button>`).join('')}</div>
+  ${aba==='agora'?'':`<div class="linha-dep" style="margin:0 0 14px">${PERIODOS.map(([d,n])=>`<button class="depc" data-a="gp" data-v="${d}" aria-pressed="${per===d}">${n}</button>`).join('')}</div>`}
+  ${aba==='agora'?gAgora():aba==='equipe'?gEquipe(desde):aba==='atrasos'?gAtrasos(desde):gOrg(desde)}
+  <p class="dica">Os números juntam o que foi registrado em todos os aparelhos.</p>`}
 
 /* ================= render ================= */
 const sheetId=s=>s.t+':'+(s.id||s.p||s.m||'');
@@ -1594,6 +1672,7 @@ const A={
   mP:d=>{ui.sheet.p=d.v;render()},
   pfSt:d=>{ui.pf.st=d.v;render()},
   pfOrd:d=>{if(ui.pf.ord===d.v&&d.v!=='urg')ui.pf.inv=!ui.pf.inv;else{ui.pf.ord=d.v;ui.pf.inv=false}render()},
+  gt:d=>{ui.gt=d.v;render();scrollTo(0,0)},
   gp:d=>{ui.gp=+d.v;render()},
   mSel:d=>{ui.sheet.sel=d.v;ui.sheet.p=null;render();document.querySelector('.sheet')?.scrollTo({top:0,behavior:'smooth'})},
   mRes:d=>{snap();{const l=lote(d.l);registrar({tipo:'reserva',maq:d.m,maqTipo:unidade(d.m)?.tipo,op:d.p||'',ped:l.ped,cli:pedById(l.ped).cliente,prod:prod(l.prod).nome,step:sMap(rp(l))[d.s].nome})}state.reservas=state.reservas||{};Object.keys(state.reservas).forEach(k=>{const r=state.reservas[k];if(r.l===d.l&&r.s===d.s)delete state.reservas[k]});state.reservas[d.m]={l:d.l,s:d.s,p:d.p||''};ui.sheet.sel=null;commit();toast(`Reservado para ${unidade(d.m)?.nome}`)},
