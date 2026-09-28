@@ -526,6 +526,22 @@ button.faixa{width:100%;text-align:left;font:inherit;cursor:pointer}.quem-f{bord
 .med{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--grey-soft);font-weight:700;font-size:15px}.med.m0{background:#F4C542}.med.m1{background:#C9CFD6}.med.m2{background:#D89A63}
 .como{margin-top:12px;font-size:16px;color:var(--ink2)}.como summary{font-weight:700;color:var(--blue);cursor:pointer}.como p{margin:8px 0}
 @media (max-width:640px){.g-abas .zona{font-size:13px}.rk{grid-template-columns:auto minmax(0,1fr) auto}.rk .av{display:none}.kpi b{font-size:24px}}
+
+/* v0.27: importar fichas e mockups */
+.imp-bar{display:flex;flex-wrap:wrap;gap:10px;margin:-4px 0 14px}.mbtn.neutro2{background:var(--card);color:var(--ink);border:2px solid var(--line);display:inline-flex;align-items:center;gap:8px}.mbtn.neutro2 svg.ic{width:24px;height:24px}
+.imp-ok,.imp-q{display:inline-flex;align-items:center;gap:4px;font-size:14px;font-weight:700;border-radius:8px;padding:1px 8px;margin-left:6px;vertical-align:middle}
+.imp-ok{background:var(--go-soft);color:var(--go-dark)}.imp-q{background:var(--atn-soft);color:var(--atn-ink)}.imp-ok svg.ic,.imp-q svg.ic{width:16px;height:16px}
+.imp-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.lido{color:var(--muted);font-size:15px}
+.imp-h{display:flex;gap:14px;align-items:center;margin-bottom:6px}.imp-h svg.prod{width:96px;height:96px;flex:none}
+svg.prod.mock{background:#fff;border-radius:12px}
+.sug{display:block;width:100%;text-align:left;border:2px dashed var(--blue);background:var(--blue-soft);color:var(--ink);border-radius:12px;padding:10px 14px;margin:6px 0 8px;font:inherit;font-size:17px;cursor:pointer}
+.novo-t{border-style:dashed;color:var(--go-dark)}
+.cbol{display:inline-block;width:16px;height:16px;border-radius:50%;border:1px solid rgba(0,0,0,.2);margin-right:6px;vertical-align:-2px}
+.imp-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:8px}.imp-g label{display:grid;gap:2px;text-align:center;font-weight:700;font-size:15px;color:var(--ink2)}.imp-g .campo{text-align:center;padding:8px 4px;font-size:19px}
+.imp-pz{border-top:1px solid var(--grey-soft);padding:10px 0;display:grid;gap:6px}
+.mock-l{display:grid;gap:8px;max-height:360px;overflow:auto}.mock-l .depc{justify-content:flex-start;text-align:left;gap:12px}.mock-l svg.prod{width:52px;height:52px;flex:none}
+.obs-f{display:flex;gap:6px;align-items:center;color:var(--ink2);font-size:15px;margin:2px 0}.obs-f svg.ic{width:18px;height:18px}
+@media (max-width:640px){.imp-2{grid-template-columns:1fr}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -570,6 +586,7 @@ button.faixa{width:100%;text-align:left;font:inherit;cursor:pointer}.quem-f{bord
   <symbol id="i-engr" viewBox="0 0 48 48"><circle cx="24" cy="24" r="6"/><path d="M24 4v7M24 37v7M4 24h7M37 24h7M10 10l5 5M33 33l5 5M38 10l-5 5M15 33l-5 5"/></symbol>
 </svg>
 
+<input type="file" id="fImpF" accept="application/pdf" multiple hidden><input type="file" id="fImpM" accept="image/*,application/pdf" multiple hidden><input type="file" id="fImpM1" accept="image/*,application/pdf" hidden>
 <main><div class="wrap"><div id="sync" class="sync"></div></div><div class="wrap" id="app"></div></main>
 <nav class="nav" aria-label="Menu"><div class="wrap">
   <button class="nb" data-a="tela" data-t="fabrica"><svg class="ic"><use href="#i-fabrica"/></svg>Fábrica</button>
@@ -977,7 +994,7 @@ function calcMat(ls){const m={};ls.forEach(x0=>{const g=x0.g||x0.grade,temG=g&&O
   return Object.values(m).map(o=>{o.nec=Math.ceil(o.nec);o.est=state.estoque[o.item]??0;o.st=o.est>=o.nec?'ok':'comprar';return o})}
 function gradeOf(q){const w=[.14,.3,.3,.18,.08];const g={};let t=0;['P','M','G','GG','XG'].forEach((s,i)=>{g[s]=Math.round(q*w[i]);t+=g[s]});g.M+=q-t;return g}
 function makeRework(l,detect,orig,n,mot,ts,op){RC={};const p=rp(l),D=desc(p,orig),k=state.consertos.filter(d=>d.l===l.id).length+1;
-  const r={id:`${l.id}-C${k}`,ped:l.ped,prod:l.prod,cor:l.cor,cores2:l.cores2||[],tecido:l.tecido,opcoes:l.opcoes,pers:l.pers,qtd:n,grade:{},desm:0,steps:{},rework:true,parent:l.id};
+  const r={id:`${l.id}-C${k}`,ped:l.ped,mock:l.mock,prod:l.prod,cor:l.cor,cores2:l.cores2||[],tecido:l.tecido,opcoes:l.opcoes,pers:l.pers,qtd:n,grade:{},desm:0,steps:{},rework:true,parent:l.id};
   p.steps.forEach(s=>{if(!D.has(s.id))r.steps[s.id]={st:'ok',herdado:true}});l.desm=(l.desm||0)+n;state.lotes.push(r);
   state.consertos.push({ts,l:l.id,r:r.id,ped:l.ped,detect,orig,n,motivo:mot,op});return r}
 
@@ -1046,6 +1063,7 @@ function normalizar(s){if(!s.nomesV){(s.pessoas||[]).forEach(p=>{if(NOMES_V1[p.n
 function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===8&&s.pedidos){const semLog=!s.log;normalizar(s);state=s;if(semLog){seedN=11;logExemplo(now())}if(s.exemplo==null)s.exemplo=true;return}}catch(e){}seed();state.exemplo=true;aplicaFotos(state)}
 
 /* ================= desenho dos produtos ================= */
+function loteSvg(l){return l&&l.mock?`<svg class="prod mock" viewBox="0 0 120 120" role="img" aria-label="Mockup"><image href="${l.mock}" x="0" y="0" width="120" height="120" preserveAspectRatio="xMidYMid meet"/></svg>`:prodSvg(l.prod,l.cor,l.cores2)}
 function prodSvg(pid,cor,c2){const p=prod(pid);let sv=shapeSvg(p?p.forma:'polo',cor,p?p.nome:'');if(c2&&c2.length){const dots=c2.slice(0,4).map((c,i)=>`<circle cx="${104-i*15}" cy="106" r="8" fill="${coresAll()[c.cor]||'#999'}" stroke="#fff" stroke-width="2.5"/>`).join('');sv=sv.replace('</svg>',dots+'</svg>')}return sv}
 const coresAll=()=>(state&&state.cores)||CORES;
 function claroHex(h){const n=parseInt(String(h).slice(1),16);if(isNaN(n))return true;const r=n>>16,g=n>>8&255,b=n&255;return (r*299+g*587+b*114)/1000>200}
@@ -1071,7 +1089,7 @@ const upill=u=>`<span class="pill u-${u}"><span class="dot"></span>${ULAB[u]}</s
 function entregaTxt(ped,inf){if(ped.concluido)return `Entregue ${fD(ped.concluido)}`;const d=inf.du;return `Entrega ${fD(ped.entrega)} · ${d>1?`faltam ${d} dias úteis`:d===1?'falta 1 dia útil':d===0?'é hoje':'passou da data'}`}
 function chips(it){const r=[upill(it.inf.u)];if(it.l.rework)r.push(`<span class="pill cons">${ic('i-conserto')}Conserto</span>`);if(it.adianta)r.push(`<span class="pill adi">${ic('i-adiantar')}Adiantar</span>`);return r.join('')}
 function tarefaCard(it,sug){const q=qtdEf(it.l);
-  return `<div class="tarefa ${sug?'sug':''}">${prodSvg(it.p.id,it.l.cor,it.l.cores2)}<div>
+  return `<div class="tarefa ${sug?'sug':''}">${loteSvg(it.l)}<div>
     <div class="etapa">${esc(it.s.nome)}</div><div class="qtd">${q} peças</div>
     <div class="desc" style="display:flex;align-items:center;gap:6px">${ic('i-relogio')}Tempo estimado ≈ ${esc(durEt(it.s,q))}</div>
     <div class="desc">${esc(it.p.nome)} · ${esc(modeloTxt(it.l))}</div>
@@ -1114,7 +1132,7 @@ function tarRow(t){const lab={vias:'Separei',artePrep:'Pronta',arte:'Aprovada',a
 function fornCard(f,esc_){const fora=[];state.lotes.forEach(l=>{const ped=pedById(l.ped);if(ped.concluido)return;const p=rp(l);Object.entries(l.steps).forEach(([sid,x])=>{if(x.st==='fora'&&x.forn===f.id)fora.push({l,p,s:sMap(p)[sid],x,ped})})});
   const lev=esc_.filter(t=>t.a==='levei'&&(fornById(stOf(lote(t.l),t.s).forn)||fornDe(sMap(rp(lote(t.l)))[t.s].posto)[0])?.id===f.id);
   return `<div class="forn"><div class="forn-h"><span class="m-ic">${ic(tipo(f.servico).i)}</span><div><b>${esc(f.nome)}</b><span>${esc(tNome(f.servico))} · prazo ${f.prazo} ${f.prazo>1?'dias':'dia'}</span></div></div>
-    ${fora.map(o=>{const d=diasDesde(o.x.saiu);return `<div class="fitem">${prodSvg(o.p.id,o.l.cor)}<div><b>${esc(o.s.nome)} · ${qtdEf(o.l)} peças</b><span>${esc(o.ped.cliente)} · lá ${haQuanto(o.x.saiu)}</span>${d>f.prazo?'<span class="late" style="display:block">Passou do prazo</span>':''}</div><button class="mbtn go" data-a="buscou" data-l="${o.l.id}" data-s="${o.s.id}">Chegou</button></div>`}).join('')||'<div class="vazio-s">Nada lá agora</div>'}
+    ${fora.map(o=>{const d=diasDesde(o.x.saiu);return `<div class="fitem">${loteSvg(o.l)}<div><b>${esc(o.s.nome)} · ${qtdEf(o.l)} peças</b><span>${esc(o.ped.cliente)} · lá ${haQuanto(o.x.saiu)}</span>${d>f.prazo?'<span class="late" style="display:block">Passou do prazo</span>':''}</div><button class="mbtn go" data-a="buscou" data-l="${o.l.id}" data-s="${o.s.id}">Chegou</button></div>`}).join('')||'<div class="vazio-s">Nada lá agora</div>'}
     ${lev.length?`<div class="vazio-s" style="color:var(--atn-ink);font-weight:700">${lev.length} ${lev.length>1?'pacotes prontos':'pacote pronto'} para levar</div>`:''}</div>`}
 const ehSemp=(u,P)=>!P.uso[u.id]&&!P.plan[u.id]&&!!(P.semPessoa[u.tipo]||[])[P.us.filter(x=>x.tipo===u.tipo&&!P.uso[x.id]&&!P.plan[x.id]).findIndex(x=>x.id===u.id)];
 function tileTempo(t,u){const x=t.x,sit=situacao(),a=heAtiva(x),tm=`<span data-tl="${t.l.id}" data-ts="${t.s.id}">${fDur(tempoUtil(x))}</span>`;
@@ -1135,7 +1153,7 @@ function maqTile(u,P,esp){const t=P.uso[u.id],pl=P.plan[u.id],sp=!t&&!pl?(P.semP
   const cls=t?'st-trab':pl?'st-livre':sp?'st-semp':'st-nada';const quem=t?t.x.op:pl?pl.pessoa:null;
   return `<div class="pessoa ${cls}"><button class="p-open" data-a="maq" data-m="${u.id}">
     <div class="m-top"><span class="m-ic">${ic(tipo(u.tipo).i)}</span><b>${esc(u.nome)}</b>${esp?`<span class="fila">+${esp} na fila</span>`:''}</div>
-    <div class="p-body">${it?`${prodSvg(it.p.id,it.l.cor,it.l.cores2)}<div>${pl?`<span class="prox">${pl.reservado?'Reservado':'Próximo'}</span>`:''}<b>${esc(it.s.nome)}</b><span>${qtdEf(it.l)} peças</span><span class="emp">${ic('i-predio')}${esc(it.ped.cliente)}</span>${quem?`<span class="quem-l">${av(quem,'s')}${esc(pNome(quem))} ${pl?estrela(pessoa(quem),pl):''}</span>`:''}</div>`:'<span class="vazio">Sem trabalho para esta máquina</span>'}</div></button>
+    <div class="p-body">${it?`${loteSvg(it.l)}<div>${pl?`<span class="prox">${pl.reservado?'Reservado':'Próximo'}</span>`:''}<b>${esc(it.s.nome)}</b><span>${qtdEf(it.l)} peças</span><span class="emp">${ic('i-predio')}${esc(it.ped.cliente)}</span>${quem?`<span class="quem-l">${av(quem,'s')}${esc(pNome(quem))} ${pl?estrela(pessoa(quem),pl):''}</span>`:''}</div>`:'<span class="vazio">Sem trabalho para esta máquina</span>'}</div></button>
     ${P.resEspera[u.id]?`<div class="dica" style="padding:0 14px 8px;color:var(--blue);font-weight:700">Reservado a seguir: ${esc(P.resEspera[u.id].s.nome)} · ${esc(P.resEspera[u.id].ped.cliente)}</div>`:''}
     ${t?tileTempo(t,u):sp?'<div class="p-st"><span class="dot"></span>Esperando alguém livre</div>':''}
     ${t?`<button class="p-act fim" data-a="terminou" data-m="${u.id}">${ic('i-check')}Terminou</button>${heAtiva(t.x)?`<button class="he-b" data-a="hePara" data-m="${u.id}">Parar a hora extra agora</button>`:''}`:pl?`<button class="p-act ini" data-a="comecar" data-m="${u.id}" data-l="${pl.l.id}" data-s="${pl.s.id}" data-p="${pl.pessoa}">${ic('i-play')}Começar</button>`:''}
@@ -1158,13 +1176,14 @@ function listaPedidos(){const f=ui.pf||{},q=(f.q||'').trim().toLowerCase(),qd=so
     return `<button class="ped" data-a="pedido" data-id="${p.id}"><div class="ped-st u-${i.u}"><span class="dot"></span>${ULAB[i.u]}</div>
       <h3>${esc(p.cliente)}</h3>${p.contato||p.cnpj?`<div class="ped-ent" style="font-size:16px;color:var(--muted)">${esc(p.contato)}${p.contato&&p.cnpj?' · ':''}${p.cnpj?`<span style="white-space:nowrap">CNPJ ${esc(p.cnpj)}</span>`:''}</div>`:''}
       <div class="ped-ent">${ic('i-caminhao')}${entregaTxt(p,i)}</div><div class="ped-ent" style="font-size:15px;color:var(--muted)">Pedido ${esc(p.id)} · feito em ${fD(p.chegada)}</div>
-      <div class="ped-prods">${i.ls.filter(l=>!l.rework).map(l=>{const[d,t]=minsTot(l);return `<div class="pp">${prodSvg(l.prod,l.cor,l.cores2)}<b>${l.qtd}</b><div class="barra"><i style="width:${d/t*100}%"></i></div></div>`}).join('')}</div>
+      <div class="ped-prods">${i.ls.filter(l=>!l.rework).map(l=>{const[d,t]=minsTot(l);return `<div class="pp">${loteSvg(l)}<b>${l.qtd}</b><div class="barra"><i style="width:${d/t*100}%"></i></div></div>`}).join('')}</div>
       ${falta.length&&!p.concluido?`<div class="falta">${ic('i-cadeado')}Falta: ${falta.join(', ')}</div>`:''}
       ${fora&&!p.concluido?`<div class="falta" style="background:#F3ECFB;color:#6B2F8C">${ic('i-caminhao')}Parte da peça no fornecedor</div>`:''}
     </button>`}).join('')}</div>`}
 function vPedidos(){const f=ui.pf=ui.pf||{st:'todos',ord:'urg',q:'',inv:false};
   const cnt=u=>u==='todos'?state.pedidos.length:state.pedidos.filter(p=>info(p).u===u).length;
   return `<h1>Pedidos</h1>
+  <div class="imp-bar"><button class="mbtn neutro2" data-a="impFichas">${ic('i-lista')}Importar fichas</button><button class="mbtn neutro2" data-a="impMocks">${ic('i-camisa')}Importar mockups</button></div>
   <div class="filtros">
     <input class="campo busca" id="pedBusca" value="${esc(f.q)}" placeholder="Buscar por empresa, cliente ou CNPJ" autocomplete="off" aria-label="Buscar pedido">
     <div class="linha-dep">${PF_ST.map(([k,n])=>`<button class="depc st-${k}" data-a="pfSt" data-v="${k}" aria-pressed="${f.st===k}">${k!=='todos'?`<span class="dot u-${k}" style="width:12px;height:12px;background:currentColor"></span>`:''}${n} <small style="font-weight:400">${cnt(k)}</small></button>`).join('')}</div>
@@ -1188,7 +1207,7 @@ function sPedido(id){const ped=pedById(id),i=info(ped),mats=ped.materiais.filter
     ${mats.some(m=>m.st==='comprar')?avisoEst():''}
     <div class="lib ${lib?'u-ok':'u-warn'}">${ic(lib?'i-check':'i-cadeado')}${lib?'Pode cortar':'Ainda não pode cortar'}</div></div>
   ${envs.length?`<div class="card"><h2>Arte para quem aplica</h2><p style="margin:0 0 6px;color:var(--ink2)">Cada personalização só começa quando a arte chegou em quem aplica.</p>
-    ${envs.map(e=>{const fo=isExt(e.z)?fornDe(e.z.posto)[0]:null;const r=resp('arteEnv',{l:e.l.id,s:e.z.id});return `<div class="mat">${ic(tipo(e.z.posto).i)}<div><b>${esc(e.z.nome)} · ${esc(prod(e.l.prod).nome)} ${esc(e.l.cor)}</b><span>Para ${esc(fo?fo.nome:tipo(e.z.posto).nome)}${!e.ok&&r?' · '+esc(r):''}</span></div>
+    ${envs.map(e=>{const fo=isExt(e.z)?fornDe(e.z.posto)[0]:null;const r=resp('arteEnv',{l:e.l.id,s:e.z.id});return `<div class="mat">${ic(tipo(e.z.posto).i)}<div><b>${esc(e.z.nome)} · ${esc(prod(e.l.prod).nome)} ${esc(e.l.cor)}</b><span>Para ${esc(fo?fo.nome:tipo(e.z.posto).nome)}${!e.ok&&r?' · '+esc(r):''}${(e.l.pers||[]).find(x=>x.id===e.z.id)?.desc?`<br>Arte: ${esc((e.l.pers||[]).find(x=>x.id===e.z.id).desc)}`:''}</span></div>
       ${e.ok?`<span class="pill u-ok">${ic('i-check')}Enviada</span>`:`<button class="mbtn" data-a="arteEnv" data-id="${id}" data-l="${e.l.id}" data-s="${e.z.id}" ${ped.arte?'':'disabled style="opacity:.4"'}>Enviei</button>`}</div>`}).join('')}</div>`:''}`}
   <div class="card"><h2>Peças e etapas</h2>${legendaStatus()}${i.ls.filter(l=>!l.rework).map(l=>prodLine(l,ped)+i.ls.filter(r=>r.parent===l.id&&!loteDone(r)).map(r=>prodLine(r,ped)).join('')).join('')}</div>`}
 const ETAPAS=[{nome:'Corte',i:'i-corte',g:['corte']},{nome:'Personalização',i:'i-estampa',g:['pers']},{nome:'Costura',i:'i-maquina',g:['costura']},{nome:'Arremate',i:'i-lupa',t:['arremate']},{nome:'Embalar',i:'i-caixa',t:['embalagem']}];
@@ -1197,7 +1216,7 @@ function prodLine(l,ped){const p=rp(l);
     const c=n===ss.length?'ok':fo?'fora':(and||n>0)?'and':'';return `<div class="tp ${c}"><span class="tc">${ic(c==='ok'?'i-check':c==='fora'?'i-caminhao':e.i)}</span>${e.nome}${ss.length>1&&c!=='ok'?`<small>${n} de ${ss.length}</small>`:''}</div>`}).join('');
   const ands=p.steps.filter(s=>stOf(l,s.id).st==='and'),fo=p.steps.filter(s=>stOf(l,s.id).st==='fora');
   const agora=loteDone(l)?'Pronto':fo.length?`No fornecedor: ${fo.map(s=>s.nome).join(', ')}`:ands.length?'Agora: '+ands.map(s=>`${s.nome} (${pNome(stOf(l,s.id).op)})`).join(', '):!liberado(ped)?'Esperando liberar o corte':'Esperando a próxima máquina';
-  return `<div class="prodbloco"><div class="prodline">${prodSvg(l.prod,l.cor,l.cores2)}<div><h3>${l.rework?`<span class="pill cons">${ic('i-conserto')}Conserto</span> `:''}${esc(p.nome)} · ${esc(modeloTxt(l))} · ${qtdEf(l)} peças</h3><div class="agora">${esc(agora)}</div><div class="trilha">${et}</div></div></div>${fluxo(rotaV(l,ped),'L'+l.id,l,ped)}</div>`}
+  return `<div class="prodbloco"><div class="prodline">${loteSvg(l)}<div><h3>${l.rework?`<span class="pill cons">${ic('i-conserto')}Conserto</span> `:''}${esc(p.nome)} · ${esc(modeloTxt(l))} · ${qtdEf(l)} peças</h3><div class="agora">${esc(agora)}</div>${l.obs?`<div class="obs-f">${ic('i-lista')}${esc(l.obs)}</div>`:''}${l.rework?'':`<button class="x azul" data-a="mockUm" data-l="${l.id}" style="margin:4px 0 8px;font-size:15px">${ic('i-camisa')}${l.mock?'Trocar mockup':'Pôr mockup'}</button>`}<div class="trilha">${et}</div></div></div>${fluxo(rotaV(l,ped),'L'+l.id,l,ped)}</div>`}
 
 /* ================= mapa de etapas ================= */
 const NW=200,NH=104,GX=48,GY=14;
@@ -1446,7 +1465,7 @@ function sMaq(){const e=ui.sheet,u=unidade(e.m);if(!u)return voltar();const P=pl
   const ondePlan=it=>{const m=Object.keys(P.plan).find(k=>kIt(P.plan[k])===kIt(it));return m?(m===u.id?'sugerido aqui':`sugerido para ${unidade(m)?.nome}`):''};
   const resOutra=it=>{const m=Object.keys(state.reservas||{}).find(k=>k!==u.id&&state.reservas[k].l===it.l.id&&state.reservas[k].s===it.s.id);return m?`reservado para ${unidade(m)?.nome}`:''};
   const linha=(it,bloq)=>{const tag=bloq?`Espera: ${it.falta.join(', ')}`:(resOutra(it)||ondePlan(it));const on=e.sel===kIt(it);
-    return `<button class="outra" data-a="mSel" data-v="${kIt(it)}" style="${on?'border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--blue)':''}">${prodSvg(it.p.id,it.l.cor,it.l.cores2)}<div><b>${esc(it.s.nome)} · ${qtdEf(it.l)} peças${it.l.rework?' · conserto':''}</b><span>${esc(it.ped.cliente)} · ${ULAB[it.inf.u]}${tag?` · <b style="color:${bloq?'var(--atn-ink)':'var(--blue)'}">${esc(tag)}</b>`:''}</span></div><span class="ir">${on?'Escolhido':'Escolher'}${ic('i-seta')}</span></button>`};
+    return `<button class="outra" data-a="mSel" data-v="${kIt(it)}" style="${on?'border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--blue)':''}">${loteSvg(it.l)}<div><b>${esc(it.s.nome)} · ${qtdEf(it.l)} peças${it.l.rework?' · conserto':''}</b><span>${esc(it.ped.cliente)} · ${ULAB[it.inf.u]}${tag?` · <b style="color:${bloq?'var(--atn-ink)':'var(--blue)'}">${esc(tag)}</b>`:''}</span></div><span class="ir">${on?'Escolhido':'Escolher'}${ic('i-seta')}</span></button>`};
   const listas=(tit)=>`${O.pr.length?`<h2 style="margin-top:26px">${tit}</h2><p class="dica" style="margin:-4px 0 8px">Já podem entrar nesta máquina.</p><div class="outras">${O.pr.map(it=>linha(it,false)).join('')}</div>`:''}
     ${O.ch.length?`<h2 style="margin-top:26px">Chegando depois</h2><p class="dica" style="margin:-4px 0 8px">Ainda esperam uma etapa anterior. Escolha só se as peças já estiverem na máquina.</p><div class="outras">${O.ch.slice(0,8).map(it=>linha(it,true)).join('')}</div>`:''}`;
   const all=[...O.pr,...O.ch],achar=k=>all.find(it=>kIt(it)===k);
@@ -1572,6 +1591,150 @@ function gOrg(desde){const L=(state.log||[]).filter(e=>e.ts>=desde);
   </tbody></table></div><p class="dica">"Registrado por" mostra quem estava usando o aparelho (escolhido tocando no nome, lá em cima).</p></div>
   <p class="dica">Os números deste painel juntam os cliques de todos os aparelhos.</p>`}
 
+/* ================= importar fichas e mockups ================= */
+const PDFJS='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+const carregaScript=src=>new Promise((ok,er)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>er(new Error('script'));document.head.appendChild(s)});
+async function pdfLib(){if(!window.pdfjsWorker)await carregaScript(PDFJS+'pdf.worker.min.js');if(!window.pdfjsLib)await carregaScript(PDFJS+'pdf.min.js');return window.pdfjsLib}
+const lerArq=(f,comoTexto)=>new Promise((ok,er)=>{const r=new FileReader();r.onload=()=>ok(r.result);r.onerror=er;comoTexto?r.readAsText(f):r.readAsArrayBuffer(f)});
+const lerURL=f=>new Promise((ok,er)=>{const r=new FileReader();r.onload=()=>ok(r.result);r.onerror=er;r.readAsDataURL(f)});
+const semAc=x=>String(x||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[“”"'.]/g,'').replace(/\s+/g,' ').trim();
+const MESES=['janeiro','fevereiro','marco','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+function lerData(txt,depoisDe){const t=semAc(txt);let d,m,y;let r=t.match(/(\d{1,2})\s*\/\s*(\d{1,2})(?:\s*\/\s*(\d{2,4}))?/);
+  if(r){d=+r[1];m=+r[2]-1;y=r[3]?+(r[3].length===2?'20'+r[3]:r[3]):null}else{r=t.match(/(\d{1,2})\s*(?:de\s*)?([a-z]+)(?:\s*(?:de\s*)?(\d{4}))?/);if(!r)return null;const mi=MESES.findIndex(x=>x.startsWith(r[2].slice(0,3)));if(mi<0)return null;d=+r[1];m=mi;y=r[3]?+r[3]:null}
+  if(!(d>=1&&d<=31&&m>=0&&m<=11))return null;const deduz=y==null;
+  if(y==null){const hoje=new Date();y=hoje.getFullYear();if(depoisDe){const a=new Date(depoisDe);y=a.getFullYear();if(new Date(y,m,d,17).getTime()<depoisDe)y++}else if(new Date(y,m,d).getTime()>now()+7*DIA)y--}
+  const dt=new Date(y,m,d,17,0,0,0);if(dt.getDate()!==d)return null;return {ts:dt.getTime(),deduz}}
+async function lerFicha(file){const pdf=await pdfLib();const buf=await lerArq(file);const doc=await pdf.getDocument({data:new Uint8Array(buf),isEvalSupported:false}).promise;
+  const pg=await doc.getPage(1);const tc=await pg.getTextContent();const it=tc.items.filter(t=>t.str.trim()).map(t=>({x:t.transform[4],y:t.transform[5],s:t.str.trim()}));
+  const linhas=[];[...it].sort((a,b)=>b.y-a.y||a.x-b.x).forEach(t=>{const l=linhas.find(l=>Math.abs(l.y-t.y)<=3);l?l.it.push(t):linhas.push({y:t.y,it:[t]})});
+  linhas.forEach(l=>{l.it.sort((a,b)=>a.x-b.x);l.t=l.it.map(x=>x.s).join(' ').replace(/\s+/g,' ')});
+  const F={arquivo:file.name,avisos:[]};const achaI=re=>linhas.findIndex(l=>re.test(semAc(l.t)));const depois=(l,re)=>l.t.replace(re,'').trim();
+  const i0=achaI(/^ficha de producao/);if(i0>=0){const l=linhas[i0];const pag=l.it.find(x=>/^\d+\s*\/\s*\d+$/.test(x.s));if(pag)F.pag=pag.s.replace(/\s/g,'');F.cliente=l.it.filter(x=>x!==pag&&!/ficha de produ/i.test(semAc(x.s))).map(x=>x.s).join(' ').trim()||null}
+  const ip=achaI(/pedido n/);if(ip>=0){const m=linhas[ip].t.match(/pedido\s*n\S*\s*(\d+)/i);if(m)F.num=m[1]}
+  const iP=achaI(/^produto\s*:?/),iC=achaI(/^obs do corte/),iPz=achaI(/^obs personaliza/),iF=achaI(/^fechou/),iE=achaI(/^prazo de entrega/);
+  if(iP>=0){const fim=[iC,iPz,iF].filter(x=>x>iP).sort((a,b)=>a-b)[0]??iP+3;F.produto=[depois(linhas[iP],/^produto\s*:?/i),...linhas.slice(iP+1,fim).map(l=>l.t)].join(' ').replace(/^\s*[.\-•]\s*/,'').replace(/\s+/g,' ').trim()}
+  if(iC>=0)F.obsCorte=depois(linhas[iC],/^obs do corte\s*:?/i);
+  if(iPz>=0){F.persTxt=depois(linhas[iPz],/^obs personaliza\S*\s*:?/i);const fim=[iF,iE].filter(x=>x>iPz).sort((a,b)=>a-b)[0]??iPz+1;
+    F.locais=linhas.slice(iPz+1,fim).map(l=>{const m=l.t.match(/^([^:]{2,30}):\s*(.*)$/);return m?{rot:m[1].trim(),txt:m[2].trim()}:null}).filter(Boolean)}
+  if(iF>=0){F.fechouTxt=depois(linhas[iF],/^fechou\s*:?/i);F.fechou=lerData(F.fechouTxt)}
+  if(iE>=0){F.prazoTxt=depois(linhas[iE],/^prazo de entrega\s*:?/i);F.prazo=lerData(F.prazoTxt,F.fechou?.ts)}
+  if(F.produto){const m=F.produto.match(/^(.*?)\s+em\s+(.+?)\s+na\s+cor\s+(.+)$/i);if(m){F.modeloTxt=m[1].trim();F.tecidoTxt=m[2].trim();F.corTxt=m[3].trim()}else{const c=F.produto.match(/na\s+cor\s+(.+)$/i);if(c)F.corTxt=c[1].trim()}}
+  // tabela de tamanhos
+  const qd=it.find(x=>/^qdade/i.test(x.s)||/^quantidade/i.test(x.s));const SZ=new Set([...sizesAll(),'PP','EXG','EG','G1','G2','G3','XGG'].map(x=>x.toUpperCase()));
+  F.linhas=[];F.tabOk=false;
+  if(qd){const hdr=it.filter(x=>Math.abs(x.y-qd.y)<=20&&x.x<qd.x-10&&SZ.has(x.s.toUpperCase())).sort((a,b)=>a.x-b.x);
+    const tot=it.find(x=>/^total$/i.test(x.s)&&x.y<qd.y-30);const baseY=tot?tot.y+5:-1e9;
+    const nums=it.filter(x=>/^\d+$/.test(x.s)&&x.y<qd.y-25&&x.y>baseY);const rot=it.filter(x=>!/^\d+$/.test(x.s)&&x.y<qd.y-25&&x.y>baseY&&x.x<(hdr[0]?hdr[0].x:qd.x)-40);
+    const rows=[];nums.sort((a,b)=>b.y-a.y).forEach(n=>{const r=rows.find(r=>Math.abs(r.y-n.y)<=6);r?r.n.push(n):rows.push({y:n.y,n:[n],rot:[]})});
+    rot.forEach(t=>{const c=rows.filter(r=>r.y>=t.y-6).sort((a,b)=>(a.y-t.y)-(b.y-t.y))[0];if(c)c.rot.push(t)});
+    const w=hdr.length>1?(hdr[hdr.length-1].x-hdr[0].x)/(hdr.length-1):null;
+    rows.forEach(r=>{r.n.sort((a,b)=>a.x-b.x);const totN=r.n.filter(n=>n.x>=qd.x-40),sz=r.n.filter(n=>n.x<qd.x-40);const g={};let certo=true;
+      if(sz.length===hdr.length)sz.forEach((n,i)=>g[hdr[i].s.toUpperCase()]=+n.s);
+      else if(w){sz.forEach(n=>{const i=hdr.findIndex(h=>n.x>=h.x-w/2-8&&n.x<h.x+w/2-8);if(i<0||g[hdr[i].s.toUpperCase()]!=null)certo=false;else g[hdr[i].s.toUpperCase()]=+n.s})}else certo=false;
+      const soma=sum(Object.values(g)),total=totN.length?+totN[totN.length-1].s:null;
+      F.linhas.push({rot:r.rot.sort((a,b)=>b.y-a.y||a.x-b.x).map(x=>x.s).join(' '),g,total,ok:certo&&soma>0&&(total==null||total===soma)})});
+    const tg=tot?it.filter(x=>/^\d+$/.test(x.s)&&x.y<=tot.y+5&&x.y>=tot.y-30).map(x=>+x.s)[0]:null;F.totalGeral=tg??null;
+    if(tg!=null&&tg!==sum(F.linhas.map(l=>sum(Object.values(l.g)))))F.linhas.forEach(l=>l.ok=false);
+    F.tabOk=F.linhas.length>0&&F.linhas.every(l=>l.ok)}
+  if(!F.linhas.length)F.avisos.push('Não consegui ler a tabela de tamanhos.');
+  return F}
+// só marca como certo quando o texto bate exatamente com o cadastro
+const casaExato=(txt,lista)=>{const t=semAc(txt);const r=lista.filter(x=>semAc(x)===t);return r.length===1?r[0]:null};
+function sugereProd(txt){const w=new Set(semAc(txt).split(/[^a-z0-9]+/).filter(Boolean));const c=state.produtos.filter(p=>semAc(p.nome).split(/[^a-z0-9]+/).filter(Boolean).every(x=>w.has(x)));return c.length===1?c[0].id:null}
+const PARTE_DE={'peito':'Frente','peito esq':'Frente','peito dir':'Frente','frente':'Frente','costas':'Costas','nuca':'Costas','manga':'Mangas','mangas':'Mangas','gola':'Gola'};
+function lerLocal(rot,p){const t=semAc(rot).replace(/\s+/g,' ');const lado=/\besq/.test(t)?'esq':/\bdir/.test(t)?'dir':/ambas|as duas/.test(t)?'ambas':null;
+  const partes=p?.partes||['Frente','Costas','Mangas','Gola'];
+  if(/^mangas?\b/.test(t)&&partes.includes('Mangas')&&lado)return {parte:'Mangas',lado,certo:true};
+  const exato=partes.find(x=>semAc(x)===t);if(exato)return {parte:exato,certo:true};
+  const k=Object.keys(PARTE_DE).find(k=>t.startsWith(k));const sug=k&&partes.includes(PARTE_DE[k])?PARTE_DE[k]:null;
+  return {parte:null,sug,lado:sug==='Mangas'?lado:null,certo:false}}
+function montaItem(F,L){const txt=[F.modeloTxt,L.rot].filter(Boolean).join(' ');const it={fonte:F.arquivo,pag:F.pag,txt:F.produto+(L.rot?' · '+L.rot:''),prod:null,sugP:sugereProd(txt),tecido:null,tecTxt:F.tecidoTxt||'',cor:null,corTxt:F.corTxt||'',
+    g:{...L.g},total:L.total,gOk:L.ok,gConf:false,pers:[],obs:(F.obsCorte&&!/^[x\-–—]$/i.test(F.obsCorte.trim()))?'Corte: '+F.obsCorte:'',mock:null};
+  it.cor=F.corTxt?casaExato(F.corTxt,Object.keys(state.cores)):null;
+  const ext=state.tipos.filter(t=>t.externo||t.grupo==='pers');const tipoTxt=(F.persTxt||'').trim();const tipoOk=tipoTxt?casaExato(tipoTxt,ext.map(t=>t.nome)):null;const tId=tipoOk?ext.find(t=>t.nome===tipoOk).id:null;
+  it.pers=(F.locais||[]).map(x=>({rot:x.rot,desc:x.txt,tipo:tId,tipoTxt,parte:null,lado:null,sug:null,conf:false}));return it}
+function ajustaItemProd(it){const p=prod(it.prod);if(!p)return;it.tecido=it.tecTxt?casaExato(it.tecTxt,p.tecidos||[]):null;if(!it.tecido&&(p.tecidos||[]).length===1&&!it.tecTxt)it.tecido=p.tecidos[0];
+  it.pers.forEach(x=>{const r=lerLocal(x.rot,p);x.parte=r.certo?r.parte:null;x.lado=r.certo?(r.lado||null):null;x.sug=r.certo?null:r.sug;x.sugLado=r.lado||null;x.conf=r.certo})}
+async function importarFichas(files){toast('Lendo as fichas…',false);let fichas=[];
+  try{for(const f of files)fichas.push(await lerFicha(f))}catch(e){toast('Não consegui abrir o leitor de PDF. Verifique a internet e tente de novo.',false);return}
+  const G={};fichas.forEach(F=>{const k=F.num||('?'+(F.cliente||F.arquivo));(G[k]=G[k]||[]).push(F)});
+  const grupos=Object.entries(G).map(([k,fs])=>{fs.sort((a,b)=>(a.pag||'').localeCompare(b.pag||''));const F0=fs[0];const tot=fs.map(F=>+(F.pag||'').split('/')[1]||0).find(Boolean);
+    const pags=fs.map(F=>F.pag).filter(Boolean);const falta=tot?Array.from({length:tot},(_,i)=>`${i+1}/${tot}`).filter(p=>!pags.includes(p)):[];
+    const dif=(k)=>new Set(fs.map(F=>semAc(F[k]||''))).size>1;
+    const g={num:F0.num||'',cliente:F0.cliente||'',chegada:F0.fechou?.ts||null,chDeduz:!!F0.fechou?.deduz,chTxt:F0.fechouTxt||'',entrega:F0.prazo?.ts||null,enDeduz:!!F0.prazo?.deduz,enTxt:F0.prazoTxt||'',vend:null,contato:'',cnpj:'',falta,avisos:[],itens:[]};
+    if(dif('cliente'))g.avisos.push('As fichas têm nomes de empresa diferentes. Confira.');
+    if(dif('prazoTxt')){g.entrega=null;g.avisos.push('As fichas têm prazos de entrega diferentes. Escolha o certo.')}
+    fs.forEach(F=>{F.avisos.forEach(a=>g.avisos.push(`${F.pag||F.arquivo}: ${a}`));(F.linhas.length?F.linhas:[{rot:'',g:{},total:null,ok:false}]).forEach(L=>g.itens.push(montaItem(F,L)))});
+    if(g.num&&pedById(g.num))g.avisos.push(`Já existe um pedido ${g.num} no sistema.`);
+    return g});
+  document.getElementById('toast').innerHTML='';openSheet({t:'imp',gi:0,grupos})}
+function impPend(g){const P=[];if(!g.cliente.trim())P.push('empresa');if(!g.entrega)P.push('prazo de entrega');if(!g.vend)P.push('quem vendeu');if(g.num&&pedById(g.num))P.push('número do pedido (já existe)');
+  g.itens.forEach((it,i)=>{const n=`peça ${i+1}`;if(!it.prod)P.push(`${n}: produto`);else if(!it.tecido)P.push(`${n}: tecido`);if(!it.cor)P.push(`${n}: cor`);
+    if(!sum(Object.values(it.g)))P.push(`${n}: quantidades`);else if(!it.gOk&&!it.gConf)P.push(`${n}: confirmar quantidades`);
+    it.pers.forEach((x,j)=>{if(!x.tipo)P.push(`${n}: tipo da personalização ${j+1}`);if(!x.parte)P.push(`${n}: onde vai a personalização ${j+1}`)})});return P}
+const okTag=(ok,txt)=>ok?`<span class="imp-ok">${ic('i-check')}${txt||'Lido da ficha'}</span>`:`<span class="imp-q">${ic('i-alerta')}${txt||'Confirme'}</span>`;
+function sImp(){const e=ui.sheet,g=e.grupos[e.gi];const pend=impPend(g),ext=state.tipos.filter(t=>t.externo||t.grupo==='pers');
+  const dIn=ts=>ts?new Date(ts-new Date(ts).getTimezoneOffset()*6e4).toISOString().slice(0,10):'';
+  return `${voltar('Cancelar')}<h1>Importar ficha</h1>
+  ${e.grupos.length>1?`<div class="linha-dep" style="margin-bottom:12px">${e.grupos.map((x,i)=>`<button class="depc" data-a="impG" data-v="${i}" aria-pressed="${i===e.gi}">Pedido ${esc(x.num||'?')}</button>`).join('')}</div>`:''}
+  <p class="sub-l">Só preenchi o que está escrito claramente na ficha (<span class="imp-ok">${ic('i-check')}</span>). O resto precisa da sua confirmação (<span class="imp-q">${ic('i-alerta')}</span>).</p>
+  ${g.falta.length?`<div class="aviso">${ic('i-alerta')}Falta a ficha ${g.falta.join(', ')} deste pedido. Importe junto para não esquecer peças.</div>`:''}
+  ${g.avisos.map(a=>`<div class="aviso">${ic('i-alerta')}${esc(a)}</div>`).join('')}
+  <div class="card"><h2>Pedido ${esc(g.num||'')}</h2>
+    <div class="rotulo">Empresa ${g.cliente?okTag(true):okTag(false,'Escreva')}</div><input class="campo" data-imp="cliente" value="${esc(g.cliente)}">
+    <div class="imp-2"><div><div class="rotulo">Fechou ${g.chegada?okTag(true,g.chDeduz?'Lido (ano deduzido)':''):okTag(false,'Escolha')}</div><input class="campo" type="date" data-imp="chegada" value="${dIn(g.chegada)}">${g.chTxt?`<small class="lido">Na ficha: “${esc(g.chTxt)}”</small>`:''}</div>
+      <div><div class="rotulo">Prazo de entrega ${g.entrega?okTag(true,g.enDeduz?'Lido (ano deduzido)':''):okTag(false,'Escolha')}</div><input class="campo" type="date" data-imp="entrega" value="${dIn(g.entrega)}">${g.enTxt?`<small class="lido">Na ficha: “${esc(g.enTxt)}”</small>`:''}</div></div>
+    <div class="rotulo">Quem vendeu? ${okTag(!!g.vend,g.vend?'Escolhido':'Não está na ficha')}</div><div class="linha-dep">${state.pessoas.filter(p=>temPapel(p,'vendas')).map(p=>`<button class="pchip" data-a="impVend" data-v="${p.id}" aria-pressed="${g.vend===p.id}">${av(p.id,'s')}${esc(p.nome)}</button>`).join('')}</div>
+    <div class="imp-2"><div><div class="rotulo">Contato (opcional)</div><input class="campo" data-imp="contato" value="${esc(g.contato)}"></div><div><div class="rotulo">CNPJ (opcional)</div><input class="campo" data-imp="cnpj" value="${esc(g.cnpj)}" inputmode="numeric"></div></div></div>
+  ${g.itens.map((it,k)=>{const p=prod(it.prod);return `<div class="card imp-it"><div class="imp-h">${it.mock?`<svg class="prod mock" viewBox="0 0 120 120"><image href="${it.mock}" width="120" height="120" preserveAspectRatio="xMidYMid meet"/></svg>`:it.prod?prodSvg(it.prod,it.cor||'',[]):`<span class="m-ic">${ic('i-camisa')}</span>`}
+      <div><h2 style="margin:0">Peça ${k+1}${it.pag?` <small class="lido">(ficha ${esc(it.pag)})</small>`:''}</h2><small class="lido">Na ficha: “${esc(it.txt||'')}”</small><br>
+      <button class="x azul" data-a="impMock" data-k="${k}" style="margin-top:6px">${ic('i-camisa')}${it.mock?'Trocar mockup':'Pôr mockup desta peça'}</button></div></div>
+    <div class="rotulo">Produto ${okTag(!!it.prod,it.prod?'Confirmado':'Escolha')}</div>
+    ${it.sugP&&!it.prod?`<button class="sug" data-a="impProd" data-k="${k}" data-v="${it.sugP}">Parece ser <b>${esc(prod(it.sugP).nome)}</b>. Toque para confirmar</button>`:''}
+    <div class="linha-dep">${state.produtos.map(q=>`<button class="depc" data-a="impProd" data-k="${k}" data-v="${q.id}" aria-pressed="${it.prod===q.id}">${esc(q.nome)}</button>`).join('')}</div>
+    ${p?`<div class="rotulo">Tecido ${okTag(!!it.tecido,it.tecido&&it.tecTxt&&semAc(it.tecido)===semAc(it.tecTxt)?'':it.tecido?'Confirmado':'Escolha')}</div>
+      <div class="linha-dep">${(p.tecidos||[]).map(t=>`<button class="depc" data-a="impTec" data-k="${k}" data-v="${esc(t)}" aria-pressed="${it.tecido===t}">${esc(t)}</button>`).join('')}
+      ${it.tecTxt&&!(p.tecidos||[]).some(t=>semAc(t)===semAc(it.tecTxt))?`<button class="depc novo-t" data-a="impTecNovo" data-k="${k}">${ic('i-mais')}Cadastrar “${esc(it.tecTxt)}” no ${esc(p.nome)}</button>`:''}</div>`:''}
+    <div class="rotulo">Cor ${okTag(!!it.cor,it.cor&&it.corTxt&&semAc(it.cor)===semAc(it.corTxt)?'':it.cor?'Confirmada':'Escolha')}</div>
+    <div class="linha-dep">${it.corTxt&&!Object.keys(state.cores).some(c=>semAc(c)===semAc(it.corTxt))?`<button class="depc novo-t" data-a="impCorNova" data-k="${k}">${ic('i-mais')}Cadastrar a cor “${esc(it.corTxt)}”</button>`:''}${Object.entries(state.cores).map(([c,h])=>`<button class="depc" data-a="impCor" data-k="${k}" data-v="${esc(c)}" aria-pressed="${it.cor===c}"><span class="cbol" style="background:${h}"></span>${esc(c)}</button>`).join('')}</div>
+    <div class="rotulo">Quantidades ${sum(Object.values(it.g))?okTag(it.gOk||it.gConf,it.gOk?`Lido: soma confere com o total (${it.total??sum(Object.values(it.g))})`:it.gConf?'Confirmado':'A soma não confere. Corrija e confirme'):okTag(false,'Preencha')}</div>
+    <div class="imp-g">${sizesAll().map(z=>`<label><span>${z}</span><input class="campo" type="number" min="0" data-impg="${k}" data-z="${z}" value="${it.g[z]||''}"></label>`).join('')}</div>
+    ${!it.gOk&&sum(Object.values(it.g))?`<button class="depc" data-a="impGConf" data-k="${k}" aria-pressed="${it.gConf}" style="margin-top:8px">${ic('i-check')}Confirmo as quantidades (${sum(Object.values(it.g))} peças)</button>`:''}
+    ${it.pers.length?`<div class="rotulo">Personalização</div>${it.pers.map((x,j)=>`<div class="imp-pz"><div><b>${esc(x.rot)}:</b> ${esc(x.desc)}</div>
+      <div class="linha-dep">${okTag(!!x.tipo,x.tipo?'':'Qual serviço?')}${ext.map(t=>`<button class="depc" data-a="impPT" data-k="${k}" data-j="${j}" data-v="${t.id}" aria-pressed="${x.tipo===t.id}">${ic(t.i)}${esc(t.nome)}</button>`).join('')}</div>
+      ${p?`${x.sug&&!x.parte?`<button class="sug" data-a="impPP" data-k="${k}" data-j="${j}" data-v="${x.sug}" data-l="${x.sugLado||''}">“${esc(x.rot)}” parece ser <b>${esc(x.sug)}${x.sugLado?' · '+LADOS[x.sugLado]:''}</b>. Toque para confirmar</button>`:''}
+      <div class="linha-dep">${okTag(!!x.parte,x.parte?'':'Onde vai?')}${(p.partes||[]).map(pt=>pt==='Mangas'?['esq','dir','ambas'].map(ld=>`<button class="depc" data-a="impPP" data-k="${k}" data-j="${j}" data-v="Mangas" data-l="${ld}" aria-pressed="${x.parte==='Mangas'&&x.lado===ld}">${LADOS[ld]}</button>`).join(''):`<button class="depc" data-a="impPP" data-k="${k}" data-j="${j}" data-v="${esc(pt)}" aria-pressed="${x.parte===pt}">${esc(pt)}</button>`).join('')}</div>`:'<small class="lido">Escolha o produto para ver onde pode ir.</small>'}</div>`).join('')}`:''}
+    ${it.obs?`<p class="lido" style="margin:10px 0 0">${esc(it.obs)}</p>`:''}</div>`}).join('')}
+  ${pend.length?`<div class="aviso">${ic('i-alerta')}Falta confirmar: ${esc(pend.slice(0,6).join(', '))}${pend.length>6?` e mais ${pend.length-6}`:''}.</div>`:''}
+  <div class="acoes"><button class="big go" data-a="impCriar" ${pend.length?'disabled':''}>${ic('i-check')}Criar pedido ${esc(g.num||'')}</button></div>`}
+function impCriar(){const e=ui.sheet,g=e.grupos[e.gi];if(impPend(g).length)return;snap();
+  const num=/^\d+$/.test(g.num)&&!pedById(g.num)?g.num:String(state.seq++).padStart(4,'0');if(/^\d+$/.test(num))state.seq=Math.max(state.seq,+num+1);
+  const lines=g.itens.map(it=>({prod:it.prod,cor:it.cor,cores2:[],tecido:it.tecido,opcoes:[],pers:it.pers.map((x,j)=>({tipo:x.tipo,parte:x.parte,lado:x.parte==='Mangas'?x.lado:undefined,desc:x.desc||undefined,id:'pz'+j})),g:{...it.g},qtd:sum(Object.values(it.g)),mock:it.mock,obs:it.obs}));
+  state.pedidos.push({id:num,cliente:g.cliente.trim(),contato:g.contato.trim(),cnpj:g.cnpj.trim(),vendedor:g.vend,chegada:g.chegada||now(),entrega:g.entrega,vias:false,artePrep:false,arte:false,artes:{},materiais:calcMat(lines),concluido:null,fonte:'ficha'});
+  lines.forEach((x,i)=>state.lotes.push({id:`${num}-${i+1}`,ped:num,prod:x.prod,cor:x.cor,cores2:[],tecido:x.tecido,opcoes:[],pers:x.pers,qtd:x.qtd,grade:x.g,desm:0,steps:{},rework:false,parent:null,mock:x.mock||undefined,obs:x.obs||undefined}));
+  e.grupos.splice(e.gi,1);if(e.grupos.length){e.gi=0;commit();toast(`Pedido ${num} criado. Falta ${e.grupos.length}`)}else{ui.sheet={t:'pedido',id:num};ui.tela='pedidos';commit();toast(`Pedido ${num} criado`)}}
+// mockup: tira o fundo branco e a faixa de baixo, deixa quadrado
+async function mockDeArquivo(f){let src;
+  if(/pdf$/i.test(f.type)||/\.pdf$/i.test(f.name)){const pdf=await pdfLib();const doc=await pdf.getDocument({data:new Uint8Array(await lerArq(f)),isEvalSupported:false}).promise;const pg=await doc.getPage(1);const vp=pg.getViewport({scale:1.5});const c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;await pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;src=c.toDataURL('image/png')}
+  else src=await lerURL(f);
+  const im=new Image();im.src=src;await im.decode();const W=Math.min(900,im.width),H=Math.round(im.height*W/im.width);const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,W,H);g.drawImage(im,0,0,W,H);
+  const d=g.getImageData(0,0,W,H).data;const cheio=(x,y)=>{const i=(y*W+x)*4;return d[i+3]>20&&(d[i]<235||d[i+1]<235||d[i+2]<235)};
+  const ciano=(x,y)=>{const i=(y*W+x)*4;return d[i+2]>140&&d[i+1]>140&&d[i+2]-d[i]>45};const fracC=y=>{let n=0;for(let x=0;x<W;x+=3)if(ciano(x,y))n++;return n/(W/3)};
+  let fimY=H;for(let y=Math.floor(H*.5);y<H;y++){if(fracC(y)>.2){let ok=true;for(let z=y;z<H;z+=4)if(fracC(z)<.2){ok=false;break}if(ok){fimY=y;break}}}
+  {const im2=g.getImageData(0,0,W,H),e2=im2.data;for(let y=Math.floor(H*.6);y<H;y++)for(let x=0;x<W;x++)if(ciano(x,y)){const i=(y*W+x)*4;e2[i]=e2[i+1]=e2[i+2]=255}g.putImageData(im2,0,0);for(let i=0;i<d.length;i++)d[i]=e2[i]}
+  let x0=W,y0=fimY,x1=0,y1=0;for(let y=0;y<fimY;y+=2)for(let x=0;x<W;x+=2)if(cheio(x,y)){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
+  if(x1<=x0||y1<=y0){x0=0;y0=0;x1=W;y1=fimY}
+  const lado=Math.max(x1-x0,y1-y0)*1.08,cx=(x0+x1)/2,cy=(y0+y1)/2,N=240,o=document.createElement('canvas');o.width=o.height=N;const og=o.getContext('2d');og.fillStyle='#fff';og.fillRect(0,0,N,N);
+  const bw=x1-x0+1,bh=Math.min(y1,fimY-1)-y0+1,k=N/lado;og.drawImage(c,x0,y0,bw,bh,(N-bw*k)/2,(N-bh*k)/2,bw*k,bh*k);return o.toDataURL('image/jpeg',.85)}
+function sugMock(nome){const t=' '+semAc(nome).replace(/[^a-z0-9]+/g,' ')+' ';const ls=state.lotes.filter(l=>!l.rework&&!pedById(l.ped)?.concluido);
+  const num=(t.match(/\b(\d{3,6})\b/)||[])[1];const cand=ls.filter(l=>(!num||l.ped===num)&&t.includes(' '+semAc(l.cor)+' '));return cand.length===1?cand[0].id:null}
+function sMock(){const e=ui.sheet;const ls=state.lotes.filter(l=>!l.rework&&!pedById(l.ped)?.concluido).sort((a,b)=>b.ped.localeCompare(a.ped));
+  return `${voltar('Cancelar')}<h1>Importar mockups</h1><p class="sub-l">Escolha de qual peça é cada mockup. Ele passa a ser o desenho da peça no sistema.</p>
+  ${e.itens.map((m,i)=>`<div class="card imp-it"><div class="imp-h"><svg class="prod mock" viewBox="0 0 120 120"><image href="${m.img}" width="120" height="120" preserveAspectRatio="xMidYMid meet"/></svg><div><b>${esc(m.nome)}</b><br>${okTag(!!m.alvo,m.alvo?'Escolhido':'De qual peça?')}</div></div>
+    ${m.sug&&!m.alvo?`<button class="sug" data-a="mockAlvo" data-i="${i}" data-v="${m.sug}">Parece ser <b>Pedido ${esc(lote(m.sug).ped)} · ${esc(prod(lote(m.sug).prod).nome)} ${esc(lote(m.sug).cor)}</b>. Toque para confirmar</button>`:''}
+    <div class="mock-l">${ls.map(l=>`<button class="depc" data-a="mockAlvo" data-i="${i}" data-v="${l.id}" aria-pressed="${m.alvo===l.id}">${loteSvg(l)}<span><b>Pedido ${esc(l.ped)}</b> ${esc(pedById(l.ped).cliente)}<br>${esc(prod(l.prod).nome)} · ${esc(l.cor)}</span></button>`).join('')||'<p class="dica">Nenhum pedido em aberto.</p>'}</div></div>`).join('')}
+  <div class="acoes"><button class="big go" data-a="mockOk" ${e.itens.some(m=>m.alvo)?'':'disabled'}>${ic('i-check')}Salvar ${e.itens.filter(m=>m.alvo).length} ${e.itens.filter(m=>m.alvo).length===1?'mockup':'mockups'}</button></div>`}
+
 /* ================= painel do gestor ================= */
 const PERIODOS=[[1,'Hoje'],[7,'7 dias'],[30,'30 dias']];
 function gDesde(){const d=ui.gp||7;return d===1?sod(now()).getTime():now()-d*DIA}
@@ -1649,7 +1812,7 @@ function render(){RC={};
   const sh=document.getElementById('sheet');const s=ui.sheet;
   if(!s){sh.innerHTML='';document.body.style.overflow='';return}
   const old=sh.querySelector('.sheet'),keep=old&&old.dataset.id===sheetId(s)?{top:old.scrollTop,x:[...old.querySelectorAll('.fx-wrap')].map(e=>[e.dataset.k,e.scrollLeft])}:null;
-  const html=({tipo:sTipoEd,troca:sTroca,maq:sMaq,pedido:()=>sPedido(s.id),prob:sProblema,novo:sNovo,ajuda:sAjuda,produto:()=>sProduto(s.p),etapa:sEtapa,nprod:sNovoProd,pes:sPesEd,forn:sFornEd,quem:sQuem,he:sHE}[s.t]||(()=>''))();
+  const html=({tipo:sTipoEd,troca:sTroca,maq:sMaq,pedido:()=>sPedido(s.id),prob:sProblema,novo:sNovo,ajuda:sAjuda,produto:()=>sProduto(s.p),etapa:sEtapa,nprod:sNovoProd,pes:sPesEd,forn:sFornEd,quem:sQuem,he:sHE,imp:sImp,mock:sMock}[s.t]||(()=>''))();
   sh.innerHTML=`<div class="sheet ${['pedido','produto'].includes(s.t)?'largo':''}" data-id="${esc(sheetId(s))}" role="dialog" aria-modal="true"><div class="wrap">${html}</div></div>`;document.body.style.overflow='hidden';
   if(keep){const n=sh.querySelector('.sheet');n.scrollTop=keep.top;keep.x.forEach(([k,x])=>{const e=n.querySelector(`.fx-wrap[data-k="${k}"]`);if(e)e.scrollLeft=x})}
   document.querySelectorAll('[aria-label]:not([title])').forEach(el=>el.title=el.getAttribute('aria-label'));
@@ -1684,6 +1847,23 @@ const A={
     {const P0=plano(),pl=P0.plan[d.m],rs=(state.reservas||{})[d.m],k=d.l+'|'+d.s;
      const modo=fora?'fora':rs&&rs.l===d.l&&rs.s===d.s?'reserva':pl&&kIt(pl)===k?(pl.pessoa===d.p?'sugerido':'pessoa'):'outro';
      registrar({tipo:'inicio',modo,maq:d.m,maqTipo:unidade(d.m)?.tipo,op:d.p,sug:pl?.pessoa||'',ped:l.ped,cli:pedById(l.ped).cliente,prod:prod(l.prod).nome,step:s.nome})}l.steps[d.s]={st:'and',ini:now(),op:d.p,maq:d.m,manual:fora||undefined};let heTxt='';if(situacao().k!=='trab'){const ot=Object.values(plano().uso).map(q=>heAtiva(q.x)).filter(Boolean)[0];const ate=situacao().k==='pausa'?null:(ot?ot.f:heOpcoes()[1]||heOpcoes()[0]);if(ate){l.steps[d.s].he=[{i:now(),f:ate}];heTxt=` · hora extra até ${tsHm(ate)}`}}const R_=state.reservas||{};Object.keys(R_).forEach(k=>{if(k===d.m||(R_[k].l===d.l&&R_[k].s===d.s))delete R_[k]});ui.sheet=null;commit();toast(`${pNome(d.p)} começou ${s.nome} na ${unidade(d.m)?.nome||''}${fora?' (fora da ordem)':''}${heTxt}`)},
+  impFichas:()=>{const i=document.getElementById('fImpF');i.value='';i.click()},
+  impMocks:()=>{const i=document.getElementById('fImpM');i.value='';i.click()},
+  impMock:d=>{ui.mockK=+d.k;ui.mockL=null;const i=document.getElementById('fImpM1');i.value='';i.click()},
+  mockUm:d=>{ui.mockK=null;ui.mockL=d.l;const i=document.getElementById('fImpM1');i.value='';i.click()},
+  impG:d=>{ui.sheet.gi=+d.v;render()},
+  impVend:d=>{const g=ui.sheet.grupos[ui.sheet.gi];g.vend=d.v;render()},
+  impProd:d=>{const it=ui.sheet.grupos[ui.sheet.gi].itens[+d.k];it.prod=d.v;ajustaItemProd(it);render()},
+  impTec:d=>{ui.sheet.grupos[ui.sheet.gi].itens[+d.k].tecido=d.v;render()},
+  impTecNovo:d=>{const it=ui.sheet.grupos[ui.sheet.gi].itens[+d.k],p=prod(it.prod);const v=it.tecTxt.replace(/\S+/g,w=>w[0].toUpperCase()+w.slice(1).toLowerCase());if(!p.tecidos.some(t=>semAc(t)===semAc(v)))p.tecidos.push(v);it.tecido=p.tecidos.find(t=>semAc(t)===semAc(v));save();render();toast(`${v} cadastrado no ${p.nome}`,false)},
+  impCor:d=>{ui.sheet.grupos[ui.sheet.gi].itens[+d.k].cor=d.v;render()},
+  impCorNova:d=>{const it=ui.sheet.grupos[ui.sheet.gi].itens[+d.k];const v=it.corTxt.replace(/\S+/g,w=>w[0].toUpperCase()+w.slice(1).toLowerCase());if(!state.cores[v])state.cores[v]='#9AA3AD';it.cor=v;save();render();toast(`Cor ${v} cadastrada. Ajuste o tom em Cadastros › Produtos se quiser`,false)},
+  impGConf:d=>{const it=ui.sheet.grupos[ui.sheet.gi].itens[+d.k];it.gConf=!it.gConf;render()},
+  impPT:d=>{ui.sheet.grupos[ui.sheet.gi].itens[+d.k].pers[+d.j].tipo=d.v;render()},
+  impPP:d=>{const x=ui.sheet.grupos[ui.sheet.gi].itens[+d.k].pers[+d.j];x.parte=d.v;x.lado=d.v==='Mangas'?(d.l||'ambas'):null;render()},
+  impCriar:()=>impCriar(),
+  mockAlvo:d=>{ui.sheet.itens[+d.i].alvo=d.v;render()},
+  mockOk:()=>{snap();let n=0;ui.sheet.itens.forEach(m=>{const l=m.alvo&&lote(m.alvo);if(l){l.mock=m.img;n++;state.lotes.filter(r=>r.parent===l.id).forEach(r=>r.mock=m.img)}});ui.sheet=null;commit();toast(`${n} ${n===1?'mockup salvo':'mockups salvos'}`)},
   quem:()=>openSheet({t:'quem'}),
   quemSel:d=>{quemSet(d.v);ui.sheet=null;render();tick();toast(`Pronto, este aparelho é de ${quemNome()}`,false)},
   inicio:d=>{nuvemIniciar(d.v)},
@@ -1850,6 +2030,14 @@ const A={
 };
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b||b.disabled)return;const f=A[b.dataset.a];if(f){e.preventDefault();f(b.dataset)}});
 document.addEventListener('change',e=>{const t=e.target,d=t.dataset;if(!state)return;
+  if(t.id==='fImpF'&&t.files.length){importarFichas([...t.files]);return}
+  if((t.id==='fImpM'||t.id==='fImpM1')&&t.files.length){const fs=[...t.files];(async()=>{toast('Preparando o mockup…',false);const out=[];
+      for(const f of fs){try{out.push({img:await mockDeArquivo(f),nome:f.name})}catch(er){toast(`Não consegui abrir ${f.name}`,false)}}document.getElementById('toast').innerHTML='';if(!out.length)return;
+      if(t.id==='fImpM1'&&ui.mockK!=null&&ui.sheet&&ui.sheet.t==='imp'){ui.sheet.grupos[ui.sheet.gi].itens[ui.mockK].mock=out[0].img;render();return}
+      if(t.id==='fImpM1'&&ui.mockL){snap();const l=lote(ui.mockL);l.mock=out[0].img;state.lotes.filter(r=>r.parent===l.id).forEach(r=>r.mock=out[0].img);commit();toast('Mockup salvo');return}
+      openSheet({t:'mock',itens:out.map(m=>({...m,alvo:null,sug:sugMock(m.nome)}))})})();return}
+  if(t.dataset.imp&&ui.sheet&&ui.sheet.t==='imp'){const g=ui.sheet.grupos[ui.sheet.gi],k=t.dataset.imp;if(k==='chegada'||k==='entrega'){if(!t.value){g[k]=null}else{const [y,m,dd]=t.value.split('-').map(Number);g[k]=new Date(y,m-1,dd,17).getTime();g[k==='chegada'?'chDeduz':'enDeduz']=false}render()}else g[k]=t.value;return}
+  if(t.dataset.impg!=null&&ui.sheet&&ui.sheet.t==='imp'){const it=ui.sheet.grupos[ui.sheet.gi].itens[+t.dataset.impg];const v=parseInt(t.value)||0;if(v)it.g[t.dataset.z]=v;else delete it.g[t.dataset.z];it.gOk=false;it.gConf=false;render();return}
   if(t.id==='xFoto'&&t.files&&t.files[0]){eRead();const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const N=240,c=document.createElement('canvas');c.width=c.height=N;const m=Math.min(im.width,im.height);
     c.getContext('2d').drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,N,N);if(ui.sheet&&ui.sheet.t==='pes'){ui.sheet.foto=c.toDataURL('image/jpeg',.82);render()}};im.onerror=()=>toast('Não consegui abrir essa foto');im.src=r.result};r.readAsDataURL(t.files[0]);return}const num=()=>parseFloat(String(t.value).replace(',','.'));let ok=false;
   if(d.exp){if(!/^\d\d:\d\d$/.test(t.value))return;snap();state.expediente[d.exp]=t.value;ok=true}
