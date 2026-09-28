@@ -576,7 +576,7 @@ const fD=ts=>{const d=new Date(ts);return `${DOWc[d.getDay()]} ${pad(d.getDate()
 const fDur=ms=>{const m=Math.max(0,Math.round(ms/MIN));const h=Math.floor(m/60);return h?`${h}h${pad(m%60)}`:`${m} min`};
 const nf=(x,d=1)=>Number(x).toLocaleString('pt-BR',{maximumFractionDigits:d});
 const sum=a=>a.reduce((x,y)=>x+y,0);
-const EXP0={ini:'07:30',fim:'17:30',pausas:[{nome:'Pausa',h:'09:00',min:15},{nome:'Pausa',h:'15:00',min:15}],dias:[1,2,3,4,5]};
+const EXP0={v2:true,ini:'07:30',fim:'17:30',pausas:[{nome:'Pausa',h:'09:00',min:15},{nome:'Almoço',h:'12:00',min:60},{nome:'Pausa',h:'15:00',min:15}],dias:[1,2,3,4,5]};
 const EXP=()=>(typeof state!=='undefined'&&state&&state.expediente)||EXP0;
 const hm=x=>{const[a,b]=String(x||'0:0').split(':').map(Number);return (a||0)*60+(b||0)};
 const hmTxt=m=>`${pad(Math.floor(m/60)%24)}:${pad(Math.round(m%60))}`;
@@ -597,7 +597,7 @@ function situacao(ts){ts=ts||now();const js=janelasDia(sod(ts));if(js.some(([a,b
   return {k:'fora',prox:proxInicio(ts),depois:ts>=fim}}
 const heAtiva=(x,ts)=>(x&&x.he||[]).find(h=>h.i<=(ts||now())&&(ts||now())<h.f);
 const contando=x=>situacao().k==='trab'||!!heAtiva(x);
-function heOpcoes(){const t=now(),lim=proxInicio(t),base=Math.ceil(t/(30*MIN))*30*MIN;const o=[];for(let k=1;k<=8;k++){const v=base+k*30*MIN;if(v>lim)break;o.push(v)}return o.length?o:[lim]}
+function heOpcoes(){const t=now(),lim=proxInicio(t),base=Math.ceil(t/(30*MIN))*30*MIN;const o=[];[1,2,3,4,5,6,8,10,12,16,20].forEach(k=>{const v=base+k*30*MIN;if(v<=lim)o.push(v)});return o.length?o:[lim]}
 const sod=ts=>{const d=new Date(ts);d.setHours(0,0,0,0);return d};
 function addWD(ts,n){const d=sod(ts);let k=Math.abs(n);const s=n<0?-1:1;while(k>0){d.setDate(d.getDate()+s);if(isWD(d))k--}d.setHours(17,0,0,0);return d.getTime()}
 function wdUntil(ts){const a=sod(now()),b=sod(ts);let n=0;const d=new Date(a);if(b>=a){while(d<b){d.setDate(d.getDate()+1);if(isWD(d))n++}return n}while(d>b){if(isWD(d))n--;d.setDate(d.getDate()-1)}return n}
@@ -1005,7 +1005,7 @@ function seed(){seedN=7;const T=now();
   const r=makeRework(lote('0402-1'),'arremate','etiqueta',5,'Etiqueta errada',addWD(T,-6),'leo');rp(r).steps.forEach(s=>r.steps[s.id]={st:'ok',herdado:true});
   return state}
 function save(){RC={};try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}nuvemSalvar()}
-function normalizar(s){s.log=s.log||[];s.pessoas=s.pessoas||[];s.consertos=s.consertos||[];s.cores={...CORES,...(s.cores||{})};const EXC={'0402':['Marcos Lima','12.345.678/0001-90'],'0409':['Juliana Prado','23.456.789/0001-01'],'0412':['Paulo Reis','34.567.890/0001-12'],'0415':['Carla Mendes','45.678.901/0001-23'],'0416':['Rafael Souza','56.789.012/0001-34'],'0419':['Renata Alves','78.901.234/0001-56'],'0418':['Teresa Nogueira','67.890.123/0001-45'],'0420':['Fernanda Rocha','89.012.345/0001-67']};s.pedidos.forEach(p=>{const x=EXC[p.id];p.contato=p.contato||(x?x[0]:'');p.cnpj=p.cnpj||(x?x[1]:'')});s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});const mg=x=>{if(x.parte==='Mangas'&&!x.lado)x.lado='esq'};s.produtos.forEach(p=>{(p.persPadrao||[]).forEach(mg);ajustaGola(p)});Object.entries({'Gola polo Marinho':260,'Gola polo Branca':120,'Gola polo Cinza':150,'Gola ribana Branca':300,'Gola ribana Preta':150}).forEach(([k,v])=>{if(s.estoque[k]==null)s.estoque[k]=v});s.lotes.forEach(l=>(l.pers||[]).forEach(mg));cfgDefaults(s);return s}
+function normalizar(s){if(s.expediente&&!s.expediente.v2){if(!s.expediente.pausas.some(p=>hm(p.h)>=hm('11:00')&&hm(p.h)<=hm('13:00')))s.expediente.pausas.push({nome:'Almoço',h:'12:00',min:60});s.expediente.pausas.sort((a,b)=>hm(a.h)-hm(b.h));s.expediente.v2=true}s.log=s.log||[];s.pessoas=s.pessoas||[];s.consertos=s.consertos||[];s.cores={...CORES,...(s.cores||{})};const EXC={'0402':['Marcos Lima','12.345.678/0001-90'],'0409':['Juliana Prado','23.456.789/0001-01'],'0412':['Paulo Reis','34.567.890/0001-12'],'0415':['Carla Mendes','45.678.901/0001-23'],'0416':['Rafael Souza','56.789.012/0001-34'],'0419':['Renata Alves','78.901.234/0001-56'],'0418':['Teresa Nogueira','67.890.123/0001-45'],'0420':['Fernanda Rocha','89.012.345/0001-67']};s.pedidos.forEach(p=>{const x=EXC[p.id];p.contato=p.contato||(x?x[0]:'');p.cnpj=p.cnpj||(x?x[1]:'')});s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});const mg=x=>{if(x.parte==='Mangas'&&!x.lado)x.lado='esq'};s.produtos.forEach(p=>{(p.persPadrao||[]).forEach(mg);ajustaGola(p)});Object.entries({'Gola polo Marinho':260,'Gola polo Branca':120,'Gola polo Cinza':150,'Gola ribana Branca':300,'Gola ribana Preta':150}).forEach(([k,v])=>{if(s.estoque[k]==null)s.estoque[k]=v});s.lotes.forEach(l=>(l.pers||[]).forEach(mg));cfgDefaults(s);return s}
 function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===8&&s.pedidos){const semLog=!s.log;normalizar(s);state=s;if(semLog){seedN=11;logExemplo(now())}if(s.exemplo==null)s.exemplo=true;return}}catch(e){}seed();state.exemplo=true}
 
 /* ================= desenho dos produtos ================= */
@@ -1088,9 +1088,9 @@ function tileTempo(t,u){const x=t.x,sit=situacao(),a=heAtiva(x),tm=`<span data-t
 function faixaHora(P){const sit=situacao();if(sit.k==='trab')return '';const tr=Object.values(P.uso),sem=tr.filter(t=>!heAtiva(t.x)),com=tr.length-sem.length;
   if(sit.k==='pausa')return `<div class="faixa">${ic('i-relogio')}<span><b>${esc(sit.nome)} até ${tsHm(sit.ate)}.</b> Os contadores param e voltam sozinhos.</span></div>`;
   const qd=sod(sit.prox).getTime()===sod(now()).getTime()?'hoje':sod(sit.prox).getTime()===sod(now()+DIA).getTime()?'amanhã':fD(sit.prox);
-  return `<div class="faixa">${ic('i-dormir')}<span><b>${sit.depois?'Expediente encerrado.':'Fora do horário.'}</b> Volta ${qd} às ${tsHm(sit.prox)}.${com?` ${com} em hora extra.`:''}</span>${sem.length?`<button class="mbtn" data-a="heAbrir">Hora extra</button>`:''}</div>`}
+  return `<div class="faixa">${ic('i-dormir')}<span><b>${!isWD(sod(now()))?'Hoje não é dia de trabalho: tudo conta como hora extra.':sit.depois?'Expediente encerrado.':'Fora do horário.'}</b> Volta ${qd} às ${tsHm(sit.prox)}.${com?` ${com} em hora extra.`:''}</span>${tr.length?`<button class="mbtn" data-a="heAbrir">Hora extra</button>`:''}</div>`}
 function sHE(){const e=ui.sheet,P=plano(),tr=Object.entries(P.uso);
-  return `${voltar('Cancelar')}<h1>Hora extra</h1><p class="sub-l">Quem vai continuar? O contador segue até a hora escolhida ou até apertar Terminou.</p>
+  return `${voltar('Cancelar')}<h1>Hora extra</h1><p class="sub-l">${isWD(sod(now()))?'Quem vai continuar?':'Hoje não é dia de trabalho, tudo conta como hora extra. Quem está trabalhando?'} O contador segue até a hora escolhida ou até apertar Terminou.</p>
   ${tr.length?`<div class="eq-l">${tr.map(([m,t])=>`<button class="eq" data-a="heSel" data-m="${m}" aria-pressed="${e.sel.includes(m)}">${av(t.x.op)}<span class="eq-t"><b>${esc(pNome(t.x.op))}</b><span>${esc(t.s.nome)} · ${esc(unidade(m)?.nome||'')}</span></span>${e.sel.includes(m)?ic('i-check'):''}</button>`).join('')}</div>`:'<div class="vazio-s">Ninguém está trabalhando agora. Quem começar algo fora do horário já entra em hora extra.</div>'}
   <div class="rotulo">Até que horas?</div><div class="linha-dep">${heOpcoes().map(v=>`<button class="depc" data-a="heAte" data-v="${v}" aria-pressed="${e.ate===v}">${tsHm(v)}</button>`).join('')}</div>
   <div class="acoes"><button class="big go" data-a="heOk" ${e.sel.length?'':'disabled'}>${ic('i-check')}Confirmar hora extra</button></div>`}
@@ -1281,7 +1281,7 @@ function cAjustes(){const pr=state.params;
     <div class="rotulo">Pausas</div>${(EXP().pausas||[]).map((p,i)=>`<div class="pz-row"><input class="campo" data-pzn="${i}" value="${esc(p.nome)}" aria-label="Nome da pausa"><input class="campo" type="time" data-pzh="${i}" value="${p.h}" aria-label="Horário"><span class="aj-in"><input class="campo" type="number" data-pzm="${i}" value="${p.min}" aria-label="Minutos"><small>min</small></span><button class="x" data-a="rmPausa" data-i="${i}">Tirar</button></div>`).join('')}
     <button class="mbtn" data-a="addPausa" style="margin-top:6px">${ic('i-mais')}Adicionar pausa</button>
     <div class="rotulo">Dias de trabalho</div><div class="linha-dep">${DOWc.map((n,i)=>`<button class="depc" data-a="expDia" data-v="${i}" aria-pressed="${(EXP().dias||[]).includes(i)}">${n}</button>`).join('')}</div>
-    <p class="dica" style="margin:10px 0 0">Dá <b>${fDur(jornadaMin()*MIN)}</b> de trabalho por dia. Fora desse horário e nas pausas os contadores param. Hora extra se marca na própria máquina.</p></div>
+    <p class="dica" style="margin:10px 0 0">Dá <b>${fDur(jornadaMin()*MIN)}</b> de trabalho por dia. Fora desse horário e nas pausas os contadores param. Trabalho fora dos dias marcados (ex.: sábado) conta como hora extra.</p></div>
   <div class="card"><h2>Prazos e cálculo</h2>
     ${campoN('Margem para imprevistos','data-cfg="params.margem"',pr.margem,'dias úteis')}
     ${campoN('Eficiência da equipe','data-cfg="params.efic" data-pct="1"',Math.round(pr.efic*100),'%')}
