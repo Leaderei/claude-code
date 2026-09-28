@@ -1,0 +1,794 @@
+<title>Martins Produção</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF0F3;--surface:#FFFFFF;--surface-2:#F5F7F9;--ink:#141D26;--ink-2:#3B4855;--muted:#687785;--line:#D5DCE3;--line-2:#E6EBF0;
+  --accent:#1B4C8C;--accent-ink:#FFFFFF;--accent-soft:#E2EBF7;
+  --chalk:#E2B93B;--chalk-soft:#FBF3D5;--chalk-ink:#5E4A00;
+  --ok:#1F7446;--ok-soft:#E0F1E7;--warn:#9A6100;--warn-soft:#FAEFD6;--crit:#B0271F;--crit-soft:#FAE3E1;
+  --fila:#B3BEC9;--scrim:rgba(10,15,20,.45);
+  --display:'Barlow Condensed','Arial Narrow',system-ui,sans-serif;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;
+  --bg:#0E1419;--surface:#151E26;--surface-2:#1B2630;--ink:#E4EBF1;--ink-2:#B5C1CC;--muted:#8797A6;--line:#2A3642;--line-2:#222D38;
+  --accent:#7EAEEE;--accent-ink:#0E1419;--accent-soft:#1B2D44;--chalk:#E6C457;--chalk-soft:#352D12;--chalk-ink:#F3DE9A;
+  --ok:#5CC68A;--ok-soft:#15301F;--warn:#E6AE48;--warn-soft:#342810;--crit:#F08A80;--crit-soft:#3A1C1A;--fila:#4A5866;--scrim:rgba(0,0,0,.6)}}
+:root[data-theme="dark"]{color-scheme:dark;
+  --bg:#0E1419;--surface:#151E26;--surface-2:#1B2630;--ink:#E4EBF1;--ink-2:#B5C1CC;--muted:#8797A6;--line:#2A3642;--line-2:#222D38;
+  --accent:#7EAEEE;--accent-ink:#0E1419;--accent-soft:#1B2D44;--chalk:#E6C457;--chalk-soft:#352D12;--chalk-ink:#F3DE9A;
+  --ok:#5CC68A;--ok-soft:#15301F;--warn:#E6AE48;--warn-soft:#342810;--crit:#F08A80;--crit-soft:#3A1C1A;--fila:#4A5866;--scrim:rgba(0,0,0,.6)}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--ink);font:14px/1.5 var(--sans)}
+h1,h2,h3,h4{text-wrap:balance}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.top-in{max-width:1320px;margin:0 auto;padding:10px 16px 0;display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px}
+.brand{display:flex;align-items:baseline;gap:10px;font:700 22px/1 var(--display);letter-spacing:.03em;text-transform:uppercase}
+.brand small{font:600 11px var(--sans);letter-spacing:.08em;color:var(--muted)}
+.top-meta{margin-left:auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;color:var(--muted)}
+.tabs{display:flex;gap:2px;overflow-x:auto;flex-basis:100%;scrollbar-width:none}
+.tab{appearance:none;border:0;background:none;font:600 15px var(--display);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:9px 14px 10px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+main{max-width:1320px;margin:0 auto;padding:20px 16px 56px}
+.btn{appearance:none;font:600 13px var(--sans);border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 12px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn:hover{border-color:var(--ink-2)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.big{font-size:15px;padding:11px 20px}
+.btn.danger{color:var(--crit)}
+.btn.sm{font-size:12px;padding:4px 9px}
+.btn.ghost{border-color:transparent;background:none;color:var(--muted)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+.ph{font:700 19px/1.2 var(--display);letter-spacing:.04em;text-transform:uppercase;margin:0}
+.sub{color:var(--muted);font-size:12.5px;margin:3px 0 12px;max-width:70ch}
+.eyebrow{font:600 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono)}
+.stack{display:grid;gap:16px;align-content:start}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;font:600 12px var(--sans);padding:3px 9px;border-radius:999px;white-space:nowrap;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line)}
+.chip .dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+.chip.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.chip.warn{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.chip.crit{background:var(--crit-soft);color:var(--crit);border-color:transparent}
+.chip.pronto{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.tag{display:inline-block;font:600 10.5px var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:4px;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line);vertical-align:1px;margin-left:4px}
+.tag.adianta{background:var(--chalk-soft);color:var(--chalk-ink);border-color:var(--chalk)}
+.tag.rework{background:var(--crit-soft);color:var(--crit);border-color:transparent}
+.tag.pers{border-style:dashed;border-color:var(--chalk)}
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi b{display:block;font:700 34px/1.1 var(--display);font-variant-numeric:tabular-nums;margin-top:2px}
+.kpi b.crit{color:var(--crit)}
+.kpi span{display:block;font-size:12px;color:var(--muted)}
+.g-painel{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px;align-items:start}
+@media(max-width:1060px){.g-painel{grid-template-columns:1fr}}
+/* priority */
+.prow{display:grid;grid-template-columns:28px minmax(0,1.25fr) minmax(0,1.5fr) 118px 170px;gap:14px;align-items:center;padding:12px 8px;border-top:1px solid var(--line-2);cursor:pointer;border-radius:6px;background:none;border-left:0;border-right:0;border-bottom:0;width:100%;text-align:left}
+.prow:hover{background:var(--surface-2)}
+.rank{font:700 20px var(--display);color:var(--muted);text-align:center}
+.op{font:500 12px var(--mono);color:var(--muted)}
+.cli{font-weight:600}
+.now{font-size:12.5px;color:var(--ink-2)}
+.skus{display:grid;gap:6px}
+.sku{display:grid;gap:3px;font-size:12px;color:var(--ink-2)}
+.sku span b{font-weight:600;color:var(--ink)}
+.bar{height:6px;background:var(--line-2);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:0 3px 3px 0}
+.bar i.done{background:var(--ok)}
+.due b{display:block;font-variant-numeric:tabular-nums}
+.due span{font-size:12px;color:var(--muted)}
+.stat{display:grid;gap:4px;justify-items:start}
+.stat small{font-size:11.5px;color:var(--muted)}
+@media(max-width:780px){.prow{grid-template-columns:28px minmax(0,1fr)}.prow>.skus,.prow>.due,.prow>.stat{grid-column:2}}
+.rules{margin:14px 0 0;padding:12px 14px 12px 32px;background:var(--surface-2);border-radius:8px;font-size:12.5px;color:var(--ink-2);display:grid;gap:4px}
+/* load bars */
+.lrow{display:grid;grid-template-columns:100px minmax(0,1fr) 64px;gap:10px;align-items:center;font-size:13px;padding:4px 0}
+.track{height:10px;background:var(--line-2);border-radius:2px;position:relative}
+.track i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:0 4px 4px 0;min-width:2px}
+.track i.hot{background:var(--warn)}
+.lrow .v{text-align:right;font:500 12px var(--mono);font-variant-numeric:tabular-nums}
+.lrow .v.zero{color:var(--muted)}
+.alert{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;padding:9px 0;border-top:1px solid var(--line-2);font-size:13px}
+.alert:first-of-type{border-top:0}
+.alert button{all:unset;cursor:pointer;color:var(--accent);font-weight:600}
+.ev{display:grid;grid-template-columns:78px minmax(0,1fr);gap:8px;font-size:12.5px;padding:5px 0;border-top:1px solid var(--line-2)}
+.ev time{font:500 11.5px var(--mono);color:var(--muted)}
+/* chão */
+.postos{display:flex;flex-wrap:wrap;gap:14px 26px;margin-bottom:16px}
+.pgroup .eyebrow{margin-bottom:6px}
+.pchips{display:flex;flex-wrap:wrap;gap:6px}
+.pchip{appearance:none;cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 11px;font:600 13px var(--sans);display:inline-flex;gap:8px;align-items:center}
+.pchip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.pchip .n{font:500 11px var(--mono);background:var(--surface-2);color:var(--ink-2);border-radius:999px;padding:0 7px}
+.pchip .n.z{opacity:.55}
+.g-chao{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media(max-width:900px){.g-chao{grid-template-columns:1fr}}
+.job{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:8px}
+.job.next{border:2px solid var(--ink)}
+.job.and{border:2px solid var(--accent);background:linear-gradient(var(--accent-soft),var(--surface) 70px)}
+.jh{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.jh .cli{margin-right:auto}
+.etapa{font:700 32px/1.02 var(--display);text-transform:uppercase;letter-spacing:.01em}
+.prodl{font-size:14px;color:var(--ink-2)}
+.prodl b{color:var(--ink)}
+.grade{display:flex;flex-wrap:wrap;gap:4px}
+.grade span{font:500 12px var(--mono);border:1px solid var(--line);border-radius:4px;padding:1px 7px;background:var(--surface-2);font-variant-numeric:tabular-nums}
+.grade span b{font-weight:600;margin-right:5px;color:var(--muted)}
+.why{font-size:13px;color:var(--ink-2);margin:0}
+.obs{background:var(--chalk-soft);border:1px solid var(--chalk);color:var(--chalk-ink);border-radius:8px;padding:8px 10px;font-size:13px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.frow{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 2px;border-top:1px solid var(--line-2)}
+.frow .rank{font-size:17px}
+.frow .t{font-weight:600}
+.frow .d{font-size:12px;color:var(--muted)}
+.empty{border:1px dashed var(--line);border-radius:12px;padding:18px;color:var(--ink-2);background:var(--surface);display:grid;gap:6px}
+.empty b{font:700 20px var(--display);text-transform:uppercase;letter-spacing:.03em;color:var(--ink)}
+.opsel{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:12px}
+.opsel .pchip{padding:5px 10px;font-size:12.5px}
+/* pedidos */
+.g-ped{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px;align-items:start}
+@media(max-width:900px){.g-ped{grid-template-columns:1fr}}
+.plist{display:grid;gap:8px}
+.pitem{appearance:none;cursor:pointer;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:10px 12px;display:grid;gap:3px;width:100%}
+.pitem[aria-current="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.pitem .row{justify-content:space-between}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:12px}
+.fact b{display:block;font:600 16px var(--sans);font-variant-numeric:tabular-nums}
+.fact b.crit{color:var(--crit)}.fact b.warn{color:var(--warn)}.fact b.ok{color:var(--ok)}
+.tog{appearance:none;cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:6px 10px;font:600 12.5px var(--sans);display:inline-flex;gap:7px;align-items:center}
+.tog::before{content:"";width:13px;height:13px;border:1.5px solid var(--muted);border-radius:3px;flex:none}
+.tog[aria-pressed="true"]{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.tog[aria-pressed="true"]::before{background:var(--ok);border-color:var(--ok);box-shadow:inset 0 0 0 2px var(--ok-soft)}
+.tw{overflow-x:auto}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+.t th{text-align:left;font:600 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.t td{padding:7px 8px;border-bottom:1px solid var(--line-2);vertical-align:middle}
+.t td.n,.t th.n{text-align:right;font-variant-numeric:tabular-nums}
+.t td.n{font-family:var(--mono);font-size:12.5px}
+.lote{border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:10px;background:var(--surface)}
+.lote.rw{background:var(--surface-2);border-style:dashed}
+.lote h3{margin:0;font:600 15px var(--sans)}
+.dagw{overflow-x:auto;padding-bottom:4px}
+.dag{display:flex;gap:10px;min-width:max-content}
+.lane{display:flex;flex-direction:column;gap:6px;width:150px}
+.st{font-size:12px;border-radius:6px;padding:5px 8px;border:1px solid var(--line);background:var(--surface-2);color:var(--muted);line-height:1.25}
+.st small{display:block;font:500 10.5px var(--mono);opacity:.85;margin-top:1px}
+.st.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.st.and{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.st.ready{background:var(--surface);color:var(--ink);border-color:var(--ink-2)}
+.st[data-f="pers"]{box-shadow:inset 0 0 0 2px var(--chalk)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:5px;border:1px solid var(--line)}
+details summary{cursor:pointer;font-weight:600;font-size:13px;color:var(--accent)}
+/* roteiros */
+.rlane{display:flex;flex-direction:column;gap:8px;width:200px}
+.rstep{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;display:grid;gap:4px}
+.rstep h4{margin:0;font:600 13.5px/1.3 var(--sans);display:flex;justify-content:space-between;gap:6px}
+.rstep .meta{font:500 11px var(--mono);color:var(--muted)}
+.rstep .deps{font-size:11.5px;color:var(--ink-2)}
+.rstep[data-f="pers"]{border-color:var(--chalk);background:var(--chalk-soft)}
+.rstep[data-f="antes"]{border-left:3px solid var(--ok)}
+.rstep .x{all:unset;cursor:pointer;color:var(--muted);font-size:15px;line-height:1;padding:0 2px}
+.rstep .x:hover{color:var(--crit)}
+.fase{font:600 10px var(--sans);letter-spacing:.06em;text-transform:uppercase}
+.fase.antes{color:var(--ok)}.fase.pers{color:var(--chalk-ink)}.fase.depois{color:var(--muted)}
+.g-rot{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+@media(max-width:1060px){.g-rot{grid-template-columns:1fr}}
+/* forms */
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+label.f{display:grid;gap:4px;font-size:12px;color:var(--muted);font-weight:600}
+input,select,textarea{font:14px var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:7px 9px;width:100%;min-width:0}
+input[type=checkbox]{width:auto}
+.cbs{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:12.5px}
+.cbs label{display:inline-flex;gap:5px;align-items:center}
+.sizes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.linha{border:1px solid var(--line);border-radius:8px;padding:12px;display:grid;gap:10px;background:var(--surface-2)}
+.err{color:var(--crit);font-size:13px;font-weight:600}
+/* modal */
+.ov{position:fixed;inset:0;background:var(--scrim);display:grid;place-items:center;padding:16px;z-index:50}
+.modal{background:var(--surface);border-radius:12px;max-width:500px;width:100%;padding:20px;display:grid;gap:12px;max-height:90vh;overflow:auto}
+/* metrics */
+.g-met{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+@media(max-width:960px){.g-met{grid-template-columns:1fr}}
+.srow{display:grid;grid-template-columns:100px minmax(0,1fr) 110px;gap:10px;align-items:center;font-size:13px;padding:5px 0}
+.sbar{display:flex;gap:2px;height:14px}
+.sbar i{display:block;height:100%}
+.sbar i.p{background:var(--accent)}
+.sbar i.q{background:var(--fila);border-radius:0 4px 4px 0}
+.srow .v{font:500 11.5px var(--mono);text-align:right;color:var(--ink-2)}
+.eff{display:inline-block;min-width:52px;text-align:center}
+.note{font-size:12.5px;color:var(--ink-2);background:var(--surface-2);border-radius:8px;padding:10px 12px}
+.sample{font:600 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;background:var(--chalk-soft);color:var(--chalk-ink);border:1px solid var(--chalk);padding:2px 7px;border-radius:4px}
+@media (prefers-reduced-motion:no-preference){.job,.panel{transition:border-color .15s}}
+</style>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand">Martins Uniformes <small>Produção · esboço v0.1</small></div>
+    <div class="top-meta"><span class="sample">Dados de exemplo</span><span id="clock" class="mono"></span><button class="btn sm ghost" data-a="reset" id="resetBtn">Restaurar exemplo</button></div>
+    <nav class="tabs" aria-label="Seções">
+      <button class="tab" data-a="tab" data-t="painel">Painel</button>
+      <button class="tab" data-a="tab" data-t="chao">Chão de fábrica</button>
+      <button class="tab" data-a="tab" data-t="pedidos">Pedidos</button>
+      <button class="tab" data-a="tab" data-t="roteiros">Produtos e roteiros</button>
+      <button class="tab" data-a="tab" data-t="metricas">Métricas</button>
+    </nav>
+  </div>
+</header>
+<main id="app"></main>
+<div id="modal"></div>
+
+<script>
+/* ============ utilidades ============ */
+const MIN=6e4,H=36e5;
+const DOW=['dom','seg','ter','qua','qui','sex','sáb'];
+const pad=n=>String(n).padStart(2,'0');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nf=(x,d=1)=>Number(x).toLocaleString('pt-BR',{maximumFractionDigits:d});
+const pct=x=>Math.round(x*100)+'%';
+const now=()=>Date.now();
+const fD=ts=>{const d=new Date(ts);return `${DOW[d.getDay()]} ${pad(d.getDate())}/${pad(d.getMonth()+1)}`};
+const fDH=ts=>{const d=new Date(ts);return `${pad(d.getDate())}/${pad(d.getMonth()+1)} ${pad(d.getHours())}:${pad(d.getMinutes())}`};
+const fDur=ms=>{const m=Math.max(0,Math.round(ms/MIN));const h=Math.floor(m/60);return h?`${h}h${pad(m%60)}`:`${m} min`};
+const fHrs=ms=>nf(ms/H,1)+' h';
+const sum=a=>a.reduce((x,y)=>x+y,0);
+const isWD=d=>d.getDay()!==0&&d.getDay()!==6;
+const sod=ts=>{const d=new Date(ts);d.setHours(0,0,0,0);return d};
+function addWD(ts,n){const d=sod(ts);let k=Math.abs(n);const s=n<0?-1:1;while(k>0){d.setDate(d.getDate()+s);if(isWD(d))k--}d.setHours(17,0,0,0);return d.getTime()}
+function wdUntil(ts){const a=sod(now()),b=sod(ts);let n=0;const d=new Date(a);
+  if(b>=a){while(d<b){d.setDate(d.getDate()+1);if(isWD(d))n++}return n}
+  while(d>b){if(isWD(d))n--;d.setDate(d.getDate()-1)}return n}
+let seedN=7;const rnd=()=>{seedN|=0;seedN=seedN+0x6D2B79F5|0;let t=Math.imul(seedN^seedN>>>15,1|seedN);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+const pick=a=>a[Math.floor(rnd()*a.length)];
+
+/* ============ cadastros ============ */
+const POSTOS=[
+  {id:'corte',nome:'Corte',grupo:'Corte',cap:1,ops:['Anderson']},
+  {id:'estampa',nome:'Estamparia',grupo:'Personalização',cap:2,ops:['Diego','Paulo']},
+  {id:'bordado',nome:'Bordado',grupo:'Personalização',cap:1,ops:['Lúcia']},
+  {id:'reta',nome:'Reta',grupo:'Costura',cap:3,ops:['Cida','Marlene','Joana']},
+  {id:'overlock',nome:'Overlock',grupo:'Costura',cap:2,ops:['Rose','Tânia']},
+  {id:'galoneira',nome:'Galoneira',grupo:'Costura',cap:2,ops:['Sueli','Vera']},
+  {id:'caseadeira',nome:'Caseadeira',grupo:'Costura',cap:1,ops:['Neide']},
+  {id:'cadeia',nome:'Ponto cadeia',grupo:'Costura',cap:1,ops:['Fátima']},
+  {id:'acabamento',nome:'Revisão',grupo:'Acabamento',cap:2,ops:['Bia','Solange']},
+  {id:'expedicao',nome:'Expedição',grupo:'Acabamento',cap:1,ops:['Márcio']},
+];
+const POSTO=Object.fromEntries(POSTOS.map(p=>[p.id,p]));
+const SIZES=['P','M','G','GG','XG'];
+const CORES=['Branca','Preta','Marinho','Cinza','Verde','Royal','Vermelha'];
+const MOTIVOS=['Costura irregular / torta','Gola torta / fora de medida','Etiqueta no lado errado','Estampa deslocada ou falhada','Tamanho trocado no pacote','Defeito no tecido','Medida fora da tabela','Outro'];
+const S=(id,nome,posto,deps,min,o={})=>({id,nome,posto,deps,min,pers:!!o.pers,fecha:!!o.fecha,obs:o.obs||''});
+const PRODUTOS0=[
+ {id:'polo-ams',nome:'Polo Amsterdã',ref:'PL-AMS',tecido:'Piquet',consumo:0.42,aviam:[['Botão 4 furos','un',3],['Gola ribana','un',1],['Etiqueta composição','un',1]],steps:[
+  S('corte','Corte','corte',[],0.9),
+  S('bordado','Bordado logo peito','bordado',['corte'],2.0,{pers:1}),
+  S('silk','Silk costas','estampa',['corte'],0.7,{pers:1}),
+  S('peitilho','Montar peitilho','reta',['corte'],1.6),
+  S('prepgola','Preparar gola','reta',['corte'],0.5),
+  S('barramanga','Barra de manga','galoneira',['corte'],0.4),
+  S('ombro','Unir ombros','overlock',['peitilho','silk','bordado'],0.5),
+  S('gola','Pregar gola','overlock',['ombro','prepgola'],0.8),
+  S('manga','Pregar mangas','overlock',['ombro','barramanga'],0.9),
+  S('fechar','Fechar laterais','overlock',['manga','gola'],0.8,{fecha:1}),
+  S('etiqueta','Etiqueta e pesponto de gola','reta',['gola'],0.6,{obs:'Etiqueta de composição no lado ESQUERDO interno, 2 cm abaixo da gola, conforme ficha técnica.'}),
+  S('barra','Barra','galoneira',['fechar'],0.5),
+  S('casear','Casear e pregar botões','caseadeira',['fechar'],0.8),
+  S('revisao','Revisão e arremate','acabamento',['barra','etiqueta','casear'],0.7),
+  S('embalar','Dobrar e embalar','expedicao',['revisao'],0.3)]},
+ {id:'polo-vie',nome:'Polo Viena',ref:'PL-VIE',tecido:'Malha dry',consumo:0.40,aviam:[['Botão 4 furos','un',2],['Gola ribana','un',1],['Etiqueta composição','un',1]],steps:[
+  S('corte','Corte','corte',[],0.8),
+  S('subl','Sublimação frente','estampa',['corte'],0.9,{pers:1}),
+  S('bordmanga','Bordado na manga','bordado',['corte'],1.4,{pers:1}),
+  S('peitilho','Montar peitilho','reta',['corte'],1.5),
+  S('prepgola','Preparar gola','reta',['corte'],0.5),
+  S('barramanga','Barra de manga','galoneira',['corte'],0.4),
+  S('ombro','Unir ombros','overlock',['peitilho','subl'],0.5),
+  S('gola','Pregar gola','overlock',['ombro','prepgola'],0.8),
+  S('manga','Pregar mangas','overlock',['ombro','barramanga','bordmanga'],0.9),
+  S('fechar','Fechar laterais','overlock',['manga','gola'],0.8,{fecha:1}),
+  S('etiqueta','Etiqueta e pesponto de gola','reta',['gola'],0.6,{obs:'Etiqueta de composição no lado ESQUERDO interno, conforme ficha técnica.'}),
+  S('fenda','Barra com fenda lateral','reta',['fechar'],0.9),
+  S('casear','Casear e pregar botões','caseadeira',['fechar'],0.7),
+  S('revisao','Revisão e arremate','acabamento',['fenda','etiqueta','casear'],0.7),
+  S('embalar','Dobrar e embalar','expedicao',['revisao'],0.3)]},
+ {id:'calca-hel',nome:'Calça Helanca',ref:'CL-HEL',tecido:'Helanca',consumo:1.1,aviam:[['Elástico 35 mm','m',0.9],['Cordão','m',1.1],['Etiqueta composição','un',1]],steps:[
+  S('corte','Corte','corte',[],0.7),
+  S('transfer','Transfer faixa lateral','estampa',['corte'],0.8,{pers:1}),
+  S('bolso','Bolsos faca','reta',['transfer'],2.2,{obs:'Só com a faixa lateral aplicada. Conferir alinhamento da faixa com a boca do bolso.'}),
+  S('gancho','Fechar gancho','overlock',['bolso'],0.7),
+  S('laterais','Fechar laterais e entrepernas','overlock',['gancho'],1.1,{fecha:1}),
+  S('cos','Cós com elástico','cadeia',['laterais'],1.2),
+  S('barra','Barra','galoneira',['laterais'],0.5),
+  S('etiqueta','Etiqueta','reta',['cos'],0.3,{obs:'Etiqueta no cós, lado ESQUERDO interno.'}),
+  S('revisao','Revisão e arremate','acabamento',['barra','etiqueta'],0.6),
+  S('embalar','Dobrar e embalar','expedicao',['revisao'],0.3)]},
+];
+const ESTOQUE0={'Piquet Marinho':140,'Piquet Branca':60,'Piquet Verde':10,'Piquet Cinza':80,'Malha dry Branca':150,'Malha dry Cinza':70,'Helanca Preta':240,'Helanca Marinho':20,'Helanca Cinza':150,'Botão 4 furos':2200,'Gola ribana':900,'Etiqueta composição':3000,'Elástico 35 mm':420,'Cordão':500};
+const PARAMS0={margem:5,jornada:480,efic:0.85,fila:0.25,leadCompra:5};
+
+/* ============ estado ============ */
+const KEY='martins-producao-v1b';
+let state, ui={tab:'painel',posto:'overlock',operador:'',ped:null,prod:'polo-ams',modal:null,pf:'ativos',mprod:'todos',novo:null,confirmReset:false};
+const P=()=>state.params;
+const prod=id=>state.produtos.find(p=>p.id===id);
+const pedById=id=>state.pedidos.find(p=>p.id===id);
+const lote=id=>state.lotes.find(l=>l.id===id);
+const lotesDe=pid=>state.lotes.filter(l=>l.ped===pid);
+const sMap=p=>Object.fromEntries(p.steps.map(s=>[s.id,s]));
+const stOf=(l,sid)=>l.steps[sid]||{st:'pend'};
+const done=(l,sid)=>stOf(l,sid).st==='ok';
+const qtdEf=l=>l.qtd-(l.desm||0);
+
+function topo(p){const m=sMap(p),seen={},out=[];const v=id=>{if(seen[id]||!m[id])return;seen[id]=1;m[id].deps.forEach(v);out.push(m[id])};p.steps.forEach(s=>v(s.id));return out}
+function anc(p,id){const m=sMap(p),r=new Set();const v=x=>(m[x]?.deps||[]).forEach(d=>{if(!r.has(d)){r.add(d);v(d)}});v(id);return r}
+function desc(p,id){const r=new Set([id]);let ch=true;while(ch){ch=false;p.steps.forEach(s=>{if(!r.has(s.id)&&s.deps.some(d=>r.has(d))){r.add(s.id);ch=true}})}return r}
+function fase(p,s){if(s.pers)return 'pers';const a=anc(p,s.id);return p.steps.some(x=>x.pers&&a.has(x.id))?'depois':'antes'}
+const FASE={antes:'Pode adiantar',pers:'Personalização',depois:'Após personalização'};
+function levels(p){const lv={};topo(p).forEach(s=>lv[s.id]=s.deps.length?1+Math.max(...s.deps.map(d=>lv[d]??0)):0);return lv}
+
+function loteDone(l){return prod(l.prod).steps.every(s=>done(l,s.id))}
+function liberado(ped){return ped.vias.ficha&&ped.vias.tecido&&ped.vias.producao&&ped.arte&&ped.materiais.every(m=>m.st==='ok'||m.st==='recebido')}
+function ready(l,s,ped){if(done(l,s.id)||stOf(l,s.id).st==='and')return false;if(!s.deps.every(d=>done(l,d)))return false;if(!s.deps.length&&!liberado(ped))return false;return true}
+function wStep(l,s){return s.min*qtdEf(l)/(P().jornada*P().efic)+P().fila}
+function remDays(l){const p=prod(l.prod),dist={};let mx=0;topo(p).forEach(s=>{const st=stOf(l,s.id).st;const w=st==='ok'?0:st==='and'?wStep(l,s)*0.5:wStep(l,s);dist[s.id]=w+Math.max(0,...s.deps.map(d=>dist[d]||0));mx=Math.max(mx,dist[s.id])});return mx}
+function minsTot(l){let t=0,d=0;prod(l.prod).steps.forEach(s=>{const m=s.min*l.qtd;t+=m;if(done(l,s.id))d+=m});return [d,t]}
+function preDias(ped){if(liberado(ped))return 0;let d=0;if(ped.materiais.some(m=>m.st==='comprar'))d+=P().leadCompra;else if(ped.materiais.some(m=>m.st==='pedido'))d+=Math.ceil(P().leadCompra/2);if(!ped.arte||!ped.vias.ficha||!ped.vias.tecido||!ped.vias.producao)d+=1;return d}
+function info(ped){
+  const ls=lotesDe(ped.id),ab=ls.filter(l=>!loteDone(l)),pre=preDias(ped);
+  let need=0,garg=null;ab.forEach(l=>{const d=remDays(l)+pre;if(d>need){need=d;garg=l}});
+  let D=0,T=0;ls.filter(l=>!l.rework).forEach(l=>{const[d,t]=minsTot(l);D+=d;T+=t});
+  const prog=T?D/T:0,du=wdUntil(ped.entrega),disp=du-P().margem,folga=disp-need;
+  const status=ped.concluido?'fim':!ab.length?'pronto':folga<-P().margem?'crit':folga<0?'warn':'ok';
+  const cons=Math.max(0,-folga/P().margem),iniciado=D>0;
+  const score=ped.concluido?1e9:!ab.length?-100:folga-(iniciado?3*prog:0);
+  return {ls,ab,need,garg,prog,du,disp,folga,status,cons,iniciado,score,pre}
+}
+const STLABEL={ok:'No prazo',warn:'Consumindo margem',crit:'Vai atrasar',pronto:'Pronto p/ entrega',fim:'Entregue'};
+function statusChip(inf){return `<span class="chip ${inf.status==='fim'?'':inf.status}"><span class="dot"></span>${STLABEL[inf.status]}</span>`}
+function folgaTxt(inf){if(inf.status==='fim'||inf.status==='pronto')return '';return inf.folga>=0?`${nf(inf.folga)} d de folga além da margem`:`margem de ${P().margem} d: ${pct(Math.min(inf.cons,9.99))} usada`}
+function loteAgora(l){const p=prod(l.prod),ped=pedById(l.ped);if(loteDone(l))return 'Pronto';const and=p.steps.filter(s=>stOf(l,s.id).st==='and');if(and.length)return 'Em '+and.map(s=>s.nome).join(', ');const r=p.steps.filter(s=>ready(l,s,ped));if(r.length)return 'Na fila: '+r.map(s=>s.nome).join(', ');if(!liberado(ped))return 'Aguardando liberação para o corte';return 'Aguardando'}
+
+function fila(pid){
+  const out={and:[],ready:[],bloq:[]};
+  state.pedidos.filter(p=>!p.concluido).forEach(ped=>{const inf=info(ped);
+    lotesDe(ped.id).forEach(l=>{const p=prod(l.prod),m=sMap(p);
+      p.steps.filter(s=>s.posto===pid&&!done(l,s.id)).forEach(s=>{
+        const st=stOf(l,s.id),it={ped,inf,l,p,s,st};
+        if(st.st==='and')out.and.push(it);
+        else if(ready(l,s,ped)){it.adianta=fase(p,s)==='antes'&&p.steps.some(x=>x.pers&&!done(l,x.id));out.ready.push(it)}
+        else{const falta=s.deps.filter(d=>!done(l,d));
+          if(falta.length&&falta.every(d=>stOf(l,d).st==='and'||ready(l,m[d],ped))){it.falta=falta.map(d=>m[d].nome);out.bloq.push(it)}}
+      })})});
+  const cmp=(a,b)=>a.inf.score-b.inf.score||(b.l.rework?1:0)-(a.l.rework?1:0)||levels(a.p)[a.s.id]-levels(b.p)[b.s.id];
+  out.ready.sort(cmp);out.bloq.sort(cmp);return out}
+function motivo(it){const {inf,ped}=it,r=[];r.push(`Entrega ${fD(ped.entrega)} (${inf.du} d.ú.)`);r.push(folgaTxt(inf));
+  if(inf.iniciado&&inf.prog>=.3)r.push(`pedido ${pct(inf.prog)} feito: terminar libera espaço`);
+  if(it.adianta)r.push('adiantando enquanto a personalização não chega; a peça não fecha aqui');
+  if(it.l.rework)r.push('retrabalho de desmanche');return r.filter(Boolean).join(' · ')}
+function carga(pid){const f=fila(pid);const m=sum(f.and.map(i=>i.s.min*qtdEf(i.l)*0.5))+sum(f.ready.map(i=>i.s.min*qtdEf(i.l)));return m/(P().jornada*P().efic*POSTO[pid].cap)}
+
+function log(txt,ts=now()){state.eventos.unshift({ts,txt});state.eventos.length=Math.min(state.eventos.length,80)}
+function calcMat(ls){const m={};ls.forEach(x=>{const p=prod(x.prod);const add=(item,un,q)=>{m[item]=m[item]||{item,un,nec:0};m[item].nec+=q};add(`${p.tecido} ${x.cor}`,'m',p.consumo*x.qtd);(p.aviam||[]).forEach(([i,u,q])=>add(i,u,q*x.qtd))});
+  return Object.values(m).map(o=>{o.nec=Math.ceil(o.nec);o.est=state.estoque[o.item]??0;o.st=o.est>=o.nec?'ok':'comprar';return o})}
+function gradeOf(q){const w=[.14,.3,.3,.18,.08];const g={};let t=0;SIZES.forEach((s,i)=>{g[s]=Math.round(q*w[i]);t+=g[s]});g.M+=q-t;return g}
+function makeRework(l,detect,orig,n,mot,ts,op,obs=''){
+  const p=prod(l.prod),D=desc(p,orig),k=state.desmanches.filter(d=>d.l===l.id).length+1;
+  const r={id:`${l.id}-R${k}`,ped:l.ped,prod:l.prod,cor:l.cor,qtd:n,grade:{},desm:0,steps:{},rework:true,parent:l.id};
+  p.steps.forEach(s=>{if(!D.has(s.id))r.steps[s.id]={st:'ok',herdado:true}});
+  l.desm=(l.desm||0)+n;state.lotes.push(r);
+  state.desmanches.push({id:'D'+(state.desmanches.length+1),ts,l:l.id,r:r.id,ped:l.ped,detect,orig,n,motivo:mot,op,obs});return r}
+
+/* ============ dados de exemplo ============ */
+function sim(l,doneIds,andId,start,target){
+  const p=prod(l.prod),fim={};let mx=0;
+  topo(p).forEach(s=>{const isAnd=s.id===andId;if(!doneIds.includes(s.id)&&!isAnd)return;
+    const rdy=Math.max(start,...s.deps.map(d=>fim[d]||start));const ini=rdy+(1+rnd()*16)*H;
+    const f=0.9+rnd()*0.45+(s.posto==='overlock'?0.14:0)+(s.id==='bolso'?0.25:0)+(s.posto==='corte'?-0.05:0);
+    const op=pick(POSTO[s.posto].ops);
+    if(isAnd){l.steps[s.id]={st:'and',ini,op};mx=Math.max(mx,ini)}
+    else{const e=ini+s.min*l.qtd*f*MIN;fim[s.id]=e;l.steps[s.id]={st:'ok',ini,fim:e,op};mx=Math.max(mx,e)}});
+  const tg=target||now()-(0.5+rnd()*2.5)*H;const sh=mx-tg;
+  Object.values(l.steps).forEach(x=>{x.ini-=sh;if(x.fim)x.fim-=sh})}
+function seed(){
+  seedN=7;const T=now();
+  state={v:1,params:{...PARAMS0},produtos:JSON.parse(JSON.stringify(PRODUTOS0)),pedidos:[],lotes:[],desmanches:[],eventos:[],estoque:{...ESTOQUE0},seq:{op:421}};
+  const mk=o=>{const ped={id:o.id,cliente:o.cliente,chegada:o.chegada,entrega:o.entrega,vias:o.vias||{ficha:true,tecido:true,producao:true},arte:o.arte??true,materiais:[],liberadoTs:o.lib||null,concluido:o.concluido||null};
+    ped.materiais=calcMat(o.linhas);if(o.lib)ped.materiais.forEach(m=>m.st='ok');state.pedidos.push(ped);
+    o.linhas.forEach((x,i)=>{const l={id:`${o.id}-${i+1}`,ped:o.id,prod:x.prod,cor:x.cor,qtd:x.qtd,grade:gradeOf(x.qtd),desm:0,steps:{},rework:false,parent:null};state.lotes.push(l);
+      if(x.done||x.and)sim(l,x.done||[],x.and,o.lib,x.target)});return ped};
+  const all=id=>prod(id).steps.map(s=>s.id);
+  mk({id:'0402',cliente:'Supermercados Bom Preço',chegada:addWD(T,-26),entrega:addWD(T,-3),lib:addWD(T,-23),concluido:addWD(T,-4),
+    linhas:[{prod:'polo-ams',cor:'Cinza',qtd:150,done:all('polo-ams'),target:addWD(T,-4)-6*H}]});
+  mk({id:'0409',cliente:'Transportes Rota Sul',chegada:addWD(T,-21),entrega:addWD(T,2),lib:addWD(T,-17),
+    linhas:[{prod:'polo-vie',cor:'Cinza',qtd:90,done:all('polo-vie').filter(x=>!['revisao','embalar'].includes(x)),and:'revisao'}]});
+  mk({id:'0412',cliente:'Construtora Horizonte',chegada:addWD(T,-16),entrega:addWD(T,4),lib:addWD(T,-13),
+    linhas:[{prod:'polo-ams',cor:'Marinho',qtd:180,done:['corte','bordado','silk','peitilho','prepgola','barramanga','ombro','gola','manga','fechar','etiqueta'],and:'barra'},
+            {prod:'calca-hel',cor:'Preta',qtd:180,done:['corte'],and:'transfer'}]});
+  mk({id:'0415',cliente:'Rede Farma Vida',chegada:addWD(T,-9),entrega:addWD(T,14),lib:addWD(T,-6),
+    linhas:[{prod:'polo-vie',cor:'Branca',qtd:240,done:['corte','peitilho','barramanga'],and:'subl'}]});
+  mk({id:'0416',cliente:'Academia Pulse',chegada:addWD(T,-8),entrega:addWD(T,9),lib:addWD(T,-6),
+    linhas:[{prod:'calca-hel',cor:'Cinza',qtd:120,done:['corte','transfer'],and:'bolso'}]});
+  mk({id:'0418',cliente:'Colégio São Bento',chegada:addWD(T,-3),entrega:addWD(T,22),arte:false,
+    linhas:[{prod:'polo-ams',cor:'Branca',qtd:320},{prod:'calca-hel',cor:'Marinho',qtd:320}]});
+  mk({id:'0420',cliente:'Clínica Vitta',chegada:T-2*H,entrega:addWD(T,20),arte:false,vias:{ficha:false,tecido:false,producao:false},
+    linhas:[{prod:'polo-ams',cor:'Verde',qtd:60}]});
+  const r1=makeRework(lote('0402-1'),'revisao','etiqueta',5,'Etiqueta no lado errado',addWD(T,-6),'Bia');prod('polo-ams').steps.forEach(s=>r1.steps[s.id]={st:'ok',herdado:true});
+  const r2=makeRework(lote('0402-1'),'ombro','silk',3,'Estampa deslocada ou falhada',addWD(T,-9),'Rose');prod('polo-ams').steps.forEach(s=>r2.steps[s.id]={st:'ok',herdado:true});
+  makeRework(lote('0412-1'),'fechar','manga',6,'Costura irregular / torta',T-26*H,'Tânia');
+  makeRework(lote('0409-1'),'revisao','gola',8,'Gola torta / fora de medida',T-3*H,'Bia');
+  log('Pedido OP 0402 entregue: Supermercados Bom Preço',addWD(T,-4));
+  log('Desmanche: 6 peças da OP 0412 voltam para Pregar mangas (costura irregular)',T-26*H);
+  log('OP 0418: arte aguardando aprovação do cliente; Piquet Branco e Helanca Marinho a comprar',T-20*H);
+  log('Desmanche: 8 peças da OP 0409 voltam para Pregar gola (gola torta)',T-3*H);
+  log('Pedido OP 0420 recebido: Clínica Vitta, 60 peças',T-2*H);
+  return state}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===1&&s.pedidos){state=s;return}}catch(e){}seed()}
+
+/* ============ componentes ============ */
+function gradeHtml(l){const g=l.grade||{};const ks=SIZES.filter(k=>g[k]);if(!ks.length)return '';return `<div class="grade">${ks.map(k=>`<span><b>${k}</b>${g[k]}</span>`).join('')}</div>`}
+function job(it,mode){
+  const {ped,l,p,s,st}=it,q=qtdEf(l),tags=[];
+  if(it.adianta)tags.push('<span class="tag adianta">Adiantando</span>');
+  if(l.rework)tags.push('<span class="tag rework">Retrabalho</span>');
+  if(s.pers)tags.push('<span class="tag pers">Personalização</span>');
+  if(s.fecha)tags.push('<span class="tag">Fecha a peça</span>');
+  const ids=`data-l="${l.id}" data-s="${s.id}"`;
+  return `<article class="job ${mode}">
+    <div class="jh"><span class="op">OP ${ped.id}</span><span class="cli">${esc(ped.cliente)}</span>${statusChip(it.inf)}</div>
+    <div class="eyebrow">${mode==='and'?`Em andamento · ${esc(st.op)} · há <span data-ini="${st.ini}">${fDur(now()-st.ini)}</span>`:'Próximo pacote'}</div>
+    <div class="etapa">${esc(s.nome)}</div>
+    <div class="prodl">${esc(p.nome)} · ${esc(l.cor)} · <b>${q} peças</b> · tempo padrão ${fDur(s.min*q*MIN)} (${nf(s.min)} min/pç) ${tags.join('')}</div>
+    ${gradeHtml(l)}
+    <p class="why">${esc(motivo(it))}</p>
+    ${s.obs?`<div class="obs"><b>Instrução da ficha:</b> ${esc(s.obs)}</div>`:''}
+    <div class="actions">${mode==='and'
+      ?`<button class="btn pri big" data-a="finalizar" ${ids}>Finalizar</button><button class="btn danger" data-a="desm" ${ids}>Registrar erro / desmanche</button>`
+      :`<button class="btn pri big" data-a="iniciar" ${ids}>Iniciar${ui.operador?' · '+esc(ui.operador):''}</button>`}</div>
+  </article>`}
+
+/* ============ PAINEL ============ */
+function vPainel(){
+  const ativos=state.pedidos.filter(p=>!p.concluido).map(p=>({p,i:info(p)})).sort((a,b)=>a.i.score-b.i.score);
+  const started=l=>Object.values(l.steps).some(x=>x.st!=='pend');
+  const wip=sum(state.lotes.filter(l=>!pedById(l.ped).concluido&&!loteDone(l)&&started(l)).map(qtdEf));
+  const risco=ativos.filter(a=>a.i.status==='warn'||a.i.status==='crit'),crit=ativos.filter(a=>a.i.status==='crit');
+  const prodz=sum(state.lotes.filter(l=>!l.rework&&Object.values(l.steps).some(x=>x.st==='ok')).map(l=>l.qtd)),desm=sum(state.desmanches.map(d=>d.n));
+  const lib=ativos.filter(a=>liberado(a.p)).length;
+  const cargas=POSTOS.map(p=>({p,d:carga(p.id)})),maxC=Math.max(1,...cargas.map(c=>c.d)),top=cargas.reduce((a,b)=>b.d>a.d?b:a);
+  const alerts=[];
+  crit.forEach(a=>alerts.push(['crit',`OP ${a.p.id} (${esc(a.p.cliente)}) precisa de ~${nf(a.i.need)} d úteis de trabalho e faltam ${a.i.du} até a entrega. Gargalo: ${esc(prod(a.i.garg.prod).nome)} ${esc(a.i.garg.cor)}.`,a.p.id]));
+  ativos.forEach(({p})=>{p.materiais.filter(m=>m.st==='comprar').forEach(m=>alerts.push(['warn',`OP ${p.id}: comprar ${esc(m.item)} (faltam ${nf(m.nec-m.est,0)} ${m.un}).`,p.id]));
+    if(!p.vias.ficha||!p.vias.tecido||!p.vias.producao)alerts.push(['warn',`OP ${p.id}: vias do pedido ainda não separadas (ficha, tecido, produção).`,p.id]);
+    if(!p.arte)alerts.push(['warn',`OP ${p.id}: arte/ficha técnica sem aprovação. O corte não é liberado sem ela.`,p.id])});
+  state.lotes.filter(l=>l.rework&&!loteDone(l)&&!pedById(l.ped).concluido).forEach(l=>alerts.push(['warn',`Retrabalho aberto: ${qtdEf(l)} peças da OP ${l.ped} (${esc(prod(l.prod).nome)}). ${esc(loteAgora(l))}.`,l.ped]));
+  const ociosos=cargas.filter(c=>c.d===0&&fila(c.p.id).and.length===0).map(c=>c.p.nome);
+  if(ociosos.length)alerts.push(['',`Sem trabalho liberado agora: ${ociosos.join(', ')}. Avaliar remanejar para ${top.p.nome} (maior fila).`,null]);
+  return `
+  <section class="kpis">
+    <div class="kpi"><div class="eyebrow">Pedidos em aberto</div><b>${ativos.length}</b><span>${lib} liberados · ${ativos.length-lib} aguardando liberação</span></div>
+    <div class="kpi"><div class="eyebrow">Peças em processo</div><b>${wip.toLocaleString('pt-BR')}</b><span>em pacotes já iniciados</span></div>
+    <div class="kpi"><div class="eyebrow">Pedidos em risco</div><b class="${crit.length?'crit':''}">${risco.length}</b><span>${crit.length} vão atrasar sem ação</span></div>
+    <div class="kpi"><div class="eyebrow">Entregas em 7 d.ú.</div><b>${ativos.filter(a=>a.i.du<=7).length}</b><span>próximas saídas</span></div>
+    <div class="kpi"><div class="eyebrow">Retrabalho</div><b>${prodz?nf(desm/prodz*100):0}%</b><span>${desm} peças desmanchadas de ${prodz.toLocaleString('pt-BR')}</span></div>
+  </section>
+  <div class="g-painel">
+    <section class="panel">
+      <h2 class="ph">Prioridade de produção</h2>
+      <p class="sub">Ordem calculada pelo sistema. Clique num pedido para ver SKUs, pré-produção e tempos.</p>
+      ${ativos.map((a,i)=>`<button class="prow" data-a="abrirPed" data-id="${a.p.id}">
+        <span class="rank">${i+1}</span>
+        <div><div class="op">OP ${a.p.id}</div><div class="cli">${esc(a.p.cliente)}</div><div class="now">${a.i.garg?`Gargalo: ${esc(prod(a.i.garg.prod).nome)} ${esc(a.i.garg.cor)}. ${esc(loteAgora(a.i.garg))}`:'Todos os SKUs prontos'}</div></div>
+        <div class="skus">${a.i.ls.filter(l=>!l.rework).map(l=>{const[d,t]=minsTot(l);const rw=a.i.ls.filter(r=>r.parent===l.id&&!loteDone(r));return `<div class="sku"><span><b>${esc(prod(l.prod).nome)} ${esc(l.cor)}</b> · ${l.qtd} pç · ${pct(d/t)}${rw.length?` · <span class="tag rework">${sum(rw.map(r=>r.qtd))} em retrabalho</span>`:''}</span><div class="bar"><i class="${d>=t?'done':''}" style="width:${d/t*100}%"></i></div></div>`}).join('')}</div>
+        <div class="due"><b>${fD(a.p.entrega)}</b><span>${a.i.du} d.ú. · limite interno ${fD(addWD(a.p.entrega,-P().margem))}</span></div>
+        <div class="stat">${statusChip(a.i)}<small>${esc(folgaTxt(a.i))}</small></div>
+      </button>`).join('')}
+      <ol class="rules">
+        <li><b>Data de entrega manda</b>, não a data de chegada. Todo pedido carrega uma margem de ${P().margem} dias úteis para imprevistos.</li>
+        <li>Para cada SKU, o sistema soma o caminho mais longo de etapas que faltam (tempo padrão × peças ÷ jornada × eficiência + ${nf(P().fila,2)} d de fila por etapa). O SKU mais lento define o pedido.</li>
+        <li>Folga = dias úteis até a entrega − margem − trabalho restante. Pedidos já iniciados ganham peso para fechar logo e liberar espaço físico.</li>
+        <li>Pedido não liberado (vias, arte, material) soma o prazo de compra de ${P().leadCompra} d.</li>
+      </ol>
+    </section>
+    <div class="stack">
+      <section class="panel">
+        <h2 class="ph">Carga por posto</h2>
+        <p class="sub">Dias de trabalho liberado na fila, considerando o nº de máquinas. Destaque = gargalo atual.</p>
+        ${cargas.map(c=>`<div class="lrow" title="${esc(c.p.nome)}: ${nf(c.d)} dias de fila · ${c.p.cap} máquina(s)"><span>${esc(c.p.nome)}</span><div class="track"><i class="${c===top&&c.d>0?'hot':''}" style="width:${c.d/maxC*100}%"></i></div><span class="v ${c.d?'':'zero'}">${c.d?(c.d<0.05?'<0,1':nf(c.d))+' d':'livre'}</span></div>`).join('')}
+      </section>
+      <section class="panel">
+        <h2 class="ph">Alertas</h2>
+        <div style="margin-top:8px">${alerts.map(([sev,t,id])=>`<div class="alert"><span class="chip ${sev}"><span class="dot"></span>${sev==='crit'?'Crítico':sev==='warn'?'Atenção':'Info'}</span><div>${t} ${id?`<button data-a="abrirPed" data-id="${id}">Abrir</button>`:''}</div></div>`).join('')||'<p class="muted">Nada pendente.</p>'}</div>
+      </section>
+      <section class="panel">
+        <h2 class="ph">Movimentações</h2>
+        <div style="margin-top:8px">${state.eventos.slice(0,8).map(e=>`<div class="ev"><time>${fDH(e.ts)}</time><span>${esc(e.txt)}</span></div>`).join('')}</div>
+      </section>
+    </div>
+  </div>`}
+
+/* ============ CHÃO DE FÁBRICA ============ */
+function vChao(){
+  const grupos=[...new Set(POSTOS.map(p=>p.grupo))];
+  const po=POSTO[ui.posto],f=fila(ui.posto);
+  const cargas=POSTOS.filter(p=>p.id!==ui.posto).map(p=>({p,d:carga(p.id)})).sort((a,b)=>b.d-a.d);
+  const next=f.ready[0];
+  return `
+  <div class="postos">${grupos.map(g=>`<div class="pgroup"><div class="eyebrow">${g}</div><div class="pchips">${POSTOS.filter(p=>p.grupo===g).map(p=>{const x=fila(p.id);const n=x.ready.length+x.and.length;return `<button class="pchip" data-a="posto" data-p="${p.id}" aria-pressed="${p.id===ui.posto}">${esc(p.nome)}<span class="n ${n?'':'z'}">${n}</span></button>`}).join('')}</div></div>`).join('')}</div>
+  <div class="g-chao">
+    <div class="stack">
+      <div class="opsel"><span class="eyebrow">Quem está no posto</span>${po.ops.map(o=>`<button class="pchip" data-a="oper" data-o="${esc(o)}" aria-pressed="${ui.operador===o}">${esc(o)}</button>`).join('')}</div>
+      ${f.and.map(it=>job(it,'and')).join('')}
+      ${next?job(next,'next'):`<div class="empty"><b>${esc(po.nome)} sem pacote liberado</b>
+        <span>${f.bloq.length?`Próximo a chegar: OP ${f.bloq[0].ped.id}, ${esc(f.bloq[0].s.nome)}, depois de ${esc(f.bloq[0].falta.join(' + '))}.`:'Nenhum pacote a caminho deste posto.'}</span>
+        ${f.and.length?'':`<span>Sugestão: apoiar <b>${esc(cargas[0].p.nome)}</b>, que tem ${nf(cargas[0].d)} d de fila.</span>`}</div>`}
+    </div>
+    <div class="stack">
+      <section class="panel">
+        <h2 class="ph">Fila de ${esc(po.nome)}</h2>
+        <p class="sub">Liberados para este posto, na ordem que o sistema recomenda. ${po.cap} máquina(s) · ${nf(carga(po.id))} d de trabalho.</p>
+        ${f.ready.map((it,i)=>`<div class="frow"><span class="rank">${i+1}</span><div><div class="t">${esc(it.s.nome)} · ${qtdEf(it.l)} pç ${it.adianta?'<span class="tag adianta">Adiantando</span>':''}${it.l.rework?'<span class="tag rework">Retrabalho</span>':''}</div><div class="d">OP ${it.ped.id} · ${esc(it.ped.cliente)} · ${esc(it.p.nome)} ${esc(it.l.cor)} · entrega ${fD(it.ped.entrega)}</div></div><button class="btn sm" data-a="iniciar" data-l="${it.l.id}" data-s="${it.s.id}">Iniciar</button></div>`).join('')||'<p class="muted">Fila vazia.</p>'}
+      </section>
+      <section class="panel">
+        <h2 class="ph">Chegando</h2>
+        <p class="sub">Pacotes cuja etapa anterior está em andamento ou na fila de outro posto.</p>
+        ${f.bloq.map(it=>`<div class="frow"><span class="rank">·</span><div><div class="t">${esc(it.s.nome)} · ${qtdEf(it.l)} pç</div><div class="d">OP ${it.ped.id} · ${esc(it.p.nome)} ${esc(it.l.cor)} · aguardando ${esc(it.falta.join(' + '))}</div></div><span></span></div>`).join('')||'<p class="muted">Nada a caminho.</p>'}
+      </section>
+    </div>
+  </div>`}
+
+/* ============ PEDIDOS ============ */
+function vPedidos(){
+  const list=state.pedidos.filter(p=>ui.pf==='ativos'?!p.concluido:!!p.concluido).map(p=>({p,i:info(p)})).sort((a,b)=>ui.pf==='ativos'?a.i.score-b.i.score:b.p.concluido-a.p.concluido);
+  if(!ui.ped&&list[0])ui.ped=list[0].p.id;
+  return `<div class="g-ped">
+    <aside class="plist">
+      <button class="btn pri" data-a="novo">+ Novo pedido</button>
+      <div class="row"><button class="pchip" data-a="pf" data-f="ativos" aria-pressed="${ui.pf==='ativos'}">Em aberto</button><button class="pchip" data-a="pf" data-f="fim" aria-pressed="${ui.pf==='fim'}">Entregues</button></div>
+      ${list.map(({p,i})=>`<button class="pitem" data-a="selPed" data-id="${p.id}" aria-current="${ui.ped===p.id}"><div class="row"><span class="op">OP ${p.id}</span>${statusChip(i)}</div><div class="cli">${esc(p.cliente)}</div><div class="bar"><i class="${i.prog>=1?'done':''}" style="width:${i.prog*100}%"></i></div><span class="muted" style="font-size:12px">Entrega ${fD(p.entrega)} · ${pct(i.prog)} feito</span></button>`).join('')}
+    </aside>
+    <section>${ui.ped==='novo'?vNovo():ui.ped&&pedById(ui.ped)?vPedido(pedById(ui.ped)):'<p class="muted">Selecione um pedido.</p>'}</section>
+  </div>`}
+function vPedido(ped){
+  const i=info(ped),lib=liberado(ped),ls=lotesDe(ped.id),ds=state.desmanches.filter(d=>d.ped===ped.id);
+  const v=(k,lab)=>`<button class="tog" data-a="via" data-id="${ped.id}" data-v="${k}" aria-pressed="${!!ped.vias[k]}">${lab}</button>`;
+  return `<div class="stack">
+  <section class="panel">
+    <div class="row" style="justify-content:space-between"><div><div class="op">OP ${ped.id}</div><h2 class="ph" style="font-size:26px">${esc(ped.cliente)}</h2></div><div class="row">${statusChip(i)}${i.status==='pronto'?`<button class="btn pri" data-a="entregar" data-id="${ped.id}">Registrar entrega</button>`:''}</div></div>
+    <div class="facts">
+      <div class="fact"><div class="eyebrow">Chegada</div><b>${fD(ped.chegada)}</b></div>
+      <div class="fact"><div class="eyebrow">Entrega</div><b>${fD(ped.entrega)}</b></div>
+      <div class="fact"><div class="eyebrow">Limite interno</div><b>${fD(addWD(ped.entrega,-P().margem))}</b></div>
+      ${ped.concluido?`<div class="fact"><div class="eyebrow">Entregue em</div><b>${fD(ped.concluido)}</b></div>`:`
+      <div class="fact"><div class="eyebrow">Dias úteis restantes</div><b>${i.du}</b></div>
+      <div class="fact"><div class="eyebrow">Trabalho estimado</div><b>${nf(i.need)} d</b></div>
+      <div class="fact"><div class="eyebrow">Folga</div><b class="${i.status}">${i.folga>=0?'+':''}${nf(i.folga)} d</b></div>`}
+      <div class="fact"><div class="eyebrow">Progresso</div><b>${pct(i.prog)}</b></div>
+    </div>
+  </section>
+  <section class="panel">
+    <div class="row" style="justify-content:space-between"><h2 class="ph">Pré-produção</h2><span class="chip ${lib?'ok':'warn'}"><span class="dot"></span>${lib?'Liberado para o corte'+(ped.liberadoTs?' em '+fD(ped.liberadoTs):''):'Corte bloqueado'}</span></div>
+    <p class="sub">O pedido só entra na fila do corte quando as três vias estão separadas, a arte aprovada e todo material conferido.</p>
+    <div class="row" style="margin-bottom:12px"><span class="eyebrow">Vias</span>${v('ficha','Ficha técnica')}${v('tecido','Tecido')}${v('producao','Produção')}<span class="eyebrow" style="margin-left:10px">Arte</span><button class="tog" data-a="arte" data-id="${ped.id}" aria-pressed="${!!ped.arte}">Aprovada pelo cliente</button></div>
+    <div class="tw"><table class="t"><thead><tr><th>Material</th><th class="n">Necessário</th><th class="n">Em estoque</th><th>Situação</th><th></th></tr></thead><tbody>
+    ${ped.materiais.map((m,k)=>`<tr><td>${esc(m.item)}</td><td class="n">${nf(m.nec,0)} ${m.un}</td><td class="n">${nf(m.est,0)} ${m.un}</td><td>${m.st==='ok'?'<span class="chip ok"><span class="dot"></span>Separado</span>':m.st==='recebido'?'<span class="chip ok"><span class="dot"></span>Recebido</span>':m.st==='pedido'?'<span class="chip pronto"><span class="dot"></span>Compra feita</span>':`<span class="chip warn"><span class="dot"></span>Faltam ${nf(m.nec-m.est,0)} ${m.un}</span>`}</td><td>${m.st==='comprar'?`<button class="btn sm" data-a="comprar" data-id="${ped.id}" data-k="${k}">Registrar compra</button>`:m.st==='pedido'?`<button class="btn sm" data-a="receber" data-id="${ped.id}" data-k="${k}">Registrar recebimento</button>`:''}</td></tr>`).join('')}
+    </tbody></table></div>
+  </section>
+  <section class="panel">
+    <h2 class="ph">SKUs do pedido</h2>
+    <p class="sub">O pedido só fecha quando todos os SKUs, inclusive retrabalhos, estiverem prontos. Cada coluna é um estágio do roteiro: etapas na mesma coluna podem correr em paralelo.</p>
+    <div class="legend" style="margin-bottom:10px"><span><i style="background:var(--ok-soft)"></i>Feita</span><span><i style="background:var(--accent)"></i>Em andamento</span><span><i style="background:var(--surface);border-color:var(--ink-2)"></i>Liberada, na fila</span><span><i style="background:var(--surface-2)"></i>Aguardando etapa anterior</span><span><i style="box-shadow:inset 0 0 0 2px var(--chalk)"></i>Personalização</span></div>
+    <div class="stack">${ls.filter(l=>!l.rework).map(l=>loteCard(l,ped)+ls.filter(r=>r.parent===l.id).map(r=>loteCard(r,ped)).join('')).join('')}</div>
+  </section>
+  ${ds.length?`<section class="panel"><h2 class="ph">Desmanches</h2><div class="tw" style="margin-top:10px"><table class="t"><thead><tr><th>Quando</th><th>SKU</th><th class="n">Peças</th><th>Detectado em</th><th>Volta para</th><th>Motivo</th><th>Retrabalho</th></tr></thead><tbody>
+    ${ds.map(d=>{const l=lote(d.l),p=prod(l.prod),m=sMap(p),r=lote(d.r);return `<tr><td class="mono">${fDH(d.ts)}</td><td>${esc(p.nome)} ${esc(l.cor)}</td><td class="n">${d.n}</td><td>${esc(m[d.detect]?.nome||d.detect)}</td><td>${esc(m[d.orig]?.nome||d.orig)}</td><td>${esc(d.motivo)}${d.obs?` · <span class="muted">${esc(d.obs)}</span>`:''}</td><td>${r&&loteDone(r)?'<span class="chip ok"><span class="dot"></span>Concluído</span>':'<span class="chip warn"><span class="dot"></span>Em aberto</span>'}</td></tr>`}).join('')}
+  </tbody></table></div></section>`:''}
+  </div>`}
+function loteCard(l,ped){
+  const p=prod(l.prod),lv=levels(p),maxL=Math.max(...Object.values(lv)),[d,t]=minsTot(l),m=sMap(p);
+  const lanes=[];for(let k=0;k<=maxL;k++)lanes.push(p.steps.filter(s=>lv[s.id]===k));
+  const cls=s=>{const st=stOf(l,s.id).st;return st==='ok'?'ok':st==='and'?'and':ready(l,s,ped)?'ready':''};
+  const rows=topo(p).filter(s=>l.steps[s.id]&&l.steps[s.id].ini).map(s=>{const x=l.steps[s.id];const rdy=s.deps.length?Math.max(...s.deps.map(q=>l.steps[q]?.fim||0)):(ped.liberadoTs||0);const fila=rdy&&x.ini>rdy?x.ini-rdy:0;const proc=x.fim?x.fim-x.ini:now()-x.ini;const real=proc/MIN/qtdEf(l);
+    return `<tr><td>${esc(s.nome)}</td><td>${esc(POSTO[s.posto].nome)}</td><td>${esc(x.op||'')}</td><td class="n">${x.fim?fDH(x.fim):'em curso'}</td><td class="n">${fHrs(fila)}</td><td class="n">${fHrs(proc)}</td><td class="n">${x.fim?nf(real,2)+' / '+nf(s.min,2):'–'}</td></tr>`}).join('');
+  return `<div class="lote ${l.rework?'rw':''}">
+    <div class="row" style="justify-content:space-between"><h3>${l.rework?'<span class="tag rework" style="margin:0 6px 0 0">Retrabalho</span>':''}${esc(p.nome)} · ${esc(l.cor)} · ${qtdEf(l)} peças${l.desm?` <span class="muted">(${l.qtd} − ${l.desm} desmanchadas)</span>`:''}</h3><span class="muted" style="font-size:12.5px">${loteDone(l)?'Pronto':`${pct(d/t)} · faltam ~${nf(remDays(l))} d`}</span></div>
+    ${gradeHtml(l)}
+    <div class="dagw"><div class="dag">${lanes.map(ss=>`<div class="lane">${ss.map(s=>`<div class="st ${cls(s)}" data-f="${s.pers?'pers':''}" title="${esc(FASE[fase(p,s)])}${s.fecha?' · fecha a peça':''}">${esc(s.nome)}<small>${esc(POSTO[s.posto].nome)}${stOf(l,s.id).herdado?' · herdada':''}</small></div>`).join('')}</div>`).join('')}</div></div>
+    ${rows?`<details><summary>Tempos por etapa</summary><div class="tw"><table class="t"><thead><tr><th>Etapa</th><th>Posto</th><th>Quem</th><th class="n">Fim</th><th class="n">Parado na fila</th><th class="n">Em processo</th><th class="n">Real / padrão (min/pç)</th></tr></thead><tbody>${rows}</tbody></table></div></details>`:''}
+  </div>`}
+function vNovo(){
+  const n=ui.novo;const dflt=new Date(addWD(now(),22));const iso=`${dflt.getFullYear()}-${pad(dflt.getMonth()+1)}-${pad(dflt.getDate())}`;
+  return `<form class="panel stack" id="fNovo" novalidate>
+    <div><h2 class="ph">Novo pedido</h2><p class="sub">Ao criar, o sistema calcula o material necessário, compara com o estoque e já aponta o que precisa ser comprado.</p></div>
+    <div class="fgrid"><label class="f">Cliente<input id="nCli" value="${esc(n.cliente||'')}" placeholder="Ex.: Hospital Santa Clara"></label><label class="f">Data de entrega<input id="nEnt" type="date" value="${esc(n.entrega||iso)}"></label></div>
+    ${n.linhas.map((x,k)=>`<div class="linha" data-k="${k}">
+      <div class="fgrid"><label class="f">Produto<select id="nP${k}">${state.produtos.map(p=>`<option value="${p.id}" ${p.id===x.prod?'selected':''}>${esc(p.nome)}</option>`).join('')}</select></label>
+      <label class="f">Cor<input id="nC${k}" list="cores" value="${esc(x.cor)}" placeholder="Marinho"></label></div>
+      <div><div class="eyebrow" style="margin-bottom:4px">Grade de tamanhos</div><div class="sizes">${SIZES.map(s=>`<label class="f">${s}<input id="nG${k}${s}" type="number" min="0" inputmode="numeric" value="${x.g[s]||''}"></label>`).join('')}</div></div>
+      ${n.linhas.length>1?`<div><button type="button" class="btn sm ghost" data-a="rmLinha" data-i="${k}">Remover SKU</button></div>`:''}
+    </div>`).join('')}
+    <datalist id="cores">${CORES.map(c=>`<option value="${c}">`).join('')}</datalist>
+    ${n.err?`<p class="err">${esc(n.err)}</p>`:''}
+    <div class="row"><button type="button" class="btn" data-a="addLinha">+ Adicionar SKU</button><button type="submit" class="btn pri">Criar pedido</button></div>
+  </form>`}
+function readNovo(){const n=ui.novo;n.cliente=document.getElementById('nCli')?.value||'';n.entrega=document.getElementById('nEnt')?.value||'';
+  n.linhas.forEach((x,k)=>{x.prod=document.getElementById('nP'+k)?.value||x.prod;x.cor=document.getElementById('nC'+k)?.value||'';SIZES.forEach(s=>{x.g[s]=Math.max(0,parseInt(document.getElementById(`nG${k}${s}`)?.value)||0)})})}
+
+/* ============ ROTEIROS ============ */
+function vRoteiros(){
+  const p=prod(ui.prod)||state.produtos[0],lv=levels(p),maxL=Math.max(0,...Object.values(lv)),m=sMap(p);
+  const lanes=[];for(let k=0;k<=maxL;k++)lanes.push(p.steps.filter(s=>lv[s.id]===k));
+  const hasDep=id=>p.steps.some(s=>s.deps.includes(id));
+  return `<div class="row" style="margin-bottom:14px">${state.produtos.map(x=>`<button class="pchip" data-a="prod" data-p="${x.id}" aria-pressed="${x.id===p.id}">${esc(x.nome)} <span class="n">${x.steps.length}</span></button>`).join('')}</div>
+  <div class="g-rot">
+    <section class="panel">
+      <h2 class="ph">${esc(p.nome)} <span class="op">${esc(p.ref)}</span></h2>
+      <p class="sub">${esc(p.tecido)} · ${nf(p.consumo,2)} m/peça · tempo padrão total ${nf(sum(p.steps.map(s=>s.min)),1)} min/peça. A fase de cada etapa é deduzida das dependências: tudo que não depende da personalização pode ser adiantado quando a máquina estiver livre.</p>
+      <div class="legend" style="margin-bottom:12px"><span><i style="border-left:3px solid var(--ok)"></i>Pode adiantar</span><span><i style="background:var(--chalk-soft);border-color:var(--chalk)"></i>Personalização</span><span><i></i>Após personalização</span></div>
+      <div class="dagw"><div class="dag">${lanes.map((ss,k)=>`<div class="rlane"><div class="eyebrow">Estágio ${k+1}</div>${ss.map(s=>{const f=fase(p,s);return `<div class="rstep" data-f="${f}"><h4><span>${esc(s.nome)}</span>${hasDep(s.id)?'':`<button class="x" data-a="delStep" data-s="${s.id}" aria-label="Remover etapa ${esc(s.nome)}" title="Remover etapa">×</button>`}</h4><div class="meta">${esc(POSTO[s.posto].nome)} · ${nf(s.min,2)} min/pç</div><div class="fase ${f}">${FASE[f]}${s.fecha?' · fecha a peça':''}</div>${s.deps.length?`<div class="deps">Depois de: ${s.deps.map(d=>esc(m[d]?.nome||d)).join(', ')}</div>`:''}${s.obs?`<div class="deps muted">${esc(s.obs)}</div>`:''}</div>`}).join('')}</div>`).join('')}</div></div>
+    </section>
+    <div class="stack">
+      <form class="panel stack" id="fStep" novalidate>
+        <div><h2 class="ph">Adicionar etapa</h2><p class="sub">Cadastro manual do processo e de suas dependências, como decidido na reunião.</p></div>
+        <label class="f">Nome da etapa<input id="sNome" placeholder="Ex.: Pregar vivo na gola"></label>
+        <div class="fgrid"><label class="f">Posto / máquina<select id="sPosto">${POSTOS.map(x=>`<option value="${x.id}">${esc(x.nome)}</option>`).join('')}</select></label><label class="f">Min/peça<input id="sMin" type="number" step="0.1" min="0.1" value="0.5"></label></div>
+        <div><div class="eyebrow" style="margin-bottom:4px">Só pode começar depois de</div><div class="cbs">${p.steps.map(s=>`<label><input type="checkbox" name="sDep" value="${s.id}">${esc(s.nome)}</label>`).join('')}</div></div>
+        <div class="cbs"><label><input type="checkbox" id="sPers">É personalização</label><label><input type="checkbox" id="sFecha">Fecha a peça</label></div>
+        <label class="f">Instrução para o operador<input id="sObs" placeholder="Ex.: etiqueta do lado esquerdo"></label>
+        <p class="err" id="sErr"></p>
+        <button class="btn pri" type="submit">Adicionar ao roteiro</button>
+      </form>
+      <form class="panel stack" id="fProd" novalidate>
+        <div><h2 class="ph">Novo produto</h2><p class="sub">Copie o roteiro de um produto parecido e ajuste.</p></div>
+        <div class="fgrid"><label class="f">Nome<input id="pNome" placeholder="Ex.: Camiseta Gola Careca"></label><label class="f">Referência<input id="pRef" placeholder="CM-GC"></label></div>
+        <div class="fgrid"><label class="f">Tecido<input id="pTec" placeholder="Malha PV"></label><label class="f">Consumo (m/pç)<input id="pCons" type="number" step="0.01" value="0.35"></label></div>
+        <label class="f">Copiar roteiro de<select id="pCopy"><option value="">Começar só com o corte</option>${state.produtos.map(x=>`<option value="${x.id}">${esc(x.nome)}</option>`).join('')}</select></label>
+        <p class="err" id="pErr"></p>
+        <button class="btn" type="submit">Criar produto</button>
+      </form>
+      <section class="panel stack">
+        <div><h2 class="ph">Parâmetros de cálculo</h2><p class="sub">Premissas do esboço. Ajuste para ver a prioridade mudar.</p></div>
+        <div class="fgrid">
+          <label class="f">Margem para imprevistos (d.ú.)<input type="number" min="0" step="1" data-param="margem" value="${P().margem}"></label>
+          <label class="f">Jornada (min/dia)<input type="number" min="60" step="10" data-param="jornada" value="${P().jornada}"></label>
+          <label class="f">Eficiência (0–1)<input type="number" min="0.3" max="1" step="0.05" data-param="efic" value="${P().efic}"></label>
+          <label class="f">Fila por etapa (dias)<input type="number" min="0" step="0.05" data-param="fila" value="${P().fila}"></label>
+          <label class="f">Prazo de compra (d.ú.)<input type="number" min="0" step="1" data-param="leadCompra" value="${P().leadCompra}"></label>
+        </div>
+      </section>
+    </div>
+  </div>`}
+
+/* ============ MÉTRICAS ============ */
+function passagens(){const out=[];state.lotes.forEach(l=>{const p=prod(l.prod),ped=pedById(l.ped);p.steps.forEach(s=>{const x=l.steps[s.id];if(!x||x.st!=='ok'||!x.ini||!x.fim)return;
+  const rdy=s.deps.length?Math.max(...s.deps.map(d=>l.steps[d]?.fim||0)):(ped.liberadoTs||0);
+  out.push({l,p,s,ped,proc:x.fim-x.ini,fila:rdy&&x.ini>rdy?x.ini-rdy:0,real:(x.fim-x.ini)/MIN/l.qtd})})});return out}
+function vMetricas(){
+  const ps=passagens();const tf=sum(ps.map(x=>x.fila)),tp=sum(ps.map(x=>x.proc));
+  const porPosto=POSTOS.map(p=>{const a=ps.filter(x=>x.s.posto===p.id);return {p,n:a.length,f:a.length?sum(a.map(x=>x.fila))/a.length:0,q:a.length?sum(a.map(x=>x.proc))/a.length:0}}).filter(x=>x.n);
+  const mx=Math.max(...porPosto.map(x=>x.f+x.q),1);
+  const prods=ui.mprod==='todos'?state.produtos:state.produtos.filter(p=>p.id===ui.mprod);
+  const etapas=[];prods.forEach(p=>p.steps.forEach(s=>{const a=ps.filter(x=>x.p.id===p.id&&x.s.id===s.id);if(a.length){const r=sum(a.map(x=>x.real))/a.length;etapas.push({p,s,r,e:s.min/r,n:a.length})}}));
+  const effAll=etapas.length?sum(etapas.map(e=>e.e))/etapas.length:0;
+  const conc=state.pedidos.filter(p=>p.concluido);
+  const ltm=conc.length?sum(conc.map(p=>{let n=0;const d=sod(p.chegada),e=sod(p.concluido);while(d<e){d.setDate(d.getDate()+1);if(isWD(d))n++}return n}))/conc.length:0;
+  const prodz=sum(state.lotes.filter(l=>!l.rework&&Object.values(l.steps).some(x=>x.st==='ok')).map(l=>l.qtd)),desm=sum(state.desmanches.map(d=>d.n));
+  const mot={};state.desmanches.forEach(d=>mot[d.motivo]=(mot[d.motivo]||0)+d.n);const motA=Object.entries(mot).sort((a,b)=>b[1]-a[1]);const mm=Math.max(1,...motA.map(x=>x[1]));
+  const effChip=e=>`<span class="chip eff ${e>=.9?'ok':e>=.75?'warn':'crit'}">${pct(e)}</span>`;
+  return `<section class="kpis">
+    <div class="kpi"><div class="eyebrow">Tempo parado</div><b>${tf+tp?pct(tf/(tf+tp)):'–'}</b><span>do tempo total dos pacotes é espera entre etapas</span></div>
+    <div class="kpi"><div class="eyebrow">Eficiência média</div><b>${etapas.length?pct(effAll):'–'}</b><span>tempo padrão ÷ tempo real</span></div>
+    <div class="kpi"><div class="eyebrow">Lead time</div><b>${conc.length?nf(ltm)+' d':'–'}</b><span>d.ú. da chegada à entrega (${conc.length} pedido${conc.length>1?'s':''})</span></div>
+    <div class="kpi"><div class="eyebrow">Retrabalho</div><b>${prodz?nf(desm/prodz*100):0}%</b><span>${desm} de ${prodz.toLocaleString('pt-BR')} peças</span></div>
+  </section>
+  <div class="g-met">
+    <section class="panel">
+      <h2 class="ph">Fila × processamento por posto</h2>
+      <p class="sub">Média por passagem de pacote. Cada início e fim registrado no chão de fábrica alimenta esta visão.</p>
+      <div class="legend" style="margin-bottom:8px"><span><i style="background:var(--accent);border:0"></i>Em processo</span><span><i style="background:var(--fila);border:0"></i>Parado na fila</span></div>
+      ${porPosto.map(x=>`<div class="srow" title="${esc(x.p.nome)}: ${fHrs(x.q)} em processo, ${fHrs(x.f)} na fila (${x.n} passagens)"><span>${esc(x.p.nome)}</span><div class="sbar"><i class="p" style="width:${x.q/mx*100}%"></i><i class="q" style="width:${x.f/mx*100}%"></i></div><span class="v">${fHrs(x.q)} + ${fHrs(x.f)}</span></div>`).join('')}
+    </section>
+    <section class="panel">
+      <h2 class="ph">Retrabalho por motivo</h2>
+      <p class="sub">Peças desmanchadas. Cada desmanche registra onde foi detectado e para qual etapa a peça volta.</p>
+      ${motA.map(([k,v])=>`<div class="lrow" style="grid-template-columns:170px minmax(0,1fr) 44px"><span>${esc(k)}</span><div class="track"><i style="width:${v/mm*100}%"></i></div><span class="v">${v} pç</span></div>`).join('')||'<p class="muted">Nenhum desmanche registrado.</p>'}
+    </section>
+    <section class="panel" style="grid-column:1/-1">
+      <div class="row" style="justify-content:space-between"><h2 class="ph">Tempo padrão × real por etapa</h2><label class="f" style="min-width:200px">Produto<select data-ui="mprod"><option value="todos">Todos</option>${state.produtos.map(p=>`<option value="${p.id}" ${ui.mprod===p.id?'selected':''}>${esc(p.nome)}</option>`).join('')}</select></label></div>
+      <p class="sub">Eficiência abaixo de 75% indica tempo padrão irreal, máquina com problema ou necessidade de treino. É a base para calibrar o cadastro.</p>
+      <div class="tw"><table class="t"><thead><tr><th>Produto</th><th>Etapa</th><th>Posto</th><th class="n">Padrão min/pç</th><th class="n">Real min/pç</th><th class="n">Eficiência</th><th class="n">Passagens</th></tr></thead><tbody>
+      ${etapas.sort((a,b)=>a.e-b.e).map(e=>`<tr><td>${esc(e.p.nome)}</td><td>${esc(e.s.nome)}</td><td>${esc(POSTO[e.s.posto].nome)}</td><td class="n">${nf(e.s.min,2)}</td><td class="n">${nf(e.r,2)}</td><td class="n">${effChip(e.e)}</td><td class="n">${e.n}</td></tr>`).join('')}
+      </tbody></table></div>
+    </section>
+  </div>
+  <p class="note" style="margin-top:16px">Premissas do esboço: jornada de ${P().jornada} min, eficiência de ${pct(P().efic)}, ${nf(P().fila,2)} d de fila por etapa, margem de ${P().margem} d.ú. Os números acima vêm dos dados de exemplo; com uso real, cada clique em Iniciar/Finalizar vira histórico.</p>`}
+
+/* ============ render e ações ============ */
+function render(){
+  document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-current',b.dataset.t===ui.tab?'page':'false'));
+  const V={painel:vPainel,chao:vChao,pedidos:vPedidos,roteiros:vRoteiros,metricas:vMetricas}[ui.tab];
+  document.getElementById('app').innerHTML=V();
+  const rb=document.getElementById('resetBtn');rb.textContent=ui.confirmReset?'Confirmar: apagar alterações':'Restaurar exemplo';rb.classList.toggle('danger',ui.confirmReset);
+  renderModal()}
+function renderModal(){const el=document.getElementById('modal');const md=ui.modal;if(!md){el.innerHTML='';return}
+  const l=lote(md.l),p=prod(l.prod),s=sMap(p)[md.s],ped=pedById(l.ped);
+  const origs=topo(p).filter(x=>x.id===s.id||anc(p,s.id).has(x.id)).filter(x=>x.posto!=='corte');
+  el.innerHTML=`<div class="ov"><form class="modal" id="fDesm" novalidate>
+    <div><div class="eyebrow">OP ${ped.id} · ${esc(p.nome)} ${esc(l.cor)} · detectado em ${esc(s.nome)}</div><h2 class="ph" style="font-size:24px">Registrar desmanche</h2><p class="sub">As peças saem deste pacote e viram um pacote de retrabalho que volta para a etapa de origem, com a mesma prioridade do pedido.</p></div>
+    <div class="fgrid"><label class="f">Peças<input id="dN" type="number" min="1" max="${qtdEf(l)}" value="1"></label>
+    <label class="f">Voltar para a etapa<select id="dO">${origs.map(x=>`<option value="${x.id}" ${x.id===s.id?'selected':''}>${esc(x.nome)}</option>`).join('')}</select></label></div>
+    <label class="f">Motivo<select id="dM">${MOTIVOS.map(x=>`<option>${esc(x)}</option>`).join('')}</select></label>
+    <label class="f">Observação<input id="dObs" placeholder="Opcional"></label>
+    <p class="err" id="dErr"></p>
+    <div class="row" style="justify-content:flex-end"><button type="button" class="btn" data-a="fecharModal">Cancelar</button><button type="submit" class="btn pri">Registrar desmanche</button></div>
+  </form></div>`}
+function commit(){save();render()}
+function checkLib(p){if(liberado(p)){if(!p.liberadoTs){p.liberadoTs=now();log(`OP ${p.id} liberada para o corte`)}}else if(!lotesDe(p.id).some(l=>Object.values(l.steps).some(x=>x.st!=='pend')))p.liberadoTs=null}
+const A={
+  tab:d=>{ui.tab=d.t;ui.confirmReset=false;render();window.scrollTo(0,0)},
+  posto:d=>{ui.posto=d.p;ui.operador='';render()},
+  oper:d=>{ui.operador=ui.operador===d.o?'':d.o;render()},
+  iniciar:d=>{const l=lote(d.l),p=prod(l.prod),s=sMap(p)[d.s],ops=POSTO[s.posto].ops;const op=ops.includes(ui.operador)?ui.operador:ops[0];
+    l.steps[s.id]={st:'and',ini:now(),op};log(`${op} iniciou ${s.nome} · OP ${l.ped} · ${p.nome} ${l.cor} (${qtdEf(l)} pç)`);commit()},
+  finalizar:d=>{const l=lote(d.l),p=prod(l.prod),s=sMap(p)[d.s],x=l.steps[s.id];x.st='ok';x.fim=now();
+    log(`${x.op} finalizou ${s.nome} · OP ${l.ped} em ${fDur(x.fim-x.ini)} (padrão ${fDur(s.min*qtdEf(l)*MIN)})`);
+    if(loteDone(l))log(`${l.rework?'Retrabalho':'SKU'} pronto: ${p.nome} ${l.cor} · OP ${l.ped}`);
+    if(lotesDe(l.ped).every(loteDone))log(`OP ${l.ped} com todos os SKUs prontos: liberar entrega`);commit()},
+  desm:d=>{ui.modal={l:d.l,s:d.s};renderModal()},
+  fecharModal:()=>{ui.modal=null;renderModal()},
+  abrirPed:d=>{ui.tab='pedidos';ui.pf='ativos';ui.ped=d.id;render();window.scrollTo(0,0)},
+  selPed:d=>{ui.ped=d.id;render()},
+  pf:d=>{ui.pf=d.f;ui.ped=null;render()},
+  novo:()=>{ui.ped='novo';ui.novo={cliente:'',entrega:'',linhas:[{prod:state.produtos[0].id,cor:'',g:{}}],err:''};render()},
+  addLinha:()=>{readNovo();ui.novo.linhas.push({prod:state.produtos[0].id,cor:'',g:{}});render()},
+  rmLinha:d=>{readNovo();ui.novo.linhas.splice(+d.i,1);render()},
+  via:d=>{const p=pedById(d.id);p.vias[d.v]=!p.vias[d.v];checkLib(p);commit()},
+  arte:d=>{const p=pedById(d.id);p.arte=!p.arte;if(p.arte)log(`OP ${p.id}: arte aprovada pelo cliente`);checkLib(p);commit()},
+  comprar:d=>{const p=pedById(d.id),m=p.materiais[+d.k];m.st='pedido';m.ts=now();log(`OP ${p.id}: compra registrada de ${m.item}`);commit()},
+  receber:d=>{const p=pedById(d.id),m=p.materiais[+d.k];m.st='recebido';log(`OP ${p.id}: ${m.item} recebido`);checkLib(p);commit()},
+  entregar:d=>{const p=pedById(d.id);p.concluido=now();log(`Pedido OP ${p.id} entregue: ${p.cliente}`);ui.pf='fim';commit()},
+  prod:d=>{ui.prod=d.p;render()},
+  delStep:d=>{const p=prod(ui.prod);if(p.steps.some(s=>s.deps.includes(d.s)))return;p.steps=p.steps.filter(s=>s.id!==d.s);commit()},
+  reset:()=>{if(!ui.confirmReset){ui.confirmReset=true;render();return}seed();ui.confirmReset=false;ui.ped=null;ui.modal=null;commit()},
+};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const fn=A[b.dataset.a];if(fn){e.preventDefault();fn(b.dataset)}else return;
+  if(b.dataset.a!=='reset'&&ui.confirmReset){ui.confirmReset=false;render()}});
+document.addEventListener('change',e=>{const t=e.target;
+  if(t.dataset.param){const v=parseFloat(t.value);if(!isNaN(v)){state.params[t.dataset.param]=v;commit()}}
+  if(t.dataset.ui){ui[t.dataset.ui]=t.value;render()}});
+document.addEventListener('submit',e=>{e.preventDefault();const f=e.target;const g=id=>document.getElementById(id);
+  if(f.id==='fNovo'){readNovo();const n=ui.novo;const lines=n.linhas.map(x=>({prod:x.prod,cor:x.cor.trim(),g:{...x.g},qtd:sum(SIZES.map(s=>x.g[s]||0))}));
+    if(!n.cliente.trim()){n.err='Informe o cliente.';return render()}
+    if(!n.entrega){n.err='Informe a data de entrega.';return render()}
+    if(lines.some(x=>!x.cor)){n.err='Informe a cor de cada SKU.';return render()}
+    if(lines.some(x=>!x.qtd)){n.err='Cada SKU precisa de pelo menos uma peça na grade.';return render()}
+    const [y,mo,da]=n.entrega.split('-').map(Number);const ent=new Date(y,mo-1,da,17).getTime();
+    const id=String(state.seq.op++).padStart(4,'0');
+    const ped={id,cliente:n.cliente.trim(),chegada:now(),entrega:ent,vias:{ficha:false,tecido:false,producao:false},arte:false,materiais:calcMat(lines),liberadoTs:null,concluido:null};
+    state.pedidos.push(ped);lines.forEach((x,i)=>state.lotes.push({id:`${id}-${i+1}`,ped:id,prod:x.prod,cor:x.cor,qtd:x.qtd,grade:x.g,desm:0,steps:{},rework:false,parent:null}));
+    log(`Pedido OP ${id} recebido: ${ped.cliente}, ${sum(lines.map(x=>x.qtd))} peças`);ui.ped=id;ui.pf='ativos';ui.novo=null;commit();window.scrollTo(0,0)}
+  if(f.id==='fDesm'){const md=ui.modal,l=lote(md.l),n=parseInt(g('dN').value)||0;
+    if(n<1||n>qtdEf(l)){g('dErr').textContent=`Informe entre 1 e ${qtdEf(l)} peças.`;return}
+    const r=makeRework(l,md.s,g('dO').value,n,g('dM').value,now(),stOf(l,md.s).op||'',g('dObs').value.trim());
+    log(`Desmanche: ${n} peças da OP ${l.ped} voltam para ${sMap(prod(l.prod))[g('dO').value].nome} (${g('dM').value})`);ui.modal=null;commit()}
+  if(f.id==='fStep'){const p=prod(ui.prod),nome=g('sNome').value.trim();if(!nome){g('sErr').textContent='Dê um nome à etapa.';return}
+    const deps=[...f.querySelectorAll('input[name=sDep]:checked')].map(x=>x.value);let id=nome.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g,'');let k=2;const base=id||'etapa';id=base;while(p.steps.some(s=>s.id===id))id=base+k++;
+    p.steps.push(S(id,nome,g('sPosto').value,deps.length?deps:(p.steps.length?[p.steps[0].id]:[]),Math.max(0.1,parseFloat(g('sMin').value)||0.5),{pers:g('sPers').checked,fecha:g('sFecha').checked,obs:g('sObs').value.trim()}));commit()}
+  if(f.id==='fProd'){const nome=g('pNome').value.trim();if(!nome){g('pErr').textContent='Dê um nome ao produto.';return}
+    const src=prod(g('pCopy').value);const id='p'+Date.now().toString(36);
+    state.produtos.push({id,nome,ref:g('pRef').value.trim()||'—',tecido:g('pTec').value.trim()||'Tecido',consumo:parseFloat(g('pCons').value)||0.35,aviam:src?JSON.parse(JSON.stringify(src.aviam)):[['Etiqueta composição','un',1]],steps:src?JSON.parse(JSON.stringify(src.steps)):[S('corte','Corte','corte',[],0.8)]});
+    ui.prod=id;commit()}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ui.modal){ui.modal=null;renderModal()}});
+function tick(){const c=document.getElementById('clock');if(c)c.textContent=fDH(now());document.querySelectorAll('[data-ini]').forEach(el=>el.textContent=fDur(now()-(+el.dataset.ini)))}
+load();render();tick();setInterval(tick,30000);
+</script>
