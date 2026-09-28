@@ -549,6 +549,8 @@ svg.prod.mock{background:#fff;border-radius:12px}
 .emp-al{display:flex;gap:12px;font-size:15px;font-weight:700;margin-top:2px}.emp-al span{display:inline-flex;align-items:center;gap:5px}.emp-al .dot{width:10px;height:10px}
 .h1-link{border:0;background:none;padding:0;font:inherit;color:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-align:left}.h1-link svg.ic{width:26px;height:26px;color:var(--muted)}
 .rk-p svg.prod{width:44px;height:44px}
+
+.imp-box{display:grid;gap:4px;background:var(--blue-soft);border:2px solid #BFD2F2;border-radius:16px;padding:14px 16px;margin:4px 0 18px}.imp-box span{color:var(--ink2);font-size:16px}.imp-box .mbtn{display:inline-flex;align-items:center;gap:8px}.imp-box svg.ic{width:24px;height:24px}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1539,12 +1541,12 @@ function sugClientes(q,sel){const n=nCli(q);if(sel&&cliById(sel))return `<span c
 function sNovo(){const w=ui.sheet.w,passos=`<div class="passos">${[1,2,3,4].map(n=>`<i class="${n<=w.step?'on':''}"></i>`).join('')}</div>`;
   const head=`${voltar(w.step>1?'Voltar':'Cancelar')}${passos}<div class="passo-n">Passo ${w.step} de 4</div>`;
   const nav=(lab='Próximo')=>`${w.err?`<div class="aviso">${ic('i-alerta')}${esc(w.err)}</div>`:''}<div class="acoes"><button class="big go" data-a="wNext">${lab}${ic('i-seta')}</button></div>`;
-  if(w.step===1)return `${head}<h1>Para quem é o pedido?</h1><div class="rotulo" style="margin-top:0">Nome da empresa</div><input class="campo" id="wCli" value="${esc(w.cliente)}" placeholder="Ex.: Hospital Santa Clara" autocomplete="off"><div id="wCliSug" class="linha-dep" style="margin-top:8px">${sugClientes(w.cliente,w.cli)}</div>
+  if(w.step===1)return `${head}<div class="imp-box"><b>Tem a ficha de produção em PDF?</b><span>O sistema lê a ficha e preenche o pedido para você conferir.</span><div class="imp-bar" style="margin:6px 0 0"><button class="mbtn" data-a="impFichas">${ic('i-lista')}Importar fichas</button><button class="mbtn neutro2" data-a="impMocks">${ic('i-camisa')}Importar mockups</button></div></div><h1>Para quem é o pedido?</h1><div class="rotulo" style="margin-top:0">Nome da empresa</div><input class="campo" id="wCli" value="${esc(w.cliente)}" placeholder="Ex.: Hospital Santa Clara" autocomplete="off"><div id="wCliSug" class="linha-dep" style="margin-top:8px">${sugClientes(w.cliente,w.cli)}</div>
     <div class="rotulo">Nome do cliente (contato)</div><input class="campo" id="wCont" value="${esc(w.contato||'')}" placeholder="Ex.: Ana Souza" autocomplete="off">
     <div class="rotulo">CNPJ</div><input class="campo" id="wCnpj" value="${esc(w.cnpj||'')}" placeholder="00.000.000/0000-00" inputmode="numeric" autocomplete="off">
     <div class="rotulo">Quem vendeu?</div><div class="linha-dep">${state.pessoas.filter(p=>temPapel(p,'vendas')).map(p=>`<button class="pchip" data-a="wVend" data-v="${p.id}" aria-pressed="${w.vend===p.id}">${av(p.id,'s')}${esc(p.nome)}</button>`).join('')}</div>${nav()}`;
   if(w.step===2)return `${head}<h1>Quais peças?</h1><p style="color:var(--ink2);margin-top:-6px">Toque na peça para adicionar.</p><div class="escolhe">${state.produtos.map(p=>`<button class="opc" data-a="wAdd" data-p="${p.id}">${prodSvg(p.id,'')}${esc(p.nome)}</button>`).join('')}</div>
-    ${w.itens.map((it,k)=>`<div class="item"><div class="item-h">${prodSvg(it.prod,it.cor,it.cores2)}<b>${esc(prod(it.prod).nome)}</b><button class="x" data-a="wRm" data-k="${k}">Tirar</button></div>
+    ${w.itens.map((it,k)=>`<div class="item"><div class="item-h">${it.mock?loteSvg({mock:it.mock}):prodSvg(it.prod,it.cor,it.cores2)}<b>${esc(prod(it.prod).nome)}</b><button class="x azul" data-a="wMock" data-k="${k}" style="font-size:15px">${ic('i-camisa')}${it.mock?'Trocar mockup':'Pôr mockup'}</button><button class="x" data-a="wRm" data-k="${k}">Tirar</button></div>
       <div><div class="passo-n">Tecido</div><div class="linha-dep">${prod(it.prod).tecidos.map(t=>`<button class="depc" data-a="wTec" data-k="${k}" data-v="${esc(t)}" aria-pressed="${it.tecido===t}">${ic('i-rolo')}${esc(t)}</button>`).join('')}<button class="depc" data-a="wNovoTec" data-k="${k}">${ic('i-mais')}Novo tecido</button></div>
         ${it.novoTec?`<div class="novo-in"><input class="campo" id="nt${k}" placeholder="Nome do tecido (ex.: Malha PV)" autocomplete="off"><button class="mbtn go" data-a="wSalvaTec" data-k="${k}">Salvar</button></div><p class="dica">Fica cadastrado no ${esc(prod(it.prod).nome)} para os próximos pedidos.</p>`:''}</div>
       ${(prod(it.prod).opcoes||[]).length?`<div><div class="passo-n">Modelo</div><div class="linha-dep">${prod(it.prod).opcoes.map(o=>`<button class="depc" data-a="wOpc" data-k="${k}" data-v="${o.id}" aria-pressed="${it.opcoes.includes(o.id)}">${esc(o.nome)}</button>`).join('')}</div></div>`:''}
@@ -1903,8 +1905,9 @@ const A={
      registrar({tipo:'inicio',modo,maq:d.m,maqTipo:unidade(d.m)?.tipo,op:d.p,sug:pl?.pessoa||'',ped:l.ped,cli:pedById(l.ped).cliente,prod:prod(l.prod).nome,step:s.nome})}l.steps[d.s]={st:'and',ini:now(),op:d.p,maq:d.m,manual:fora||undefined};let heTxt='';if(situacao().k!=='trab'){const ot=Object.values(plano().uso).map(q=>heAtiva(q.x)).filter(Boolean)[0];const ate=situacao().k==='pausa'?null:(ot?ot.f:heOpcoes()[1]||heOpcoes()[0]);if(ate){l.steps[d.s].he=[{i:now(),f:ate}];heTxt=` · hora extra até ${tsHm(ate)}`}}const R_=state.reservas||{};Object.keys(R_).forEach(k=>{if(k===d.m||(R_[k].l===d.l&&R_[k].s===d.s))delete R_[k]});ui.sheet=null;commit();toast(`${pNome(d.p)} começou ${s.nome} na ${unidade(d.m)?.nome||''}${fora?' (fora da ordem)':''}${heTxt}`)},
   impFichas:()=>{const i=document.getElementById('fImpF');i.value='';i.click()},
   impMocks:()=>{const i=document.getElementById('fImpM');i.value='';i.click()},
-  impMock:d=>{ui.mockK=+d.k;ui.mockL=null;const i=document.getElementById('fImpM1');i.value='';i.click()},
-  mockUm:d=>{ui.mockK=null;ui.mockL=d.l;const i=document.getElementById('fImpM1');i.value='';i.click()},
+  wMock:d=>{wRead();ui.mockK=null;ui.mockL=null;ui.mockW=+d.k;const i=document.getElementById('fImpM1');i.value='';i.click()},
+  impMock:d=>{ui.mockW=null;ui.mockK=+d.k;ui.mockL=null;const i=document.getElementById('fImpM1');i.value='';i.click()},
+  mockUm:d=>{ui.mockW=null;ui.mockK=null;ui.mockL=d.l;const i=document.getElementById('fImpM1');i.value='';i.click()},
   impG:d=>{ui.sheet.gi=+d.v;render()},
   impCli:d=>{const g=ui.sheet.grupos[ui.sheet.gi];g.cliId=d.v;g.cliNovo=false;render()},
   impCliNovo:d=>{const g=ui.sheet.grupos[ui.sheet.gi];g.cliNovo=true;g.cliId=null;render()},
@@ -2089,7 +2092,7 @@ const A={
   wCriar:()=>{const w=ui.sheet.w;snap();const id=String(state.seq++).padStart(4,'0');const lines=w.itens.map(it=>({prod:it.prod,cor:it.cor,cores2:JSON.parse(JSON.stringify(it.cores2||[])),tecido:it.tecido,opcoes:[...it.opcoes],pers:it.pers.map((x,j)=>({tipo:x.tipo,parte:x.parte,lado:x.lado,id:'pz'+j})),g:{...it.g},qtd:sum(sizesAll().map(s=>it.g[s]||0))}));
     const cl=garanteCliente(w.cliente,(w.cnpj||'').trim(),(w.contato||'').trim(),w.cli);
     state.pedidos.push({id,cli:cl.id,cliente:cl.nome,contato:(w.contato||'').trim(),cnpj:(w.cnpj||'').trim()||cl.cnpj||'',vendedor:w.vend,chegada:now(),entrega:w.entrega,vias:false,artePrep:false,arte:false,artes:{},materiais:calcMat(lines),concluido:null});
-    lines.forEach((x,i)=>state.lotes.push({id:`${id}-${i+1}`,ped:id,prod:x.prod,cor:x.cor,cores2:x.cores2,tecido:x.tecido,opcoes:x.opcoes,pers:x.pers,qtd:x.qtd,grade:x.g,desm:0,steps:{},rework:false,parent:null}));
+    lines.forEach((x,i)=>state.lotes.push({id:`${id}-${i+1}`,ped:id,mock:w.itens[i].mock||undefined,prod:x.prod,cor:x.cor,cores2:x.cores2,tecido:x.tecido,opcoes:x.opcoes,pers:x.pers,qtd:x.qtd,grade:x.g,desm:0,steps:{},rework:false,parent:null}));
     ui.tela='pedidos';ui.sheet={t:'pedido',id};commit();toast('Pedido criado')},
 };
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b||b.disabled)return;const f=A[b.dataset.a];if(f){e.preventDefault();f(b.dataset)}});
@@ -2097,6 +2100,7 @@ document.addEventListener('change',e=>{const t=e.target,d=t.dataset;if(!state)re
   if(t.id==='fImpF'&&t.files.length){importarFichas([...t.files]);return}
   if((t.id==='fImpM'||t.id==='fImpM1')&&t.files.length){const fs=[...t.files];(async()=>{toast('Preparando o mockup…',false);const out=[];
       for(const f of fs){try{out.push({img:await mockDeArquivo(f),nome:f.name})}catch(er){toast(`Não consegui abrir ${f.name}`,false)}}document.getElementById('toast').innerHTML='';if(!out.length)return;
+      if(t.id==='fImpM1'&&ui.mockW!=null&&ui.sheet&&ui.sheet.t==='novo'){ui.sheet.w.itens[ui.mockW].mock=out[0].img;ui.mockW=null;render();return}
       if(t.id==='fImpM1'&&ui.mockK!=null&&ui.sheet&&ui.sheet.t==='imp'){ui.sheet.grupos[ui.sheet.gi].itens[ui.mockK].mock=out[0].img;render();return}
       if(t.id==='fImpM1'&&ui.mockL){snap();const l=lote(ui.mockL);l.mock=out[0].img;state.lotes.filter(r=>r.parent===l.id).forEach(r=>r.mock=out[0].img);commit();toast('Mockup salvo');return}
       openSheet({t:'mock',itens:out.map(m=>({...m,alvo:null,sug:sugMock(m.nome)}))})})();return}
