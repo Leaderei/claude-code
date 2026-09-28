@@ -467,6 +467,19 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .st-semp{border:2px dashed var(--line)}.st-semp .p-st{background:var(--grey-soft);color:var(--ink2)}.st-semp .p-st .dot{background:var(--muted)}
 .m-top{flex-wrap:wrap}
 @media (max-width:640px){.ped-l{flex-wrap:wrap;row-gap:4px;white-space:normal}.pl-go{display:none}}
+
+/* v0.20: equipe em lista + foto */
+.av.foto{background-size:cover;background-position:center;background-color:var(--grey-soft)}
+.av.g{width:96px;height:96px;font-size:42px}
+.eq-g{margin-bottom:22px}.eq-g .grupo-h small{font-size:17px;font-weight:700;color:var(--muted)}
+.eq-l{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:10px}
+.eq{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:12px 14px}
+.eq:hover{border-color:var(--ink2)}
+.eq .av{width:56px;height:56px}
+.eq-t{min-width:0;flex:1}.eq-t b{display:block;font-size:20px}.eq-t span{font-size:16px;color:var(--muted)}.eq-t em{font-style:normal;color:var(--atn-ink);font-weight:700}
+.eq-go{font-size:28px;color:var(--muted);line-height:1}
+.pes-foto{display:flex;align-items:center;gap:18px;margin:6px 0 10px}
+.foto-b{display:inline-flex;align-items:center;gap:8px;cursor:pointer}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -507,6 +520,7 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
   <symbol id="i-grafico" viewBox="0 0 48 48"><path d="M6 42h36M12 36V24M22 36V12M32 36V20M42 36V28"/></symbol>
   <symbol id="i-dormir" viewBox="0 0 48 48"><path d="M8 10h12L8 24h12M26 22h10L26 34h10"/></symbol>
   <symbol id="i-fabrica" viewBox="0 0 48 48"><path d="M4 42V20l10 7v-7l10 7v-7l10 7V8h8v34z"/><path d="M4 42h40M12 34h4M22 34h4"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 48 48"><path d="M6 16h8l4-6h12l4 6h8v24H6z"/><circle cx="24" cy="27" r="8"/></symbol>
   <symbol id="i-engr" viewBox="0 0 48 48"><circle cx="24" cy="24" r="6"/><path d="M24 4v7M24 37v7M4 24h7M37 24h7M10 10l5 5M33 33l5 5M38 10l-5 5M15 33l-5 5"/></symbol>
 </svg>
 
@@ -782,7 +796,8 @@ const papeisTxt=p=>(p.papeis||[]).map(k=>state.papeis[k]).filter(Boolean).join('
 const pessoa=id=>state.pessoas.find(p=>p.id===id);
 const pNome=id=>pessoa(id)?.nome||'';
 const avColor=id=>AVC[Math.max(0,state.pessoas.findIndex(p=>p.id===id))%AVC.length];
-const av=(id,cls='')=>`<span class="av ${cls}" style="background:${avColor(id)}">${esc((pNome(id)||'?')[0])}</span>`;
+const avImg=(foto,nome,cor,cls='')=>foto?`<span class="av foto ${cls}" role="img" aria-label="${esc(nome||'')}" style="background-image:url('${foto}')"></span>`:`<span class="av ${cls}" style="background:${cor}">${esc((nome||'?')[0])}</span>`;
+const av=(id,cls='')=>avImg(pessoa(id)?.foto,pNome(id),avColor(id),cls);
 const aptos=tid=>state.pessoas.filter(p=>p.sabe.includes(tid));
 const fornDe=serv=>state.forn.filter(f=>f.servico===serv);
 const fornById=id=>state.forn.find(f=>f.id===id);
@@ -1175,11 +1190,12 @@ function sTipoEd(){const e=ui.sheet;const usoP=e.id?state.produtos.filter(p=>p.s
   ${usoP.length?`<p style="color:var(--ink2)">Usada nos produtos: ${esc(usoP.join(', '))}</p>`:''}
   ${e.err?`<div class="aviso">${ic('i-alerta')}${esc(e.err)}</div>`:''}
   <div class="acoes"><button class="big go" data-a="tOk">${ic('i-check')}Salvar</button>${e.id?`<button class="big neutro" data-a="tRm">Tirar esta máquina</button>`:''}</div>`}
-function cEquipe(){const ord=['costura','corte','pers','acab','vendas','compras'];const o1=p=>Math.min(99,...(p.papeis||[]).map(k=>ord.indexOf(k)));const ps=[...state.pessoas].sort((a,b)=>o1(a)-o1(b));
-  return `<p style="margin:-6px 0 14px;color:var(--ink2)">Toque numa pessoa para mudar o que ela sabe fazer. ★ = faz melhor, o sistema dá preferência.</p>
-  <div class="pess">${ps.map(p=>`<button class="pes" data-a="pesEd" data-id="${p.id}"><div class="pes-h">${av(p.id)}<div><b>${esc(p.nome)}</b><span>${esc(papeisTxt(p))}</span></div></div>
-    <div class="skills">${p.sabe.map(t=>`<span class="sk ${p.melhor.includes(t)?'best':''}">${ic(tipo(t).i)}${esc(tNome(t))}${p.melhor.includes(t)?' ★':''}</span>`).join('')}${p.melhor.filter(x=>!state.tipos.some(t=>t.id===x)&&!FN[x]).map(x=>`<span class="sk best">${esc(x)} ★</span>`).join('')}${(p.funcoes||[]).map(f=>`<span class="sk ${(p.melhor||[]).includes(f)?'best':''}">${ic(FN[f].i)}${esc(FN[f].nome)}${(p.melhor||[]).includes(f)?' ★':''}</span>`).join('')}${p.viaApp?`<span class="sk">${ic('i-caminhao')}Leva por aplicativo</span>`:''}${!p.sabe.length&&!(p.funcoes||[]).length?'<span class="sk">Sem função cadastrada</span>':''}</div></button>`).join('')}
-  <button class="prodc add" data-a="pesEd" data-id="">${ic('i-mais')}<b>Adicionar pessoa</b></button></div>`}
+function cEquipe(){const ord=['costura','corte','pers','acab','vendas','compras'];const o1=p=>Math.min(99,...(p.papeis||[]).map(k=>ord.indexOf(k)));
+  const SET=[['Costura','i-maquina',[0]],['Corte','i-corte',[1]],['Personalização','i-estampa',[2]],['Acabamento','i-caixa',[3]],['Escritório e entregas','i-vias',[4,5]],['Sem cargo','i-pessoas',[99]]];
+  return `<p class="sub-l" style="margin-top:-6px">Toque na pessoa para ver e mudar o que ela faz.</p>
+  ${SET.map(([n,i,ks])=>{const ps=state.pessoas.filter(p=>ks.includes(o1(p)));if(!ps.length)return '';
+    return `<section class="eq-g"><h2 class="grupo-h">${ic(i)}${n} <small>${ps.length}</small></h2><div class="eq-l">${ps.map(p=>`<button class="eq" data-a="pesEd" data-id="${p.id}">${av(p.id)}<span class="eq-t"><b>${esc(p.nome)}</b><span>${esc(papeisTxt(p))}${p.disp===false?' · <em>fora agora</em>':''}</span></span><span class="eq-go">›</span></button>`).join('')}</div></section>`}).join('')}
+  <button class="prodc add" data-a="pesEd" data-id="" style="width:100%">${ic('i-mais')}<b>Adicionar pessoa</b></button>`}
 function cForn(){return `<div class="tipo-h" style="margin-top:0">Serviços feitos fora</div>
   ${state.tipos.filter(t=>t.externo).map(t=>`<div class="cad-row"><span class="m-ic" style="background:#F3ECFB;color:#6B2F8C">${ic(t.i)}</span><div><b>${esc(t.nome)}</b><span>${fornDe(t.id).map(f=>esc(f.nome)).join(', ')||'<b style="color:var(--red);display:inline">sem fornecedor</b>'}</span></div><button class="mbtn" data-a="tipoEd" data-t="${t.id}">Editar</button></div>`).join('')}
   <button class="prodc add" data-a="tipoEd" data-t="" data-ext="1" style="width:100%;margin:6px 0 20px">${ic('i-mais')}<b>Adicionar serviço terceirizado</b></button>
@@ -1227,7 +1243,8 @@ function cProdutos(){return `<div class="prods">${state.produtos.map(p=>`<button
   <button class="prodc add" data-a="nprod">${ic('i-mais')}<b>Cadastrar produto</b></button></div>`}
 function sPesEd(){const e=ui.sheet,internos=state.tipos.filter(t=>!t.externo);
   const nomesEtapas=[...new Set(state.produtos.flatMap(p=>p.steps.filter(s=>e.sabe.includes(s.posto)).map(s=>s.nome)))];
-  return `${voltar('Cancelar')}<h1>${e.id?esc(e.nome||'Pessoa'):'Nova pessoa'}</h1>
+  return `${voltar('Cancelar')}<div class="pes-foto">${avImg(e.foto,e.nome||'?',e.id?avColor(e.id):'var(--muted)','g')}<div><h1 style="margin:0 0 8px">${e.id?esc(e.nome||'Pessoa'):'Nova pessoa'}</h1>
+    <label class="mbtn foto-b">${ic('i-camera')}${e.foto?'Trocar foto':'Pôr foto'}<input type="file" id="xFoto" accept="image/*" hidden></label>${e.foto?` <button class="x" data-a="xFotoRm" style="margin-left:6px">Remover foto</button>`:''}</div></div>
   <div class="rotulo">Nome</div><input class="campo" id="xNome" value="${esc(e.nome)}" autocomplete="off">
   <div class="rotulo">Cargos <span style="font-weight:400;color:var(--muted)">(pode marcar vários)</span></div><div class="linha-dep">${Object.entries(state.papeis).map(([k,n])=>`<button class="depc" data-a="xPapel" data-v="${k}" aria-pressed="${e.papeis.includes(k)}">${n}</button>`).join('')}</div>
   <div class="rotulo">Máquinas que sabe usar</div><div class="escolhe">${internos.map(t=>`<button class="opc" data-a="xSabe" data-v="${t.id}" aria-pressed="${e.sabe.includes(t.id)}">${ic(t.i)}${esc(t.nome)}</button>`).join('')}</div>
@@ -1524,12 +1541,13 @@ const A={
   entregar:d=>{const p=pedById(d.id);snap();p.concluido=now();commit();toast(`Pedido de ${p.cliente} entregue`)},
   /* cadastros */
   tQtd:d=>{const t=tipo(d.t),n=Math.max(0,(t.qtd||0)+(+d.d));if(n<t.qtd&&plano().uso[`${t.id}-${t.qtd}`]){toast(`A ${t.nome} ${t.qtd} está em uso agora`,false);return}snap();t.qtd=n;commit()},
-  pesEd:d=>{const p=pessoa(d.id);openSheet(p?{t:'pes',id:p.id,nome:p.nome,papeis:[...(p.papeis||[])],sabe:[...p.sabe],melhor:[...p.melhor],funcoes:[...(p.funcoes||[])],viaApp:!!p.viaApp,disp:p.disp!==false,err:''}:{t:'pes',id:null,nome:'',papeis:['costura'],sabe:[],melhor:[],funcoes:[],viaApp:false,disp:true,err:''})},
+  pesEd:d=>{const p=pessoa(d.id);openSheet(p?{t:'pes',id:p.id,nome:p.nome,foto:p.foto||'',papeis:[...(p.papeis||[])],sabe:[...p.sabe],melhor:[...p.melhor],funcoes:[...(p.funcoes||[])],viaApp:!!p.viaApp,disp:p.disp!==false,err:''}:{t:'pes',id:null,nome:'',papeis:['costura'],sabe:[],melhor:[],funcoes:[],viaApp:false,disp:true,err:''})},
   xPapel:d=>{eRead();const e=ui.sheet;togl(e.papeis,d.v);if(e.papeis.includes(d.v)){(CARGO_FUN[d.v]||[]).forEach(f=>{if(!e.funcoes.includes(f))e.funcoes.push(f)});if(d.v==='corte'&&!e.sabe.includes('corte'))e.sabe.push('corte')}render()},
   xSabe:d=>{eRead();const e=ui.sheet;togl(e.sabe,d.v);if(!e.sabe.includes(d.v))e.melhor=e.melhor.filter(x=>x!==d.v);render()},
   xMelhor:d=>{eRead();togl(ui.sheet.melhor,d.v);render()},
+  xFotoRm:()=>{eRead();ui.sheet.foto='';render()},
   xOk:()=>{eRead();const e=ui.sheet;if(!e.nome.trim()){e.err='Escreva o nome';return render()}snap();
-    const obj={id:e.id||uid('p'),nome:e.nome.trim(),papeis:e.papeis,sabe:e.sabe,melhor:e.melhor,funcoes:e.funcoes,viaApp:e.viaApp&&e.funcoes.some(f=>['levar','entregar'].includes(f)),disp:e.disp};const i=state.pessoas.findIndex(p=>p.id===e.id);i<0?state.pessoas.push(obj):state.pessoas[i]=obj;ui.sheet=null;commit();toast(`${obj.nome} salvo`)},
+    const obj={id:e.id||uid('p'),nome:e.nome.trim(),foto:e.foto||undefined,papeis:e.papeis,sabe:e.sabe,melhor:e.melhor,funcoes:e.funcoes,viaApp:e.viaApp&&e.funcoes.some(f=>['levar','entregar'].includes(f)),disp:e.disp};const i=state.pessoas.findIndex(p=>p.id===e.id);i<0?state.pessoas.push(obj):state.pessoas[i]=obj;ui.sheet=null;commit();toast(`${obj.nome} salvo`)},
   xRm:()=>{const e=ui.sheet;if(plano().ocup.has(e.id)){e.err='Esta pessoa está trabalhando agora. Termine antes de tirar.';return render()}snap();state.pessoas=state.pessoas.filter(p=>p.id!==e.id);ui.sheet=null;commit();toast(`${e.nome} saiu da equipe`)},
   fornEd:d=>{const f=fornById(d.id);openSheet(f?{t:'forn',...JSON.parse(JSON.stringify(f)),err:''}:{t:'forn',id:null,nome:'',servico:'bordado',prazo:3,leva:state.pessoas.find(p=>temPapel(p,'compras'))?.id||'',err:''})},
   fServ:d=>{eRead();ui.sheet.servico=d.v;render()},
@@ -1633,7 +1651,9 @@ const A={
     ui.tela='pedidos';ui.sheet={t:'pedido',id};commit();toast('Pedido criado')},
 };
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b||b.disabled)return;const f=A[b.dataset.a];if(f){e.preventDefault();f(b.dataset)}});
-document.addEventListener('change',e=>{const t=e.target,d=t.dataset;if(!state)return;const num=()=>parseFloat(String(t.value).replace(',','.'));let ok=false;
+document.addEventListener('change',e=>{const t=e.target,d=t.dataset;if(!state)return;
+  if(t.id==='xFoto'&&t.files&&t.files[0]){eRead();const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const N=240,c=document.createElement('canvas');c.width=c.height=N;const m=Math.min(im.width,im.height);
+    c.getContext('2d').drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,N,N);if(ui.sheet&&ui.sheet.t==='pes'){ui.sheet.foto=c.toDataURL('image/jpeg',.82);render()}};im.onerror=()=>toast('Não consegui abrir essa foto');im.src=r.result};r.readAsDataURL(t.files[0]);return}const num=()=>parseFloat(String(t.value).replace(',','.'));let ok=false;
   if(d.cfg){const[a,b]=d.cfg.split('.');let v=num();if(isNaN(v))return;if(d.pct)v=v/100;snap();state[a][b]=v;ok=true}
   else if(d.est!=null){const v=num();if(isNaN(v))return;snap();state.estoque[d.est]=v;ok=true}
   else if(d.catn!=null){snap();state.cats[+d.catn].nome=t.value.trim()||'Categoria';ok=true}
