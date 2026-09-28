@@ -496,7 +496,9 @@ const CARGO_FUN={vendas:['vias','arte_prep','arte_aprov','arte_env'],compras:['c
 const DO_VENDEDOR=['vias','arte_prep','arte_aprov','arte_env'];
 const FORN0=[{id:'fb',nome:'Bordadeira parceira',servico:'bordado',prazo:3,leva:'roger'},{id:'fd',nome:'Parceiro DTF',servico:'dtf',prazo:2,leva:'roger'}];
 const AVC=['#1E5BB8','#9C3D8F','#17864A','#B5561B','#4C5BA8','#0E7C86','#8A5A00','#B0304A','#3F6E2A','#5A4FB0','#A04000','#2E6F9E'];
-const CATS=[{id:'inf',nome:'Infantil',t:['2','4','6','8']},{id:'juv',nome:'Juvenil',t:['10','12','14','16']},{id:'adu',nome:'Adulto',t:['P','M','G','GG','XG','XXG']}];
+const CATS=[{id:'inf',nome:'Infantil',t:['2','4','6','8'],fator:0.6},{id:'juv',nome:'Juvenil',t:['10','12','14','16'],fator:0.8},{id:'adu',nome:'Adulto',t:['P','M','G','GG','XG','XXG'],fator:1}];
+/* Consumo de tecido por tamanho em relação ao adulto (estimativa; conferir no encaixe do corte) */
+const fatorTam=t=>t==='XXG'?1.15:(CATS.find(c=>c.t.includes(t))?.fator??1);
 const SIZES=CATS.flatMap(c=>c.t);
 const catDe=it=>CATS.find(c=>c.id===(it.cat||'adu'));
 const CORES={Branca:'#F7F7F5',Preta:'#24272C',Marinho:'#1F2E55',Cinza:'#8E959E',Verde:'#2E7D4F',Royal:'#2449B8',Vermelha:'#C0302A'};
@@ -736,20 +738,23 @@ const nota=(p,it)=>(p.melhor.includes(it.s.nome)?12:0)+(p.melhor.includes(it.s.p
 function plano(){const uso={},ocup=new Set();
   state.lotes.forEach(l=>{const ped=pedById(l.ped);if(!ped||ped.concluido)return;const p=rp(l),m=sMap(p);
     Object.entries(l.steps).forEach(([sid,x])=>{if(x.st==='and'&&m[sid]){uso[x.maq]={ped,inf:info(ped),l,p,s:m[sid],x};ocup.add(x.op)}})});
-  const us=unidades(),plan={},usados=new Set(),espera={},semPessoa={};
-  prontas().filter(it=>!isExt(it.s)).forEach(it=>{const t=it.s.posto;const livres=us.filter(u=>u.tipo===t&&!uso[u.id]&&!plan[u.id]);
+  const resEspera={},us=unidades(),plan={},usados=new Set(),espera={},semPessoa={},todas=prontas().filter(it=>!isExt(it.s)),fixas=new Set();
+  Object.entries(state.reservas||{}).forEach(([m,r])=>{const u=us.find(x=>x.id===m);if(!u||uso[m])return;const it=todas.find(x=>x.l.id===r.l&&x.s.id===r.s);if(!it){const l=lote(r.l);if(l){const z=sMap(rp(l))[r.s];if(z&&stOf(l,z.id).st==='pend')resEspera[m]={l,s:z,ped:pedById(l.ped)}}return}
+    const c=aptos(u.tipo).filter(p=>!ocup.has(p.id)&&!usados.has(p.id)).sort((a,b)=>nota(b,it)-nota(a,it)),pe=c.find(p=>p.id===r.p)||c[0];if(!pe)return;
+    usados.add(pe.id);plan[m]={...it,pessoa:pe.id,reservado:true};fixas.add(it.l.id+'|'+it.s.id)});
+  todas.filter(it=>!fixas.has(it.l.id+'|'+it.s.id)).forEach(it=>{const t=it.s.posto;const livres=us.filter(u=>u.tipo===t&&!uso[u.id]&&!plan[u.id]);
     if(!livres.length){(espera[t]=espera[t]||[]).push(it);return}
     const c=aptos(t).filter(p=>!ocup.has(p.id)&&!usados.has(p.id)).sort((a,b)=>nota(b,it)-nota(a,it));
     if(!c.length){(semPessoa[t]=semPessoa[t]||[]).push(it);return}
     usados.add(c[0].id);plan[livres[0].id]={...it,pessoa:c[0].id}});
-  return{uso,ocup,plan,espera,semPessoa,us,usados}}
+  return{uso,ocup,plan,espera,semPessoa,us,usados,resEspera}}
 const capazes=f=>state.pessoas.filter(p=>(p.funcoes||[]).includes(f));
 function tarefasEsc(){const out=[];
   state.pedidos.filter(p=>!p.concluido).forEach(ped=>{const inf=info(ped),T=o=>out.push({ped,inf,...o,key:[o.a,ped.id,o.k??'',o.l||'',o.s||''].join(':')});
     if(!ped.vias)T({f:'vias',i:'i-vias',t:'Separar as vias',sub:'Ficha, tecido e produção',a:'vias'});
     if(!ped.artePrep)T({f:'arte_prep',i:'i-arte',t:'Preparar a arte',a:'artePrep'});
     else if(!ped.arte)T({f:'arte_aprov',i:'i-arte',t:'Aprovar a arte com o cliente',a:'arte'});
-    ped.materiais.forEach((m,k)=>{if(m.st==='comprar')T({f:'comprar',i:'i-carrinho',t:`Comprar ${m.item}`,sub:qtdTxt(m.nec-m.est,m.un),a:'comprei',k});
+    ped.materiais.forEach((m,k)=>{if(m.st==='comprar')T({f:'comprar',i:'i-carrinho',t:`Comprar ${m.item}`,sub:qtdTxt(m.nec-m.est,m.un)+' · estimativa, confira o estoque',a:'comprei',k});
       if(m.st==='pedido')T({f:'comprar',i:'i-caminhao',t:`Receber ${m.item}`,sub:'Comprado, esperando chegar',a:'chegou',k})});
     lotesDe(ped.id).filter(l=>!l.rework).forEach(l=>rp(l).steps.filter(z=>z.pers&&!done(l,z.id)&&!arteOk(ped,l,z)).forEach(z=>{if(!ped.arte)return;const fo=isExt(z)?fornDe(z.posto)[0]:null;
       T({f:'arte_env',i:'i-arte',t:`Enviar arte: ${z.nome}`,sub:`${prod(l.prod).nome} ${modeloTxt(l)} → ${fo?fo.nome:tipo(z.posto).nome}`,a:'arteEnv',l:l.id,s:z.id})}));
@@ -769,9 +774,11 @@ function atribuir(ts){const carga={};ts.forEach(t=>{const cs=capazes(t.f),fix=st
 const viaApp=(t)=>['levar','entregar'].includes(t.f)&&pessoa(t.resp)?.viaApp;
 function tarTxt(t){if(!viaApp(t))return t.t;return t.a==='levei'?t.t.replace('Levar para','Chamar app para levar ao'):t.a==='buscou'?t.t.replace('Buscar no','Chamar app para buscar no'):'Chamar app para entregar ao cliente'}
 function servicosPed(ped){const n=new Set();lotesDe(ped.id).forEach(l=>rp(l).steps.forEach(s=>{if(s.pers||isExt(s))n.add(tNome(s.posto))}));return[...n]}
-const qtdTxt=(q,un)=>`${Number(q).toLocaleString('pt-BR')} ${un==='m'?'metros':'unidades'}`;
+const qtdTxt=(q,un)=>`≈ ${Number(q).toLocaleString('pt-BR')} ${un==='m'?'metros':'unidades'}`;
+const AVISO_EST='Quantidades estimadas pelo sistema. Confira o estoque real e as quantidades antes de comprar.';
+const avisoEst=()=>`<div class="instr" style="margin:10px 0 0;font-size:17px">${ic('i-alerta')}<span>${AVISO_EST}</span></div>`;
 const modeloTxt=x=>{const p=prod(x.prod);return[x.tecido,x.cor,...(p.opcoes||[]).filter(o=>(x.opcoes||[]).includes(o.id)).map(o=>o.nome.toLowerCase())].filter(Boolean).join(' · ')};
-function calcMat(ls){const m={};ls.forEach(x=>{const p=prod(x.prod);const add=(it,un,q)=>{m[it]=m[it]||{item:it,un,nec:0};m[it].nec+=q};add(`${x.tecido||(p.tecidos||[])[0]||'Tecido'} ${x.cor}`,'m',p.consumo*x.qtd);p.aviam.forEach(([i,u,q])=>add(i,u,q*x.qtd));(p.opcoes||[]).filter(o=>(x.opcoes||[]).includes(o.id)).forEach(o=>(o.aviam||[]).forEach(([i,u,q])=>add(i,u,q*x.qtd)))});
+function calcMat(ls){const m={};ls.forEach(x0=>{const g=x0.g||x0.grade,qe=g&&Object.keys(g).length?sum(Object.entries(g).map(([t,q])=>(q||0)*fatorTam(t))):x0.qtd,x={...x0,qtd:qe},p=prod(x.prod);const add=(it,un,q)=>{m[it]=m[it]||{item:it,un,nec:0};m[it].nec+=q};add(`${x.tecido||(p.tecidos||[])[0]||'Tecido'} ${x.cor}`,'m',p.consumo*x.qtd);p.aviam.forEach(([i,u,q])=>add(i,u,q*x.qtd));(p.opcoes||[]).filter(o=>(x.opcoes||[]).includes(o.id)).forEach(o=>(o.aviam||[]).forEach(([i,u,q])=>add(i,u,q*x.qtd)))});
   return Object.values(m).map(o=>{o.nec=Math.ceil(o.nec);o.est=state.estoque[o.item]??0;o.st=o.est>=o.nec?'ok':'comprar';return o})}
 function gradeOf(q){const w=[.14,.3,.3,.18,.08];const g={};let t=0;['P','M','G','GG','XG'].forEach((s,i)=>{g[s]=Math.round(q*w[i]);t+=g[s]});g.M+=q-t;return g}
 function makeRework(l,detect,orig,n,mot,ts,op){RC={};const p=rp(l),D=desc(p,orig),k=state.consertos.filter(d=>d.l===l.id).length+1;
@@ -881,7 +888,8 @@ function maqTile(u,P){const t=P.uso[u.id],pl=P.plan[u.id],sp=!t&&!pl?(P.semPesso
   const cls=t?'st-trab':pl?'st-livre':sp?'st-semp':'st-nada';const quem=t?t.x.op:pl?pl.pessoa:null;
   return `<div class="pessoa ${cls}"><button class="p-open" data-a="maq" data-m="${u.id}">
     <div class="m-top"><span class="m-ic">${ic(tipo(u.tipo).i)}</span><b>${esc(u.nome)}</b></div>
-    <div class="p-body">${it?`${prodSvg(it.p.id,it.l.cor)}<div>${pl?'<span class="prox">Próximo</span>':''}<b>${esc(it.s.nome)}</b><span>${qtdEf(it.l)} peças</span><span class="emp">${ic('i-predio')}${esc(it.ped.cliente)}</span>${quem?`<span class="quem-l">${av(quem,'s')}${esc(pNome(quem))} ${pl?estrela(pessoa(quem),pl):''}</span>`:''}</div>`:'<span class="vazio">Sem trabalho para esta máquina</span>'}</div></button>
+    <div class="p-body">${it?`${prodSvg(it.p.id,it.l.cor)}<div>${pl?`<span class="prox">${pl.reservado?'Reservado':'Próximo'}</span>`:''}<b>${esc(it.s.nome)}</b><span>${qtdEf(it.l)} peças</span><span class="emp">${ic('i-predio')}${esc(it.ped.cliente)}</span>${quem?`<span class="quem-l">${av(quem,'s')}${esc(pNome(quem))} ${pl?estrela(pessoa(quem),pl):''}</span>`:''}</div>`:'<span class="vazio">Sem trabalho para esta máquina</span>'}</div></button>
+    ${P.resEspera[u.id]?`<div class="dica" style="padding:0 14px 8px;color:var(--blue);font-weight:700">Reservado a seguir: ${esc(P.resEspera[u.id].s.nome)} · ${esc(P.resEspera[u.id].ped.cliente)}</div>`:''}
     <div class="p-st"><span class="dot"></span>${t?`Trabalhando · <span data-ini="${t.x.ini}">${fDur(now()-t.x.ini)}</span>`:pl?'Parada · pronta para começar':sp?'Ninguém livre sabe usar':'Sem trabalho'}</div>
     ${t?`<button class="p-act fim" data-a="terminou" data-m="${u.id}">${ic('i-check')}Terminou</button>`:pl?`<button class="p-act ini" data-a="comecar" data-m="${u.id}" data-l="${pl.l.id}" data-s="${pl.s.id}" data-p="${pl.pessoa}">${ic('i-play')}Começar</button>`:''}
   </div>`}
@@ -908,6 +916,7 @@ function sPedido(id){const ped=pedById(id),i=info(ped),mats=ped.materiais.filter
     ${chk('vias',ped.vias,'i-vias','Vias separadas')}${chk('artePrep',ped.artePrep,'i-arte','Arte preparada')}${chk('arte',ped.arte,'i-arte','Arte aprovada')}
     <div class="chk" aria-pressed="${!mats.some(m=>m.st!=='recebido')}">${ic('i-rolo')}Material<span class="box">${ic('i-check')}</span>${mats.some(m=>m.st!=='recebido')&&resp('comprei')?`<span style="font-weight:400;font-size:15px;color:var(--muted)">${esc(resp('comprei'))}</span>`:''}</div></div>
     ${mats.filter(m=>m.st!=='recebido').map(m=>{const k=ped.materiais.indexOf(m);return `<div class="mat">${ic(m.st==='pedido'?'i-caminhao':'i-carrinho')}<div><b>${esc(m.item)}</b><span>${m.st==='pedido'?'Comprado, esperando chegar':'Comprar '+qtdTxt(m.nec-m.est,m.un)}</span></div><button class="mbtn" data-a="${m.st==='pedido'?'chegou':'comprei'}" data-id="${id}" data-k="${k}">${m.st==='pedido'?'Chegou':'Comprei'}</button></div>`}).join('')}
+    ${mats.some(m=>m.st==='comprar')?avisoEst():''}
     <div class="lib ${lib?'u-ok':'u-warn'}">${ic(lib?'i-check':'i-cadeado')}${lib?'Pode cortar':'Ainda não pode cortar'}</div></div>
   ${envs.length?`<div class="card"><h2>Arte para quem aplica</h2><p style="margin:0 0 6px;color:var(--ink2)">Cada personalização só começa quando a arte chegou em quem aplica.</p>
     ${envs.map(e=>{const fo=isExt(e.z)?fornDe(e.z.posto)[0]:null;const r=resp('arteEnv',{l:e.l.id,s:e.z.id});return `<div class="mat">${ic(tipo(e.z.posto).i)}<div><b>${esc(e.z.nome)} · ${esc(prod(e.l.prod).nome)} ${esc(e.l.cor)}</b><span>Para ${esc(fo?fo.nome:tipo(e.z.posto).nome)}${!e.ok&&r?' · '+esc(r):''}</span></div>
@@ -1078,22 +1087,43 @@ function sNovoProd(){const e=ui.sheet,formas=[['polo','Polo'],['polo2','Polo com
 
 /* ================= FOLHAS ================= */
 const voltar=(lab='Voltar')=>`<button class="voltar" data-a="fechar">${ic('i-voltar')}${lab}</button>`;
-function sMaq(){const e=ui.sheet,u=unidade(e.m);if(!u)return voltar();const P=plano(),t=P.uso[u.id],tp=tipo(u.tipo);
+function opcoesTipo(t){const pr=prontas().filter(it=>it.s.posto===t),ch=[];
+  state.pedidos.filter(p=>!p.concluido).forEach(ped=>{const inf=info(ped);lotesDe(ped.id).forEach(l=>{const p=rp(l),m=sMap(p);
+    p.steps.filter(z=>z.posto===t&&stOf(l,z.id).st==='pend'&&!ready(l,z,ped)).forEach(z=>{const f=z.deps.filter(d=>!done(l,d)).map(d=>m[d]?.nome||d);
+      ch.push({ped,inf,l,p,s:z,falta:f.length?f:[liberado(ped)?'arte ou peça no fornecedor':'liberar o corte']})})})});
+  return{pr,ch:ch.sort((a,b)=>a.inf.score-b.inf.score)}}
+const kIt=it=>it.l.id+'|'+it.s.id;
+function sMaq(){const e=ui.sheet,u=unidade(e.m);if(!u)return voltar();const P=plano(),t=P.uso[u.id],tp=tipo(u.tipo),O=opcoesTipo(u.tipo),res=(state.reservas||{})[u.id];
   const head=`<div class="quem"><span class="m-ic" style="width:64px;height:64px">${ic(tp.i)}</span><div><b>${esc(u.nome)}</b><span>Sabem usar: ${aptos(u.tipo).map(p=>esc(p.nome)).join(', ')||'ninguém'}</span></div></div>`;
-  if(t)return `${voltar()}${head}<h2>${av(t.x.op,'s')} ${esc(pNome(t.x.op))} está fazendo</h2>${tarefaCard(t)}
-    <div class="acoes"><button class="big go" data-a="terminou" data-m="${u.id}">${ic('i-check')}Terminou</button><button class="big prob" data-a="problema" data-m="${u.id}">${ic('i-alerta')}Deu problema</button></div>`;
+  const ondePlan=it=>{const m=Object.keys(P.plan).find(k=>kIt(P.plan[k])===kIt(it));return m?(m===u.id?'sugerido aqui':`sugerido para ${unidade(m)?.nome}`):''};
+  const resOutra=it=>{const m=Object.keys(state.reservas||{}).find(k=>k!==u.id&&state.reservas[k].l===it.l.id&&state.reservas[k].s===it.s.id);return m?`reservado para ${unidade(m)?.nome}`:''};
+  const linha=(it,bloq)=>{const tag=bloq?`Espera: ${it.falta.join(', ')}`:(resOutra(it)||ondePlan(it));const on=e.sel===kIt(it);
+    return `<button class="outra" data-a="mSel" data-v="${kIt(it)}" style="${on?'border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--blue)':''}">${prodSvg(it.p.id,it.l.cor)}<div><b>${esc(it.s.nome)} · ${qtdEf(it.l)} peças${it.l.rework?' · conserto':''}</b><span>${esc(it.ped.cliente)} · ${ULAB[it.inf.u]}${tag?` · <b style="color:${bloq?'var(--atn-ink)':'var(--blue)'}">${esc(tag)}</b>`:''}</span></div><span class="ir">${on?'Escolhido':'Escolher'}${ic('i-seta')}</span></button>`};
+  const listas=(tit)=>`${O.pr.length?`<h2 style="margin-top:26px">${tit}</h2><p class="dica" style="margin:-4px 0 8px">Já podem entrar nesta máquina.</p><div class="outras">${O.pr.map(it=>linha(it,false)).join('')}</div>`:''}
+    ${O.ch.length?`<h2 style="margin-top:26px">Chegando depois</h2><p class="dica" style="margin:-4px 0 8px">Ainda esperam uma etapa anterior. Escolha só se as peças já estiverem na máquina.</p><div class="outras">${O.ch.slice(0,8).map(it=>linha(it,true)).join('')}</div>`:''}`;
+  const all=[...O.pr,...O.ch],achar=k=>all.find(it=>kIt(it)===k);
+  if(t){const sel=e.sel&&achar(e.sel),rIt=res&&achar(res.l+'|'+res.s);
+    return `${voltar()}${head}<h2>${av(t.x.op,'s')} ${esc(pNome(t.x.op))} está fazendo</h2>${tarefaCard(t)}
+    <div class="acoes"><button class="big go" data-a="terminou" data-m="${u.id}">${ic('i-check')}Terminou</button><button class="big prob" data-a="problema" data-m="${u.id}">${ic('i-alerta')}Deu problema</button></div>
+    <div class="card" style="margin-top:22px"><h2>Depois deste</h2>${rIt?`<p style="margin:0 0 10px"><b>Reservado:</b> ${esc(rIt.s.nome)} · ${esc(rIt.ped.cliente)}</p><button class="mbtn" data-a="mResX" data-m="${u.id}">Tirar reserva</button>`:'<p style="margin:0;color:var(--ink2)">O sistema escolhe sozinho quando terminar. Para decidir você, escolha abaixo e reserve.</p>'}
+      ${sel?`<div class="acoes"><button class="big azul" data-a="mRes" data-m="${u.id}" data-l="${sel.l.id}" data-s="${sel.s.id}" data-p="">${ic('i-check')}Reservar "${esc(sel.s.nome)}" como próximo</button></div>`:''}</div>
+    ${listas('Opções para esta máquina')}`}
   const feito=e.feito?`<div class="feito"><div class="ok">${ic('i-check')}</div><b>Pronto!</b><span>${esc(e.feito)}</span></div>`:'';
-  const tasks=prontas().filter(it=>it.s.posto===u.tipo&&!Object.values(P.plan).some(x=>x!==P.plan[u.id]&&x.l.id===it.l.id&&x.s.id===it.s.id));
-  if(!tasks.length)return `${voltar(e.feito?'Fechar':'Voltar')}${head}${feito}<div class="vazio-box">${ic('i-dormir')}<b>Nada para ${esc(tp.nome)} agora</b></div>`;
-  const pl=P.plan[u.id],sel=e.sel!=null?tasks[e.sel]||tasks[0]:(pl?tasks.find(x=>x.l.id===pl.l.id&&x.s.id===pl.s.id):null)||tasks[0];
-  const livres=aptos(u.tipo).filter(p=>!P.ocup.has(p.id)).sort((a,b)=>nota(b,sel)-nota(a,sel));
-  const quem=e.p&&livres.some(p=>p.id===e.p)?e.p:(pl&&sel===tasks.find(x=>x.l.id===pl.l.id&&x.s.id===pl.s.id)?pl.pessoa:livres[0]?.id);
-  return `${voltar(e.feito?'Fechar':'Voltar')}${head}${feito}<h2>Próximo trabalho</h2>${tarefaCard(sel,true)}
+  if(!all.length)return `${voltar(e.feito?'Fechar':'Voltar')}${head}${feito}<div class="vazio-box">${ic('i-dormir')}<b>Nada para ${esc(tp.nome)} agora</b></div>`;
+  const pl=P.plan[u.id];const sel=(e.sel&&achar(e.sel))||(res&&achar(res.l+'|'+res.s))||(pl&&achar(kIt(pl)))||O.pr[0]||O.ch[0];
+  const bloq=O.ch.includes(sel);
+  const todosAptos=aptos(u.tipo).sort((a,b)=>nota(b,sel)-nota(a,sel)),livres=todosAptos.filter(p=>!P.ocup.has(p.id));
+  const ondeEsta=id=>{const m=Object.keys(P.uso).find(k=>P.uso[k].x.op===id);return m?unidade(m)?.nome:''};
+  const quem=e.p&&livres.some(p=>p.id===e.p)?e.p:(pl&&kIt(pl)===kIt(sel)?pl.pessoa:(res&&res.p&&livres.some(p=>p.id===res.p)?res.p:livres[0]?.id));
+  const reservado=res&&res.l===sel.l.id&&res.s===sel.s.id;
+  return `${voltar(e.feito?'Fechar':'Voltar')}${head}${feito}<h2>${reservado?'Reservado para esta máquina':e.sel?'Escolhido por você':'Próximo trabalho sugerido'}</h2>${tarefaCard(sel,true)}
+    ${bloq?`<div class="instr" style="background:var(--red-soft);border-color:var(--red);color:var(--red)">${ic('i-alerta')}<span>Fora da ordem: ainda espera ${esc(sel.falta.join(', '))}. Só comece se as peças já estiverem aqui.</span></div>`:''}
     <div class="rotulo">Quem vai fazer?</div>
-    ${livres.length?`<div class="linha-dep">${livres.map(p=>`<button class="pchip" data-a="mP" data-v="${p.id}" aria-pressed="${quem===p.id}">${av(p.id,'s')}${esc(p.nome)} ${estrela(p,sel)}</button>`).join('')}</div>
-    <div class="acoes"><button class="big go ini" data-a="comecar" data-m="${u.id}" data-l="${sel.l.id}" data-s="${sel.s.id}" data-p="${quem}">${ic('i-play')}Começar com ${esc(pNome(quem))}</button></div>`
+    ${todosAptos.length?`<div class="linha-dep">${todosAptos.map(p=>{const oc=P.ocup.has(p.id);return `<button class="pchip" data-a="mP" data-v="${p.id}" aria-pressed="${quem===p.id}" ${oc?'disabled':''}>${av(p.id,'s')}${esc(p.nome)} ${estrela(p,sel)}${oc?` <small>(na ${esc(ondeEsta(p.id))})</small>`:''}</button>`}).join('')}</div>`:''}
+    ${quem?`<div class="acoes"><button class="big go ini" data-a="comecar" data-m="${u.id}" data-l="${sel.l.id}" data-s="${sel.s.id}" data-p="${quem}">${ic('i-play')}Começar com ${esc(pNome(quem))}</button>
+      ${reservado?`<button class="big neutro" data-a="mResX" data-m="${u.id}">Tirar reserva</button>`:`<button class="big neutro" data-a="mRes" data-m="${u.id}" data-l="${sel.l.id}" data-s="${sel.s.id}" data-p="${quem}">Reservar para esta máquina</button>`}</div>`
     :`<div class="vazio-box">${ic('i-pessoas')}<b>Ninguém livre sabe usar esta máquina</b><button class="mbtn" data-a="irEquipe">Ver cadastro da equipe</button></div>`}
-    ${tasks.length>1?`<h2 style="margin-top:26px">Ou escolher outro</h2><div class="outras">${tasks.slice(0,5).map((it,k)=>it===sel?'':`<button class="outra" data-a="mT" data-v="${k}">${prodSvg(it.p.id,it.l.cor)}<div><b>${esc(it.s.nome)} · ${qtdEf(it.l)} peças</b><span>${esc(it.ped.cliente)}</span></div><span class="ir">Escolher${ic('i-seta')}</span></button>`).join('')}</div>`:''}`}
+    ${listas('Outras opções agora')}`}
 function tarefaNa(m){return plano().uso[m]||null}
 function sProblema(){const m=ui.sheet,t=tarefaNa(m.m);if(!t)return voltar();const passos=`<div class="passos">${[1,2,3].map(n=>`<i class="${n<=m.step?'on':''}"></i>`).join('')}</div>`;
   const head=`${voltar(m.step>1?'Voltar':'Cancelar')}${passos}`;
@@ -1132,7 +1162,7 @@ function sNovo(){const w=ui.sheet.w,passos=`<div class="passos">${[1,2,3,4].map(
   return `${head}<h1>Está certo?</h1><div class="card"><h2>${esc(w.cliente)}</h2><div class="ped-ent">${av(w.vend,'s')}Vendedora: <b>${esc(pNome(w.vend))}</b></div>
     ${w.itens.map(it=>`<div class="resumo-item">${prodSvg(it.prod,it.cor)}<div><b>${esc(prod(it.prod).nome)}</b><div style="color:var(--ink2)">${esc(modeloTxt(it))}</div><div style="color:var(--ink2)">${SIZES.filter(s=>it.g[s]).map(s=>`${s}: ${it.g[s]}`).join(' · ')}</div><div style="color:var(--ink2)">${it.pers.map(x=>`${esc(tNome(x.tipo))} na ${esc(x.parte.toLowerCase())}`).join(' · ')||'Sem personalização'}</div></div></div>`).join('')}
     <div class="resumo-item">${ic('i-caminhao')}<b>Entrega ${DOW[new Date(w.entrega).getDay()]}, ${new Date(w.entrega).getDate()} de ${MES[new Date(w.entrega).getMonth()]} · ${tot} peças</b></div></div>
-    <div class="card"><h2>${mats.length?'Vai precisar comprar':'Tem todo o material'}</h2>${mats.length?mats.map(m=>`<div class="mat">${ic('i-carrinho')}<div><b>${esc(m.item)}</b><span>${qtdTxt(m.nec-m.est,m.un)}</span></div><span></span></div>`).join(''):`<div class="lib u-ok">${ic('i-check')}Pode seguir</div>`}</div>
+    <div class="card"><h2>${mats.length?'Provavelmente vai precisar comprar':'Pelo cadastro, tem o material'}</h2>${mats.length?mats.map(m=>`<div class="mat">${ic('i-carrinho')}<div><b>${esc(m.item)}</b><span>${qtdTxt(m.nec-m.est,m.un)}</span></div><span></span></div>`).join(''):`<div class="lib u-ok">${ic('i-check')}Pode seguir</div>`}${avisoEst()}<p class="dica">Consumo de tecido por tamanho: infantil 60%, juvenil 80%, adulto 100%, XXG 115%.</p></div>
     <div class="acoes"><button class="big go" data-a="wCriar">${ic('i-check')}Criar pedido</button></div>`}
 function sTroca(){const e=ui.sheet,t=tarefasEsc().find(x=>x.key===e.key);if(!t)return voltar();const cs=capazes(e.f);
   return `${voltar('Cancelar')}<h1>Quem faz esta tarefa?</h1><div class="card"><b style="font-size:21px">${esc(tarTxt(t))}</b><div style="color:var(--ink2)">${esc(t.ped.cliente)}${t.sub?' · '+esc(t.sub):''}</div></div>
@@ -1174,10 +1204,12 @@ const A={
   ajuda:()=>openSheet({t:'ajuda'}),
   maq:d=>openSheet({t:'maq',m:d.m}),
   mP:d=>{ui.sheet.p=d.v;render()},
-  mT:d=>{ui.sheet.sel=+d.v;ui.sheet.p=null;render()},
+  mSel:d=>{ui.sheet.sel=d.v;ui.sheet.p=null;render();document.querySelector('.sheet')?.scrollTo({top:0,behavior:'smooth'})},
+  mRes:d=>{snap();state.reservas=state.reservas||{};Object.keys(state.reservas).forEach(k=>{const r=state.reservas[k];if(r.l===d.l&&r.s===d.s)delete state.reservas[k]});state.reservas[d.m]={l:d.l,s:d.s,p:d.p||''};ui.sheet.sel=null;commit();toast(`Reservado para ${unidade(d.m)?.nome}`)},
+  mResX:d=>{snap();delete (state.reservas||{})[d.m];ui.sheet.sel=null;commit();toast('Reserva tirada: o sistema volta a escolher')},
   pedido:d=>{ui.fx=null;openSheet({t:'pedido',id:d.id})},
   terminou:d=>{const t=tarefaNa(d.m);if(!t)return;snap();t.x.st='ok';t.x.fim=now();save();const n=`${pNome(t.x.op)} terminou ${t.s.nome}`;openSheet({t:'maq',m:d.m,feito:n});toast(n)},
-  comecar:d=>{if(!d.p)return;const l=lote(d.l);snap();const s=sMap(rp(l))[d.s];l.steps[d.s]={st:'and',ini:now(),op:d.p,maq:d.m};ui.sheet=null;commit();toast(`${pNome(d.p)} começou ${s.nome} na ${unidade(d.m)?.nome||''}`)},
+  comecar:d=>{if(!d.p)return;const l=lote(d.l);snap();const s=sMap(rp(l))[d.s],fora=!ready(l,s,pedById(l.ped));l.steps[d.s]={st:'and',ini:now(),op:d.p,maq:d.m,manual:fora||undefined};const R_=state.reservas||{};Object.keys(R_).forEach(k=>{if(k===d.m||(R_[k].l===d.l&&R_[k].s===d.s))delete R_[k]});ui.sheet=null;commit();toast(`${pNome(d.p)} começou ${s.nome} na ${unidade(d.m)?.nome||''}${fora?' (fora da ordem)':''}`)},
   desfazer:()=>{if(!undo)return;state=JSON.parse(undo);undo=null;document.getElementById('toast').innerHTML='';ui.sheet=null;commit()},
   problema:d=>openSheet({t:'prob',m:d.m,step:1,n:1,orig:null,mot:null}),
   pMot:d=>{const s=ui.sheet,t=tarefaNa(s.m),pr=PROBS[+d.k];s.mot=pr.k;const opts=topo(t.p).filter(x=>(x.id===t.s.id||anc(t.p,t.s.id).has(x.id))&&x.posto!=='corte').map(x=>x.id);s.orig=pr.alvo.find(a=>opts.includes(a))||t.s.id;s.step=2;render()},
