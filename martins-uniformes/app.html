@@ -263,7 +263,7 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .cor span{width:50px;height:50px;border-radius:50%;border:3px solid var(--line)}
 .cor[aria-pressed="true"] span{box-shadow:0 0 0 4px var(--card),0 0 0 7px var(--go)}
 .tams{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
-.tam{display:grid;grid-template-columns:38px 54px minmax(56px,1fr) 54px;align-items:center;gap:6px;background:var(--bg);border-radius:14px;padding:6px}
+.tam{display:grid;grid-template-columns:46px 54px minmax(56px,1fr) 54px;align-items:center;gap:6px;background:var(--bg);border-radius:14px;padding:6px}
 .tam b{font-size:22px;text-align:center}
 .tam input{width:100%;min-width:0;text-align:center;font:inherit;font-size:24px;font-weight:700;border:2px solid var(--line);border-radius:10px;padding:6px 0;background:var(--card);color:var(--ink)}
 .stp{width:54px;height:54px;border:0;border-radius:12px;background:var(--card);border:2px solid var(--line);font-size:30px;font-weight:700;line-height:1}
@@ -496,7 +496,9 @@ const CARGO_FUN={vendas:['vias','arte_prep','arte_aprov','arte_env'],compras:['c
 const DO_VENDEDOR=['vias','arte_prep','arte_aprov','arte_env'];
 const FORN0=[{id:'fb',nome:'Bordadeira parceira',servico:'bordado',prazo:3,leva:'roger'},{id:'fd',nome:'Parceiro DTF',servico:'dtf',prazo:2,leva:'roger'}];
 const AVC=['#1E5BB8','#9C3D8F','#17864A','#B5561B','#4C5BA8','#0E7C86','#8A5A00','#B0304A','#3F6E2A','#5A4FB0','#A04000','#2E6F9E'];
-const SIZES=['P','M','G','GG','XG'];
+const CATS=[{id:'inf',nome:'Infantil',t:['2','4','6','8']},{id:'juv',nome:'Juvenil',t:['10','12','14','16']},{id:'adu',nome:'Adulto',t:['P','M','G','GG','XG','XXG']}];
+const SIZES=CATS.flatMap(c=>c.t);
+const catDe=it=>CATS.find(c=>c.id===(it.cat||'adu'));
 const CORES={Branca:'#F7F7F5',Preta:'#24272C',Marinho:'#1F2E55',Cinza:'#8E959E',Verde:'#2E7D4F',Royal:'#2449B8',Vermelha:'#C0302A'};
 const S=(id,nome,posto,deps,min,o={})=>({id,nome,posto,deps,min,pers:!!o.pers,fecha:!!o.fecha,obs:o.obs||'',partes:o.partes||[]});
 const ETQ='Etiqueta do lado ESQUERDO, por dentro';
@@ -771,7 +773,7 @@ const qtdTxt=(q,un)=>`${Number(q).toLocaleString('pt-BR')} ${un==='m'?'metros':'
 const modeloTxt=x=>{const p=prod(x.prod);return[x.tecido,x.cor,...(p.opcoes||[]).filter(o=>(x.opcoes||[]).includes(o.id)).map(o=>o.nome.toLowerCase())].filter(Boolean).join(' · ')};
 function calcMat(ls){const m={};ls.forEach(x=>{const p=prod(x.prod);const add=(it,un,q)=>{m[it]=m[it]||{item:it,un,nec:0};m[it].nec+=q};add(`${x.tecido||(p.tecidos||[])[0]||'Tecido'} ${x.cor}`,'m',p.consumo*x.qtd);p.aviam.forEach(([i,u,q])=>add(i,u,q*x.qtd));(p.opcoes||[]).filter(o=>(x.opcoes||[]).includes(o.id)).forEach(o=>(o.aviam||[]).forEach(([i,u,q])=>add(i,u,q*x.qtd)))});
   return Object.values(m).map(o=>{o.nec=Math.ceil(o.nec);o.est=state.estoque[o.item]??0;o.st=o.est>=o.nec?'ok':'comprar';return o})}
-function gradeOf(q){const w=[.14,.3,.3,.18,.08];const g={};let t=0;SIZES.forEach((s,i)=>{g[s]=Math.round(q*w[i]);t+=g[s]});g.M+=q-t;return g}
+function gradeOf(q){const w=[.14,.3,.3,.18,.08];const g={};let t=0;['P','M','G','GG','XG'].forEach((s,i)=>{g[s]=Math.round(q*w[i]);t+=g[s]});g.M+=q-t;return g}
 function makeRework(l,detect,orig,n,mot,ts,op){RC={};const p=rp(l),D=desc(p,orig),k=state.consertos.filter(d=>d.l===l.id).length+1;
   const r={id:`${l.id}-C${k}`,ped:l.ped,prod:l.prod,cor:l.cor,tecido:l.tecido,opcoes:l.opcoes,pers:l.pers,qtd:n,grade:{},desm:0,steps:{},rework:true,parent:l.id};
   p.steps.forEach(s=>{if(!D.has(s.id))r.steps[s.id]={st:'ok',herdado:true}});l.desm=(l.desm||0)+n;state.lotes.push(r);
@@ -1117,7 +1119,9 @@ function sNovo(){const w=ui.sheet.w,passos=`<div class="passos">${[1,2,3,4].map(
         <button class="depc" data-a="wPadd" data-k="${k}">${ic('i-mais')}Adicionar</button></div>
         ${it.novaP?`<div class="card" style="margin:10px 0 0;background:var(--bg)"><div class="passo-n">Qual personalização?</div><div class="linha-dep">${state.tipos.filter(t=>t.grupo==='pers').map(t=>`<button class="depc" data-a="wPt" data-k="${k}" data-v="${t.id}" aria-pressed="${it.novaP.tipo===t.id}">${ic(t.i)}${esc(tNome(t.id))}</button>`).join('')}</div>
           <div class="passo-n" style="margin-top:12px">Em qual parte da peça?</div><div class="linha-dep">${(prod(it.prod).partes||[]).map(pp=>`<button class="depc" data-a="wPp" data-k="${k}" data-v="${esc(pp)}">${esc(pp)}</button>`).join('')}</div></div>`:''}</div>
-      <div><div class="passo-n">Quantidade por tamanho</div><div class="tams">${SIZES.map(s=>`<div class="tam"><b>${s}</b><button class="stp" data-a="wQ" data-k="${k}" data-s="${s}" data-d="-10" aria-label="Menos 10 no ${s}">−</button><input id="q${k}${s}" data-q="${k}" data-s="${s}" inputmode="numeric" value="${it.g[s]||0}" aria-label="Quantidade ${s}"><button class="stp" data-a="wQ" data-k="${k}" data-s="${s}" data-d="10" aria-label="Mais 10 no ${s}">+</button></div>`).join('')}</div>
+      <div><div class="passo-n">Quantidade por tamanho</div>
+        <div class="linha-dep" style="margin-bottom:10px">${CATS.map(c=>{const n=sum(c.t.map(z=>it.g[z]||0));return `<button class="depc" data-a="wCat" data-k="${k}" data-v="${c.id}" aria-pressed="${catDe(it).id===c.id}">${c.nome} <small style="font-weight:400">${c.t[0]} a ${c.t[c.t.length-1]}</small>${n?` <span class="tagp" style="padding:0 8px">${n}</span>`:''}</button>`}).join('')}</div>
+        <div class="tams">${catDe(it).t.map(s=>`<div class="tam"><b>${s}</b><button class="stp" data-a="wQ" data-k="${k}" data-s="${s}" data-d="-10" aria-label="Menos 10 no ${s}">−</button><input id="q${k}${s}" data-q="${k}" data-s="${s}" inputmode="numeric" value="${it.g[s]||0}" aria-label="Quantidade ${s}"><button class="stp" data-a="wQ" data-k="${k}" data-s="${s}" data-d="10" aria-label="Mais 10 no ${s}">+</button></div>`).join('')}</div>
       <p style="margin:0;font-weight:700">Total: ${sum(SIZES.map(s=>it.g[s]||0))} peças</p></div>`).join('')}${nav()}`;
   if(w.step===3){const ops=[15,20,30].map(d=>{const dt=new Date(now()+d*DIA);dt.setHours(17,0,0,0);return dt.getTime()});
     const iso=w.entrega?(()=>{const d=new Date(w.entrega);return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`})():'';
@@ -1255,6 +1259,7 @@ const A={
   wNovaCor:d=>{wRead();const it=ui.sheet.w.itens[+d.k];it.novaCor=!it.novaCor;render();document.getElementById('nc'+d.k)?.focus()},
   wSalvaCor:d=>{const v=(document.getElementById('nc'+d.k)?.value||'').trim(),h=document.getElementById('nh'+d.k)?.value||'#888888';wRead();const w=ui.sheet.w,it=w.itens[+d.k];if(!v){w.err='Escreva o nome da cor';return render()}
     const ex=Object.keys(state.cores).find(c=>c.toLowerCase()===v.toLowerCase());if(!ex)state.cores[v]=h;it.cor=ex||v;it.novaCor=false;w.err='';save();render();toast(ex?`${ex} já existia e foi escolhida`:`Cor ${v} cadastrada`,false)},
+  wCat:d=>{wRead();ui.sheet.w.itens[+d.k].cat=d.v;render()},
   wTec:d=>{wRead();ui.sheet.w.itens[+d.k].tecido=d.v;ui.sheet.w.err='';render()},
   wOpc:d=>{wRead();togl(ui.sheet.w.itens[+d.k].opcoes,d.v);render()},
   wPadd:d=>{wRead();ui.sheet.w.itens[+d.k].novaP={tipo:null};render()},
