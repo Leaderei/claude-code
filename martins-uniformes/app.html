@@ -24,7 +24,7 @@ svg.ic{width:1.3em;height:1.3em;flex:none;fill:none;stroke:currentColor;stroke-w
 
 /* topo */
 .top{background:var(--card);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;gap:16px;padding-block:14px}
+.top .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-block:14px}
 .ola{margin-right:auto}
 .ola b{display:block;font-size:30px;line-height:1.1}
 .ola span{color:var(--muted);font-size:18px}
@@ -377,6 +377,15 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .busca{font-size:20px;padding:12px 16px}
 .depc.st-crit[aria-pressed="true"]{border-color:var(--red);background:var(--red-soft);color:var(--red)}
 .depc.st-warn[aria-pressed="true"]{border-color:var(--atn);background:var(--atn-soft);color:var(--atn-ink)}
+.dicaG b{display:inline!important;font-size:inherit}
+.g-alerta{border-width:3px}.g-alerta.u-crit{border-color:var(--red)}.g-alerta.u-warn{border-color:var(--atn)}.g-alerta.u-ok{border-color:var(--go)}
+.g-big{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}.g-big b{font-size:56px;line-height:1}.g-big span{font-size:20px;font-weight:700}
+.g-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 16px}
+.grow{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 44px;gap:10px;align-items:center;padding:7px 0;font-size:17px;border-top:1px solid var(--grey-soft)}
+.grow b{text-align:right;font-variant-numeric:tabular-nums}
+.gtrack{height:12px;background:var(--grey-soft);border-radius:3px;overflow:hidden}.gtrack i{display:block;height:100%;border-radius:0 4px 4px 0}
+.gt{width:100%;border-collapse:collapse;font-size:16px}.gt th{text-align:left;font-size:14px;color:var(--muted);padding:6px 8px;border-bottom:2px solid var(--line)}.gt td{padding:8px;border-bottom:1px solid var(--grey-soft);vertical-align:top}.gt small{color:var(--muted)}
+.tw{overflow-x:auto}
 .nota{background:var(--atn-soft);color:var(--atn-ink);border-radius:14px;padding:12px 16px;font-size:17px;margin-bottom:16px}
 </style>
 
@@ -415,6 +424,7 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
   <symbol id="i-camisa" viewBox="0 0 48 48"><path d="M17 6l-12 8 5 9 5-3v22h18V20l5 3 5-9-12-8c-1 4-4 6-7 6s-6-2-7-6z"/></symbol>
   <symbol id="i-predio" viewBox="0 0 48 48"><path d="M8 42V8h20v34M28 18h12v24M4 42h40M14 15h8M14 23h8M14 31h8M33 26h2M33 33h2"/></symbol>
   <symbol id="i-play" viewBox="0 0 48 48"><path d="M14 8l26 16-26 16z"/></symbol>
+  <symbol id="i-grafico" viewBox="0 0 48 48"><path d="M6 42h36M12 36V24M22 36V12M32 36V20M42 36V28"/></symbol>
   <symbol id="i-dormir" viewBox="0 0 48 48"><path d="M8 10h12L8 24h12M26 22h10L26 34h10"/></symbol>
   <symbol id="i-fabrica" viewBox="0 0 48 48"><path d="M4 42V20l10 7v-7l10 7v-7l10 7V8h8v34z"/><path d="M4 42h40M12 34h4M22 34h4"/></symbol>
   <symbol id="i-engr" viewBox="0 0 48 48"><circle cx="24" cy="24" r="6"/><path d="M24 4v7M24 37v7M4 24h7M37 24h7M10 10l5 5M33 33l5 5M38 10l-5 5M15 33l-5 5"/></symbol>
@@ -422,6 +432,7 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 
 <header class="top"><div class="wrap">
   <div class="ola"><b id="ola">Bom dia, Helena</b><span id="hoje"></span> <span class="exemplo">Exemplo</span></div>
+  <button class="help" data-a="tela" data-t="gestor"><svg class="ic"><use href="#i-grafico"/></svg>Painel do gestor</button>
   <button class="help" data-a="ajuda"><svg class="ic"><use href="#i-duvida"/></svg>Como usar</button>
 </div></header>
 <main><div class="wrap" id="app"></div></main>
@@ -796,6 +807,16 @@ function sim(l,doneIds,start){const p=rp(l),fim={};let mx=0;
     const e=isExt(s)?ini+(2+rnd()*2)*DIA:ini+s.min*l.qtd*(.9+rnd()*.45)*MIN;fim[s.id]=e;
     l.steps[s.id]=isExt(s)?{st:'ok',saiu:ini,fim:e,forn:fornDe(s.posto)[0]?.id,op:'roger'}:{st:'ok',ini,fim:e,op:pick(aptos(s.posto).map(x=>x.id)),maq:`${s.posto}-1`};mx=Math.max(mx,e)});
   const sh=mx-(now()-(2+rnd()*3)*H);Object.values(l.steps).forEach(x=>{['ini','fim','saiu'].forEach(k=>{if(x[k])x[k]-=sh})})}
+function logExemplo(T){state.log=[];{const combos=[['Polo Amsterdã','Pregar mangas','overlock'],['Polo Amsterdã','Unir ombros','overlock'],['Polo Viena','Pregar gola','overlock'],['Polo Amsterdã','Montar peitilho','reta'],['Calça Helanca','Pregar bolsos','reta'],['Polo Viena','Barra da manga','galoneira'],['Calça Helanca','Barra','galoneira'],['Polo Amsterdã','Casear','caseadeira'],['Polo Amsterdã','Corte','corte'],['Jaleco','Corte','corte']];
+    const clis=['Construtora Horizonte','Rede Farma Vida','Academia Pulse','Transportes Rota Sul','Hospital São Lucas'];
+    for(let i=0;i<56;i++){const c=combos[Math.floor(rnd()*combos.length)],ap=aptos(c[2]);if(!ap.length)continue;const op=pick(ap.map(x=>x.id)),r=rnd();
+      let modo='sugerido';if(c[1]==='Pregar mangas'&&r<.55)modo='fora';else if(c[2]==='overlock'&&r<.25)modo='pessoa';else if(r<.07)modo='outro';else if(r<.1)modo='reserva';
+      const ts=T-(i<44?rnd()*6.5:7+rnd()*20)*DIA;state.log.push({ts,por:'Helena',tipo:'inicio',modo,maq:c[2]+'-'+(1+Math.floor(rnd()*Math.min(3,tipo(c[2]).qtd||1))),maqTipo:c[2],op,sug:modo==='pessoa'?pick(ap.filter(x=>x.id!==op).map(x=>x.id))||op:op,ped:'',cli:pick(clis),prod:c[0],step:c[1]})}
+    [[1.2,'fora'],[2.1,'fora'],[3.4,'fora'],[4.6,'fora'],[5.3,'fora']].forEach(([d,m])=>state.log.push({ts:T-d*DIA,por:'Helena',tipo:'inicio',modo:m,maq:'overlock-1',maqTipo:'overlock',op:'dalva',sug:'dalva',ped:'',cli:'Construtora Horizonte',prod:'Polo Amsterdã',step:'Pregar mangas'}));
+    [[0.8,'zeze'],[2.7,'zeze'],[4.1,'dalva']].forEach(([d,op])=>state.log.push({ts:T-d*DIA,por:'Helena',tipo:'inicio',modo:'pessoa',maq:'overlock-2',maqTipo:'overlock',op,sug:'ana',ped:'',cli:'Rede Farma Vida',prod:'Polo Viena',step:'Pregar gola'}));
+    state.log.push({ts:T-1.5*DIA,por:'Helena',tipo:'reserva',maq:'reta-1',maqTipo:'reta',op:'leo',ped:'0416',cli:'Academia Pulse',prod:'Calça Helanca',step:'Pregar bolsos'});
+    state.log.push({ts:T-2*DIA,por:'Helena',tipo:'troca',f:'levar',de:'roger',para:'layara',ped:'0412',cli:'Construtora Horizonte',step:'Levar para Parceiro DTF'});
+    state.log.sort((a,b)=>a.ts-b.ts)}}
 function seed(){seedN=7;const T=now();
   state={v:8,cores:{...CORES},atrib:{},tipos:JSON.parse(JSON.stringify(TIPOS0)),pessoas:JSON.parse(JSON.stringify(PESSOAS0)),forn:JSON.parse(JSON.stringify(FORN0)),produtos:JSON.parse(JSON.stringify(PRODUTOS0)),pedidos:[],lotes:[],consertos:[],estoque:{...ESTOQUE},seq:421};
   const mk=o=>{const ped={id:o.id,cliente:o.cliente,contato:o.contato||'',cnpj:o.cnpj||'',vendedor:o.vend,chegada:o.chegada,entrega:o.entrega,vias:o.vias??true,arte:o.arte??true,artePrep:o.prep??true,artes:{},materiais:[],concluido:o.concluido||null};
@@ -817,10 +838,11 @@ function seed(){seedN=7;const T=now();
   lote('0412-2').steps.pz0={st:'fora',saiu:T-26*H,forn:'fd',op:'roger'};lote('0415-1').steps.pz1={st:'fora',saiu:T-20*H,forn:'fb',op:'roger'};
   makeRework(lote('0412-1'),'fechar','manga',6,'Costura torta',T-26*H,'dalva');and('0412-1-C1','manga','overlock-1','dalva',18);
   makeRework(lote('0409-1'),'fechar','gola',8,'Gola torta',T-3*H,'zeze');
+  logExemplo(T);
   const r=makeRework(lote('0402-1'),'arremate','etiqueta',5,'Etiqueta errada',addWD(T,-6),'leo');rp(r).steps.forEach(s=>r.steps[s.id]={st:'ok',herdado:true});
   return state}
 function save(){RC={};try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
-function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===8&&s.pedidos){if(!s.cores)s.cores={...CORES};const EXC={'0402':['Marcos Lima','12.345.678/0001-90'],'0409':['Juliana Prado','23.456.789/0001-01'],'0412':['Paulo Reis','34.567.890/0001-12'],'0415':['Carla Mendes','45.678.901/0001-23'],'0416':['Rafael Souza','56.789.012/0001-34'],'0419':['Renata Alves','78.901.234/0001-56'],'0418':['Teresa Nogueira','67.890.123/0001-45'],'0420':['Fernanda Rocha','89.012.345/0001-67']};s.pedidos.forEach(p=>{const x=EXC[p.id];p.contato=p.contato||(x?x[0]:'');p.cnpj=p.cnpj||(x?x[1]:'')});s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});state=s;return}}catch(e){}seed()}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===8&&s.pedidos){const semLog=!s.log;if(!s.cores)s.cores={...CORES};const EXC={'0402':['Marcos Lima','12.345.678/0001-90'],'0409':['Juliana Prado','23.456.789/0001-01'],'0412':['Paulo Reis','34.567.890/0001-12'],'0415':['Carla Mendes','45.678.901/0001-23'],'0416':['Rafael Souza','56.789.012/0001-34'],'0419':['Renata Alves','78.901.234/0001-56'],'0418':['Teresa Nogueira','67.890.123/0001-45'],'0420':['Fernanda Rocha','89.012.345/0001-67']};s.pedidos.forEach(p=>{const x=EXC[p.id];p.contato=p.contato||(x?x[0]:'');p.cnpj=p.cnpj||(x?x[1]:'')});s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});state=s;if(semLog){seedN=11;logExemplo(now())}return}}catch(e){}seed()}
 
 /* ================= desenho dos produtos ================= */
 function prodSvg(pid,cor){const p=prod(pid);return shapeSvg(p?p.forma:'polo',cor,p?p.nome:'')}
@@ -1117,6 +1139,7 @@ function opcoesTipo(t){const pr=prontas().filter(it=>it.s.posto===t),ch=[];
     p.steps.filter(z=>z.posto===t&&stOf(l,z.id).st==='pend'&&!ready(l,z,ped)).forEach(z=>{const f=z.deps.filter(d=>!done(l,d)).map(d=>m[d]?.nome||d);
       ch.push({ped,inf,l,p,s:z,falta:f.length?f:[liberado(ped)?'arte ou peça no fornecedor':'liberar o corte']})})})});
   return{pr,ch:ch.sort((a,b)=>a.inf.score-b.inf.score)}}
+function registrar(e){state.log=state.log||[];state.log.push({ts:now(),por:'Helena',...e});if(state.log.length>3000)state.log.splice(0,state.log.length-3000)}
 const kIt=it=>it.l.id+'|'+it.s.id;
 function sMaq(){const e=ui.sheet,u=unidade(e.m);if(!u)return voltar();const P=plano(),t=P.uso[u.id],tp=tipo(u.tipo),O=opcoesTipo(u.tipo),res=(state.reservas||{})[u.id];
   const head=`<div class="quem"><span class="m-ic" style="width:64px;height:64px">${ic(tp.i)}</span><div><b>${esc(u.nome)}</b><span>Sabem usar: ${aptos(u.tipo).map(p=>esc(p.nome)).join(', ')||'ninguém'}</span></div></div>`;
@@ -1202,11 +1225,48 @@ function sAjuda(){return `${voltar('Fechar')}<h1>Como usar</h1><div class="ajuda
   <div class="ajuda"><div class="aj">${ic('i-alerta')}<b>Peça com defeito? Toque na máquina e aperte DEU PROBLEMA</b></div><div class="aj">${ic('i-conserto')}<b>Apertou errado? Aperte DESFAZER</b></div></div>
   <div class="acoes"><button class="big go" data-a="fechar">Entendi</button></div>`}
 
+/* ================= PAINEL DO GESTOR ================= */
+const MODOS={sugerido:'Seguiu a sugestão',reserva:'Reservado à mão',fora:'Começou fora da ordem',outro:'Escolheu outro processo',pessoa:'Trocou a pessoa sugerida'};
+const MODO_COR={reserva:'#1E5BB8',fora:'#C9352A',outro:'#B5561B',pessoa:'#7A3E9D'};
+function barra(v,max,cor){return `<div class="gtrack"><i style="width:${max?Math.max(2,v/max*100):0}%;background:${cor||'var(--blue)'}"></i></div>`}
+function vGestor(){const dias=ui.gp||7,desde=now()-dias*DIA,L=(state.log||[]).filter(e=>e.ts>=desde);
+  const ini=L.filter(e=>e.tipo==='inicio'),man=ini.filter(e=>e.modo!=='sugerido'),pct=ini.length?man.length/ini.length:0;
+  const sev=pct>.2?'crit':pct>.1?'warn':'ok',res=L.filter(e=>e.tipo==='reserva').length,tro=L.filter(e=>e.tipo==='troca');
+  const cnt=(arr,f)=>{const m={};arr.forEach(e=>{const k=f(e);m[k]=(m[k]||0)+1});return Object.entries(m).sort((a,b)=>b[1]-a[1])};
+  const porModo=cnt(man,e=>e.modo),maxM=Math.max(1,...porModo.map(x=>x[1]));
+  const porProc=cnt(man,e=>e.prod+' · '+e.step).slice(0,8),maxP=Math.max(1,...porProc.map(x=>x[1]));
+  const tipos=[...new Set(ini.map(e=>e.maqTipo))].map(t=>{const a=ini.filter(e=>e.maqTipo===t),m=a.filter(e=>e.modo!=='sugerido').length;return{t,n:a.length,m,p:a.length?m/a.length:0}}).sort((a,b)=>b.p-a.p);
+  const porPes=cnt(man,e=>e.op).slice(0,8);
+  const dicas=[];porProc.forEach(([k,n])=>{const a=man.filter(e=>e.prod+' · '+e.step===k),top=cnt(a,e=>e.modo)[0];if(n<3)return;const[pr,st]=k.split(' · ');
+    if(top[0]==='fora')dicas.push(`<b>${esc(st)}</b> (${esc(pr)}) começou fora da ordem ${top[1]} vezes. Revise no roteiro o que ela precisa antes: talvez ela não dependa de tudo que está marcado.`);
+    else if(top[0]==='pessoa')dicas.push(`Em <b>${esc(st)}</b> (${esc(pr)}) a pessoa sugerida foi trocada ${top[1]} vezes. Revise quem faz melhor (★) essa etapa no cadastro da Equipe.`);
+    else if(top[0]==='outro')dicas.push(`<b>${esc(st)}</b> (${esc(pr)}) foi escolhida no lugar da sugestão ${top[1]} vezes. Veja se a prioridade ou a data de entrega do pedido está certa.`);
+    else dicas.push(`<b>${esc(st)}</b> (${esc(pr)}) foi reservada à mão ${top[1]} vezes. Se é sempre a mesma máquina, pode ser uma regra que falta no sistema.`)});
+  tipos.filter(x=>x.n>=4&&x.p>.3).forEach(x=>dicas.push(`Na <b>${esc(tipo(x.t).nome)}</b>, ${Math.round(x.p*100)}% dos inícios foram manuais. Converse com quem opera essa máquina para entender o porquê.`));
+  const ativos=state.pedidos.filter(p=>!p.concluido).map(p=>info(p));
+  return `<h1>Painel do gestor</h1>
+  <div class="linha-dep" style="margin:-4px 0 18px">${[7,30].map(d=>`<button class="depc" data-a="gp" data-v="${d}" aria-pressed="${dias===d}">Últimos ${d} dias</button>`).join('')}</div>
+  <div class="card g-alerta u-${sev}"><div class="g-big"><b>${Math.round(pct*100)}%</b><span>dos inícios de processo foram decididos à mão</span></div>
+    <div style="font-size:18px">${sev==='crit'?`<b>Acima de 20%.</b> A regra está sendo contornada com frequência: provavelmente algum roteiro, dependência ou prioridade está errado no cadastro. Veja abaixo onde corrigir.`:sev==='warn'?'<b>Entre 10% e 20%.</b> Aceitável, mas vale olhar os processos que mais aparecem abaixo.':'<b>Abaixo de 10%.</b> A equipe está seguindo o sistema. Os ajustes à mão são exceção.'}</div>
+    <div class="dica">${ini.length} inícios · ${man.length} manuais · ${res} reservas · ${tro.length} tarefas de escritório trocadas de pessoa</div></div>
+  ${dicas.length?`<div class="card"><h2>O que corrigir no cadastro</h2>${dicas.slice(0,5).map(d=>`<div class="mat">${ic('i-engr')}<div class="dicaG"><span style="font-size:18px;color:var(--ink)">${d}</span></div><span></span></div>`).join('')}</div>`:''}
+  <div class="g-grid">
+    <div class="card"><h2>Tipos de ajuste manual</h2>${porModo.map(([k,n])=>`<div class="grow"><span>${esc(MODOS[k])}</span>${barra(n,maxM,MODO_COR[k])}<b>${n}</b></div>`).join('')||'<p class="dica">Nenhum ajuste manual no período.</p>'}</div>
+    <div class="card"><h2>Por máquina</h2><p class="dica" style="margin:-4px 0 8px">% de inícios manuais em cada tipo de máquina</p>${tipos.map(x=>`<div class="grow"><span>${esc(tipo(x.t).nome)}</span>${barra(x.p,1,x.p>.2?'var(--red)':x.p>.1?'var(--atn)':'var(--go)')}<b>${Math.round(x.p*100)}%</b></div>`).join('')}</div>
+    <div class="card"><h2>Processos mais contornados</h2>${porProc.map(([k,n])=>`<div class="grow"><span>${esc(k)}</span>${barra(n,maxP)}<b>${n}</b></div>`).join('')||'<p class="dica">Nada no período.</p>'}</div>
+    <div class="card"><h2>Por pessoa na máquina</h2>${porPes.map(([k,n])=>`<div class="grow"><span style="display:flex;gap:8px;align-items:center">${av(k,'s')}${esc(pNome(k)||k)}</span>${barra(n,porPes[0][1])}<b>${n}</b></div>`).join('')||'<p class="dica">Nada no período.</p>'}</div>
+  </div>
+  <div class="card"><h2>Últimos ajustes manuais</h2><div class="tw"><table class="gt"><thead><tr><th>Quando</th><th>O quê</th><th>Máquina</th><th>Pessoa</th><th>Tipo</th><th>Registrado por</th></tr></thead><tbody>
+    ${[...man,...L.filter(e=>e.tipo!=='inicio')].sort((a,b)=>b.ts-a.ts).slice(0,15).map(e=>`<tr><td>${fD(e.ts)} ${pad(new Date(e.ts).getHours())}:${pad(new Date(e.ts).getMinutes())}</td><td>${esc(e.step)}${e.prod?' · '+esc(e.prod):''}<br><small>${esc(e.cli||'')}</small></td><td>${esc(e.maq?(unidade(e.maq)?.nome||e.maq):'Escritório')}</td><td>${e.tipo==='troca'?`${esc(pNome(e.de)||'—')} → ${esc(pNome(e.para)||'sistema')}`:esc(pNome(e.op)||'—')}${e.modo==='pessoa'&&e.sug?`<br><small>sugerida: ${esc(pNome(e.sug))}</small>`:''}</td><td>${e.tipo==='inicio'?esc(MODOS[e.modo]):e.tipo==='reserva'?'Reserva feita':'Tarefa trocada'}</td><td>${esc(e.por||'')}</td></tr>`).join('')}
+  </tbody></table></div><p class="dica">"Registrado por" mostra quem usava o app. Hoje é sempre a Helena; com login, vira o nome de quem apertou o botão.</p></div>
+  <div class="card"><h2>Situação dos pedidos agora</h2><div class="linha-dep">${['crit','warn','ok','pronto'].map(u=>`<span class="pill u-${u}" style="font-size:18px;padding:8px 16px"><span class="dot"></span>${ativos.filter(i=>i.u===u).length} ${ULAB[u].toLowerCase()}</span>`).join('')}</div></div>
+  <p class="dica">Os números deste painel vêm dos dados de exemplo e dos cliques feitos neste aparelho.</p>`}
+
 /* ================= render ================= */
 const sheetId=s=>s.t+':'+(s.id||s.p||s.m||'');
 function render(){RC={};
   document.querySelectorAll('.nb[data-t]').forEach(b=>b.setAttribute('aria-current',b.dataset.t===ui.tela?'page':'false'));
-  document.getElementById('app').innerHTML=ui.tela==='pedidos'?vPedidos():ui.tela==='cadastros'?vCadastros():vFabrica();
+  document.getElementById('app').innerHTML=ui.tela==='gestor'?vGestor():ui.tela==='pedidos'?vPedidos():ui.tela==='cadastros'?vCadastros():vFabrica();
   const sh=document.getElementById('sheet');const s=ui.sheet;
   if(!s){sh.innerHTML='';document.body.style.overflow='';return}
   const old=sh.querySelector('.sheet'),keep=old&&old.dataset.id===sheetId(s)?{top:old.scrollTop,x:[...old.querySelectorAll('.fx-wrap')].map(e=>[e.dataset.k,e.scrollLeft])}:null;
@@ -1233,12 +1293,16 @@ const A={
   mP:d=>{ui.sheet.p=d.v;render()},
   pfSt:d=>{ui.pf.st=d.v;render()},
   pfOrd:d=>{if(ui.pf.ord===d.v&&d.v!=='urg')ui.pf.inv=!ui.pf.inv;else{ui.pf.ord=d.v;ui.pf.inv=false}render()},
+  gp:d=>{ui.gp=+d.v;render()},
   mSel:d=>{ui.sheet.sel=d.v;ui.sheet.p=null;render();document.querySelector('.sheet')?.scrollTo({top:0,behavior:'smooth'})},
-  mRes:d=>{snap();state.reservas=state.reservas||{};Object.keys(state.reservas).forEach(k=>{const r=state.reservas[k];if(r.l===d.l&&r.s===d.s)delete state.reservas[k]});state.reservas[d.m]={l:d.l,s:d.s,p:d.p||''};ui.sheet.sel=null;commit();toast(`Reservado para ${unidade(d.m)?.nome}`)},
+  mRes:d=>{snap();{const l=lote(d.l);registrar({tipo:'reserva',maq:d.m,maqTipo:unidade(d.m)?.tipo,op:d.p||'',ped:l.ped,cli:pedById(l.ped).cliente,prod:prod(l.prod).nome,step:sMap(rp(l))[d.s].nome})}state.reservas=state.reservas||{};Object.keys(state.reservas).forEach(k=>{const r=state.reservas[k];if(r.l===d.l&&r.s===d.s)delete state.reservas[k]});state.reservas[d.m]={l:d.l,s:d.s,p:d.p||''};ui.sheet.sel=null;commit();toast(`Reservado para ${unidade(d.m)?.nome}`)},
   mResX:d=>{snap();delete (state.reservas||{})[d.m];ui.sheet.sel=null;commit();toast('Reserva tirada: o sistema volta a escolher')},
   pedido:d=>{ui.fx=null;openSheet({t:'pedido',id:d.id})},
   terminou:d=>{const t=tarefaNa(d.m);if(!t)return;snap();t.x.st='ok';t.x.fim=now();save();const n=`${pNome(t.x.op)} terminou ${t.s.nome}`;openSheet({t:'maq',m:d.m,feito:n});toast(n)},
-  comecar:d=>{if(!d.p)return;const l=lote(d.l);snap();const s=sMap(rp(l))[d.s],fora=!ready(l,s,pedById(l.ped));l.steps[d.s]={st:'and',ini:now(),op:d.p,maq:d.m,manual:fora||undefined};const R_=state.reservas||{};Object.keys(R_).forEach(k=>{if(k===d.m||(R_[k].l===d.l&&R_[k].s===d.s))delete R_[k]});ui.sheet=null;commit();toast(`${pNome(d.p)} começou ${s.nome} na ${unidade(d.m)?.nome||''}${fora?' (fora da ordem)':''}`)},
+  comecar:d=>{if(!d.p)return;const l=lote(d.l);snap();const s=sMap(rp(l))[d.s],fora=!ready(l,s,pedById(l.ped));
+    {const P0=plano(),pl=P0.plan[d.m],rs=(state.reservas||{})[d.m],k=d.l+'|'+d.s;
+     const modo=fora?'fora':rs&&rs.l===d.l&&rs.s===d.s?'reserva':pl&&kIt(pl)===k?(pl.pessoa===d.p?'sugerido':'pessoa'):'outro';
+     registrar({tipo:'inicio',modo,maq:d.m,maqTipo:unidade(d.m)?.tipo,op:d.p,sug:pl?.pessoa||'',ped:l.ped,cli:pedById(l.ped).cliente,prod:prod(l.prod).nome,step:s.nome})}l.steps[d.s]={st:'and',ini:now(),op:d.p,maq:d.m,manual:fora||undefined};const R_=state.reservas||{};Object.keys(R_).forEach(k=>{if(k===d.m||(R_[k].l===d.l&&R_[k].s===d.s))delete R_[k]});ui.sheet=null;commit();toast(`${pNome(d.p)} começou ${s.nome} na ${unidade(d.m)?.nome||''}${fora?' (fora da ordem)':''}`)},
   desfazer:()=>{if(!undo)return;state=JSON.parse(undo);undo=null;document.getElementById('toast').innerHTML='';ui.sheet=null;commit()},
   problema:d=>openSheet({t:'prob',m:d.m,step:1,n:1,orig:null,mot:null}),
   pMot:d=>{const s=ui.sheet,t=tarefaNa(s.m),pr=PROBS[+d.k];s.mot=pr.k;const opts=topo(t.p).filter(x=>(x.id===t.s.id||anc(t.p,t.s.id).has(x.id))&&x.posto!=='corte').map(x=>x.id);s.orig=pr.alvo.find(a=>opts.includes(a))||t.s.id;s.step=2;render()},
@@ -1265,7 +1329,7 @@ const A={
     if(usoP.length){e.err=`Não dá para tirar: tem etapas em ${usoP.join(', ')}. Mude essas etapas para outra máquina antes.`;return render()}
     if(Object.keys(plano().uso).some(u=>u.startsWith(e.id+'-'))){e.err='Está em uso agora.';return render()}
     snap();state.tipos=state.tipos.filter(x=>x.id!==e.id);state.pessoas.forEach(p=>{p.sabe=p.sabe.filter(x=>x!==e.id);p.melhor=p.melhor.filter(x=>x!==e.id)});ui.sheet=null;commit();toast(`${e.nome} tirada`)},
-  trocaSel:d=>{snap();if(d.v)state.atrib[ui.sheet.key]=d.v;else delete state.atrib[ui.sheet.key];ui.sheet=null;commit();toast(d.v?`Tarefa passada para ${pNome(d.v)}`:'O sistema volta a escolher')},
+  trocaSel:d=>{snap();{const t=tarefasEsc().find(x=>x.key===ui.sheet.key);if(t)registrar({tipo:'troca',f:t.f,de:t.resp||'',para:d.v||'',ped:t.ped.id,cli:t.ped.cliente,step:t.t})}if(d.v)state.atrib[ui.sheet.key]=d.v;else delete state.atrib[ui.sheet.key];ui.sheet=null;commit();toast(d.v?`Tarefa passada para ${pNome(d.v)}`:'O sistema volta a escolher')},
   xFun:d=>{eRead();const e=ui.sheet;togl(e.funcoes,d.v);if(!e.funcoes.includes(d.v))e.melhor=e.melhor.filter(x=>x!==d.v);render()},
   xApp:d=>{eRead();ui.sheet.viaApp=!ui.sheet.viaApp;render()},
   comprei:d=>{const p=pedById(d.id);snap();p.materiais[+d.k].st='pedido';commit();toast('Compra anotada')},
