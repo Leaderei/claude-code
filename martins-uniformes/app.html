@@ -370,6 +370,9 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .sk.best{background:#FFF3D1;color:#6A4A00}
 .sk svg.ic{width:16px;height:16px}
 .pess{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;align-items:start}
+.novo-in{display:flex;gap:10px;align-items:center;margin-top:10px}.novo-in .campo{font-size:20px;padding:10px 14px}
+.cor-pick{width:56px;height:52px;border:2px solid var(--line);border-radius:12px;padding:2px;background:var(--card);flex:none}
+.dica{margin:6px 0 0;font-size:15px;color:var(--muted)}
 .nota{background:var(--atn-soft);color:var(--atn-ink);border-radius:14px;padding:12px 16px;font-size:17px;margin-bottom:16px}
 </style>
 
@@ -781,7 +784,7 @@ function sim(l,doneIds,start){const p=rp(l),fim={};let mx=0;
     l.steps[s.id]=isExt(s)?{st:'ok',saiu:ini,fim:e,forn:fornDe(s.posto)[0]?.id,op:'roger'}:{st:'ok',ini,fim:e,op:pick(aptos(s.posto).map(x=>x.id)),maq:`${s.posto}-1`};mx=Math.max(mx,e)});
   const sh=mx-(now()-(2+rnd()*3)*H);Object.values(l.steps).forEach(x=>{['ini','fim','saiu'].forEach(k=>{if(x[k])x[k]-=sh})})}
 function seed(){seedN=7;const T=now();
-  state={v:8,atrib:{},tipos:JSON.parse(JSON.stringify(TIPOS0)),pessoas:JSON.parse(JSON.stringify(PESSOAS0)),forn:JSON.parse(JSON.stringify(FORN0)),produtos:JSON.parse(JSON.stringify(PRODUTOS0)),pedidos:[],lotes:[],consertos:[],estoque:{...ESTOQUE},seq:421};
+  state={v:8,cores:{...CORES},atrib:{},tipos:JSON.parse(JSON.stringify(TIPOS0)),pessoas:JSON.parse(JSON.stringify(PESSOAS0)),forn:JSON.parse(JSON.stringify(FORN0)),produtos:JSON.parse(JSON.stringify(PRODUTOS0)),pedidos:[],lotes:[],consertos:[],estoque:{...ESTOQUE},seq:421};
   const mk=o=>{const ped={id:o.id,cliente:o.cliente,vendedor:o.vend,chegada:o.chegada,entrega:o.entrega,vias:o.vias??true,arte:o.arte??true,artePrep:o.prep??true,artes:{},materiais:[],concluido:o.concluido||null};
     ped.materiais=calcMat(o.linhas);if(o.lib)ped.materiais.forEach(m=>m.st='ok');state.pedidos.push(ped);
     o.linhas.forEach((x,i)=>{const l={id:`${o.id}-${i+1}`,ped:o.id,prod:x.prod,cor:x.cor,tecido:x.tecido||prod(x.prod).tecidos[0],opcoes:x.opcoes||[],qtd:x.qtd,grade:gradeOf(x.qtd),pers:(prod(x.prod).persPadrao||[]).map((y,j)=>({...y,id:'pz'+j})),desm:0,steps:{},rework:false,parent:null};state.lotes.push(l);if(x.done)sim(l,x.done==='all'?rp(l).steps.map(z=>z.id):x.done,o.lib)});
@@ -804,11 +807,13 @@ function seed(){seedN=7;const T=now();
   const r=makeRework(lote('0402-1'),'arremate','etiqueta',5,'Etiqueta errada',addWD(T,-6),'leo');rp(r).steps.forEach(s=>r.steps[s.id]={st:'ok',herdado:true});
   return state}
 function save(){RC={};try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
-function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===8&&s.pedidos){s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});state=s;return}}catch(e){}seed()}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===8&&s.pedidos){if(!s.cores)s.cores={...CORES};s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});state=s;return}}catch(e){}seed()}
 
 /* ================= desenho dos produtos ================= */
 function prodSvg(pid,cor){const p=prod(pid);return shapeSvg(p?p.forma:'polo',cor,p?p.nome:'')}
-function shapeSvg(forma,cor,nome){const f=CORES[cor]||'#B9C0C8',claro=cor==='Branca'||!CORES[cor];
+const coresAll=()=>(state&&state.cores)||CORES;
+function claroHex(h){const n=parseInt(String(h).slice(1),16);if(isNaN(n))return true;const r=n>>16,g=n>>8&255,b=n&255;return (r*299+g*587+b*114)/1000>200}
+function shapeSvg(forma,cor,nome){const hx=coresAll()[cor],f=hx||'#B9C0C8',claro=!hx||claroHex(hx);
   const st=claro?'#8C96A1':'rgba(0,0,0,.45)',ln=claro?'#8C96A1':'rgba(255,255,255,.55)';
   const a=`fill="${f}" stroke="${st}" stroke-width="2.5" stroke-linejoin="round"`,b=`fill="none" stroke="${ln}" stroke-width="2.5" stroke-linecap="round"`;
   let body;
@@ -1103,9 +1108,11 @@ function sNovo(){const w=ui.sheet.w,passos=`<div class="passos">${[1,2,3,4].map(
     <div class="rotulo">Quem vendeu?</div><div class="linha-dep">${state.pessoas.filter(p=>temPapel(p,'vendas')).map(p=>`<button class="pchip" data-a="wVend" data-v="${p.id}" aria-pressed="${w.vend===p.id}">${av(p.id,'s')}${esc(p.nome)}</button>`).join('')}</div>${nav()}`;
   if(w.step===2)return `${head}<h1>Quais peças?</h1><p style="color:var(--ink2);margin-top:-6px">Toque na peça para adicionar.</p><div class="escolhe">${state.produtos.map(p=>`<button class="opc" data-a="wAdd" data-p="${p.id}">${prodSvg(p.id,'')}${esc(p.nome)}</button>`).join('')}</div>
     ${w.itens.map((it,k)=>`<div class="item"><div class="item-h">${prodSvg(it.prod,it.cor)}<b>${esc(prod(it.prod).nome)}</b><button class="x" data-a="wRm" data-k="${k}">Tirar</button></div>
-      <div><div class="passo-n">Tecido</div><div class="linha-dep">${prod(it.prod).tecidos.map(t=>`<button class="depc" data-a="wTec" data-k="${k}" data-v="${esc(t)}" aria-pressed="${it.tecido===t}">${ic('i-rolo')}${esc(t)}</button>`).join('')}</div></div>
+      <div><div class="passo-n">Tecido</div><div class="linha-dep">${prod(it.prod).tecidos.map(t=>`<button class="depc" data-a="wTec" data-k="${k}" data-v="${esc(t)}" aria-pressed="${it.tecido===t}">${ic('i-rolo')}${esc(t)}</button>`).join('')}<button class="depc" data-a="wNovoTec" data-k="${k}">${ic('i-mais')}Novo tecido</button></div>
+        ${it.novoTec?`<div class="novo-in"><input class="campo" id="nt${k}" placeholder="Nome do tecido (ex.: Malha PV)" autocomplete="off"><button class="mbtn go" data-a="wSalvaTec" data-k="${k}">Salvar</button></div><p class="dica">Fica cadastrado no ${esc(prod(it.prod).nome)} para os próximos pedidos.</p>`:''}</div>
       ${(prod(it.prod).opcoes||[]).length?`<div><div class="passo-n">Modelo</div><div class="linha-dep">${prod(it.prod).opcoes.map(o=>`<button class="depc" data-a="wOpc" data-k="${k}" data-v="${o.id}" aria-pressed="${it.opcoes.includes(o.id)}">${esc(o.nome)}</button>`).join('')}</div></div>`:''}
-      <div><div class="passo-n">Cor</div><div class="cores">${Object.entries(CORES).map(([n,h])=>`<button class="cor" data-a="wCor" data-k="${k}" data-c="${n}" aria-pressed="${it.cor===n}"><span style="background:${h}"></span>${n}</button>`).join('')}</div></div>
+      <div><div class="passo-n">Cor</div><div class="cores">${Object.entries(coresAll()).map(([n,h])=>`<button class="cor" data-a="wCor" data-k="${k}" data-c="${esc(n)}" aria-pressed="${it.cor===n}"><span style="background:${esc(h)}"></span>${esc(n)}</button>`).join('')}<button class="cor" data-a="wNovaCor" data-k="${k}"><span style="display:grid;place-items:center;border-style:dashed">${ic('i-mais')}</span>Nova cor</button></div>
+        ${it.novaCor?`<div class="novo-in"><input class="campo" id="nc${k}" placeholder="Nome da cor (ex.: Azul petróleo)" autocomplete="off"><input type="color" id="nh${k}" value="#2A6F7F" aria-label="Escolha a cor" class="cor-pick"><button class="mbtn go" data-a="wSalvaCor" data-k="${k}">Salvar</button></div><p class="dica">Fica disponível em todos os produtos.</p>`:''}</div>
       <div><div class="passo-n">Personalização: o quê e onde</div><div class="linha-dep">${it.pers.map((x,j)=>`<span class="depc" aria-pressed="true">${ic(tipo(x.tipo).i)}${esc(tNome(x.tipo))} · ${esc(x.parte)}${tipo(x.tipo).externo?' <small style="font-weight:400">(fora)</small>':''}<button class="x" data-a="wPrm" data-k="${k}" data-j="${j}" aria-label="Tirar" style="padding:0 8px;margin-left:4px">×</button></span>`).join('')}
         <button class="depc" data-a="wPadd" data-k="${k}">${ic('i-mais')}Adicionar</button></div>
         ${it.novaP?`<div class="card" style="margin:10px 0 0;background:var(--bg)"><div class="passo-n">Qual personalização?</div><div class="linha-dep">${state.tipos.filter(t=>t.grupo==='pers').map(t=>`<button class="depc" data-a="wPt" data-k="${k}" data-v="${t.id}" aria-pressed="${it.novaP.tipo===t.id}">${ic(t.i)}${esc(tNome(t.id))}</button>`).join('')}</div>
@@ -1242,6 +1249,12 @@ const A={
   novo:()=>openSheet({t:'novo',w:{step:1,cliente:'',vend:null,itens:[],entrega:null,err:''}}),
   wVend:d=>{wRead();ui.sheet.w.vend=d.v;ui.sheet.w.err='';render()},
   wAdd:d=>{wRead();const pp=prod(d.p);ui.sheet.w.itens.push({prod:d.p,cor:'',tecido:pp.tecidos.length===1?pp.tecidos[0]:'',opcoes:[],g:{},pers:JSON.parse(JSON.stringify(prod(d.p).persPadrao||[])),novaP:null});ui.sheet.w.err='';render();const it=document.querySelectorAll('.item');it[it.length-1]?.scrollIntoView({behavior:'smooth',block:'start'})},
+  wNovoTec:d=>{wRead();const it=ui.sheet.w.itens[+d.k];it.novoTec=!it.novoTec;render();document.getElementById('nt'+d.k)?.focus()},
+  wSalvaTec:d=>{const v=(document.getElementById('nt'+d.k)?.value||'').trim();wRead();const w=ui.sheet.w,it=w.itens[+d.k];if(!v){w.err='Escreva o nome do tecido';return render()}
+    const p=prod(it.prod),ex=p.tecidos.find(t=>t.toLowerCase()===v.toLowerCase());if(!ex)p.tecidos.push(v);it.tecido=ex||v;it.novoTec=false;w.err='';save();render();toast(ex?`${ex} já existia e foi escolhido`:`Tecido ${v} cadastrado no ${p.nome}`,false)},
+  wNovaCor:d=>{wRead();const it=ui.sheet.w.itens[+d.k];it.novaCor=!it.novaCor;render();document.getElementById('nc'+d.k)?.focus()},
+  wSalvaCor:d=>{const v=(document.getElementById('nc'+d.k)?.value||'').trim(),h=document.getElementById('nh'+d.k)?.value||'#888888';wRead();const w=ui.sheet.w,it=w.itens[+d.k];if(!v){w.err='Escreva o nome da cor';return render()}
+    const ex=Object.keys(state.cores).find(c=>c.toLowerCase()===v.toLowerCase());if(!ex)state.cores[v]=h;it.cor=ex||v;it.novaCor=false;w.err='';save();render();toast(ex?`${ex} já existia e foi escolhida`:`Cor ${v} cadastrada`,false)},
   wTec:d=>{wRead();ui.sheet.w.itens[+d.k].tecido=d.v;ui.sheet.w.err='';render()},
   wOpc:d=>{wRead();togl(ui.sheet.w.itens[+d.k].opcoes,d.v);render()},
   wPadd:d=>{wRead();ui.sheet.w.itens[+d.k].novaP={tipo:null};render()},
