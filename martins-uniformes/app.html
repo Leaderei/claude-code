@@ -491,6 +491,18 @@ button.ola{border:0;background:none;text-align:left;padding:0;display:flex;flex-
 .inicio{max-width:560px;margin:10px auto;display:grid;gap:14px;justify-items:start;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:24px}
 .inicio p{margin:0;color:var(--ink2)}.inicio .big{width:100%}
 .eq[aria-pressed="true"]{border-color:var(--go);background:var(--go-soft)}
+
+/* v0.22: horário e hora extra */
+.st-he .p-st,.p-st.st-he{background:#F3ECFB;color:#6B2F8C}.p-st.st-he .dot{background:#7A3E9D}
+.p-st.st-pausa{background:var(--grey-soft);color:var(--ink2)}.p-st.st-pausa svg.ic{width:22px;height:22px}
+.st-trab .p-st.st-pausa+.p-act.fim{opacity:.9}
+.he-b{display:flex;align-items:center;justify-content:center;gap:8px;margin:-4px 12px 12px;border:2px solid #B48ACB;background:#fff;color:#6B2F8C;border-radius:12px;min-height:46px;font-weight:700;font-size:17px}
+.he-b svg.ic{width:22px;height:22px}
+.faixa{display:flex;align-items:center;gap:12px;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:10px 14px;margin-bottom:14px;font-size:17px;color:var(--ink2)}
+.faixa>svg.ic{width:30px;height:30px;flex:none;color:var(--muted)}.faixa>span{flex:1}.faixa b{color:var(--ink)}
+.pz-row{display:grid;grid-template-columns:minmax(0,1fr) 150px 120px auto;gap:8px;align-items:center;margin-bottom:10px}.pz-row .campo,.aj-in input[type=time]{min-width:0;width:100%}.aj-in input[type=time]{width:150px}
+.pz-row{padding-bottom:10px;border-bottom:2px solid var(--grey-soft)}
+@media (max-width:640px){.pz-row{grid-template-columns:minmax(0,1fr) 96px auto}.pz-row>input:first-child{grid-column:1/-1}.pz-row input{font-size:18px;padding-inline:10px}.pz-row .aj-in small{display:none}.faixa{flex-wrap:wrap}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -552,6 +564,7 @@ button.ola{border:0;background:none;text-align:left;padding:0;display:flex;flex-
 
 <script>
 /* ================= utilidades ================= */
+document.documentElement.lang="pt-BR";
 const MIN=6e4,H=36e5,DIA=864e5;
 const DOW=['domingo','segunda','terça','quarta','quinta','sexta','sábado'];
 const DOWc=['dom','seg','ter','qua','qui','sex','sáb'];
@@ -563,7 +576,28 @@ const fD=ts=>{const d=new Date(ts);return `${DOWc[d.getDay()]} ${pad(d.getDate()
 const fDur=ms=>{const m=Math.max(0,Math.round(ms/MIN));const h=Math.floor(m/60);return h?`${h}h${pad(m%60)}`:`${m} min`};
 const nf=(x,d=1)=>Number(x).toLocaleString('pt-BR',{maximumFractionDigits:d});
 const sum=a=>a.reduce((x,y)=>x+y,0);
-const isWD=d=>d.getDay()!==0&&d.getDay()!==6;
+const EXP0={ini:'07:30',fim:'17:30',pausas:[{nome:'Pausa',h:'09:00',min:15},{nome:'Pausa',h:'15:00',min:15}],dias:[1,2,3,4,5]};
+const EXP=()=>(typeof state!=='undefined'&&state&&state.expediente)||EXP0;
+const hm=x=>{const[a,b]=String(x||'0:0').split(':').map(Number);return (a||0)*60+(b||0)};
+const hmTxt=m=>`${pad(Math.floor(m/60)%24)}:${pad(Math.round(m%60))}`;
+const tsHm=ts=>{const d=new Date(ts);return `${pad(d.getHours())}:${pad(d.getMinutes())}`};
+const isWD=d=>(EXP().dias||[1,2,3,4,5]).includes(d.getDay());
+function segsDia(){const e=EXP();let sg=[[hm(e.ini),hm(e.fim)]];
+  (e.pausas||[]).forEach(p=>{const a=hm(p.h),z=a+(+p.min||0);sg=sg.flatMap(([x,y])=>z<=x||a>=y?[[x,y]]:[[x,Math.max(x,a)],[Math.min(y,z),y]].filter(([u,v])=>v>u))});return sg}
+const jornadaMin=()=>Math.max(60,sum(segsDia().map(([a,b])=>b-a)));
+function janelasDia(d0){if(!isWD(d0))return [];const b=d0.getTime();return segsDia().map(([x,y])=>[b+x*MIN,b+y*MIN])}
+const sobre=(a,b,c,d)=>Math.max(0,Math.min(b,d)-Math.max(a,c));
+function tempoUtil(x,ate){if(!x||!x.ini)return 0;const fim=x.fim||ate||now();let t=0;const d=sod(x.ini);let n=0;
+  while(d.getTime()<=fim&&n++<400){janelasDia(d).forEach(([a,b])=>t+=sobre(x.ini,fim,a,b));d.setDate(d.getDate()+1)}
+  (x.he||[]).forEach(h=>t+=sobre(h.i,Math.min(h.f,fim),x.ini,fim));return t}
+function proxInicio(ts){const d=sod(ts);for(let i=0;i<15;i++){const j=janelasDia(d).find(([a])=>a>ts);if(j)return j[0];d.setDate(d.getDate()+1)}return ts+DIA}
+function situacao(ts){ts=ts||now();const js=janelasDia(sod(ts));if(js.some(([a,b])=>ts>=a&&ts<b))return {k:'trab'};
+  const e=EXP(),b=sod(ts).getTime(),ini=b+hm(e.ini)*MIN,fim=b+hm(e.fim)*MIN;
+  if(isWD(sod(ts))&&ts>=ini&&ts<fim){const p=(e.pausas||[]).find(p=>{const a=b+hm(p.h)*MIN;return ts>=a&&ts<a+(+p.min||0)*MIN});return {k:'pausa',ate:p?b+(hm(p.h)+(+p.min||0))*MIN:proxInicio(ts),nome:p?.nome||'Pausa'}}
+  return {k:'fora',prox:proxInicio(ts),depois:ts>=fim}}
+const heAtiva=(x,ts)=>(x&&x.he||[]).find(h=>h.i<=(ts||now())&&(ts||now())<h.f);
+const contando=x=>situacao().k==='trab'||!!heAtiva(x);
+function heOpcoes(){const t=now(),lim=proxInicio(t),base=Math.ceil(t/(30*MIN))*30*MIN;const o=[];for(let k=1;k<=8;k++){const v=base+k*30*MIN;if(v>lim)break;o.push(v)}return o.length?o:[lim]}
 const sod=ts=>{const d=new Date(ts);d.setHours(0,0,0,0);return d};
 function addWD(ts,n){const d=sod(ts);let k=Math.abs(n);const s=n<0?-1:1;while(k>0){d.setDate(d.getDate()+s);if(isWD(d))k--}d.setHours(17,0,0,0);return d.getTime()}
 function wdUntil(ts){const a=sod(now()),b=sod(ts);let n=0;const d=new Date(a);if(b>=a){while(d<b){d.setDate(d.getDate()+1);if(isWD(d))n++}return n}while(d>b){if(isWD(d))n--;d.setDate(d.getDate()-1)}return n}
@@ -854,7 +888,7 @@ function ready(l,s,ped){if(stOf(l,s.id).st!=='pend')return false;if(!s.deps.ever
   if(isExt(s)){const R=rp(l);   // só leva se a parte não estiver numa máquina
     if(R.steps.some(x=>stOf(l,x.id).st==='and'&&usa(R,x).some(pp=>s.partes.includes(pp))))return false}
   return true}
-function wStep(l,s){if(isExt(s))return (fornDe(s.posto)[0]?.prazo||3)+0.5;return s.min*qtdEf(l)/(prm().jornada*prm().efic)+prm().fila}
+function wStep(l,s){if(isExt(s))return (fornDe(s.posto)[0]?.prazo||3)+0.5;return s.min*qtdEf(l)/(jornadaMin()*prm().efic)+prm().fila}
 function remDays(l){const p=rp(l),dist={};let mx=0;topo(p).forEach(s=>{const st=stOf(l,s.id).st;const w=st==='ok'?0:(st==='and'||st==='fora')?wStep(l,s)*.5:wStep(l,s);dist[s.id]=w+Math.max(0,...s.deps.map(d=>dist[d]||0));mx=Math.max(mx,dist[s.id])});return mx}
 function minsTot(l){let t=0,d=0;rp(l).steps.forEach(s=>{const m=s.min*l.qtd;t+=m;if(done(l,s.id))d+=m});return[d,t]}
 function preDias(ped){if(liberado(ped))return 0;let d=0;if(ped.materiais.some(m=>m.st==='comprar'))d+=prm().leadCompra;else if(ped.materiais.some(m=>m.st==='pedido'))d+=Math.ceil(prm().leadCompra/2);if(!ped.arte||!ped.vias)d+=1;return d}
@@ -911,7 +945,7 @@ const viaApp=(t)=>['levar','entregar'].includes(t.f)&&pessoa(t.resp)?.viaApp;
 function tarTxt(t){if(!viaApp(t))return t.t;return t.a==='levei'?t.t.replace('Levar para','Chamar app para levar ao'):t.a==='buscou'?t.t.replace('Buscar no','Chamar app para buscar no'):'Chamar app para entregar ao cliente'}
 function servicosPed(ped){const n=new Set();lotesDe(ped.id).forEach(l=>rp(l).steps.forEach(s=>{if(s.pers||isExt(s))n.add(tNome(s.posto))}));return[...n]}
 const durEt=(s,q)=>isExt(s)?`${fornDe(s.posto)[0]?.prazo||3} dias no fornecedor`:fDur(s.min*q*MIN);
-const minTxt=m=>m>=480?`${nf(m/480)} dia${m>=960?'s':''}`:fDur(m*MIN);
+const minTxt=m=>{const J=jornadaMin();return m>=J?`${nf(m/J)} dia${m>=2*J?'s':''}`:fDur(m*MIN)};
 const qtdTxt=(q,un)=>`≈ ${Number(q).toLocaleString('pt-BR')} ${un==='m'?'metros':'unidades'}`;
 const AVISO_EST='Quantidades estimadas pelo sistema. Confira o estoque real e as quantidades antes de comprar.';
 const avisoEst=()=>`<div class="instr" style="margin:10px 0 0;font-size:17px">${ic('i-alerta')}<span>${AVISO_EST}</span></div>`;
@@ -944,7 +978,7 @@ function logExemplo(T){state.log=[];{const combos=[['Polo Amsterdã','Pregar man
     state.log.push({ts:T-2*DIA,por:'Helena',tipo:'troca',f:'levar',de:'roger',para:'layara',ped:'0412',cli:'Construtora Horizonte',step:'Levar para Parceiro DTF'});
     state.log.sort((a,b)=>a.ts-b.ts)}}
 const TESC0={vias:15,arte_prep:60,arte_aprov:240,arte_env:10,comprar:30,levar:60,entregar:60};
-const CFG0=()=>({params:{...PAR},tEsc:{...TESC0},cats:JSON.parse(JSON.stringify(CATS)),fatorEsp:{XXG:1.15},pesos:{...PESO_PARTE},probs:JSON.parse(JSON.stringify(PROBS)),papeis:{...PAPEIS},partesExtra:[...PARTES_COR_EXTRA]});
+const CFG0=()=>({expediente:JSON.parse(JSON.stringify(EXP0)),params:{...PAR},tEsc:{...TESC0},cats:JSON.parse(JSON.stringify(CATS)),fatorEsp:{XXG:1.15},pesos:{...PESO_PARTE},probs:JSON.parse(JSON.stringify(PROBS)),papeis:{...PAPEIS},partesExtra:[...PARTES_COR_EXTRA]});
 function cfgDefaults(s){const d=CFG0();Object.keys(d).forEach(k=>{if(s[k]==null)s[k]=d[k]});Object.keys(TESC0).forEach(k=>{if(s.tEsc[k]==null)s.tEsc[k]=TESC0[k]});Object.keys(PAR).forEach(k=>{if(s.params[k]==null)s.params[k]=PAR[k]})}
 function seed(){seedN=7;const T=now();
   state={v:8,...CFG0(),cores:{...CORES},atrib:{},tipos:JSON.parse(JSON.stringify(TIPOS0)),pessoas:JSON.parse(JSON.stringify(PESSOAS0)),forn:JSON.parse(JSON.stringify(FORN0)),produtos:JSON.parse(JSON.stringify(PRODUTOS0)),pedidos:[],lotes:[],consertos:[],estoque:{...ESTOQUE},seq:421};
@@ -1017,7 +1051,7 @@ function vFabrica(){const P=plano(),esc_=tarefasEsc();
   const nTrab=P.us.filter(u=>P.uso[u.id]).length,nIni=P.us.filter(u=>!P.uso[u.id]&&P.plan[u.id]).length;
   const z=ui.fz||'maq';
   const zonas=[['maq','Máquinas','i-maquina',nIni],['fora','Fora','i-caminhao',foraN],['esc','Escritório','i-vias',esc_.length]];
-  return `<button class="ped-l" data-a="tela" data-t="pedidos"><span class="pl-t">Pedidos</span>${res||'<span class="pl-i">nenhum aberto</span>'}<span class="pl-go">›</span></button>
+  return `${faixaHora(P)}<button class="ped-l" data-a="tela" data-t="pedidos"><span class="pl-t">Pedidos</span>${res||'<span class="pl-i">nenhum aberto</span>'}<span class="pl-go">›</span></button>
   <div class="zonas" role="tablist">${zonas.map(([k,n,i,c])=>`<button class="zona" role="tab" data-a="fz" data-v="${k}" aria-pressed="${z===k}">${ic(i)}<span>${n}</span>${c?`<em>${c}</em>`:''}</button>`).join('')}</div>
   ${z==='maq'?`<div class="agora"><span><b>${nIni}</b> para começar</span><span><b>${nTrab}</b> trabalhando</span></div>
   ${livres.length?`<div class="livres"><span class="t">Livres:</span>${livres.map(p=>`<span class="pl-p">${av(p.id,'s')}${esc(p.nome)}</span>`).join('')}</div>`:''}
@@ -1046,14 +1080,28 @@ function fornCard(f,esc_){const fora=[];state.lotes.forEach(l=>{const ped=pedByI
     ${fora.map(o=>{const d=diasDesde(o.x.saiu);return `<div class="fitem">${prodSvg(o.p.id,o.l.cor)}<div><b>${esc(o.s.nome)} · ${qtdEf(o.l)} peças</b><span>${esc(o.ped.cliente)} · lá ${haQuanto(o.x.saiu)}</span>${d>f.prazo?'<span class="late" style="display:block">Passou do prazo</span>':''}</div><button class="mbtn go" data-a="buscou" data-l="${o.l.id}" data-s="${o.s.id}">Chegou</button></div>`}).join('')||'<div class="vazio-s">Nada lá agora</div>'}
     ${lev.length?`<div class="vazio-s" style="color:var(--atn-ink);font-weight:700">${lev.length} ${lev.length>1?'pacotes prontos':'pacote pronto'} para levar</div>`:''}</div>`}
 const ehSemp=(u,P)=>!P.uso[u.id]&&!P.plan[u.id]&&!!(P.semPessoa[u.tipo]||[])[P.us.filter(x=>x.tipo===u.tipo&&!P.uso[x.id]&&!P.plan[x.id]).findIndex(x=>x.id===u.id)];
+function tileTempo(t,u){const x=t.x,sit=situacao(),a=heAtiva(x),tm=`<span data-tl="${t.l.id}" data-ts="${t.s.id}">${fDur(tempoUtil(x))}</span>`;
+  if(a)return `<div class="p-st st-he"><span class="dot"></span>Hora extra até ${tsHm(a.f)} · ${tm}</div>`;
+  if(sit.k==='trab')return `<div class="p-st"><span class="dot"></span>Trabalhando · ${tm}</div>`;
+  if(sit.k==='pausa')return `<div class="p-st st-pausa">${ic('i-relogio')}${esc(sit.nome)} até ${tsHm(sit.ate)} · ${tm}</div>`;
+  return `<div class="p-st st-pausa">${ic('i-dormir')}Parado, fora do horário · ${tm}</div>`}
+function faixaHora(P){const sit=situacao();if(sit.k==='trab')return '';const tr=Object.values(P.uso),sem=tr.filter(t=>!heAtiva(t.x)),com=tr.length-sem.length;
+  if(sit.k==='pausa')return `<div class="faixa">${ic('i-relogio')}<span><b>${esc(sit.nome)} até ${tsHm(sit.ate)}.</b> Os contadores param e voltam sozinhos.</span></div>`;
+  const qd=sod(sit.prox).getTime()===sod(now()).getTime()?'hoje':sod(sit.prox).getTime()===sod(now()+DIA).getTime()?'amanhã':fD(sit.prox);
+  return `<div class="faixa">${ic('i-dormir')}<span><b>${sit.depois?'Expediente encerrado.':'Fora do horário.'}</b> Volta ${qd} às ${tsHm(sit.prox)}.${com?` ${com} em hora extra.`:''}</span>${sem.length?`<button class="mbtn" data-a="heAbrir">Hora extra</button>`:''}</div>`}
+function sHE(){const e=ui.sheet,P=plano(),tr=Object.entries(P.uso);
+  return `${voltar('Cancelar')}<h1>Hora extra</h1><p class="sub-l">Quem vai continuar? O contador segue até a hora escolhida ou até apertar Terminou.</p>
+  ${tr.length?`<div class="eq-l">${tr.map(([m,t])=>`<button class="eq" data-a="heSel" data-m="${m}" aria-pressed="${e.sel.includes(m)}">${av(t.x.op)}<span class="eq-t"><b>${esc(pNome(t.x.op))}</b><span>${esc(t.s.nome)} · ${esc(unidade(m)?.nome||'')}</span></span>${e.sel.includes(m)?ic('i-check'):''}</button>`).join('')}</div>`:'<div class="vazio-s">Ninguém está trabalhando agora. Quem começar algo fora do horário já entra em hora extra.</div>'}
+  <div class="rotulo">Até que horas?</div><div class="linha-dep">${heOpcoes().map(v=>`<button class="depc" data-a="heAte" data-v="${v}" aria-pressed="${e.ate===v}">${tsHm(v)}</button>`).join('')}</div>
+  <div class="acoes"><button class="big go" data-a="heOk" ${e.sel.length?'':'disabled'}>${ic('i-check')}Confirmar hora extra</button></div>`}
 function maqTile(u,P,esp){const t=P.uso[u.id],pl=P.plan[u.id],sp=!t&&!pl?(P.semPessoa[u.tipo]||[])[P.us.filter(x=>x.tipo===u.tipo&&!P.uso[x.id]&&!P.plan[x.id]).findIndex(x=>x.id===u.id)]:null;const it=t||pl||sp;
   const cls=t?'st-trab':pl?'st-livre':sp?'st-semp':'st-nada';const quem=t?t.x.op:pl?pl.pessoa:null;
   return `<div class="pessoa ${cls}"><button class="p-open" data-a="maq" data-m="${u.id}">
     <div class="m-top"><span class="m-ic">${ic(tipo(u.tipo).i)}</span><b>${esc(u.nome)}</b>${esp?`<span class="fila">+${esp} na fila</span>`:''}</div>
     <div class="p-body">${it?`${prodSvg(it.p.id,it.l.cor,it.l.cores2)}<div>${pl?`<span class="prox">${pl.reservado?'Reservado':'Próximo'}</span>`:''}<b>${esc(it.s.nome)}</b><span>${qtdEf(it.l)} peças</span><span class="emp">${ic('i-predio')}${esc(it.ped.cliente)}</span>${quem?`<span class="quem-l">${av(quem,'s')}${esc(pNome(quem))} ${pl?estrela(pessoa(quem),pl):''}</span>`:''}</div>`:'<span class="vazio">Sem trabalho para esta máquina</span>'}</div></button>
     ${P.resEspera[u.id]?`<div class="dica" style="padding:0 14px 8px;color:var(--blue);font-weight:700">Reservado a seguir: ${esc(P.resEspera[u.id].s.nome)} · ${esc(P.resEspera[u.id].ped.cliente)}</div>`:''}
-    ${t?`<div class="p-st"><span class="dot"></span>Trabalhando · <span data-ini="${t.x.ini}">${fDur(now()-t.x.ini)}</span></div>`:sp?'<div class="p-st"><span class="dot"></span>Esperando alguém livre</div>':''}
-    ${t?`<button class="p-act fim" data-a="terminou" data-m="${u.id}">${ic('i-check')}Terminou</button>`:pl?`<button class="p-act ini" data-a="comecar" data-m="${u.id}" data-l="${pl.l.id}" data-s="${pl.s.id}" data-p="${pl.pessoa}">${ic('i-play')}Começar</button>`:''}
+    ${t?tileTempo(t,u):sp?'<div class="p-st"><span class="dot"></span>Esperando alguém livre</div>':''}
+    ${t?`<button class="p-act fim" data-a="terminou" data-m="${u.id}">${ic('i-check')}Terminou</button>${heAtiva(t.x)?`<button class="he-b" data-a="hePara" data-m="${u.id}">Parar a hora extra agora</button>`:''}`:pl?`<button class="p-act ini" data-a="comecar" data-m="${u.id}" data-l="${pl.l.id}" data-s="${pl.s.id}" data-p="${pl.pessoa}">${ic('i-play')}Começar</button>`:''}
   </div>`}
 
 /* ================= PEDIDOS ================= */
@@ -1227,9 +1275,15 @@ function cAjustes(){const pr=state.params;
   return `${state.exemplo&&state.pedidos.length?`<div class="card" style="border-color:var(--atn)"><h2>Pedidos de exemplo</h2><p style="margin:0 0 12px;color:var(--ink2)">Quando terminar o treino, apague os pedidos de exemplo. Máquinas, equipe, produtos e estoque continuam.</p>
     ${ui.apagaEx?`<div class="aviso">${ic('i-alerta')}Isso apaga os pedidos de todos os aparelhos. Tem certeza?</div><div class="acoes"><button class="big" style="background:var(--red);color:#fff" data-a="apagaEx" data-ok="1">Sim, apagar</button><button class="big neutro" data-a="apagaExN">Não</button></div>`:`<button class="mbtn" data-a="apagaEx">Apagar pedidos de exemplo</button>`}</div>`:''}
   <div class="card"><h2>Onde ficam os dados</h2><p style="margin:0;color:var(--ink2)">${NV.modo==='nuvem'?'Na nuvem: todos os aparelhos veem as mesmas informações ao mesmo tempo.':'Só neste aparelho. Abra pelo link do sistema para usar a nuvem.'}</p></div>
+  <div class="card"><h2>Horário da fábrica</h2>
+    <label class="aj-row"><span>Começa</span><span class="aj-in"><input class="campo" type="time" data-exp="ini" value="${EXP().ini}"></span></label>
+    <label class="aj-row"><span>Para</span><span class="aj-in"><input class="campo" type="time" data-exp="fim" value="${EXP().fim}"></span></label>
+    <div class="rotulo">Pausas</div>${(EXP().pausas||[]).map((p,i)=>`<div class="pz-row"><input class="campo" data-pzn="${i}" value="${esc(p.nome)}" aria-label="Nome da pausa"><input class="campo" type="time" data-pzh="${i}" value="${p.h}" aria-label="Horário"><span class="aj-in"><input class="campo" type="number" data-pzm="${i}" value="${p.min}" aria-label="Minutos"><small>min</small></span><button class="x" data-a="rmPausa" data-i="${i}">Tirar</button></div>`).join('')}
+    <button class="mbtn" data-a="addPausa" style="margin-top:6px">${ic('i-mais')}Adicionar pausa</button>
+    <div class="rotulo">Dias de trabalho</div><div class="linha-dep">${DOWc.map((n,i)=>`<button class="depc" data-a="expDia" data-v="${i}" aria-pressed="${(EXP().dias||[]).includes(i)}">${n}</button>`).join('')}</div>
+    <p class="dica" style="margin:10px 0 0">Dá <b>${fDur(jornadaMin()*MIN)}</b> de trabalho por dia. Fora desse horário e nas pausas os contadores param. Hora extra se marca na própria máquina.</p></div>
   <div class="card"><h2>Prazos e cálculo</h2>
     ${campoN('Margem para imprevistos','data-cfg="params.margem"',pr.margem,'dias úteis')}
-    ${campoN('Jornada de trabalho por dia','data-cfg="params.jornada"',pr.jornada,'minutos')}
     ${campoN('Eficiência da equipe','data-cfg="params.efic" data-pct="1"',Math.round(pr.efic*100),'%')}
     ${campoN('Espera entre uma etapa e outra','data-cfg="params.fila"',pr.fila,'dias')}
     ${campoN('Prazo para chegar uma compra','data-cfg="params.leadCompra"',pr.leadCompra,'dias úteis')}</div>
@@ -1459,11 +1513,14 @@ function vGestor(){const dias=ui.gp||7,desde=now()-dias*DIA,L=(state.log||[]).fi
     else dicas.push(`<b>${esc(st)}</b> (${esc(pr)}) foi reservada à mão ${top[1]} vezes. Se é sempre a mesma máquina, pode ser uma regra que falta no sistema.`)});
   tipos.filter(x=>x.n>=4&&x.p>.3).forEach(x=>dicas.push(`Na <b>${esc(tipo(x.t).nome)}</b>, ${Math.round(x.p*100)}% dos inícios foram manuais. Converse com quem opera essa máquina para entender o porquê.`));
   const ativos=state.pedidos.filter(p=>!p.concluido).map(p=>info(p));
+  const heP={};state.lotes.forEach(l=>Object.values(l.steps).forEach(x=>(x.he||[]).forEach(h=>{const m=sobre(h.i,Math.min(h.f,x.fim||now(),now()),desde,now());if(m>0)heP[x.op]=(heP[x.op]||0)+m})));
+  const heL=Object.entries(heP).sort((a,b)=>b[1]-a[1]);
   return `<h1>Painel do gestor</h1>
   <div class="linha-dep" style="margin:-4px 0 18px">${[7,30].map(d=>`<button class="depc" data-a="gp" data-v="${d}" aria-pressed="${dias===d}">Últimos ${d} dias</button>`).join('')}</div>
   <div class="card g-alerta u-${sev}"><div class="g-big"><b>${Math.round(pct*100)}%</b><span>dos inícios de processo foram decididos à mão</span></div>
     <div style="font-size:18px">${sev==='crit'?`<b>Acima de 20%.</b> A regra está sendo contornada com frequência: provavelmente algum roteiro, dependência ou prioridade está errado no cadastro. Veja abaixo onde corrigir.`:sev==='warn'?'<b>Entre 10% e 20%.</b> Aceitável, mas vale olhar os processos que mais aparecem abaixo.':'<b>Abaixo de 10%.</b> A equipe está seguindo o sistema. Os ajustes à mão são exceção.'}</div>
     <div class="dica">${ini.length} inícios · ${man.length} manuais · ${res} reservas · ${tro.length} tarefas de escritório trocadas de pessoa</div></div>
+  <div class="card"><h2>Horas extras</h2>${heL.length?`${heL.map(([p,m])=>`<div class="grow"><span style="display:flex;align-items:center;gap:8px">${av(p,'s')}${esc(pNome(p))}</span>${barra(m,heL[0][1],'#7A3E9D')}<b>${fDur(m)}</b></div>`).join('')}<p class="dica" style="margin:8px 0 0">Total: <b>${fDur(sum(heL.map(x=>x[1])))}</b> no período.</p>`:'<p class="dica" style="margin:0">Nenhuma hora extra no período.</p>'}</div>
   ${dicas.length?`<div class="card"><h2>O que corrigir no cadastro</h2>${dicas.slice(0,5).map(d=>`<div class="mat">${ic('i-engr')}<div class="dicaG"><span style="font-size:18px;color:var(--ink)">${d}</span></div><span></span></div>`).join('')}</div>`:''}
   <div class="g-grid">
     <div class="card"><h2>Tipos de ajuste manual</h2>${porModo.map(([k,n])=>`<div class="grow"><span>${esc(MODOS[k])}</span>${barra(n,maxM,MODO_COR[k])}<b>${n}</b></div>`).join('')||'<p class="dica">Nenhum ajuste manual no período.</p>'}</div>
@@ -1485,7 +1542,7 @@ function render(){RC={};
   const sh=document.getElementById('sheet');const s=ui.sheet;
   if(!s){sh.innerHTML='';document.body.style.overflow='';return}
   const old=sh.querySelector('.sheet'),keep=old&&old.dataset.id===sheetId(s)?{top:old.scrollTop,x:[...old.querySelectorAll('.fx-wrap')].map(e=>[e.dataset.k,e.scrollLeft])}:null;
-  const html=({tipo:sTipoEd,troca:sTroca,maq:sMaq,pedido:()=>sPedido(s.id),prob:sProblema,novo:sNovo,ajuda:sAjuda,produto:()=>sProduto(s.p),etapa:sEtapa,nprod:sNovoProd,pes:sPesEd,forn:sFornEd,quem:sQuem}[s.t]||(()=>''))();
+  const html=({tipo:sTipoEd,troca:sTroca,maq:sMaq,pedido:()=>sPedido(s.id),prob:sProblema,novo:sNovo,ajuda:sAjuda,produto:()=>sProduto(s.p),etapa:sEtapa,nprod:sNovoProd,pes:sPesEd,forn:sFornEd,quem:sQuem,he:sHE}[s.t]||(()=>''))();
   sh.innerHTML=`<div class="sheet ${['pedido','produto'].includes(s.t)?'largo':''}" data-id="${esc(sheetId(s))}" role="dialog" aria-modal="true"><div class="wrap">${html}</div></div>`;document.body.style.overflow='hidden';
   if(keep){const n=sh.querySelector('.sheet');n.scrollTop=keep.top;keep.x.forEach(([k,x])=>{const e=n.querySelector(`.fx-wrap[data-k="${k}"]`);if(e)e.scrollLeft=x})}
   const f=document.getElementById('wCli');if(f&&!f.value)f.focus()}
@@ -1513,16 +1570,26 @@ const A={
   mRes:d=>{snap();{const l=lote(d.l);registrar({tipo:'reserva',maq:d.m,maqTipo:unidade(d.m)?.tipo,op:d.p||'',ped:l.ped,cli:pedById(l.ped).cliente,prod:prod(l.prod).nome,step:sMap(rp(l))[d.s].nome})}state.reservas=state.reservas||{};Object.keys(state.reservas).forEach(k=>{const r=state.reservas[k];if(r.l===d.l&&r.s===d.s)delete state.reservas[k]});state.reservas[d.m]={l:d.l,s:d.s,p:d.p||''};ui.sheet.sel=null;commit();toast(`Reservado para ${unidade(d.m)?.nome}`)},
   mResX:d=>{snap();delete (state.reservas||{})[d.m];ui.sheet.sel=null;commit();toast('Reserva tirada: o sistema volta a escolher')},
   pedido:d=>{ui.fx=null;openSheet({t:'pedido',id:d.id})},
-  terminou:d=>{const t=tarefaNa(d.m);if(!t)return;snap();t.x.st='ok';t.x.fim=now();save();const n=`${pNome(t.x.op)} terminou ${t.s.nome}`;openSheet({t:'maq',m:d.m,feito:n});toast(n)},
+  terminou:d=>{const t=tarefaNa(d.m);if(!t)return;snap();t.x.st='ok';t.x.fim=now();{const a=heAtiva(t.x,t.x.fim-1);if(a)a.f=t.x.fim}t.x.util=Math.round(tempoUtil(t.x)/MIN);save();const n=`${pNome(t.x.op)} terminou ${t.s.nome}`;openSheet({t:'maq',m:d.m,feito:n});toast(n)},
   comecar:d=>{if(!d.p)return;const l=lote(d.l);snap();const s=sMap(rp(l))[d.s],fora=!ready(l,s,pedById(l.ped));
     {const P0=plano(),pl=P0.plan[d.m],rs=(state.reservas||{})[d.m],k=d.l+'|'+d.s;
      const modo=fora?'fora':rs&&rs.l===d.l&&rs.s===d.s?'reserva':pl&&kIt(pl)===k?(pl.pessoa===d.p?'sugerido':'pessoa'):'outro';
-     registrar({tipo:'inicio',modo,maq:d.m,maqTipo:unidade(d.m)?.tipo,op:d.p,sug:pl?.pessoa||'',ped:l.ped,cli:pedById(l.ped).cliente,prod:prod(l.prod).nome,step:s.nome})}l.steps[d.s]={st:'and',ini:now(),op:d.p,maq:d.m,manual:fora||undefined};const R_=state.reservas||{};Object.keys(R_).forEach(k=>{if(k===d.m||(R_[k].l===d.l&&R_[k].s===d.s))delete R_[k]});ui.sheet=null;commit();toast(`${pNome(d.p)} começou ${s.nome} na ${unidade(d.m)?.nome||''}${fora?' (fora da ordem)':''}`)},
+     registrar({tipo:'inicio',modo,maq:d.m,maqTipo:unidade(d.m)?.tipo,op:d.p,sug:pl?.pessoa||'',ped:l.ped,cli:pedById(l.ped).cliente,prod:prod(l.prod).nome,step:s.nome})}l.steps[d.s]={st:'and',ini:now(),op:d.p,maq:d.m,manual:fora||undefined};let heTxt='';if(situacao().k!=='trab'){const ot=Object.values(plano().uso).map(q=>heAtiva(q.x)).filter(Boolean)[0];const ate=situacao().k==='pausa'?null:(ot?ot.f:heOpcoes()[1]||heOpcoes()[0]);if(ate){l.steps[d.s].he=[{i:now(),f:ate}];heTxt=` · hora extra até ${tsHm(ate)}`}}const R_=state.reservas||{};Object.keys(R_).forEach(k=>{if(k===d.m||(R_[k].l===d.l&&R_[k].s===d.s))delete R_[k]});ui.sheet=null;commit();toast(`${pNome(d.p)} começou ${s.nome} na ${unidade(d.m)?.nome||''}${fora?' (fora da ordem)':''}${heTxt}`)},
   quem:()=>openSheet({t:'quem'}),
   quemSel:d=>{quemSet(d.v);ui.sheet=null;render();tick();toast(`Pronto, este aparelho é de ${quemNome()}`,false)},
   inicio:d=>{nuvemIniciar(d.v)},
   apagaEx:d=>{if(!d.ok){ui.apagaEx=true;return render()}snap();state.pedidos=[];state.lotes=[];state.consertos=[];state.log=[];state.atrib={};state.exemplo=false;ui.apagaEx=false;commit();toast('Pedidos de exemplo apagados')},
   apagaExN:()=>{ui.apagaEx=false;render()},
+  addPausa:()=>{snap();state.expediente.pausas.push({nome:'Pausa',h:'12:00',min:60});commit()},
+  rmPausa:d=>{snap();state.expediente.pausas.splice(+d.i,1);commit()},
+  expDia:d=>{snap();const v=+d.v,ds=state.expediente.dias;state.expediente.dias=ds.includes(v)?ds.filter(x=>x!==v):[...ds,v].sort();commit()},
+  heAbrir:d=>{openSheet({t:'he',sel:d.m?[d.m]:[],ate:heOpcoes()[1]||heOpcoes()[0]})},
+  heSel:d=>{const e=ui.sheet;e.sel=e.sel.includes(d.m)?e.sel.filter(x=>x!==d.m):[...e.sel,d.m];render()},
+  heAte:d=>{ui.sheet.ate=+d.v;render()},
+  heOk:()=>{const e=ui.sheet,P=plano();if(!e.sel.length)return;snap();const t0=now();
+    e.sel.forEach(m=>{const t=P.uso[m];if(!t)return;const x=t.x;x.he=x.he||[];const a=heAtiva(x);if(a)a.f=e.ate;else x.he.push({i:t0,f:e.ate})});
+    ui.sheet=null;commit();toast(`Hora extra até ${tsHm(e.ate)} para ${e.sel.length} ${e.sel.length>1?'pessoas':'pessoa'}`)},
+  hePara:d=>{const t=tarefaNa(d.m);if(!t)return;const a=heAtiva(t.x);if(!a)return;snap();a.f=now();commit();toast(`Hora extra de ${pNome(t.x.op)} encerrada`)},
   desfazer:()=>{if(!undo)return;state=JSON.parse(undo);undo=null;document.getElementById('toast').innerHTML='';ui.sheet=null;commit()},
   problema:d=>openSheet({t:'prob',m:d.m,step:1,n:1,orig:null,mot:null}),
   pMot:d=>{const s=ui.sheet,t=tarefaNa(s.m),pr=state.probs[+d.k];s.mot=pr.k;const opts=topo(t.p).filter(x=>(x.id===t.s.id||anc(t.p,t.s.id).has(x.id))&&x.posto!=='corte').map(x=>x.id);s.orig=(pr.alvo||[]).find(a=>opts.includes(a))||t.s.id;s.step=2;render()},
@@ -1674,7 +1741,11 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b
 document.addEventListener('change',e=>{const t=e.target,d=t.dataset;if(!state)return;
   if(t.id==='xFoto'&&t.files&&t.files[0]){eRead();const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const N=240,c=document.createElement('canvas');c.width=c.height=N;const m=Math.min(im.width,im.height);
     c.getContext('2d').drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,N,N);if(ui.sheet&&ui.sheet.t==='pes'){ui.sheet.foto=c.toDataURL('image/jpeg',.82);render()}};im.onerror=()=>toast('Não consegui abrir essa foto');im.src=r.result};r.readAsDataURL(t.files[0]);return}const num=()=>parseFloat(String(t.value).replace(',','.'));let ok=false;
-  if(d.cfg){const[a,b]=d.cfg.split('.');let v=num();if(isNaN(v))return;if(d.pct)v=v/100;snap();state[a][b]=v;ok=true}
+  if(d.exp){if(!/^\d\d:\d\d$/.test(t.value))return;snap();state.expediente[d.exp]=t.value;ok=true}
+  else if(d.pzn!=null){snap();state.expediente.pausas[+d.pzn].nome=t.value.trim()||'Pausa';ok=true}
+  else if(d.pzh!=null){if(!/^\d\d:\d\d$/.test(t.value))return;snap();state.expediente.pausas[+d.pzh].h=t.value;ok=true}
+  else if(d.pzm!=null){const v=num();if(isNaN(v)||v<0)return;snap();state.expediente.pausas[+d.pzm].min=v;ok=true}
+  else if(d.cfg){const[a,b]=d.cfg.split('.');let v=num();if(isNaN(v))return;if(d.pct)v=v/100;snap();state[a][b]=v;ok=true}
   else if(d.est!=null){const v=num();if(isNaN(v))return;snap();state.estoque[d.est]=v;ok=true}
   else if(d.catn!=null){snap();state.cats[+d.catn].nome=t.value.trim()||'Categoria';ok=true}
   else if(d.catf!=null){const v=num();if(isNaN(v))return;snap();state.cats[+d.catf].fator=v/100;ok=true}
@@ -1688,7 +1759,8 @@ document.addEventListener('input',e=>{if(e.target.id==='estBusca'){ui.eq=e.targe
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ui.sheet)A.fechar();if(e.key==='Enter'&&(['eNome','eObs','pNome','pTec','xNome','wCont','wCnpj','pedBusca','estBusca'].includes(e.target.id)||e.target.closest?.('.card')&&e.target.tagName==='INPUT'))e.preventDefault();if(e.key==='Enter'&&e.target.id==='wCli'){e.preventDefault();A.wNext()}});
 function tick(){const h=new Date().getHours();const qn=quemNome();document.getElementById('ola').textContent=`${h<12?'Bom dia':h<18?'Boa tarde':'Boa noite'}${qn?', '+qn:''}`;document.getElementById('olaQ').textContent=qn?'':'Toque aqui e diga quem é você';const ex=document.getElementById('exTag');if(ex)ex.hidden=!(state&&state.exemplo);
   const d=new Date();document.getElementById('hoje').textContent=`${DOW[d.getDay()]}, ${d.getDate()} de ${MES[d.getMonth()]}`;
-  document.querySelectorAll('[data-ini]').forEach(el=>el.textContent=fDur(now()-(+el.dataset.ini)))}
+  document.querySelectorAll('[data-tl]').forEach(el=>{const l=lote(el.dataset.tl),x=l&&l.steps[el.dataset.ts];if(x)el.textContent=fDur(tempoUtil(x))});
+  const P=state&&plano(),k=situacao().k+'|'+(P?Object.values(P.uso).filter(t=>heAtiva(t.x)).length:0);if(tick.k&&tick.k!==k){tick.k=k;nuvemRender();return}tick.k=k}
 
 /* ================= quem usa este aparelho ================= */
 const DEV=(()=>{try{let d=localStorage.getItem('martins-dev');if(!d){d=Math.random().toString(36).slice(2,8);localStorage.setItem('martins-dev',d)}return d}catch(e){return 'x'+Math.random().toString(36).slice(2,6)}})();
