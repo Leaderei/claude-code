@@ -369,7 +369,7 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .sk{display:inline-flex;align-items:center;gap:4px;background:var(--grey-soft);border-radius:8px;padding:3px 9px;font-size:15px;font-weight:700;color:var(--ink2)}
 .sk.best{background:#FFF3D1;color:#6A4A00}
 .sk svg.ic{width:16px;height:16px}
-.pess{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.pess{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;align-items:start}
 .nota{background:var(--atn-soft);color:var(--atn-ink);border-radius:14px;padding:12px 16px;font-size:17px;margin-bottom:16px}
 </style>
 
@@ -470,15 +470,15 @@ const TIPOS0=[
 ];
 const PAPEIS={costura:'Costureira',corte:'Cortador',vendas:'Vendedora',compras:'Compras e entregas',pers:'Personalização',acab:'Acabamento'};
 const PESSOAS0=[
-  {id:'leo',nome:'Léo',papel:'costura',sabe:['reta','overlock','galoneira','cobregola','caseadeira','botoneira'],melhor:['reta']},
-  {id:'zeze',nome:'Zezé',papel:'costura',sabe:['overlock','galoneira'],melhor:[]},
-  {id:'ana',nome:'Ana',papel:'costura',sabe:['overlock','galoneira','cobregola'],melhor:['Pregar gola','galoneira']},
-  {id:'anilda',nome:'Anilda',papel:'costura',sabe:['reta','cobregola'],melhor:['reta']},
-  {id:'dalva',nome:'Dalva',papel:'costura',sabe:['galoneira','overlock','reta'],melhor:['overlock']},
-  {id:'fabio',nome:'Fábio',papel:'corte',sabe:['corte'],melhor:['corte']},
-  {id:'layara',nome:'Layara',papel:'vendas',sabe:[],funcoes:['vias','arte_prep','arte_aprov','arte_env','levar','entregar'],viaApp:true,melhor:['arte_prep','arte_env']},
-  {id:'paula',nome:'Paula',papel:'vendas',sabe:[],funcoes:['vias','arte_prep','arte_aprov','arte_env'],melhor:[]},
-  {id:'roger',nome:'Roger',papel:'compras',sabe:[],funcoes:['comprar','levar','entregar'],melhor:['comprar','levar','entregar']},
+  {id:'leo',nome:'Léo',papeis:['costura'],sabe:['reta','overlock','galoneira','cobregola','caseadeira','botoneira'],melhor:['reta']},
+  {id:'zeze',nome:'Zezé',papeis:['costura'],sabe:['overlock','galoneira'],melhor:[]},
+  {id:'ana',nome:'Ana',papeis:['costura'],sabe:['overlock','galoneira','cobregola'],melhor:['Pregar gola','galoneira']},
+  {id:'anilda',nome:'Anilda',papeis:['costura'],sabe:['reta','cobregola'],melhor:['reta']},
+  {id:'dalva',nome:'Dalva',papeis:['costura'],sabe:['galoneira','overlock','reta'],melhor:['overlock']},
+  {id:'fabio',nome:'Fábio',papeis:['corte'],sabe:['corte'],melhor:['corte']},
+  {id:'layara',nome:'Layara',papeis:['vendas'],sabe:[],funcoes:['vias','arte_prep','arte_aprov','arte_env','levar','entregar'],viaApp:true,melhor:['arte_prep','arte_env']},
+  {id:'paula',nome:'Paula',papeis:['vendas'],sabe:[],funcoes:['vias','arte_prep','arte_aprov','arte_env'],melhor:[]},
+  {id:'roger',nome:'Roger',papeis:['compras','vendas'],sabe:[],funcoes:['vias','arte_prep','arte_aprov','arte_env','comprar','levar','entregar'],melhor:['comprar','levar','entregar']},
 ];
 const FUNCOES=[
   {id:'vias',nome:'Separar vias',i:'i-vias'},
@@ -489,6 +489,7 @@ const FUNCOES=[
   {id:'levar',nome:'Levar e buscar no terceirizado',i:'i-caminhao'},
   {id:'entregar',nome:'Entregar pedido ao cliente',i:'i-caminhao'}];
 const FN=Object.fromEntries(FUNCOES.map(f=>[f.id,f]));
+const CARGO_FUN={vendas:['vias','arte_prep','arte_aprov','arte_env'],compras:['comprar','levar','entregar']};
 const DO_VENDEDOR=['vias','arte_prep','arte_aprov','arte_env'];
 const FORN0=[{id:'fb',nome:'Bordadeira parceira',servico:'bordado',prazo:3,leva:'roger'},{id:'fd',nome:'Parceiro DTF',servico:'dtf',prazo:2,leva:'roger'}];
 const AVC=['#1E5BB8','#9C3D8F','#17864A','#B5561B','#4C5BA8','#0E7C86','#8A5A00','#B0304A','#3F6E2A','#5A4FB0','#A04000','#2E6F9E'];
@@ -548,6 +549,8 @@ const lotesDe=pid=>state.lotes.filter(l=>l.ped===pid);
 const tipo=id=>state.tipos.find(t=>t.id===id)||{id,nome:id,grupo:'costura',i:'i-maquina'};
 const tNome=id=>tipo(id).curto||tipo(id).nome;
 const PICON=new Proxy({},{get:(_,k)=>tipo(k).i||'i-maquina'});
+const temPapel=(p,k)=>(p.papeis||[]).includes(k);
+const papeisTxt=p=>(p.papeis||[]).map(k=>PAPEIS[k]).filter(Boolean).join(' · ');
 const pessoa=id=>state.pessoas.find(p=>p.id===id);
 const pNome=id=>pessoa(id)?.nome||'';
 const avColor=id=>AVC[Math.max(0,state.pessoas.findIndex(p=>p.id===id))%AVC.length];
@@ -669,7 +672,7 @@ function seed(){seedN=7;const T=now();
     {prod:'polo-ams',cor:'Marinho',qtd:180,done:['corte','pz0','pz1','peitilho','pregpeit','prepgola','barramanga','ombro','gola','cobregola','manga','fechar','etiqueta']},
     {prod:'calca-hel',cor:'Preta',qtd:180,done:['corte']}]});
   mk({id:'0415',cliente:'Rede Farma Vida',vend:'paula',chegada:addWD(T,-9),entrega:addWD(T,14),lib:addWD(T,-6),linhas:[{prod:'polo-vie',cor:'Branca',qtd:240,done:['corte','pz0','peitilho']}]});
-  mk({id:'0416',cliente:'Academia Pulse',vend:'layara',chegada:addWD(T,-8),entrega:addWD(T,9),lib:addWD(T,-6),linhas:[{prod:'calca-hel',cor:'Cinza',qtd:120,done:['corte','pz0','prepbolso','prepcos']}]});
+  mk({id:'0416',cliente:'Academia Pulse',vend:'roger',chegada:addWD(T,-8),entrega:addWD(T,9),lib:addWD(T,-6),linhas:[{prod:'calca-hel',cor:'Cinza',qtd:120,done:['corte','pz0','prepbolso','prepcos']}]});
   mk({id:'0418',cliente:'Colégio São Bento',vend:'paula',chegada:addWD(T,-3),entrega:addWD(T,22),arte:false,env:false,linhas:[{prod:'polo-ams',cor:'Branca',qtd:320},{prod:'calca-hel',cor:'Marinho',qtd:320}]});
   mk({id:'0420',cliente:'Clínica Vitta',vend:'layara',chegada:T-2*H,entrega:addWD(T,20),prep:false,arte:false,vias:false,env:false,linhas:[{prod:'polo-ams',cor:'Verde',qtd:60}]});
   const and=(lid,sid,maq,op,min)=>{lote(lid).steps[sid]={st:'and',ini:T-min*MIN,op,maq}};
@@ -680,7 +683,7 @@ function seed(){seedN=7;const T=now();
   const r=makeRework(lote('0402-1'),'arremate','etiqueta',5,'Etiqueta errada',addWD(T,-6),'leo');rp(r).steps.forEach(s=>r.steps[s.id]={st:'ok',herdado:true});
   return state}
 function save(){RC={};try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
-function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===7&&s.pedidos){state=s;return}}catch(e){}seed()}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===7&&s.pedidos){s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});state=s;return}}catch(e){}seed()}
 
 /* ================= desenho dos produtos ================= */
 function prodSvg(pid,cor){const p=prod(pid);return shapeSvg(p?p.forma:'polo',cor,p?p.nome:'')}
@@ -868,10 +871,10 @@ function sTipoEd(){const e=ui.sheet;const usoP=e.id?state.produtos.filter(p=>p.s
   ${usoP.length?`<p style="color:var(--ink2)">Usada nos produtos: ${esc(usoP.join(', '))}</p>`:''}
   ${e.err?`<div class="aviso">${ic('i-alerta')}${esc(e.err)}</div>`:''}
   <div class="acoes"><button class="big go" data-a="tOk">${ic('i-check')}Salvar</button>${e.id?`<button class="big neutro" data-a="tRm">Tirar esta máquina</button>`:''}</div>`}
-function cEquipe(){const ord=['costura','corte','pers','acab','vendas','compras'];const ps=[...state.pessoas].sort((a,b)=>ord.indexOf(a.papel)-ord.indexOf(b.papel));
+function cEquipe(){const ord=['costura','corte','pers','acab','vendas','compras'];const o1=p=>Math.min(99,...(p.papeis||[]).map(k=>ord.indexOf(k)));const ps=[...state.pessoas].sort((a,b)=>o1(a)-o1(b));
   return `<p style="margin:-6px 0 14px;color:var(--ink2)">Toque numa pessoa para mudar o que ela sabe fazer. ★ = faz melhor, o sistema dá preferência.</p>
-  <div class="pess">${ps.map(p=>`<button class="pes" data-a="pesEd" data-id="${p.id}"><div class="pes-h">${av(p.id)}<div><b>${esc(p.nome)}</b><span>${PAPEIS[p.papel]||''}</span></div></div>
-    <div class="skills">${p.sabe.map(t=>`<span class="sk ${p.melhor.includes(t)?'best':''}">${ic(tipo(t).i)}${esc(tNome(t))}${p.melhor.includes(t)?' ★':''}</span>`).join('')}${p.melhor.filter(x=>!state.tipos.some(t=>t.id===x)).map(x=>`<span class="sk best">${esc(x)} ★</span>`).join('')}${(p.funcoes||[]).map(f=>`<span class="sk ${(p.melhor||[]).includes(f)?'best':''}">${ic(FN[f].i)}${esc(FN[f].nome)}${(p.melhor||[]).includes(f)?' ★':''}</span>`).join('')}${p.viaApp?`<span class="sk">${ic('i-caminhao')}Leva por aplicativo</span>`:''}${!p.sabe.length&&!(p.funcoes||[]).length?'<span class="sk">Sem função cadastrada</span>':''}</div></button>`).join('')}
+  <div class="pess">${ps.map(p=>`<button class="pes" data-a="pesEd" data-id="${p.id}"><div class="pes-h">${av(p.id)}<div><b>${esc(p.nome)}</b><span>${esc(papeisTxt(p))}</span></div></div>
+    <div class="skills">${p.sabe.map(t=>`<span class="sk ${p.melhor.includes(t)?'best':''}">${ic(tipo(t).i)}${esc(tNome(t))}${p.melhor.includes(t)?' ★':''}</span>`).join('')}${p.melhor.filter(x=>!state.tipos.some(t=>t.id===x)&&!FN[x]).map(x=>`<span class="sk best">${esc(x)} ★</span>`).join('')}${(p.funcoes||[]).map(f=>`<span class="sk ${(p.melhor||[]).includes(f)?'best':''}">${ic(FN[f].i)}${esc(FN[f].nome)}${(p.melhor||[]).includes(f)?' ★':''}</span>`).join('')}${p.viaApp?`<span class="sk">${ic('i-caminhao')}Leva por aplicativo</span>`:''}${!p.sabe.length&&!(p.funcoes||[]).length?'<span class="sk">Sem função cadastrada</span>':''}</div></button>`).join('')}
   <button class="prodc add" data-a="pesEd" data-id="">${ic('i-mais')}<b>Adicionar pessoa</b></button></div>`}
 function cForn(){return `<p style="margin:-6px 0 14px;color:var(--ink2)">Serviços feitos fora. O pacote inteiro vai e volta junto.</p>
   <div class="pess">${state.forn.map(f=>`<button class="pes" data-a="fornEd" data-id="${f.id}"><div class="pes-h"><span class="m-ic" style="background:#F3ECFB;color:#6B2F8C">${ic(tipo(f.servico).i)}</span><div><b>${esc(f.nome)}</b><span>${esc(tNome(f.servico))}</span></div></div>
@@ -883,7 +886,7 @@ function sPesEd(){const e=ui.sheet,internos=state.tipos.filter(t=>!t.externo);
   const nomesEtapas=[...new Set(state.produtos.flatMap(p=>p.steps.filter(s=>e.sabe.includes(s.posto)).map(s=>s.nome)))];
   return `${voltar('Cancelar')}<h1>${e.id?esc(e.nome||'Pessoa'):'Nova pessoa'}</h1>
   <div class="rotulo">Nome</div><input class="campo" id="xNome" value="${esc(e.nome)}" autocomplete="off">
-  <div class="rotulo">Função</div><div class="linha-dep">${Object.entries(PAPEIS).map(([k,n])=>`<button class="depc" data-a="xPapel" data-v="${k}" aria-pressed="${e.papel===k}">${n}</button>`).join('')}</div>
+  <div class="rotulo">Cargos <span style="font-weight:400;color:var(--muted)">(pode marcar vários)</span></div><div class="linha-dep">${Object.entries(PAPEIS).map(([k,n])=>`<button class="depc" data-a="xPapel" data-v="${k}" aria-pressed="${e.papeis.includes(k)}">${n}</button>`).join('')}</div>
   <div class="rotulo">Máquinas que sabe usar</div><div class="escolhe">${internos.map(t=>`<button class="opc" data-a="xSabe" data-v="${t.id}" aria-pressed="${e.sabe.includes(t.id)}">${ic(t.i)}${esc(t.nome)}</button>`).join('')}</div>
   ${e.sabe.length?`<div class="rotulo">Faz melhor ★ <span style="font-weight:400;color:var(--muted)">(o sistema dá preferência)</span></div>
   <div class="linha-dep">${e.sabe.map(t=>`<button class="depc" data-a="xMelhor" data-v="${t}" aria-pressed="${e.melhor.includes(t)}">${ic(tipo(t).i)}${esc(tNome(t))}</button>`).join('')}</div>
@@ -964,7 +967,7 @@ function sNovo(){const w=ui.sheet.w,passos=`<div class="passos">${[1,2,3,4].map(
   const head=`${voltar(w.step>1?'Voltar':'Cancelar')}${passos}<div class="passo-n">Passo ${w.step} de 4</div>`;
   const nav=(lab='Próximo')=>`${w.err?`<div class="aviso">${ic('i-alerta')}${esc(w.err)}</div>`:''}<div class="acoes"><button class="big go" data-a="wNext">${lab}${ic('i-seta')}</button></div>`;
   if(w.step===1)return `${head}<h1>Para quem é o pedido?</h1><input class="campo" id="wCli" value="${esc(w.cliente)}" placeholder="Nome do cliente" autocomplete="off">
-    <div class="rotulo">Quem vendeu?</div><div class="linha-dep">${state.pessoas.filter(p=>p.papel==='vendas').map(p=>`<button class="pchip" data-a="wVend" data-v="${p.id}" aria-pressed="${w.vend===p.id}">${av(p.id,'s')}${esc(p.nome)}</button>`).join('')}</div>${nav()}`;
+    <div class="rotulo">Quem vendeu?</div><div class="linha-dep">${state.pessoas.filter(p=>temPapel(p,'vendas')).map(p=>`<button class="pchip" data-a="wVend" data-v="${p.id}" aria-pressed="${w.vend===p.id}">${av(p.id,'s')}${esc(p.nome)}</button>`).join('')}</div>${nav()}`;
   if(w.step===2)return `${head}<h1>Quais peças?</h1><p style="color:var(--ink2);margin-top:-6px">Toque na peça para adicionar.</p><div class="escolhe">${state.produtos.map(p=>`<button class="opc" data-a="wAdd" data-p="${p.id}">${prodSvg(p.id,'')}${esc(p.nome)}</button>`).join('')}</div>
     ${w.itens.map((it,k)=>`<div class="item"><div class="item-h">${prodSvg(it.prod,it.cor)}<b>${esc(prod(it.prod).nome)}</b><button class="x" data-a="wRm" data-k="${k}">Tirar</button></div>
       <div><div class="passo-n">Cor</div><div class="cores">${Object.entries(CORES).map(([n,h])=>`<button class="cor" data-a="wCor" data-k="${k}" data-c="${n}" aria-pressed="${it.cor===n}"><span style="background:${h}"></span>${n}</button>`).join('')}</div></div>
@@ -1065,14 +1068,14 @@ const A={
   entregar:d=>{const p=pedById(d.id);snap();p.concluido=now();commit();toast(`Pedido de ${p.cliente} entregue`)},
   /* cadastros */
   tQtd:d=>{const t=tipo(d.t),n=Math.max(0,(t.qtd||0)+(+d.d));if(n<t.qtd&&plano().uso[`${t.id}-${t.qtd}`]){toast(`A ${t.nome} ${t.qtd} está em uso agora`,false);return}snap();t.qtd=n;commit()},
-  pesEd:d=>{const p=pessoa(d.id);openSheet(p?{t:'pes',id:p.id,nome:p.nome,papel:p.papel,sabe:[...p.sabe],melhor:[...p.melhor],funcoes:[...(p.funcoes||[])],viaApp:!!p.viaApp,disp:p.disp!==false,err:''}:{t:'pes',id:null,nome:'',papel:'costura',sabe:[],melhor:[],funcoes:[],viaApp:false,disp:true,err:''})},
-  xPapel:d=>{eRead();ui.sheet.papel=d.v;render()},
+  pesEd:d=>{const p=pessoa(d.id);openSheet(p?{t:'pes',id:p.id,nome:p.nome,papeis:[...(p.papeis||[])],sabe:[...p.sabe],melhor:[...p.melhor],funcoes:[...(p.funcoes||[])],viaApp:!!p.viaApp,disp:p.disp!==false,err:''}:{t:'pes',id:null,nome:'',papeis:['costura'],sabe:[],melhor:[],funcoes:[],viaApp:false,disp:true,err:''})},
+  xPapel:d=>{eRead();const e=ui.sheet;togl(e.papeis,d.v);if(e.papeis.includes(d.v)){(CARGO_FUN[d.v]||[]).forEach(f=>{if(!e.funcoes.includes(f))e.funcoes.push(f)});if(d.v==='corte'&&!e.sabe.includes('corte'))e.sabe.push('corte')}render()},
   xSabe:d=>{eRead();const e=ui.sheet;togl(e.sabe,d.v);if(!e.sabe.includes(d.v))e.melhor=e.melhor.filter(x=>x!==d.v);render()},
   xMelhor:d=>{eRead();togl(ui.sheet.melhor,d.v);render()},
   xOk:()=>{eRead();const e=ui.sheet;if(!e.nome.trim()){e.err='Escreva o nome';return render()}snap();
-    const obj={id:e.id||uid('p'),nome:e.nome.trim(),papel:e.papel,sabe:e.sabe,melhor:e.melhor,funcoes:e.funcoes,viaApp:e.viaApp&&e.funcoes.some(f=>['levar','entregar'].includes(f)),disp:e.disp};const i=state.pessoas.findIndex(p=>p.id===e.id);i<0?state.pessoas.push(obj):state.pessoas[i]=obj;ui.sheet=null;commit();toast(`${obj.nome} salvo`)},
+    const obj={id:e.id||uid('p'),nome:e.nome.trim(),papeis:e.papeis,sabe:e.sabe,melhor:e.melhor,funcoes:e.funcoes,viaApp:e.viaApp&&e.funcoes.some(f=>['levar','entregar'].includes(f)),disp:e.disp};const i=state.pessoas.findIndex(p=>p.id===e.id);i<0?state.pessoas.push(obj):state.pessoas[i]=obj;ui.sheet=null;commit();toast(`${obj.nome} salvo`)},
   xRm:()=>{const e=ui.sheet;if(plano().ocup.has(e.id)){e.err='Esta pessoa está trabalhando agora. Termine antes de tirar.';return render()}snap();state.pessoas=state.pessoas.filter(p=>p.id!==e.id);ui.sheet=null;commit();toast(`${e.nome} saiu da equipe`)},
-  fornEd:d=>{const f=fornById(d.id);openSheet(f?{t:'forn',...JSON.parse(JSON.stringify(f)),err:''}:{t:'forn',id:null,nome:'',servico:'bordado',prazo:3,leva:state.pessoas.find(p=>p.papel==='compras')?.id||'',err:''})},
+  fornEd:d=>{const f=fornById(d.id);openSheet(f?{t:'forn',...JSON.parse(JSON.stringify(f)),err:''}:{t:'forn',id:null,nome:'',servico:'bordado',prazo:3,leva:state.pessoas.find(p=>temPapel(p,'compras'))?.id||'',err:''})},
   fServ:d=>{eRead();ui.sheet.servico=d.v;render()},
   fPrazo:d=>{eRead();ui.sheet.prazo=Math.max(1,ui.sheet.prazo+(+d.d));render()},
   fLeva:d=>{eRead();ui.sheet.leva=d.v;render()},
