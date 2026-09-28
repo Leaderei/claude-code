@@ -60,8 +60,17 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .setor-h{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;color:var(--ink2);margin-bottom:10px}
 .setor-h svg.ic{width:30px;height:30px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
-.pessoa{display:grid;grid-template-rows:auto 1fr auto;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:18px;padding:0;overflow:hidden;min-height:190px}
+.pessoa{display:grid;grid-template-rows:1fr auto auto;border:2px solid var(--line);background:var(--card);border-radius:18px;overflow:hidden;min-height:190px}
+.p-open{display:grid;grid-template-rows:auto 1fr;text-align:left;border:0;background:none;padding:0}
 .pessoa:hover{border-color:var(--ink2)}
+.p-body .emp{display:flex;align-items:center;gap:5px;color:var(--ink);font-weight:700;font-size:16px;margin-top:2px}
+.p-body .emp svg.ic{width:19px;height:19px;color:var(--muted)}
+.p-body .prox{display:block;color:var(--atn-ink);font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.p-act{display:flex;align-items:center;justify-content:center;gap:10px;border:0;margin:0 12px 12px;border-radius:14px;min-height:58px;font-size:21px;font-weight:700;color:#fff}
+.p-act svg.ic{width:28px;height:28px;stroke-width:3.8}
+.p-act.ini{background:var(--blue)}.p-act.ini:hover{background:#174A96}
+.p-act.fim{background:var(--go)}.p-act.fim:hover{background:var(--go-dark)}
+.st-trab .p-st,.st-livre .p-st,.st-nada .p-st{margin-bottom:12px}
 .p-top{display:flex;align-items:center;gap:12px;padding:14px 14px 8px}
 .av{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:24px;font-weight:700;color:#fff;flex:none}
 .p-top b{display:block;font-size:22px;line-height:1.1}
@@ -180,6 +189,7 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .big.prob{background:var(--card);color:var(--red);border:3px solid var(--red);min-height:66px;font-size:22px}
 .big.neutro{background:var(--card);color:var(--ink2);border:2px solid var(--line);min-height:62px;font-size:21px}
 .big.azul{background:var(--blue);color:#fff}
+.big.go.ini{background:var(--blue)}
 .big:disabled{opacity:.4;cursor:not-allowed}
 .outras{display:grid;gap:10px;margin-top:10px}
 .outra{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:14px;align-items:center;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:16px;padding:10px 14px}
@@ -320,6 +330,8 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
   <symbol id="i-carrinho" viewBox="0 0 48 48"><path d="M4 8h6l5 22h24l4-15H12"/><circle cx="18" cy="38" r="3"/><circle cx="36" cy="38" r="3"/></symbol>
   <symbol id="i-mao" viewBox="0 0 48 48"><path d="M18 26V9a3 3 0 0 1 6 0v14M24 21v-4a3 3 0 0 1 6 0v6M30 21a3 3 0 0 1 6 0v9c0 8-5 13-12 13-5 0-8-3-11-8l-5-8a3 3 0 0 1 5-3l4 4"/></symbol>
   <symbol id="i-camisa" viewBox="0 0 48 48"><path d="M17 6l-12 8 5 9 5-3v22h18V20l5 3 5-9-12-8c-1 4-4 6-7 6s-6-2-7-6z"/></symbol>
+  <symbol id="i-predio" viewBox="0 0 48 48"><path d="M8 42V8h20v34M28 18h12v24M4 42h40M14 15h8M14 23h8M14 31h8M33 26h2M33 33h2"/></symbol>
+  <symbol id="i-play" viewBox="0 0 48 48"><path d="M14 8l26 16-26 16z"/></symbol>
   <symbol id="i-dormir" viewBox="0 0 48 48"><path d="M8 10h12L8 24h12M26 22h10L26 34h10"/></symbol>
 </svg>
 
@@ -507,7 +519,8 @@ function tarefaCard(it,sug){const q=qtdEf(it.l);
   return `<div class="tarefa ${sug?'sug':''}">${prodSvg(it.p.id,it.l.cor)}<div>
     <div class="etapa">${esc(it.s.nome)}</div>
     <div class="qtd">${q} peças</div>
-    <div class="desc">${esc(it.p.nome)} ${esc(it.l.cor)} · ${esc(it.ped.cliente)}</div>
+    <div class="desc">${esc(it.p.nome)} ${esc(it.l.cor)}</div>
+    <div class="desc" style="display:flex;align-items:center;gap:6px;font-weight:700;color:var(--ink)">${ic('i-predio')}${esc(it.ped.cliente)}</div>
     <div class="para">${chips(it)}</div>
   </div></div>${it.s.obs?`<div class="instr">${ic('i-etiqueta')}<span>${esc(it.s.obs)}</span></div>`:''}`}
 
@@ -518,13 +531,14 @@ function vEquipe(){
   const res=['crit','warn','ok'].filter(u=>cnt(u)).map(u=>`<button class="rs u-${u}" data-a="tela" data-t="pedidos"><span class="dot"></span><b>${cnt(u)}</b>${cnt(u)>1?'pedidos':'pedido'} ${ULAB[u].toLowerCase()}</button>`).join('');
   return `<h1>Quem está fazendo o quê</h1><div class="resumo">${res}</div>
   ${SETORES.map(se=>`<section class="setor"><div class="setor-h">${ic(se.i)}${se.nome}</div><div class="grid">
-    ${POSTOS.filter(p=>p.setor===se.id).flatMap(p=>p.ops.map(op=>{const t=tarefaDe(op);const livre=!t,temFila=livre&&fila(p.id).length>0;
-      const cls=t?'st-trab':temFila?'st-livre':'st-nada';
-      return `<button class="pessoa ${cls}" data-a="pessoa" data-o="${esc(op)}">
+    ${POSTOS.filter(p=>p.setor===se.id).flatMap(p=>{const f=fila(p.id);let k=0;return p.ops.map(op=>{const t=tarefaDe(op);const nx=t?null:f[k++]||null;
+      const cls=t?'st-trab':nx?'st-livre':'st-nada',it=t||nx;
+      return `<div class="pessoa ${cls}"><button class="p-open" data-a="pessoa" data-o="${esc(op)}">
         <div class="p-top">${av(op)}<div><b>${esc(op)}</b><small>${ic(PICON[p.id])}${esc(p.nome)}</small></div></div>
-        <div class="p-body">${t?`${prodSvg(t.p.id,t.l.cor)}<div><b>${esc(t.s.nome)}</b><span>${qtdEf(t.l)} peças</span></div>`:`<span class="vazio">${temFila?'Tem trabalho esperando':'Nada para fazer agora'}</span>`}</div>
-        <div class="p-st"><span class="dot"></span>${t?`Trabalhando · <span data-ini="${t.x.ini}">${fDur(now()-t.x.ini)}</span>`:temFila?'Livre · dar trabalho':'Sem trabalho'}</div>
-      </button>`})).join('')}
+        <div class="p-body">${it?`${prodSvg(it.p.id,it.l.cor)}<div>${nx?'<span class="prox">Próximo</span>':''}<b>${esc(it.s.nome)}</b><span>${qtdEf(it.l)} peças</span><span class="emp">${ic('i-predio')}${esc(it.ped.cliente)}</span></div>`:`<span class="vazio">Nada para fazer agora</span>`}</div></button>
+        <div class="p-st"><span class="dot"></span>${t?`Trabalhando · <span data-ini="${t.x.ini}">${fDur(now()-t.x.ini)}</span>`:nx?'Parada · esperando começar':'Sem trabalho'}</div>
+        ${t?`<button class="p-act fim" data-a="terminou" data-o="${esc(op)}">${ic('i-check')}Terminou</button>`:nx?`<button class="p-act ini" data-a="comecar" data-o="${esc(op)}" data-l="${nx.l.id}" data-s="${nx.s.id}">${ic('i-play')}Começar</button>`:''}
+      </div>`})}).join('')}
   </div></section>`).join('')}`}
 
 /* ================= PEDIDOS ================= */
@@ -550,7 +564,7 @@ function sugestao(op){const po=postoDe(op),f=fila(po.id);
     return `<div class="vazio-box">${ic('i-dormir')}<b>Nada para ${esc(po.nome)} agora</b>${outro&&outro.n?`<span>Pode ajudar na <b>${esc(outro.p.nome)}</b></span>`:''}</div>`}
   const [a,...rest]=f;
   return `<h2>Próximo trabalho</h2>${tarefaCard(a,true)}
-    <div class="acoes"><button class="big go" data-a="comecar" data-o="${esc(op)}" data-l="${a.l.id}" data-s="${a.s.id}">${ic('i-mao')}Começar</button></div>
+    <div class="acoes"><button class="big go ini" data-a="comecar" data-o="${esc(op)}" data-l="${a.l.id}" data-s="${a.s.id}">${ic('i-play')}Começar</button></div>
     ${rest.length?`<h2 style="margin-top:26px">Ou escolher outro</h2><div class="outras">${rest.slice(0,3).map(it=>`<button class="outra" data-a="comecar" data-o="${esc(op)}" data-l="${it.l.id}" data-s="${it.s.id}">${prodSvg(it.p.id,it.l.cor)}<div><b>${esc(it.s.nome)} · ${qtdEf(it.l)} peças</b><span>${esc(it.ped.cliente)}</span></div><span class="ir">Começar${ic('i-seta')}</span></button>`).join('')}</div>`:''}`}
 function sFeito(op,nome){return `${voltar('Fechar')}<div class="feito"><div class="ok">${ic('i-check')}</div><b>Pronto!</b><span>${esc(op)} terminou ${esc(nome)}</span></div>${sugestao(op)}`}
 function sPedido(id){const ped=pedById(id),i=info(ped);
@@ -601,7 +615,7 @@ function sNovo(){const w=ui.sheet.w,passos=`<div class="passos">${[1,2,3,4].map(
 function sAjuda(){return `${voltar('Fechar')}<h1>Como usar</h1><div class="ajuda">
   <div class="aj"><span class="n">1</span>${ic('i-pessoas')}<b>Toque na pessoa</b></div>
   <div class="aj"><span class="n">2</span>${ic('i-check')}<b>Quando acabar, aperte TERMINOU</b></div>
-  <div class="aj"><span class="n">3</span>${ic('i-mao')}<b>O app mostra o próximo trabalho. Aperte COMEÇAR</b></div></div>
+  <div class="aj"><span class="n">3</span>${ic('i-mao')}<b>Para iniciar, aperte COMEÇAR no cartão da pessoa</b></div></div>
   <div class="ajuda"><div class="aj">${ic('i-alerta')}<b>Peça com defeito? Aperte DEU PROBLEMA</b></div><div class="aj">${ic('i-conserto')}<b>Apertou errado? Aperte DESFAZER</b></div></div>
   <div class="acoes"><button class="big go" data-a="fechar">Entendi</button></div>`}
 
