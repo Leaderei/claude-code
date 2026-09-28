@@ -516,7 +516,14 @@ const CATS=[{id:'inf',nome:'Infantil',t:['2','4','6','8'],fator:0.6},{id:'juv',n
 const fatorTam=t=>t==='XXG'?1.15:(CATS.find(c=>c.t.includes(t))?.fator??1);
 const SIZES=CATS.flatMap(c=>c.t);
 const catDe=it=>CATS.find(c=>c.id===(it.cat||'adu'));
-const CORES={Branca:'#F7F7F5',Preta:'#24272C',Marinho:'#1F2E55',Cinza:'#8E959E',Verde:'#2E7D4F',Royal:'#2449B8',Vermelha:'#C0302A'};
+const CORES={Branca:'#F7F7F5',Preta:'#24272C',Marinho:'#1F2E55',Cinza:'#8E959E',Verde:'#2E7D4F',Royal:'#2449B8',Vermelha:'#C0302A',
+  'Cinza mescla':'#B7BBC0',Chumbo:'#4A4F55',Grafite:'#33373C','Azul celeste':'#7FB3E0','Azul turquesa':'#1FA3A8','Azul petróleo':'#1F5F6B',
+  'Verde bandeira':'#1E8A3E','Verde musgo':'#5B6B3A','Verde limão':'#A6CE39',Amarela:'#F2C230','Amarelo ouro':'#D9A21B',Laranja:'#EE7A22',
+  Vinho:'#6E1F2E',Bordô:'#7E2437',Rosa:'#E88FB0','Pink':'#D6336C',Roxa:'#5E3A8C',Lilás:'#B39DDB',Bege:'#D9C7A7',Caqui:'#A89968',Marrom:'#6B4A2F'};
+const ORDEM_COR=['Secundária','Terciária','Quarta cor','Quinta cor','Sexta cor'];
+/* Parte aproximada do tecido que cada parte da peça usa (estimativa para dividir a compra entre as cores) */
+const PESO_PARTE={Frente:.3,Costas:.3,Mangas:.22,Gola:.05,Peitilho:.03,'Punhos e barra':.06,Punhos:.03,Bolsos:.05,Pernas:.85,'Cós':.08,Traseiro:.4,Saia:.5,Short:.4,'Recorte lateral':.08,'Friso / vivo':.02,'Faixa lateral':.04};
+const PARTES_COR_EXTRA=['Recorte lateral','Friso / vivo','Faixa lateral','Punhos'];
 const S=(id,nome,posto,deps,min,o={})=>({id,nome,posto,deps,min,pers:!!o.pers,fecha:!!o.fecha,obs:o.obs||'',partes:o.partes||[]});
 const ETQ='Etiqueta do lado ESQUERDO, por dentro';
 const PARTES_POLO=['Frente','Costas','Mangas','Gola','Peitilho'];
@@ -713,7 +720,7 @@ const LADOS={esq:'Manga esquerda',dir:'Manga direita',ambas:'As duas mangas'};
 const localTxt=x=>x.parte==='Mangas'&&x.lado?LADOS[x.lado]:x.parte;
 let RC={};
 const usa=(R,x)=>x.partes&&x.partes.length?x.partes:(R.partes||[]);
-function rota(p0,pers,opc){pers=pers||[];opc=opc||[];
+function rota(p0,pers,opc,cores){pers=pers||[];opc=opc||[];
   const os=(p0.opcoes||[]).filter(o=>opc.includes(o.id)).flatMap(o=>o.steps.map(z=>({...z,deps:[...z.deps],opt:o.nome})));
   const bs=[...p0.steps.map(z=>({...z,deps:[...z.deps]})),...os];
   os.forEach(z=>(z.antes||[]).forEach(a=>{const t=bs.find(y=>y.id===a);if(t&&!t.deps.includes(z.id))t.deps.push(z.id)}));
@@ -722,8 +729,9 @@ function rota(p0,pers,opc){pers=pers||[];opc=opc||[];
   const steps=p.steps.map((s,i)=>{if(i===0)return{...s};const an=anc(p,s.id);if(c0)an.delete(c0.id);
     const ex=ps.filter(x=>usa(p,s).includes(x.partes[0])&&![...an].some(a=>{const z=p.steps.find(y=>y.id===a);return z&&usa(p,z).includes(x.partes[0])})).map(x=>x.id);
     return{...s,deps:[...new Set([...s.deps,...ex])]}});
+  if(c0&&cores&&(cores.cores2||[]).length)steps[0]={...steps[0],obs:`Cores: ${cores.cor} (principal) · ${cores.cores2.map((c,i)=>`${ORDEM_COR[i]||'Outra'}: ${c.cor} em ${c.partes.join(', ').toLowerCase()}`).join(' · ')}`};
   return{...p,steps:c0?[steps[0],...ps,...steps.slice(1)]:ps}}
-const rp=l=>RC[l.id]||(RC[l.id]=rota(prod(l.prod),l.pers,l.opcoes));
+const rp=l=>RC[l.id]||(RC[l.id]=rota(prod(l.prod),l.pers,l.opcoes,l));
 function fase(p,s){if(s.pers)return 'pers';const a=anc(p,s.id);return p.steps.some(x=>x.pers&&a.has(x.id))?'depois':'antes'}
 
 /* ================= motor ================= */
@@ -794,12 +802,13 @@ function servicosPed(ped){const n=new Set();lotesDe(ped.id).forEach(l=>rp(l).ste
 const qtdTxt=(q,un)=>`≈ ${Number(q).toLocaleString('pt-BR')} ${un==='m'?'metros':'unidades'}`;
 const AVISO_EST='Quantidades estimadas pelo sistema. Confira o estoque real e as quantidades antes de comprar.';
 const avisoEst=()=>`<div class="instr" style="margin:10px 0 0;font-size:17px">${ic('i-alerta')}<span>${AVISO_EST}</span></div>`;
-const modeloTxt=x=>{const p=prod(x.prod);return[x.tecido,x.cor,...(p.opcoes||[]).filter(o=>(x.opcoes||[]).includes(o.id)).map(o=>o.nome.toLowerCase())].filter(Boolean).join(' · ')};
-function calcMat(ls){const m={};ls.forEach(x0=>{const g=x0.g||x0.grade,qe=g&&Object.keys(g).length?sum(Object.entries(g).map(([t,q])=>(q||0)*fatorTam(t))):x0.qtd,x={...x0,qtd:qe},p=prod(x.prod);const add=(it,un,q)=>{m[it]=m[it]||{item:it,un,nec:0};m[it].nec+=q};add(`${x.tecido||(p.tecidos||[])[0]||'Tecido'} ${x.cor}`,'m',p.consumo*x.qtd);p.aviam.forEach(([i,u,q])=>add(i,u,q*x.qtd));(p.opcoes||[]).filter(o=>(x.opcoes||[]).includes(o.id)).forEach(o=>(o.aviam||[]).forEach(([i,u,q])=>add(i,u,q*x.qtd)))});
+const coresTxt=x=>(x.cores2||[]).map(c=>`${c.cor} (${c.partes.join(', ').toLowerCase()})`).join(' + ');
+const modeloTxt=x=>{const p=prod(x.prod);return[x.tecido,x.cor+((x.cores2||[]).length?' + '+coresTxt(x):''),...(p.opcoes||[]).filter(o=>(x.opcoes||[]).includes(o.id)).map(o=>o.nome.toLowerCase())].filter(Boolean).join(' · ')};
+function calcMat(ls){const m={};ls.forEach(x0=>{const g=x0.g||x0.grade,qe=g&&Object.keys(g).length?sum(Object.entries(g).map(([t,q])=>(q||0)*fatorTam(t))):x0.qtd,x={...x0,qtd:qe},p=prod(x.prod);const add=(it,un,q)=>{m[it]=m[it]||{item:it,un,nec:0};m[it].nec+=q};{const tec=x.tecido||(p.tecidos||[])[0]||'Tecido',base=p.consumo*x.qtd;let resto=1;(x.cores2||[]).forEach(c=>{const f=Math.min(.9,sum(c.partes.map(pt=>PESO_PARTE[pt]??.05)));resto-=f;add(`${tec} ${c.cor}`,'m',base*f)});add(`${tec} ${x.cor}`,'m',base*Math.max(.1,resto))}p.aviam.forEach(([i,u,q])=>add(i,u,q*x.qtd));(p.opcoes||[]).filter(o=>(x.opcoes||[]).includes(o.id)).forEach(o=>(o.aviam||[]).forEach(([i,u,q])=>add(i,u,q*x.qtd)))});
   return Object.values(m).map(o=>{o.nec=Math.ceil(o.nec);o.est=state.estoque[o.item]??0;o.st=o.est>=o.nec?'ok':'comprar';return o})}
 function gradeOf(q){const w=[.14,.3,.3,.18,.08];const g={};let t=0;['P','M','G','GG','XG'].forEach((s,i)=>{g[s]=Math.round(q*w[i]);t+=g[s]});g.M+=q-t;return g}
 function makeRework(l,detect,orig,n,mot,ts,op){RC={};const p=rp(l),D=desc(p,orig),k=state.consertos.filter(d=>d.l===l.id).length+1;
-  const r={id:`${l.id}-C${k}`,ped:l.ped,prod:l.prod,cor:l.cor,tecido:l.tecido,opcoes:l.opcoes,pers:l.pers,qtd:n,grade:{},desm:0,steps:{},rework:true,parent:l.id};
+  const r={id:`${l.id}-C${k}`,ped:l.ped,prod:l.prod,cor:l.cor,cores2:l.cores2||[],tecido:l.tecido,opcoes:l.opcoes,pers:l.pers,qtd:n,grade:{},desm:0,steps:{},rework:true,parent:l.id};
   p.steps.forEach(s=>{if(!D.has(s.id))r.steps[s.id]={st:'ok',herdado:true}});l.desm=(l.desm||0)+n;state.lotes.push(r);
   state.consertos.push({ts,l:l.id,r:r.id,ped:l.ped,detect,orig,n,motivo:mot,op});return r}
 
@@ -823,12 +832,12 @@ function seed(){seedN=7;const T=now();
   state={v:8,cores:{...CORES},atrib:{},tipos:JSON.parse(JSON.stringify(TIPOS0)),pessoas:JSON.parse(JSON.stringify(PESSOAS0)),forn:JSON.parse(JSON.stringify(FORN0)),produtos:JSON.parse(JSON.stringify(PRODUTOS0)),pedidos:[],lotes:[],consertos:[],estoque:{...ESTOQUE},seq:421};
   const mk=o=>{const ped={id:o.id,cliente:o.cliente,contato:o.contato||'',cnpj:o.cnpj||'',vendedor:o.vend,chegada:o.chegada,entrega:o.entrega,vias:o.vias??true,arte:o.arte??true,artePrep:o.prep??true,artes:{},materiais:[],concluido:o.concluido||null};
     ped.materiais=calcMat(o.linhas);if(o.lib)ped.materiais.forEach(m=>m.st='ok');state.pedidos.push(ped);
-    o.linhas.forEach((x,i)=>{const l={id:`${o.id}-${i+1}`,ped:o.id,prod:x.prod,cor:x.cor,tecido:x.tecido||prod(x.prod).tecidos[0],opcoes:x.opcoes||[],qtd:x.qtd,grade:gradeOf(x.qtd),pers:(prod(x.prod).persPadrao||[]).map((y,j)=>({...y,id:'pz'+j})),desm:0,steps:{},rework:false,parent:null};state.lotes.push(l);if(x.done)sim(l,x.done==='all'?rp(l).steps.map(z=>z.id):x.done,o.lib)});
+    o.linhas.forEach((x,i)=>{const l={id:`${o.id}-${i+1}`,ped:o.id,prod:x.prod,cor:x.cor,cores2:x.cores2||[],tecido:x.tecido||prod(x.prod).tecidos[0],opcoes:x.opcoes||[],qtd:x.qtd,grade:gradeOf(x.qtd),pers:(prod(x.prod).persPadrao||[]).map((y,j)=>({...y,id:'pz'+j})),desm:0,steps:{},rework:false,parent:null};state.lotes.push(l);if(x.done)sim(l,x.done==='all'?rp(l).steps.map(z=>z.id):x.done,o.lib)});
     if(o.env??true)lotesDe(o.id).forEach(l=>rp(l).steps.filter(z=>z.pers).forEach(z=>ped.artes[l.id+':'+z.id]=o.chegada))};
   mk({id:'0402',contato:'Marcos Lima',cnpj:'12.345.678/0001-90',cliente:'Supermercados Bom Preço',vend:'layara',chegada:addWD(T,-26),entrega:addWD(T,-3),lib:addWD(T,-23),concluido:addWD(T,-4),linhas:[{prod:'polo-ams',cor:'Cinza',qtd:150,done:'all'}]});
   mk({id:'0409',contato:'Juliana Prado',cnpj:'23.456.789/0001-01',cliente:'Transportes Rota Sul',vend:'paula',chegada:addWD(T,-21),entrega:addWD(T,2),lib:addWD(T,-17),linhas:[{prod:'polo-vie',cor:'Cinza',qtd:90,done:['corte','pz0','pz1','peitilho','pregpeit','prepgola','barramanga','ombro','gola','cobregola','manga','fechar','etiqueta','fenda','casear','botao']}]});
   mk({id:'0412',contato:'Paulo Reis',cnpj:'34.567.890/0001-12',cliente:'Construtora Horizonte',vend:'layara',chegada:addWD(T,-16),entrega:addWD(T,4),lib:addWD(T,-13),linhas:[
-    {prod:'polo-ams',cor:'Marinho',qtd:180,done:['corte','pz0','pz1','peitilho','pregpeit','prepgola','barramanga','ombro','gola','cobregola','manga','fechar','etiqueta']},
+    {prod:'polo-ams',cor:'Marinho',cores2:[{cor:'Branca',partes:['Gola']}],qtd:180,done:['corte','pz0','pz1','peitilho','pregpeit','prepgola','barramanga','ombro','gola','cobregola','manga','fechar','etiqueta']},
     {prod:'calca-hel',cor:'Preta',qtd:180,done:['corte']}]});
   mk({id:'0415',contato:'Carla Mendes',cnpj:'45.678.901/0001-23',cliente:'Rede Farma Vida',vend:'paula',chegada:addWD(T,-9),entrega:addWD(T,14),lib:addWD(T,-6),linhas:[{prod:'polo-vie',cor:'Branca',qtd:240,done:['corte','pz0','peitilho']}]});
   mk({id:'0416',contato:'Rafael Souza',cnpj:'56.789.012/0001-34',cliente:'Academia Pulse',vend:'roger',chegada:addWD(T,-8),entrega:addWD(T,9),lib:addWD(T,-6),linhas:[{prod:'calca-hel',cor:'Cinza',qtd:120,done:['corte','pz0','prepbolso','prepcos']}]});
@@ -844,10 +853,10 @@ function seed(){seedN=7;const T=now();
   const r=makeRework(lote('0402-1'),'arremate','etiqueta',5,'Etiqueta errada',addWD(T,-6),'leo');rp(r).steps.forEach(s=>r.steps[s.id]={st:'ok',herdado:true});
   return state}
 function save(){RC={};try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
-function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===8&&s.pedidos){const semLog=!s.log;if(!s.cores)s.cores={...CORES};const EXC={'0402':['Marcos Lima','12.345.678/0001-90'],'0409':['Juliana Prado','23.456.789/0001-01'],'0412':['Paulo Reis','34.567.890/0001-12'],'0415':['Carla Mendes','45.678.901/0001-23'],'0416':['Rafael Souza','56.789.012/0001-34'],'0419':['Renata Alves','78.901.234/0001-56'],'0418':['Teresa Nogueira','67.890.123/0001-45'],'0420':['Fernanda Rocha','89.012.345/0001-67']};s.pedidos.forEach(p=>{const x=EXC[p.id];p.contato=p.contato||(x?x[0]:'');p.cnpj=p.cnpj||(x?x[1]:'')});s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});const mg=x=>{if(x.parte==='Mangas'&&!x.lado)x.lado='esq'};s.produtos.forEach(p=>(p.persPadrao||[]).forEach(mg));s.lotes.forEach(l=>(l.pers||[]).forEach(mg));state=s;if(semLog){seedN=11;logExemplo(now())}return}}catch(e){}seed()}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===8&&s.pedidos){const semLog=!s.log;s.cores={...CORES,...(s.cores||{})};const EXC={'0402':['Marcos Lima','12.345.678/0001-90'],'0409':['Juliana Prado','23.456.789/0001-01'],'0412':['Paulo Reis','34.567.890/0001-12'],'0415':['Carla Mendes','45.678.901/0001-23'],'0416':['Rafael Souza','56.789.012/0001-34'],'0419':['Renata Alves','78.901.234/0001-56'],'0418':['Teresa Nogueira','67.890.123/0001-45'],'0420':['Fernanda Rocha','89.012.345/0001-67']};s.pedidos.forEach(p=>{const x=EXC[p.id];p.contato=p.contato||(x?x[0]:'');p.cnpj=p.cnpj||(x?x[1]:'')});s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});const mg=x=>{if(x.parte==='Mangas'&&!x.lado)x.lado='esq'};s.produtos.forEach(p=>(p.persPadrao||[]).forEach(mg));s.lotes.forEach(l=>(l.pers||[]).forEach(mg));state=s;if(semLog){seedN=11;logExemplo(now())}return}}catch(e){}seed()}
 
 /* ================= desenho dos produtos ================= */
-function prodSvg(pid,cor){const p=prod(pid);return shapeSvg(p?p.forma:'polo',cor,p?p.nome:'')}
+function prodSvg(pid,cor,c2){const p=prod(pid);let sv=shapeSvg(p?p.forma:'polo',cor,p?p.nome:'');if(c2&&c2.length){const dots=c2.slice(0,4).map((c,i)=>`<circle cx="${104-i*15}" cy="106" r="8" fill="${coresAll()[c.cor]||'#999'}" stroke="#fff" stroke-width="2.5"/>`).join('');sv=sv.replace('</svg>',dots+'</svg>')}return sv}
 const coresAll=()=>(state&&state.cores)||CORES;
 function claroHex(h){const n=parseInt(String(h).slice(1),16);if(isNaN(n))return true;const r=n>>16,g=n>>8&255,b=n&255;return (r*299+g*587+b*114)/1000>200}
 function shapeSvg(forma,cor,nome){const hx=coresAll()[cor],f=hx||'#B9C0C8',claro=!hx||claroHex(hx);
@@ -872,7 +881,7 @@ const upill=u=>`<span class="pill u-${u}"><span class="dot"></span>${ULAB[u]}</s
 function entregaTxt(ped,inf){if(ped.concluido)return `Entregue ${fD(ped.concluido)}`;const d=inf.du;return `Entrega ${fD(ped.entrega)} · ${d>1?`faltam ${d} dias úteis`:d===1?'falta 1 dia útil':d===0?'é hoje':'passou da data'}`}
 function chips(it){const r=[upill(it.inf.u)];if(it.l.rework)r.push(`<span class="pill cons">${ic('i-conserto')}Conserto</span>`);if(it.adianta)r.push(`<span class="pill adi">${ic('i-adiantar')}Adiantar</span>`);return r.join('')}
 function tarefaCard(it,sug){const q=qtdEf(it.l);
-  return `<div class="tarefa ${sug?'sug':''}">${prodSvg(it.p.id,it.l.cor)}<div>
+  return `<div class="tarefa ${sug?'sug':''}">${prodSvg(it.p.id,it.l.cor,it.l.cores2)}<div>
     <div class="etapa">${esc(it.s.nome)}</div><div class="qtd">${q} peças</div>
     <div class="desc">${esc(it.p.nome)} · ${esc(modeloTxt(it.l))}</div>
     <div class="desc" style="display:flex;align-items:center;gap:6px;font-weight:700;color:var(--ink)">${ic('i-predio')}${esc(it.ped.cliente)}</div>
@@ -916,7 +925,7 @@ function maqTile(u,P){const t=P.uso[u.id],pl=P.plan[u.id],sp=!t&&!pl?(P.semPesso
   const cls=t?'st-trab':pl?'st-livre':sp?'st-semp':'st-nada';const quem=t?t.x.op:pl?pl.pessoa:null;
   return `<div class="pessoa ${cls}"><button class="p-open" data-a="maq" data-m="${u.id}">
     <div class="m-top"><span class="m-ic">${ic(tipo(u.tipo).i)}</span><b>${esc(u.nome)}</b></div>
-    <div class="p-body">${it?`${prodSvg(it.p.id,it.l.cor)}<div>${pl?`<span class="prox">${pl.reservado?'Reservado':'Próximo'}</span>`:''}<b>${esc(it.s.nome)}</b><span>${qtdEf(it.l)} peças</span><span class="emp">${ic('i-predio')}${esc(it.ped.cliente)}</span>${quem?`<span class="quem-l">${av(quem,'s')}${esc(pNome(quem))} ${pl?estrela(pessoa(quem),pl):''}</span>`:''}</div>`:'<span class="vazio">Sem trabalho para esta máquina</span>'}</div></button>
+    <div class="p-body">${it?`${prodSvg(it.p.id,it.l.cor,it.l.cores2)}<div>${pl?`<span class="prox">${pl.reservado?'Reservado':'Próximo'}</span>`:''}<b>${esc(it.s.nome)}</b><span>${qtdEf(it.l)} peças</span><span class="emp">${ic('i-predio')}${esc(it.ped.cliente)}</span>${quem?`<span class="quem-l">${av(quem,'s')}${esc(pNome(quem))} ${pl?estrela(pessoa(quem),pl):''}</span>`:''}</div>`:'<span class="vazio">Sem trabalho para esta máquina</span>'}</div></button>
     ${P.resEspera[u.id]?`<div class="dica" style="padding:0 14px 8px;color:var(--blue);font-weight:700">Reservado a seguir: ${esc(P.resEspera[u.id].s.nome)} · ${esc(P.resEspera[u.id].ped.cliente)}</div>`:''}
     <div class="p-st"><span class="dot"></span>${t?`Trabalhando · <span data-ini="${t.x.ini}">${fDur(now()-t.x.ini)}</span>`:pl?'Parada · pronta para começar':sp?'Ninguém livre sabe usar':'Sem trabalho'}</div>
     ${t?`<button class="p-act fim" data-a="terminou" data-m="${u.id}">${ic('i-check')}Terminou</button>`:pl?`<button class="p-act ini" data-a="comecar" data-m="${u.id}" data-l="${pl.l.id}" data-s="${pl.s.id}" data-p="${pl.pessoa}">${ic('i-play')}Começar</button>`:''}
@@ -939,7 +948,7 @@ function listaPedidos(){const f=ui.pf||{},q=(f.q||'').trim().toLowerCase(),qd=so
     return `<button class="ped" data-a="pedido" data-id="${p.id}"><div class="ped-st u-${i.u}"><span class="dot"></span>${ULAB[i.u]}</div>
       <h3>${esc(p.cliente)}</h3>${p.contato||p.cnpj?`<div class="ped-ent" style="font-size:16px;color:var(--muted)">${esc(p.contato)}${p.contato&&p.cnpj?' · ':''}${p.cnpj?`<span style="white-space:nowrap">CNPJ ${esc(p.cnpj)}</span>`:''}</div>`:''}
       <div class="ped-ent">${ic('i-caminhao')}${entregaTxt(p,i)}</div><div class="ped-ent" style="font-size:15px;color:var(--muted)">Pedido ${esc(p.id)} · feito em ${fD(p.chegada)}</div>
-      <div class="ped-prods">${i.ls.filter(l=>!l.rework).map(l=>{const[d,t]=minsTot(l);return `<div class="pp">${prodSvg(l.prod,l.cor)}<b>${l.qtd}</b><div class="barra"><i style="width:${d/t*100}%"></i></div></div>`}).join('')}</div>
+      <div class="ped-prods">${i.ls.filter(l=>!l.rework).map(l=>{const[d,t]=minsTot(l);return `<div class="pp">${prodSvg(l.prod,l.cor,l.cores2)}<b>${l.qtd}</b><div class="barra"><i style="width:${d/t*100}%"></i></div></div>`}).join('')}</div>
       ${falta.length&&!p.concluido?`<div class="falta">${ic('i-cadeado')}Falta: ${falta.join(', ')}</div>`:''}
       ${fora&&!p.concluido?`<div class="falta" style="background:#F3ECFB;color:#6B2F8C">${ic('i-caminhao')}Parte da peça no fornecedor</div>`:''}
     </button>`}).join('')}</div>`}
@@ -977,7 +986,7 @@ function prodLine(l,ped){const p=rp(l);
     const c=n===ss.length?'ok':fo?'fora':(and||n>0)?'and':'';return `<div class="tp ${c}"><span class="tc">${ic(c==='ok'?'i-check':c==='fora'?'i-caminhao':e.i)}</span>${e.nome}${ss.length>1&&c!=='ok'?`<small>${n} de ${ss.length}</small>`:''}</div>`}).join('');
   const ands=p.steps.filter(s=>stOf(l,s.id).st==='and'),fo=p.steps.filter(s=>stOf(l,s.id).st==='fora');
   const agora=loteDone(l)?'Pronto':fo.length?`No fornecedor: ${fo.map(s=>s.nome).join(', ')}`:ands.length?'Agora: '+ands.map(s=>`${s.nome} (${pNome(stOf(l,s.id).op)})`).join(', '):!liberado(ped)?'Esperando liberar o corte':'Esperando a próxima máquina';
-  return `<div class="prodbloco"><div class="prodline">${prodSvg(l.prod,l.cor)}<div><h3>${l.rework?`<span class="pill cons">${ic('i-conserto')}Conserto</span> `:''}${esc(p.nome)} · ${esc(modeloTxt(l))} · ${qtdEf(l)} peças</h3><div class="agora">${esc(agora)}</div><div class="trilha">${et}</div></div></div>${fluxo(rotaV(l,ped),'L'+l.id,l,ped)}</div>`}
+  return `<div class="prodbloco"><div class="prodline">${prodSvg(l.prod,l.cor,l.cores2)}<div><h3>${l.rework?`<span class="pill cons">${ic('i-conserto')}Conserto</span> `:''}${esc(p.nome)} · ${esc(modeloTxt(l))} · ${qtdEf(l)} peças</h3><div class="agora">${esc(agora)}</div><div class="trilha">${et}</div></div></div>${fluxo(rotaV(l,ped),'L'+l.id,l,ped)}</div>`}
 
 /* ================= mapa de etapas ================= */
 const NW=200,NH=104,GX=48,GY=14;
@@ -1148,7 +1157,7 @@ function sMaq(){const e=ui.sheet,u=unidade(e.m);if(!u)return voltar();const P=pl
   const ondePlan=it=>{const m=Object.keys(P.plan).find(k=>kIt(P.plan[k])===kIt(it));return m?(m===u.id?'sugerido aqui':`sugerido para ${unidade(m)?.nome}`):''};
   const resOutra=it=>{const m=Object.keys(state.reservas||{}).find(k=>k!==u.id&&state.reservas[k].l===it.l.id&&state.reservas[k].s===it.s.id);return m?`reservado para ${unidade(m)?.nome}`:''};
   const linha=(it,bloq)=>{const tag=bloq?`Espera: ${it.falta.join(', ')}`:(resOutra(it)||ondePlan(it));const on=e.sel===kIt(it);
-    return `<button class="outra" data-a="mSel" data-v="${kIt(it)}" style="${on?'border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--blue)':''}">${prodSvg(it.p.id,it.l.cor)}<div><b>${esc(it.s.nome)} · ${qtdEf(it.l)} peças${it.l.rework?' · conserto':''}</b><span>${esc(it.ped.cliente)} · ${ULAB[it.inf.u]}${tag?` · <b style="color:${bloq?'var(--atn-ink)':'var(--blue)'}">${esc(tag)}</b>`:''}</span></div><span class="ir">${on?'Escolhido':'Escolher'}${ic('i-seta')}</span></button>`};
+    return `<button class="outra" data-a="mSel" data-v="${kIt(it)}" style="${on?'border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--blue)':''}">${prodSvg(it.p.id,it.l.cor,it.l.cores2)}<div><b>${esc(it.s.nome)} · ${qtdEf(it.l)} peças${it.l.rework?' · conserto':''}</b><span>${esc(it.ped.cliente)} · ${ULAB[it.inf.u]}${tag?` · <b style="color:${bloq?'var(--atn-ink)':'var(--blue)'}">${esc(tag)}</b>`:''}</span></div><span class="ir">${on?'Escolhido':'Escolher'}${ic('i-seta')}</span></button>`};
   const listas=(tit)=>`${O.pr.length?`<h2 style="margin-top:26px">${tit}</h2><p class="dica" style="margin:-4px 0 8px">Já podem entrar nesta máquina.</p><div class="outras">${O.pr.map(it=>linha(it,false)).join('')}</div>`:''}
     ${O.ch.length?`<h2 style="margin-top:26px">Chegando depois</h2><p class="dica" style="margin:-4px 0 8px">Ainda esperam uma etapa anterior. Escolha só se as peças já estiverem na máquina.</p><div class="outras">${O.ch.slice(0,8).map(it=>linha(it,true)).join('')}</div>`:''}`;
   const all=[...O.pr,...O.ch],achar=k=>all.find(it=>kIt(it)===k);
@@ -1191,12 +1200,22 @@ function sNovo(){const w=ui.sheet.w,passos=`<div class="passos">${[1,2,3,4].map(
     <div class="rotulo">CNPJ</div><input class="campo" id="wCnpj" value="${esc(w.cnpj||'')}" placeholder="00.000.000/0000-00" inputmode="numeric" autocomplete="off">
     <div class="rotulo">Quem vendeu?</div><div class="linha-dep">${state.pessoas.filter(p=>temPapel(p,'vendas')).map(p=>`<button class="pchip" data-a="wVend" data-v="${p.id}" aria-pressed="${w.vend===p.id}">${av(p.id,'s')}${esc(p.nome)}</button>`).join('')}</div>${nav()}`;
   if(w.step===2)return `${head}<h1>Quais peças?</h1><p style="color:var(--ink2);margin-top:-6px">Toque na peça para adicionar.</p><div class="escolhe">${state.produtos.map(p=>`<button class="opc" data-a="wAdd" data-p="${p.id}">${prodSvg(p.id,'')}${esc(p.nome)}</button>`).join('')}</div>
-    ${w.itens.map((it,k)=>`<div class="item"><div class="item-h">${prodSvg(it.prod,it.cor)}<b>${esc(prod(it.prod).nome)}</b><button class="x" data-a="wRm" data-k="${k}">Tirar</button></div>
+    ${w.itens.map((it,k)=>`<div class="item"><div class="item-h">${prodSvg(it.prod,it.cor,it.cores2)}<b>${esc(prod(it.prod).nome)}</b><button class="x" data-a="wRm" data-k="${k}">Tirar</button></div>
       <div><div class="passo-n">Tecido</div><div class="linha-dep">${prod(it.prod).tecidos.map(t=>`<button class="depc" data-a="wTec" data-k="${k}" data-v="${esc(t)}" aria-pressed="${it.tecido===t}">${ic('i-rolo')}${esc(t)}</button>`).join('')}<button class="depc" data-a="wNovoTec" data-k="${k}">${ic('i-mais')}Novo tecido</button></div>
         ${it.novoTec?`<div class="novo-in"><input class="campo" id="nt${k}" placeholder="Nome do tecido (ex.: Malha PV)" autocomplete="off"><button class="mbtn go" data-a="wSalvaTec" data-k="${k}">Salvar</button></div><p class="dica">Fica cadastrado no ${esc(prod(it.prod).nome)} para os próximos pedidos.</p>`:''}</div>
       ${(prod(it.prod).opcoes||[]).length?`<div><div class="passo-n">Modelo</div><div class="linha-dep">${prod(it.prod).opcoes.map(o=>`<button class="depc" data-a="wOpc" data-k="${k}" data-v="${o.id}" aria-pressed="${it.opcoes.includes(o.id)}">${esc(o.nome)}</button>`).join('')}</div></div>`:''}
-      <div><div class="passo-n">Cor</div><div class="cores">${Object.entries(coresAll()).map(([n,h])=>`<button class="cor" data-a="wCor" data-k="${k}" data-c="${esc(n)}" aria-pressed="${it.cor===n}"><span style="background:${esc(h)}"></span>${esc(n)}</button>`).join('')}<button class="cor" data-a="wNovaCor" data-k="${k}"><span style="display:grid;place-items:center;border-style:dashed">${ic('i-mais')}</span>Nova cor</button></div>
+      <div><div class="passo-n">Cor principal</div><div class="cores">${Object.entries(coresAll()).map(([n,h])=>`<button class="cor" data-a="wCor" data-k="${k}" data-c="${esc(n)}" aria-pressed="${it.cor===n}"><span style="background:${esc(h)}"></span>${esc(n)}</button>`).join('')}<button class="cor" data-a="wNovaCor" data-k="${k}"><span style="display:grid;place-items:center;border-style:dashed">${ic('i-mais')}</span>Nova cor</button></div>
         ${it.novaCor?`<div class="novo-in"><input class="campo" id="nc${k}" placeholder="Nome da cor (ex.: Azul petróleo)" autocomplete="off"><input type="color" id="nh${k}" value="#2A6F7F" aria-label="Escolha a cor" class="cor-pick"><button class="mbtn go" data-a="wSalvaCor" data-k="${k}">Salvar</button></div><p class="dica">Fica disponível em todos os produtos.</p>`:''}</div>
+      <div><div class="passo-n">Outras cores na peça</div>
+        <div class="linha-dep">${(it.cores2||[]).map((c,j)=>`<span class="depc" aria-pressed="true"><span style="width:20px;height:20px;border-radius:50%;background:${esc(coresAll()[c.cor]||'#999')};border:2px solid var(--line)"></span>${ORDEM_COR[j]||'Outra'}: ${esc(c.cor)} · ${esc(c.partes.join(', '))}<button class="x" data-a="wC2rm" data-k="${k}" data-j="${j}" aria-label="Tirar" style="padding:0 8px;margin-left:4px">×</button></span>`).join('')}
+          <button class="depc" data-a="wC2add" data-k="${k}">${ic('i-mais')}Adicionar ${esc((ORDEM_COR[(it.cores2||[]).length]||'outra cor').toLowerCase())}</button></div>
+        ${it.novaC2?`<div class="card" style="margin:10px 0 0;background:var(--bg)"><div class="passo-n">Qual é a ${esc((ORDEM_COR[(it.cores2||[]).length]||'outra cor').toLowerCase())}?</div>
+          <div class="cores">${Object.entries(coresAll()).filter(([n])=>n!==it.cor).map(([n,h])=>`<button class="cor" data-a="wC2cor" data-k="${k}" data-c="${esc(n)}" aria-pressed="${it.novaC2.cor===n}"><span style="background:${esc(h)}"></span>${esc(n)}</button>`).join('')}<button class="cor" data-a="wNovaCor2" data-k="${k}"><span style="display:grid;place-items:center;border-style:dashed">${ic('i-mais')}</span>Nova cor</button></div>
+          ${it.novaCor2?`<div class="novo-in"><input class="campo" id="nc2${k}" placeholder="Nome da cor" autocomplete="off"><input type="color" id="nh2${k}" value="#D9A21B" aria-label="Escolha a cor" class="cor-pick"><button class="mbtn go" data-a="wSalvaCor2" data-k="${k}">Salvar</button></div>`:''}
+          <div class="passo-n" style="margin-top:12px">Em quais partes? <span style="font-weight:400">(pode marcar várias)</span></div>
+          <div class="linha-dep">${[...new Set([...(prod(it.prod).partes||[]),...PARTES_COR_EXTRA,...it.novaC2.partes])].map(pt=>`<button class="depc" data-a="wC2pt" data-k="${k}" data-v="${esc(pt)}" aria-pressed="${it.novaC2.partes.includes(pt)}">${esc(pt)}</button>`).join('')}</div>
+          <div class="novo-in"><input class="campo" id="c2o${k}" placeholder="Outra parte (ex.: Bolso da manga)" autocomplete="off"><button class="mbtn" data-a="wC2outra" data-k="${k}">Incluir</button></div>
+          <div class="acoes"><button class="big go" data-a="wC2ok" data-k="${k}" style="min-height:60px;font-size:21px">${ic('i-check')}Confirmar cor</button><button class="big neutro" data-a="wC2x" data-k="${k}" style="min-height:52px">Cancelar</button></div></div>`:''}</div>
       <div><div class="passo-n">Personalização: o quê e onde</div><div class="linha-dep">${it.pers.map((x,j)=>`<span class="depc" aria-pressed="true">${ic(tipo(x.tipo).i)}${esc(tNome(x.tipo))} · ${esc(localTxt(x))}${tipo(x.tipo).externo?' <small style="font-weight:400">(fora)</small>':''}<button class="x" data-a="wPrm" data-k="${k}" data-j="${j}" aria-label="Tirar" style="padding:0 8px;margin-left:4px">×</button></span>`).join('')}
         <button class="depc" data-a="wPadd" data-k="${k}">${ic('i-mais')}Adicionar</button></div>
         ${it.novaP?`<div class="card" style="margin:10px 0 0;background:var(--bg)"><div class="passo-n">Qual personalização?</div><div class="linha-dep">${state.tipos.filter(t=>t.grupo==='pers').map(t=>`<button class="depc" data-a="wPt" data-k="${k}" data-v="${t.id}" aria-pressed="${it.novaP.tipo===t.id}">${ic(t.i)}${esc(tNome(t.id))}</button>`).join('')}</div>
@@ -1213,7 +1232,7 @@ function sNovo(){const w=ui.sheet.w,passos=`<div class="passos">${[1,2,3,4].map(
   const tot=sum(w.itens.map(it=>sum(SIZES.map(s=>it.g[s]||0))));
   const mats=calcMat(w.itens.map(it=>({prod:it.prod,cor:it.cor,qtd:sum(SIZES.map(s=>it.g[s]||0))}))).filter(m=>m.st==='comprar');
   return `${head}<h1>Está certo?</h1><div class="card"><h2>${esc(w.cliente)}</h2>${w.contato||w.cnpj?`<div class="ped-ent">${esc(w.contato||'')}${w.contato&&w.cnpj?' · ':''}${w.cnpj?'CNPJ '+esc(w.cnpj):''}</div>`:''}<div class="ped-ent">${av(w.vend,'s')}Vendedora: <b>${esc(pNome(w.vend))}</b></div>
-    ${w.itens.map(it=>`<div class="resumo-item">${prodSvg(it.prod,it.cor)}<div><b>${esc(prod(it.prod).nome)}</b><div style="color:var(--ink2)">${esc(modeloTxt(it))}</div><div style="color:var(--ink2)">${SIZES.filter(s=>it.g[s]).map(s=>`${s}: ${it.g[s]}`).join(' · ')}</div><div style="color:var(--ink2)">${it.pers.map(x=>`${esc(tNome(x.tipo))} na ${esc(localTxt(x).toLowerCase())}`).join(' · ')||'Sem personalização'}</div></div></div>`).join('')}
+    ${w.itens.map(it=>`<div class="resumo-item">${prodSvg(it.prod,it.cor,it.cores2)}<div><b>${esc(prod(it.prod).nome)}</b><div style="color:var(--ink2)">${esc(modeloTxt(it))}</div><div style="color:var(--ink2)">${SIZES.filter(s=>it.g[s]).map(s=>`${s}: ${it.g[s]}`).join(' · ')}</div><div style="color:var(--ink2)">${it.pers.map(x=>`${esc(tNome(x.tipo))} na ${esc(localTxt(x).toLowerCase())}`).join(' · ')||'Sem personalização'}</div></div></div>`).join('')}
     <div class="resumo-item">${ic('i-caminhao')}<b>Entrega ${DOW[new Date(w.entrega).getDay()]}, ${new Date(w.entrega).getDate()} de ${MES[new Date(w.entrega).getMonth()]} · ${tot} peças</b></div></div>
     <div class="card"><h2>${mats.length?'Provavelmente vai precisar comprar':'Pelo cadastro, tem o material'}</h2>${mats.length?mats.map(m=>`<div class="mat">${ic('i-carrinho')}<div><b>${esc(m.item)}</b><span>${qtdTxt(m.nec-m.est,m.un)}</span></div><span></span></div>`).join(''):`<div class="lib u-ok">${ic('i-check')}Pode seguir</div>`}${avisoEst()}<p class="dica">Consumo de tecido por tamanho: infantil 60%, juvenil 80%, adulto 100%, XXG 115%.</p></div>
     <div class="acoes"><button class="big go" data-a="wCriar">${ic('i-check')}Criar pedido</button></div>`}
@@ -1380,7 +1399,7 @@ const A={
   /* novo pedido */
   novo:()=>openSheet({t:'novo',w:{step:1,cliente:'',vend:null,itens:[],entrega:null,err:''}}),
   wVend:d=>{wRead();ui.sheet.w.vend=d.v;ui.sheet.w.err='';render()},
-  wAdd:d=>{wRead();const pp=prod(d.p);ui.sheet.w.itens.push({prod:d.p,cor:'',tecido:pp.tecidos.length===1?pp.tecidos[0]:'',opcoes:[],g:{},pers:JSON.parse(JSON.stringify(prod(d.p).persPadrao||[])),novaP:null});ui.sheet.w.err='';render();const it=document.querySelectorAll('.item');it[it.length-1]?.scrollIntoView({behavior:'smooth',block:'start'})},
+  wAdd:d=>{wRead();const pp=prod(d.p);ui.sheet.w.itens.push({prod:d.p,cor:'',cores2:[],novaC2:null,tecido:pp.tecidos.length===1?pp.tecidos[0]:'',opcoes:[],g:{},pers:JSON.parse(JSON.stringify(prod(d.p).persPadrao||[])),novaP:null});ui.sheet.w.err='';render();const it=document.querySelectorAll('.item');it[it.length-1]?.scrollIntoView({behavior:'smooth',block:'start'})},
   wNovoTec:d=>{wRead();const it=ui.sheet.w.itens[+d.k];it.novoTec=!it.novoTec;render();document.getElementById('nt'+d.k)?.focus()},
   wSalvaTec:d=>{const v=(document.getElementById('nt'+d.k)?.value||'').trim();wRead();const w=ui.sheet.w,it=w.itens[+d.k];if(!v){w.err='Escreva o nome do tecido';return render()}
     const p=prod(it.prod),ex=p.tecidos.find(t=>t.toLowerCase()===v.toLowerCase());if(!ex)p.tecidos.push(v);it.tecido=ex||v;it.novoTec=false;w.err='';save();render();toast(ex?`${ex} já existia e foi escolhido`:`Tecido ${v} cadastrado no ${p.nome}`,false)},
@@ -1388,6 +1407,17 @@ const A={
   wSalvaCor:d=>{const v=(document.getElementById('nc'+d.k)?.value||'').trim(),h=document.getElementById('nh'+d.k)?.value||'#888888';wRead();const w=ui.sheet.w,it=w.itens[+d.k];if(!v){w.err='Escreva o nome da cor';return render()}
     const ex=Object.keys(state.cores).find(c=>c.toLowerCase()===v.toLowerCase());if(!ex)state.cores[v]=h;it.cor=ex||v;it.novaCor=false;w.err='';save();render();toast(ex?`${ex} já existia e foi escolhida`:`Cor ${v} cadastrada`,false)},
   wCat:d=>{wRead();ui.sheet.w.itens[+d.k].cat=d.v;render()},
+  wC2add:d=>{wRead();ui.sheet.w.itens[+d.k].novaC2={cor:null,partes:[]};render()},
+  wC2x:d=>{wRead();const it=ui.sheet.w.itens[+d.k];it.novaC2=null;it.novaCor2=false;render()},
+  wC2cor:d=>{wRead();ui.sheet.w.itens[+d.k].novaC2.cor=d.c;render()},
+  wC2pt:d=>{wRead();togl(ui.sheet.w.itens[+d.k].novaC2.partes,d.v);render()},
+  wC2outra:d=>{const v=(document.getElementById('c2o'+d.k)?.value||'').trim();wRead();if(!v)return;const n=ui.sheet.w.itens[+d.k].novaC2;if(!n.partes.includes(v))n.partes.push(v);render()},
+  wC2ok:d=>{wRead();const w=ui.sheet.w,it=w.itens[+d.k],n=it.novaC2;if(!n.cor){w.err='Escolha a cor';return render()}if(!n.partes.length){w.err='Marque em quais partes vai essa cor';return render()}
+    it.cores2=it.cores2||[];it.cores2.push({cor:n.cor,partes:[...n.partes]});it.novaC2=null;it.novaCor2=false;w.err='';render()},
+  wC2rm:d=>{wRead();ui.sheet.w.itens[+d.k].cores2.splice(+d.j,1);render()},
+  wNovaCor2:d=>{wRead();const it=ui.sheet.w.itens[+d.k];it.novaCor2=!it.novaCor2;render();document.getElementById('nc2'+d.k)?.focus()},
+  wSalvaCor2:d=>{const v=(document.getElementById('nc2'+d.k)?.value||'').trim(),h=document.getElementById('nh2'+d.k)?.value||'#888888';wRead();const w=ui.sheet.w,it=w.itens[+d.k];if(!v){w.err='Escreva o nome da cor';return render()}
+    const ex=Object.keys(state.cores).find(c=>c.toLowerCase()===v.toLowerCase());if(!ex)state.cores[v]=h;it.novaC2.cor=ex||v;it.novaCor2=false;w.err='';save();render()},
   wTec:d=>{wRead();ui.sheet.w.itens[+d.k].tecido=d.v;ui.sheet.w.err='';render()},
   wOpc:d=>{wRead();togl(ui.sheet.w.itens[+d.k].opcoes,d.v);render()},
   wPadd:d=>{wRead();ui.sheet.w.itens[+d.k].novaP={tipo:null};render()},
@@ -1401,12 +1431,12 @@ const A={
   wData:d=>{ui.sheet.w.entrega=+d.t;ui.sheet.w.err='';render()},
   wNext:()=>{wRead();const w=ui.sheet.w;w.err='';
     if(w.step===1){if(!w.cliente.trim())w.err='Escreva o nome da empresa';else if(w.cnpj&&soDig(w.cnpj).length!==14)w.err='O CNPJ precisa ter 14 números';else if(!w.vend)w.err='Escolha quem vendeu'}
-    if(w.step===2){if(!w.itens.length)w.err='Toque em uma peça para adicionar';else if(w.itens.some(i=>!i.tecido))w.err='Escolha o tecido de cada peça';else if(w.itens.some(i=>i.pers.some(x=>x.parte==='Mangas'&&!x.lado)))w.err='Diga em qual manga vai a personalização';else if(w.itens.some(i=>!i.cor))w.err='Escolha a cor de cada peça';else if(w.itens.some(i=>!sum(SIZES.map(s=>i.g[s]||0))))w.err='Coloque a quantidade de cada peça'}
+    if(w.step===2){if(!w.itens.length)w.err='Toque em uma peça para adicionar';else if(w.itens.some(i=>!i.tecido))w.err='Escolha o tecido de cada peça';else if(w.itens.some(i=>i.pers.some(x=>x.parte==='Mangas'&&!x.lado)))w.err='Diga em qual manga vai a personalização';else if(w.itens.some(i=>!i.cor))w.err='Escolha a cor principal de cada peça';else if(w.itens.some(i=>i.novaC2))w.err='Confirme ou cancele a cor que está adicionando';else if(w.itens.some(i=>!sum(SIZES.map(s=>i.g[s]||0))))w.err='Coloque a quantidade de cada peça'}
     if(w.step===3&&!w.entrega)w.err='Escolha a data de entrega';
     if(!w.err)w.step++;render();const e=document.querySelector('.sheet');if(e&&!w.err)e.scrollTop=0},
-  wCriar:()=>{const w=ui.sheet.w;snap();const id=String(state.seq++).padStart(4,'0');const lines=w.itens.map(it=>({prod:it.prod,cor:it.cor,tecido:it.tecido,opcoes:[...it.opcoes],pers:it.pers.map((x,j)=>({tipo:x.tipo,parte:x.parte,lado:x.lado,id:'pz'+j})),g:{...it.g},qtd:sum(SIZES.map(s=>it.g[s]||0))}));
+  wCriar:()=>{const w=ui.sheet.w;snap();const id=String(state.seq++).padStart(4,'0');const lines=w.itens.map(it=>({prod:it.prod,cor:it.cor,cores2:JSON.parse(JSON.stringify(it.cores2||[])),tecido:it.tecido,opcoes:[...it.opcoes],pers:it.pers.map((x,j)=>({tipo:x.tipo,parte:x.parte,lado:x.lado,id:'pz'+j})),g:{...it.g},qtd:sum(SIZES.map(s=>it.g[s]||0))}));
     state.pedidos.push({id,cliente:w.cliente.trim(),contato:(w.contato||'').trim(),cnpj:(w.cnpj||'').trim(),vendedor:w.vend,chegada:now(),entrega:w.entrega,vias:false,artePrep:false,arte:false,artes:{},materiais:calcMat(lines),concluido:null});
-    lines.forEach((x,i)=>state.lotes.push({id:`${id}-${i+1}`,ped:id,prod:x.prod,cor:x.cor,tecido:x.tecido,opcoes:x.opcoes,pers:x.pers,qtd:x.qtd,grade:x.g,desm:0,steps:{},rework:false,parent:null}));
+    lines.forEach((x,i)=>state.lotes.push({id:`${id}-${i+1}`,ped:id,prod:x.prod,cor:x.cor,cores2:x.cores2,tecido:x.tecido,opcoes:x.opcoes,pers:x.pers,qtd:x.qtd,grade:x.g,desm:0,steps:{},rework:false,parent:null}));
     ui.tela='pedidos';ui.sheet={t:'pedido',id};commit();toast('Pedido criado')},
 };
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b||b.disabled)return;const f=A[b.dataset.a];if(f){e.preventDefault();f(b.dataset)}});
