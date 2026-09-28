@@ -295,6 +295,80 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .aj svg.ic{width:64px;height:64px;color:var(--ink2)}
 .aj b{font-size:22px;line-height:1.2}
 .exemplo{display:inline-block;background:var(--atn-soft);color:var(--atn-ink);border-radius:8px;padding:2px 10px;font-size:15px;font-weight:700}
+
+#sheet:not(:empty) ~ #toast .toast{top:calc(16px + env(safe-area-inset-top,0px));bottom:auto}
+/* v0.5: máquinas, pessoas e terceirizados */
+.pulos{display:flex;flex-wrap:wrap;gap:8px;margin:-6px 0 20px}
+.pulo{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--line);background:var(--card);border-radius:12px;padding:7px 12px;font-weight:700;font-size:16px;color:var(--ink2);text-decoration:none}
+.pulo svg.ic{width:22px;height:22px}
+.grupo{margin-bottom:30px;scroll-margin-top:16px}
+.grupo-h{display:flex;align-items:center;gap:10px;font-size:26px;font-weight:700;margin:0 0 12px}
+.grupo-h svg.ic{width:34px;height:34px}
+.tipo-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;font-size:20px;font-weight:700;color:var(--ink2);margin:16px 0 8px}
+.tipo-h small{font-size:16px;font-weight:400;color:var(--muted)}
+.tipo-h .esp{font-size:16px;font-weight:700;color:var(--atn-ink);background:var(--atn-soft);border-radius:8px;padding:2px 9px}
+.m-top{display:flex;align-items:center;gap:10px;padding:14px 14px 6px}
+.m-ic{width:46px;height:46px;border-radius:12px;background:var(--grey-soft);display:grid;place-items:center;flex:none}
+.m-ic svg.ic{width:30px;height:30px}
+.m-top b{font-size:21px;line-height:1.1}
+.quem-l{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px;margin-top:4px}
+.av.s{width:30px;height:30px;font-size:15px}
+.st-semp{border-color:var(--red)}
+.st-semp .p-st{background:var(--red-soft);color:var(--red);margin-bottom:12px}
+.estrela{color:#C98A00}
+.livres{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:22px}
+.livres .t{font-weight:700;color:var(--ink2);margin-right:4px}
+.pchip{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--line);background:var(--card);border-radius:999px;padding:4px 14px 4px 4px;font-weight:700;font-size:17px}
+.pchip[aria-pressed="true"]{border-color:var(--go);background:var(--go-soft);color:var(--go-dark)}
+.pchip:disabled{opacity:.4}
+.pchip small{font-weight:400;color:var(--muted);font-size:14px}
+.forns{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.forn{background:var(--card);border:2px solid #B48ACB;border-radius:18px;padding:16px;display:grid;gap:10px}
+.forn-h{display:flex;align-items:center;gap:12px}
+.forn-h .m-ic{background:#F3ECFB;color:#6B2F8C}
+.forn-h b{display:block;font-size:21px}
+.forn-h span{color:var(--muted);font-size:16px}
+.fitem{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:12px;align-items:center;border-top:2px solid var(--grey-soft);padding-top:10px}
+.fitem svg.prod{width:56px;height:56px}
+.fitem b{display:block;font-size:18px}
+.fitem span{font-size:16px;color:var(--ink2)}
+.fitem .late{color:var(--red);font-weight:700}
+.esc{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.escp{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px}
+.escp-h{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.escp-h b{display:block;font-size:22px}
+.escp-h span{color:var(--muted);font-size:16px}
+.tar{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-top:2px solid var(--grey-soft)}
+.tar svg.ic{width:32px;height:32px;color:var(--ink2)}
+.tar b{display:block;font-size:18px;line-height:1.2}
+.tar span{font-size:15px;color:var(--ink2)}
+.tar .mbtn{padding:10px 14px;font-size:17px}
+.mbtn.go{background:var(--go)}
+.vazio-s{color:var(--muted);font-size:17px;padding:8px 0}
+.nd.st-fora{background:#F3ECFB;border:3px solid #7A3E9D}.nd.st-fora .nd-s{color:#6B2F8C}
+.nd.f-ext{background:#F3ECFB;border-color:#B48ACB}.nd.f-ext .nd-s{color:#6B2F8C}
+.tp.fora{color:#6B2F8C}.tp.fora .tc{background:#F3ECFB;border-color:#7A3E9D;color:#6B2F8C}
+.subtabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.subtab{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--line);background:var(--card);border-radius:14px;padding:10px 16px;font-weight:700;font-size:18px}
+.subtab svg.ic{width:26px;height:26px}
+.subtab[aria-current="page"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cad-row{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:14px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:10px}
+.cad-row .m-ic{width:52px;height:52px}
+.cad-row b{display:block;font-size:20px}
+.cad-row span{font-size:16px;color:var(--ink2)}
+.qtdbox{display:flex;align-items:center;gap:8px}
+.qtdbox output{font-size:28px;font-weight:700;min-width:36px;text-align:center}
+.pes{display:grid;justify-items:start;gap:8px;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px}
+.pes:hover{border-color:var(--ink2)}
+.pes-h{display:flex;align-items:center;gap:12px}
+.pes-h b{display:block;font-size:22px}
+.pes-h span{color:var(--muted);font-size:16px}
+.skills{display:flex;flex-wrap:wrap;gap:6px}
+.sk{display:inline-flex;align-items:center;gap:4px;background:var(--grey-soft);border-radius:8px;padding:3px 9px;font-size:15px;font-weight:700;color:var(--ink2)}
+.sk.best{background:#FFF3D1;color:#6A4A00}
+.sk svg.ic{width:16px;height:16px}
+.pess{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.nota{background:var(--atn-soft);color:var(--atn-ink);border-radius:14px;padding:12px 16px;font-size:17px;margin-bottom:16px}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -333,6 +407,8 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
   <symbol id="i-predio" viewBox="0 0 48 48"><path d="M8 42V8h20v34M28 18h12v24M4 42h40M14 15h8M14 23h8M14 31h8M33 26h2M33 33h2"/></symbol>
   <symbol id="i-play" viewBox="0 0 48 48"><path d="M14 8l26 16-26 16z"/></symbol>
   <symbol id="i-dormir" viewBox="0 0 48 48"><path d="M8 10h12L8 24h12M26 22h10L26 34h10"/></symbol>
+  <symbol id="i-fabrica" viewBox="0 0 48 48"><path d="M4 42V20l10 7v-7l10 7v-7l10 7V8h8v34z"/><path d="M4 42h40M12 34h4M22 34h4"/></symbol>
+  <symbol id="i-engr" viewBox="0 0 48 48"><circle cx="24" cy="24" r="6"/><path d="M24 4v7M24 37v7M4 24h7M37 24h7M10 10l5 5M33 33l5 5M38 10l-5 5M15 33l-5 5"/></symbol>
 </svg>
 
 <header class="top"><div class="wrap">
@@ -341,9 +417,9 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 </div></header>
 <main><div class="wrap" id="app"></div></main>
 <nav class="nav" aria-label="Menu"><div class="wrap">
-  <button class="nb" data-a="tela" data-t="equipe"><svg class="ic"><use href="#i-pessoas"/></svg>Equipe</button>
+  <button class="nb" data-a="tela" data-t="fabrica"><svg class="ic"><use href="#i-fabrica"/></svg>Fábrica</button>
   <button class="nb" data-a="tela" data-t="pedidos"><svg class="ic"><use href="#i-lista"/></svg>Pedidos</button>
-  <button class="nb" data-a="tela" data-t="produtos"><svg class="ic"><use href="#i-camisa"/></svg>Produtos</button>
+  <button class="nb" data-a="tela" data-t="cadastros"><svg class="ic"><use href="#i-engr"/></svg>Cadastros</button>
   <button class="nb novo" data-a="novo"><svg class="ic"><use href="#i-mais"/></svg>Novo pedido</button>
 </div></nav>
 <div id="sheet"></div>
@@ -351,7 +427,7 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 
 <script>
 /* ================= utilidades ================= */
-const MIN=6e4,H=36e5;
+const MIN=6e4,H=36e5,DIA=864e5;
 const DOW=['domingo','segunda','terça','quarta','quinta','sexta','sábado'];
 const DOWc=['dom','seg','ter','qua','qui','sex','sáb'];
 const MES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
@@ -360,117 +436,159 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const now=()=>Date.now();
 const fD=ts=>{const d=new Date(ts);return `${DOWc[d.getDay()]} ${pad(d.getDate())}/${pad(d.getMonth()+1)}`};
 const fDur=ms=>{const m=Math.max(0,Math.round(ms/MIN));const h=Math.floor(m/60);return h?`${h}h${pad(m%60)}`:`${m} min`};
+const nf=(x,d=1)=>Number(x).toLocaleString('pt-BR',{maximumFractionDigits:d});
 const sum=a=>a.reduce((x,y)=>x+y,0);
 const isWD=d=>d.getDay()!==0&&d.getDay()!==6;
 const sod=ts=>{const d=new Date(ts);d.setHours(0,0,0,0);return d};
 function addWD(ts,n){const d=sod(ts);let k=Math.abs(n);const s=n<0?-1:1;while(k>0){d.setDate(d.getDate()+s);if(isWD(d))k--}d.setHours(17,0,0,0);return d.getTime()}
 function wdUntil(ts){const a=sod(now()),b=sod(ts);let n=0;const d=new Date(a);if(b>=a){while(d<b){d.setDate(d.getDate()+1);if(isWD(d))n++}return n}while(d>b){if(isWD(d))n--;d.setDate(d.getDate()-1)}return n}
+const diasDesde=ts=>Math.max(0,Math.floor((now()-ts)/DIA));
 let seedN=7;const rnd=()=>{seedN|=0;seedN=seedN+0x6D2B79F5|0;let t=Math.imul(seedN^seedN>>>15,1|seedN);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
-const pick=a=>a[Math.floor(rnd()*a.length)];
+const pick=a=>a.length?a[Math.floor(rnd()*a.length)]:'';
 const ic=(id,cls='')=>`<svg class="ic ${cls}" aria-hidden="true"><use href="#${id}"/></svg>`;
+const uid=p=>p+Date.now().toString(36)+Math.floor(Math.random()*1e3);
 
-/* ================= cadastros ================= */
-const POSTOS=[
-  {id:'corte',nome:'Corte',setor:'corte',cap:1,ops:['Anderson']},
-  {id:'estampa',nome:'Estamparia',setor:'pers',cap:2,ops:['Diego','Paulo']},
-  {id:'bordado',nome:'Bordado',setor:'pers',cap:1,ops:['Lúcia']},
-  {id:'reta',nome:'Reta',setor:'costura',cap:3,ops:['Cida','Marlene','Joana']},
-  {id:'overlock',nome:'Overlock',setor:'costura',cap:2,ops:['Rose','Tânia']},
-  {id:'galoneira',nome:'Galoneira',setor:'costura',cap:2,ops:['Sueli','Vera']},
-  {id:'caseadeira',nome:'Caseadeira',setor:'costura',cap:1,ops:['Neide']},
-  {id:'cadeia',nome:'Ponto cadeia',setor:'costura',cap:1,ops:['Fátima']},
-  {id:'acabamento',nome:'Revisão',setor:'fim',cap:2,ops:['Bia','Solange']},
-  {id:'expedicao',nome:'Embalagem',setor:'fim',cap:1,ops:['Márcio']},
+/* ================= cadastros iniciais (conforme conversa com a Martins) ================= */
+const GRUPOS=[{id:'corte',nome:'Corte',i:'i-corte'},{id:'pers',nome:'Personalização',i:'i-estampa'},{id:'costura',nome:'Costura',i:'i-maquina'},{id:'acab',nome:'Acabamento',i:'i-caixa'}];
+const TIPOS0=[
+  {id:'corte',nome:'Mesa de corte',curto:'Corte',grupo:'corte',i:'i-corte',qtd:1},
+  {id:'sublimacao',nome:'Mesa de sublimação',curto:'Sublimação',grupo:'pers',i:'i-estampa',qtd:1},
+  {id:'estamparia',nome:'Mesa de estamparia',curto:'Estamparia',grupo:'pers',i:'i-estampa',qtd:1},
+  {id:'reta',nome:'Reta',grupo:'costura',i:'i-maquina',qtd:5},
+  {id:'overlock',nome:'Overlock',grupo:'costura',i:'i-maquina',qtd:5},
+  {id:'galoneira',nome:'Galoneira',grupo:'costura',i:'i-maquina',qtd:4},
+  {id:'cobregola',nome:'Cobre-gola',grupo:'costura',i:'i-maquina',qtd:1},
+  {id:'caseadeira',nome:'Caseadeira',grupo:'costura',i:'i-botao',qtd:1},
+  {id:'botoneira',nome:'Botoneira',grupo:'costura',i:'i-botao',qtd:1},
+  {id:'arremate',nome:'Mesa de arremate',curto:'Arremate',grupo:'acab',i:'i-lupa',qtd:1},
+  {id:'embalagem',nome:'Mesa de embalagem',curto:'Embalagem',grupo:'acab',i:'i-caixa',qtd:1},
+  {id:'bordado',nome:'Bordado',grupo:'pers',i:'i-bordado',externo:true},
+  {id:'dtf',nome:'DTF',grupo:'pers',i:'i-estampa',externo:true},
 ];
-const POSTO=Object.fromEntries(POSTOS.map(p=>[p.id,p]));
-const SETORES=[{id:'corte',nome:'Corte',i:'i-corte'},{id:'pers',nome:'Estampa e bordado',i:'i-estampa'},{id:'costura',nome:'Costura',i:'i-maquina'},{id:'fim',nome:'Revisão e embalagem',i:'i-caixa'}];
-const PICON={corte:'i-corte',estampa:'i-estampa',bordado:'i-bordado',reta:'i-maquina',overlock:'i-maquina',galoneira:'i-maquina',cadeia:'i-maquina',caseadeira:'i-botao',acabamento:'i-lupa',expedicao:'i-caixa'};
-const ETAPAS=[{id:'corte',nome:'Corte',i:'i-corte',postos:['corte']},{id:'pers',nome:'Estampa',i:'i-estampa',postos:['estampa','bordado']},{id:'costura',nome:'Costura',i:'i-maquina',postos:['reta','overlock','galoneira','caseadeira','cadeia']},{id:'rev',nome:'Revisão',i:'i-lupa',postos:['acabamento']},{id:'emb',nome:'Embalar',i:'i-caixa',postos:['expedicao']}];
-const AVC=['#1E5BB8','#9C3D8F','#17864A','#B5561B','#4C5BA8','#0E7C86','#8A5A00','#B0304A','#3F6E2A','#5A4FB0','#A04000','#2E6F9E','#7A3E9D','#6B6B00','#006D5B','#9B2C2C'];
-const ALLOPS=POSTOS.flatMap(p=>p.ops);
-const avColor=op=>AVC[ALLOPS.indexOf(op)%AVC.length];
+const PAPEIS={costura:'Costureira',corte:'Cortador',vendas:'Vendedora',compras:'Compras e entregas',pers:'Personalização',acab:'Acabamento'};
+const PESSOAS0=[
+  {id:'leo',nome:'Léo',papel:'costura',sabe:['reta','overlock','galoneira','cobregola','caseadeira','botoneira'],melhor:['reta']},
+  {id:'zeze',nome:'Zezé',papel:'costura',sabe:['overlock','galoneira'],melhor:[]},
+  {id:'ana',nome:'Ana',papel:'costura',sabe:['overlock','galoneira','cobregola'],melhor:['Pregar gola','galoneira']},
+  {id:'anilda',nome:'Anilda',papel:'costura',sabe:['reta','cobregola'],melhor:['reta']},
+  {id:'dalva',nome:'Dalva',papel:'costura',sabe:['galoneira','overlock','reta'],melhor:['overlock']},
+  {id:'fabio',nome:'Fábio',papel:'corte',sabe:['corte'],melhor:['corte']},
+  {id:'layara',nome:'Layara',papel:'vendas',sabe:[],melhor:[]},
+  {id:'paula',nome:'Paula',papel:'vendas',sabe:[],melhor:[]},
+  {id:'roger',nome:'Roger',papel:'compras',sabe:[],melhor:[]},
+];
+const FORN0=[{id:'fb',nome:'Bordadeira parceira',servico:'bordado',prazo:3,leva:'roger'},{id:'fd',nome:'Parceiro DTF',servico:'dtf',prazo:2,leva:'roger'}];
+const AVC=['#1E5BB8','#9C3D8F','#17864A','#B5561B','#4C5BA8','#0E7C86','#8A5A00','#B0304A','#3F6E2A','#5A4FB0','#A04000','#2E6F9E'];
 const SIZES=['P','M','G','GG','XG'];
 const CORES={Branca:'#F7F7F5',Preta:'#24272C',Marinho:'#1F2E55',Cinza:'#8E959E',Verde:'#2E7D4F',Royal:'#2449B8',Vermelha:'#C0302A'};
 const S=(id,nome,posto,deps,min,o={})=>({id,nome,posto,deps,min,pers:!!o.pers,fecha:!!o.fecha,obs:o.obs||''});
+const ETQ='Etiqueta do lado ESQUERDO, por dentro';
 const PRODUTOS0=[
  {id:'polo-ams',nome:'Polo Amsterdã',forma:'polo',tecido:'Piquet',consumo:0.42,aviam:[['Botão','un',3],['Gola ribana','un',1],['Etiqueta','un',1]],steps:[
-  S('corte','Corte','corte',[],0.9),S('bordado','Bordado no peito','bordado',['corte'],2.0,{pers:1}),S('silk','Estampa nas costas','estampa',['corte'],0.7,{pers:1}),
+  S('corte','Corte','corte',[],0.9),S('bordado','Bordado no peito','bordado',['corte'],2,{pers:1}),S('silk','Silk nas costas','estamparia',['corte'],0.7,{pers:1}),
   S('peitilho','Montar peitilho','reta',['corte'],1.6),S('prepgola','Preparar gola','reta',['corte'],0.5),S('barramanga','Barra da manga','galoneira',['corte'],0.4),
-  S('ombro','Unir ombros','overlock',['peitilho','silk','bordado'],0.5),S('gola','Pregar gola','overlock',['ombro','prepgola'],0.8),S('manga','Pregar mangas','overlock',['ombro','barramanga'],0.9),
-  S('fechar','Fechar laterais','overlock',['manga','gola'],0.8,{fecha:1}),S('etiqueta','Pregar etiqueta','reta',['gola'],0.6,{obs:'Etiqueta do lado ESQUERDO, por dentro'}),
-  S('barra','Barra','galoneira',['fechar'],0.5),S('casear','Casa e botão','caseadeira',['fechar'],0.8),S('revisao','Revisar','acabamento',['barra','etiqueta','casear'],0.7),S('embalar','Dobrar e embalar','expedicao',['revisao'],0.3)]},
+  S('ombro','Unir ombros','overlock',['peitilho','silk','bordado'],0.5),S('gola','Pregar gola','overlock',['ombro','prepgola'],0.8),S('cobregola','Cobre-gola','cobregola',['gola'],0.6),
+  S('manga','Pregar mangas','overlock',['ombro','barramanga'],0.9),S('fechar','Fechar laterais','overlock',['manga','gola'],0.8,{fecha:1}),
+  S('etiqueta','Pregar etiqueta','reta',['cobregola'],0.4,{obs:ETQ}),S('barra','Barra','galoneira',['fechar'],0.5),S('casear','Casear','caseadeira',['fechar'],0.5),
+  S('botao','Pregar botão','botoneira',['casear'],0.4),S('arremate','Arremate e revisão','arremate',['barra','etiqueta','botao'],0.7),S('embalar','Dobrar e embalar','embalagem',['arremate'],0.3)]},
  {id:'polo-vie',nome:'Polo Viena',forma:'polo2',tecido:'Malha dry',consumo:0.40,aviam:[['Botão','un',2],['Gola ribana','un',1],['Etiqueta','un',1]],steps:[
-  S('corte','Corte','corte',[],0.8),S('subl','Sublimação','estampa',['corte'],0.9,{pers:1}),S('bordmanga','Bordado na manga','bordado',['corte'],1.4,{pers:1}),
+  S('corte','Corte','corte',[],0.8),S('subl','Sublimação','sublimacao',['corte'],0.9,{pers:1}),S('bordmanga','Bordado na manga','bordado',['corte'],1.4,{pers:1}),
   S('peitilho','Montar peitilho','reta',['corte'],1.5),S('prepgola','Preparar gola','reta',['corte'],0.5),S('barramanga','Barra da manga','galoneira',['corte'],0.4),
-  S('ombro','Unir ombros','overlock',['peitilho','subl'],0.5),S('gola','Pregar gola','overlock',['ombro','prepgola'],0.8),S('manga','Pregar mangas','overlock',['ombro','barramanga','bordmanga'],0.9),
-  S('fechar','Fechar laterais','overlock',['manga','gola'],0.8,{fecha:1}),S('etiqueta','Pregar etiqueta','reta',['gola'],0.6,{obs:'Etiqueta do lado ESQUERDO, por dentro'}),
-  S('fenda','Barra com fenda','reta',['fechar'],0.9),S('casear','Casa e botão','caseadeira',['fechar'],0.7),S('revisao','Revisar','acabamento',['fenda','etiqueta','casear'],0.7),S('embalar','Dobrar e embalar','expedicao',['revisao'],0.3)]},
+  S('ombro','Unir ombros','overlock',['peitilho','subl'],0.5),S('gola','Pregar gola','overlock',['ombro','prepgola'],0.8),S('cobregola','Cobre-gola','cobregola',['gola'],0.6),
+  S('manga','Pregar mangas','overlock',['ombro','barramanga','bordmanga'],0.9),S('fechar','Fechar laterais','overlock',['manga','gola'],0.8,{fecha:1}),
+  S('etiqueta','Pregar etiqueta','reta',['cobregola'],0.4,{obs:ETQ}),S('fenda','Barra com fenda','reta',['fechar'],0.9),S('casear','Casear','caseadeira',['fechar'],0.5),
+  S('botao','Pregar botão','botoneira',['casear'],0.4),S('arremate','Arremate e revisão','arremate',['fenda','etiqueta','botao'],0.7),S('embalar','Dobrar e embalar','embalagem',['arremate'],0.3)]},
  {id:'calca-hel',nome:'Calça Helanca',forma:'calca',tecido:'Helanca',consumo:1.1,aviam:[['Elástico','m',0.9],['Cordão','m',1.1],['Etiqueta','un',1]],steps:[
-  S('corte','Corte','corte',[],0.7),S('transfer','Faixa lateral','estampa',['corte'],0.8,{pers:1}),S('bolso','Bolsos','reta',['transfer'],2.2,{obs:'Conferir se a faixa está alinhada com o bolso'}),
-  S('gancho','Fechar gancho','overlock',['bolso'],0.7),S('laterais','Fechar laterais','overlock',['gancho'],1.1,{fecha:1}),S('cos','Cós com elástico','cadeia',['laterais'],1.2),
-  S('barra','Barra','galoneira',['laterais'],0.5),S('etiqueta','Pregar etiqueta','reta',['cos'],0.3,{obs:'Etiqueta no cós, lado ESQUERDO, por dentro'}),S('revisao','Revisar','acabamento',['barra','etiqueta'],0.6),S('embalar','Dobrar e embalar','expedicao',['revisao'],0.3)]},
+  S('corte','Corte','corte',[],0.7),S('transfer','Faixa lateral','dtf',['corte'],0.8,{pers:1}),S('bolso','Bolsos','reta',['transfer'],2.2,{obs:'Conferir se a faixa está alinhada com o bolso'}),
+  S('gancho','Fechar gancho','overlock',['bolso'],0.7),S('laterais','Fechar laterais','overlock',['gancho'],1.1,{fecha:1}),S('cos','Cós com elástico','galoneira',['laterais'],1.2),
+  S('barra','Barra','galoneira',['laterais'],0.5),S('etiqueta','Pregar etiqueta','reta',['cos'],0.3,{obs:'Etiqueta no cós, lado ESQUERDO, por dentro'}),
+  S('arremate','Arremate e revisão','arremate',['barra','etiqueta'],0.6),S('embalar','Dobrar e embalar','embalagem',['arremate'],0.3)]},
 ];
 const ESTOQUE={'Piquet Marinho':140,'Piquet Branca':60,'Piquet Verde':10,'Piquet Cinza':80,'Malha dry Branca':150,'Malha dry Cinza':70,'Helanca Preta':240,'Helanca Marinho':20,'Helanca Cinza':150,'Botão':2200,'Gola ribana':900,'Etiqueta':3000,'Elástico':420,'Cordão':500};
 const PAR={margem:5,jornada:480,efic:0.85,fila:0.25,leadCompra:5};
-const PROBS=[
-  {k:'Gola torta',i:'i-gola',alvo:['gola','prepgola']},
-  {k:'Etiqueta errada',i:'i-etiqueta',alvo:['etiqueta']},
-  {k:'Estampa com defeito',i:'i-mancha',alvo:['silk','subl','transfer','bordado','bordmanga']},
-  {k:'Costura torta',i:'i-costura',alvo:[]},
-  {k:'Tamanho trocado',i:'i-regua',alvo:[]},
-  {k:'Defeito no tecido',i:'i-furo',alvo:[]},
-  {k:'Outro problema',i:'i-duvida',alvo:[]},
-];
+const PROBS=[{k:'Gola torta',i:'i-gola',alvo:['gola','prepgola','cobregola']},{k:'Etiqueta errada',i:'i-etiqueta',alvo:['etiqueta']},{k:'Estampa ou bordado com defeito',i:'i-mancha',alvo:['silk','subl','transfer','bordado','bordmanga']},{k:'Costura torta',i:'i-costura',alvo:[]},{k:'Tamanho trocado',i:'i-regua',alvo:[]},{k:'Defeito no tecido',i:'i-furo',alvo:[]},{k:'Outro problema',i:'i-duvida',alvo:[]}];
 
-/* ================= desenho dos produtos ================= */
-function prodSvg(pid,cor){const p=prod(pid);return shapeSvg(p?p.forma:'polo',cor,p?p.nome:'')}
-function shapeSvg(forma,cor,nome){const p={forma,nome};
-  const f=CORES[cor]||'#B9C0C8',claro=['Branca'].includes(cor)||!CORES[cor];
-  const st=claro?'#8C96A1':'rgba(0,0,0,.45)',ln=claro?'#8C96A1':'rgba(255,255,255,.55)';
-  const a=`fill="${f}" stroke="${st}" stroke-width="2.5" stroke-linejoin="round"`,b=`fill="none" stroke="${ln}" stroke-width="2.5" stroke-linecap="round"`;
-  let body;
-  if(p.forma==='calca')body=`<path ${a} d="M36 10H84L91 108H66L60 46L54 108H29Z"/><path ${b} d="M37 21H83M44 22c1 8 5 12 12 13M76 22c-1 8-5 12-12 13"/><path ${b} d="M33 30L30 104M87 30L90 104" stroke-dasharray="1 0"/>`;
-  else{body=`<path ${a} d="M42 14L52 10Q60 17 68 10L78 14L104 32L95 52L84 46L84 108L36 108L36 46L25 52L16 32Z"/><path ${a} d="M52 10L60 26L68 10"/><path ${b} d="M60 26V46"/><circle cx="60" cy="33" r="2" fill="${ln}"/><circle cx="60" cy="41" r="2" fill="${ln}"/>`;
-    if(p.forma==='camiseta')body=`<path ${a} d="M42 14L50 10Q60 22 70 10L78 14L104 32L95 52L84 46L84 108L36 108L36 46L25 52L16 32Z"/><path ${b} d="M51 12Q60 26 69 12"/>`;
-    if(p.forma==='polo2')body+=`<path ${b} d="M22 44L99 44" stroke-dasharray="0" opacity="0"/><path ${b} d="M27 47L19 36M93 47L101 36"/>`}
-  return `<svg class="prod" viewBox="0 0 120 120" role="img" aria-label="${esc(p.nome)} ${esc(cor)}">${body}</svg>`}
-
-/* ================= estado e motor ================= */
-const KEY='martins-helena-v2';
+/* ================= estado ================= */
+const KEY='martins-v5';
 let state,undo=null,toastT=null;
-let ui={tela:'equipe',sheet:null,fx:null};
+let ui={tela:'fabrica',sheet:null,fx:null,cad:'maquinas'};
 const prod=id=>state.produtos.find(p=>p.id===id);
 const pedById=id=>state.pedidos.find(p=>p.id===id);
 const lote=id=>state.lotes.find(l=>l.id===id);
 const lotesDe=pid=>state.lotes.filter(l=>l.ped===pid);
+const tipo=id=>state.tipos.find(t=>t.id===id)||{id,nome:id,grupo:'costura',i:'i-maquina'};
+const tNome=id=>tipo(id).curto||tipo(id).nome;
+const PICON=new Proxy({},{get:(_,k)=>tipo(k).i||'i-maquina'});
+const pessoa=id=>state.pessoas.find(p=>p.id===id);
+const pNome=id=>pessoa(id)?.nome||'';
+const avColor=id=>AVC[Math.max(0,state.pessoas.findIndex(p=>p.id===id))%AVC.length];
+const av=(id,cls='')=>`<span class="av ${cls}" style="background:${avColor(id)}">${esc((pNome(id)||'?')[0])}</span>`;
+const aptos=tid=>state.pessoas.filter(p=>p.sabe.includes(tid));
+const fornDe=serv=>state.forn.filter(f=>f.servico===serv);
+const fornById=id=>state.forn.find(f=>f.id===id);
+const isExt=s=>!!tipo(s.posto).externo;
+function unidades(){return state.tipos.filter(t=>!t.externo).flatMap(t=>Array.from({length:t.qtd||0},(_,k)=>({id:`${t.id}-${k+1}`,tipo:t.id,nome:t.qtd>1?`${t.nome} ${k+1}`:t.nome})))}
+const unidade=id=>unidades().find(u=>u.id===id);
 const sMap=p=>Object.fromEntries(p.steps.map(s=>[s.id,s]));
 const stOf=(l,sid)=>l.steps[sid]||{st:'pend'};
 const done=(l,sid)=>stOf(l,sid).st==='ok';
 const qtdEf=l=>l.qtd-(l.desm||0);
+const loteFora=l=>Object.values(l.steps).some(x=>x.st==='fora');
+const loteAnd=l=>Object.values(l.steps).some(x=>x.st==='and');
 function topo(p){const m=sMap(p),seen={},out=[];const v=id=>{if(seen[id]||!m[id])return;seen[id]=1;m[id].deps.forEach(v);out.push(m[id])};p.steps.forEach(s=>v(s.id));return out}
 function anc(p,id){const m=sMap(p),r=new Set();const v=x=>(m[x]?.deps||[]).forEach(d=>{if(!r.has(d)){r.add(d);v(d)}});v(id);return r}
 function desc(p,id){const r=new Set([id]);let ch=true;while(ch){ch=false;p.steps.forEach(s=>{if(!r.has(s.id)&&s.deps.some(d=>r.has(d))){r.add(s.id);ch=true}})}return r}
 function lv(p){const o={};topo(p).forEach(s=>o[s.id]=s.deps.length?1+Math.max(...s.deps.map(d=>o[d]??0)):0);return o}
+const filhos=(p,id)=>p.steps.filter(s=>s.deps.includes(id));
+function fase(p,s){if(s.pers)return 'pers';const a=anc(p,s.id);return p.steps.some(x=>x.pers&&a.has(x.id))?'depois':'antes'}
+
+/* ================= motor ================= */
 const loteDone=l=>prod(l.prod).steps.every(s=>done(l,s.id));
 const liberado=ped=>ped.vias&&ped.arte&&ped.materiais.every(m=>m.st!=='comprar'&&m.st!=='pedido');
-function ready(l,s,ped){if(stOf(l,s.id).st!=='pend')return false;if(!s.deps.every(d=>done(l,d)))return false;if(!s.deps.length&&!liberado(ped))return false;return true}
-const wStep=(l,s)=>s.min*qtdEf(l)/(PAR.jornada*PAR.efic)+PAR.fila;
-function remDays(l){const p=prod(l.prod),dist={};let mx=0;topo(p).forEach(s=>{const st=stOf(l,s.id).st;const w=st==='ok'?0:st==='and'?wStep(l,s)*.5:wStep(l,s);dist[s.id]=w+Math.max(0,...s.deps.map(d=>dist[d]||0));mx=Math.max(mx,dist[s.id])});return mx}
+function ready(l,s,ped){if(stOf(l,s.id).st!=='pend')return false;if(!s.deps.every(d=>done(l,d)))return false;if(!s.deps.length&&!liberado(ped))return false;
+  if(loteFora(l))return false;                       // peças no fornecedor: tudo espera
+  if(isExt(s)&&(loteAnd(l)||!ped.arteEnviada))return false; // só leva com o pacote inteiro e a arte enviada
+  return true}
+function wStep(l,s){if(isExt(s))return (fornDe(s.posto)[0]?.prazo||3)+0.5;return s.min*qtdEf(l)/(PAR.jornada*PAR.efic)+PAR.fila}
+function remDays(l){const p=prod(l.prod),dist={};let mx=0;topo(p).forEach(s=>{const st=stOf(l,s.id).st;const w=st==='ok'?0:(st==='and'||st==='fora')?wStep(l,s)*.5:wStep(l,s);dist[s.id]=w+Math.max(0,...s.deps.map(d=>dist[d]||0));mx=Math.max(mx,dist[s.id])});return mx}
 function minsTot(l){let t=0,d=0;prod(l.prod).steps.forEach(s=>{const m=s.min*l.qtd;t+=m;if(done(l,s.id))d+=m});return[d,t]}
 function preDias(ped){if(liberado(ped))return 0;let d=0;if(ped.materiais.some(m=>m.st==='comprar'))d+=PAR.leadCompra;else if(ped.materiais.some(m=>m.st==='pedido'))d+=Math.ceil(PAR.leadCompra/2);if(!ped.arte||!ped.vias)d+=1;return d}
-function info(ped){
-  const ls=lotesDe(ped.id),ab=ls.filter(l=>!loteDone(l)),pre=preDias(ped);let need=0;ab.forEach(l=>need=Math.max(need,remDays(l)+pre));
+function info(ped){const ls=lotesDe(ped.id),ab=ls.filter(l=>!loteDone(l)),pre=preDias(ped);let need=0;ab.forEach(l=>need=Math.max(need,remDays(l)+pre));
   let D=0,T=0;ls.filter(l=>!l.rework).forEach(l=>{const[d,t]=minsTot(l);D+=d;T+=t});
   const prog=T?D/T:0,du=wdUntil(ped.entrega),folga=du-PAR.margem-need;
   const u=ped.concluido?'fim':!ab.length?'pronto':folga<-PAR.margem?'crit':folga<0?'warn':'ok';
-  const score=ped.concluido?1e9:!ab.length?-100:folga-(D>0?3*prog:0);
-  return{ls,ab,prog,du,folga,u,score}}
+  return{ls,ab,prog,du,folga,u,score:ped.concluido?1e9:!ab.length?-100:folga-(D>0?3*prog:0)}}
 const ULAB={crit:'Atrasando',warn:'Atenção',ok:'Em dia',pronto:'Pronto',fim:'Entregue'};
-function fila(pid){const out=[];state.pedidos.filter(p=>!p.concluido).forEach(ped=>{const inf=info(ped);lotesDe(ped.id).forEach(l=>{const p=prod(l.prod);
-  p.steps.filter(s=>s.posto===pid&&ready(l,s,ped)).forEach(s=>out.push({ped,inf,l,p,s,adianta:!s.pers&&!p.steps.some(x=>x.pers&&anc(p,s.id).has(x.id))&&p.steps.some(x=>x.pers&&!done(l,x.id))}))})});
+function prontas(){const out=[];state.pedidos.filter(p=>!p.concluido).forEach(ped=>{const inf=info(ped);lotesDe(ped.id).forEach(l=>{const p=prod(l.prod);
+  p.steps.forEach(s=>{if(ready(l,s,ped))out.push({ped,inf,l,p,s,adianta:!s.pers&&fase(p,s)==='antes'&&p.steps.some(x=>x.pers&&!done(l,x.id))})})})});
   return out.sort((a,b)=>a.inf.score-b.inf.score||(b.l.rework?1:0)-(a.l.rework?1:0)||lv(a.p)[a.s.id]-lv(b.p)[b.s.id])}
-function tarefaDe(op){for(const l of state.lotes){for(const[sid,x]of Object.entries(l.steps)){if(x.st==='and'&&x.op===op){const ped=pedById(l.ped);if(ped.concluido)continue;const p=prod(l.prod);return{l,p,s:sMap(p)[sid],x,ped,inf:info(ped)}}}}return null}
-const postoDe=op=>POSTOS.find(p=>p.ops.includes(op));
+/* Plano: coloca cada tarefa numa máquina livre com a melhor pessoa livre.
+   Preferência: quem faz melhor aquela etapa/máquina; empate → quem sabe menos coisas,
+   para deixar as multifuncionais livres para cobrir outros gargalos. */
+const nota=(p,it)=>(p.melhor.includes(it.s.nome)?12:0)+(p.melhor.includes(it.s.posto)?10:0)-p.sabe.length;
+function plano(){const uso={},ocup=new Set();
+  state.lotes.forEach(l=>{const ped=pedById(l.ped);if(!ped||ped.concluido)return;const p=prod(l.prod),m=sMap(p);
+    Object.entries(l.steps).forEach(([sid,x])=>{if(x.st==='and'&&m[sid]){uso[x.maq]={ped,inf:info(ped),l,p,s:m[sid],x};ocup.add(x.op)}})});
+  const us=unidades(),plan={},usados=new Set(),espera={},semPessoa={};
+  prontas().filter(it=>!isExt(it.s)).forEach(it=>{const t=it.s.posto;const livres=us.filter(u=>u.tipo===t&&!uso[u.id]&&!plan[u.id]);
+    if(!livres.length){(espera[t]=espera[t]||[]).push(it);return}
+    const c=aptos(t).filter(p=>!ocup.has(p.id)&&!usados.has(p.id)).sort((a,b)=>nota(b,it)-nota(a,it));
+    if(!c.length){(semPessoa[t]=semPessoa[t]||[]).push(it);return}
+    usados.add(c[0].id);plan[livres[0].id]={...it,pessoa:c[0].id}});
+  return{uso,ocup,plan,espera,semPessoa,us,usados}}
+function tarefasEsc(){const out=[],comprador=state.pessoas.find(p=>p.papel==='compras');
+  state.pedidos.filter(p=>!p.concluido).forEach(ped=>{const inf=info(ped),v=ped.vendedor;
+    if(!ped.vias)out.push({resp:v,ped,inf,i:'i-vias',t:'Separar as vias',sub:'Ficha, tecido e produção',a:'vias'});
+    if(!ped.arte)out.push({resp:v,ped,inf,i:'i-arte',t:'Aprovar a arte com o cliente',a:'arte'});
+    const sv=servicosPed(ped);if(ped.arte&&sv.length&&!ped.arteEnviada)out.push({resp:v,ped,inf,i:'i-arte',t:`Enviar a arte: ${sv.join(', ')}`,a:'arteEnv'});
+    ped.materiais.forEach((m,k)=>{if(m.st==='comprar')out.push({resp:comprador?.id,ped,inf,i:'i-carrinho',t:`Comprar ${m.item}`,sub:qtdTxt(m.nec-m.est,m.un),a:'comprei',k});
+      if(m.st==='pedido')out.push({resp:comprador?.id,ped,inf,i:'i-caminhao',t:`Receber ${m.item}`,sub:'Comprado, esperando chegar',a:'chegou',k})});
+    lotesDe(ped.id).forEach(l=>{const p=prod(l.prod);p.steps.filter(isExt).forEach(s=>{const x=stOf(l,s.id),f=fornById(x.forn)||fornDe(s.posto)[0];
+      if(x.st==='fora'){const d=diasDesde(x.saiu);out.push({resp:f?.leva,ped,inf,i:'i-caminhao',t:`Buscar no ${f?.nome||tNome(s.posto)}`,sub:`${s.nome} · ${qtdEf(l)} peças · lá há ${d} ${d===1?'dia':'dias'}`,late:d>(f?.prazo||3),a:'buscou',l:l.id,s:s.id,img:[p.id,l.cor]})}
+      else if(ready(l,s,ped))out.push({resp:f?.leva,ped,inf,i:'i-caminhao',t:`Levar para ${f?.nome||tNome(s.posto)}`,sub:`${s.nome} · ${qtdEf(l)} peças`,a:'levei',l:l.id,s:s.id,img:[p.id,l.cor]})})})});
+  return out.sort((a,b)=>a.inf.score-b.inf.score)}
+function servicosPed(ped){const n=new Set();lotesDe(ped.id).forEach(l=>prod(l.prod).steps.forEach(s=>{if(s.pers||isExt(s))n.add(tNome(s.posto))}));return[...n]}
+const qtdTxt=(q,un)=>`${Number(q).toLocaleString('pt-BR')} ${un==='m'?'metros':'unidades'}`;
 function calcMat(ls){const m={};ls.forEach(x=>{const p=prod(x.prod);const add=(it,un,q)=>{m[it]=m[it]||{item:it,un,nec:0};m[it].nec+=q};add(`${p.tecido} ${x.cor}`,'m',p.consumo*x.qtd);p.aviam.forEach(([i,u,q])=>add(i,u,q*x.qtd))});
   return Object.values(m).map(o=>{o.nec=Math.ceil(o.nec);o.est=state.estoque[o.item]??0;o.st=o.est>=o.nec?'ok':'comprar';return o})}
 function gradeOf(q){const w=[.14,.3,.3,.18,.08];const g={};let t=0;SIZES.forEach((s,i)=>{g[s]=Math.round(q*w[i]);t+=g[s]});g.M+=q-t;return g}
@@ -480,151 +598,128 @@ function makeRework(l,detect,orig,n,mot,ts,op){const p=prod(l.prod),D=desc(p,ori
   state.consertos.push({ts,l:l.id,r:r.id,ped:l.ped,detect,orig,n,motivo:mot,op});return r}
 
 /* ================= exemplo ================= */
-function sim(l,doneIds,andId,start,target){const p=prod(l.prod),fim={};let mx=0;
-  topo(p).forEach(s=>{const isAnd=s.id===andId;if(!doneIds.includes(s.id)&&!isAnd)return;const rdy=Math.max(start,...s.deps.map(d=>fim[d]||start));const ini=rdy+(1+rnd()*16)*H;const f=.9+rnd()*.45;const op=pick(POSTO[s.posto].ops);
-    if(isAnd){l.steps[s.id]={st:'and',ini,op};mx=Math.max(mx,ini)}else{const e=ini+s.min*l.qtd*f*MIN;fim[s.id]=e;l.steps[s.id]={st:'ok',ini,fim:e,op};mx=Math.max(mx,e)}});
-  const sh=mx-(target||now()-(.5+rnd()*2)*H);Object.values(l.steps).forEach(x=>{x.ini-=sh;if(x.fim)x.fim-=sh})}
+function sim(l,doneIds,start){const p=prod(l.prod),fim={};let mx=0;
+  topo(p).forEach(s=>{if(!doneIds.includes(s.id))return;const rdy=Math.max(start,...s.deps.map(d=>fim[d]||start));const ini=rdy+(1+rnd()*14)*H;
+    const e=isExt(s)?ini+(2+rnd()*2)*DIA:ini+s.min*l.qtd*(.9+rnd()*.45)*MIN;fim[s.id]=e;
+    l.steps[s.id]=isExt(s)?{st:'ok',saiu:ini,fim:e,forn:fornDe(s.posto)[0]?.id,op:'roger'}:{st:'ok',ini,fim:e,op:pick(aptos(s.posto).map(x=>x.id)),maq:`${s.posto}-1`};mx=Math.max(mx,e)});
+  const sh=mx-(now()-(2+rnd()*3)*H);Object.values(l.steps).forEach(x=>{['ini','fim','saiu'].forEach(k=>{if(x[k])x[k]-=sh})})}
 function seed(){seedN=7;const T=now();
-  state={v:1,produtos:JSON.parse(JSON.stringify(PRODUTOS0)),pedidos:[],lotes:[],consertos:[],estoque:{...ESTOQUE},seq:421};
-  const mk=o=>{const ped={id:o.id,cliente:o.cliente,chegada:o.chegada,entrega:o.entrega,vias:o.vias??true,arte:o.arte??true,materiais:[],concluido:o.concluido||null};
+  state={v:5,tipos:JSON.parse(JSON.stringify(TIPOS0)),pessoas:JSON.parse(JSON.stringify(PESSOAS0)),forn:JSON.parse(JSON.stringify(FORN0)),produtos:JSON.parse(JSON.stringify(PRODUTOS0)),pedidos:[],lotes:[],consertos:[],estoque:{...ESTOQUE},seq:421};
+  const mk=o=>{const ped={id:o.id,cliente:o.cliente,vendedor:o.vend,chegada:o.chegada,entrega:o.entrega,vias:o.vias??true,arte:o.arte??true,arteEnviada:o.env??true,materiais:[],concluido:o.concluido||null};
     ped.materiais=calcMat(o.linhas);if(o.lib)ped.materiais.forEach(m=>m.st='ok');state.pedidos.push(ped);
-    o.linhas.forEach((x,i)=>{const l={id:`${o.id}-${i+1}`,ped:o.id,prod:x.prod,cor:x.cor,qtd:x.qtd,grade:gradeOf(x.qtd),desm:0,steps:{},rework:false,parent:null};state.lotes.push(l);if(x.done||x.and)sim(l,x.done||[],x.and,o.lib,x.target)})};
+    o.linhas.forEach((x,i)=>{const l={id:`${o.id}-${i+1}`,ped:o.id,prod:x.prod,cor:x.cor,qtd:x.qtd,grade:gradeOf(x.qtd),desm:0,steps:{},rework:false,parent:null};state.lotes.push(l);if(x.done)sim(l,x.done,o.lib)})};
   const all=id=>prod(id).steps.map(s=>s.id);
-  mk({id:'0402',cliente:'Supermercados Bom Preço',chegada:addWD(T,-26),entrega:addWD(T,-3),lib:addWD(T,-23),concluido:addWD(T,-4),linhas:[{prod:'polo-ams',cor:'Cinza',qtd:150,done:all('polo-ams'),target:addWD(T,-4)}]});
-  mk({id:'0409',cliente:'Transportes Rota Sul',chegada:addWD(T,-21),entrega:addWD(T,2),lib:addWD(T,-17),linhas:[{prod:'polo-vie',cor:'Cinza',qtd:90,done:all('polo-vie').filter(x=>!['revisao','embalar'].includes(x)),and:'revisao'}]});
-  mk({id:'0412',cliente:'Construtora Horizonte',chegada:addWD(T,-16),entrega:addWD(T,4),lib:addWD(T,-13),linhas:[
-    {prod:'polo-ams',cor:'Marinho',qtd:180,done:['corte','bordado','silk','peitilho','prepgola','barramanga','ombro','gola','manga','fechar','etiqueta'],and:'barra'},
-    {prod:'calca-hel',cor:'Preta',qtd:180,done:['corte'],and:'transfer'}]});
-  mk({id:'0415',cliente:'Rede Farma Vida',chegada:addWD(T,-9),entrega:addWD(T,14),lib:addWD(T,-6),linhas:[{prod:'polo-vie',cor:'Branca',qtd:240,done:['corte','peitilho','barramanga'],and:'subl'}]});
-  mk({id:'0416',cliente:'Academia Pulse',chegada:addWD(T,-8),entrega:addWD(T,9),lib:addWD(T,-6),linhas:[{prod:'calca-hel',cor:'Cinza',qtd:120,done:['corte','transfer'],and:'bolso'}]});
-  mk({id:'0418',cliente:'Colégio São Bento',chegada:addWD(T,-3),entrega:addWD(T,22),arte:false,linhas:[{prod:'polo-ams',cor:'Branca',qtd:320},{prod:'calca-hel',cor:'Marinho',qtd:320}]});
-  mk({id:'0420',cliente:'Clínica Vitta',chegada:T-2*H,entrega:addWD(T,20),arte:false,vias:false,linhas:[{prod:'polo-ams',cor:'Verde',qtd:60}]});
-  lote('0415-1').steps.prepgola={st:'and',ini:T-40*MIN,op:''};
-  lote('0415-1').steps.bordmanga={st:'and',ini:T-75*MIN,op:''};
-  makeRework(lote('0412-1'),'fechar','manga',6,'Costura torta',T-26*H,'Tânia');
-  makeRework(lote('0409-1'),'revisao','gola',8,'Gola torta',T-3*H,'Bia');
-  const r=makeRework(lote('0402-1'),'revisao','etiqueta',5,'Etiqueta errada',addWD(T,-6),'Bia');prod('polo-ams').steps.forEach(s=>r.steps[s.id]={st:'ok',herdado:true});
-  const busy=new Set();state.lotes.forEach(l=>{if(pedById(l.ped).concluido)return;Object.entries(l.steps).forEach(([sid,x])=>{if(x.st!=='and')return;const po=POSTO[sMap(prod(l.prod))[sid].posto];
-    let op=po.ops.includes(x.op)&&!busy.has(x.op)?x.op:po.ops.find(o=>!busy.has(o));if(!op){x.st='pend';delete x.ini;return}x.op=op;busy.add(op);if(T-x.ini>3*H)x.ini=T-(20+rnd()*140)*MIN})});
+  mk({id:'0402',cliente:'Supermercados Bom Preço',vend:'layara',chegada:addWD(T,-26),entrega:addWD(T,-3),lib:addWD(T,-23),concluido:addWD(T,-4),linhas:[{prod:'polo-ams',cor:'Cinza',qtd:150,done:all('polo-ams')}]});
+  mk({id:'0409',cliente:'Transportes Rota Sul',vend:'paula',chegada:addWD(T,-21),entrega:addWD(T,2),lib:addWD(T,-17),linhas:[{prod:'polo-vie',cor:'Cinza',qtd:90,done:all('polo-vie').filter(x=>!['arremate','embalar'].includes(x))}]});
+  mk({id:'0412',cliente:'Construtora Horizonte',vend:'layara',chegada:addWD(T,-16),entrega:addWD(T,4),lib:addWD(T,-13),linhas:[
+    {prod:'polo-ams',cor:'Marinho',qtd:180,done:['corte','bordado','silk','peitilho','prepgola','barramanga','ombro','gola','cobregola','manga','fechar','etiqueta']},
+    {prod:'calca-hel',cor:'Preta',qtd:180,done:['corte']}]});
+  mk({id:'0415',cliente:'Rede Farma Vida',vend:'paula',chegada:addWD(T,-9),entrega:addWD(T,14),lib:addWD(T,-6),linhas:[{prod:'polo-vie',cor:'Branca',qtd:240,done:['corte','peitilho','barramanga']}]});
+  mk({id:'0416',cliente:'Academia Pulse',vend:'layara',chegada:addWD(T,-8),entrega:addWD(T,9),lib:addWD(T,-6),linhas:[{prod:'calca-hel',cor:'Cinza',qtd:120,done:['corte','transfer']}]});
+  mk({id:'0418',cliente:'Colégio São Bento',vend:'paula',chegada:addWD(T,-3),entrega:addWD(T,22),arte:false,env:false,linhas:[{prod:'polo-ams',cor:'Branca',qtd:320},{prod:'calca-hel',cor:'Marinho',qtd:320}]});
+  mk({id:'0420',cliente:'Clínica Vitta',vend:'layara',chegada:T-2*H,entrega:addWD(T,20),arte:false,vias:false,env:false,linhas:[{prod:'polo-ams',cor:'Verde',qtd:60}]});
+  const and=(lid,sid,maq,op,min)=>{lote(lid).steps[sid]={st:'and',ini:T-min*MIN,op,maq}};
+  and('0412-1','barra','galoneira-1','ana',55);and('0415-1','prepgola','reta-2','anilda',40);and('0416-1','bolso','reta-1','leo',126);
+  lote('0412-2').steps.transfer={st:'fora',saiu:T-26*H,forn:'fd',op:'roger'};
+  makeRework(lote('0412-1'),'fechar','manga',6,'Costura torta',T-26*H,'dalva');and('0412-1-C1','manga','overlock-1','dalva',18);
+  makeRework(lote('0409-1'),'fechar','gola',8,'Gola torta',T-3*H,'zeze');
+  const r=makeRework(lote('0402-1'),'arremate','etiqueta',5,'Etiqueta errada',addWD(T,-6),'leo');prod('polo-ams').steps.forEach(s=>r.steps[s.id]={st:'ok',herdado:true});
   return state}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
-function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===1&&s.pedidos){state=s;return}}catch(e){}seed()}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===5&&s.pedidos){state=s;return}}catch(e){}seed()}
+
+/* ================= desenho dos produtos ================= */
+function prodSvg(pid,cor){const p=prod(pid);return shapeSvg(p?p.forma:'polo',cor,p?p.nome:'')}
+function shapeSvg(forma,cor,nome){const f=CORES[cor]||'#B9C0C8',claro=cor==='Branca'||!CORES[cor];
+  const st=claro?'#8C96A1':'rgba(0,0,0,.45)',ln=claro?'#8C96A1':'rgba(255,255,255,.55)';
+  const a=`fill="${f}" stroke="${st}" stroke-width="2.5" stroke-linejoin="round"`,b=`fill="none" stroke="${ln}" stroke-width="2.5" stroke-linecap="round"`;
+  let body;
+  if(forma==='calca')body=`<path ${a} d="M36 10H84L91 108H66L60 46L54 108H29Z"/><path ${b} d="M37 21H83M44 22c1 8 5 12 12 13M76 22c-1 8-5 12-12 13"/>`;
+  else if(forma==='camiseta')body=`<path ${a} d="M42 14L50 10Q60 22 70 10L78 14L104 32L95 52L84 46L84 108L36 108L36 46L25 52L16 32Z"/><path ${b} d="M51 12Q60 26 69 12"/>`;
+  else{body=`<path ${a} d="M42 14L52 10Q60 17 68 10L78 14L104 32L95 52L84 46L84 108L36 108L36 46L25 52L16 32Z"/><path ${a} d="M52 10L60 26L68 10"/><path ${b} d="M60 26V46"/><circle cx="60" cy="33" r="2" fill="${ln}"/><circle cx="60" cy="41" r="2" fill="${ln}"/>`;
+    if(forma==='polo2')body+=`<path ${b} d="M27 47L19 36M93 47L101 36"/>`}
+  return `<svg class="prod" viewBox="0 0 120 120" role="img" aria-label="${esc(nome)} ${esc(cor)}">${body}</svg>`}
 
 /* ================= peças de tela ================= */
-const av=(op,big)=>`<span class="av" style="background:${avColor(op)}">${esc(op[0])}</span>`;
 const upill=u=>`<span class="pill u-${u}"><span class="dot"></span>${ULAB[u]}</span>`;
 function entregaTxt(ped,inf){if(ped.concluido)return `Entregue ${fD(ped.concluido)}`;const d=inf.du;return `Entrega ${fD(ped.entrega)} · ${d>1?`faltam ${d} dias úteis`:d===1?'falta 1 dia útil':d===0?'é hoje':'passou da data'}`}
 function chips(it){const r=[upill(it.inf.u)];if(it.l.rework)r.push(`<span class="pill cons">${ic('i-conserto')}Conserto</span>`);if(it.adianta)r.push(`<span class="pill adi">${ic('i-adiantar')}Adiantar</span>`);return r.join('')}
 function tarefaCard(it,sug){const q=qtdEf(it.l);
   return `<div class="tarefa ${sug?'sug':''}">${prodSvg(it.p.id,it.l.cor)}<div>
-    <div class="etapa">${esc(it.s.nome)}</div>
-    <div class="qtd">${q} peças</div>
+    <div class="etapa">${esc(it.s.nome)}</div><div class="qtd">${q} peças</div>
     <div class="desc">${esc(it.p.nome)} ${esc(it.l.cor)}</div>
     <div class="desc" style="display:flex;align-items:center;gap:6px;font-weight:700;color:var(--ink)">${ic('i-predio')}${esc(it.ped.cliente)}</div>
-    <div class="para">${chips(it)}</div>
-  </div></div>${it.s.obs?`<div class="instr">${ic('i-etiqueta')}<span>${esc(it.s.obs)}</span></div>`:''}`}
+    <div class="para">${chips(it)}</div></div></div>${it.s.obs?`<div class="instr">${ic('i-etiqueta')}<span>${esc(it.s.obs)}</span></div>`:''}`}
+const estrela=(p,it)=>(p.melhor.includes(it.s.nome)||p.melhor.includes(it.s.posto))?`<span class="estrela" title="Faz melhor">★</span>`:'';
 
-/* ================= EQUIPE ================= */
-function vEquipe(){
-  const ativos=state.pedidos.filter(p=>!p.concluido).map(p=>info(p));
-  const cnt=u=>ativos.filter(i=>i.u===u).length;
+/* ================= FÁBRICA ================= */
+function vFabrica(){const P=plano(),esc_=tarefasEsc();
+  const ativos=state.pedidos.filter(p=>!p.concluido).map(p=>info(p));const cnt=u=>ativos.filter(i=>i.u===u).length;
   const res=['crit','warn','ok'].filter(u=>cnt(u)).map(u=>`<button class="rs u-${u}" data-a="tela" data-t="pedidos"><span class="dot"></span><b>${cnt(u)}</b>${cnt(u)>1?'pedidos':'pedido'} ${ULAB[u].toLowerCase()}</button>`).join('');
-  return `<h1>Quem está fazendo o quê</h1><div class="resumo">${res}</div>
-  ${SETORES.map(se=>`<section class="setor"><div class="setor-h">${ic(se.i)}${se.nome}</div><div class="grid">
-    ${POSTOS.filter(p=>p.setor===se.id).flatMap(p=>{const f=fila(p.id);let k=0;return p.ops.map(op=>{const t=tarefaDe(op);const nx=t?null:f[k++]||null;
-      const cls=t?'st-trab':nx?'st-livre':'st-nada',it=t||nx;
-      return `<div class="pessoa ${cls}"><button class="p-open" data-a="pessoa" data-o="${esc(op)}">
-        <div class="p-top">${av(op)}<div><b>${esc(op)}</b><small>${ic(PICON[p.id])}${esc(p.nome)}</small></div></div>
-        <div class="p-body">${it?`${prodSvg(it.p.id,it.l.cor)}<div>${nx?'<span class="prox">Próximo</span>':''}<b>${esc(it.s.nome)}</b><span>${qtdEf(it.l)} peças</span><span class="emp">${ic('i-predio')}${esc(it.ped.cliente)}</span></div>`:`<span class="vazio">Nada para fazer agora</span>`}</div></button>
-        <div class="p-st"><span class="dot"></span>${t?`Trabalhando · <span data-ini="${t.x.ini}">${fDur(now()-t.x.ini)}</span>`:nx?'Parada · esperando começar':'Sem trabalho'}</div>
-        ${t?`<button class="p-act fim" data-a="terminou" data-o="${esc(op)}">${ic('i-check')}Terminou</button>`:nx?`<button class="p-act ini" data-a="comecar" data-o="${esc(op)}" data-l="${nx.l.id}" data-s="${nx.s.id}">${ic('i-play')}Começar</button>`:''}
-      </div>`})}).join('')}
-  </div></section>`).join('')}`}
+  const livres=state.pessoas.filter(p=>p.sabe.length&&!P.ocup.has(p.id)&&!P.usados.has(p.id));
+  const foraN=sum(state.lotes.map(l=>Object.values(l.steps).filter(x=>x.st==='fora').length));
+  const pulos=[...GRUPOS.map(g=>[g.id,g.nome,g.i]),['fora',`Terceirizados${foraN?` (${foraN})`:''}`,'i-caminhao'],['esc',`Escritório (${esc_.length})`,'i-vias']];
+  return `<h1>Fábrica agora</h1><div class="resumo">${res}</div>
+  <div class="pulos">${pulos.map(([id,n,i])=>`<a class="pulo" href="#g-${id}">${ic(i)}${n}</a>`).join('')}</div>
+  ${livres.length?`<div class="livres"><span class="t">Sem trabalho agora:</span>${livres.map(p=>`<span class="pchip">${av(p.id,'s')}${esc(p.nome)}</span>`).join('')}</div>`:''}
+  ${GRUPOS.map(g=>{const ts=state.tipos.filter(t=>t.grupo===g.id&&!t.externo&&t.qtd>0);if(!ts.length)return '';
+    return `<section class="grupo" id="g-${g.id}"><h2 class="grupo-h">${ic(g.i)}${g.nome}</h2>${ts.map(t=>{const esp=(P.espera[t.id]||[]).length,sp=(P.semPessoa[t.id]||[]).length;
+      return `<div class="tipo-h">${esc(t.nome)} <small>${t.qtd} ${t.qtd>1?'máquinas':'máquina'}</small>${esp?`<span class="esp">${esp} esperando máquina</span>`:''}</div>
+      <div class="grid">${P.us.filter(u=>u.tipo===t.id).map(u=>maqTile(u,P)).join('')}</div>`}).join('')}</section>`}).join('')}
+  <section class="grupo" id="g-fora"><h2 class="grupo-h">${ic('i-caminhao')}Terceirizados</h2>
+    <p style="margin:-4px 0 12px;color:var(--ink2)">Enquanto o pacote está fora, nenhuma outra etapa dele anda.</p>
+    <div class="forns">${state.forn.map(f=>fornCard(f,esc_)).join('')}</div></section>
+  <section class="grupo" id="g-esc"><h2 class="grupo-h">${ic('i-vias')}Escritório e entregas</h2>
+    <div class="esc">${state.pessoas.filter(p=>['vendas','compras'].includes(p.papel)).map(p=>{const ts=esc_.filter(t=>t.resp===p.id);
+      return `<div class="escp"><div class="escp-h">${av(p.id)}<div><b>${esc(p.nome)}</b><span>${PAPEIS[p.papel]}</span></div></div>${ts.map(tarRow).join('')||'<div class="vazio-s">Nada pendente</div>'}</div>`}).join('')}</div></section>`}
+function tarRow(t){return `<div class="tar">${ic(t.i)}<div><b>${esc(t.t)}</b><span>${esc(t.ped.cliente)}${t.sub?' · '+esc(t.sub):''}</span>${t.late?'<span class="late" style="display:block;color:var(--red);font-weight:700">Passou do prazo do fornecedor</span>':''}</div>
+  <button class="mbtn ${t.a==='buscou'||t.a==='chegou'?'go':''}" data-a="${t.a}" data-id="${t.ped.id}" data-k="${t.k??''}" data-l="${t.l||''}" data-s="${t.s||''}">${{vias:'Separei',arte:'Aprovada',arteEnv:'Enviei',comprei:'Comprei',chegou:'Chegou',levei:'Levei',buscou:'Chegou'}[t.a]}</button></div>`}
+function fornCard(f,esc_){const fora=[];state.lotes.forEach(l=>{const ped=pedById(l.ped);if(ped.concluido)return;const p=prod(l.prod);Object.entries(l.steps).forEach(([sid,x])=>{if(x.st==='fora'&&x.forn===f.id)fora.push({l,p,s:sMap(p)[sid],x,ped})})});
+  const lev=esc_.filter(t=>t.a==='levei'&&(fornById(stOf(lote(t.l),t.s).forn)||fornDe(sMap(prod(lote(t.l).prod))[t.s].posto)[0])?.id===f.id);
+  return `<div class="forn"><div class="forn-h"><span class="m-ic">${ic(tipo(f.servico).i)}</span><div><b>${esc(f.nome)}</b><span>${esc(tNome(f.servico))} · prazo ${f.prazo} ${f.prazo>1?'dias':'dia'} · leva e busca: ${esc(pNome(f.leva))}</span></div></div>
+    ${fora.map(o=>{const d=diasDesde(o.x.saiu);return `<div class="fitem">${prodSvg(o.p.id,o.l.cor)}<div><b>${esc(o.s.nome)} · ${qtdEf(o.l)} peças</b><span>${esc(o.ped.cliente)} · lá há ${d} ${d===1?'dia':'dias'}</span>${d>f.prazo?'<span class="late" style="display:block">Passou do prazo</span>':''}</div><button class="mbtn go" data-a="buscou" data-l="${o.l.id}" data-s="${o.s.id}">Chegou</button></div>`}).join('')||'<div class="vazio-s">Nada lá agora</div>'}
+    ${lev.length?`<div class="vazio-s" style="color:var(--atn-ink);font-weight:700">${lev.length} ${lev.length>1?'pacotes prontos':'pacote pronto'} para levar</div>`:''}</div>`}
+function maqTile(u,P){const t=P.uso[u.id],pl=P.plan[u.id],sp=!t&&!pl?(P.semPessoa[u.tipo]||[])[0]:null;const it=t||pl||sp;
+  const cls=t?'st-trab':pl?'st-livre':sp?'st-semp':'st-nada';const quem=t?t.x.op:pl?pl.pessoa:null;
+  return `<div class="pessoa ${cls}"><button class="p-open" data-a="maq" data-m="${u.id}">
+    <div class="m-top"><span class="m-ic">${ic(tipo(u.tipo).i)}</span><b>${esc(u.nome)}</b></div>
+    <div class="p-body">${it?`${prodSvg(it.p.id,it.l.cor)}<div>${pl?'<span class="prox">Próximo</span>':''}<b>${esc(it.s.nome)}</b><span>${qtdEf(it.l)} peças</span><span class="emp">${ic('i-predio')}${esc(it.ped.cliente)}</span>${quem?`<span class="quem-l">${av(quem,'s')}${esc(pNome(quem))} ${pl?estrela(pessoa(quem),pl):''}</span>`:''}</div>`:'<span class="vazio">Sem trabalho para esta máquina</span>'}</div></button>
+    <div class="p-st"><span class="dot"></span>${t?`Trabalhando · <span data-ini="${t.x.ini}">${fDur(now()-t.x.ini)}</span>`:pl?'Parada · pronta para começar':sp?'Ninguém livre sabe usar':'Sem trabalho'}</div>
+    ${t?`<button class="p-act fim" data-a="terminou" data-m="${u.id}">${ic('i-check')}Terminou</button>`:pl?`<button class="p-act ini" data-a="comecar" data-m="${u.id}" data-l="${pl.l.id}" data-s="${pl.s.id}" data-p="${pl.pessoa}">${ic('i-play')}Começar</button>`:''}
+  </div>`}
 
 /* ================= PEDIDOS ================= */
-function vPedidos(){
-  const ls=state.pedidos.map(p=>({p,i:info(p)})).sort((a,b)=>a.i.score-b.i.score);
+function vPedidos(){const ls=state.pedidos.map(p=>({p,i:info(p)})).sort((a,b)=>a.i.score-b.i.score);
   return `<h1>Pedidos</h1><div class="peds">${ls.map(({p,i})=>{const falta=[];if(!p.vias)falta.push('vias');if(!p.arte)falta.push('arte');if(p.materiais.some(m=>m.st==='comprar'||m.st==='pedido'))falta.push('material');
+    const fora=i.ls.some(loteFora);
     return `<button class="ped" data-a="pedido" data-id="${p.id}"><div class="ped-st u-${i.u}"><span class="dot"></span>${ULAB[i.u]}</div>
       <h3>${esc(p.cliente)}</h3><div class="ped-ent">${ic('i-caminhao')}${entregaTxt(p,i)}</div>
       <div class="ped-prods">${i.ls.filter(l=>!l.rework).map(l=>{const[d,t]=minsTot(l);return `<div class="pp">${prodSvg(l.prod,l.cor)}<b>${l.qtd}</b><div class="barra"><i style="width:${d/t*100}%"></i></div></div>`}).join('')}</div>
       ${falta.length&&!p.concluido?`<div class="falta">${ic('i-cadeado')}Falta: ${falta.join(', ')}</div>`:''}
+      ${fora&&!p.concluido?`<div class="falta" style="background:#F3ECFB;color:#6B2F8C">${ic('i-caminhao')}Peças no fornecedor</div>`:''}
     </button>`}).join('')}</div>`}
-
-/* ================= FOLHAS ================= */
-const voltar=(lab='Voltar')=>`<button class="voltar" data-a="fechar">${ic('i-voltar')}${lab}</button>`;
-function sPessoa(op){const po=postoDe(op),t=tarefaDe(op);
-  const head=`<div class="quem">${av(op)}<div><b>${esc(op)}</b><span>${esc(po.nome)}</span></div></div>`;
-  if(t)return `${voltar()}${head}<h2>Está fazendo agora</h2>${tarefaCard(t)}
-    <div class="acoes"><button class="big go" data-a="terminou" data-o="${esc(op)}">${ic('i-check')}Terminou</button>
-    <button class="big prob" data-a="problema" data-o="${esc(op)}">${ic('i-alerta')}Deu problema</button></div>`;
-  return `${voltar()}${head}${sugestao(op)}`}
-function sugestao(op){const po=postoDe(op),f=fila(po.id);
-  if(!f.length){const outro=POSTOS.filter(p=>p.setor===po.setor&&p.id!==po.id).map(p=>({p,n:fila(p.id).length})).sort((a,b)=>b.n-a.n)[0];
-    return `<div class="vazio-box">${ic('i-dormir')}<b>Nada para ${esc(po.nome)} agora</b>${outro&&outro.n?`<span>Pode ajudar na <b>${esc(outro.p.nome)}</b></span>`:''}</div>`}
-  const [a,...rest]=f;
-  return `<h2>Próximo trabalho</h2>${tarefaCard(a,true)}
-    <div class="acoes"><button class="big go ini" data-a="comecar" data-o="${esc(op)}" data-l="${a.l.id}" data-s="${a.s.id}">${ic('i-play')}Começar</button></div>
-    ${rest.length?`<h2 style="margin-top:26px">Ou escolher outro</h2><div class="outras">${rest.slice(0,3).map(it=>`<button class="outra" data-a="comecar" data-o="${esc(op)}" data-l="${it.l.id}" data-s="${it.s.id}">${prodSvg(it.p.id,it.l.cor)}<div><b>${esc(it.s.nome)} · ${qtdEf(it.l)} peças</b><span>${esc(it.ped.cliente)}</span></div><span class="ir">Começar${ic('i-seta')}</span></button>`).join('')}</div>`:''}`}
-function sFeito(op,nome){return `${voltar('Fechar')}<div class="feito"><div class="ok">${ic('i-check')}</div><b>Pronto!</b><span>${esc(op)} terminou ${esc(nome)}</span></div>${sugestao(op)}`}
-function sPedido(id){const ped=pedById(id),i=info(ped);
-  const mats=ped.materiais.filter(m=>m.st!=='ok');
-  const lib=liberado(ped);
+function sPedido(id){const ped=pedById(id),i=info(ped),mats=ped.materiais.filter(m=>m.st!=='ok'),lib=liberado(ped),sv=servicosPed(ped),v=ped.vendedor,comp=state.pessoas.find(p=>p.papel==='compras');
+  const chk=(a,on,icn,t,resp)=>`<button class="chk" data-a="${a}" data-id="${id}" aria-pressed="${!!on}">${ic(icn)}${t}<span class="box">${ic('i-check')}</span>${resp?`<span style="font-weight:400;font-size:15px;color:var(--muted)">${esc(pNome(resp))}</span>`:''}</button>`;
   return `${voltar()}<div class="card ped-head">${upill(i.u)}<h1>${esc(ped.cliente)}</h1><div class="ped-ent">${ic('i-caminhao')}${entregaTxt(ped,i)}</div>
+    <div class="ped-ent">${v?av(v,'s'):''}Vendedora: <b>${esc(pNome(v)||'—')}</b></div>
     ${i.u==='pronto'?`<div class="acoes"><button class="big go" data-a="entregar" data-id="${id}">${ic('i-caminhao')}Entregar pedido</button></div>`:''}</div>
   ${ped.concluido?'':`<div class="card"><h2>Antes de cortar</h2><div class="checks">
-    <button class="chk" data-a="vias" data-id="${id}" aria-pressed="${!!ped.vias}">${ic('i-vias')}Vias separadas<span class="box">${ic('i-check')}</span></button>
-    <button class="chk" data-a="arte" data-id="${id}" aria-pressed="${!!ped.arte}">${ic('i-arte')}Arte aprovada<span class="box">${ic('i-check')}</span></button>
-    <div class="chk" aria-pressed="${!mats.some(m=>m.st!=='recebido')}">${ic('i-rolo')}Material<span class="box">${ic('i-check')}</span></div></div>
-    ${mats.filter(m=>m.st!=='recebido').map(m=>{const k=ped.materiais.indexOf(m);return `<div class="mat">${ic(m.st==='pedido'?'i-caminhao':'i-carrinho')}<div><b>${esc(m.item)}</b><span>${m.st==='pedido'?'Comprado, esperando chegar':`Comprar ${(m.nec-m.est).toLocaleString('pt-BR')} ${m.un==='m'?'metros':'unidades'}`}</span></div><button class="mbtn" data-a="${m.st==='pedido'?'chegou':'comprei'}" data-id="${id}" data-k="${k}">${m.st==='pedido'?'Chegou':'Comprei'}</button></div>`}).join('')}
+    ${chk('vias',ped.vias,'i-vias','Vias separadas',v)}${chk('arte',ped.arte,'i-arte','Arte aprovada',v)}
+    ${sv.length?chk('arteEnv',ped.arteEnviada,'i-arte','Arte enviada',v):''}
+    <div class="chk" aria-pressed="${!mats.some(m=>m.st!=='recebido')}">${ic('i-rolo')}Material<span class="box">${ic('i-check')}</span><span style="font-weight:400;font-size:15px;color:var(--muted)">${esc(pNome(comp?.id))}</span></div></div>
+    ${mats.filter(m=>m.st!=='recebido').map(m=>{const k=ped.materiais.indexOf(m);return `<div class="mat">${ic(m.st==='pedido'?'i-caminhao':'i-carrinho')}<div><b>${esc(m.item)}</b><span>${m.st==='pedido'?'Comprado, esperando chegar':'Comprar '+qtdTxt(m.nec-m.est,m.un)}</span></div><button class="mbtn" data-a="${m.st==='pedido'?'chegou':'comprei'}" data-id="${id}" data-k="${k}">${m.st==='pedido'?'Chegou':'Comprei'}</button></div>`}).join('')}
     <div class="lib ${lib?'u-ok':'u-warn'}">${ic(lib?'i-check':'i-cadeado')}${lib?'Pode cortar':'Ainda não pode cortar'}</div></div>`}
   <div class="card"><h2>Peças e etapas</h2>${legendaStatus()}${i.ls.filter(l=>!l.rework).map(l=>prodLine(l,ped)+i.ls.filter(r=>r.parent===l.id&&!loteDone(r)).map(r=>prodLine(r,ped)).join('')).join('')}</div>`}
+const ETAPAS=[{nome:'Corte',i:'i-corte',g:['corte']},{nome:'Personalização',i:'i-estampa',g:['pers']},{nome:'Costura',i:'i-maquina',g:['costura']},{nome:'Arremate',i:'i-lupa',t:['arremate']},{nome:'Embalar',i:'i-caixa',t:['embalagem']}];
 function prodLine(l,ped){const p=prod(l.prod);
-  const et=ETAPAS.map(e=>{const ss=p.steps.filter(s=>e.postos.includes(s.posto));if(!ss.length)return '';const n=ss.filter(s=>done(l,s.id)).length,and=ss.some(s=>stOf(l,s.id).st==='and');
-    const c=n===ss.length?'ok':(and||n>0)?'and':'';return `<div class="tp ${c}"><span class="tc">${ic(c==='ok'?'i-check':e.i)}</span>${e.nome}${ss.length>1&&c!=='ok'?`<small>${n} de ${ss.length}</small>`:''}</div>`}).join('');
-  const ands=p.steps.filter(s=>stOf(l,s.id).st==='and');
-  const agora=loteDone(l)?'Pronto':ands.length?'Agora: '+ands.map(s=>`${s.nome} (${stOf(l,s.id).op})`).join(', '):!liberado(ped)?'Esperando liberar o corte':'Esperando a próxima máquina';
+  const et=ETAPAS.map(e=>{const ss=p.steps.filter(s=>e.t?e.t.includes(s.posto):e.g.includes(tipo(s.posto).grupo));if(!ss.length)return '';const n=ss.filter(s=>done(l,s.id)).length,and=ss.some(s=>stOf(l,s.id).st==='and'),fo=ss.some(s=>stOf(l,s.id).st==='fora');
+    const c=n===ss.length?'ok':fo?'fora':(and||n>0)?'and':'';return `<div class="tp ${c}"><span class="tc">${ic(c==='ok'?'i-check':c==='fora'?'i-caminhao':e.i)}</span>${e.nome}${ss.length>1&&c!=='ok'?`<small>${n} de ${ss.length}</small>`:''}</div>`}).join('');
+  const ands=p.steps.filter(s=>stOf(l,s.id).st==='and'),fo=p.steps.filter(s=>stOf(l,s.id).st==='fora');
+  const agora=loteDone(l)?'Pronto':fo.length?`No fornecedor: ${fo.map(s=>s.nome).join(', ')}`:ands.length?'Agora: '+ands.map(s=>`${s.nome} (${pNome(stOf(l,s.id).op)})`).join(', '):!liberado(ped)?'Esperando liberar o corte':'Esperando a próxima máquina';
   return `<div class="prodbloco"><div class="prodline">${prodSvg(l.prod,l.cor)}<div><h3>${l.rework?`<span class="pill cons">${ic('i-conserto')}Conserto</span> `:''}${esc(p.nome)} ${esc(l.cor)} · ${qtdEf(l)} peças</h3><div class="agora">${esc(agora)}</div><div class="trilha">${et}</div></div></div>${fluxo(p,'L'+l.id,l,ped)}</div>`}
-function sProblema(){const m=ui.sheet,t=tarefaDe(m.op);if(!t)return voltar();const passos=`<div class="passos">${[1,2,3].map(n=>`<i class="${n<=m.step?'on':''}"></i>`).join('')}</div>`;
-  const head=`${voltar(m.step>1?'Voltar':'Cancelar')}${passos}`;
-  if(m.step===1)return `${head}<h1>Qual foi o problema?</h1><div class="probs">${PROBS.map((p,k)=>`<button class="opc" data-a="pMot" data-k="${k}">${ic(p.i)}${p.k}</button>`).join('')}</div>`;
-  if(m.step===2)return `${head}<h1>Quantas peças?</h1><div class="contador"><button class="stp" data-a="pN" data-d="-1" aria-label="Menos uma">−</button><output>${m.n}</output><button class="stp" data-a="pN" data-d="1" aria-label="Mais uma">+</button></div><p style="text-align:center;color:var(--muted)">de ${qtdEf(t.l)} peças</p><div class="acoes"><button class="big go" data-a="pNext">Continuar${ic('i-seta')}</button></div>`;
-  const opts=topo(t.p).filter(s=>(s.id===t.s.id||anc(t.p,t.s.id).has(s.id))&&s.posto!=='corte').reverse();
-  return `${head}<h1>Voltar para qual máquina?</h1><div class="escolhe">${opts.map(s=>`<button class="opc" data-a="pOrig" data-s="${s.id}" aria-pressed="${m.orig===s.id}">${ic(PICON[s.posto])}${esc(s.nome)}<span style="font-weight:400;font-size:16px;color:var(--muted)">${esc(POSTO[s.posto].nome)}</span></button>`).join('')}</div>
-    <div class="acoes"><button class="big go" data-a="pOk" ${m.orig?'':'disabled'}>${ic('i-check')}Mandar ${m.n} ${m.n>1?'peças':'peça'} para conserto</button></div>`}
-function sNovo(){const w=ui.sheet.w,passos=`<div class="passos">${[1,2,3,4].map(n=>`<i class="${n<=w.step?'on':''}"></i>`).join('')}</div>`;
-  const head=`${voltar(w.step>1?'Voltar':'Cancelar')}${passos}<div class="passo-n">Passo ${w.step} de 4</div>`;
-  const nav=(lab='Próximo')=>`${w.err?`<div class="aviso">${ic('i-alerta')}${esc(w.err)}</div>`:''}<div class="acoes"><button class="big go" data-a="wNext">${lab}${ic('i-seta')}</button></div>`;
-  if(w.step===1)return `${head}<h1>Para quem é o pedido?</h1><input class="campo" id="wCli" value="${esc(w.cliente)}" placeholder="Nome do cliente" autocomplete="off">${nav()}`;
-  if(w.step===2)return `${head}<h1>Quais peças?</h1><p style="color:var(--ink2);margin-top:-6px">Toque na peça para adicionar.</p><div class="escolhe">${state.produtos.map(p=>`<button class="opc" data-a="wAdd" data-p="${p.id}">${prodSvg(p.id,'')}${esc(p.nome)}</button>`).join('')}</div>
-    ${w.itens.map((it,k)=>`<div class="item"><div class="item-h">${prodSvg(it.prod,it.cor)}<b>${esc(prod(it.prod).nome)}</b><button class="x" data-a="wRm" data-k="${k}">Tirar</button></div>
-      <div><div class="passo-n">Cor</div><div class="cores">${Object.entries(CORES).map(([n,h])=>`<button class="cor" data-a="wCor" data-k="${k}" data-c="${n}" aria-pressed="${it.cor===n}"><span style="background:${h}"></span>${n}</button>`).join('')}</div></div>
-      <div><div class="passo-n">Quantidade por tamanho</div><div class="tams">${SIZES.map(s=>`<div class="tam"><b>${s}</b><button class="stp" data-a="wQ" data-k="${k}" data-s="${s}" data-d="-10" aria-label="Menos 10 no ${s}">−</button><input id="q${k}${s}" data-q="${k}" data-s="${s}" inputmode="numeric" value="${it.g[s]||0}" aria-label="Quantidade ${s}"><button class="stp" data-a="wQ" data-k="${k}" data-s="${s}" data-d="10" aria-label="Mais 10 no ${s}">+</button></div>`).join('')}</div>
-      <p style="margin:0;font-weight:700">Total: ${sum(SIZES.map(s=>it.g[s]||0))} peças</p></div>`).join('')}${nav()}`;
-  if(w.step===3){const ops=[15,20,30].map(d=>{const dt=new Date(now()+d*864e5);dt.setHours(17,0,0,0);return dt.getTime()});
-    const iso=w.entrega?(()=>{const d=new Date(w.entrega);return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`})():'';
-    return `${head}<h1>Para quando?</h1><div class="datas">${ops.map((t,k)=>`<button class="data-op" data-a="wData" data-t="${t}" aria-pressed="${w.entrega===t}"><b>Daqui ${[15,20,30][k]} dias</b><span>${DOW[new Date(t).getDay()]}, ${new Date(t).getDate()} de ${MES[new Date(t).getMonth()]}</span></button>`).join('')}</div>
-      <p class="passo-n" style="margin-top:18px">Ou escolha outra data</p><input class="campo" type="date" id="wDt" value="${iso}">${nav()}`}
-  const tot=sum(w.itens.map(it=>sum(SIZES.map(s=>it.g[s]||0))));
-  const mats=calcMat(w.itens.map(it=>({prod:it.prod,cor:it.cor,qtd:sum(SIZES.map(s=>it.g[s]||0))}))).filter(m=>m.st==='comprar');
-  return `${head}<h1>Está certo?</h1><div class="card"><h2>${esc(w.cliente)}</h2>
-    ${w.itens.map(it=>`<div class="resumo-item">${prodSvg(it.prod,it.cor)}<div><b>${esc(prod(it.prod).nome)} ${esc(it.cor)}</b><div style="color:var(--ink2)">${SIZES.filter(s=>it.g[s]).map(s=>`${s}: ${it.g[s]}`).join(' · ')}</div></div></div>`).join('')}
-    <div class="resumo-item">${ic('i-caminhao')}<b>Entrega ${DOW[new Date(w.entrega).getDay()]}, ${new Date(w.entrega).getDate()} de ${MES[new Date(w.entrega).getMonth()]} · ${tot} peças</b></div></div>
-    <div class="card"><h2>${mats.length?'Vai precisar comprar':'Tem todo o material'}</h2>${mats.length?mats.map(m=>`<div class="mat">${ic('i-carrinho')}<div><b>${esc(m.item)}</b><span>${(m.nec-m.est).toLocaleString('pt-BR')} ${m.un==='m'?'metros':'unidades'}</span></div><span></span></div>`).join(''):`<div class="lib u-ok">${ic('i-check')}Pode seguir</div>`}</div>
-    <div class="acoes"><button class="big go" data-a="wCriar">${ic('i-check')}Criar pedido</button></div>`}
-function sAjuda(){return `${voltar('Fechar')}<h1>Como usar</h1><div class="ajuda">
-  <div class="aj"><span class="n">1</span>${ic('i-pessoas')}<b>Toque na pessoa</b></div>
-  <div class="aj"><span class="n">2</span>${ic('i-check')}<b>Quando acabar, aperte TERMINOU</b></div>
-  <div class="aj"><span class="n">3</span>${ic('i-mao')}<b>Para iniciar, aperte COMEÇAR no cartão da pessoa</b></div></div>
-  <div class="ajuda"><div class="aj">${ic('i-alerta')}<b>Peça com defeito? Aperte DEU PROBLEMA</b></div><div class="aj">${ic('i-conserto')}<b>Apertou errado? Aperte DESFAZER</b></div></div>
-  <div class="acoes"><button class="big go" data-a="fechar">Entendi</button></div>`}
 
 /* ================= mapa de etapas ================= */
-const nf=(x,d=1)=>Number(x).toLocaleString('pt-BR',{maximumFractionDigits:d});
 const NW=200,NH=104,GX=48,GY=14;
-const filhos=(p,id)=>p.steps.filter(s=>s.deps.includes(id));
-const FASE={antes:'Pode adiantar',pers:'Estampa ou bordado',depois:'Depois da estampa'};
-function fase(p,s){if(s.pers)return 'pers';const a=anc(p,s.id);return p.steps.some(x=>x.pers&&a.has(x.id))?'depois':'antes'}
 function layout(p){const L=lv(p),cols=[],row={};topo(p).forEach(s=>(cols[L[s.id]]=cols[L[s.id]]||[]).push(s));
   const bar=s=>s.deps.length?sum(s.deps.map(d=>row[d]||0))/s.deps.length:0;
   cols.forEach((c,i)=>{if(i)c.sort((a,b)=>bar(a)-bar(b));c.forEach((s,r)=>row[s.id]=r)});
@@ -632,10 +727,14 @@ function layout(p){const L=lv(p),cols=[],row={};topo(p).forEach(s=>(cols[L[s.id]
   cols.forEach((c,i)=>{const off=(maxR-c.length)*(NH+GY)/2;c.forEach((s,r)=>pos[s.id]={x:i*(NW+GX),y:off+r*(NH+GY)})});
   return{pos,w:Math.max(NW,cols.length*(NW+GX)-GX),h:maxR*(NH+GY)-GY}}
 function ndStatus(l,s,ped){const x=stOf(l,s.id),m=sMap(prod(l.prod));
-  if(x.st==='ok')return['ok',`${ic('i-check')}${x.herdado?'Já estava feito':'Feito'+(x.op?' · '+esc(x.op):'')}`];
-  if(x.st==='and')return['and',`${ic('i-mao')}${esc(x.op)} fazendo`];
-  if(ready(l,s,ped))return['ready',`${ic('i-seta')}Pode começar`];
-  const f=s.deps.filter(d=>!done(l,d));return['pend',f.length?`Espera: ${esc(m[f[0]].nome)}${f.length>1?` e mais ${f.length-1}`:''}`:'Espera liberar o corte']}
+  if(x.st==='ok')return['ok',`${ic('i-check')}${x.herdado?'Já estava feito':'Feito'+(x.op?' · '+esc(pNome(x.op)):'')}`];
+  if(x.st==='and')return['and',`${ic('i-mao')}${esc(pNome(x.op))} · ${esc(unidade(x.maq)?.nome||'')}`];
+  if(x.st==='fora'){const d=diasDesde(x.saiu);return['fora',`${ic('i-caminhao')}No fornecedor · ${d} ${d===1?'dia':'dias'}`]}
+  if(ready(l,s,ped))return['ready',`${ic('i-seta')}${isExt(s)?'Pronta para levar':'Pode começar'}`];
+  const f=s.deps.filter(d=>!done(l,d));
+  if(!f.length&&loteFora(l))return['pend','Peças no fornecedor'];
+  if(!f.length&&isExt(s))return['pend',!ped.arteEnviada?'Espera enviar a arte':'Espera peças voltarem da máquina'];
+  return['pend',f.length?`Espera: ${esc(m[f[0]].nome)}${f.length>1?` e mais ${f.length-1}`:''}`:'Espera liberar o corte']}
 function fluxo(p,key,l,ped){const{pos,w,h}=layout(p),m=sMap(p);const sel=ui.fx&&ui.fx.k===key&&m[ui.fx.s]?ui.fx.s:null;
   const rel=sel?new Set([sel,...anc(p,sel),...desc(p,sel)]):null;const mk='ar'+key.replace(/[^a-zA-Z0-9]/g,'');
   const edges=p.steps.flatMap(s=>s.deps.filter(d=>pos[d]&&pos[s.id]).map(d=>{const a=pos[d],b=pos[s.id];const x1=a.x+NW,y1=a.y+NH/2,x2=b.x,y2=b.y+NH/2;
@@ -643,46 +742,82 @@ function fluxo(p,key,l,ped){const{pos,w,h}=layout(p),m=sMap(p);const sel=ui.fx&&
     return `<path class="e ${on?'on':''} ${hi?'hi':''} ${dim?'dim':''}" d="M${x1} ${y1}C${x1+GX*.7} ${y1},${x2-GX*.7} ${y2},${x2-7} ${y2}" marker-end="url(#${mk}${hi?'h':on?'g':''})"/>`}));
   const mark=(id,c)=>`<marker id="${id}" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="${c}"/></marker>`;
   const nodes=p.steps.filter(s=>pos[s.id]).map(s=>{const q=pos[s.id];let cls,st;
-    if(l){const r=ndStatus(l,s,ped);cls='st-'+r[0];st=r[1]}else{const f=fase(p,s);cls='f-'+f;st=f==='antes'?`${ic('i-adiantar')}Pode adiantar`:f==='pers'?`${ic('i-estampa')}Estampa/bordado`:s.fecha?`${ic('i-cadeado')}Fecha a peça`:'Depois da estampa'}
+    if(l){const r=ndStatus(l,s,ped);cls='st-'+r[0];st=r[1]}
+    else if(isExt(s)){cls='f-ext';st=`${ic('i-caminhao')}Terceirizado`}
+    else{const f=fase(p,s);cls='f-'+f;st=f==='antes'?`${ic('i-adiantar')}Pode adiantar`:f==='pers'?`${ic('i-estampa')}Personalização`:s.fecha?`${ic('i-cadeado')}Fecha a peça`:'Depois da personalização'}
     return `<button class="nd ${cls} ${sel===s.id?'sel':''} ${rel&&!rel.has(s.id)?'dim':''}" style="left:${q.x}px;top:${q.y}px;width:${NW}px;height:${NH}px" data-a="fxSel" data-k="${key}" data-s="${s.id}">
-      <span class="nd-h">${ic(PICON[s.posto])}<span>${esc(s.nome)}</span></span><span class="nd-m">${esc(POSTO[s.posto].nome)}${l?'':` · ${nf(s.min)} min`}</span><span class="nd-s">${st}</span></button>`}).join('');
+      <span class="nd-h">${ic(PICON[s.posto])}<span>${esc(s.nome)}</span></span><span class="nd-m">${esc(tNome(s.posto))}${l||isExt(s)?'':` · ${nf(s.min)} min`}</span><span class="nd-s">${st}</span></button>`}).join('');
   return `<div class="fx-wrap" data-k="${key}"><div class="fx" style="width:${w}px;height:${h}px"><svg class="fx-lines" width="${w}" height="${h}" aria-hidden="true"><defs>${mark(mk,'#A9B3BF')}${mark(mk+'g','#17864A')}${mark(mk+'h','#1E5BB8')}</defs>${edges.join('')}</svg>${nodes}</div></div>
     ${w>700?`<div class="arraste">${ic('i-seta')}Arraste para o lado para ver todas as ${p.steps.length} etapas</div>`:''}
-    ${sel?fxInfo(p,m[sel],key,l,ped):`<div class="arraste">${ic('i-mao')}Toque numa etapa para ver o que ela precisa</div>`}`}
-function fxInfo(p,s,key,l,ped){const m=sMap(p),fil=filhos(p,s.id),podeTirar=!l&&!fil.length&&p.steps.length>1;
-  const chip=id=>`<span class="tagp">${esc(m[id].nome)}</span>`;
+    ${sel?fxInfo(p,m[sel],key,l):`<div class="arraste">${ic('i-mao')}Toque numa etapa para ver o que ela precisa</div>`}`}
+function fxInfo(p,s,key,l){const m=sMap(p),fil=filhos(p,s.id),podeTirar=!l&&!fil.length&&p.steps.length>1,chip=id=>`<span class="tagp">${esc(m[id].nome)}</span>`;
+  const quem=isExt(s)?fornDe(s.posto).map(f=>f.nome):aptos(s.posto).map(x=>x.nome+((x.melhor.includes(s.nome)||x.melhor.includes(s.posto))?' ★':''));
   return `<div class="fx-info"><div class="t">${ic(PICON[s.posto])}${esc(s.nome)}</div>
-    <div>${esc(POSTO[s.posto].nome)} · ${nf(s.min)} min por peça${l?` · ${esc(fDur(s.min*qtdEf(l)*MIN))} para as ${qtdEf(l)} peças`:''}${s.fecha?' · fecha a peça':''}</div>
+    <div>${esc(tipo(s.posto).nome)}${isExt(s)?' · terceirizado':` · ${nf(s.min)} min por peça${l?` · ${esc(fDur(s.min*qtdEf(l)*MIN))} para as ${qtdEf(l)} peças`:''}`}${s.fecha?' · fecha a peça':''}</div>
     <div class="lin"><b>Precisa estar pronto antes:</b>${s.deps.length?s.deps.map(chip).join(''):'<span>nada, é a primeira etapa</span>'}</div>
     <div class="lin"><b>Quando terminar, libera:</b>${fil.length?fil.map(x=>chip(x.id)).join(''):'<span>a peça fica pronta</span>'}</div>
+    <div class="lin"><b>${isExt(s)?'Fornecedor:':'Quem sabe fazer:'}</b>${quem.length?quem.map(n=>`<span class="tagp">${esc(n)}</span>`).join(''):'<span style="color:var(--red);font-weight:700">ninguém cadastrado</span>'}</div>
     ${s.obs?`<div class="lin">${ic('i-etiqueta')}<b>${esc(s.obs)}</b></div>`:''}
-    <div class="row" style="display:flex;gap:10px;flex-wrap:wrap">${podeTirar?`<button class="x" data-a="rmEtapa" data-p="${p.id}" data-s="${s.id}">Tirar esta etapa</button>`:''}<button class="x azul" data-a="fxSel" data-k="${key}" data-s="${s.id}">Fechar</button></div></div>`}
-function legendaStatus(){return `<div class="legenda"><span><i style="background:var(--go-soft);border-color:var(--go)"></i>Feito</span><span><i style="background:var(--blue-soft);border:3px solid var(--blue)"></i>Fazendo</span><span><i style="border:3px solid var(--ink)"></i>Pode começar</span><span><i style="background:#F5F6F8;border-style:dashed"></i>Esperando</span></div>`}
+    <div style="display:flex;gap:10px;flex-wrap:wrap">${podeTirar?`<button class="x" data-a="rmEtapa" data-p="${p.id}" data-s="${s.id}">Tirar esta etapa</button>`:''}<button class="x azul" data-a="fxSel" data-k="${key}" data-s="${s.id}">Fechar</button></div></div>`}
+function legendaStatus(){return `<div class="legenda"><span><i style="background:var(--go-soft);border-color:var(--go)"></i>Feito</span><span><i style="background:var(--blue-soft);border:3px solid var(--blue)"></i>Fazendo</span><span><i style="border:3px solid var(--ink)"></i>Pode começar</span><span><i style="background:#F3ECFB;border:3px solid #7A3E9D"></i>No fornecedor</span><span><i style="background:#F5F6F8;border-style:dashed"></i>Esperando</span></div>`}
 
-/* ================= PRODUTOS ================= */
-function vProdutos(){return `<h1>Produtos cadastrados</h1><p style="color:var(--ink2);margin-top:-6px">Toque num produto para ver como ele é feito.</p>
-  <div class="prods">${state.produtos.map(p=>`<button class="prodc" data-a="produto" data-p="${p.id}">${prodSvg(p.id,'')}<b>${esc(p.nome)}</b><span>${p.steps.length} etapas · ${nf(sum(p.steps.map(s=>s.min)))} min por peça</span></button>`).join('')}
+/* ================= CADASTROS ================= */
+function vCadastros(){const tabs=[['maquinas','Máquinas','i-maquina'],['equipe','Equipe','i-pessoas'],['forn','Terceirizados','i-caminhao'],['produtos','Produtos','i-camisa']];
+  const body=ui.cad==='equipe'?cEquipe():ui.cad==='forn'?cForn():ui.cad==='produtos'?cProdutos():cMaquinas();
+  return `<h1>Cadastros</h1><div class="subtabs">${tabs.map(([k,n,i])=>`<button class="subtab" data-a="cad" data-k="${k}" aria-current="${ui.cad===k?'page':'false'}">${ic(i)}${n}</button>`).join('')}</div>${body}`}
+function cMaquinas(){const P=plano();return `<p style="margin:-6px 0 14px;color:var(--ink2)">Cada máquina é um posto de trabalho. Ajuste a quantidade com + e −.</p>
+  ${GRUPOS.map(g=>{const ts=state.tipos.filter(t=>t.grupo===g.id&&!t.externo);if(!ts.length)return '';return `<div class="tipo-h">${ic(g.i)}${g.nome}</div>${ts.map(t=>{const ap=aptos(t.id);
+    return `<div class="cad-row"><span class="m-ic">${ic(t.i)}</span><div><b>${esc(t.nome)}</b><span>${ap.length?'Sabem usar: '+ap.map(p=>esc(p.nome)+(p.melhor.includes(t.id)?' ★':'')).join(', '):'<b style="color:var(--red);display:inline">Ninguém cadastrado para usar</b>'}</span></div>
+      <div class="qtdbox"><button class="stp" data-a="tQtd" data-t="${t.id}" data-d="-1" aria-label="Menos uma ${esc(t.nome)}">−</button><output>${t.qtd}</output><button class="stp" data-a="tQtd" data-t="${t.id}" data-d="1" aria-label="Mais uma ${esc(t.nome)}">+</button></div></div>`}).join('')}`}).join('')}`}
+function cEquipe(){const ord=['costura','corte','pers','acab','vendas','compras'];const ps=[...state.pessoas].sort((a,b)=>ord.indexOf(a.papel)-ord.indexOf(b.papel));
+  return `<p style="margin:-6px 0 14px;color:var(--ink2)">Toque numa pessoa para mudar o que ela sabe fazer. ★ = faz melhor, o sistema dá preferência.</p>
+  <div class="pess">${ps.map(p=>`<button class="pes" data-a="pesEd" data-id="${p.id}"><div class="pes-h">${av(p.id)}<div><b>${esc(p.nome)}</b><span>${PAPEIS[p.papel]||''}</span></div></div>
+    <div class="skills">${p.sabe.map(t=>`<span class="sk ${p.melhor.includes(t)?'best':''}">${ic(tipo(t).i)}${esc(tNome(t))}${p.melhor.includes(t)?' ★':''}</span>`).join('')}${p.melhor.filter(x=>!state.tipos.some(t=>t.id===x)).map(x=>`<span class="sk best">${esc(x)} ★</span>`).join('')}${!p.sabe.length?`<span class="sk">${p.papel==='vendas'?'Vias, arte e envio para personalização':p.papel==='compras'?'Compras, levar e buscar terceirizados':'Sem máquina'}</span>`:''}</div></button>`).join('')}
+  <button class="prodc add" data-a="pesEd" data-id="">${ic('i-mais')}<b>Adicionar pessoa</b></button></div>`}
+function cForn(){return `<p style="margin:-6px 0 14px;color:var(--ink2)">Serviços feitos fora. O pacote inteiro vai e volta junto.</p>
+  <div class="pess">${state.forn.map(f=>`<button class="pes" data-a="fornEd" data-id="${f.id}"><div class="pes-h"><span class="m-ic" style="background:#F3ECFB;color:#6B2F8C">${ic(tipo(f.servico).i)}</span><div><b>${esc(f.nome)}</b><span>${esc(tNome(f.servico))}</span></div></div>
+    <div class="skills"><span class="sk">${ic('i-relogio')}Prazo ${f.prazo} ${f.prazo>1?'dias':'dia'}</span><span class="sk">${ic('i-caminhao')}${esc(pNome(f.leva)||'ninguém')}</span></div></button>`).join('')}
+  <button class="prodc add" data-a="fornEd" data-id="">${ic('i-mais')}<b>Adicionar terceirizado</b></button></div>`}
+function cProdutos(){return `<div class="prods">${state.produtos.map(p=>`<button class="prodc" data-a="produto" data-p="${p.id}">${prodSvg(p.id,'')}<b>${esc(p.nome)}</b><span>${p.steps.length} etapas · ${nf(sum(p.steps.filter(s=>!isExt(s)).map(s=>s.min)))} min por peça</span></button>`).join('')}
   <button class="prodc add" data-a="nprod">${ic('i-mais')}<b>Cadastrar produto</b></button></div>`}
+function sPesEd(){const e=ui.sheet,internos=state.tipos.filter(t=>!t.externo);
+  const nomesEtapas=[...new Set(state.produtos.flatMap(p=>p.steps.filter(s=>e.sabe.includes(s.posto)).map(s=>s.nome)))];
+  return `${voltar('Cancelar')}<h1>${e.id?esc(e.nome||'Pessoa'):'Nova pessoa'}</h1>
+  <div class="rotulo">Nome</div><input class="campo" id="xNome" value="${esc(e.nome)}" autocomplete="off">
+  <div class="rotulo">Função</div><div class="linha-dep">${Object.entries(PAPEIS).map(([k,n])=>`<button class="depc" data-a="xPapel" data-v="${k}" aria-pressed="${e.papel===k}">${n}</button>`).join('')}</div>
+  <div class="rotulo">Máquinas que sabe usar</div><div class="escolhe">${internos.map(t=>`<button class="opc" data-a="xSabe" data-v="${t.id}" aria-pressed="${e.sabe.includes(t.id)}">${ic(t.i)}${esc(t.nome)}</button>`).join('')}</div>
+  ${e.sabe.length?`<div class="rotulo">Faz melhor ★ <span style="font-weight:400;color:var(--muted)">(o sistema dá preferência)</span></div>
+  <div class="linha-dep">${e.sabe.map(t=>`<button class="depc" data-a="xMelhor" data-v="${t}" aria-pressed="${e.melhor.includes(t)}">${ic(tipo(t).i)}${esc(tNome(t))}</button>`).join('')}</div>
+  <div class="rotulo" style="font-size:17px">Ou uma etapa específica</div><div class="linha-dep">${nomesEtapas.map(n=>`<button class="depc" data-a="xMelhor" data-v="${esc(n)}" aria-pressed="${e.melhor.includes(n)}">${esc(n)}</button>`).join('')}</div>`:''}
+  ${e.err?`<div class="aviso">${ic('i-alerta')}${esc(e.err)}</div>`:''}
+  <div class="acoes"><button class="big go" data-a="xOk">${ic('i-check')}Salvar</button>${e.id?`<button class="big neutro" data-a="xRm">Tirar da equipe</button>`:''}</div>`}
+function sFornEd(){const e=ui.sheet,ext=state.tipos.filter(t=>t.externo);
+  return `${voltar('Cancelar')}<h1>${e.id?esc(e.nome):'Novo terceirizado'}</h1>
+  <div class="rotulo">Nome do fornecedor</div><input class="campo" id="xNome" value="${esc(e.nome)}" autocomplete="off">
+  <div class="rotulo">Serviço</div><div class="escolhe">${ext.map(t=>`<button class="opc" data-a="fServ" data-v="${t.id}" aria-pressed="${e.servico===t.id}">${ic(t.i)}${esc(t.nome)}</button>`).join('')}</div>
+  <div class="rotulo">Prazo (dias)</div><div class="contador" style="justify-content:flex-start"><button class="stp" data-a="fPrazo" data-d="-1" aria-label="Menos um dia">−</button><output>${e.prazo}</output><button class="stp" data-a="fPrazo" data-d="1" aria-label="Mais um dia">+</button></div>
+  <div class="rotulo">Quem leva e busca</div><div class="linha-dep">${state.pessoas.map(p=>`<button class="pchip" data-a="fLeva" data-v="${p.id}" aria-pressed="${e.leva===p.id}">${av(p.id,'s')}${esc(p.nome)}</button>`).join('')}</div>
+  ${e.err?`<div class="aviso">${ic('i-alerta')}${esc(e.err)}</div>`:''}
+  <div class="acoes"><button class="big go" data-a="fOk">${ic('i-check')}Salvar</button></div>`}
 function sProduto(pid){const p=prod(pid);if(!p)return voltar();const key='P'+p.id;
-  const porMaq=POSTOS.map(po=>({po,ss:p.steps.filter(s=>s.posto===po.id)})).filter(x=>x.ss.length);
-  return `${voltar()}<div class="card"><div class="item-h">${prodSvg(p.id,'')}<div style="margin-right:auto"><h1 style="margin:0">${esc(p.nome)}</h1><div style="color:var(--ink2)">${esc(p.tecido)} · ${p.steps.length} etapas · ${nf(sum(p.steps.map(s=>s.min)))} min por peça</div></div></div></div>
-  <div class="card"><h2>Como é feita</h2><p style="margin:0 0 4px;color:var(--ink2)">Siga as setas: cada etapa só começa quando as etapas que chegam nela terminam.</p>
-    <div class="legenda"><span><i style="border-color:var(--line)"></i><b style="color:var(--go-dark)">Pode adiantar</b>: não depende da estampa</span><span><i style="background:var(--atn-soft);border-color:var(--atn)"></i>Estampa ou bordado</span><span><i></i>Depois da estampa</span></div>
-    ${fluxo(p,key)}
-    <div class="acoes"><button class="big azul" data-a="addEtapa" data-p="${p.id}">${ic('i-mais')}Adicionar etapa</button></div></div>
-  <div class="card"><h2>Etapas por máquina</h2>${porMaq.map(x=>`<div class="mat">${ic(PICON[x.po.id])}<div><b>${esc(x.po.nome)}</b><span>${x.ss.map(s=>esc(s.nome)).join(' · ')}</span></div><span class="tagp">${nf(sum(x.ss.map(s=>s.min)))} min</span></div>`).join('')}</div>`}
-function eRead(){const e=ui.sheet;const n=document.getElementById('eNome');if(n)e.nome=n.value;const o=document.getElementById('eObs');if(o)e.obs=o.value;const c=document.getElementById('pNome');if(c)e.nome=c.value;const t=document.getElementById('pTec');if(t)e.tecido=t.value}
+  const porMaq=state.tipos.map(t=>({t,ss:p.steps.filter(s=>s.posto===t.id)})).filter(x=>x.ss.length);
+  return `${voltar()}<div class="card"><div class="item-h">${prodSvg(p.id,'')}<div style="margin-right:auto"><h1 style="margin:0">${esc(p.nome)}</h1><div style="color:var(--ink2)">${esc(p.tecido)} · ${p.steps.length} etapas</div></div></div></div>
+  <div class="card"><h2>Como é feita</h2><p style="margin:0 0 4px;color:var(--ink2)">Siga as setas: cada etapa só começa quando as que chegam nela terminam.</p>
+    <div class="legenda"><span><i></i><b style="color:var(--go-dark)">Pode adiantar</b></span><span><i style="background:var(--atn-soft);border-color:var(--atn)"></i>Personalização interna</span><span><i style="background:#F3ECFB;border-color:#B48ACB"></i>Terceirizado</span><span><i></i>Depois da personalização</span></div>
+    ${fluxo(p,key)}<div class="acoes"><button class="big azul" data-a="addEtapa" data-p="${p.id}">${ic('i-mais')}Adicionar etapa</button></div></div>
+  <div class="card"><h2>Etapas por máquina</h2>${porMaq.map(x=>`<div class="mat">${ic(x.t.i)}<div><b>${esc(x.t.nome)}</b><span>${x.ss.map(s=>esc(s.nome)).join(' · ')}</span></div><span class="tagp">${x.t.externo?'fora':nf(sum(x.ss.map(s=>s.min)))+' min'}</span></div>`).join('')}</div>`}
+function eRead(){const e=ui.sheet;[['eNome','nome'],['eObs','obs'],['pNome','nome'],['pTec','tecido'],['xNome','nome']].forEach(([id,k])=>{const n=document.getElementById(id);if(n)e[k]=n.value})}
 function sEtapa(){const e=ui.sheet,p=prod(e.p);
   return `${voltar('Cancelar')}<h1>Nova etapa em ${esc(p.nome)}</h1>
   <div class="rotulo">Nome da etapa</div><input class="campo" id="eNome" value="${esc(e.nome)}" placeholder="Ex.: Pregar vivo na gola" autocomplete="off">
-  <div class="rotulo">Em qual máquina?</div><div class="escolhe">${POSTOS.map(po=>`<button class="opc" data-a="eP" data-v="${po.id}" aria-pressed="${e.posto===po.id}">${ic(PICON[po.id])}${esc(po.nome)}</button>`).join('')}</div>
+  <div class="rotulo">Onde é feita?</div><div class="escolhe">${state.tipos.map(t=>`<button class="opc" data-a="eP" data-v="${t.id}" aria-pressed="${e.posto===t.id}">${ic(t.i)}${esc(t.nome)}${t.externo?'<span style="font-weight:400;font-size:15px;color:#6B2F8C">terceirizado</span>':''}</button>`).join('')}</div>
   <div class="rotulo">O que precisa estar pronto antes?</div><div class="linha-dep">${topo(p).map(s=>`<button class="depc" data-a="eD" data-v="${s.id}" aria-pressed="${e.deps.includes(s.id)}">${ic(PICON[s.posto])}${esc(s.nome)}</button>`).join('')}</div>
   <div class="rotulo">Tempo por peça (minutos)</div><div class="contador" style="justify-content:flex-start"><button class="stp" data-a="eM" data-d="-0.1" aria-label="Menos tempo">−</button><output>${nf(e.min)}</output><button class="stp" data-a="eM" data-d="0.1" aria-label="Mais tempo">+</button></div>
-  <div class="rotulo">Marque se for o caso</div><div class="linha-dep"><button class="depc" data-a="eT" data-v="pers" aria-pressed="${e.pers}">${ic('i-estampa')}É estampa ou bordado</button><button class="depc" data-a="eT" data-v="fecha" aria-pressed="${e.fecha}">${ic('i-cadeado')}Fecha a peça</button></div>
+  <div class="rotulo">Marque se for o caso</div><div class="linha-dep"><button class="depc" data-a="eT" data-v="pers" aria-pressed="${e.pers}">${ic('i-estampa')}É personalização</button><button class="depc" data-a="eT" data-v="fecha" aria-pressed="${e.fecha}">${ic('i-cadeado')}Fecha a peça</button></div>
   <div class="rotulo">Aviso para quem faz (opcional)</div><input class="campo" id="eObs" value="${esc(e.obs)}" placeholder="Ex.: etiqueta do lado esquerdo" autocomplete="off">
   ${e.err?`<div class="aviso">${ic('i-alerta')}${esc(e.err)}</div>`:''}
   <div class="acoes"><button class="big go" data-a="eOk">${ic('i-check')}Adicionar etapa</button></div>`}
-function sNovoProd(){const e=ui.sheet;const formas=[['polo','Polo'],['polo2','Polo com punho'],['camiseta','Camiseta'],['calca','Calça']];
+function sNovoProd(){const e=ui.sheet,formas=[['polo','Polo'],['polo2','Polo com punho'],['camiseta','Camiseta'],['calca','Calça']];
   return `${voltar('Cancelar')}<h1>Cadastrar produto</h1>
   <div class="rotulo">Nome</div><input class="campo" id="pNome" value="${esc(e.nome)}" placeholder="Ex.: Camiseta Gola Careca" autocomplete="off">
   <div class="rotulo">Desenho</div><div class="escolhe">${formas.map(([f,n])=>`<button class="opc" data-a="npF" data-v="${f}" aria-pressed="${e.forma===f}">${shapeSvg(f,'',n)}${n}</button>`).join('')}</div>
@@ -691,18 +826,73 @@ function sNovoProd(){const e=ui.sheet;const formas=[['polo','Polo'],['polo2','Po
   ${e.err?`<div class="aviso">${ic('i-alerta')}${esc(e.err)}</div>`:''}
   <div class="acoes"><button class="big go" data-a="npOk">${ic('i-check')}Cadastrar</button></div>`}
 
+/* ================= FOLHAS ================= */
+const voltar=(lab='Voltar')=>`<button class="voltar" data-a="fechar">${ic('i-voltar')}${lab}</button>`;
+function sMaq(){const e=ui.sheet,u=unidade(e.m);if(!u)return voltar();const P=plano(),t=P.uso[u.id],tp=tipo(u.tipo);
+  const head=`<div class="quem"><span class="m-ic" style="width:64px;height:64px">${ic(tp.i)}</span><div><b>${esc(u.nome)}</b><span>Sabem usar: ${aptos(u.tipo).map(p=>esc(p.nome)).join(', ')||'ninguém'}</span></div></div>`;
+  if(t)return `${voltar()}${head}<h2>${av(t.x.op,'s')} ${esc(pNome(t.x.op))} está fazendo</h2>${tarefaCard(t)}
+    <div class="acoes"><button class="big go" data-a="terminou" data-m="${u.id}">${ic('i-check')}Terminou</button><button class="big prob" data-a="problema" data-m="${u.id}">${ic('i-alerta')}Deu problema</button></div>`;
+  const feito=e.feito?`<div class="feito"><div class="ok">${ic('i-check')}</div><b>Pronto!</b><span>${esc(e.feito)}</span></div>`:'';
+  const tasks=prontas().filter(it=>it.s.posto===u.tipo&&!Object.values(P.plan).some(x=>x!==P.plan[u.id]&&x.l.id===it.l.id&&x.s.id===it.s.id));
+  if(!tasks.length)return `${voltar(e.feito?'Fechar':'Voltar')}${head}${feito}<div class="vazio-box">${ic('i-dormir')}<b>Nada para ${esc(tp.nome)} agora</b></div>`;
+  const pl=P.plan[u.id],sel=e.sel!=null?tasks[e.sel]||tasks[0]:(pl?tasks.find(x=>x.l.id===pl.l.id&&x.s.id===pl.s.id):null)||tasks[0];
+  const livres=aptos(u.tipo).filter(p=>!P.ocup.has(p.id)).sort((a,b)=>nota(b,sel)-nota(a,sel));
+  const quem=e.p&&livres.some(p=>p.id===e.p)?e.p:(pl&&sel===tasks.find(x=>x.l.id===pl.l.id&&x.s.id===pl.s.id)?pl.pessoa:livres[0]?.id);
+  return `${voltar(e.feito?'Fechar':'Voltar')}${head}${feito}<h2>Próximo trabalho</h2>${tarefaCard(sel,true)}
+    <div class="rotulo">Quem vai fazer?</div>
+    ${livres.length?`<div class="linha-dep">${livres.map(p=>`<button class="pchip" data-a="mP" data-v="${p.id}" aria-pressed="${quem===p.id}">${av(p.id,'s')}${esc(p.nome)} ${estrela(p,sel)}</button>`).join('')}</div>
+    <div class="acoes"><button class="big go ini" data-a="comecar" data-m="${u.id}" data-l="${sel.l.id}" data-s="${sel.s.id}" data-p="${quem}">${ic('i-play')}Começar com ${esc(pNome(quem))}</button></div>`
+    :`<div class="vazio-box">${ic('i-pessoas')}<b>Ninguém livre sabe usar esta máquina</b><button class="mbtn" data-a="irEquipe">Ver cadastro da equipe</button></div>`}
+    ${tasks.length>1?`<h2 style="margin-top:26px">Ou escolher outro</h2><div class="outras">${tasks.slice(0,5).map((it,k)=>it===sel?'':`<button class="outra" data-a="mT" data-v="${k}">${prodSvg(it.p.id,it.l.cor)}<div><b>${esc(it.s.nome)} · ${qtdEf(it.l)} peças</b><span>${esc(it.ped.cliente)}</span></div><span class="ir">Escolher${ic('i-seta')}</span></button>`).join('')}</div>`:''}`}
+function tarefaNa(m){return plano().uso[m]||null}
+function sProblema(){const m=ui.sheet,t=tarefaNa(m.m);if(!t)return voltar();const passos=`<div class="passos">${[1,2,3].map(n=>`<i class="${n<=m.step?'on':''}"></i>`).join('')}</div>`;
+  const head=`${voltar(m.step>1?'Voltar':'Cancelar')}${passos}`;
+  if(m.step===1)return `${head}<h1>Qual foi o problema?</h1><div class="probs">${PROBS.map((p,k)=>`<button class="opc" data-a="pMot" data-k="${k}">${ic(p.i)}${p.k}</button>`).join('')}</div>`;
+  if(m.step===2)return `${head}<h1>Quantas peças?</h1><div class="contador"><button class="stp" data-a="pN" data-d="-1" aria-label="Menos uma">−</button><output>${m.n}</output><button class="stp" data-a="pN" data-d="1" aria-label="Mais uma">+</button></div><p style="text-align:center;color:var(--muted)">de ${qtdEf(t.l)} peças</p><div class="acoes"><button class="big go" data-a="pNext">Continuar${ic('i-seta')}</button></div>`;
+  const opts=topo(t.p).filter(s=>(s.id===t.s.id||anc(t.p,t.s.id).has(s.id))&&s.posto!=='corte').reverse();
+  return `${head}<h1>Voltar para qual etapa?</h1><div class="escolhe">${opts.map(s=>`<button class="opc" data-a="pOrig" data-s="${s.id}" aria-pressed="${m.orig===s.id}">${ic(PICON[s.posto])}${esc(s.nome)}<span style="font-weight:400;font-size:16px;color:var(--muted)">${esc(tNome(s.posto))}</span></button>`).join('')}</div>
+    <div class="acoes"><button class="big go" data-a="pOk" ${m.orig?'':'disabled'}>${ic('i-check')}Mandar ${m.n} ${m.n>1?'peças':'peça'} para conserto</button></div>`}
+function sPedidoWrap(id){return sPedido(id)}
+function sNovo(){const w=ui.sheet.w,passos=`<div class="passos">${[1,2,3,4].map(n=>`<i class="${n<=w.step?'on':''}"></i>`).join('')}</div>`;
+  const head=`${voltar(w.step>1?'Voltar':'Cancelar')}${passos}<div class="passo-n">Passo ${w.step} de 4</div>`;
+  const nav=(lab='Próximo')=>`${w.err?`<div class="aviso">${ic('i-alerta')}${esc(w.err)}</div>`:''}<div class="acoes"><button class="big go" data-a="wNext">${lab}${ic('i-seta')}</button></div>`;
+  if(w.step===1)return `${head}<h1>Para quem é o pedido?</h1><input class="campo" id="wCli" value="${esc(w.cliente)}" placeholder="Nome do cliente" autocomplete="off">
+    <div class="rotulo">Quem vendeu?</div><div class="linha-dep">${state.pessoas.filter(p=>p.papel==='vendas').map(p=>`<button class="pchip" data-a="wVend" data-v="${p.id}" aria-pressed="${w.vend===p.id}">${av(p.id,'s')}${esc(p.nome)}</button>`).join('')}</div>${nav()}`;
+  if(w.step===2)return `${head}<h1>Quais peças?</h1><p style="color:var(--ink2);margin-top:-6px">Toque na peça para adicionar.</p><div class="escolhe">${state.produtos.map(p=>`<button class="opc" data-a="wAdd" data-p="${p.id}">${prodSvg(p.id,'')}${esc(p.nome)}</button>`).join('')}</div>
+    ${w.itens.map((it,k)=>`<div class="item"><div class="item-h">${prodSvg(it.prod,it.cor)}<b>${esc(prod(it.prod).nome)}</b><button class="x" data-a="wRm" data-k="${k}">Tirar</button></div>
+      <div><div class="passo-n">Cor</div><div class="cores">${Object.entries(CORES).map(([n,h])=>`<button class="cor" data-a="wCor" data-k="${k}" data-c="${n}" aria-pressed="${it.cor===n}"><span style="background:${h}"></span>${n}</button>`).join('')}</div></div>
+      <div><div class="passo-n">Quantidade por tamanho</div><div class="tams">${SIZES.map(s=>`<div class="tam"><b>${s}</b><button class="stp" data-a="wQ" data-k="${k}" data-s="${s}" data-d="-10" aria-label="Menos 10 no ${s}">−</button><input id="q${k}${s}" data-q="${k}" data-s="${s}" inputmode="numeric" value="${it.g[s]||0}" aria-label="Quantidade ${s}"><button class="stp" data-a="wQ" data-k="${k}" data-s="${s}" data-d="10" aria-label="Mais 10 no ${s}">+</button></div>`).join('')}</div>
+      <p style="margin:0;font-weight:700">Total: ${sum(SIZES.map(s=>it.g[s]||0))} peças</p></div>`).join('')}${nav()}`;
+  if(w.step===3){const ops=[15,20,30].map(d=>{const dt=new Date(now()+d*DIA);dt.setHours(17,0,0,0);return dt.getTime()});
+    const iso=w.entrega?(()=>{const d=new Date(w.entrega);return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`})():'';
+    return `${head}<h1>Para quando?</h1><div class="datas">${ops.map((t,k)=>`<button class="data-op" data-a="wData" data-t="${t}" aria-pressed="${w.entrega===t}"><b>Daqui ${[15,20,30][k]} dias</b><span>${DOW[new Date(t).getDay()]}, ${new Date(t).getDate()} de ${MES[new Date(t).getMonth()]}</span></button>`).join('')}</div>
+      <p class="passo-n" style="margin-top:18px">Ou escolha outra data</p><input class="campo" type="date" id="wDt" value="${iso}">${nav()}`}
+  const tot=sum(w.itens.map(it=>sum(SIZES.map(s=>it.g[s]||0))));
+  const mats=calcMat(w.itens.map(it=>({prod:it.prod,cor:it.cor,qtd:sum(SIZES.map(s=>it.g[s]||0))}))).filter(m=>m.st==='comprar');
+  return `${head}<h1>Está certo?</h1><div class="card"><h2>${esc(w.cliente)}</h2><div class="ped-ent">${av(w.vend,'s')}Vendedora: <b>${esc(pNome(w.vend))}</b></div>
+    ${w.itens.map(it=>`<div class="resumo-item">${prodSvg(it.prod,it.cor)}<div><b>${esc(prod(it.prod).nome)} ${esc(it.cor)}</b><div style="color:var(--ink2)">${SIZES.filter(s=>it.g[s]).map(s=>`${s}: ${it.g[s]}`).join(' · ')}</div></div></div>`).join('')}
+    <div class="resumo-item">${ic('i-caminhao')}<b>Entrega ${DOW[new Date(w.entrega).getDay()]}, ${new Date(w.entrega).getDate()} de ${MES[new Date(w.entrega).getMonth()]} · ${tot} peças</b></div></div>
+    <div class="card"><h2>${mats.length?'Vai precisar comprar':'Tem todo o material'}</h2>${mats.length?mats.map(m=>`<div class="mat">${ic('i-carrinho')}<div><b>${esc(m.item)}</b><span>${qtdTxt(m.nec-m.est,m.un)}</span></div><span></span></div>`).join(''):`<div class="lib u-ok">${ic('i-check')}Pode seguir</div>`}</div>
+    <div class="acoes"><button class="big go" data-a="wCriar">${ic('i-check')}Criar pedido</button></div>`}
+function sAjuda(){return `${voltar('Fechar')}<h1>Como usar</h1><div class="ajuda">
+  <div class="aj"><span class="n">1</span>${ic('i-maquina')}<b>Cada cartão é uma máquina</b></div>
+  <div class="aj"><span class="n">2</span>${ic('i-play')}<b>Máquina parada? Aperte COMEÇAR</b></div>
+  <div class="aj"><span class="n">3</span>${ic('i-check')}<b>Acabou? Aperte TERMINOU</b></div></div>
+  <div class="ajuda"><div class="aj">${ic('i-alerta')}<b>Peça com defeito? Toque na máquina e aperte DEU PROBLEMA</b></div><div class="aj">${ic('i-conserto')}<b>Apertou errado? Aperte DESFAZER</b></div></div>
+  <div class="acoes"><button class="big go" data-a="fechar">Entendi</button></div>`}
+
 /* ================= render ================= */
+const sheetId=s=>s.t+':'+(s.id||s.p||s.m||'');
 function render(){
   document.querySelectorAll('.nb[data-t]').forEach(b=>b.setAttribute('aria-current',b.dataset.t===ui.tela?'page':'false'));
-  document.getElementById('app').innerHTML=ui.tela==='pedidos'?vPedidos():ui.tela==='produtos'?vProdutos():vEquipe();
+  document.getElementById('app').innerHTML=ui.tela==='pedidos'?vPedidos():ui.tela==='cadastros'?vCadastros():vFabrica();
   const sh=document.getElementById('sheet');const s=ui.sheet;
   if(!s){sh.innerHTML='';document.body.style.overflow='';return}
   const old=sh.querySelector('.sheet'),keep=old&&old.dataset.id===sheetId(s)?{top:old.scrollTop,x:[...old.querySelectorAll('.fx-wrap')].map(e=>[e.dataset.k,e.scrollLeft])}:null;
-  const html=s.t==='produto'?sProduto(s.p):s.t==='etapa'?sEtapa():s.t==='nprod'?sNovoProd():s.t==='pessoa'?sPessoa(s.op):s.t==='feito'?sFeito(s.op,s.nome):s.t==='pedido'?sPedido(s.id):s.t==='prob'?sProblema():s.t==='novo'?sNovo():s.t==='ajuda'?sAjuda():'';
+  const html=({maq:sMaq,pedido:()=>sPedido(s.id),prob:sProblema,novo:sNovo,ajuda:sAjuda,produto:()=>sProduto(s.p),etapa:sEtapa,nprod:sNovoProd,pes:sPesEd,forn:sFornEd}[s.t]||(()=>''))();
   sh.innerHTML=`<div class="sheet ${['pedido','produto'].includes(s.t)?'largo':''}" data-id="${esc(sheetId(s))}" role="dialog" aria-modal="true"><div class="wrap">${html}</div></div>`;document.body.style.overflow='hidden';
   if(keep){const n=sh.querySelector('.sheet');n.scrollTop=keep.top;keep.x.forEach(([k,x])=>{const e=n.querySelector(`.fx-wrap[data-k="${k}"]`);if(e)e.scrollLeft=x})}
   const f=document.getElementById('wCli');if(f&&!f.value)f.focus()}
-const sheetId=s=>s.t+':'+(s.id||s.p||s.op||'');
 function snap(){undo=JSON.stringify(state)}
 function toast(msg,comDesfazer=true){const el=document.getElementById('toast');clearTimeout(toastT);
   el.innerHTML=`<div class="toast" role="status"><span>${esc(msg)}</span>${comDesfazer?'<button data-a="desfazer">Desfazer</button>':''}</div>`;toastT=setTimeout(()=>{el.innerHTML='';undo=null},9000)}
@@ -711,63 +901,88 @@ function openSheet(s){ui.sheet=s;render();const e=document.querySelector('.sheet
 function wRead(){const w=ui.sheet?.w;if(!w)return;const c=document.getElementById('wCli');if(c)w.cliente=c.value;
   document.querySelectorAll('[data-q]').forEach(i=>{w.itens[+i.dataset.q].g[i.dataset.s]=Math.max(0,parseInt(i.value)||0)});
   const d=document.getElementById('wDt');if(d&&d.value){const[y,m,dd]=d.value.split('-').map(Number);w.entrega=new Date(y,m-1,dd,17).getTime()}}
+const togl=(a,v)=>{const i=a.indexOf(v);i<0?a.push(v):a.splice(i,1)};
 const A={
+  tela:d=>{ui.tela=d.t;ui.sheet=null;render();window.scrollTo(0,0)},
+  cad:d=>{ui.cad=d.k;render()},
+  irEquipe:()=>{ui.tela='cadastros';ui.cad='equipe';ui.sheet=null;render();window.scrollTo(0,0)},
+  fechar:()=>{const s=ui.sheet;if(s?.t==='etapa'){ui.sheet={t:'produto',p:s.p};return render()}if(s?.t==='prob'&&s.step>1){s.step--;return render()}if(s?.t==='novo'&&s.w.step>1){wRead();s.w.step--;s.w.err='';return render()}ui.sheet=null;render()},
+  ajuda:()=>openSheet({t:'ajuda'}),
+  maq:d=>openSheet({t:'maq',m:d.m}),
+  mP:d=>{ui.sheet.p=d.v;render()},
+  mT:d=>{ui.sheet.sel=+d.v;ui.sheet.p=null;render()},
+  pedido:d=>{ui.fx=null;openSheet({t:'pedido',id:d.id})},
+  terminou:d=>{const t=tarefaNa(d.m);if(!t)return;snap();t.x.st='ok';t.x.fim=now();save();const n=`${pNome(t.x.op)} terminou ${t.s.nome}`;openSheet({t:'maq',m:d.m,feito:n});toast(n)},
+  comecar:d=>{if(!d.p)return;const l=lote(d.l);snap();const s=sMap(prod(l.prod))[d.s];l.steps[d.s]={st:'and',ini:now(),op:d.p,maq:d.m};ui.sheet=null;commit();toast(`${pNome(d.p)} começou ${s.nome} na ${unidade(d.m)?.nome||''}`)},
+  desfazer:()=>{if(!undo)return;state=JSON.parse(undo);undo=null;document.getElementById('toast').innerHTML='';ui.sheet=null;commit()},
+  problema:d=>openSheet({t:'prob',m:d.m,step:1,n:1,orig:null,mot:null}),
+  pMot:d=>{const s=ui.sheet,t=tarefaNa(s.m),pr=PROBS[+d.k];s.mot=pr.k;const opts=topo(t.p).filter(x=>(x.id===t.s.id||anc(t.p,t.s.id).has(x.id))&&x.posto!=='corte').map(x=>x.id);s.orig=pr.alvo.find(a=>opts.includes(a))||t.s.id;s.step=2;render()},
+  pN:d=>{const s=ui.sheet,t=tarefaNa(s.m);s.n=Math.min(qtdEf(t.l),Math.max(1,s.n+(+d.d)));render()},
+  pNext:()=>{ui.sheet.step=3;render()},
+  pOrig:d=>{ui.sheet.orig=d.s;render()},
+  pOk:()=>{const s=ui.sheet,t=tarefaNa(s.m);if(!s.orig)return;snap();makeRework(t.l,t.s.id,s.orig,s.n,s.mot,now(),t.x.op);const nome=sMap(t.p)[s.orig].nome;ui.sheet={t:'maq',m:s.m};commit();toast(`${s.n} ${s.n>1?'peças foram':'peça foi'} para conserto em ${nome}`)},
+  vias:d=>{const p=pedById(d.id);snap();p.vias=!p.vias;commit();if(p.vias)toast('Vias separadas')},
+  arte:d=>{const p=pedById(d.id);snap();p.arte=!p.arte;commit();if(p.arte)toast('Arte aprovada')},
+  arteEnv:d=>{const p=pedById(d.id);snap();p.arteEnviada=!p.arteEnviada;commit();if(p.arteEnviada)toast('Arte enviada')},
+  comprei:d=>{const p=pedById(d.id);snap();p.materiais[+d.k].st='pedido';commit();toast('Compra anotada')},
+  chegou:d=>{const p=pedById(d.id);snap();p.materiais[+d.k].st='recebido';commit();toast('Material chegou')},
+  levei:d=>{const l=lote(d.l),s=sMap(prod(l.prod))[d.s],f=fornDe(s.posto)[0];snap();l.steps[s.id]={st:'fora',saiu:now(),forn:f?.id,op:f?.leva};commit();toast(`${qtdEf(l)} peças foram para ${f?.nome||tNome(s.posto)}`)},
+  buscou:d=>{const l=lote(d.l),x=l.steps[d.s];snap();x.st='ok';x.fim=now();commit();toast('Peças de volta na fábrica')},
+  entregar:d=>{const p=pedById(d.id);snap();p.concluido=now();commit();toast(`Pedido de ${p.cliente} entregue`)},
+  /* cadastros */
+  tQtd:d=>{const t=tipo(d.t),n=Math.max(0,(t.qtd||0)+(+d.d));if(n<t.qtd&&plano().uso[`${t.id}-${t.qtd}`]){toast(`A ${t.nome} ${t.qtd} está em uso agora`,false);return}snap();t.qtd=n;commit()},
+  pesEd:d=>{const p=pessoa(d.id);openSheet(p?{t:'pes',id:p.id,nome:p.nome,papel:p.papel,sabe:[...p.sabe],melhor:[...p.melhor],err:''}:{t:'pes',id:null,nome:'',papel:'costura',sabe:[],melhor:[],err:''})},
+  xPapel:d=>{eRead();ui.sheet.papel=d.v;render()},
+  xSabe:d=>{eRead();const e=ui.sheet;togl(e.sabe,d.v);if(!e.sabe.includes(d.v))e.melhor=e.melhor.filter(x=>x!==d.v);render()},
+  xMelhor:d=>{eRead();togl(ui.sheet.melhor,d.v);render()},
+  xOk:()=>{eRead();const e=ui.sheet;if(!e.nome.trim()){e.err='Escreva o nome';return render()}snap();
+    const obj={id:e.id||uid('p'),nome:e.nome.trim(),papel:e.papel,sabe:e.sabe,melhor:e.melhor};const i=state.pessoas.findIndex(p=>p.id===e.id);i<0?state.pessoas.push(obj):state.pessoas[i]=obj;ui.sheet=null;commit();toast(`${obj.nome} salvo`)},
+  xRm:()=>{const e=ui.sheet;if(plano().ocup.has(e.id)){e.err='Esta pessoa está trabalhando agora. Termine antes de tirar.';return render()}snap();state.pessoas=state.pessoas.filter(p=>p.id!==e.id);ui.sheet=null;commit();toast(`${e.nome} saiu da equipe`)},
+  fornEd:d=>{const f=fornById(d.id);openSheet(f?{t:'forn',...JSON.parse(JSON.stringify(f)),err:''}:{t:'forn',id:null,nome:'',servico:'bordado',prazo:3,leva:state.pessoas.find(p=>p.papel==='compras')?.id||'',err:''})},
+  fServ:d=>{eRead();ui.sheet.servico=d.v;render()},
+  fPrazo:d=>{eRead();ui.sheet.prazo=Math.max(1,ui.sheet.prazo+(+d.d));render()},
+  fLeva:d=>{eRead();ui.sheet.leva=d.v;render()},
+  fOk:()=>{eRead();const e=ui.sheet;if(!e.nome.trim()){e.err='Escreva o nome do fornecedor';return render()}snap();
+    const obj={id:e.id||uid('f'),nome:e.nome.trim(),servico:e.servico,prazo:e.prazo,leva:e.leva};const i=state.forn.findIndex(f=>f.id===e.id);i<0?state.forn.push(obj):state.forn[i]=obj;ui.sheet=null;commit();toast(`${obj.nome} salvo`)},
   fxSel:d=>{ui.fx=ui.fx&&ui.fx.k===d.k&&ui.fx.s===d.s?null:{k:d.k,s:d.s};render()},
   produto:d=>{ui.fx=null;openSheet({t:'produto',p:d.p})},
   addEtapa:d=>openSheet({t:'etapa',p:d.p,nome:'',posto:null,deps:[],min:0.5,pers:false,fecha:false,obs:'',err:''}),
   eP:d=>{eRead();ui.sheet.posto=d.v;render()},
-  eD:d=>{eRead();const a=ui.sheet.deps,i=a.indexOf(d.v);i<0?a.push(d.v):a.splice(i,1);render()},
+  eD:d=>{eRead();togl(ui.sheet.deps,d.v);render()},
   eM:d=>{eRead();ui.sheet.min=Math.max(0.1,Math.round((ui.sheet.min+(+d.d))*10)/10);render()},
   eT:d=>{eRead();ui.sheet[d.v]=!ui.sheet[d.v];render()},
   eOk:()=>{eRead();const e=ui.sheet,p=prod(e.p);e.err='';
-    if(!e.nome.trim())e.err='Escreva o nome da etapa';else if(!e.posto)e.err='Escolha a máquina';else if(!e.deps.length)e.err='Escolha o que precisa estar pronto antes';
+    if(!e.nome.trim())e.err='Escreva o nome da etapa';else if(!e.posto)e.err='Escolha onde é feita';else if(!e.deps.length)e.err='Escolha o que precisa estar pronto antes';
     if(e.err)return render();snap();const base=e.nome.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g,'')||'etapa';let id=base,k=2;while(p.steps.some(s=>s.id===id))id=base+k++;
-    p.steps.push(S(id,e.nome.trim(),e.posto,[...e.deps],e.min,{pers:e.pers,fecha:e.fecha,obs:(e.obs||'').trim()}));ui.fx={k:'P'+p.id,s:id};ui.sheet={t:'produto',p:p.id};commit();toast(`Etapa ${e.nome.trim()} adicionada`)},
+    p.steps.push(S(id,e.nome.trim(),e.posto,[...e.deps],e.min,{pers:e.pers||tipo(e.posto).grupo==='pers',fecha:e.fecha,obs:(e.obs||'').trim()}));ui.fx={k:'P'+p.id,s:id};ui.sheet={t:'produto',p:p.id};commit();toast(`Etapa ${e.nome.trim()} adicionada`)},
   rmEtapa:d=>{const p=prod(d.p);if(filhos(p,d.s).length)return;snap();const n=sMap(p)[d.s].nome;p.steps=p.steps.filter(s=>s.id!==d.s);ui.fx=null;commit();toast(`Etapa ${n} tirada`)},
   nprod:()=>openSheet({t:'nprod',nome:'',forma:'camiseta',tecido:'',copia:null,err:''}),
   npF:d=>{eRead();ui.sheet.forma=d.v;render()},
   npC:d=>{eRead();ui.sheet.copia=d.v||null;render()},
   npOk:()=>{eRead();const e=ui.sheet;e.err='';if(!e.nome.trim()){e.err='Escreva o nome do produto';return render()}snap();
-    const src=e.copia&&prod(e.copia),id='p'+Date.now().toString(36);
+    const src=e.copia&&prod(e.copia),id=uid('p');
     state.produtos.push({id,nome:e.nome.trim(),forma:e.forma,tecido:(e.tecido||'').trim()||'Tecido',consumo:src?src.consumo:0.4,aviam:src?JSON.parse(JSON.stringify(src.aviam)):[['Etiqueta','un',1]],steps:src?JSON.parse(JSON.stringify(src.steps)):[S('corte','Corte','corte',[],0.8)]});
-    ui.tela='produtos';ui.fx=null;ui.sheet={t:'produto',p:id};commit();toast(`${e.nome.trim()} cadastrado`)},
-  tela:d=>{ui.tela=d.t;ui.sheet=null;render();window.scrollTo(0,0)},
-  fechar:()=>{const s=ui.sheet;if(s?.t==='etapa'){ui.sheet={t:'produto',p:s.p};return render()}if(s?.t==='prob'&&s.step>1){s.step--;return render()}if(s?.t==='novo'&&s.w.step>1){wRead();s.w.step--;s.w.err='';return render()}ui.sheet=null;render()},
-  ajuda:()=>openSheet({t:'ajuda'}),
-  pessoa:d=>openSheet({t:'pessoa',op:d.o}),
-  pedido:d=>{ui.fx=null;openSheet({t:'pedido',id:d.id})},
-  terminou:d=>{const t=tarefaDe(d.o);if(!t)return;snap();t.x.st='ok';t.x.fim=now();save();openSheet({t:'feito',op:d.o,nome:t.s.nome});toast(`${d.o} terminou ${t.s.nome}`)},
-  comecar:d=>{const l=lote(d.l);snap();const s=sMap(prod(l.prod))[d.s];l.steps[d.s]={st:'and',ini:now(),op:d.o};ui.sheet=null;commit();toast(`${d.o} começou ${s.nome}`)},
-  desfazer:()=>{if(!undo)return;state=JSON.parse(undo);undo=null;document.getElementById('toast').innerHTML='';ui.sheet=null;commit()},
-  problema:d=>openSheet({t:'prob',op:d.o,step:1,n:1,orig:null,mot:null}),
-  pMot:d=>{const s=ui.sheet,t=tarefaDe(s.op),pr=PROBS[+d.k];s.mot=pr.k;const opts=topo(t.p).filter(x=>(x.id===t.s.id||anc(t.p,t.s.id).has(x.id))&&x.posto!=='corte').map(x=>x.id);s.orig=pr.alvo.find(a=>opts.includes(a))||null;s.step=2;render()},
-  pN:d=>{const s=ui.sheet,t=tarefaDe(s.op);s.n=Math.min(qtdEf(t.l),Math.max(1,s.n+(+d.d)));render()},
-  pNext:()=>{ui.sheet.step=3;render()},
-  pOrig:d=>{ui.sheet.orig=d.s;render()},
-  pOk:()=>{const s=ui.sheet,t=tarefaDe(s.op);if(!s.orig)return;snap();makeRework(t.l,t.s.id,s.orig,s.n,s.mot,now(),s.op);const nome=sMap(t.p)[s.orig].nome;ui.sheet={t:'pessoa',op:s.op};commit();toast(`${s.n} ${s.n>1?'peças foram':'peça foi'} para conserto em ${nome}`)},
-  vias:d=>{const p=pedById(d.id);snap();p.vias=!p.vias;commit()},
-  arte:d=>{const p=pedById(d.id);snap();p.arte=!p.arte;commit()},
-  comprei:d=>{const p=pedById(d.id);snap();p.materiais[+d.k].st='pedido';commit();toast('Compra anotada')},
-  chegou:d=>{const p=pedById(d.id);snap();p.materiais[+d.k].st='recebido';commit();toast('Material chegou')},
-  entregar:d=>{const p=pedById(d.id);snap();p.concluido=now();commit();toast(`Pedido de ${p.cliente} entregue`)},
-  novo:()=>openSheet({t:'novo',w:{step:1,cliente:'',itens:[],entrega:null,err:''}}),
+    ui.tela='cadastros';ui.cad='produtos';ui.fx=null;ui.sheet={t:'produto',p:id};commit();toast(`${e.nome.trim()} cadastrado`)},
+  /* novo pedido */
+  novo:()=>openSheet({t:'novo',w:{step:1,cliente:'',vend:null,itens:[],entrega:null,err:''}}),
+  wVend:d=>{wRead();ui.sheet.w.vend=d.v;ui.sheet.w.err='';render()},
   wAdd:d=>{wRead();ui.sheet.w.itens.push({prod:d.p,cor:'',g:{}});ui.sheet.w.err='';render();const it=document.querySelectorAll('.item');it[it.length-1]?.scrollIntoView({behavior:'smooth',block:'start'})},
   wRm:d=>{wRead();ui.sheet.w.itens.splice(+d.k,1);render()},
   wCor:d=>{wRead();ui.sheet.w.itens[+d.k].cor=d.c;render()},
   wQ:d=>{wRead();const g=ui.sheet.w.itens[+d.k].g;g[d.s]=Math.max(0,(g[d.s]||0)+(+d.d));render()},
   wData:d=>{ui.sheet.w.entrega=+d.t;ui.sheet.w.err='';render()},
   wNext:()=>{wRead();const w=ui.sheet.w;w.err='';
-    if(w.step===1&&!w.cliente.trim())w.err='Escreva o nome do cliente';
+    if(w.step===1){if(!w.cliente.trim())w.err='Escreva o nome do cliente';else if(!w.vend)w.err='Escolha quem vendeu'}
     if(w.step===2){if(!w.itens.length)w.err='Toque em uma peça para adicionar';else if(w.itens.some(i=>!i.cor))w.err='Escolha a cor de cada peça';else if(w.itens.some(i=>!sum(SIZES.map(s=>i.g[s]||0))))w.err='Coloque a quantidade de cada peça'}
     if(w.step===3&&!w.entrega)w.err='Escolha a data de entrega';
     if(!w.err)w.step++;render();const e=document.querySelector('.sheet');if(e&&!w.err)e.scrollTop=0},
   wCriar:()=>{const w=ui.sheet.w;snap();const id=String(state.seq++).padStart(4,'0');const lines=w.itens.map(it=>({prod:it.prod,cor:it.cor,g:{...it.g},qtd:sum(SIZES.map(s=>it.g[s]||0))}));
-    state.pedidos.push({id,cliente:w.cliente.trim(),chegada:now(),entrega:w.entrega,vias:false,arte:false,materiais:calcMat(lines),concluido:null});
+    state.pedidos.push({id,cliente:w.cliente.trim(),vendedor:w.vend,chegada:now(),entrega:w.entrega,vias:false,arte:false,arteEnviada:false,materiais:calcMat(lines),concluido:null});
     lines.forEach((x,i)=>state.lotes.push({id:`${id}-${i+1}`,ped:id,prod:x.prod,cor:x.cor,qtd:x.qtd,grade:x.g,desm:0,steps:{},rework:false,parent:null}));
     ui.tela='pedidos';ui.sheet={t:'pedido',id};commit();toast('Pedido criado')},
 };
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b||b.disabled)return;const f=A[b.dataset.a];if(f){e.preventDefault();f(b.dataset)}});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ui.sheet)A.fechar();if(e.key==='Enter'&&['eNome','eObs','pNome','pTec'].includes(e.target.id))e.preventDefault();if(e.key==='Enter'&&e.target.id==='wCli'){e.preventDefault();A.wNext()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ui.sheet)A.fechar();if(e.key==='Enter'&&['eNome','eObs','pNome','pTec','xNome'].includes(e.target.id))e.preventDefault();if(e.key==='Enter'&&e.target.id==='wCli'){e.preventDefault();A.wNext()}});
 function tick(){const h=new Date().getHours();document.getElementById('ola').textContent=`${h<12?'Bom dia':h<18?'Boa tarde':'Boa noite'}, Helena`;
   const d=new Date();document.getElementById('hoje').textContent=`${DOW[d.getDay()]}, ${d.getDate()} de ${MES[d.getMonth()]}`;
   document.querySelectorAll('[data-ini]').forEach(el=>el.textContent=fDur(now()-(+el.dataset.ini)))}
