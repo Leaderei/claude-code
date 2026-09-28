@@ -373,6 +373,10 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .novo-in{display:flex;gap:10px;align-items:center;margin-top:10px}.novo-in .campo{font-size:20px;padding:10px 14px}
 .cor-pick{width:56px;height:52px;border:2px solid var(--line);border-radius:12px;padding:2px;background:var(--card);flex:none}
 .dica{margin:6px 0 0;font-size:15px;color:var(--muted)}
+.filtros{display:grid;gap:12px;margin-bottom:20px}
+.busca{font-size:20px;padding:12px 16px}
+.depc.st-crit[aria-pressed="true"]{border-color:var(--red);background:var(--red-soft);color:var(--red)}
+.depc.st-warn[aria-pressed="true"]{border-color:var(--atn);background:var(--atn-soft);color:var(--atn-ink)}
 .nota{background:var(--atn-soft);color:var(--atn-ink);border-radius:14px;padding:12px 16px;font-size:17px;margin-bottom:16px}
 </style>
 
@@ -794,20 +798,20 @@ function sim(l,doneIds,start){const p=rp(l),fim={};let mx=0;
   const sh=mx-(now()-(2+rnd()*3)*H);Object.values(l.steps).forEach(x=>{['ini','fim','saiu'].forEach(k=>{if(x[k])x[k]-=sh})})}
 function seed(){seedN=7;const T=now();
   state={v:8,cores:{...CORES},atrib:{},tipos:JSON.parse(JSON.stringify(TIPOS0)),pessoas:JSON.parse(JSON.stringify(PESSOAS0)),forn:JSON.parse(JSON.stringify(FORN0)),produtos:JSON.parse(JSON.stringify(PRODUTOS0)),pedidos:[],lotes:[],consertos:[],estoque:{...ESTOQUE},seq:421};
-  const mk=o=>{const ped={id:o.id,cliente:o.cliente,vendedor:o.vend,chegada:o.chegada,entrega:o.entrega,vias:o.vias??true,arte:o.arte??true,artePrep:o.prep??true,artes:{},materiais:[],concluido:o.concluido||null};
+  const mk=o=>{const ped={id:o.id,cliente:o.cliente,contato:o.contato||'',cnpj:o.cnpj||'',vendedor:o.vend,chegada:o.chegada,entrega:o.entrega,vias:o.vias??true,arte:o.arte??true,artePrep:o.prep??true,artes:{},materiais:[],concluido:o.concluido||null};
     ped.materiais=calcMat(o.linhas);if(o.lib)ped.materiais.forEach(m=>m.st='ok');state.pedidos.push(ped);
     o.linhas.forEach((x,i)=>{const l={id:`${o.id}-${i+1}`,ped:o.id,prod:x.prod,cor:x.cor,tecido:x.tecido||prod(x.prod).tecidos[0],opcoes:x.opcoes||[],qtd:x.qtd,grade:gradeOf(x.qtd),pers:(prod(x.prod).persPadrao||[]).map((y,j)=>({...y,id:'pz'+j})),desm:0,steps:{},rework:false,parent:null};state.lotes.push(l);if(x.done)sim(l,x.done==='all'?rp(l).steps.map(z=>z.id):x.done,o.lib)});
     if(o.env??true)lotesDe(o.id).forEach(l=>rp(l).steps.filter(z=>z.pers).forEach(z=>ped.artes[l.id+':'+z.id]=o.chegada))};
-  mk({id:'0402',cliente:'Supermercados Bom Preço',vend:'layara',chegada:addWD(T,-26),entrega:addWD(T,-3),lib:addWD(T,-23),concluido:addWD(T,-4),linhas:[{prod:'polo-ams',cor:'Cinza',qtd:150,done:'all'}]});
-  mk({id:'0409',cliente:'Transportes Rota Sul',vend:'paula',chegada:addWD(T,-21),entrega:addWD(T,2),lib:addWD(T,-17),linhas:[{prod:'polo-vie',cor:'Cinza',qtd:90,done:['corte','pz0','pz1','peitilho','pregpeit','prepgola','barramanga','ombro','gola','cobregola','manga','fechar','etiqueta','fenda','casear','botao']}]});
-  mk({id:'0412',cliente:'Construtora Horizonte',vend:'layara',chegada:addWD(T,-16),entrega:addWD(T,4),lib:addWD(T,-13),linhas:[
+  mk({id:'0402',contato:'Marcos Lima',cnpj:'12.345.678/0001-90',cliente:'Supermercados Bom Preço',vend:'layara',chegada:addWD(T,-26),entrega:addWD(T,-3),lib:addWD(T,-23),concluido:addWD(T,-4),linhas:[{prod:'polo-ams',cor:'Cinza',qtd:150,done:'all'}]});
+  mk({id:'0409',contato:'Juliana Prado',cnpj:'23.456.789/0001-01',cliente:'Transportes Rota Sul',vend:'paula',chegada:addWD(T,-21),entrega:addWD(T,2),lib:addWD(T,-17),linhas:[{prod:'polo-vie',cor:'Cinza',qtd:90,done:['corte','pz0','pz1','peitilho','pregpeit','prepgola','barramanga','ombro','gola','cobregola','manga','fechar','etiqueta','fenda','casear','botao']}]});
+  mk({id:'0412',contato:'Paulo Reis',cnpj:'34.567.890/0001-12',cliente:'Construtora Horizonte',vend:'layara',chegada:addWD(T,-16),entrega:addWD(T,4),lib:addWD(T,-13),linhas:[
     {prod:'polo-ams',cor:'Marinho',qtd:180,done:['corte','pz0','pz1','peitilho','pregpeit','prepgola','barramanga','ombro','gola','cobregola','manga','fechar','etiqueta']},
     {prod:'calca-hel',cor:'Preta',qtd:180,done:['corte']}]});
-  mk({id:'0415',cliente:'Rede Farma Vida',vend:'paula',chegada:addWD(T,-9),entrega:addWD(T,14),lib:addWD(T,-6),linhas:[{prod:'polo-vie',cor:'Branca',qtd:240,done:['corte','pz0','peitilho']}]});
-  mk({id:'0416',cliente:'Academia Pulse',vend:'roger',chegada:addWD(T,-8),entrega:addWD(T,9),lib:addWD(T,-6),linhas:[{prod:'calca-hel',cor:'Cinza',qtd:120,done:['corte','pz0','prepbolso','prepcos']}]});
-  mk({id:'0419',cliente:'Hospital São Lucas',vend:'paula',chegada:addWD(T,-4),entrega:addWD(T,18),lib:addWD(T,-1),linhas:[{prod:'jaleco',cor:'Branca',tecido:'Gabardine',qtd:80},{prod:'brim-ziper',cor:'Marinho',tecido:'Brim',qtd:80}]});
-  mk({id:'0418',cliente:'Colégio São Bento',vend:'paula',chegada:addWD(T,-3),entrega:addWD(T,22),arte:false,env:false,linhas:[{prod:'polo-ams',cor:'Branca',qtd:320},{prod:'calca-hel',cor:'Marinho',qtd:320}]});
-  mk({id:'0420',cliente:'Clínica Vitta',vend:'layara',chegada:T-2*H,entrega:addWD(T,20),prep:false,arte:false,vias:false,env:false,linhas:[{prod:'polo-ams',cor:'Verde',qtd:60}]});
+  mk({id:'0415',contato:'Carla Mendes',cnpj:'45.678.901/0001-23',cliente:'Rede Farma Vida',vend:'paula',chegada:addWD(T,-9),entrega:addWD(T,14),lib:addWD(T,-6),linhas:[{prod:'polo-vie',cor:'Branca',qtd:240,done:['corte','pz0','peitilho']}]});
+  mk({id:'0416',contato:'Rafael Souza',cnpj:'56.789.012/0001-34',cliente:'Academia Pulse',vend:'roger',chegada:addWD(T,-8),entrega:addWD(T,9),lib:addWD(T,-6),linhas:[{prod:'calca-hel',cor:'Cinza',qtd:120,done:['corte','pz0','prepbolso','prepcos']}]});
+  mk({id:'0419',contato:'Renata Alves',cnpj:'78.901.234/0001-56',cliente:'Hospital São Lucas',vend:'paula',chegada:addWD(T,-4),entrega:addWD(T,18),lib:addWD(T,-1),linhas:[{prod:'jaleco',cor:'Branca',tecido:'Gabardine',qtd:80},{prod:'brim-ziper',cor:'Marinho',tecido:'Brim',qtd:80}]});
+  mk({id:'0418',contato:'Teresa Nogueira',cnpj:'67.890.123/0001-45',cliente:'Colégio São Bento',vend:'paula',chegada:addWD(T,-3),entrega:addWD(T,22),arte:false,env:false,linhas:[{prod:'polo-ams',cor:'Branca',qtd:320},{prod:'calca-hel',cor:'Marinho',qtd:320}]});
+  mk({id:'0420',contato:'Fernanda Rocha',cnpj:'89.012.345/0001-67',cliente:'Clínica Vitta',vend:'layara',chegada:T-2*H,entrega:addWD(T,20),prep:false,arte:false,vias:false,env:false,linhas:[{prod:'polo-ams',cor:'Verde',qtd:60}]});
   const and=(lid,sid,maq,op,min)=>{lote(lid).steps[sid]={st:'and',ini:T-min*MIN,op,maq}};
   and('0412-1','barra','galoneira-1','ana',55);and('0415-1','prepgola','reta-2','anilda',40);and('0416-1','bolso','reta-1','leo',126);
   lote('0412-2').steps.pz0={st:'fora',saiu:T-26*H,forn:'fd',op:'roger'};lote('0415-1').steps.pz1={st:'fora',saiu:T-20*H,forn:'fb',op:'roger'};
@@ -816,7 +820,7 @@ function seed(){seedN=7;const T=now();
   const r=makeRework(lote('0402-1'),'arremate','etiqueta',5,'Etiqueta errada',addWD(T,-6),'leo');rp(r).steps.forEach(s=>r.steps[s.id]={st:'ok',herdado:true});
   return state}
 function save(){RC={};try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
-function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===8&&s.pedidos){if(!s.cores)s.cores={...CORES};s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});state=s;return}}catch(e){}seed()}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===8&&s.pedidos){if(!s.cores)s.cores={...CORES};const EXC={'0402':['Marcos Lima','12.345.678/0001-90'],'0409':['Juliana Prado','23.456.789/0001-01'],'0412':['Paulo Reis','34.567.890/0001-12'],'0415':['Carla Mendes','45.678.901/0001-23'],'0416':['Rafael Souza','56.789.012/0001-34'],'0419':['Renata Alves','78.901.234/0001-56'],'0418':['Teresa Nogueira','67.890.123/0001-45'],'0420':['Fernanda Rocha','89.012.345/0001-67']};s.pedidos.forEach(p=>{const x=EXC[p.id];p.contato=p.contato||(x?x[0]:'');p.cnpj=p.cnpj||(x?x[1]:'')});s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});state=s;return}}catch(e){}seed()}
 
 /* ================= desenho dos produtos ================= */
 function prodSvg(pid,cor){const p=prod(pid);return shapeSvg(p?p.forma:'polo',cor,p?p.nome:'')}
@@ -895,22 +899,43 @@ function maqTile(u,P){const t=P.uso[u.id],pl=P.plan[u.id],sp=!t&&!pl?(P.semPesso
   </div>`}
 
 /* ================= PEDIDOS ================= */
-function vPedidos(){const ls=state.pedidos.map(p=>({p,i:info(p)})).sort((a,b)=>a.i.score-b.i.score);
-  return `<h1>Pedidos</h1><div class="peds">${ls.map(({p,i})=>{const falta=[];if(!p.vias)falta.push('vias');if(!p.arte)falta.push('arte');if(p.materiais.some(m=>m.st==='comprar'||m.st==='pedido'))falta.push('material');
+const soDig=x=>String(x||'').replace(/\D/g,'');
+const fmtCnpj=v=>{const d=soDig(v).slice(0,14);return d.replace(/^(\d{2})(\d)/,'$1.$2').replace(/^(\d{2})\.(\d{3})(\d)/,'$1.$2.$3').replace(/\.(\d{3})(\d)/,'.$1/$2').replace(/(\d{4})(\d)/,'$1-$2')};
+const PF_ST=[['todos','Todos'],['crit','Atrasando'],['warn','Atenção'],['ok','Em dia'],['pronto','Prontos'],['fim','Entregues']];
+const PF_ORD=[['urg','Mais urgente'],['entrega','Data de entrega'],['emissao','Data do pedido']];
+function listaPedidos(){const f=ui.pf||{},q=(f.q||'').trim().toLowerCase(),qd=soDig(q);
+  let ls=state.pedidos.map(p=>({p,i:info(p)}));
+  if(f.st&&f.st!=='todos')ls=ls.filter(x=>x.i.u===f.st);
+  if(q)ls=ls.filter(({p})=>(p.cliente||'').toLowerCase().includes(q)||(p.contato||'').toLowerCase().includes(q)||(qd.length>=2&&soDig(p.cnpj).includes(qd))||p.id.includes(q));
+  const dir=f.inv?-1:1,o=f.ord||'urg';
+  ls.sort((a,b)=>dir*(o==='entrega'?a.p.entrega-b.p.entrega:o==='emissao'?b.p.chegada-a.p.chegada:a.i.score-b.i.score));
+  if(!ls.length)return `<div class="vazio-box">${ic('i-lupa')}<b>Nenhum pedido encontrado</b><span>Mude o filtro ou a busca.</span></div>`;
+  return `<div class="peds">${ls.map(({p,i})=>{const falta=[];if(!p.vias)falta.push('vias');if(!p.arte)falta.push('arte');if(p.materiais.some(m=>m.st==='comprar'||m.st==='pedido'))falta.push('material');
     const fora=i.ls.some(loteFora);
     return `<button class="ped" data-a="pedido" data-id="${p.id}"><div class="ped-st u-${i.u}"><span class="dot"></span>${ULAB[i.u]}</div>
-      <h3>${esc(p.cliente)}</h3><div class="ped-ent">${ic('i-caminhao')}${entregaTxt(p,i)}</div>
+      <h3>${esc(p.cliente)}</h3>${p.contato||p.cnpj?`<div class="ped-ent" style="font-size:16px;color:var(--muted)">${esc(p.contato)}${p.contato&&p.cnpj?' · ':''}${p.cnpj?`<span style="white-space:nowrap">CNPJ ${esc(p.cnpj)}</span>`:''}</div>`:''}
+      <div class="ped-ent">${ic('i-caminhao')}${entregaTxt(p,i)}</div><div class="ped-ent" style="font-size:15px;color:var(--muted)">Pedido ${esc(p.id)} · feito em ${fD(p.chegada)}</div>
       <div class="ped-prods">${i.ls.filter(l=>!l.rework).map(l=>{const[d,t]=minsTot(l);return `<div class="pp">${prodSvg(l.prod,l.cor)}<b>${l.qtd}</b><div class="barra"><i style="width:${d/t*100}%"></i></div></div>`}).join('')}</div>
       ${falta.length&&!p.concluido?`<div class="falta">${ic('i-cadeado')}Falta: ${falta.join(', ')}</div>`:''}
       ${fora&&!p.concluido?`<div class="falta" style="background:#F3ECFB;color:#6B2F8C">${ic('i-caminhao')}Parte da peça no fornecedor</div>`:''}
     </button>`}).join('')}</div>`}
+function vPedidos(){const f=ui.pf=ui.pf||{st:'todos',ord:'urg',q:'',inv:false};
+  const cnt=u=>u==='todos'?state.pedidos.length:state.pedidos.filter(p=>info(p).u===u).length;
+  return `<h1>Pedidos</h1>
+  <div class="filtros">
+    <input class="campo busca" id="pedBusca" value="${esc(f.q)}" placeholder="Buscar por empresa, cliente ou CNPJ" autocomplete="off" aria-label="Buscar pedido">
+    <div class="linha-dep">${PF_ST.map(([k,n])=>`<button class="depc st-${k}" data-a="pfSt" data-v="${k}" aria-pressed="${f.st===k}">${k!=='todos'?`<span class="dot u-${k}" style="width:12px;height:12px;background:currentColor"></span>`:''}${n} <small style="font-weight:400">${cnt(k)}</small></button>`).join('')}</div>
+    <div class="linha-dep"><span class="rotulo" style="margin:0 4px 0 0;align-self:center">Ordenar por</span>${PF_ORD.map(([k,n])=>`<button class="depc" data-a="pfOrd" data-v="${k}" aria-pressed="${f.ord===k}">${n}${f.ord===k&&k!=='urg'?(k==='entrega'?(f.inv?' ↓ mais longe':' ↑ mais perto'):(f.inv?' ↑ mais antigo':' ↓ mais recente')):''}</button>`).join('')}</div>
+  </div>
+  <div id="pedLista">${listaPedidos()}</div>`}
 function sPedido(id){const ped=pedById(id),i=info(ped),mats=ped.materiais.filter(m=>m.st!=='ok'),lib=liberado(ped),v=ped.vendedor;
   const TS=tarefasEsc().filter(t=>t.ped.id===id),resp=(a,x)=>{const t=TS.find(t=>t.a===a&&(!x||(t.l===x.l&&t.s===x.s)));return t&&t.resp?pNome(t.resp):''};
   const chk=(a,on,icn,t)=>`<button class="chk" data-a="${a}" data-id="${id}" aria-pressed="${!!on}">${ic(icn)}${t}<span class="box">${ic('i-check')}</span>${!on&&resp(a)?`<span style="font-weight:400;font-size:15px;color:var(--muted)">${esc(resp(a))}</span>`:''}</button>`;
   const envs=[];i.ls.filter(l=>!l.rework).forEach(l=>rp(l).steps.filter(z=>z.pers).forEach(z=>envs.push({l,z,ok:arteOk(ped,l,z)})));
   const tEnt=TS.find(t=>t.a==='entregar');
   return `${voltar()}<div class="card ped-head">${upill(i.u)}<h1>${esc(ped.cliente)}</h1><div class="ped-ent">${ic('i-caminhao')}${entregaTxt(ped,i)}</div>
-    <div class="ped-ent">${v?av(v,'s'):''}Vendedora: <b>${esc(pNome(v)||'—')}</b></div>
+    ${ped.contato||ped.cnpj?`<div class="ped-ent">${ic('i-predio')}${ped.contato?`Cliente: <b>${esc(ped.contato)}</b>`:''}${ped.contato&&ped.cnpj?' · ':''}${ped.cnpj?`CNPJ ${esc(ped.cnpj)}`:''}</div>`:''}
+    <div class="ped-ent">${v?av(v,'s'):''}Vendedora: <b>${esc(pNome(v)||'—')}</b> · Pedido ${esc(ped.id)} feito em ${fD(ped.chegada)}</div>
     ${tEnt?`<div class="acoes"><button class="big go" data-a="entregar" data-id="${id}">${ic('i-caminhao')}${esc(tarTxt(tEnt))}${tEnt.resp?' · '+esc(pNome(tEnt.resp)):''}</button></div>`:''}</div>
   ${ped.concluido?'':`<div class="card"><h2>Antes de cortar</h2><div class="checks">
     ${chk('vias',ped.vias,'i-vias','Vias separadas')}${chk('artePrep',ped.artePrep,'i-arte','Arte preparada')}${chk('arte',ped.arte,'i-arte','Arte aprovada')}
@@ -1136,7 +1161,9 @@ function sPedidoWrap(id){return sPedido(id)}
 function sNovo(){const w=ui.sheet.w,passos=`<div class="passos">${[1,2,3,4].map(n=>`<i class="${n<=w.step?'on':''}"></i>`).join('')}</div>`;
   const head=`${voltar(w.step>1?'Voltar':'Cancelar')}${passos}<div class="passo-n">Passo ${w.step} de 4</div>`;
   const nav=(lab='Próximo')=>`${w.err?`<div class="aviso">${ic('i-alerta')}${esc(w.err)}</div>`:''}<div class="acoes"><button class="big go" data-a="wNext">${lab}${ic('i-seta')}</button></div>`;
-  if(w.step===1)return `${head}<h1>Para quem é o pedido?</h1><input class="campo" id="wCli" value="${esc(w.cliente)}" placeholder="Nome do cliente" autocomplete="off">
+  if(w.step===1)return `${head}<h1>Para quem é o pedido?</h1><div class="rotulo" style="margin-top:0">Nome da empresa</div><input class="campo" id="wCli" value="${esc(w.cliente)}" placeholder="Ex.: Hospital Santa Clara" autocomplete="off">
+    <div class="rotulo">Nome do cliente (contato)</div><input class="campo" id="wCont" value="${esc(w.contato||'')}" placeholder="Ex.: Ana Souza" autocomplete="off">
+    <div class="rotulo">CNPJ</div><input class="campo" id="wCnpj" value="${esc(w.cnpj||'')}" placeholder="00.000.000/0000-00" inputmode="numeric" autocomplete="off">
     <div class="rotulo">Quem vendeu?</div><div class="linha-dep">${state.pessoas.filter(p=>temPapel(p,'vendas')).map(p=>`<button class="pchip" data-a="wVend" data-v="${p.id}" aria-pressed="${w.vend===p.id}">${av(p.id,'s')}${esc(p.nome)}</button>`).join('')}</div>${nav()}`;
   if(w.step===2)return `${head}<h1>Quais peças?</h1><p style="color:var(--ink2);margin-top:-6px">Toque na peça para adicionar.</p><div class="escolhe">${state.produtos.map(p=>`<button class="opc" data-a="wAdd" data-p="${p.id}">${prodSvg(p.id,'')}${esc(p.nome)}</button>`).join('')}</div>
     ${w.itens.map((it,k)=>`<div class="item"><div class="item-h">${prodSvg(it.prod,it.cor)}<b>${esc(prod(it.prod).nome)}</b><button class="x" data-a="wRm" data-k="${k}">Tirar</button></div>
@@ -1159,7 +1186,7 @@ function sNovo(){const w=ui.sheet.w,passos=`<div class="passos">${[1,2,3,4].map(
       <p class="passo-n" style="margin-top:18px">Ou escolha outra data</p><input class="campo" type="date" id="wDt" value="${iso}">${nav()}`}
   const tot=sum(w.itens.map(it=>sum(SIZES.map(s=>it.g[s]||0))));
   const mats=calcMat(w.itens.map(it=>({prod:it.prod,cor:it.cor,qtd:sum(SIZES.map(s=>it.g[s]||0))}))).filter(m=>m.st==='comprar');
-  return `${head}<h1>Está certo?</h1><div class="card"><h2>${esc(w.cliente)}</h2><div class="ped-ent">${av(w.vend,'s')}Vendedora: <b>${esc(pNome(w.vend))}</b></div>
+  return `${head}<h1>Está certo?</h1><div class="card"><h2>${esc(w.cliente)}</h2>${w.contato||w.cnpj?`<div class="ped-ent">${esc(w.contato||'')}${w.contato&&w.cnpj?' · ':''}${w.cnpj?'CNPJ '+esc(w.cnpj):''}</div>`:''}<div class="ped-ent">${av(w.vend,'s')}Vendedora: <b>${esc(pNome(w.vend))}</b></div>
     ${w.itens.map(it=>`<div class="resumo-item">${prodSvg(it.prod,it.cor)}<div><b>${esc(prod(it.prod).nome)}</b><div style="color:var(--ink2)">${esc(modeloTxt(it))}</div><div style="color:var(--ink2)">${SIZES.filter(s=>it.g[s]).map(s=>`${s}: ${it.g[s]}`).join(' · ')}</div><div style="color:var(--ink2)">${it.pers.map(x=>`${esc(tNome(x.tipo))} na ${esc(x.parte.toLowerCase())}`).join(' · ')||'Sem personalização'}</div></div></div>`).join('')}
     <div class="resumo-item">${ic('i-caminhao')}<b>Entrega ${DOW[new Date(w.entrega).getDay()]}, ${new Date(w.entrega).getDate()} de ${MES[new Date(w.entrega).getMonth()]} · ${tot} peças</b></div></div>
     <div class="card"><h2>${mats.length?'Provavelmente vai precisar comprar':'Pelo cadastro, tem o material'}</h2>${mats.length?mats.map(m=>`<div class="mat">${ic('i-carrinho')}<div><b>${esc(m.item)}</b><span>${qtdTxt(m.nec-m.est,m.un)}</span></div><span></span></div>`).join(''):`<div class="lib u-ok">${ic('i-check')}Pode seguir</div>`}${avisoEst()}<p class="dica">Consumo de tecido por tamanho: infantil 60%, juvenil 80%, adulto 100%, XXG 115%.</p></div>
@@ -1192,7 +1219,7 @@ function toast(msg,comDesfazer=true){const el=document.getElementById('toast');c
   el.innerHTML=`<div class="toast" role="status"><span>${esc(msg)}</span>${comDesfazer?'<button data-a="desfazer">Desfazer</button>':''}</div>`;toastT=setTimeout(()=>{el.innerHTML='';undo=null},9000)}
 function commit(){save();render()}
 function openSheet(s){ui.sheet=s;render();const e=document.querySelector('.sheet');if(e)e.scrollTop=0}
-function wRead(){const w=ui.sheet?.w;if(!w)return;const c=document.getElementById('wCli');if(c)w.cliente=c.value;
+function wRead(){const w=ui.sheet?.w;if(!w)return;const c=document.getElementById('wCli');if(c)w.cliente=c.value;const ct=document.getElementById('wCont');if(ct)w.contato=ct.value;const cj=document.getElementById('wCnpj');if(cj)w.cnpj=cj.value;
   document.querySelectorAll('[data-q]').forEach(i=>{w.itens[+i.dataset.q].g[i.dataset.s]=Math.max(0,parseInt(i.value)||0)});
   const d=document.getElementById('wDt');if(d&&d.value){const[y,m,dd]=d.value.split('-').map(Number);w.entrega=new Date(y,m-1,dd,17).getTime()}}
 const togl=(a,v)=>{const i=a.indexOf(v);i<0?a.push(v):a.splice(i,1)};
@@ -1204,6 +1231,8 @@ const A={
   ajuda:()=>openSheet({t:'ajuda'}),
   maq:d=>openSheet({t:'maq',m:d.m}),
   mP:d=>{ui.sheet.p=d.v;render()},
+  pfSt:d=>{ui.pf.st=d.v;render()},
+  pfOrd:d=>{if(ui.pf.ord===d.v&&d.v!=='urg')ui.pf.inv=!ui.pf.inv;else{ui.pf.ord=d.v;ui.pf.inv=false}render()},
   mSel:d=>{ui.sheet.sel=d.v;ui.sheet.p=null;render();document.querySelector('.sheet')?.scrollTo({top:0,behavior:'smooth'})},
   mRes:d=>{snap();state.reservas=state.reservas||{};Object.keys(state.reservas).forEach(k=>{const r=state.reservas[k];if(r.l===d.l&&r.s===d.s)delete state.reservas[k]});state.reservas[d.m]={l:d.l,s:d.s,p:d.p||''};ui.sheet.sel=null;commit();toast(`Reservado para ${unidade(d.m)?.nome}`)},
   mResX:d=>{snap();delete (state.reservas||{})[d.m];ui.sheet.sel=null;commit();toast('Reserva tirada: o sistema volta a escolher')},
@@ -1303,17 +1332,18 @@ const A={
   wQ:d=>{wRead();const g=ui.sheet.w.itens[+d.k].g;g[d.s]=Math.max(0,(g[d.s]||0)+(+d.d));render()},
   wData:d=>{ui.sheet.w.entrega=+d.t;ui.sheet.w.err='';render()},
   wNext:()=>{wRead();const w=ui.sheet.w;w.err='';
-    if(w.step===1){if(!w.cliente.trim())w.err='Escreva o nome do cliente';else if(!w.vend)w.err='Escolha quem vendeu'}
+    if(w.step===1){if(!w.cliente.trim())w.err='Escreva o nome da empresa';else if(w.cnpj&&soDig(w.cnpj).length!==14)w.err='O CNPJ precisa ter 14 números';else if(!w.vend)w.err='Escolha quem vendeu'}
     if(w.step===2){if(!w.itens.length)w.err='Toque em uma peça para adicionar';else if(w.itens.some(i=>!i.tecido))w.err='Escolha o tecido de cada peça';else if(w.itens.some(i=>!i.cor))w.err='Escolha a cor de cada peça';else if(w.itens.some(i=>!sum(SIZES.map(s=>i.g[s]||0))))w.err='Coloque a quantidade de cada peça'}
     if(w.step===3&&!w.entrega)w.err='Escolha a data de entrega';
     if(!w.err)w.step++;render();const e=document.querySelector('.sheet');if(e&&!w.err)e.scrollTop=0},
   wCriar:()=>{const w=ui.sheet.w;snap();const id=String(state.seq++).padStart(4,'0');const lines=w.itens.map(it=>({prod:it.prod,cor:it.cor,tecido:it.tecido,opcoes:[...it.opcoes],pers:it.pers.map((x,j)=>({tipo:x.tipo,parte:x.parte,id:'pz'+j})),g:{...it.g},qtd:sum(SIZES.map(s=>it.g[s]||0))}));
-    state.pedidos.push({id,cliente:w.cliente.trim(),vendedor:w.vend,chegada:now(),entrega:w.entrega,vias:false,artePrep:false,arte:false,artes:{},materiais:calcMat(lines),concluido:null});
+    state.pedidos.push({id,cliente:w.cliente.trim(),contato:(w.contato||'').trim(),cnpj:(w.cnpj||'').trim(),vendedor:w.vend,chegada:now(),entrega:w.entrega,vias:false,artePrep:false,arte:false,artes:{},materiais:calcMat(lines),concluido:null});
     lines.forEach((x,i)=>state.lotes.push({id:`${id}-${i+1}`,ped:id,prod:x.prod,cor:x.cor,tecido:x.tecido,opcoes:x.opcoes,pers:x.pers,qtd:x.qtd,grade:x.g,desm:0,steps:{},rework:false,parent:null}));
     ui.tela='pedidos';ui.sheet={t:'pedido',id};commit();toast('Pedido criado')},
 };
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b||b.disabled)return;const f=A[b.dataset.a];if(f){e.preventDefault();f(b.dataset)}});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ui.sheet)A.fechar();if(e.key==='Enter'&&['eNome','eObs','pNome','pTec','xNome'].includes(e.target.id))e.preventDefault();if(e.key==='Enter'&&e.target.id==='wCli'){e.preventDefault();A.wNext()}});
+document.addEventListener('input',e=>{if(e.target.id==='pedBusca'){ui.pf.q=e.target.value;const L=document.getElementById('pedLista');if(L)L.innerHTML=listaPedidos()}if(e.target.id==='wCnpj'){const v=fmtCnpj(e.target.value);if(v!==e.target.value)e.target.value=v}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ui.sheet)A.fechar();if(e.key==='Enter'&&['eNome','eObs','pNome','pTec','xNome','wCont','wCnpj','pedBusca'].includes(e.target.id))e.preventDefault();if(e.key==='Enter'&&e.target.id==='wCli'){e.preventDefault();A.wNext()}});
 function tick(){const h=new Date().getHours();document.getElementById('ola').textContent=`${h<12?'Bom dia':h<18?'Boa tarde':'Boa noite'}, Helena`;
   const d=new Date();document.getElementById('hoje').textContent=`${DOW[d.getDay()]}, ${d.getDate()} de ${MES[d.getMonth()]}`;
   document.querySelectorAll('[data-ini]').forEach(el=>el.textContent=fDur(now()-(+el.dataset.ini)))}
