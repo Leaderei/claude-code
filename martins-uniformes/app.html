@@ -437,6 +437,36 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
   .quem b{font-size:24px}
 }
 .nota{background:var(--atn-soft);color:var(--atn-ink);border-radius:14px;padding:12px 16px;font-size:17px;margin-bottom:16px}
+
+/* v0.19: fábrica mais limpa */
+.ped-l{display:flex;align-items:center;gap:14px;width:100%;border:0;background:none;padding:2px 2px 12px;font-size:17px;color:var(--ink2);text-align:left;overflow-x:auto;scrollbar-width:none;white-space:nowrap}
+.ped-l::-webkit-scrollbar{display:none}
+.pl-t{font-weight:700;color:var(--ink)}
+.pl-i{display:inline-flex;align-items:center;gap:6px;flex:none}.pl-i .dot{width:12px;height:12px}
+.pl-crit{color:var(--red)}.pl-crit b{color:var(--red)}.pl-warn .dot{background:var(--atn)}.pl-ok .dot{background:var(--go)}
+.pl-go{margin-left:auto;font-size:26px;line-height:1;color:var(--muted)}
+.zonas{position:sticky;top:0;z-index:12;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:5px;margin-bottom:16px;box-shadow:0 4px 0 var(--bg)}
+.zona{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;border:0;background:none;border-radius:13px;padding:10px 6px;font-weight:700;font-size:18px;color:var(--ink2)}
+.zona svg.ic{width:26px;height:26px}
+.zona[aria-pressed="true"]{background:var(--ink);color:#fff}
+.zona em{font-style:normal;min-width:26px;height:26px;border-radius:13px;padding:0 7px;display:grid;place-items:center;background:var(--atn);color:#2B1D00;font-size:15px}
+.agora{display:flex;gap:18px;font-size:17px;color:var(--ink2);margin:0 2px 8px}.agora b{color:var(--ink);font-size:20px}
+.livres{background:none;border:0;padding:0 2px;margin-bottom:20px;gap:8px 14px;font-size:16px}
+.pl-p{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--ink2)}
+.pl-p .av.s{width:26px;height:26px;font-size:13px}
+.grupo-h{font-size:22px;margin-bottom:10px;color:var(--ink2)}.grupo-h svg.ic{width:28px;height:28px}
+.grupo{margin-bottom:24px}
+.fila{margin-left:auto;font-size:14px;font-weight:700;color:var(--atn-ink);background:var(--atn-soft);border-radius:8px;padding:2px 8px;white-space:nowrap}
+.st-livre .p-body{padding-bottom:14px}
+.paradas{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px;color:var(--muted);font-size:16px}
+.paradas .t{margin-right:2px}
+.pm{display:inline-flex;align-items:center;gap:6px;border:2px dashed var(--line);background:none;border-radius:12px;padding:5px 10px;font-size:16px;font-weight:700;color:var(--ink2)}
+.pm svg.ic{width:20px;height:20px;color:var(--muted)}
+.sub-l{margin:0 2px 12px;color:var(--muted);font-size:16px}
+@media (max-width:640px){.zona{flex-direction:column;gap:2px;font-size:15px;padding:8px 4px}.zona em{position:absolute;top:4px;right:8px;min-width:22px;height:22px;font-size:13px}.ped-l{font-size:15px;gap:12px}}
+.st-semp{border:2px dashed var(--line)}.st-semp .p-st{background:var(--grey-soft);color:var(--ink2)}.st-semp .p-st .dot{background:var(--muted)}
+.m-top{flex-wrap:wrap}
+@media (max-width:640px){.ped-l{flex-wrap:wrap;row-gap:4px;white-space:normal}.pl-go{display:none}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -954,28 +984,31 @@ const estrela=(p,it)=>(p.melhor.includes(it.s.nome)||p.melhor.includes(it.s.post
 /* ================= FÁBRICA ================= */
 function vFabrica(){const P=plano(),esc_=tarefasEsc();
   const ativos=state.pedidos.filter(p=>!p.concluido).map(p=>info(p));const cnt=u=>ativos.filter(i=>i.u===u).length;
-  const res=['crit','warn','ok'].filter(u=>cnt(u)).map(u=>`<button class="rs u-${u}" data-a="tela" data-t="pedidos"><span class="dot"></span><b>${cnt(u)}</b>${cnt(u)>1?'pedidos':'pedido'} ${ULAB[u].toLowerCase()}</button>`).join('');
+  const res=['crit','warn','ok'].filter(u=>cnt(u)).map(u=>`<span class="pl-i pl-${u}"><span class="dot"></span><b>${cnt(u)}</b> ${ULAB[u].toLowerCase()}</span>`).join('');
   const livres=state.pessoas.filter(p=>p.sabe.length&&!P.ocup.has(p.id)&&!P.usados.has(p.id));
   const foraN=sum(state.lotes.map(l=>Object.values(l.steps).filter(x=>x.st==='fora').length));
-  const pulos=[...GRUPOS.map(g=>[g.id,g.nome,g.i]),['fora',`Terceirizados${foraN?` (${foraN})`:''}`,'i-caminhao'],['esc',`Escritório (${esc_.length})`,'i-vias']];
-  return `<h1>Fábrica agora</h1><div class="resumo">${res}</div>
-  <div class="pulos">${[['todas','Todas'],['acao','Precisam de ação'],['trab','Trabalhando']].map(([k,n])=>`<button class="pulo ff" data-a="ff" data-v="${k}" aria-pressed="${(ui.ff||'todas')===k}">${n}</button>`).join('')}<span class="pulo-sep"></span>${pulos.map(([id,n,i])=>`<a class="pulo" href="#g-${id}">${ic(i)}${n}</a>`).join('')}</div>
-  ${livres.length?`<div class="livres"><span class="t">Sem trabalho agora:</span>${livres.map(p=>`<span class="pchip">${av(p.id,'s')}${esc(p.nome)}</span>`).join('')}</div>`:''}
+  const nTrab=P.us.filter(u=>P.uso[u.id]).length,nIni=P.us.filter(u=>!P.uso[u.id]&&P.plan[u.id]).length;
+  const z=ui.fz||'maq';
+  const zonas=[['maq','Máquinas','i-maquina',nIni],['fora','Fora','i-caminhao',foraN],['esc','Escritório','i-vias',esc_.length]];
+  return `<button class="ped-l" data-a="tela" data-t="pedidos"><span class="pl-t">Pedidos</span>${res||'<span class="pl-i">nenhum aberto</span>'}<span class="pl-go">›</span></button>
+  <div class="zonas" role="tablist">${zonas.map(([k,n,i,c])=>`<button class="zona" role="tab" data-a="fz" data-v="${k}" aria-pressed="${z===k}">${ic(i)}<span>${n}</span>${c?`<em>${c}</em>`:''}</button>`).join('')}</div>
+  ${z==='maq'?`<div class="agora"><span><b>${nIni}</b> para começar</span><span><b>${nTrab}</b> trabalhando</span></div>
+  ${livres.length?`<div class="livres"><span class="t">Livres:</span>${livres.map(p=>`<span class="pl-p">${av(p.id,'s')}${esc(p.nome)}</span>`).join('')}</div>`:''}
   ${GRUPOS.map(g=>{const ts=state.tipos.filter(t=>t.grupo===g.id&&!t.externo&&t.qtd>0);if(!ts.length)return '';
-    const vis=u=>{const f=ui.ff||'todas';if(f==='trab')return!!P.uso[u.id];if(f==='acao')return!P.uso[u.id]&&(!!P.plan[u.id]||(P.semPessoa[u.tipo]||[]).length>0);return true};const ts2=ts.filter(t=>P.us.some(u=>u.tipo===t.id&&vis(u)));if(!ts2.length)return '';
-    return `<section class="grupo" id="g-${g.id}"><h2 class="grupo-h">${ic(g.i)}${g.nome}</h2>${ts2.map(t=>{const esp=(P.espera[t.id]||[]).length,sp=(P.semPessoa[t.id]||[]).length;
-      return `<div class="tipo-h">${esc(t.nome)} <small>${t.qtd} ${t.qtd>1?'máquinas':'máquina'}</small>${esp?`<span class="esp">${esp} esperando máquina</span>`:''}</div>
-      <div class="grid">${P.us.filter(u=>u.tipo===t.id&&vis(u)).map(u=>maqTile(u,P)).join('')}</div>`}).join('')}</section>`}).join('')}
-  <section class="grupo" id="g-fora"><h2 class="grupo-h">${ic('i-caminhao')}Terceirizados</h2>
-    <p style="margin:-4px 0 12px;color:var(--ink2)">Só esperam as etapas que usam a parte que está fora. O resto da peça continua andando.</p>
-    <div class="forns">${state.forn.map(f=>fornCard(f,esc_)).join('')}</div></section>
-  <section class="grupo" id="g-esc"><h2 class="grupo-h">${ic('i-vias')}Escritório e entregas</h2>
-    <p style="margin:-4px 0 12px;color:var(--ink2)">Cada tarefa vai para quem tem a função e está disponível. Toque em "Trocar pessoa" para mudar.</p>
+    const us=P.us.filter(u=>ts.some(t=>t.id===u.tipo));
+    const ativo=u=>P.uso[u.id]||P.plan[u.id]||ehSemp(u,P);
+    const on=us.filter(ativo),off=us.filter(u=>!ativo(u));const vistos=new Set();
+    return `<section class="grupo" id="g-${g.id}"><h2 class="grupo-h">${ic(g.i)}${g.nome}</h2>
+      ${on.length?`<div class="grid">${on.map(u=>{const esp=vistos.has(u.tipo)?0:(P.espera[u.tipo]||[]).length;vistos.add(u.tipo);return maqTile(u,P,esp)}).join('')}</div>`:''}
+      ${off.length?`<div class="paradas"><span class="t">Paradas, sem trabalho:</span>${off.map(u=>`<button class="pm" data-a="maq" data-m="${u.id}">${ic(tipo(u.tipo).i)}${esc(u.nome)}</button>`).join('')}</div>`:''}</section>`}).join('')}`:''}
+  ${z==='fora'?`<section class="grupo" id="g-fora"><p class="sub-l">Só a parte que saiu fica esperando. O resto continua.</p>
+    <div class="forns">${state.forn.map(f=>fornCard(f,esc_)).join('')}</div></section>`:''}
+  ${z==='esc'?`<section class="grupo" id="g-esc">
     ${esc_.some(t=>!t.resp)?`<div class="escp" style="border-color:var(--red);margin-bottom:14px"><div class="escp-h"><span class="m-ic" style="background:var(--red-soft);color:var(--red)">${ic('i-alerta')}</span><div><b>Sem responsável</b><span>Ninguém cadastrado com essa função</span></div></div>${esc_.filter(t=>!t.resp).map(tarRow).join('')}</div>`:''}
     <div class="esc">${state.pessoas.filter(p=>(p.funcoes||[]).length).map(p=>{const ts=esc_.filter(t=>t.resp===p.id);
       return `<div class="escp"><div class="escp-h">${av(p.id)}<div style="margin-right:auto"><b>${esc(p.nome)}</b><span>${ts.length} ${ts.length===1?'tarefa':'tarefas'}</span></div>
         <button class="pchip" data-a="disp" data-id="${p.id}" aria-pressed="${p.disp!==false}" style="padding:6px 14px">${p.disp!==false?'Disponível':'Fora agora'}</button></div>
-        ${ts.map(tarRow).join('')||'<div class="vazio-s">Nada pendente</div>'}</div>`}).join('')}</div></section>`}
+        ${ts.map(tarRow).join('')||'<div class="vazio-s">Nada pendente</div>'}</div>`}).join('')}</div></section>`:''}`}
 function tarRow(t){const lab={vias:'Separei',artePrep:'Pronta',arte:'Aprovada',arteEnv:'Enviei',comprei:'Comprei',chegou:'Chegou',levei:viaApp(t)?'Enviado':'Levei',buscou:'Chegou',entregar:'Entregue'}[t.a];
   return `<div class="tar">${ic(t.i)}<div><b>${esc(tarTxt(t))}</b><span>${esc(t.ped.cliente)}${t.sub?' · '+esc(t.sub):''} · ≈ ${minTxt(state.tEsc[t.f]||0)}</span>${t.late?'<span style="display:block;color:var(--red);font-weight:700">Passou do prazo do fornecedor</span>':''}
     <button class="x azul" data-a="troca" data-key="${esc(t.key)}" data-f="${t.f}" style="padding:2px 10px;margin-top:4px;font-size:15px">${t.fixo?'Escolhido à mão · ':''}Trocar pessoa</button></div>
@@ -985,13 +1018,14 @@ function fornCard(f,esc_){const fora=[];state.lotes.forEach(l=>{const ped=pedByI
   return `<div class="forn"><div class="forn-h"><span class="m-ic">${ic(tipo(f.servico).i)}</span><div><b>${esc(f.nome)}</b><span>${esc(tNome(f.servico))} · prazo ${f.prazo} ${f.prazo>1?'dias':'dia'}</span></div></div>
     ${fora.map(o=>{const d=diasDesde(o.x.saiu);return `<div class="fitem">${prodSvg(o.p.id,o.l.cor)}<div><b>${esc(o.s.nome)} · ${qtdEf(o.l)} peças</b><span>${esc(o.ped.cliente)} · lá ${haQuanto(o.x.saiu)}</span>${d>f.prazo?'<span class="late" style="display:block">Passou do prazo</span>':''}</div><button class="mbtn go" data-a="buscou" data-l="${o.l.id}" data-s="${o.s.id}">Chegou</button></div>`}).join('')||'<div class="vazio-s">Nada lá agora</div>'}
     ${lev.length?`<div class="vazio-s" style="color:var(--atn-ink);font-weight:700">${lev.length} ${lev.length>1?'pacotes prontos':'pacote pronto'} para levar</div>`:''}</div>`}
-function maqTile(u,P){const t=P.uso[u.id],pl=P.plan[u.id],sp=!t&&!pl?(P.semPessoa[u.tipo]||[])[P.us.filter(x=>x.tipo===u.tipo&&!P.uso[x.id]&&!P.plan[x.id]).findIndex(x=>x.id===u.id)]:null;const it=t||pl||sp;
+const ehSemp=(u,P)=>!P.uso[u.id]&&!P.plan[u.id]&&!!(P.semPessoa[u.tipo]||[])[P.us.filter(x=>x.tipo===u.tipo&&!P.uso[x.id]&&!P.plan[x.id]).findIndex(x=>x.id===u.id)];
+function maqTile(u,P,esp){const t=P.uso[u.id],pl=P.plan[u.id],sp=!t&&!pl?(P.semPessoa[u.tipo]||[])[P.us.filter(x=>x.tipo===u.tipo&&!P.uso[x.id]&&!P.plan[x.id]).findIndex(x=>x.id===u.id)]:null;const it=t||pl||sp;
   const cls=t?'st-trab':pl?'st-livre':sp?'st-semp':'st-nada';const quem=t?t.x.op:pl?pl.pessoa:null;
   return `<div class="pessoa ${cls}"><button class="p-open" data-a="maq" data-m="${u.id}">
-    <div class="m-top"><span class="m-ic">${ic(tipo(u.tipo).i)}</span><b>${esc(u.nome)}</b></div>
+    <div class="m-top"><span class="m-ic">${ic(tipo(u.tipo).i)}</span><b>${esc(u.nome)}</b>${esp?`<span class="fila">+${esp} na fila</span>`:''}</div>
     <div class="p-body">${it?`${prodSvg(it.p.id,it.l.cor,it.l.cores2)}<div>${pl?`<span class="prox">${pl.reservado?'Reservado':'Próximo'}</span>`:''}<b>${esc(it.s.nome)}</b><span>${qtdEf(it.l)} peças</span><span class="emp">${ic('i-predio')}${esc(it.ped.cliente)}</span>${quem?`<span class="quem-l">${av(quem,'s')}${esc(pNome(quem))} ${pl?estrela(pessoa(quem),pl):''}</span>`:''}</div>`:'<span class="vazio">Sem trabalho para esta máquina</span>'}</div></button>
     ${P.resEspera[u.id]?`<div class="dica" style="padding:0 14px 8px;color:var(--blue);font-weight:700">Reservado a seguir: ${esc(P.resEspera[u.id].s.nome)} · ${esc(P.resEspera[u.id].ped.cliente)}</div>`:''}
-    <div class="p-st"><span class="dot"></span>${t?`Trabalhando · <span data-ini="${t.x.ini}">${fDur(now()-t.x.ini)}</span>`:pl?'Parada · pronta para começar':sp?'Ninguém livre sabe usar':'Sem trabalho'}</div>
+    ${t?`<div class="p-st"><span class="dot"></span>Trabalhando · <span data-ini="${t.x.ini}">${fDur(now()-t.x.ini)}</span></div>`:sp?'<div class="p-st"><span class="dot"></span>Esperando alguém livre</div>':''}
     ${t?`<button class="p-act fim" data-a="terminou" data-m="${u.id}">${ic('i-check')}Terminou</button>`:pl?`<button class="p-act ini" data-a="comecar" data-m="${u.id}" data-l="${pl.l.id}" data-s="${pl.s.id}" data-p="${pl.pessoa}">${ic('i-play')}Começar</button>`:''}
   </div>`}
 
@@ -1533,6 +1567,7 @@ const A={
   addProb:()=>{const n=(document.getElementById('probN')?.value||'').trim();if(!n)return;snap();state.probs.push({k:n,i:'i-duvida',alvo:[]});commit()},
   addPapel:()=>{const n=(document.getElementById('papN')?.value||'').trim();if(!n)return;snap();state.papeis[uid('c')]=n;commit()},
   ff:d=>{ui.ff=d.v;render()},
+  fz:d=>{ui.fz=d.v;render();scrollTo(0,0)},
   addTec:d=>{const i=document.getElementById('novoTec'),v=(i?.value||'').trim();if(!v)return;const p=prod(d.p);p.tecidos=p.tecidos||[];if(!p.tecidos.includes(v)){snap();p.tecidos.push(v);commit();toast(`Tecido ${v} adicionado`)}},
   addParte:d=>{const i=document.getElementById('novaParte'),v=(i?.value||'').trim();if(!v)return;const p=prod(d.p);p.partes=p.partes||[];if(!p.partes.includes(v)){snap();p.partes.push(v);commit();toast(`Parte ${v} adicionada`)}},
   eP:d=>{eRead();ui.sheet.posto=d.v;render()},
