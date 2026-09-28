@@ -33,7 +33,7 @@ svg.ic{width:1.3em;height:1.3em;flex:none;fill:none;stroke:currentColor;stroke-w
 /* navegação inferior */
 main{padding-block:20px 150px}
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);box-shadow:0 -6px 20px rgba(22,32,44,.06)}
-.nav .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding-block:10px}
+.nav .wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding-block:10px}
 .nb{display:flex;flex-direction:column;align-items:center;gap:4px;border:0;border-radius:16px;background:none;padding:10px 6px;font-weight:700;font-size:18px;color:var(--ink2)}
 .nb svg.ic{width:34px;height:34px}
 .nb[aria-current="page"]{background:var(--blue-soft);color:var(--blue)}
@@ -59,7 +59,7 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .setor{margin-bottom:26px}
 .setor-h{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;color:var(--ink2);margin-bottom:10px}
 .setor-h svg.ic{width:30px;height:30px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:14px}
 .pessoa{display:grid;grid-template-rows:1fr auto auto;border:2px solid var(--line);background:var(--card);border-radius:18px;overflow:hidden;min-height:190px}
 .p-open{display:grid;grid-template-rows:auto 1fr;text-align:left;border:0;background:none;padding:0}
 .pessoa:hover{border-color:var(--ink2)}
@@ -91,7 +91,7 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 @keyframes pulse{50%{transform:scale(.55);opacity:.5}}
 
 /* pedidos */
-.peds{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.peds{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px}
 .ped{display:grid;gap:10px;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:18px;padding:0 0 16px;overflow:hidden}
 .ped:hover{border-color:var(--ink2)}
 .ped-st{display:flex;align-items:center;gap:10px;padding:10px 16px;font-weight:700;font-size:19px;text-transform:uppercase;letter-spacing:.04em}
@@ -148,7 +148,7 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .prodbloco:first-of-type{border-top:0;padding-top:4px}
 .prodbloco .prodline{border-top:0;padding:0}
 /* produtos */
-.prods{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.prods{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:16px}
 .prodc{display:grid;justify-items:center;gap:6px;text-align:center;border:2px solid var(--line);background:var(--card);border-radius:18px;padding:18px}
 .prodc:hover{border-color:var(--ink2)}
 .prodc svg.prod{width:130px;height:130px}
@@ -248,7 +248,7 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .passo-n{color:var(--muted);font-weight:700;font-size:18px;margin-bottom:4px}
 .campo{width:100%;font:inherit;font-size:26px;padding:16px 18px;border:3px solid var(--line);border-radius:16px;background:var(--card);color:var(--ink)}
 .campo:focus{border-color:var(--blue);outline:none}
-.escolhe{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.escolhe{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr));gap:12px}
 .opc{display:grid;justify-items:center;gap:6px;border:3px solid var(--line);background:var(--card);border-radius:18px;padding:14px 10px;font-weight:700;font-size:19px;text-align:center}
 .opc svg.prod{width:110px;height:110px}
 .opc svg.ic{width:48px;height:48px}
@@ -262,12 +262,12 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .cor{display:grid;justify-items:center;gap:4px;border:0;background:none;font-size:15px;font-weight:700;color:var(--ink2);padding:0}
 .cor span{width:50px;height:50px;border-radius:50%;border:3px solid var(--line)}
 .cor[aria-pressed="true"] span{box-shadow:0 0 0 4px var(--card),0 0 0 7px var(--go)}
-.tams{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.tams{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:10px}
 .tam{display:grid;grid-template-columns:46px 54px minmax(56px,1fr) 54px;align-items:center;gap:6px;background:var(--bg);border-radius:14px;padding:6px}
 .tam b{font-size:22px;text-align:center}
 .tam input{width:100%;min-width:0;text-align:center;font:inherit;font-size:24px;font-weight:700;border:2px solid var(--line);border-radius:10px;padding:6px 0;background:var(--card);color:var(--ink)}
 .stp{width:54px;height:54px;border:0;border-radius:12px;background:var(--card);border:2px solid var(--line);font-size:30px;font-weight:700;line-height:1}
-.datas{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.datas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
 .data-op{display:grid;gap:4px;justify-items:start;border:3px solid var(--line);background:var(--card);border-radius:18px;padding:16px;text-align:left}
 .data-op b{font-size:24px}
 .data-op span{color:var(--ink2);font-size:18px}
@@ -279,7 +279,7 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .resumo-item b{font-size:20px}
 
 /* problema */
-.probs{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.probs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:12px}
 .probs .opc svg.ic{width:52px;height:52px;color:var(--red)}
 .contador{display:flex;align-items:center;justify-content:center;gap:18px;margin:10px 0}
 .contador .stp{width:84px;height:84px;font-size:44px;border-radius:20px}
@@ -324,7 +324,7 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .pchip[aria-pressed="true"]{border-color:var(--go);background:var(--go-soft);color:var(--go-dark)}
 .pchip:disabled{opacity:.4}
 .pchip small{font-weight:400;color:var(--muted);font-size:14px}
-.forns{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.forns{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:14px}
 .forn{background:var(--card);border:2px solid #B48ACB;border-radius:18px;padding:16px;display:grid;gap:10px}
 .forn-h{display:flex;align-items:center;gap:12px}
 .forn-h .m-ic{background:#F3ECFB;color:#6B2F8C}
@@ -335,7 +335,7 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .fitem b{display:block;font-size:18px}
 .fitem span{font-size:16px;color:var(--ink2)}
 .fitem .late{color:var(--red);font-weight:700}
-.esc{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.esc{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:14px}
 .escp{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px}
 .escp-h{display:flex;align-items:center;gap:12px;margin-bottom:6px}
 .escp-h b{display:block;font-size:22px}
@@ -369,7 +369,7 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .sk{display:inline-flex;align-items:center;gap:4px;background:var(--grey-soft);border-radius:8px;padding:3px 9px;font-size:15px;font-weight:700;color:var(--ink2)}
 .sk.best{background:#FFF3D1;color:#6A4A00}
 .sk svg.ic{width:16px;height:16px}
-.pess{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;align-items:start}
+.pess{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:14px;align-items:start}
 .novo-in{display:flex;gap:10px;align-items:center;margin-top:10px}.novo-in .campo{font-size:20px;padding:10px 14px}
 .cor-pick{width:56px;height:52px;border:2px solid var(--line);border-radius:12px;padding:2px;background:var(--card);flex:none}
 .dica{margin:6px 0 0;font-size:15px;color:var(--muted)}
@@ -380,12 +380,62 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 .dicaG b{display:inline!important;font-size:inherit}
 .g-alerta{border-width:3px}.g-alerta.u-crit{border-color:var(--red)}.g-alerta.u-warn{border-color:var(--atn)}.g-alerta.u-ok{border-color:var(--go)}
 .g-big{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}.g-big b{font-size:56px;line-height:1}.g-big span{font-size:20px;font-weight:700}
-.g-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 16px}
+.g-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:0 16px}
 .grow{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 44px;gap:10px;align-items:center;padding:7px 0;font-size:17px;border-top:1px solid var(--grey-soft)}
 .grow b{text-align:right;font-variant-numeric:tabular-nums}
 .gtrack{height:12px;background:var(--grey-soft);border-radius:3px;overflow:hidden}.gtrack i{display:block;height:100%;border-radius:0 4px 4px 0}
 .gt{width:100%;border-collapse:collapse;font-size:16px}.gt th{text-align:left;font-size:14px;color:var(--muted);padding:6px 8px;border-bottom:2px solid var(--line)}.gt td{padding:8px;border-bottom:1px solid var(--grey-soft);vertical-align:top}.gt small{color:var(--muted)}
 .tw{overflow-x:auto}
+.est-row{display:grid;grid-template-columns:minmax(0,1fr) 120px 44px;gap:10px;align-items:center;padding:6px 0;border-top:1px solid var(--grey-soft);font-size:17px}
+.est-row .campo{font-size:19px;padding:8px 10px}
+.aj-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--grey-soft);font-size:17px}
+.aj-in{display:flex;align-items:center;gap:8px}.aj-in .campo{width:110px;font-size:19px;padding:8px 10px}.aj-in small{color:var(--muted);font-size:15px;white-space:nowrap}
+.cat-ed{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) auto auto;gap:8px;align-items:center;padding:8px 0;border-top:1px solid var(--grey-soft)}
+.cat-ed .campo{font-size:18px;padding:8px 10px}
+.cores-ed{display:flex;flex-wrap:wrap;gap:8px}
+.cor-ed{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--line);border-radius:12px;padding:4px 6px 4px 4px;font-weight:700;font-size:15px;background:var(--card)}
+.cor-ed input[type=color]{width:34px;height:34px;border:0;padding:0;background:none;border-radius:50%}
+.cor-ed .x{padding:0 6px;border:0}
+.novo-in{flex-wrap:wrap}
+.pulo.ff[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pulo-sep{width:2px;align-self:stretch;background:var(--line);flex:none}
+.pulos{position:sticky;top:0;z-index:12;background:var(--bg);padding:10px 0;margin:-6px 0 14px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.pulos::-webkit-scrollbar{display:none}
+.pulo{flex:none;white-space:nowrap}
+.grupo{scroll-margin-top:70px}
+.subtabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.subtab{flex:none}
+.sheet .voltar{position:sticky;top:8px;z-index:6;box-shadow:0 6px 18px rgba(22,32,44,.14)}
+@media (max-width:640px){
+  body{font-size:18px}
+  .top .wrap{padding-block:10px}
+  .ola b{font-size:22px}.ola span{font-size:15px}
+  .top .wrap{flex-wrap:nowrap}.ola{min-width:0}.ola b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .help{padding:10px;flex:none}.help span{display:none}
+  .resumo{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-bottom:14px}.resumo .rs{flex:none}
+  #sheet:not(:empty) ~ #toast .toast{top:calc(78px + env(safe-area-inset-top,0px))}
+  .tarefa svg.prod{width:96px;height:96px}
+  h1{font-size:25px}h2{font-size:21px}
+  main{padding-block:14px 120px}
+  .nav .wrap{gap:4px;padding-block:6px}
+  .nb{font-size:13px;padding:8px 2px;border-radius:12px}.nb svg.ic{width:26px;height:26px}
+  .card{padding:14px;border-radius:16px}
+  .grid{grid-template-columns:1fr}
+  .pessoa{min-height:0}
+  .m-top{padding:10px 12px 4px}.m-ic{width:40px;height:40px}.m-top b{font-size:19px}
+  .p-body{padding:4px 12px 10px}.p-body svg.prod{width:52px;height:52px}
+  .p-act{min-height:52px;font-size:19px;margin:0 10px 10px}
+  .grupo-h{font-size:22px}
+  .resumo .rs{font-size:15px;padding:8px 12px}.resumo .rs b{font-size:20px}
+  .filtros .linha-dep{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}
+  .filtros .depc{flex:none}
+  .big{font-size:22px;min-height:66px}
+  .tarefa{padding:14px}
+  .cat-ed{grid-template-columns:1fr 1fr}
+  .est-row{grid-template-columns:minmax(0,1fr) 96px 40px}
+  .toast{bottom:calc(96px + env(safe-area-inset-bottom,0px));font-size:17px}
+  .quem b{font-size:24px}
+}
 .nota{background:var(--atn-soft);color:var(--atn-ink);border-radius:14px;padding:12px 16px;font-size:17px;margin-bottom:16px}
 </style>
 
@@ -432,15 +482,15 @@ h2{font-size:24px;margin:0 0 10px;text-wrap:balance}
 
 <header class="top"><div class="wrap">
   <div class="ola"><b id="ola">Bom dia, Helena</b><span id="hoje"></span> <span class="exemplo">Exemplo</span></div>
-  <button class="help" data-a="tela" data-t="gestor"><svg class="ic"><use href="#i-grafico"/></svg>Painel do gestor</button>
-  <button class="help" data-a="ajuda"><svg class="ic"><use href="#i-duvida"/></svg>Como usar</button>
+  <button class="help" data-a="ajuda" aria-label="Como usar"><svg class="ic"><use href="#i-duvida"/></svg><span>Como usar</span></button>
 </div></header>
 <main><div class="wrap" id="app"></div></main>
 <nav class="nav" aria-label="Menu"><div class="wrap">
   <button class="nb" data-a="tela" data-t="fabrica"><svg class="ic"><use href="#i-fabrica"/></svg>Fábrica</button>
   <button class="nb" data-a="tela" data-t="pedidos"><svg class="ic"><use href="#i-lista"/></svg>Pedidos</button>
-  <button class="nb" data-a="tela" data-t="cadastros"><svg class="ic"><use href="#i-engr"/></svg>Cadastros</button>
   <button class="nb novo" data-a="novo"><svg class="ic"><use href="#i-mais"/></svg>Novo pedido</button>
+  <button class="nb" data-a="tela" data-t="cadastros"><svg class="ic"><use href="#i-engr"/></svg>Cadastros</button>
+  <button class="nb" data-a="tela" data-t="gestor"><svg class="ic"><use href="#i-grafico"/></svg>Gestor</button>
 </div></nav>
 <div id="sheet"></div>
 <div id="toast"></div>
@@ -513,9 +563,9 @@ const FORN0=[{id:'fb',nome:'Bordadeira parceira',servico:'bordado',prazo:3,leva:
 const AVC=['#1E5BB8','#9C3D8F','#17864A','#B5561B','#4C5BA8','#0E7C86','#8A5A00','#B0304A','#3F6E2A','#5A4FB0','#A04000','#2E6F9E'];
 const CATS=[{id:'inf',nome:'Infantil',t:['2','4','6','8'],fator:0.6},{id:'juv',nome:'Juvenil',t:['10','12','14','16'],fator:0.8},{id:'adu',nome:'Adulto',t:['P','M','G','GG','XG','XXG'],fator:1}];
 /* Consumo de tecido por tamanho em relação ao adulto (estimativa; conferir no encaixe do corte) */
-const fatorTam=t=>t==='XXG'?1.15:(CATS.find(c=>c.t.includes(t))?.fator??1);
-const SIZES=CATS.flatMap(c=>c.t);
-const catDe=it=>CATS.find(c=>c.id===(it.cat||'adu'));
+const fatorTam=t=>state.fatorEsp[t]!=null?state.fatorEsp[t]:(state.cats.find(c=>c.t.includes(t))?.fator??1);
+const sizesAll=()=>state.cats.flatMap(c=>c.t);
+const catDe=it=>state.cats.find(c=>c.id===(it.cat||'adu'))||state.cats[state.cats.length-1];
 const CORES={Branca:'#F7F7F5',Preta:'#24272C',Marinho:'#1F2E55',Cinza:'#8E959E',Verde:'#2E7D4F',Royal:'#2449B8',Vermelha:'#C0302A',
   'Cinza mescla':'#B7BBC0',Chumbo:'#4A4F55',Grafite:'#33373C','Azul celeste':'#7FB3E0','Azul turquesa':'#1FA3A8','Azul petróleo':'#1F5F6B',
   'Verde bandeira':'#1E8A3E','Verde musgo':'#5B6B3A','Verde limão':'#A6CE39',Amarela:'#F2C230','Amarelo ouro':'#D9A21B',Laranja:'#EE7A22',
@@ -698,7 +748,7 @@ const tipo=id=>state.tipos.find(t=>t.id===id)||{id,nome:id,grupo:'costura',i:'i-
 const tNome=id=>tipo(id).curto||tipo(id).nome;
 const PICON=new Proxy({},{get:(_,k)=>tipo(k).i||'i-maquina'});
 const temPapel=(p,k)=>(p.papeis||[]).includes(k);
-const papeisTxt=p=>(p.papeis||[]).map(k=>PAPEIS[k]).filter(Boolean).join(' · ');
+const papeisTxt=p=>(p.papeis||[]).map(k=>state.papeis[k]).filter(Boolean).join(' · ');
 const pessoa=id=>state.pessoas.find(p=>p.id===id);
 const pNome=id=>pessoa(id)?.nome||'';
 const avColor=id=>AVC[Math.max(0,state.pessoas.findIndex(p=>p.id===id))%AVC.length];
@@ -739,6 +789,7 @@ const rp=l=>RC[l.id]||(RC[l.id]=rota(prod(l.prod),l.pers,l.opcoes,l));
 function fase(p,s){if(s.pers)return 'pers';const a=anc(p,s.id);return p.steps.some(x=>x.pers&&a.has(x.id))?'depois':'antes'}
 
 /* ================= motor ================= */
+const prm=()=>state.params;
 const loteDone=l=>rp(l).steps.every(s=>done(l,s.id));
 const arteOk=(ped,l,s)=>!!(ped.artes||{})[(l.parent||l.id)+':'+s.id];
 const liberado=ped=>ped.vias&&ped.arte&&ped.materiais.every(m=>m.st!=='comprar'&&m.st!=='pedido');
@@ -747,15 +798,15 @@ function ready(l,s,ped){if(stOf(l,s.id).st!=='pend')return false;if(!s.deps.ever
   if(isExt(s)){const R=rp(l);   // só leva se a parte não estiver numa máquina
     if(R.steps.some(x=>stOf(l,x.id).st==='and'&&usa(R,x).some(pp=>s.partes.includes(pp))))return false}
   return true}
-function wStep(l,s){if(isExt(s))return (fornDe(s.posto)[0]?.prazo||3)+0.5;return s.min*qtdEf(l)/(PAR.jornada*PAR.efic)+PAR.fila}
+function wStep(l,s){if(isExt(s))return (fornDe(s.posto)[0]?.prazo||3)+0.5;return s.min*qtdEf(l)/(prm().jornada*prm().efic)+prm().fila}
 function remDays(l){const p=rp(l),dist={};let mx=0;topo(p).forEach(s=>{const st=stOf(l,s.id).st;const w=st==='ok'?0:(st==='and'||st==='fora')?wStep(l,s)*.5:wStep(l,s);dist[s.id]=w+Math.max(0,...s.deps.map(d=>dist[d]||0));mx=Math.max(mx,dist[s.id])});return mx}
 function minsTot(l){let t=0,d=0;rp(l).steps.forEach(s=>{const m=s.min*l.qtd;t+=m;if(done(l,s.id))d+=m});return[d,t]}
-function preDias(ped){if(liberado(ped))return 0;let d=0;if(ped.materiais.some(m=>m.st==='comprar'))d+=PAR.leadCompra;else if(ped.materiais.some(m=>m.st==='pedido'))d+=Math.ceil(PAR.leadCompra/2);if(!ped.arte||!ped.vias)d+=1;return d}
+function preDias(ped){if(liberado(ped))return 0;let d=0;if(ped.materiais.some(m=>m.st==='comprar'))d+=prm().leadCompra;else if(ped.materiais.some(m=>m.st==='pedido'))d+=Math.ceil(prm().leadCompra/2);if(!ped.arte||!ped.vias)d+=1;return d}
 function info(ped){const ls=lotesDe(ped.id),ab=ls.filter(l=>!loteDone(l)),pre=preDias(ped);let need=0;ab.forEach(l=>need=Math.max(need,remDays(l)+pre));
   let D=0,T=0;ls.filter(l=>!l.rework).forEach(l=>{const[d,t]=minsTot(l);D+=d;T+=t});
-  const prog=T?D/T:0,du=wdUntil(ped.entrega),folga=du-PAR.margem-need;
-  const u=ped.concluido?'fim':!ab.length?'pronto':folga<-PAR.margem?'crit':folga<0?'warn':'ok';
-  return{ls,ab,prog,du,folga,u,score:ped.concluido?1e9:!ab.length?-100:folga-(D>0?3*prog:0)}}
+  const prog=T?D/T:0,du=wdUntil(ped.entrega),folga=du-prm().margem-need;
+  const u=ped.concluido?'fim':!ab.length?'pronto':folga<-prm().margem?'crit':folga<0?'warn':'ok';
+  return{ls,ab,prog,du,folga,u,need,score:ped.concluido?1e9:!ab.length?-100:folga-(D>0?3*prog:0)}}
 const ULAB={crit:'Atrasando',warn:'Atenção',ok:'Em dia',pronto:'Pronto',fim:'Entregue'};
 function prontas(){const out=[];state.pedidos.filter(p=>!p.concluido).forEach(ped=>{const inf=info(ped);lotesDe(ped.id).forEach(l=>{const p=rp(l);
   p.steps.forEach(s=>{if(ready(l,s,ped))out.push({ped,inf,l,p,s,adianta:!s.pers&&fase(p,s)==='antes'&&p.steps.some(x=>x.pers&&!done(l,x.id))})})})});
@@ -803,12 +854,14 @@ function atribuir(ts){const carga={};ts.forEach(t=>{const cs=capazes(t.f),fix=st
 const viaApp=(t)=>['levar','entregar'].includes(t.f)&&pessoa(t.resp)?.viaApp;
 function tarTxt(t){if(!viaApp(t))return t.t;return t.a==='levei'?t.t.replace('Levar para','Chamar app para levar ao'):t.a==='buscou'?t.t.replace('Buscar no','Chamar app para buscar no'):'Chamar app para entregar ao cliente'}
 function servicosPed(ped){const n=new Set();lotesDe(ped.id).forEach(l=>rp(l).steps.forEach(s=>{if(s.pers||isExt(s))n.add(tNome(s.posto))}));return[...n]}
+const durEt=(s,q)=>isExt(s)?`${fornDe(s.posto)[0]?.prazo||3} dias no fornecedor`:fDur(s.min*q*MIN);
+const minTxt=m=>m>=480?`${nf(m/480)} dia${m>=960?'s':''}`:fDur(m*MIN);
 const qtdTxt=(q,un)=>`≈ ${Number(q).toLocaleString('pt-BR')} ${un==='m'?'metros':'unidades'}`;
 const AVISO_EST='Quantidades estimadas pelo sistema. Confira o estoque real e as quantidades antes de comprar.';
 const avisoEst=()=>`<div class="instr" style="margin:10px 0 0;font-size:17px">${ic('i-alerta')}<span>${AVISO_EST}</span></div>`;
 const coresTxt=x=>(x.cores2||[]).map(c=>`${c.cor} (${c.partes.join(', ').toLowerCase()})`).join(' + ');
 const modeloTxt=x=>{const p=prod(x.prod);return[x.tecido,x.cor+((x.cores2||[]).length?' + '+coresTxt(x):''),...(p.opcoes||[]).filter(o=>(x.opcoes||[]).includes(o.id)).map(o=>o.nome.toLowerCase())].filter(Boolean).join(' · ')};
-function calcMat(ls){const m={};ls.forEach(x0=>{const g=x0.g||x0.grade,temG=g&&Object.keys(g).length,qe=temG?sum(Object.entries(g).map(([t,q])=>(q||0)*fatorTam(t))):x0.qtd,qr=temG?sum(Object.values(g).map(q=>q||0)):x0.qtd,x={...x0,qtd:qe},p=prod(x.prod);const add=(it,un,q)=>{m[it]=m[it]||{item:it,un,nec:0};m[it].nec+=q};{const tec=x.tecido||(p.tecidos||[])[0]||'Tecido',base=p.consumo*x.qtd;let resto=1;(x.cores2||[]).forEach(c=>{const pts=c.partes.filter(pt=>!(p.golaItem&&pt==='Gola'));if(!pts.length)return;const f=Math.min(.9,sum(pts.map(pt=>PESO_PARTE[pt]??.05)));resto-=f;add(`${tec} ${c.cor}`,'m',base*f)});add(`${tec} ${x.cor}`,'m',base*Math.max(.1,resto))}
+function calcMat(ls){const m={};ls.forEach(x0=>{const g=x0.g||x0.grade,temG=g&&Object.keys(g).length,qe=temG?sum(Object.entries(g).map(([t,q])=>(q||0)*fatorTam(t))):x0.qtd,qr=temG?sum(Object.values(g).map(q=>q||0)):x0.qtd,x={...x0,qtd:qe},p=prod(x.prod);const add=(it,un,q)=>{m[it]=m[it]||{item:it,un,nec:0};m[it].nec+=q};{const tec=x.tecido||(p.tecidos||[])[0]||'Tecido',base=p.consumo*x.qtd;let resto=1;(x.cores2||[]).forEach(c=>{const pts=c.partes.filter(pt=>!(p.golaItem&&pt==='Gola'));if(!pts.length)return;const f=Math.min(.9,sum(pts.map(pt=>state.pesos[pt]??.05)));resto-=f;add(`${tec} ${c.cor}`,'m',base*f)});add(`${tec} ${x.cor}`,'m',base*Math.max(.1,resto))}
     if(p.golaItem){const cg=(x.cores2||[]).find(c=>c.partes.includes('Gola'));add(`${p.golaItem} ${cg?cg.cor:x.cor}`,'un',qr)}
     const qa=(u,q)=>q*(u==='m'?x.qtd:qr);p.aviam.forEach(([i,u,q])=>add(i,u,qa(u,q)));(p.opcoes||[]).filter(o=>(x.opcoes||[]).includes(o.id)).forEach(o=>(o.aviam||[]).forEach(([i,u,q])=>add(i,u,qa(u,q))))});
   return Object.values(m).map(o=>{o.nec=Math.ceil(o.nec);o.est=state.estoque[o.item]??0;o.st=o.est>=o.nec?'ok':'comprar';return o})}
@@ -834,8 +887,11 @@ function logExemplo(T){state.log=[];{const combos=[['Polo Amsterdã','Pregar man
     state.log.push({ts:T-1.5*DIA,por:'Helena',tipo:'reserva',maq:'reta-1',maqTipo:'reta',op:'leo',ped:'0416',cli:'Academia Pulse',prod:'Calça Helanca',step:'Pregar bolsos'});
     state.log.push({ts:T-2*DIA,por:'Helena',tipo:'troca',f:'levar',de:'roger',para:'layara',ped:'0412',cli:'Construtora Horizonte',step:'Levar para Parceiro DTF'});
     state.log.sort((a,b)=>a.ts-b.ts)}}
+const TESC0={vias:15,arte_prep:60,arte_aprov:240,arte_env:10,comprar:30,levar:60,entregar:60};
+const CFG0=()=>({params:{...PAR},tEsc:{...TESC0},cats:JSON.parse(JSON.stringify(CATS)),fatorEsp:{XXG:1.15},pesos:{...PESO_PARTE},probs:JSON.parse(JSON.stringify(PROBS)),papeis:{...PAPEIS},partesExtra:[...PARTES_COR_EXTRA]});
+function cfgDefaults(s){const d=CFG0();Object.keys(d).forEach(k=>{if(s[k]==null)s[k]=d[k]});Object.keys(TESC0).forEach(k=>{if(s.tEsc[k]==null)s.tEsc[k]=TESC0[k]});Object.keys(PAR).forEach(k=>{if(s.params[k]==null)s.params[k]=PAR[k]})}
 function seed(){seedN=7;const T=now();
-  state={v:8,cores:{...CORES},atrib:{},tipos:JSON.parse(JSON.stringify(TIPOS0)),pessoas:JSON.parse(JSON.stringify(PESSOAS0)),forn:JSON.parse(JSON.stringify(FORN0)),produtos:JSON.parse(JSON.stringify(PRODUTOS0)),pedidos:[],lotes:[],consertos:[],estoque:{...ESTOQUE},seq:421};
+  state={v:8,...CFG0(),cores:{...CORES},atrib:{},tipos:JSON.parse(JSON.stringify(TIPOS0)),pessoas:JSON.parse(JSON.stringify(PESSOAS0)),forn:JSON.parse(JSON.stringify(FORN0)),produtos:JSON.parse(JSON.stringify(PRODUTOS0)),pedidos:[],lotes:[],consertos:[],estoque:{...ESTOQUE},seq:421};
   const mk=o=>{const ped={id:o.id,cliente:o.cliente,contato:o.contato||'',cnpj:o.cnpj||'',vendedor:o.vend,chegada:o.chegada,entrega:o.entrega,vias:o.vias??true,arte:o.arte??true,artePrep:o.prep??true,artes:{},materiais:[],concluido:o.concluido||null};
     ped.materiais=calcMat(o.linhas);if(o.lib)ped.materiais.forEach(m=>m.st='ok');state.pedidos.push(ped);
     o.linhas.forEach((x,i)=>{const l={id:`${o.id}-${i+1}`,ped:o.id,prod:x.prod,cor:x.cor,cores2:x.cores2||[],tecido:x.tecido||prod(x.prod).tecidos[0],opcoes:x.opcoes||[],qtd:x.qtd,grade:gradeOf(x.qtd),pers:(prod(x.prod).persPadrao||[]).map((y,j)=>({...y,id:'pz'+j})),desm:0,steps:{},rework:false,parent:null};state.lotes.push(l);if(x.done)sim(l,x.done==='all'?rp(l).steps.map(z=>z.id):x.done,o.lib)});
@@ -859,7 +915,7 @@ function seed(){seedN=7;const T=now();
   const r=makeRework(lote('0402-1'),'arremate','etiqueta',5,'Etiqueta errada',addWD(T,-6),'leo');rp(r).steps.forEach(s=>r.steps[s.id]={st:'ok',herdado:true});
   return state}
 function save(){RC={};try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
-function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===8&&s.pedidos){const semLog=!s.log;s.cores={...CORES,...(s.cores||{})};const EXC={'0402':['Marcos Lima','12.345.678/0001-90'],'0409':['Juliana Prado','23.456.789/0001-01'],'0412':['Paulo Reis','34.567.890/0001-12'],'0415':['Carla Mendes','45.678.901/0001-23'],'0416':['Rafael Souza','56.789.012/0001-34'],'0419':['Renata Alves','78.901.234/0001-56'],'0418':['Teresa Nogueira','67.890.123/0001-45'],'0420':['Fernanda Rocha','89.012.345/0001-67']};s.pedidos.forEach(p=>{const x=EXC[p.id];p.contato=p.contato||(x?x[0]:'');p.cnpj=p.cnpj||(x?x[1]:'')});s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});const mg=x=>{if(x.parte==='Mangas'&&!x.lado)x.lado='esq'};s.produtos.forEach(p=>{(p.persPadrao||[]).forEach(mg);ajustaGola(p)});Object.entries({'Gola polo Marinho':260,'Gola polo Branca':120,'Gola polo Cinza':150,'Gola ribana Branca':300,'Gola ribana Preta':150}).forEach(([k,v])=>{if(s.estoque[k]==null)s.estoque[k]=v});s.lotes.forEach(l=>(l.pers||[]).forEach(mg));state=s;if(semLog){seedN=11;logExemplo(now())}return}}catch(e){}seed()}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===8&&s.pedidos){const semLog=!s.log;s.cores={...CORES,...(s.cores||{})};const EXC={'0402':['Marcos Lima','12.345.678/0001-90'],'0409':['Juliana Prado','23.456.789/0001-01'],'0412':['Paulo Reis','34.567.890/0001-12'],'0415':['Carla Mendes','45.678.901/0001-23'],'0416':['Rafael Souza','56.789.012/0001-34'],'0419':['Renata Alves','78.901.234/0001-56'],'0418':['Teresa Nogueira','67.890.123/0001-45'],'0420':['Fernanda Rocha','89.012.345/0001-67']};s.pedidos.forEach(p=>{const x=EXC[p.id];p.contato=p.contato||(x?x[0]:'');p.cnpj=p.cnpj||(x?x[1]:'')});s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});const mg=x=>{if(x.parte==='Mangas'&&!x.lado)x.lado='esq'};s.produtos.forEach(p=>{(p.persPadrao||[]).forEach(mg);ajustaGola(p)});Object.entries({'Gola polo Marinho':260,'Gola polo Branca':120,'Gola polo Cinza':150,'Gola ribana Branca':300,'Gola ribana Preta':150}).forEach(([k,v])=>{if(s.estoque[k]==null)s.estoque[k]=v});s.lotes.forEach(l=>(l.pers||[]).forEach(mg));cfgDefaults(s);state=s;if(semLog){seedN=11;logExemplo(now())}return}}catch(e){}seed()}
 
 /* ================= desenho dos produtos ================= */
 function prodSvg(pid,cor,c2){const p=prod(pid);let sv=shapeSvg(p?p.forma:'polo',cor,p?p.nome:'');if(c2&&c2.length){const dots=c2.slice(0,4).map((c,i)=>`<circle cx="${104-i*15}" cy="106" r="8" fill="${coresAll()[c.cor]||'#999'}" stroke="#fff" stroke-width="2.5"/>`).join('');sv=sv.replace('</svg>',dots+'</svg>')}return sv}
@@ -889,6 +945,7 @@ function chips(it){const r=[upill(it.inf.u)];if(it.l.rework)r.push(`<span class=
 function tarefaCard(it,sug){const q=qtdEf(it.l);
   return `<div class="tarefa ${sug?'sug':''}">${prodSvg(it.p.id,it.l.cor,it.l.cores2)}<div>
     <div class="etapa">${esc(it.s.nome)}</div><div class="qtd">${q} peças</div>
+    <div class="desc" style="display:flex;align-items:center;gap:6px">${ic('i-relogio')}Tempo estimado ≈ ${esc(durEt(it.s,q))}</div>
     <div class="desc">${esc(it.p.nome)} · ${esc(modeloTxt(it.l))}</div>
     <div class="desc" style="display:flex;align-items:center;gap:6px;font-weight:700;color:var(--ink)">${ic('i-predio')}${esc(it.ped.cliente)}</div>
     <div class="para">${chips(it)}</div></div></div>${it.s.obs?`<div class="instr">${ic('i-etiqueta')}<span>${esc(it.s.obs)}</span></div>`:''}`}
@@ -902,12 +959,13 @@ function vFabrica(){const P=plano(),esc_=tarefasEsc();
   const foraN=sum(state.lotes.map(l=>Object.values(l.steps).filter(x=>x.st==='fora').length));
   const pulos=[...GRUPOS.map(g=>[g.id,g.nome,g.i]),['fora',`Terceirizados${foraN?` (${foraN})`:''}`,'i-caminhao'],['esc',`Escritório (${esc_.length})`,'i-vias']];
   return `<h1>Fábrica agora</h1><div class="resumo">${res}</div>
-  <div class="pulos">${pulos.map(([id,n,i])=>`<a class="pulo" href="#g-${id}">${ic(i)}${n}</a>`).join('')}</div>
+  <div class="pulos">${[['todas','Todas'],['acao','Precisam de ação'],['trab','Trabalhando']].map(([k,n])=>`<button class="pulo ff" data-a="ff" data-v="${k}" aria-pressed="${(ui.ff||'todas')===k}">${n}</button>`).join('')}<span class="pulo-sep"></span>${pulos.map(([id,n,i])=>`<a class="pulo" href="#g-${id}">${ic(i)}${n}</a>`).join('')}</div>
   ${livres.length?`<div class="livres"><span class="t">Sem trabalho agora:</span>${livres.map(p=>`<span class="pchip">${av(p.id,'s')}${esc(p.nome)}</span>`).join('')}</div>`:''}
   ${GRUPOS.map(g=>{const ts=state.tipos.filter(t=>t.grupo===g.id&&!t.externo&&t.qtd>0);if(!ts.length)return '';
-    return `<section class="grupo" id="g-${g.id}"><h2 class="grupo-h">${ic(g.i)}${g.nome}</h2>${ts.map(t=>{const esp=(P.espera[t.id]||[]).length,sp=(P.semPessoa[t.id]||[]).length;
+    const vis=u=>{const f=ui.ff||'todas';if(f==='trab')return!!P.uso[u.id];if(f==='acao')return!P.uso[u.id]&&(!!P.plan[u.id]||(P.semPessoa[u.tipo]||[]).length>0);return true};const ts2=ts.filter(t=>P.us.some(u=>u.tipo===t.id&&vis(u)));if(!ts2.length)return '';
+    return `<section class="grupo" id="g-${g.id}"><h2 class="grupo-h">${ic(g.i)}${g.nome}</h2>${ts2.map(t=>{const esp=(P.espera[t.id]||[]).length,sp=(P.semPessoa[t.id]||[]).length;
       return `<div class="tipo-h">${esc(t.nome)} <small>${t.qtd} ${t.qtd>1?'máquinas':'máquina'}</small>${esp?`<span class="esp">${esp} esperando máquina</span>`:''}</div>
-      <div class="grid">${P.us.filter(u=>u.tipo===t.id).map(u=>maqTile(u,P)).join('')}</div>`}).join('')}</section>`}).join('')}
+      <div class="grid">${P.us.filter(u=>u.tipo===t.id&&vis(u)).map(u=>maqTile(u,P)).join('')}</div>`}).join('')}</section>`}).join('')}
   <section class="grupo" id="g-fora"><h2 class="grupo-h">${ic('i-caminhao')}Terceirizados</h2>
     <p style="margin:-4px 0 12px;color:var(--ink2)">Só esperam as etapas que usam a parte que está fora. O resto da peça continua andando.</p>
     <div class="forns">${state.forn.map(f=>fornCard(f,esc_)).join('')}</div></section>
@@ -919,7 +977,7 @@ function vFabrica(){const P=plano(),esc_=tarefasEsc();
         <button class="pchip" data-a="disp" data-id="${p.id}" aria-pressed="${p.disp!==false}" style="padding:6px 14px">${p.disp!==false?'Disponível':'Fora agora'}</button></div>
         ${ts.map(tarRow).join('')||'<div class="vazio-s">Nada pendente</div>'}</div>`}).join('')}</div></section>`}
 function tarRow(t){const lab={vias:'Separei',artePrep:'Pronta',arte:'Aprovada',arteEnv:'Enviei',comprei:'Comprei',chegou:'Chegou',levei:viaApp(t)?'Enviado':'Levei',buscou:'Chegou',entregar:'Entregue'}[t.a];
-  return `<div class="tar">${ic(t.i)}<div><b>${esc(tarTxt(t))}</b><span>${esc(t.ped.cliente)}${t.sub?' · '+esc(t.sub):''}</span>${t.late?'<span style="display:block;color:var(--red);font-weight:700">Passou do prazo do fornecedor</span>':''}
+  return `<div class="tar">${ic(t.i)}<div><b>${esc(tarTxt(t))}</b><span>${esc(t.ped.cliente)}${t.sub?' · '+esc(t.sub):''} · ≈ ${minTxt(state.tEsc[t.f]||0)}</span>${t.late?'<span style="display:block;color:var(--red);font-weight:700">Passou do prazo do fornecedor</span>':''}
     <button class="x azul" data-a="troca" data-key="${esc(t.key)}" data-f="${t.f}" style="padding:2px 10px;margin-top:4px;font-size:15px">${t.fixo?'Escolhido à mão · ':''}Trocar pessoa</button></div>
   <button class="mbtn ${['buscou','chegou','entregar'].includes(t.a)?'go':''}" data-a="${t.a}" data-id="${t.ped.id}" data-k="${t.k??''}" data-l="${t.l||''}" data-s="${t.s||''}">${lab}</button></div>`}
 function fornCard(f,esc_){const fora=[];state.lotes.forEach(l=>{const ped=pedById(l.ped);if(ped.concluido)return;const p=rp(l);Object.entries(l.steps).forEach(([sid,x])=>{if(x.st==='fora'&&x.forn===f.id)fora.push({l,p,s:sMap(p)[sid],x,ped})})});
@@ -974,6 +1032,7 @@ function sPedido(id){const ped=pedById(id),i=info(ped),mats=ped.materiais.filter
   const tEnt=TS.find(t=>t.a==='entregar');
   return `${voltar()}<div class="card ped-head">${upill(i.u)}<h1>${esc(ped.cliente)}</h1><div class="ped-ent">${ic('i-caminhao')}${entregaTxt(ped,i)}</div>
     ${ped.contato||ped.cnpj?`<div class="ped-ent">${ic('i-predio')}${ped.contato?`Cliente: <b>${esc(ped.contato)}</b>`:''}${ped.contato&&ped.cnpj?' · ':''}${ped.cnpj?`CNPJ ${esc(ped.cnpj)}`:''}</div>`:''}
+    ${!ped.concluido&&i.ab.length?`<div class="ped-ent">${ic('i-relogio')}Trabalho restante ≈ ${nf(i.need)} dias úteis</div>`:''}
     <div class="ped-ent">${v?av(v,'s'):''}Vendedora: <b>${esc(pNome(v)||'—')}</b> · Pedido ${esc(ped.id)} feito em ${fD(ped.chegada)}</div>
     ${tEnt?`<div class="acoes"><button class="big go" data-a="entregar" data-id="${id}">${ic('i-caminhao')}${esc(tarTxt(tEnt))}${tEnt.resp?' · '+esc(pNome(tEnt.resp)):''}</button></div>`:''}</div>
   ${ped.concluido?'':`<div class="card"><h2>Antes de cortar</h2><div class="checks">
@@ -1040,7 +1099,7 @@ function fluxo(p,key,l,ped){const{pos,w,h}=layout(p),m=sMap(p);const sel=ui.fx&&
     else if(isExt(s)){cls='f-ext';st=`${ic('i-caminhao')}Terceirizado`}
     else{const f=fase(p,s);cls='f-'+f;st=f==='antes'?`${ic('i-adiantar')}Pode adiantar`:f==='pers'?`${ic('i-estampa')}Personalização`:s.fecha?`${ic('i-cadeado')}Fecha a peça`:'Depois da personalização'}
     return `<button class="nd ${cls} ${sel===s.id?'sel':''} ${rel&&!rel.has(s.id)?'dim':''}" style="left:${q.x}px;top:${q.y}px;width:${NW}px;height:${NH}px" data-a="fxSel" data-k="${key}" data-s="${s.id}">
-      <span class="nd-h">${ic(s.icon||PICON[s.posto])}<span>${esc(s.nome)}</span></span><span class="nd-m">${s.virt?'Escritório':esc(tNome(s.posto))}${l||isExt(s)?'':` · ${nf(s.min)} min`}</span><span class="nd-s">${st}</span></button>`}).join('');
+      <span class="nd-h">${ic(s.icon||PICON[s.posto])}<span>${esc(s.nome)}</span></span><span class="nd-m">${s.virt?`Escritório · ≈ ${minTxt(state.tEsc[s.f]||0)}`:esc(tNome(s.posto))+(l?` · ≈ ${durEt(s,qtdEf(l))}`:isExt(s)?` · ${fornDe(s.posto)[0]?.prazo||3} dias`:` · ${nf(s.min)} min/pç`)}</span><span class="nd-s">${st}</span></button>`}).join('');
   return `<div class="fx-wrap" data-k="${key}"><div class="fx" style="width:${w}px;height:${h}px"><svg class="fx-lines" width="${w}" height="${h}" aria-hidden="true"><defs>${mark(mk,'#A9B3BF')}${mark(mk+'g','#17864A')}${mark(mk+'h','#1E5BB8')}</defs>${edges.join('')}</svg>${nodes}</div></div>
     ${w>700?`<div class="arraste">${ic('i-seta')}Arraste para o lado para ver todas as ${p.steps.length} etapas</div>`:''}
     ${sel?(m[sel].virt?vInfo(p,m[sel],key,l,ped):fxInfo(p,m[sel],key,l)):`<div class="arraste">${ic('i-mao')}Toque numa etapa para ver o que ela precisa</div>`}`}
@@ -1053,17 +1112,17 @@ function fxInfo(p,s,key,l){const m=sMap(p),fil=filhos(p,s.id),podeTirar=!l&&!fil
     <div class="lin"><b>Quando terminar, libera:</b>${fil.length?fil.map(x=>chip(x.id)).join(''):'<span>a peça fica pronta</span>'}</div>
     <div class="lin"><b>${isExt(s)?'Fornecedor:':'Quem sabe fazer:'}</b>${quem.length?quem.map(n=>`<span class="tagp">${esc(n)}</span>`).join(''):'<span style="color:var(--red);font-weight:700">ninguém cadastrado</span>'}</div>
     ${s.obs?`<div class="lin">${ic('i-etiqueta')}<b>${esc(s.obs)}</b></div>`:''}
-    <div style="display:flex;gap:10px;flex-wrap:wrap">${podeTirar?`<button class="x" data-a="rmEtapa" data-p="${p.id}" data-s="${s.id}">Tirar esta etapa</button>`:''}<button class="x azul" data-a="fxSel" data-k="${key}" data-s="${s.id}">Fechar</button></div></div>`}
+    <div style="display:flex;gap:10px;flex-wrap:wrap">${!l&&!s.id.startsWith('pz')&&!s.opt?`<button class="x azul" data-a="edEtapa" data-p="${p.id}" data-s="${s.id}">✎ Editar etapa</button>`:''}${podeTirar&&!s.opt?`<button class="x" data-a="rmEtapa" data-p="${p.id}" data-s="${s.id}">Tirar esta etapa</button>`:''}<button class="x azul" data-a="fxSel" data-k="${key}" data-s="${s.id}">Fechar</button></div></div>`}
 function vInfo(p,s,key,l,ped){const t=vTask(l,ped,s),cs=capazes(s.f);
-  return `<div class="fx-info"><div class="t">${ic(s.icon)}${esc(s.nome)}</div><div>${esc(FN[s.f].nome)} · ${vDone(l,ped,s.id)?'feito':'a fazer'}</div>
+  return `<div class="fx-info"><div class="t">${ic(s.icon)}${esc(s.nome)}</div><div>${esc(FN[s.f].nome)} · ${vDone(l,ped,s.id)?'feito':'a fazer'} · tempo estimado ≈ ${minTxt(state.tEsc[s.f]||0)}</div>
     ${t?`<div class="lin"><b>Responsável agora:</b><span class="tagp">${esc(pNome(t.resp)||'ninguém')}</span></div>`:''}
     <div class="lin"><b>Quem pode fazer:</b>${cs.length?cs.map(x=>`<span class="tagp">${esc(x.nome)}${(x.melhor||[]).includes(s.f)?' ★':''}</span>`).join(''):'<span style="color:var(--red);font-weight:700">ninguém cadastrado</span>'}</div>
     <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="x azul" data-a="fxSel" data-k="${key}" data-s="${s.id}">Fechar</button></div></div>`}
 function legendaStatus(){return `<div class="legenda"><span><i style="background:var(--go-soft);border-color:var(--go)"></i>Feito</span><span><i style="background:var(--blue-soft);border:3px solid var(--blue)"></i>Fazendo</span><span><i style="border:3px solid var(--ink)"></i>Pode começar</span><span><i style="background:#F3ECFB;border:3px solid #7A3E9D"></i>No fornecedor</span><span><i style="background:#F5F6F8;border-style:dashed"></i>Esperando</span></div>`}
 
 /* ================= CADASTROS ================= */
-function vCadastros(){const tabs=[['maquinas','Máquinas','i-maquina'],['equipe','Equipe','i-pessoas'],['forn','Terceirizados','i-caminhao'],['produtos','Produtos','i-camisa']];
-  const body=ui.cad==='equipe'?cEquipe():ui.cad==='forn'?cForn():ui.cad==='produtos'?cProdutos():cMaquinas();
+function vCadastros(){const tabs=[['maquinas','Máquinas','i-maquina'],['equipe','Equipe','i-pessoas'],['forn','Terceirizados','i-caminhao'],['produtos','Produtos','i-camisa'],['estoque','Estoque','i-rolo'],['ajustes','Ajustes','i-engr']];
+  const body=ui.cad==='estoque'?cEstoque():ui.cad==='ajustes'?cAjustes():ui.cad==='equipe'?cEquipe():ui.cad==='forn'?cForn():ui.cad==='produtos'?cProdutos():cMaquinas();
   return `<h1>Cadastros</h1><div class="subtabs">${tabs.map(([k,n,i])=>`<button class="subtab" data-a="cad" data-k="${k}" aria-current="${ui.cad===k?'page':'false'}">${ic(i)}${n}</button>`).join('')}</div>${body}`}
 function cMaquinas(){const P=plano();return `<p style="margin:-6px 0 14px;color:var(--ink2)">Cada máquina é um posto de trabalho. Ajuste a quantidade com + e −.</p>
   ${GRUPOS.map(g=>{const ts=state.tipos.filter(t=>t.grupo===g.id&&!t.externo);if(!ts.length)return '';return `<div class="tipo-h">${ic(g.i)}${g.nome}</div>${ts.map(t=>{const ap=aptos(t.id);
@@ -1072,11 +1131,13 @@ function cMaquinas(){const P=plano();return `<p style="margin:-6px 0 14px;color:
   <button class="prodc add" data-a="tipoEd" data-t="" style="width:100%;margin-top:6px">${ic('i-mais')}<b>Adicionar máquina ou mesa</b></button>`}
 const ICONES=['i-maquina','i-botao','i-corte','i-estampa','i-bordado','i-lupa','i-caixa','i-regua'];
 function sTipoEd(){const e=ui.sheet;const usoP=e.id?state.produtos.filter(p=>p.steps.some(z=>z.posto===e.id)).map(p=>p.nome):[];
-  return `${voltar('Cancelar')}<h1>${e.id?'Editar máquina':'Nova máquina ou mesa'}</h1>
+  return `${voltar('Cancelar')}<h1>${e.id?(e.externo?'Editar serviço':'Editar máquina'):(e.externo?'Novo serviço terceirizado':'Nova máquina ou mesa')}</h1>
   <div class="rotulo">Nome</div><input class="campo" id="xNome" value="${esc(e.nome)}" placeholder="Ex.: Travete" autocomplete="off">
   <div class="rotulo">Setor</div><div class="linha-dep">${GRUPOS.map(g=>`<button class="depc" data-a="tG" data-v="${g.id}" aria-pressed="${e.grupo===g.id}">${ic(g.i)}${esc(g.nome)}</button>`).join('')}</div>
   <div class="rotulo">Desenho</div><div class="linha-dep">${ICONES.map(i=>`<button class="depc" data-a="tI" data-v="${i}" aria-pressed="${e.i===i}" aria-label="Ícone">${ic(i)}</button>`).join('')}</div>
-  <div class="rotulo">Quantas existem?</div><div class="contador" style="justify-content:flex-start"><button class="stp" data-a="tQ" data-d="-1" aria-label="Menos uma">−</button><output>${e.qtd}</output><button class="stp" data-a="tQ" data-d="1" aria-label="Mais uma">+</button></div>
+  <div class="linha-dep" style="margin-top:14px"><button class="depc" data-a="tExt" aria-pressed="${!!e.externo}">${ic('i-caminhao')}Feito fora (terceirizado)</button></div>
+  ${e.grupo==='pers'?`<div class="rotulo">Tempo por peça na personalização (minutos)</div><div class="contador" style="justify-content:flex-start"><button class="stp" data-a="tMin" data-d="-0.1" aria-label="Menos tempo">−</button><output>${nf(e.min)}</output><button class="stp" data-a="tMin" data-d="0.1" aria-label="Mais tempo">+</button></div>`:''}
+  ${e.externo?'':`<div class="rotulo">Quantas existem?</div><div class="contador" style="justify-content:flex-start"><button class="stp" data-a="tQ" data-d="-1" aria-label="Menos uma">−</button><output>${e.qtd}</output><button class="stp" data-a="tQ" data-d="1" aria-label="Mais uma">+</button></div>`}
   ${usoP.length?`<p style="color:var(--ink2)">Usada nos produtos: ${esc(usoP.join(', '))}</p>`:''}
   ${e.err?`<div class="aviso">${ic('i-alerta')}${esc(e.err)}</div>`:''}
   <div class="acoes"><button class="big go" data-a="tOk">${ic('i-check')}Salvar</button>${e.id?`<button class="big neutro" data-a="tRm">Tirar esta máquina</button>`:''}</div>`}
@@ -1085,17 +1146,56 @@ function cEquipe(){const ord=['costura','corte','pers','acab','vendas','compras'
   <div class="pess">${ps.map(p=>`<button class="pes" data-a="pesEd" data-id="${p.id}"><div class="pes-h">${av(p.id)}<div><b>${esc(p.nome)}</b><span>${esc(papeisTxt(p))}</span></div></div>
     <div class="skills">${p.sabe.map(t=>`<span class="sk ${p.melhor.includes(t)?'best':''}">${ic(tipo(t).i)}${esc(tNome(t))}${p.melhor.includes(t)?' ★':''}</span>`).join('')}${p.melhor.filter(x=>!state.tipos.some(t=>t.id===x)&&!FN[x]).map(x=>`<span class="sk best">${esc(x)} ★</span>`).join('')}${(p.funcoes||[]).map(f=>`<span class="sk ${(p.melhor||[]).includes(f)?'best':''}">${ic(FN[f].i)}${esc(FN[f].nome)}${(p.melhor||[]).includes(f)?' ★':''}</span>`).join('')}${p.viaApp?`<span class="sk">${ic('i-caminhao')}Leva por aplicativo</span>`:''}${!p.sabe.length&&!(p.funcoes||[]).length?'<span class="sk">Sem função cadastrada</span>':''}</div></button>`).join('')}
   <button class="prodc add" data-a="pesEd" data-id="">${ic('i-mais')}<b>Adicionar pessoa</b></button></div>`}
-function cForn(){return `<p style="margin:-6px 0 14px;color:var(--ink2)">Serviços feitos fora. O pacote inteiro vai e volta junto.</p>
+function cForn(){return `<div class="tipo-h" style="margin-top:0">Serviços feitos fora</div>
+  ${state.tipos.filter(t=>t.externo).map(t=>`<div class="cad-row"><span class="m-ic" style="background:#F3ECFB;color:#6B2F8C">${ic(t.i)}</span><div><b>${esc(t.nome)}</b><span>${fornDe(t.id).map(f=>esc(f.nome)).join(', ')||'<b style="color:var(--red);display:inline">sem fornecedor</b>'}</span></div><button class="mbtn" data-a="tipoEd" data-t="${t.id}">Editar</button></div>`).join('')}
+  <button class="prodc add" data-a="tipoEd" data-t="" data-ext="1" style="width:100%;margin:6px 0 20px">${ic('i-mais')}<b>Adicionar serviço terceirizado</b></button>
+  <div class="tipo-h">Fornecedores</div>
   <div class="pess">${state.forn.map(f=>`<button class="pes" data-a="fornEd" data-id="${f.id}"><div class="pes-h"><span class="m-ic" style="background:#F3ECFB;color:#6B2F8C">${ic(tipo(f.servico).i)}</span><div><b>${esc(f.nome)}</b><span>${esc(tNome(f.servico))}</span></div></div>
     <div class="skills"><span class="sk">${ic('i-relogio')}Prazo ${f.prazo} ${f.prazo>1?'dias':'dia'}</span><span class="sk">${ic('i-caminhao')}${esc(pNome(f.leva)||'ninguém')}</span></div></button>`).join('')}
   <button class="prodc add" data-a="fornEd" data-id="">${ic('i-mais')}<b>Adicionar terceirizado</b></button></div>`}
+function listaEst(){const q=(ui.eq||'').toLowerCase();const it=Object.entries(state.estoque).filter(([k])=>k.toLowerCase().includes(q)).sort((a,b)=>a[0].localeCompare(b[0]));
+  return it.map(([k,v])=>`<div class="est-row"><span>${esc(k)}</span><input class="campo" type="number" min="0" step="1" data-est="${esc(k)}" value="${v}" aria-label="Quantidade de ${esc(k)}"><button class="x" data-a="rmEst" data-v="${esc(k)}" aria-label="Tirar ${esc(k)}">×</button></div>`).join('')||'<p class="dica">Nada encontrado.</p>'}
+function cEstoque(){return `<div class="nota">O sistema usa estes números para sugerir compras. São o registro do app: confira sempre o estoque real antes de comprar.</div>
+  <input class="campo busca" id="estBusca" value="${esc(ui.eq||'')}" placeholder="Buscar item (ex.: Piquet, Gola, Botão)" autocomplete="off">
+  <div class="card" style="margin-top:14px"><div id="estLista">${listaEst()}</div>
+  <div class="rotulo">Novo item</div><div class="novo-in"><input class="campo" id="estN" placeholder="Ex.: Malha PV Azul petróleo" autocomplete="off"><input class="campo" id="estQ" type="number" min="0" value="0" style="max-width:120px" aria-label="Quantidade"><button class="mbtn" data-a="addEst">Adicionar</button></div>
+  <p class="dica">Tecidos em metros; aviamentos e golas em unidades (elástico e cordão em metros).</p></div>`}
+const campoN=(lab,attr,val,suf)=>`<label class="aj-row"><span>${lab}</span><span class="aj-in"><input class="campo" type="number" step="any" ${attr} value="${val}">${suf?`<small>${suf}</small>`:''}</span></label>`;
+function cAjustes(){const pr=state.params;
+  return `<div class="card"><h2>Prazos e cálculo</h2>
+    ${campoN('Margem para imprevistos','data-cfg="params.margem"',pr.margem,'dias úteis')}
+    ${campoN('Jornada de trabalho por dia','data-cfg="params.jornada"',pr.jornada,'minutos')}
+    ${campoN('Eficiência da equipe','data-cfg="params.efic" data-pct="1"',Math.round(pr.efic*100),'%')}
+    ${campoN('Espera entre uma etapa e outra','data-cfg="params.fila"',pr.fila,'dias')}
+    ${campoN('Prazo para chegar uma compra','data-cfg="params.leadCompra"',pr.leadCompra,'dias úteis')}</div>
+  <div class="card"><h2>Tempo das tarefas de escritório</h2><p class="dica" style="margin:0 0 8px">Estimativa usada no mapa do pedido e nas tarefas.</p>
+    ${FUNCOES.map(f=>campoN(esc(f.nome),`data-cfg="tEsc.${f.id}"`,state.tEsc[f.id]??0,'minutos')).join('')}</div>
+  <div class="card"><h2>Tamanhos</h2><p class="dica" style="margin:0 0 8px">Separe os tamanhos por vírgula. Para um tamanho gastar mais ou menos tecido, escreva assim: XXG:115 (115% do consumo).</p>
+    ${state.cats.map((c,i)=>`<div class="cat-ed"><input class="campo" data-catn="${i}" value="${esc(c.nome)}" aria-label="Nome da categoria"><input class="campo" data-catt="${i}" value="${esc(c.t.map(t=>state.fatorEsp[t]!=null?`${t}:${Math.round(state.fatorEsp[t]*100)}`:t).join(', '))}" aria-label="Tamanhos">
+      <span class="aj-in"><input class="campo" type="number" data-catf="${i}" value="${Math.round(c.fator*100)}" aria-label="Consumo de tecido"><small>% do tecido</small></span><button class="x" data-a="rmCat" data-i="${i}">Tirar</button></div>`).join('')}
+    <button class="mbtn" data-a="addCat">+ Nova categoria de tamanho</button></div>
+  <div class="card"><h2>Cores</h2><p class="dica" style="margin:0 0 8px">Toque na bolinha para mudar o tom.</p>
+    <div class="cores-ed">${Object.entries(state.cores).map(([n,h])=>`<span class="cor-ed"><input type="color" data-corhex="${esc(n)}" value="${esc(h)}" aria-label="Tom de ${esc(n)}">${esc(n)}<button class="x" data-a="rmCor" data-v="${esc(n)}" aria-label="Tirar ${esc(n)}">×</button></span>`).join('')}</div>
+    <div class="novo-in"><input class="campo" id="corN" placeholder="Nome da cor" autocomplete="off"><input type="color" id="corH" value="#2A6F7F" class="cor-pick" aria-label="Tom"><button class="mbtn" data-a="addCor">Adicionar</button></div></div>
+  <div class="card"><h2>Detalhes que podem ter outra cor</h2><p class="dica" style="margin:0 0 8px">Aparecem junto das partes da peça ao escolher cor secundária.</p>
+    <div class="linha-dep">${state.partesExtra.map(x=>`<span class="depc">${esc(x)}<button class="x" data-a="rmPx" data-v="${esc(x)}" style="padding:0 8px;margin-left:4px" aria-label="Tirar">×</button></span>`).join('')}</div>
+    <div class="novo-in"><input class="campo" id="pxN" placeholder="Ex.: Vivo da gola" autocomplete="off"><button class="mbtn" data-a="addPx">Adicionar</button></div></div>
+  <div class="card"><h2>Quanto tecido cada parte usa</h2><p class="dica" style="margin:0 0 8px">Usado para dividir a compra de tecido quando a peça tem mais de uma cor.</p>
+    ${Object.entries(state.pesos).map(([k,v])=>`<label class="aj-row"><span>${esc(k)}</span><span class="aj-in"><input class="campo" type="number" step="any" data-peso="${esc(k)}" value="${Math.round(v*100)}"><small>%</small><button class="x" data-a="rmPeso" data-v="${esc(k)}" aria-label="Tirar">×</button></span></label>`).join('')}
+    <div class="novo-in"><input class="campo" id="pesoN" placeholder="Parte" autocomplete="off"><input class="campo" id="pesoV" type="number" value="5" style="max-width:100px" aria-label="Porcentagem"><button class="mbtn" data-a="addPeso">Adicionar</button></div></div>
+  <div class="card"><h2>Motivos de conserto</h2>
+    ${state.probs.map((x,i)=>`<div class="novo-in" style="margin-top:6px"><input class="campo" data-prob="${i}" value="${esc(x.k)}" aria-label="Motivo"><button class="x" data-a="rmProb" data-i="${i}">Tirar</button></div>`).join('')}
+    <div class="novo-in"><input class="campo" id="probN" placeholder="Novo motivo" autocomplete="off"><button class="mbtn" data-a="addProb">Adicionar</button></div></div>
+  <div class="card"><h2>Cargos</h2>
+    ${Object.entries(state.papeis).map(([k,v])=>`<div class="novo-in" style="margin-top:6px"><input class="campo" data-papel="${k}" value="${esc(v)}" aria-label="Cargo"></div>`).join('')}
+    <div class="novo-in"><input class="campo" id="papN" placeholder="Novo cargo" autocomplete="off"><button class="mbtn" data-a="addPapel">Adicionar</button></div></div>`}
 function cProdutos(){return `<div class="prods">${state.produtos.map(p=>`<button class="prodc" data-a="produto" data-p="${p.id}">${prodSvg(p.id,'')}<b>${esc(p.nome)}</b><span>${p.steps.length} etapas · ${nf(sum(p.steps.filter(s=>!isExt(s)).map(s=>s.min)))} min por peça</span></button>`).join('')}
   <button class="prodc add" data-a="nprod">${ic('i-mais')}<b>Cadastrar produto</b></button></div>`}
 function sPesEd(){const e=ui.sheet,internos=state.tipos.filter(t=>!t.externo);
   const nomesEtapas=[...new Set(state.produtos.flatMap(p=>p.steps.filter(s=>e.sabe.includes(s.posto)).map(s=>s.nome)))];
   return `${voltar('Cancelar')}<h1>${e.id?esc(e.nome||'Pessoa'):'Nova pessoa'}</h1>
   <div class="rotulo">Nome</div><input class="campo" id="xNome" value="${esc(e.nome)}" autocomplete="off">
-  <div class="rotulo">Cargos <span style="font-weight:400;color:var(--muted)">(pode marcar vários)</span></div><div class="linha-dep">${Object.entries(PAPEIS).map(([k,n])=>`<button class="depc" data-a="xPapel" data-v="${k}" aria-pressed="${e.papeis.includes(k)}">${n}</button>`).join('')}</div>
+  <div class="rotulo">Cargos <span style="font-weight:400;color:var(--muted)">(pode marcar vários)</span></div><div class="linha-dep">${Object.entries(state.papeis).map(([k,n])=>`<button class="depc" data-a="xPapel" data-v="${k}" aria-pressed="${e.papeis.includes(k)}">${n}</button>`).join('')}</div>
   <div class="rotulo">Máquinas que sabe usar</div><div class="escolhe">${internos.map(t=>`<button class="opc" data-a="xSabe" data-v="${t.id}" aria-pressed="${e.sabe.includes(t.id)}">${ic(t.i)}${esc(t.nome)}</button>`).join('')}</div>
   ${e.sabe.length?`<div class="rotulo">Faz melhor ★ <span style="font-weight:400;color:var(--muted)">(o sistema dá preferência)</span></div>
   <div class="linha-dep">${e.sabe.map(t=>`<button class="depc" data-a="xMelhor" data-v="${t}" aria-pressed="${e.melhor.includes(t)}">${ic(tipo(t).i)}${esc(tNome(t))}</button>`).join('')}</div>
@@ -1120,28 +1220,47 @@ function sProduto(pid){const p=prod(pid);if(!p)return voltar();const key='P'+p.i
     <div class="legenda"><span><i></i><b style="color:var(--go-dark)">Pode adiantar</b></span><span><i style="background:var(--atn-soft);border-color:var(--atn)"></i>Personalização interna</span><span><i style="background:#F3ECFB;border-color:#B48ACB"></i>Terceirizado</span><span><i></i>Depois da personalização</span></div>
     <div class="nota" style="margin:10px 0 0">A personalização é escolhida em cada pedido. Aqui o exemplo usa: ${(p.persPadrao||[]).map(x=>`<b>${esc(tNome(x.tipo))} na ${esc(localTxt(x).toLowerCase())}</b>`).join(' e ')||'nenhuma'}. Só as etapas que usam essa parte esperam por ela.</div>
     ${fluxo(rota(p,(p.persPadrao||[]).map((x,k)=>({...x,id:'pz'+k})),(p.opcoes||[]).map(o=>o.id)),key)}<div class="acoes"><button class="big azul" data-a="addEtapa" data-p="${p.id}">${ic('i-mais')}Adicionar etapa</button></div></div>
-  <div class="card"><h2>Tecidos e modelos</h2><p style="margin:0 0 10px;color:var(--ink2)">Em cada pedido é obrigatório escolher o tecido. O modelo acrescenta etapas ao roteiro.</p>
-    <div class="linha-dep">${(p.tecidos||[]).map(x=>`<span class="depc">${ic('i-rolo')}${esc(x)}</span>`).join('')}</div>
-    <div style="display:flex;gap:10px;margin-top:12px"><input class="campo" id="novoTec" placeholder="Novo tecido (ex.: Tactel)" style="font-size:20px;padding:10px 14px" autocomplete="off"><button class="mbtn" data-a="addTec" data-p="${p.id}">Adicionar</button></div>
-    ${p.golaItem?`<div class="mat">${ic('i-carrinho')}<div><b>${esc(p.golaItem)}</b><span>Comprada pronta, uma por peça, na cor da gola (principal ou a escolhida para a Gola)</span></div><span></span></div>`:''}
-    ${(p.opcoes||[]).length?`<div class="rotulo">Modelos</div>${p.opcoes.map(o=>`<div class="mat">${ic('i-mais')}<div><b>${esc(o.nome)}</b><span>Acrescenta: ${o.steps.map(z=>esc(z.nome)).join(', ')}</span></div><span></span></div>`).join('')}`:''}</div>
-  <div class="card"><h2>Partes da peça</h2><p style="margin:0 0 10px;color:var(--ink2)">Cada etapa diz quais partes usa. Assim o sistema sabe o que pode andar enquanto uma parte está na personalização.</p>
-    <div class="linha-dep">${(p.partes||[]).map(x=>`<span class="depc">${esc(x)}</span>`).join('')}</div>
-    <div style="display:flex;gap:10px;margin-top:12px"><input class="campo" id="novaParte" placeholder="Nova parte (ex.: Bolso)" style="font-size:20px;padding:10px 14px" autocomplete="off"><button class="mbtn" data-a="addParte" data-p="${p.id}">Adicionar</button></div></div>
-  <div class="card"><h2>Etapas por máquina</h2>${porMaq.map(x=>`<div class="mat">${ic(x.t.i)}<div><b>${esc(x.t.nome)}</b><span>${x.ss.map(s=>esc(s.nome)).join(' · ')}</span></div><span class="tagp">${x.t.externo?'fora':nf(sum(x.ss.map(s=>s.min)))+' min'}</span></div>`).join('')}</div>`}
+  <div class="card"><h2>Dados do produto</h2>
+    <div class="rotulo" style="margin-top:0">Nome</div><input class="campo" id="prNome" value="${esc(p.nome)}" autocomplete="off">
+    <div class="rotulo">Consumo de tecido por peça <span class="dica">(metros, tamanho adulto)</span></div><input class="campo" id="prCons" type="number" step="0.01" min="0" value="${p.consumo}">
+    <div class="rotulo">Gola comprada pronta <span class="dica">(deixe vazio se a peça não tem)</span></div><input class="campo" id="prGola" value="${esc(p.golaItem||'')}" placeholder="Ex.: Gola polo" autocomplete="off">
+    <div class="acoes"><button class="big go" data-a="prSalvar" data-p="${p.id}">${ic('i-check')}Salvar dados</button></div>
+    <div class="rotulo">Desenho</div><div class="linha-dep">${FORMAS.map(([f,n])=>`<button class="depc" data-a="prForma" data-p="${p.id}" data-v="${f}" aria-pressed="${p.forma===f}">${n}</button>`).join('')}</div></div>
+  <div class="card"><h2>Tecidos</h2><p class="dica" style="margin:0 0 10px">Em cada pedido é obrigatório escolher um destes.</p>
+    <div class="linha-dep">${(p.tecidos||[]).map(x=>`<span class="depc">${ic('i-rolo')}${esc(x)}<button class="x" data-a="rmTec" data-p="${p.id}" data-v="${esc(x)}" aria-label="Tirar ${esc(x)}" style="padding:0 8px;margin-left:4px">×</button></span>`).join('')}</div>
+    <div class="novo-in"><input class="campo" id="novoTec" placeholder="Novo tecido (ex.: Tactel)" autocomplete="off"><button class="mbtn" data-a="addTec" data-p="${p.id}">Adicionar</button></div></div>
+  <div class="card"><h2>Aviamentos por peça</h2>
+    ${p.golaItem?`<div class="mat">${ic('i-carrinho')}<div><b>${esc(p.golaItem)}</b><span>1 por peça, na cor da gola</span></div><span></span></div>`:''}
+    ${p.aviam.map((a,j)=>`<div class="mat">${ic('i-carrinho')}<div><b>${esc(a[0])}</b><span>${nf(a[2],2)} ${a[1]==='m'?'metro(s)':'unidade(s)'} por peça</span></div><button class="x" data-a="rmAv" data-p="${p.id}" data-j="${j}">Tirar</button></div>`).join('')}
+    <div class="novo-in"><input class="campo" id="avN" placeholder="Nome (ex.: Botão)" autocomplete="off"><input class="campo" id="avQ" type="number" step="0.1" min="0" value="1" aria-label="Quantidade por peça" style="max-width:110px"><select class="campo" id="avU" style="max-width:140px"><option value="un">unidades</option><option value="m">metros</option></select><button class="mbtn" data-a="addAv" data-p="${p.id}">Adicionar</button></div></div>
+  <div class="card"><h2>Personalização padrão</h2><p class="dica" style="margin:0 0 10px">Já vem marcada no novo pedido. Em cada pedido dá para mudar.</p>
+    <div class="linha-dep">${(p.persPadrao||[]).map((x,j)=>`<span class="depc">${ic(tipo(x.tipo).i)}${esc(tNome(x.tipo))} · ${esc(localTxt(x))}<button class="x" data-a="rmPp" data-p="${p.id}" data-j="${j}" aria-label="Tirar" style="padding:0 8px;margin-left:4px">×</button></span>`).join('')||'<span class="dica">Nenhuma</span>'}</div>
+    <div class="novo-in"><select class="campo" id="ppT">${state.tipos.filter(t=>t.grupo==='pers').map(t=>`<option value="${t.id}">${esc(tNome(t.id))}</option>`).join('')}</select><select class="campo" id="ppP">${(p.partes||[]).map(x=>`<option>${esc(x)}</option>`).join('')}</select><select class="campo" id="ppL"><option value="">Lado (se for manga)</option>${Object.entries(LADOS).map(([v,n])=>`<option value="${v}">${n}</option>`).join('')}</select><button class="mbtn" data-a="addPp" data-p="${p.id}">Adicionar</button></div></div>
+  <div class="card"><h2>Modelos</h2><p class="dica" style="margin:0 0 10px">Um modelo acrescenta uma etapa ao roteiro (ex.: Com zíper).</p>
+    ${(p.opcoes||[]).map((o,j)=>`<div class="mat">${ic('i-mais')}<div><b>${esc(o.nome)}</b><span>Acrescenta: ${o.steps.map(z=>`${esc(z.nome)} (${esc(tNome(z.posto))}, ${nf(z.min)} min/pç)`).join(', ')}</span></div><button class="x" data-a="rmOpc" data-p="${p.id}" data-j="${j}">Tirar</button></div>`).join('')||'<p class="dica">Nenhum modelo.</p>'}
+    <div class="rotulo">Novo modelo</div>
+    <div class="novo-in"><input class="campo" id="opN" placeholder="Nome do modelo (ex.: Com bolso)" autocomplete="off"><input class="campo" id="opE" placeholder="Etapa que acrescenta (ex.: Pregar bolso)" autocomplete="off"></div>
+    <div class="novo-in"><select class="campo" id="opM">${state.tipos.map(t=>`<option value="${t.id}">${esc(t.nome)}</option>`).join('')}</select><select class="campo" id="opA">${p.steps.slice(1).map(z=>`<option value="${z.id}">Antes de: ${esc(z.nome)}</option>`).join('')}</select></div>
+    <div class="novo-in"><select class="campo" id="opP">${(p.partes||[]).map(x=>`<option>${esc(x)}</option>`).join('')}</select><input class="campo" id="opMin" type="number" step="0.1" min="0.1" value="1" aria-label="Minutos por peça" style="max-width:120px"><span class="dica">min/pç</span><button class="mbtn" data-a="addOpc" data-p="${p.id}">Adicionar modelo</button></div></div>
+  <div class="card"><h2>Partes da peça</h2><p class="dica" style="margin:0 0 10px">Cada etapa diz quais partes usa. Assim o sistema sabe o que pode andar enquanto uma parte está na personalização.</p>
+    <div class="linha-dep">${(p.partes||[]).map(x=>`<span class="depc">${esc(x)}<button class="x" data-a="rmParte" data-p="${p.id}" data-v="${esc(x)}" aria-label="Tirar ${esc(x)}" style="padding:0 8px;margin-left:4px">×</button></span>`).join('')}</div>
+    <div class="novo-in"><input class="campo" id="novaParte" placeholder="Nova parte (ex.: Bolso)" autocomplete="off"><button class="mbtn" data-a="addParte" data-p="${p.id}">Adicionar</button></div></div>
+  <div class="card"><h2>Etapas por máquina</h2>${porMaq.map(x=>`<div class="mat">${ic(x.t.i)}<div><b>${esc(x.t.nome)}</b><span>${x.ss.map(s=>esc(s.nome)).join(' · ')}</span></div><span class="tagp">${x.t.externo?'fora':nf(sum(x.ss.map(s=>s.min)))+' min'}</span></div>`).join('')}</div>
+  <div class="acoes"><button class="big neutro" data-a="rmProd" data-p="${p.id}">Excluir este produto</button></div>`}
 function eRead(){const e=ui.sheet;[['eNome','nome'],['eObs','obs'],['pNome','nome'],['pTec','tecido'],['xNome','nome']].forEach(([id,k])=>{const n=document.getElementById(id);if(n)e[k]=n.value})}
-function sEtapa(){const e=ui.sheet,p=prod(e.p);
-  return `${voltar('Cancelar')}<h1>Nova etapa em ${esc(p.nome)}</h1>
+function sEtapa(){const e=ui.sheet,p=prod(e.p),proib=e.sid?desc(p,e.sid):new Set();
+  return `${voltar('Cancelar')}<h1>${e.sid?'Editar etapa':'Nova etapa em '+esc(p.nome)}</h1>
   <div class="rotulo">Nome da etapa</div><input class="campo" id="eNome" value="${esc(e.nome)}" placeholder="Ex.: Pregar vivo na gola" autocomplete="off">
   <div class="rotulo">Onde é feita?</div><div class="escolhe">${state.tipos.map(t=>`<button class="opc" data-a="eP" data-v="${t.id}" aria-pressed="${e.posto===t.id}">${ic(t.i)}${esc(t.nome)}${t.externo?'<span style="font-weight:400;font-size:15px;color:#6B2F8C">terceirizado</span>':''}</button>`).join('')}</div>
-  <div class="rotulo">O que precisa estar pronto antes?</div><div class="linha-dep">${topo(p).map(s=>`<button class="depc" data-a="eD" data-v="${s.id}" aria-pressed="${e.deps.includes(s.id)}">${ic(PICON[s.posto])}${esc(s.nome)}</button>`).join('')}</div>
+  <div class="rotulo">O que precisa estar pronto antes?</div><div class="linha-dep">${topo(p).filter(s=>!proib.has(s.id)).map(s=>`<button class="depc" data-a="eD" data-v="${s.id}" aria-pressed="${e.deps.includes(s.id)}">${ic(PICON[s.posto])}${esc(s.nome)}</button>`).join('')}</div>
   <div class="rotulo">Quais partes da peça ela usa?</div><div class="linha-dep">${(p.partes||[]).map(x=>`<button class="depc" data-a="ePt" data-v="${esc(x)}" aria-pressed="${e.partes.includes(x)}">${esc(x)}</button>`).join('')}</div>
   <div class="rotulo">Tempo por peça (minutos)</div><div class="contador" style="justify-content:flex-start"><button class="stp" data-a="eM" data-d="-0.1" aria-label="Menos tempo">−</button><output>${nf(e.min)}</output><button class="stp" data-a="eM" data-d="0.1" aria-label="Mais tempo">+</button></div>
   <div class="rotulo">Marque se for o caso</div><div class="linha-dep"><button class="depc" data-a="eT" data-v="pers" aria-pressed="${e.pers}">${ic('i-estampa')}É personalização</button><button class="depc" data-a="eT" data-v="fecha" aria-pressed="${e.fecha}">${ic('i-cadeado')}Fecha a peça</button></div>
   <div class="rotulo">Aviso para quem faz (opcional)</div><input class="campo" id="eObs" value="${esc(e.obs)}" placeholder="Ex.: etiqueta do lado esquerdo" autocomplete="off">
   ${e.err?`<div class="aviso">${ic('i-alerta')}${esc(e.err)}</div>`:''}
-  <div class="acoes"><button class="big go" data-a="eOk">${ic('i-check')}Adicionar etapa</button></div>`}
-function sNovoProd(){const e=ui.sheet,formas=[['polo','Polo'],['polo2','Polo com punho'],['camiseta','Camiseta'],['camisetaML','Manga longa'],['regata','Sem manga'],['calca','Calça'],['bermuda','Bermuda'],['legging','Legging'],['shortsaia','Short saia'],['jaleco','Jaleco'],['blusa','Blusa']];
+  <div class="acoes"><button class="big go" data-a="eOk">${ic('i-check')}${e.sid?'Salvar etapa':'Adicionar etapa'}</button>${e.sid&&!filhos(p,e.sid).length&&p.steps[0].id!==e.sid?`<button class="big neutro" data-a="rmEtapa" data-p="${p.id}" data-s="${e.sid}">Tirar esta etapa</button>`:''}</div>`}
+const FORMAS=[['polo','Polo'],['polo2','Polo com punho'],['camiseta','Camiseta'],['camisetaML','Manga longa'],['regata','Sem manga'],['calca','Calça'],['bermuda','Bermuda'],['legging','Legging'],['shortsaia','Short saia'],['jaleco','Jaleco'],['blusa','Blusa']];
+function sNovoProd(){const e=ui.sheet,formas=FORMAS;
   return `${voltar('Cancelar')}<h1>Cadastrar produto</h1>
   <div class="rotulo">Nome</div><input class="campo" id="pNome" value="${esc(e.nome)}" placeholder="Ex.: Camiseta Gola Careca" autocomplete="off">
   <div class="rotulo">Desenho</div><div class="escolhe">${formas.map(([f,n])=>`<button class="opc" data-a="npF" data-v="${f}" aria-pressed="${e.forma===f}">${shapeSvg(f,'',n)}${n}</button>`).join('')}</div>
@@ -1193,7 +1312,7 @@ function sMaq(){const e=ui.sheet,u=unidade(e.m);if(!u)return voltar();const P=pl
 function tarefaNa(m){return plano().uso[m]||null}
 function sProblema(){const m=ui.sheet,t=tarefaNa(m.m);if(!t)return voltar();const passos=`<div class="passos">${[1,2,3].map(n=>`<i class="${n<=m.step?'on':''}"></i>`).join('')}</div>`;
   const head=`${voltar(m.step>1?'Voltar':'Cancelar')}${passos}`;
-  if(m.step===1)return `${head}<h1>Qual foi o problema?</h1><div class="probs">${PROBS.map((p,k)=>`<button class="opc" data-a="pMot" data-k="${k}">${ic(p.i)}${p.k}</button>`).join('')}</div>`;
+  if(m.step===1)return `${head}<h1>Qual foi o problema?</h1><div class="probs">${state.probs.map((p,k)=>`<button class="opc" data-a="pMot" data-k="${k}">${ic(p.i)}${p.k}</button>`).join('')}</div>`;
   if(m.step===2)return `${head}<h1>Quantas peças?</h1><div class="contador"><button class="stp" data-a="pN" data-d="-1" aria-label="Menos uma">−</button><output>${m.n}</output><button class="stp" data-a="pN" data-d="1" aria-label="Mais uma">+</button></div><p style="text-align:center;color:var(--muted)">de ${qtdEf(t.l)} peças</p><div class="acoes"><button class="big go" data-a="pNext">Continuar${ic('i-seta')}</button></div>`;
   const opts=topo(t.p).filter(s=>(s.id===t.s.id||anc(t.p,t.s.id).has(s.id))&&s.posto!=='corte').reverse();
   return `${head}<h1>Voltar para qual etapa?</h1><div class="escolhe">${opts.map(s=>`<button class="opc" data-a="pOrig" data-s="${s.id}" aria-pressed="${m.orig===s.id}">${ic(PICON[s.posto])}${esc(s.nome)}<span style="font-weight:400;font-size:16px;color:var(--muted)">${esc(tNome(s.posto))}</span></button>`).join('')}</div>
@@ -1221,7 +1340,7 @@ function sNovo(){const w=ui.sheet.w,passos=`<div class="passos">${[1,2,3,4].map(
           ${it.novaCor2?`<div class="novo-in"><input class="campo" id="nc2${k}" placeholder="Nome da cor" autocomplete="off"><input type="color" id="nh2${k}" value="#D9A21B" aria-label="Escolha a cor" class="cor-pick"><button class="mbtn go" data-a="wSalvaCor2" data-k="${k}">Salvar</button></div>`:''}
           <div class="passo-n" style="margin-top:12px">Em quais partes? <span style="font-weight:400">(pode marcar várias)</span></div>
           ${prod(it.prod).golaItem?`<p class="dica" style="margin:0 0 8px">A gola é comprada pronta: se marcar Gola, a compra sai como "${esc(prod(it.prod).golaItem)}" nessa cor.</p>`:''}
-          <div class="linha-dep">${[...new Set([...(prod(it.prod).partes||[]),...PARTES_COR_EXTRA,...it.novaC2.partes])].map(pt=>`<button class="depc" data-a="wC2pt" data-k="${k}" data-v="${esc(pt)}" aria-pressed="${it.novaC2.partes.includes(pt)}">${esc(pt)}</button>`).join('')}</div>
+          <div class="linha-dep">${[...new Set([...(prod(it.prod).partes||[]),...state.partesExtra,...it.novaC2.partes])].map(pt=>`<button class="depc" data-a="wC2pt" data-k="${k}" data-v="${esc(pt)}" aria-pressed="${it.novaC2.partes.includes(pt)}">${esc(pt)}</button>`).join('')}</div>
           <div class="novo-in"><input class="campo" id="c2o${k}" placeholder="Outra parte (ex.: Bolso da manga)" autocomplete="off"><button class="mbtn" data-a="wC2outra" data-k="${k}">Incluir</button></div>
           <div class="acoes"><button class="big go" data-a="wC2ok" data-k="${k}" style="min-height:60px;font-size:21px">${ic('i-check')}Confirmar cor</button><button class="big neutro" data-a="wC2x" data-k="${k}" style="min-height:52px">Cancelar</button></div></div>`:''}</div>
       <div><div class="passo-n">Personalização: o quê e onde</div><div class="linha-dep">${it.pers.map((x,j)=>`<span class="depc" aria-pressed="true">${ic(tipo(x.tipo).i)}${esc(tNome(x.tipo))} · ${esc(localTxt(x))}${tipo(x.tipo).externo?' <small style="font-weight:400">(fora)</small>':''}<button class="x" data-a="wPrm" data-k="${k}" data-j="${j}" aria-label="Tirar" style="padding:0 8px;margin-left:4px">×</button></span>`).join('')}
@@ -1230,26 +1349,26 @@ function sNovo(){const w=ui.sheet.w,passos=`<div class="passos">${[1,2,3,4].map(
           <div class="passo-n" style="margin-top:12px">Em qual parte da peça?</div><div class="linha-dep">${(prod(it.prod).partes||[]).map(pp=>`<button class="depc" data-a="wPp" data-k="${k}" data-v="${esc(pp)}" aria-pressed="${it.novaP.parte===pp}">${esc(pp)}</button>`).join('')}</div>
           ${it.novaP.parte==='Mangas'?`<div class="passo-n" style="margin-top:12px">Qual manga? <span style="font-weight:400">(lado de quem veste)</span></div><div class="linha-dep">${Object.entries(LADOS).map(([v,n])=>`<button class="depc" data-a="wPl" data-k="${k}" data-v="${v}">${n}</button>`).join('')}</div>`:''}</div>`:''}</div>
       <div><div class="passo-n">Quantidade por tamanho</div>
-        <div class="linha-dep" style="margin-bottom:10px">${CATS.map(c=>{const n=sum(c.t.map(z=>it.g[z]||0));return `<button class="depc" data-a="wCat" data-k="${k}" data-v="${c.id}" aria-pressed="${catDe(it).id===c.id}">${c.nome} <small style="font-weight:400">${c.t[0]} a ${c.t[c.t.length-1]}</small>${n?` <span class="tagp" style="padding:0 8px">${n}</span>`:''}</button>`}).join('')}</div>
+        <div class="linha-dep" style="margin-bottom:10px">${state.cats.map(c=>{const n=sum(c.t.map(z=>it.g[z]||0));return `<button class="depc" data-a="wCat" data-k="${k}" data-v="${c.id}" aria-pressed="${catDe(it).id===c.id}">${c.nome} <small style="font-weight:400">${c.t[0]} a ${c.t[c.t.length-1]}</small>${n?` <span class="tagp" style="padding:0 8px">${n}</span>`:''}</button>`}).join('')}</div>
         <div class="tams">${catDe(it).t.map(s=>`<div class="tam"><b>${s}</b><button class="stp" data-a="wQ" data-k="${k}" data-s="${s}" data-d="-10" aria-label="Menos 10 no ${s}">−</button><input id="q${k}${s}" data-q="${k}" data-s="${s}" inputmode="numeric" value="${it.g[s]||0}" aria-label="Quantidade ${s}"><button class="stp" data-a="wQ" data-k="${k}" data-s="${s}" data-d="10" aria-label="Mais 10 no ${s}">+</button></div>`).join('')}</div>
-      <p style="margin:0;font-weight:700">Total: ${sum(SIZES.map(s=>it.g[s]||0))} peças</p></div>`).join('')}${nav()}`;
+      <p style="margin:0;font-weight:700">Total: ${sum(sizesAll().map(s=>it.g[s]||0))} peças</p></div>`).join('')}${nav()}`;
   if(w.step===3){const ops=[15,20,30].map(d=>{const dt=new Date(now()+d*DIA);dt.setHours(17,0,0,0);return dt.getTime()});
     const iso=w.entrega?(()=>{const d=new Date(w.entrega);return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`})():'';
     return `${head}<h1>Para quando?</h1><div class="datas">${ops.map((t,k)=>`<button class="data-op" data-a="wData" data-t="${t}" aria-pressed="${w.entrega===t}"><b>Daqui ${[15,20,30][k]} dias</b><span>${DOW[new Date(t).getDay()]}, ${new Date(t).getDate()} de ${MES[new Date(t).getMonth()]}</span></button>`).join('')}</div>
       <p class="passo-n" style="margin-top:18px">Ou escolha outra data</p><input class="campo" type="date" id="wDt" value="${iso}">${nav()}`}
-  const tot=sum(w.itens.map(it=>sum(SIZES.map(s=>it.g[s]||0))));
-  const mats=calcMat(w.itens.map(it=>({prod:it.prod,cor:it.cor,qtd:sum(SIZES.map(s=>it.g[s]||0))}))).filter(m=>m.st==='comprar');
+  const tot=sum(w.itens.map(it=>sum(sizesAll().map(s=>it.g[s]||0))));
+  const mats=calcMat(w.itens.map(it=>({prod:it.prod,cor:it.cor,qtd:sum(sizesAll().map(s=>it.g[s]||0))}))).filter(m=>m.st==='comprar');
   return `${head}<h1>Está certo?</h1><div class="card"><h2>${esc(w.cliente)}</h2>${w.contato||w.cnpj?`<div class="ped-ent">${esc(w.contato||'')}${w.contato&&w.cnpj?' · ':''}${w.cnpj?'CNPJ '+esc(w.cnpj):''}</div>`:''}<div class="ped-ent">${av(w.vend,'s')}Vendedora: <b>${esc(pNome(w.vend))}</b></div>
-    ${w.itens.map(it=>`<div class="resumo-item">${prodSvg(it.prod,it.cor,it.cores2)}<div><b>${esc(prod(it.prod).nome)}</b><div style="color:var(--ink2)">${esc(modeloTxt(it))}</div><div style="color:var(--ink2)">${SIZES.filter(s=>it.g[s]).map(s=>`${s}: ${it.g[s]}`).join(' · ')}</div><div style="color:var(--ink2)">${it.pers.map(x=>`${esc(tNome(x.tipo))} na ${esc(localTxt(x).toLowerCase())}`).join(' · ')||'Sem personalização'}</div></div></div>`).join('')}
+    ${w.itens.map(it=>`<div class="resumo-item">${prodSvg(it.prod,it.cor,it.cores2)}<div><b>${esc(prod(it.prod).nome)}</b><div style="color:var(--ink2)">${esc(modeloTxt(it))}</div><div style="color:var(--ink2)">${sizesAll().filter(s=>it.g[s]).map(s=>`${s}: ${it.g[s]}`).join(' · ')}</div><div style="color:var(--ink2)">${it.pers.map(x=>`${esc(tNome(x.tipo))} na ${esc(localTxt(x).toLowerCase())}`).join(' · ')||'Sem personalização'}</div></div></div>`).join('')}
     <div class="resumo-item">${ic('i-caminhao')}<b>Entrega ${DOW[new Date(w.entrega).getDay()]}, ${new Date(w.entrega).getDate()} de ${MES[new Date(w.entrega).getMonth()]} · ${tot} peças</b></div></div>
-    <div class="card"><h2>${mats.length?'Provavelmente vai precisar comprar':'Pelo cadastro, tem o material'}</h2>${mats.length?mats.map(m=>`<div class="mat">${ic('i-carrinho')}<div><b>${esc(m.item)}</b><span>${qtdTxt(m.nec-m.est,m.un)}</span></div><span></span></div>`).join(''):`<div class="lib u-ok">${ic('i-check')}Pode seguir</div>`}${avisoEst()}<p class="dica">Consumo de tecido por tamanho: infantil 60%, juvenil 80%, adulto 100%, XXG 115%.</p></div>
+    <div class="card"><h2>${mats.length?'Provavelmente vai precisar comprar':'Pelo cadastro, tem o material'}</h2>${mats.length?mats.map(m=>`<div class="mat">${ic('i-carrinho')}<div><b>${esc(m.item)}</b><span>${qtdTxt(m.nec-m.est,m.un)}</span></div><span></span></div>`).join(''):`<div class="lib u-ok">${ic('i-check')}Pode seguir</div>`}${avisoEst()}<p class="dica">Consumo de tecido por tamanho: ${state.cats.map(c=>`${esc(c.nome.toLowerCase())} ${Math.round(c.fator*100)}%`).join(', ')}${Object.entries(state.fatorEsp).map(([t,f])=>`, ${esc(t)} ${Math.round(f*100)}%`).join('')}. Dá para mudar em Cadastros → Ajustes.</p></div>
     <div class="acoes"><button class="big go" data-a="wCriar">${ic('i-check')}Criar pedido</button></div>`}
 function sTroca(){const e=ui.sheet,t=tarefasEsc().find(x=>x.key===e.key);if(!t)return voltar();const cs=capazes(e.f);
   return `${voltar('Cancelar')}<h1>Quem faz esta tarefa?</h1><div class="card"><b style="font-size:21px">${esc(tarTxt(t))}</b><div style="color:var(--ink2)">${esc(t.ped.cliente)}${t.sub?' · '+esc(t.sub):''}</div></div>
   <div class="linha-dep">${cs.map(p=>`<button class="pchip" data-a="trocaSel" data-v="${p.id}" aria-pressed="${t.resp===p.id}">${av(p.id,'s')}${esc(p.nome)}${p.disp===false?' <small>(fora)</small>':''}${p.viaApp&&['levar','entregar'].includes(e.f)?' <small>(app)</small>':''}</button>`).join('')}</div>
   ${t.fixo?`<div class="acoes"><button class="big neutro" data-a="trocaSel" data-v="">Deixar o sistema escolher</button></div>`:''}`}
 function sAjuda(){return `${voltar('Fechar')}<h1>Como usar</h1><div class="ajuda">
-  <div class="aj"><span class="n">1</span>${ic('i-maquina')}<b>Cada cartão é uma máquina</b></div>
+  <div class="aj"><span class="n">1</span>${ic('i-maquina')}<b>Cada cartão é uma máquina. Use o menu de baixo para trocar de tela</b></div>
   <div class="aj"><span class="n">2</span>${ic('i-play')}<b>Máquina parada? Aperte COMEÇAR</b></div>
   <div class="aj"><span class="n">3</span>${ic('i-check')}<b>Acabou? Aperte TERMINOU</b></div></div>
   <div class="ajuda"><div class="aj">${ic('i-alerta')}<b>Peça com defeito? Toque na máquina e aperte DEU PROBLEMA</b></div><div class="aj">${ic('i-conserto')}<b>Apertou errado? Aperte DESFAZER</b></div></div>
@@ -1335,7 +1454,7 @@ const A={
      registrar({tipo:'inicio',modo,maq:d.m,maqTipo:unidade(d.m)?.tipo,op:d.p,sug:pl?.pessoa||'',ped:l.ped,cli:pedById(l.ped).cliente,prod:prod(l.prod).nome,step:s.nome})}l.steps[d.s]={st:'and',ini:now(),op:d.p,maq:d.m,manual:fora||undefined};const R_=state.reservas||{};Object.keys(R_).forEach(k=>{if(k===d.m||(R_[k].l===d.l&&R_[k].s===d.s))delete R_[k]});ui.sheet=null;commit();toast(`${pNome(d.p)} começou ${s.nome} na ${unidade(d.m)?.nome||''}${fora?' (fora da ordem)':''}`)},
   desfazer:()=>{if(!undo)return;state=JSON.parse(undo);undo=null;document.getElementById('toast').innerHTML='';ui.sheet=null;commit()},
   problema:d=>openSheet({t:'prob',m:d.m,step:1,n:1,orig:null,mot:null}),
-  pMot:d=>{const s=ui.sheet,t=tarefaNa(s.m),pr=PROBS[+d.k];s.mot=pr.k;const opts=topo(t.p).filter(x=>(x.id===t.s.id||anc(t.p,t.s.id).has(x.id))&&x.posto!=='corte').map(x=>x.id);s.orig=pr.alvo.find(a=>opts.includes(a))||t.s.id;s.step=2;render()},
+  pMot:d=>{const s=ui.sheet,t=tarefaNa(s.m),pr=state.probs[+d.k];s.mot=pr.k;const opts=topo(t.p).filter(x=>(x.id===t.s.id||anc(t.p,t.s.id).has(x.id))&&x.posto!=='corte').map(x=>x.id);s.orig=(pr.alvo||[]).find(a=>opts.includes(a))||t.s.id;s.step=2;render()},
   pN:d=>{const s=ui.sheet,t=tarefaNa(s.m);s.n=Math.min(qtdEf(t.l),Math.max(1,s.n+(+d.d)));render()},
   pNext:()=>{ui.sheet.step=3;render()},
   pOrig:d=>{ui.sheet.orig=d.s;render()},
@@ -1346,14 +1465,16 @@ const A={
   artePrep:d=>{const p=pedById(d.id);snap();p.artePrep=!p.artePrep;if(!p.artePrep)p.arte=false;commit();if(p.artePrep)toast('Arte preparada')},
   disp:d=>{const p=pessoa(d.id);snap();p.disp=p.disp===false;commit();toast(p.disp?`${p.nome} disponível`:`${p.nome} fora agora: tarefas foram redistribuídas`)},
   troca:d=>openSheet({t:'troca',key:d.key,f:d.f}),
-  tipoEd:d=>{const t=state.tipos.find(x=>x.id===d.t);openSheet(t?{t:'tipo',id:t.id,nome:t.nome,grupo:t.grupo,i:t.i,qtd:t.qtd||0,err:''}:{t:'tipo',id:null,nome:'',grupo:'costura',i:'i-maquina',qtd:1,err:''})},
+  tipoEd:d=>{const t=state.tipos.find(x=>x.id===d.t);openSheet(t?{t:'tipo',id:t.id,nome:t.nome,grupo:t.grupo,i:t.i,qtd:t.qtd||0,externo:!!t.externo,min:t.min||1,err:''}:{t:'tipo',id:null,nome:'',grupo:d.ext?'pers':'costura',i:d.ext?'i-bordado':'i-maquina',qtd:d.ext?0:1,externo:!!d.ext,min:1,err:''})},
+  tExt:d=>{eRead();ui.sheet.externo=!ui.sheet.externo;render()},
+  tMin:d=>{eRead();ui.sheet.min=Math.max(0.1,Math.round((ui.sheet.min+(+d.d))*10)/10);render()},
   tG:d=>{eRead();ui.sheet.grupo=d.v;render()},
   tI:d=>{eRead();ui.sheet.i=d.v;render()},
   tQ:d=>{eRead();ui.sheet.qtd=Math.max(0,ui.sheet.qtd+(+d.d));render()},
   tOk:()=>{eRead();const e=ui.sheet;e.err='';if(!e.nome.trim()){e.err='Escreva o nome';return render()}
     const uso=plano().uso;if(e.id&&Object.keys(uso).some(u=>u.startsWith(e.id+'-')&&+u.split('-').pop()>e.qtd)){e.err='Uma das máquinas que sairiam está em uso agora. Termine o trabalho antes.';return render()}
-    snap();if(e.id){const t=state.tipos.find(x=>x.id===e.id);Object.assign(t,{nome:e.nome.trim(),curto:e.nome.trim(),grupo:e.grupo,i:e.i,qtd:e.qtd})}
-    else{const base=e.nome.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g,'')||'maq';let id=base,k=2;while(state.tipos.some(x=>x.id===id))id=base+k++;state.tipos.push({id,nome:e.nome.trim(),curto:e.nome.trim(),grupo:e.grupo,i:e.i,qtd:e.qtd})}
+    snap();const ext={externo:!!e.externo||undefined,min:e.min,qtd:e.externo?0:e.qtd};if(e.id){const t=state.tipos.find(x=>x.id===e.id);Object.assign(t,{nome:e.nome.trim(),curto:e.nome.trim(),grupo:e.grupo,i:e.i,...ext})}
+    else{const base=e.nome.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g,'')||'maq';let id=base,k=2;while(state.tipos.some(x=>x.id===id))id=base+k++;state.tipos.push({id,nome:e.nome.trim(),curto:e.nome.trim(),grupo:e.grupo,i:e.i,...ext})}
     ui.sheet=null;commit();toast(`${e.nome.trim()} salva`)},
   tRm:()=>{const e=ui.sheet,usoP=state.produtos.filter(p=>p.steps.some(z=>z.posto===e.id)).map(p=>p.nome);
     if(usoP.length){e.err=`Não dá para tirar: tem etapas em ${usoP.join(', ')}. Mude essas etapas para outra máquina antes.`;return render()}
@@ -1386,6 +1507,32 @@ const A={
   produto:d=>{ui.fx=null;openSheet({t:'produto',p:d.p})},
   addEtapa:d=>openSheet({t:'etapa',p:d.p,nome:'',posto:null,deps:[],partes:[],min:0.5,pers:false,fecha:false,obs:'',err:''}),
   ePt:d=>{eRead();togl(ui.sheet.partes,d.v);render()},
+  prSalvar:d=>{const p=prod(d.p),n=(document.getElementById('prNome')?.value||'').trim(),c=parseFloat((document.getElementById('prCons')?.value||'').replace(',','.')),g=(document.getElementById('prGola')?.value||'').trim();if(!n){toast('Escreva o nome',false);return}snap();p.nome=n;if(!isNaN(c)&&c>=0)p.consumo=c;p.golaItem=g||undefined;commit();toast('Dados salvos')},
+  prForma:d=>{snap();prod(d.p).forma=d.v;commit()},
+  rmTec:d=>{const p=prod(d.p);if(p.tecidos.length<=1){toast('O produto precisa de pelo menos um tecido',false);return}snap();p.tecidos=p.tecidos.filter(x=>x!==d.v);commit();toast(`${d.v} tirado`)},
+  rmParte:d=>{const p=prod(d.p);snap();p.partes=p.partes.filter(x=>x!==d.v);commit();toast(`Parte ${d.v} tirada`)},
+  rmAv:d=>{const p=prod(d.p);snap();p.aviam.splice(+d.j,1);commit()},
+  addAv:d=>{const n=(document.getElementById('avN')?.value||'').trim(),q=parseFloat((document.getElementById('avQ')?.value||'').replace(',','.')),u=document.getElementById('avU')?.value||'un';if(!n||isNaN(q)){toast('Escreva o nome e a quantidade',false);return}snap();prod(d.p).aviam.push([n,u,q]);commit();toast(`${n} adicionado`)},
+  rmPp:d=>{const p=prod(d.p);snap();p.persPadrao.splice(+d.j,1);commit()},
+  addPp:d=>{const p=prod(d.p),t=document.getElementById('ppT')?.value,pt=document.getElementById('ppP')?.value,ld=document.getElementById('ppL')?.value;if(!t||!pt)return;if(pt==='Mangas'&&!ld){toast('Escolha o lado da manga',false);return}snap();p.persPadrao=p.persPadrao||[];p.persPadrao.push(pt==='Mangas'?{tipo:t,parte:pt,lado:ld}:{tipo:t,parte:pt});commit()},
+  rmOpc:d=>{const p=prod(d.p);snap();p.opcoes.splice(+d.j,1);commit()},
+  addOpc:d=>{const p=prod(d.p),g=id=>(document.getElementById(id)?.value||'').trim(),n=g('opN'),en=g('opE'),m=g('opM'),a=g('opA'),pt=g('opP'),mi=parseFloat(g('opMin').replace(',','.'))||1;if(!n||!en){toast('Escreva o nome do modelo e da etapa',false);return}
+    snap();p.opcoes=p.opcoes||[];p.opcoes.push({id:uid('o'),nome:n,aviam:[],steps:[{...S(uid('x'),en,m,[p.steps[0].id],mi,{partes:pt?[pt]:[]}),antes:a?[a]:[]}]});commit();toast(`Modelo ${n} adicionado`)},
+  rmProd:d=>{const p=prod(d.p);if(state.lotes.some(l=>l.prod===p.id&&!pedById(l.ped)?.concluido)){toast('Tem pedido em aberto com este produto',false);return}snap();state.produtos=state.produtos.filter(x=>x.id!==p.id);ui.sheet=null;commit();toast(`${p.nome} excluído`)},
+  rmEst:d=>{snap();delete state.estoque[d.v];commit()},
+  addEst:()=>{const n=(document.getElementById('estN')?.value||'').trim(),q=parseFloat(document.getElementById('estQ')?.value)||0;if(!n)return;snap();state.estoque[n]=q;commit();toast(`${n} no estoque`)},
+  addCat:()=>{snap();state.cats.push({id:uid('c'),nome:'Nova categoria',t:['U'],fator:1});commit()},
+  rmCat:d=>{if(state.cats.length<=1)return;snap();state.cats.splice(+d.i,1);commit()},
+  rmCor:d=>{snap();delete state.cores[d.v];commit();toast(`${d.v} tirada`)},
+  addCor:()=>{const n=(document.getElementById('corN')?.value||'').trim(),h=document.getElementById('corH')?.value||'#888888';if(!n)return;snap();state.cores[n]=h;commit();toast(`Cor ${n} adicionada`)},
+  rmPx:d=>{snap();state.partesExtra=state.partesExtra.filter(x=>x!==d.v);commit()},
+  addPx:()=>{const n=(document.getElementById('pxN')?.value||'').trim();if(!n)return;snap();if(!state.partesExtra.includes(n))state.partesExtra.push(n);commit()},
+  rmPeso:d=>{snap();delete state.pesos[d.v];commit()},
+  addPeso:()=>{const n=(document.getElementById('pesoN')?.value||'').trim(),v=parseFloat(document.getElementById('pesoV')?.value);if(!n||isNaN(v))return;snap();state.pesos[n]=v/100;commit()},
+  rmProb:d=>{snap();state.probs.splice(+d.i,1);commit()},
+  addProb:()=>{const n=(document.getElementById('probN')?.value||'').trim();if(!n)return;snap();state.probs.push({k:n,i:'i-duvida',alvo:[]});commit()},
+  addPapel:()=>{const n=(document.getElementById('papN')?.value||'').trim();if(!n)return;snap();state.papeis[uid('c')]=n;commit()},
+  ff:d=>{ui.ff=d.v;render()},
   addTec:d=>{const i=document.getElementById('novoTec'),v=(i?.value||'').trim();if(!v)return;const p=prod(d.p);p.tecidos=p.tecidos||[];if(!p.tecidos.includes(v)){snap();p.tecidos.push(v);commit();toast(`Tecido ${v} adicionado`)}},
   addParte:d=>{const i=document.getElementById('novaParte'),v=(i?.value||'').trim();if(!v)return;const p=prod(d.p);p.partes=p.partes||[];if(!p.partes.includes(v)){snap();p.partes.push(v);commit();toast(`Parte ${v} adicionada`)}},
   eP:d=>{eRead();ui.sheet.posto=d.v;render()},
@@ -1393,10 +1540,13 @@ const A={
   eM:d=>{eRead();ui.sheet.min=Math.max(0.1,Math.round((ui.sheet.min+(+d.d))*10)/10);render()},
   eT:d=>{eRead();ui.sheet[d.v]=!ui.sheet[d.v];render()},
   eOk:()=>{eRead();const e=ui.sheet,p=prod(e.p);e.err='';
-    if(!e.nome.trim())e.err='Escreva o nome da etapa';else if(!e.posto)e.err='Escolha onde é feita';else if(!e.deps.length)e.err='Escolha o que precisa estar pronto antes';
-    if(e.err)return render();snap();const base=e.nome.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g,'')||'etapa';let id=base,k=2;while(p.steps.some(s=>s.id===id))id=base+k++;
+    const primeira=e.sid&&p.steps[0].id===e.sid;
+    if(!e.nome.trim())e.err='Escreva o nome da etapa';else if(!e.posto)e.err='Escolha onde é feita';else if(!e.deps.length&&!primeira)e.err='Escolha o que precisa estar pronto antes';
+    if(e.err)return render();snap();
+    if(e.sid){const st=p.steps.find(z=>z.id===e.sid);Object.assign(st,{nome:e.nome.trim(),posto:e.posto,deps:[...e.deps],min:e.min,pers:e.pers||tipo(e.posto).grupo==='pers',fecha:e.fecha,obs:(e.obs||'').trim(),partes:[...e.partes]});ui.fx={k:'P'+p.id,s:st.id};ui.sheet={t:'produto',p:p.id};commit();toast('Etapa salva');return}const base=e.nome.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g,'')||'etapa';let id=base,k=2;while(p.steps.some(s=>s.id===id))id=base+k++;
     p.steps.push(S(id,e.nome.trim(),e.posto,[...e.deps],e.min,{pers:e.pers||tipo(e.posto).grupo==='pers',fecha:e.fecha,obs:(e.obs||'').trim(),partes:[...e.partes]}));ui.fx={k:'P'+p.id,s:id};ui.sheet={t:'produto',p:p.id};commit();toast(`Etapa ${e.nome.trim()} adicionada`)},
-  rmEtapa:d=>{const p=prod(d.p);if(filhos(p,d.s).length)return;snap();const n=sMap(p)[d.s].nome;p.steps=p.steps.filter(s=>s.id!==d.s);ui.fx=null;commit();toast(`Etapa ${n} tirada`)},
+  edEtapa:d=>{const z=sMap(prod(d.p))[d.s];openSheet({t:'etapa',p:d.p,sid:z.id,nome:z.nome,posto:z.posto,deps:[...z.deps],partes:[...(z.partes||[])],min:z.min,pers:!!z.pers,fecha:!!z.fecha,obs:z.obs||'',err:''})},
+  rmEtapa:d=>{const p=prod(d.p);if(filhos(p,d.s).length)return;snap();const n=sMap(p)[d.s].nome;p.steps=p.steps.filter(s=>s.id!==d.s);ui.fx=null;if(ui.sheet?.t==='etapa')ui.sheet={t:'produto',p:p.id};commit();toast(`Etapa ${n} tirada`)},
   nprod:()=>openSheet({t:'nprod',nome:'',forma:'camiseta',tecido:'',copia:null,err:''}),
   npF:d=>{eRead();ui.sheet.forma=d.v;render()},
   npC:d=>{eRead();ui.sheet.copia=d.v||null;render()},
@@ -1439,17 +1589,28 @@ const A={
   wData:d=>{ui.sheet.w.entrega=+d.t;ui.sheet.w.err='';render()},
   wNext:()=>{wRead();const w=ui.sheet.w;w.err='';
     if(w.step===1){if(!w.cliente.trim())w.err='Escreva o nome da empresa';else if(w.cnpj&&soDig(w.cnpj).length!==14)w.err='O CNPJ precisa ter 14 números';else if(!w.vend)w.err='Escolha quem vendeu'}
-    if(w.step===2){if(!w.itens.length)w.err='Toque em uma peça para adicionar';else if(w.itens.some(i=>!i.tecido))w.err='Escolha o tecido de cada peça';else if(w.itens.some(i=>i.pers.some(x=>x.parte==='Mangas'&&!x.lado)))w.err='Diga em qual manga vai a personalização';else if(w.itens.some(i=>!i.cor))w.err='Escolha a cor principal de cada peça';else if(w.itens.some(i=>i.novaC2))w.err='Confirme ou cancele a cor que está adicionando';else if(w.itens.some(i=>!sum(SIZES.map(s=>i.g[s]||0))))w.err='Coloque a quantidade de cada peça'}
+    if(w.step===2){if(!w.itens.length)w.err='Toque em uma peça para adicionar';else if(w.itens.some(i=>!i.tecido))w.err='Escolha o tecido de cada peça';else if(w.itens.some(i=>i.pers.some(x=>x.parte==='Mangas'&&!x.lado)))w.err='Diga em qual manga vai a personalização';else if(w.itens.some(i=>!i.cor))w.err='Escolha a cor principal de cada peça';else if(w.itens.some(i=>i.novaC2))w.err='Confirme ou cancele a cor que está adicionando';else if(w.itens.some(i=>!sum(sizesAll().map(s=>i.g[s]||0))))w.err='Coloque a quantidade de cada peça'}
     if(w.step===3&&!w.entrega)w.err='Escolha a data de entrega';
     if(!w.err)w.step++;render();const e=document.querySelector('.sheet');if(e&&!w.err)e.scrollTop=0},
-  wCriar:()=>{const w=ui.sheet.w;snap();const id=String(state.seq++).padStart(4,'0');const lines=w.itens.map(it=>({prod:it.prod,cor:it.cor,cores2:JSON.parse(JSON.stringify(it.cores2||[])),tecido:it.tecido,opcoes:[...it.opcoes],pers:it.pers.map((x,j)=>({tipo:x.tipo,parte:x.parte,lado:x.lado,id:'pz'+j})),g:{...it.g},qtd:sum(SIZES.map(s=>it.g[s]||0))}));
+  wCriar:()=>{const w=ui.sheet.w;snap();const id=String(state.seq++).padStart(4,'0');const lines=w.itens.map(it=>({prod:it.prod,cor:it.cor,cores2:JSON.parse(JSON.stringify(it.cores2||[])),tecido:it.tecido,opcoes:[...it.opcoes],pers:it.pers.map((x,j)=>({tipo:x.tipo,parte:x.parte,lado:x.lado,id:'pz'+j})),g:{...it.g},qtd:sum(sizesAll().map(s=>it.g[s]||0))}));
     state.pedidos.push({id,cliente:w.cliente.trim(),contato:(w.contato||'').trim(),cnpj:(w.cnpj||'').trim(),vendedor:w.vend,chegada:now(),entrega:w.entrega,vias:false,artePrep:false,arte:false,artes:{},materiais:calcMat(lines),concluido:null});
     lines.forEach((x,i)=>state.lotes.push({id:`${id}-${i+1}`,ped:id,prod:x.prod,cor:x.cor,cores2:x.cores2,tecido:x.tecido,opcoes:x.opcoes,pers:x.pers,qtd:x.qtd,grade:x.g,desm:0,steps:{},rework:false,parent:null}));
     ui.tela='pedidos';ui.sheet={t:'pedido',id};commit();toast('Pedido criado')},
 };
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b||b.disabled)return;const f=A[b.dataset.a];if(f){e.preventDefault();f(b.dataset)}});
-document.addEventListener('input',e=>{if(e.target.id==='pedBusca'){ui.pf.q=e.target.value;const L=document.getElementById('pedLista');if(L)L.innerHTML=listaPedidos()}if(e.target.id==='wCnpj'){const v=fmtCnpj(e.target.value);if(v!==e.target.value)e.target.value=v}});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ui.sheet)A.fechar();if(e.key==='Enter'&&['eNome','eObs','pNome','pTec','xNome','wCont','wCnpj','pedBusca'].includes(e.target.id))e.preventDefault();if(e.key==='Enter'&&e.target.id==='wCli'){e.preventDefault();A.wNext()}});
+document.addEventListener('change',e=>{const t=e.target,d=t.dataset;if(!state)return;const num=()=>parseFloat(String(t.value).replace(',','.'));let ok=false;
+  if(d.cfg){const[a,b]=d.cfg.split('.');let v=num();if(isNaN(v))return;if(d.pct)v=v/100;snap();state[a][b]=v;ok=true}
+  else if(d.est!=null){const v=num();if(isNaN(v))return;snap();state.estoque[d.est]=v;ok=true}
+  else if(d.catn!=null){snap();state.cats[+d.catn].nome=t.value.trim()||'Categoria';ok=true}
+  else if(d.catf!=null){const v=num();if(isNaN(v))return;snap();state.cats[+d.catf].fator=v/100;ok=true}
+  else if(d.catt!=null){const c=state.cats[+d.catt];snap();c.t.forEach(x=>delete state.fatorEsp[x]);c.t=t.value.split(',').map(x=>x.trim()).filter(Boolean).map(x=>{const[n,f]=x.split(':').map(y=>y.trim());if(f&&!isNaN(parseFloat(f)))state.fatorEsp[n]=parseFloat(f)/100;return n});if(!c.t.length)c.t=['U'];ok=true}
+  else if(d.corhex!=null){snap();state.cores[d.corhex]=t.value;ok=true}
+  else if(d.peso!=null){const v=num();if(isNaN(v))return;snap();state.pesos[d.peso]=v/100;ok=true}
+  else if(d.prob!=null){snap();state.probs[+d.prob].k=t.value.trim()||state.probs[+d.prob].k;ok=true}
+  else if(d.papel!=null){snap();state.papeis[d.papel]=t.value.trim()||state.papeis[d.papel];ok=true}
+  if(ok){save();if(!d.est)render();toast('Salvo',true)}});
+document.addEventListener('input',e=>{if(e.target.id==='estBusca'){ui.eq=e.target.value;const L=document.getElementById('estLista');if(L)L.innerHTML=listaEst()}if(e.target.id==='pedBusca'){ui.pf.q=e.target.value;const L=document.getElementById('pedLista');if(L)L.innerHTML=listaPedidos()}if(e.target.id==='wCnpj'){const v=fmtCnpj(e.target.value);if(v!==e.target.value)e.target.value=v}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ui.sheet)A.fechar();if(e.key==='Enter'&&(['eNome','eObs','pNome','pTec','xNome','wCont','wCnpj','pedBusca','estBusca'].includes(e.target.id)||e.target.closest?.('.card')&&e.target.tagName==='INPUT'))e.preventDefault();if(e.key==='Enter'&&e.target.id==='wCli'){e.preventDefault();A.wNext()}});
 function tick(){const h=new Date().getHours();document.getElementById('ola').textContent=`${h<12?'Bom dia':h<18?'Boa tarde':'Boa noite'}, Helena`;
   const d=new Date();document.getElementById('hoje').textContent=`${DOW[d.getDay()]}, ${d.getDate()} de ${MES[d.getMonth()]}`;
   document.querySelectorAll('[data-ini]').forEach(el=>el.textContent=fDur(now()-(+el.dataset.ini)))}
