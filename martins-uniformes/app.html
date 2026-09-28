@@ -1185,10 +1185,12 @@ async function nuvemMockPut(id,data){if(NV.modo!=='nuvem'||!NV.db){MOCK_PEND.add
 async function nuvemMockGet(id){if(!NV.db||NV.modo!=='nuvem')return null;try{const m=await NV.db.doc(`mock/${id}`).get();if(!m.exists)return null;const n=m.data().n;
   const ps=await Promise.all(Array.from({length:n},(_,k)=>NV.db.doc(`mockp/${id}~${k}`).get()));if(ps.some(x=>!x.exists))return null;return ps.map(x=>x.data().d).join('')}catch(e){return null}}
 async function mockPendentes(){for(const id of [...MOCK_PEND]){const v=MOCKG[id]||await IDB.get(id);if(v)await nuvemMockPut(id,v);else{MOCK_PEND.delete(id);pendSalva()}}}
-function guardaMockG(id,g){MOCKG[id]=g;IDB.set(id,g);nuvemMockPut(id,g)}
+function guardaMockG(id,g){if(g&&typeof g==='object'){guardaMockG(id,g.o);if(g.c)guardaMockG(id+'~c',g.c);return}MOCKG[id]=g;IDB.set(id,g);nuvemMockPut(id,g)}
 async function pegaBin(k){if(!k)return '';if(MOCKG[k])return MOCKG[k];let v=await IDB.get(k);if(!v){v=await nuvemMockGet(k);if(v)IDB.set(k,v)}if(v)MOCKG[k]=v;return v||''}
-async function pegaMock(l){if(!l)return '';for(const id of [l.mockBin,l.id,l.parent].filter(Boolean)){if(MOCKG[id])return MOCKG[id];let v=await IDB.get(id);if(!v){v=await nuvemMockGet(id);if(v)IDB.set(id,v)}if(v){MOCKG[id]=v;return v}}return l.mock||''}
-const mockGrande=l=>l?((l.mockBin&&MOCKG[l.mockBin])||MOCKG[l.id]||(l.parent&&MOCKG[l.parent])||l.mock||''):'';
+async function pegaMock(l){if(!l)return '';for(const id of [l.mockBin,l.id,l.parent].filter(Boolean)){if(!MOCKG[id+'~c']){const c=await IDB.get(id+'~c')||await nuvemMockGet(id+'~c');if(c){MOCKG[id+'~c']=c;IDB.set(id+'~c',c)}}if(MOCKG[id])return MOCKG[id];let v=await IDB.get(id);if(!v){v=await nuvemMockGet(id);if(v)IDB.set(id,v)}if(v){MOCKG[id]=v;return v}}return l.mock||''}
+const mockChave=l=>[l.mockBin,l.id,l.parent].filter(Boolean).find(k=>MOCKG[k]||MOCKG[k+'~c']);
+const mockGrande=l=>{if(!l)return '';const k=mockChave(l);return k?(MOCKG[k+'~c']||MOCKG[k]):(l.mock||'')};
+const mockOrig=l=>{if(!l)return '';const k=mockChave(l);return k?(MOCKG[k]||MOCKG[k+'~c']):(l.mock||'')};
 function setMock(l,p,g,arq){l.mock=p;if(arq){l.mockBin=arq.bin;l.mockArq=arq.id}else{l.mockBin=undefined;if(g)guardaMockG(l.id,g);const ped=pedById(l.ped);if(ped&&ped.cli){const a={id:uid('a'),cli:ped.cli,tipo:'mockup',nome:`${prod(l.prod).nome} ${l.cor} · pedido ${l.ped}`,prev:p,bin:l.id,ts:now()};(state.arquivos=state.arquivos||[]).push(a);l.mockArq=a.id}}
   state.lotes.filter(r=>r.parent===l.id).forEach(r=>{r.mock=p;r.mockBin=l.mockBin;r.mockArq=l.mockArq})}
 function loteSvg(l){return l&&l.mock?`<svg class="prod mock" viewBox="0 0 120 120" role="img" aria-label="Mockup: toque para ampliar" ${l.id?`data-z="L:${l.id}"`:''}><image href="${l.mock}" x="0" y="0" width="120" height="120" preserveAspectRatio="xMidYMid meet"/></svg>`:prodSvg(l.prod,l.cor,l.cores2)}
@@ -1910,7 +1912,9 @@ async function mockDeArquivo(f){let src;
   const F=document.createElement('canvas');F.width=BW;F.height=BH;const fg=F.getContext('2d');fg.fillStyle='#fff';fg.fillRect(0,0,BW,BH);fg.drawImage(im,X0,Y0,BW,BH,0,0,BW,BH);
   {const img=fg.getImageData(0,0,BW,BH),e=img.data,lim=IH*.6;let mud=false;for(let y=0;y<BH;y++){if(Y0+y<lim)continue;for(let x=0;x<BW;x++){const i=(y*BW+x)*4;if(e[i+2]>140&&e[i+1]>140&&e[i+2]-e[i]>45){e[i]=e[i+1]=e[i+2]=255;mud=true}}}if(mud)fg.putImageData(img,0,0)}
   const quadro=(N,q)=>{const lado=Math.max(BW,BH)*1.06,k=N/lado,o=document.createElement('canvas');o.width=o.height=N;const og=o.getContext('2d');og.fillStyle='#fff';og.fillRect(0,0,N,N);og.imageSmoothingQuality='high';og.drawImage(F,0,0,BW,BH,(N-BW*k)/2,(N-BH*k)/2,BW*k,BH*k);return o.toDataURL('image/jpeg',q)};
-  const G=Math.min(2400,Math.round(Math.max(BW,BH)*1.06));return {p:quadro(240,.85),g:quadro(G,.92),px:G}}
+  const G=Math.min(2400,Math.round(Math.max(BW,BH)*1.06));const crop=(()=>{const lado=Math.max(BW,BH)*1.06,k=G/lado,o=document.createElement('canvas');o.width=o.height=G;const og=o.getContext('2d');og.fillStyle='#fff';og.fillRect(0,0,G,G);og.imageSmoothingQuality='high';og.drawImage(F,0,0,BW,BH,(G-BW*k)/2,(G-BH*k)/2,BW*k,BH*k);const png=o.toDataURL('image/png');return png.length<2600000?png:o.toDataURL('image/jpeg',.95)})();
+  const orig=/^data:image\/(png|jpe?g|webp|gif)/.test(src)&&src.length<14000000?src:(()=>{const o=document.createElement('canvas');o.width=IW;o.height=IH;const og=o.getContext('2d');og.fillStyle='#fff';og.fillRect(0,0,IW,IH);og.drawImage(im,0,0);return o.toDataURL('image/jpeg',.95)})();
+  return {p:quadro(240,.85),g:{o:orig,c:crop},px:IW}}
 function sugMock(nome){const t=' '+semAc(nome).replace(/[^a-z0-9]+/g,' ')+' ';const ls=state.lotes.filter(l=>!l.rework&&!pedById(l.ped)?.concluido);
   const num=(t.match(/\b(\d{3,6})\b/)||[])[1];const cand=ls.filter(l=>(!num||l.ped===num)&&t.includes(' '+semAc(l.cor)+' '));return cand.length===1?cand[0].id:null}
 function sMock(){const e=ui.sheet;const ls=state.lotes.filter(l=>!l.rework&&!pedById(l.ped)?.concluido).sort((a,b)=>b.ped.localeCompare(a.ped));
@@ -1922,20 +1926,20 @@ function sMock(){const e=ui.sheet;const ls=state.lotes.filter(l=>!l.rework&&!ped
 
 /* ================= ver mockup com zoom ================= */
 function abreZoom(z){const [k,v]=[z.slice(0,1),z.slice(2)];let src='',tit='Mockup',lt=null;
-  if(k==='L'){lt=lote(v);src=mockGrande(lt);tit=`Pedido ${lt.ped} · ${prod(lt.prod).nome} ${lt.cor}`}
-  else if(k==='I'){const it=ui.sheet.grupos[ui.sheet.gi].itens[+v];src=it.mockG||it.mock;tit=`Peça ${+v+1}`}
-  else if(k==='W'){const it=ui.sheet.w.itens[+v];src=it.mockG||it.mock;tit=prod(it.prod).nome}
-  else if(k==='M'){const m=ui.sheet.itens[+v];src=m.g||m.img;tit=m.nome}
+  if(k==='L'){lt=lote(v);src=mockOrig(lt);tit=`Pedido ${lt.ped} · ${prod(lt.prod).nome} ${lt.cor}`}
+  else if(k==='I'){const it=ui.sheet.grupos[ui.sheet.gi].itens[+v];src=it.mockG?.o||it.mockG||it.mock;tit=`Peça ${+v+1}`}
+  else if(k==='W'){const it=ui.sheet.w.itens[+v];src=it.mockG?.o||it.mockG||it.mock;tit=prod(it.prod).nome}
+  else if(k==='M'){const m=ui.sheet.itens[+v];src=m.g?.o||m.g||m.img;tit=m.nome}
   else if(k==='A'){const a=arqById(v);if(!a)return;src=a.prev;tit=a.nome;const kb=a.vis||(a.tipo==='mockup'?a.bin:null);if(kb)setTimeout(()=>pegaBin(kb).then(u=>{const im=document.querySelector('#zoom .zm-area img');if(u&&im&&im.dataset.k===undefined){im.dataset.k=1;im.dispatchEvent(new CustomEvent('trocar',{detail:u}))}}),0)}
   if(!src)return;const Z=document.getElementById('zoom');
   Z.innerHTML=`<div class="zm" role="dialog" aria-modal="true" aria-label="${esc(tit)}"><div class="zm-bar"><b>${esc(tit)}</b><button class="zm-b" data-zm="-" aria-label="Diminuir">−</button><button class="zm-b" data-zm="0" aria-label="Tamanho normal">⤢</button><button class="zm-b" data-zm="+" aria-label="Aumentar">+</button><button class="zm-b zm-x" data-zm="x" aria-label="Fechar">×</button></div><div class="zm-area"><img alt="${esc(tit)}" draggable="false"></div><p class="zm-dica"><span class="zm-res"></span> Use + e −, dois dedos ou a rodinha do mouse. Arraste para mover.</p></div>`;
   const img=Z.querySelector('img'),area=Z.querySelector('.zm-area'),res=Z.querySelector('.zm-res');let base=1,esc_=1,x=0,y=0,max=6;
-  const cabe=()=>{const r=area.getBoundingClientRect();base=Math.min(r.width/img.naturalWidth,r.height/img.naturalHeight,1e9);max=Math.max(2,Math.min(8,2/base))};
+  const cabe=()=>{const r=area.getBoundingClientRect();base=Math.min(r.width/img.naturalWidth,r.height/img.naturalHeight,1);max=Math.max(3,Math.min(8,3/base))};
   const ap=()=>{const r=area.getBoundingClientRect(),w=img.naturalWidth*base*esc_,h=img.naturalHeight*base*esc_;const mx=Math.max(0,(w-r.width)/2),my=Math.max(0,(h-r.height)/2);x=Math.max(-mx,Math.min(mx,x));y=Math.max(-my,Math.min(my,y));
     img.style.width=w+'px';img.style.height=h+'px';img.style.left=((r.width-w)/2+x)+'px';img.style.top=((r.height-h)/2+y)+'px'};
   const zoom=(f,cx,cy)=>{const r=area.getBoundingClientRect();cx=cx??r.width/2;cy=cy??r.height/2;const n=Math.min(max,Math.max(1,esc_*f));const px=cx-r.width/2-x,py=cy-r.height/2-y;x-=px*(n/esc_-1);y-=py*(n/esc_-1);esc_=n;if(n===1){x=0;y=0}ap()};
   const carrega=u=>{const i2=new Image();i2.onload=()=>{const keep=esc_;img.src=u;cabe();esc_=keep;ap();res.textContent=`${i2.naturalWidth} px ·`};i2.src=u};
-  carrega(src);if(lt)pegaMock(lt).then(u=>{if(u&&u!==src)carrega(u)});img.addEventListener('trocar',ev=>carrega(ev.detail));
+  carrega(src);if(lt)pegaMock(lt).then(()=>{const u=mockOrig(lt);if(u&&u!==src)carrega(u)});img.addEventListener('trocar',ev=>carrega(ev.detail));
   window.addEventListener('resize',()=>{if(img.naturalWidth){cabe();ap()}},{once:true});
   Z.querySelectorAll('[data-zm]').forEach(b=>b.onclick=()=>{const v=b.dataset.zm;if(v==='x')Z.innerHTML='';else if(v==='0'){esc_=1;x=0;y=0;ap()}else zoom(v==='+'?1.6:1/1.6)});
   area.onwheel=ev=>{ev.preventDefault();const r=area.getBoundingClientRect();zoom(ev.deltaY<0?1.2:1/1.2,ev.clientX-r.left,ev.clientY-r.top)};
@@ -2103,7 +2107,7 @@ const OK_EXT=new Set('gif png jpg jpeg webp mp4 webm txt json md docx pptx epub 
 async function baixarBlob(nome,blob){let dl=null;try{dl=await window.claude?.use?.('downloads')}catch(e){}
   if(dl){try{await dl.save({filename:nome,data:blob});return}catch(e){if(e&&e.code==='declined')return}}
   const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=nome;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),60000)}
-async function baixarArqs(lista,nomeZip){toast('Preparando os arquivos…',false);const fs=[];for(const a of lista){const d=await pegaBin(a.bin);if(d)fs.push({name:a.tipo==='mockup'&&!/\.\w+$/.test(a.nome)?a.nome+'.jpg':a.nome,bytes:bytesDe(d)})}
+async function baixarArqs(lista,nomeZip){toast('Preparando os arquivos…',false);const fs=[];for(const a of lista){const d=await pegaBin(a.bin);if(d)fs.push({name:a.tipo==='mockup'&&!/\.\w{2,4}$/.test(a.nome)?a.nome+'.'+((d.match(/^data:image\/(\w+)/)||[])[1]||'jpg').replace('jpeg','jpg'):a.nome,bytes:bytesDe(d)})}
   document.getElementById('toast').innerHTML='';if(!fs.length){toast('Arquivo não encontrado neste aparelho nem na nuvem',false);return}
   if(fs.length===1&&OK_EXT.has(extDe(fs[0].name)))return baixarBlob(fs[0].name,new Blob([fs[0].bytes]));
   await baixarBlob(nomeZip||(fs.length===1?fs[0].name+'.zip':'arquivos.zip'),zipar(fs))}
