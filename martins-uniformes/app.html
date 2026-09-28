@@ -556,7 +556,7 @@ svg.prod.mock{background:#fff;border-radius:12px}
 #zoom:empty{display:none}.zm{position:fixed;inset:0;z-index:80;background:#0B1119;display:grid;grid-template-rows:auto 1fr auto}
 .zm-bar{display:flex;align-items:center;gap:8px;padding:10px 12px;color:#fff}.zm-bar b{margin-right:auto;font-size:17px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .zm-b{min-width:48px;height:48px;border-radius:12px;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:22px;font-weight:700;padding:0 10px}.zm-x{background:#fff;color:#111}
-.zm-area{overflow:hidden;display:grid;place-items:center;touch-action:none;cursor:grab}.zm-area img{max-width:100%;max-height:100%;transform-origin:center;user-select:none;-webkit-user-drag:none;background:#fff}
+.zm-area{overflow:hidden;position:relative;touch-action:none;cursor:grab}.zm-area img{position:absolute;max-width:none;max-height:none;user-select:none;-webkit-user-drag:none;background:#fff;image-rendering:auto}
 .zm-dica{color:rgba(255,255,255,.7);text-align:center;font-size:14px;margin:6px 0 12px}
 svg.prod.mock{cursor:zoom-in}
 .doc-bts{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}.doc-bts .mbtn{display:inline-flex;align-items:center;gap:8px}.doc-bts svg.ic{width:22px;height:22px}
@@ -569,13 +569,13 @@ svg.prod.mock{cursor:zoom-in}
 #docRender{position:fixed;left:-10000px;top:0;width:794px}
 .a4{width:794px;height:1123px;background:#fff;color:#000;box-sizing:border-box;overflow:hidden;font-family:'Atkinson Hyperlegible',Arial,sans-serif;position:relative}
 /* ficha P&B */
-.fp,.fm{padding:30px 40px 56px;display:flex;flex-direction:column;gap:10px}
+.fp,.fm{padding:30px 40px 56px;display:flex;flex-direction:column;gap:10px}.fm{gap:8px;padding-bottom:50px}.fm .fp-top{padding-bottom:6px}
 .fp-top{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:4px solid #000;padding-bottom:10px}.fp-k{font-size:15px;letter-spacing:.18em;font-weight:700}.fp-cli{font-size:36px;font-weight:700;line-height:1.05;margin-top:4px}
 .fp-via{border:4px solid #000;border-radius:10px;padding:8px 16px;font-size:30px;font-weight:700;white-space:nowrap}
 .fp-ids{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:17px}.fp-ids b{font-size:21px}
 .fp-datas{display:grid;grid-template-columns:1fr 1.4fr;gap:12px}.fp-datas>div{border:2px solid #000;border-radius:10px;padding:8px 14px;display:flex;justify-content:space-between;align-items:center}.fp-datas span{font-size:15px;font-weight:700;letter-spacing:.12em}.fp-datas b{font-size:28px}
 .fp-ent{background:#000;color:#fff}.fp-ent b{font-size:34px}
-.fp-mid{display:grid;grid-template-columns:270px 1fr;gap:18px}.fp-img{border:2px solid #000;border-radius:10px;height:270px;display:grid;place-items:center;overflow:hidden}.fp-img img,.fp-img svg{max-width:100%;max-height:100%}.fp-img svg{width:220px;height:220px}
+.fp-mid{display:grid;grid-template-columns:270px 1fr;gap:18px}.fp-img{border:2px solid #000;border-radius:10px;height:270px;display:grid;place-items:center;overflow:hidden}.fp-img img{width:100%;height:100%;object-fit:contain;display:block}.fp-img svg{max-width:100%;max-height:100%}.fp-img svg{width:220px;height:220px}
 .fp-dados{display:grid;gap:10px;align-content:start}.fp-l{border-bottom:2px solid #000;padding-bottom:6px}.fp-l span{display:block;font-size:13px;font-weight:700;letter-spacing:.14em}.fp-l b{font-size:24px}.fp-l b.xl{font-size:32px}.fp-l em{display:block;font-style:normal;font-size:18px}
 .fp-sec{font-size:15px;font-weight:700;letter-spacing:.16em;margin-top:2px}.fp-sec small{font-weight:400;letter-spacing:0;font-size:13px}
 .fp-t,.fp-g{width:100%;border-collapse:collapse}.fp-t th,.fp-t td{border:2px solid #000;padding:6px 8px;text-align:left;font-size:18px;vertical-align:top}.fp-t th{font-size:13px;letter-spacing:.1em;background:#e6e6e6}.fp-t small{font-size:12px}
@@ -585,7 +585,7 @@ svg.prod.mock{cursor:zoom-in}
 .fp-obs{min-height:34px;font-size:18px;background:repeating-linear-gradient(transparent 0 26px,#999 26px 27px)}
 .fp-rod{position:absolute;left:40px;right:40px;bottom:22px;display:flex;justify-content:space-between;font-size:12px;border-top:1px solid #000;padding-top:6px}
 .fm-id{text-align:right;font-size:14px;font-weight:700;letter-spacing:.12em}.fm-id b{font-size:34px;letter-spacing:0}
-.fm-sub{font-size:22px;font-weight:700}.fm-img{flex:1;display:grid;place-items:center;border:2px solid #000;border-radius:12px;overflow:hidden;max-height:760px}.fm-img img{max-width:100%;max-height:750px;object-fit:contain}
+.fm-sub{font-size:22px;font-weight:700}.fm-img{flex:1;min-height:0;border:2px solid #000;border-radius:12px;overflow:hidden;padding:6px;display:flex}.fm-img img{width:100%;height:100%;object-fit:contain;display:block}
 .fm-pz{display:grid;gap:4px;font-size:18px}
 /* pedido colorido */
 .pc{--pn:#13235B;--pc:#12BFD0;--pr:#E03A3E;padding:0 0 56px;display:flex;flex-direction:column;gap:14px;color:#1b2333}
@@ -601,7 +601,7 @@ svg.prod.mock{cursor:zoom-in}
 .pc-pass{margin:auto 40px 0;background:linear-gradient(120deg,#E8FAFC,#F2F6FC);border-radius:16px;padding:14px 18px;font-size:16px}.pc-pass ol{margin:6px 0 0;padding-left:22px;line-height:1.5}
 .pc-rod{position:absolute;left:40px;right:40px;bottom:18px;display:flex;justify-content:space-between;font-size:12px;color:#5b6577;border-top:2px solid #E3E8F0;padding-top:8px}
 .pc-ti{display:flex;align-items:center;gap:14px;padding:10px 40px 0}.pc-ti h1{font-size:34px;margin:0;color:var(--pn)}.pc-tag{background:var(--pr);color:#fff;border-radius:999px;padding:4px 14px;font-weight:700;font-size:17px}
-.pc-duo{display:grid;grid-template-columns:330px 1fr;gap:20px;padding:0 40px}.pc-img{background:#F7F9FC;border-radius:18px;height:330px;display:grid;place-items:center;position:relative;overflow:hidden}.pc-img img,.pc-img svg{max-width:92%;max-height:300px}.pc-img svg{width:240px;height:240px}.pc-img small{position:absolute;bottom:8px;font-size:11px;color:#5b6577}
+.pc-duo{display:grid;grid-template-columns:330px 1fr;gap:20px;padding:0 40px}.pc-img{background:#F7F9FC;border-radius:18px;height:330px;display:grid;place-items:center;position:relative;overflow:hidden}.pc-img img{width:94%;height:300px;object-fit:contain}.pc-img svg{max-width:92%;max-height:300px}.pc-img svg{width:240px;height:240px}.pc-img small{position:absolute;bottom:8px;font-size:11px;color:#5b6577}
 .pc-spec{display:grid;gap:10px;align-content:start}.pc-spec>div{border-left:4px solid var(--pc);padding:4px 0 4px 12px}.pc-spec span{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#5b6577;font-weight:700}.pc-spec b{font-size:20px}
 .pc-pz{display:grid;grid-template-columns:300px 1fr;gap:18px;padding:0 40px}.dg{display:grid;grid-template-columns:1fr 1fr;gap:8px}.dg-p{background:#F7F9FC;border-radius:14px;padding:6px;text-align:center}.dg-t{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5b6577}.dg-s svg{width:130px;height:130px}
 .pc-pzl{display:grid;gap:8px;align-content:start}.pc-pzi{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;background:#F7F9FC;border-radius:12px;padding:8px 10px}.pc-pzi b{font-size:17px;display:block}.pc-pzi span{display:block;font-size:15px;color:#3a4458}
@@ -1115,7 +1115,7 @@ function seed(){seedN=7;const T=now();
   logExemplo(T);
   const r=makeRework(lote('0402-1'),'arremate','etiqueta',5,'Etiqueta errada',addWD(T,-6),'leo');rp(r).steps.forEach(s=>r.steps[s.id]={st:'ok',herdado:true});
   return state}
-function save(){RC={};try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){try{localStorage.setItem(KEY,JSON.stringify({...state,mockups:[]}))}catch(e2){}}nuvemSalvar()}
+function save(){RC={};try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}nuvemSalvar()}
 /* fotos enviadas pelo Nico: entram uma vez em quem ainda não tem foto; depois dá para trocar ou remover no app */
 const FOTOS0={
   priscila:'data:image/jpeg;base64,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',
@@ -1133,7 +1133,7 @@ const chaveNome=n=>String(n||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'')
 const APELIDO={laiara:'layara',nilda:'anilda',leu:'leo'};
 function aplicaFotos(s){(s.pessoas||[]).forEach(p=>{const k0=chaveNome(p.nome),k=APELIDO[k0]||k0;if(FOTOS0[k]&&!(p.fotoOk||[]).includes(k)){if(!p.foto)p.foto=FOTOS0[k];p.fotoOk=[...(p.fotoOk||[]),k]}})}
 const NOMES_V1={'Léo':'Leu','Layara':'Laiara','Anilda':'Nilda'};
-function normalizar(s){s.clientes=s.clientes||[];s.mockups=s.mockups||[];s.apelidos=s.apelidos||{};['tecido','cor','prod','local','serv'].forEach(k=>{if(!s.apelidos[k])s.apelidos[k]={}});
+function normalizar(s){s.clientes=s.clientes||[];if(s.mockups&&s.mockups.length){s.mockups.forEach(m=>{if(m&&m.id&&m.img&&!MOCKG[m.id])guardaMockG(m.id,m.img)})}delete s.mockups;s.apelidos=s.apelidos||{};['tecido','cor','prod','local','serv'].forEach(k=>{if(!s.apelidos[k])s.apelidos[k]={}});
   (s.pedidos||[]).forEach(p=>{if(p.cli&&s.clientes.some(c=>c.id===p.cli))return;const c=acharCliente(s,p.cliente,p.cnpj);if(c){p.cli=c.id;if(!c.cnpj&&p.cnpj)c.cnpj=p.cnpj;if(!c.contato&&p.contato)c.contato=p.contato}else{const n={id:'c'+(s.clientes.length+1)+'-'+Math.random().toString(36).slice(2,6),nome:(p.cliente||'').trim(),cnpj:p.cnpj||'',contato:p.contato||'',apelidos:[]};s.clientes.push(n);p.cli=n.id}});if(!s.nomesV){(s.pessoas||[]).forEach(p=>{if(NOMES_V1[p.nome])p.nome=NOMES_V1[p.nome]});s.nomesV=1}if(!s.alexV){if(!(s.pessoas||[]).some(p=>chaveNome(p.nome)==='alexandra'))s.pessoas.push({id:'alexandra',nome:'Alexandra',papeis:['acab'],sabe:['arremate','embalagem'],melhor:[]});s.alexV=1}aplicaFotos(s);if(s.expediente&&!s.expediente.v2){if(!s.expediente.pausas.some(p=>hm(p.h)>=hm('11:00')&&hm(p.h)<=hm('13:00')))s.expediente.pausas.push({nome:'Almoço',h:'12:00',min:60});s.expediente.pausas.sort((a,b)=>hm(a.h)-hm(b.h));s.expediente.v2=true}s.log=s.log||[];s.pessoas=s.pessoas||[];s.consertos=s.consertos||[];s.cores={...CORES,...(s.cores||{})};const EXC={'0402':['Marcos Lima','12.345.678/0001-90'],'0409':['Juliana Prado','23.456.789/0001-01'],'0412':['Paulo Reis','34.567.890/0001-12'],'0415':['Carla Mendes','45.678.901/0001-23'],'0416':['Rafael Souza','56.789.012/0001-34'],'0419':['Renata Alves','78.901.234/0001-56'],'0418':['Teresa Nogueira','67.890.123/0001-45'],'0420':['Fernanda Rocha','89.012.345/0001-67']};s.pedidos.forEach(p=>{const x=EXC[p.id];p.contato=p.contato||(x?x[0]:'');p.cnpj=p.cnpj||(x?x[1]:'')});s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});const mg=x=>{if(x.parte==='Mangas'&&!x.lado)x.lado='esq'};s.produtos.forEach(p=>{(p.persPadrao||[]).forEach(mg);ajustaGola(p)});Object.entries({'Gola polo Marinho':260,'Gola polo Branca':120,'Gola polo Cinza':150,'Gola ribana Branca':300,'Gola ribana Preta':150}).forEach(([k,v])=>{if(s.estoque[k]==null)s.estoque[k]=v});s.lotes.forEach(l=>(l.pers||[]).forEach(mg));cfgDefaults(s);return s}
 const nCli=x=>String(x||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 function acharCliente(st,nome,cnpj){const n=nCli(nome),d=String(cnpj||'').replace(/\D/g,'');return (st.clientes||[]).find(c=>(n&&(nCli(c.nome)===n||(c.apelidos||[]).includes(n)))||(d.length>=14&&String(c.cnpj||'').replace(/\D/g,'')===d))||null}
@@ -1146,8 +1146,23 @@ function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===8&
 
 /* ================= desenho dos produtos ================= */
 const mockSvg=(src,z)=>`<svg class="prod mock" viewBox="0 0 120 120" role="img" aria-label="Mockup: toque para ampliar" ${z?`data-z="${esc(z)}"`:''}><image href="${src}" x="0" y="0" width="120" height="120" preserveAspectRatio="xMidYMid meet"/></svg>`;
-const mockGrande=l=>l&&((state.mockups||[]).find(m=>m.id===l.id)||(state.mockups||[]).find(m=>m.id===l.parent))?.img||l?.mock||'';
-function setMock(l,p,g){l.mock=p;state.mockups=(state.mockups||[]).filter(m=>m.id!==l.id);if(g)state.mockups.push({id:l.id,img:g});state.lotes.filter(r=>r.parent===l.id).forEach(r=>r.mock=p)}
+var MOCKG={};
+const IDB=(()=>{let p;const abre=()=>p||(p=new Promise((ok,er)=>{try{const r=indexedDB.open('martins-mock',1);r.onupgradeneeded=()=>r.result.createObjectStore('m');r.onsuccess=()=>ok(r.result);r.onerror=()=>er(r.error)}catch(e){er(e)}}));
+  const tx=(modo,fn)=>abre().then(db=>new Promise(ok=>{const t=db.transaction('m',modo),q=fn(t.objectStore('m'));t.oncomplete=()=>ok(q&&q.result);t.onerror=()=>ok(null)})).catch(()=>null);
+  return {get:k=>tx('readonly',o=>o.get(k)),set:(k,v)=>tx('readwrite',o=>o.put(v,k))}})();
+const MOCK_PEND=(()=>{try{return new Set(JSON.parse(localStorage.getItem('martins-mockpend')||'[]'))}catch(e){return new Set()}})();
+const pendSalva=()=>{try{localStorage.setItem('martins-mockpend',JSON.stringify([...MOCK_PEND]))}catch(e){}};
+const PARTE=190000;
+async function nuvemMockPut(id,data){if(NV.modo!=='nuvem'||!NV.db){MOCK_PEND.add(id);pendSalva();return}
+  try{const n=Math.ceil(data.length/PARTE);for(let k=0;k<n;k++)await NV.db.doc(`mockp/${id}~${k}`).set({d:data.slice(k*PARTE,(k+1)*PARTE)});await NV.db.doc(`mock/${id}`).set({n,tam:data.length,ts:now()});MOCK_PEND.delete(id);pendSalva()}
+  catch(e){MOCK_PEND.add(id);pendSalva()}}
+async function nuvemMockGet(id){if(!NV.db||NV.modo!=='nuvem')return null;try{const m=await NV.db.doc(`mock/${id}`).get();if(!m.exists)return null;const n=m.data().n;
+  const ps=await Promise.all(Array.from({length:n},(_,k)=>NV.db.doc(`mockp/${id}~${k}`).get()));if(ps.some(x=>!x.exists))return null;return ps.map(x=>x.data().d).join('')}catch(e){return null}}
+async function mockPendentes(){for(const id of [...MOCK_PEND]){const v=MOCKG[id]||await IDB.get(id);if(v)await nuvemMockPut(id,v);else{MOCK_PEND.delete(id);pendSalva()}}}
+function guardaMockG(id,g){MOCKG[id]=g;IDB.set(id,g);nuvemMockPut(id,g)}
+async function pegaMock(l){if(!l)return '';for(const id of [l.id,l.parent].filter(Boolean)){if(MOCKG[id])return MOCKG[id];let v=await IDB.get(id);if(!v){v=await nuvemMockGet(id);if(v)IDB.set(id,v)}if(v){MOCKG[id]=v;return v}}return l.mock||''}
+const mockGrande=l=>l?(MOCKG[l.id]||(l.parent&&MOCKG[l.parent])||l.mock||''):'';
+function setMock(l,p,g){l.mock=p;state.lotes.filter(r=>r.parent===l.id).forEach(r=>r.mock=p);if(g)guardaMockG(l.id,g)}
 function loteSvg(l){return l&&l.mock?`<svg class="prod mock" viewBox="0 0 120 120" role="img" aria-label="Mockup: toque para ampliar" ${l.id?`data-z="L:${l.id}"`:''}><image href="${l.mock}" x="0" y="0" width="120" height="120" preserveAspectRatio="xMidYMid meet"/></svg>`:prodSvg(l.prod,l.cor,l.cores2)}
 function prodSvg(pid,cor,c2){const p=prod(pid);let sv=shapeSvg(p?p.forma:'polo',cor,p?p.nome:'');if(c2&&c2.length){const dots=c2.slice(0,4).map((c,i)=>`<circle cx="${104-i*15}" cy="106" r="8" fill="${coresAll()[c.cor]||'#999'}" stroke="#fff" stroke-width="2.5"/>`).join('');sv=sv.replace('</svg>',dots+'</svg>')}return sv}
 const coresAll=()=>(state&&state.cores)||CORES;
@@ -1844,23 +1859,27 @@ function impCriar(){const e=ui.sheet,g=e.grupos[e.gi];if(impPend(g).length)retur
   const num=/^\d+$/.test(g.num)&&!pedById(g.num)?g.num:String(state.seq++).padStart(4,'0');if(/^\d+$/.test(num))state.seq=Math.max(state.seq,+num+1);
   const lines=g.itens.map(it=>({prod:it.prod,cor:it.cor,cores2:[],tecido:it.tecido,opcoes:[],pers:it.pers.map((x,j)=>({tipo:x.tipo,parte:x.parte,lado:x.parte==='Mangas'?x.lado:undefined,desc:x.desc||undefined,rot:x.rot||undefined,id:'pz'+j})),g:{...it.g},qtd:sum(Object.values(it.g)),mock:it.mock,mockG:it.mockG,obs:it.obs}));
   state.pedidos.push({id:num,cli:cl.id,ficha:g.num||undefined,cliente:cl.nome,contato:g.contato.trim(),cnpj:g.cnpj.trim()||cl.cnpj||'',vendedor:g.vend,chegada:g.chegada||now(),entrega:g.entrega,vias:false,artePrep:false,arte:false,artes:{},materiais:calcMat(lines),concluido:null,fonte:'ficha'});
-  lines.forEach((x,i)=>state.lotes.push({id:`${num}-${i+1}`,ped:num,prod:x.prod,cor:x.cor,cores2:[],tecido:x.tecido,opcoes:[],pers:x.pers,qtd:x.qtd,grade:x.g,desm:0,steps:{},rework:false,parent:null,mock:x.mock||undefined,obs:x.obs||undefined}));lines.forEach((x,i)=>{if(x.mockG)state.mockups.push({id:`${num}-${i+1}`,img:x.mockG})});
+  lines.forEach((x,i)=>state.lotes.push({id:`${num}-${i+1}`,ped:num,prod:x.prod,cor:x.cor,cores2:[],tecido:x.tecido,opcoes:[],pers:x.pers,qtd:x.qtd,grade:x.g,desm:0,steps:{},rework:false,parent:null,mock:x.mock||undefined,obs:x.obs||undefined}));lines.forEach((x,i)=>{if(x.mockG)guardaMockG(`${num}-${i+1}`,x.mockG)});
   e.grupos.splice(e.gi,1);if(e.grupos.length){e.gi=0;commit();toast(`Pedido ${num} criado. Falta ${e.grupos.length}`)}else{ui.sheet={t:'pedido',id:num};ui.tela='pedidos';commit();toast(`Pedido ${num} criado`)}}
 // mockup: tira o fundo branco e a faixa de baixo, deixa quadrado
 async function mockDeArquivo(f){let src;
-  if(/pdf$/i.test(f.type)||/\.pdf$/i.test(f.name)){const pdf=await pdfLib();const doc=await pdf.getDocument({data:new Uint8Array(await lerArq(f)),isEvalSupported:false}).promise;const pg=await doc.getPage(1);const vp=pg.getViewport({scale:1.5});const c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;await pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;src=c.toDataURL('image/png')}
+  if(/pdf$/i.test(f.type)||/\.pdf$/i.test(f.name)){const pdf=await pdfLib();const doc=await pdf.getDocument({data:new Uint8Array(await lerArq(f)),isEvalSupported:false}).promise;const pg=await doc.getPage(1);
+    const v1=pg.getViewport({scale:1}),sc=Math.min(5,2600/Math.max(v1.width,v1.height)),vp=pg.getViewport({scale:sc});const c=document.createElement('canvas');c.width=Math.round(vp.width);c.height=Math.round(vp.height);await pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;src=c.toDataURL('image/png')}
   else src=await lerURL(f);
-  const im=new Image();im.src=src;await im.decode();const W=Math.min(900,im.width),H=Math.round(im.height*W/im.width);const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,W,H);g.drawImage(im,0,0,W,H);
-  const d=g.getImageData(0,0,W,H).data;const cheio=(x,y)=>{const i=(y*W+x)*4;return d[i+3]>20&&(d[i]<235||d[i+1]<235||d[i+2]<235)};
-  const ciano=(x,y)=>{const i=(y*W+x)*4;return d[i+2]>140&&d[i+1]>140&&d[i+2]-d[i]>45};const fracC=y=>{let n=0;for(let x=0;x<W;x+=3)if(ciano(x,y))n++;return n/(W/3)};
+  const im=new Image();im.src=src;await im.decode();const IW=im.naturalWidth,IH=im.naturalHeight;
+  // análise numa cópia pequena (rápida)
+  const W=Math.min(900,IW),H=Math.round(IH*W/IW),r=IW/W;const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,W,H);g.drawImage(im,0,0,W,H);
+  const d=g.getImageData(0,0,W,H).data;const ciano=(x,y)=>{const i=(y*W+x)*4;return d[i+2]>140&&d[i+1]>140&&d[i+2]-d[i]>45};const cheio=(x,y)=>{const i=(y*W+x)*4;return d[i+3]>20&&(d[i]<235||d[i+1]<235||d[i+2]<235)&&!(y>H*.6&&ciano(x,y))};
+  const fracC=y=>{let n=0;for(let x=0;x<W;x+=3)if(ciano(x,y))n++;return n/(W/3)};
   let fimY=H;for(let y=Math.floor(H*.5);y<H;y++){if(fracC(y)>.2){let ok=true;for(let z=y;z<H;z+=4)if(fracC(z)<.2){ok=false;break}if(ok){fimY=y;break}}}
-  {const im2=g.getImageData(0,0,W,H),e2=im2.data;for(let y=Math.floor(H*.6);y<H;y++)for(let x=0;x<W;x++)if(ciano(x,y)){const i=(y*W+x)*4;e2[i]=e2[i+1]=e2[i+2]=255}g.putImageData(im2,0,0);for(let i=0;i<d.length;i++)d[i]=e2[i]}
   let x0=W,y0=fimY,x1=0,y1=0;for(let y=0;y<fimY;y+=2)for(let x=0;x<W;x+=2)if(cheio(x,y)){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
-  if(x1<=x0||y1<=y0){x0=0;y0=0;x1=W;y1=fimY}
-  const lado=Math.max(x1-x0,y1-y0)*1.08,cx=(x0+x1)/2,cy=(y0+y1)/2,N=240,o=document.createElement('canvas');o.width=o.height=N;const og=o.getContext('2d');og.fillStyle='#fff';og.fillRect(0,0,N,N);
-  const bw=x1-x0+1,bh=Math.min(y1,fimY-1)-y0+1,k=N/lado;og.drawImage(c,x0,y0,bw,bh,(N-bw*k)/2,(N-bh*k)/2,bw*k,bh*k);const p=o.toDataURL('image/jpeg',.85);
-  let G=Math.min(1000,Math.round(lado)),gg;for(let q=.82;;q-=.08){const o2=document.createElement('canvas');o2.width=o2.height=G;const g2=o2.getContext('2d');g2.fillStyle='#fff';g2.fillRect(0,0,G,G);const k2=G/lado;g2.drawImage(c,x0,y0,bw,bh,(G-bw*k2)/2,(G-bh*k2)/2,bw*k2,bh*k2);gg=o2.toDataURL('image/jpeg',Math.max(.5,q));if(gg.length<300000||q<.55){if(gg.length>=300000){G=Math.round(G*.8);q=.9;continue}break}}
-  return {p,g:gg}}
+  if(x1<=x0||y1<=y0){x0=0;y0=0;x1=W-1;y1=fimY-1}
+  // recorte na resolução original
+  const X0=Math.max(0,Math.floor((x0-2)*r)),Y0=Math.max(0,Math.floor((y0-2)*r)),X1=Math.min(IW,Math.ceil((x1+3)*r)),Y1=Math.min(IH,Math.ceil((Math.min(y1,fimY-1)+3)*r)),BW=X1-X0,BH=Y1-Y0;
+  const F=document.createElement('canvas');F.width=BW;F.height=BH;const fg=F.getContext('2d');fg.fillStyle='#fff';fg.fillRect(0,0,BW,BH);fg.drawImage(im,X0,Y0,BW,BH,0,0,BW,BH);
+  {const img=fg.getImageData(0,0,BW,BH),e=img.data,lim=IH*.6;let mud=false;for(let y=0;y<BH;y++){if(Y0+y<lim)continue;for(let x=0;x<BW;x++){const i=(y*BW+x)*4;if(e[i+2]>140&&e[i+1]>140&&e[i+2]-e[i]>45){e[i]=e[i+1]=e[i+2]=255;mud=true}}}if(mud)fg.putImageData(img,0,0)}
+  const quadro=(N,q)=>{const lado=Math.max(BW,BH)*1.06,k=N/lado,o=document.createElement('canvas');o.width=o.height=N;const og=o.getContext('2d');og.fillStyle='#fff';og.fillRect(0,0,N,N);og.imageSmoothingQuality='high';og.drawImage(F,0,0,BW,BH,(N-BW*k)/2,(N-BH*k)/2,BW*k,BH*k);return o.toDataURL('image/jpeg',q)};
+  const G=Math.min(2400,Math.round(Math.max(BW,BH)*1.06));return {p:quadro(240,.85),g:quadro(G,.92),px:G}}
 function sugMock(nome){const t=' '+semAc(nome).replace(/[^a-z0-9]+/g,' ')+' ';const ls=state.lotes.filter(l=>!l.rework&&!pedById(l.ped)?.concluido);
   const num=(t.match(/\b(\d{3,6})\b/)||[])[1];const cand=ls.filter(l=>(!num||l.ped===num)&&t.includes(' '+semAc(l.cor)+' '));return cand.length===1?cand[0].id:null}
 function sMock(){const e=ui.sheet;const ls=state.lotes.filter(l=>!l.rework&&!pedById(l.ped)?.concluido).sort((a,b)=>b.ped.localeCompare(a.ped));
@@ -1871,22 +1890,28 @@ function sMock(){const e=ui.sheet;const ls=state.lotes.filter(l=>!l.rework&&!ped
   <div class="acoes"><button class="big go" data-a="mockOk" ${e.itens.some(m=>m.alvo)?'':'disabled'}>${ic('i-check')}Salvar ${e.itens.filter(m=>m.alvo).length} ${e.itens.filter(m=>m.alvo).length===1?'mockup':'mockups'}</button></div>`}
 
 /* ================= ver mockup com zoom ================= */
-function abreZoom(z){const [k,v]=[z.slice(0,1),z.slice(2)];let src='',tit='Mockup';
-  if(k==='L'){const l=lote(v);src=mockGrande(l);tit=`Pedido ${l.ped} · ${prod(l.prod).nome} ${l.cor}`}
+function abreZoom(z){const [k,v]=[z.slice(0,1),z.slice(2)];let src='',tit='Mockup',lt=null;
+  if(k==='L'){lt=lote(v);src=mockGrande(lt);tit=`Pedido ${lt.ped} · ${prod(lt.prod).nome} ${lt.cor}`}
   else if(k==='I'){const it=ui.sheet.grupos[ui.sheet.gi].itens[+v];src=it.mockG||it.mock;tit=`Peça ${+v+1}`}
   else if(k==='W'){const it=ui.sheet.w.itens[+v];src=it.mockG||it.mock;tit=prod(it.prod).nome}
   else if(k==='M'){const m=ui.sheet.itens[+v];src=m.g||m.img;tit=m.nome}
-  if(!src)return;const Z=document.getElementById('zoom');let esc_=1,x=0,y=0;
-  Z.innerHTML=`<div class="zm" role="dialog" aria-modal="true" aria-label="${esc(tit)}"><div class="zm-bar"><b>${esc(tit)}</b><button class="zm-b" data-zm="-" aria-label="Diminuir">−</button><button class="zm-b" data-zm="0" aria-label="Tamanho normal">100%</button><button class="zm-b" data-zm="+" aria-label="Aumentar">+</button><button class="zm-b zm-x" data-zm="x" aria-label="Fechar">×</button></div><div class="zm-area"><img src="${src}" alt="${esc(tit)}" draggable="false"></div><p class="zm-dica">Use + e −, dois dedos ou a rodinha do mouse. Arraste para mover.</p></div>`;
-  const img=Z.querySelector('img'),area=Z.querySelector('.zm-area');const ap=()=>{img.style.transform=`translate(${x}px,${y}px) scale(${esc_})`};
-  const zoom=(f,cx,cy)=>{const r=area.getBoundingClientRect();cx=cx??r.width/2;cy=cy??r.height/2;const n=Math.min(6,Math.max(1,esc_*f));const px=cx-r.width/2-x,py=cy-r.height/2-y;x-=px*(n/esc_-1);y-=py*(n/esc_-1);esc_=n;if(n===1){x=0;y=0}ap()};
-  Z.querySelectorAll('[data-zm]').forEach(b=>b.onclick=()=>{const v=b.dataset.zm;if(v==='x')Z.innerHTML='';else if(v==='0'){esc_=1;x=0;y=0;ap()}else zoom(v==='+'?1.5:1/1.5)});
+  if(!src)return;const Z=document.getElementById('zoom');
+  Z.innerHTML=`<div class="zm" role="dialog" aria-modal="true" aria-label="${esc(tit)}"><div class="zm-bar"><b>${esc(tit)}</b><button class="zm-b" data-zm="-" aria-label="Diminuir">−</button><button class="zm-b" data-zm="0" aria-label="Tamanho normal">⤢</button><button class="zm-b" data-zm="+" aria-label="Aumentar">+</button><button class="zm-b zm-x" data-zm="x" aria-label="Fechar">×</button></div><div class="zm-area"><img alt="${esc(tit)}" draggable="false"></div><p class="zm-dica"><span class="zm-res"></span> Use + e −, dois dedos ou a rodinha do mouse. Arraste para mover.</p></div>`;
+  const img=Z.querySelector('img'),area=Z.querySelector('.zm-area'),res=Z.querySelector('.zm-res');let base=1,esc_=1,x=0,y=0,max=6;
+  const cabe=()=>{const r=area.getBoundingClientRect();base=Math.min(r.width/img.naturalWidth,r.height/img.naturalHeight,1e9);max=Math.max(2,Math.min(8,2/base))};
+  const ap=()=>{const r=area.getBoundingClientRect(),w=img.naturalWidth*base*esc_,h=img.naturalHeight*base*esc_;const mx=Math.max(0,(w-r.width)/2),my=Math.max(0,(h-r.height)/2);x=Math.max(-mx,Math.min(mx,x));y=Math.max(-my,Math.min(my,y));
+    img.style.width=w+'px';img.style.height=h+'px';img.style.left=((r.width-w)/2+x)+'px';img.style.top=((r.height-h)/2+y)+'px'};
+  const zoom=(f,cx,cy)=>{const r=area.getBoundingClientRect();cx=cx??r.width/2;cy=cy??r.height/2;const n=Math.min(max,Math.max(1,esc_*f));const px=cx-r.width/2-x,py=cy-r.height/2-y;x-=px*(n/esc_-1);y-=py*(n/esc_-1);esc_=n;if(n===1){x=0;y=0}ap()};
+  const carrega=u=>{const i2=new Image();i2.onload=()=>{const keep=esc_;img.src=u;cabe();esc_=keep;ap();res.textContent=`${i2.naturalWidth} px ·`};i2.src=u};
+  carrega(src);if(lt)pegaMock(lt).then(u=>{if(u&&u!==src)carrega(u)});
+  window.addEventListener('resize',()=>{if(img.naturalWidth){cabe();ap()}},{once:true});
+  Z.querySelectorAll('[data-zm]').forEach(b=>b.onclick=()=>{const v=b.dataset.zm;if(v==='x')Z.innerHTML='';else if(v==='0'){esc_=1;x=0;y=0;ap()}else zoom(v==='+'?1.6:1/1.6)});
   area.onwheel=ev=>{ev.preventDefault();const r=area.getBoundingClientRect();zoom(ev.deltaY<0?1.2:1/1.2,ev.clientX-r.left,ev.clientY-r.top)};
   const P=new Map();let d0=0,s0=1,last=null,tap=0;
   area.onpointerdown=ev=>{area.setPointerCapture(ev.pointerId);P.set(ev.pointerId,{x:ev.clientX,y:ev.clientY});if(P.size===2){const [a,b]=[...P.values()];d0=Math.hypot(a.x-b.x,a.y-b.y);s0=esc_}last={x:ev.clientX,y:ev.clientY};
-    const t=Date.now();if(t-tap<300){const r=area.getBoundingClientRect();esc_>1?(esc_=1,x=0,y=0,ap()):zoom(2.5,ev.clientX-r.left,ev.clientY-r.top)}tap=t};
+    const t=Date.now();if(t-tap<300){const r=area.getBoundingClientRect();if(esc_>1){esc_=1;x=0;y=0;ap()}else zoom(3,ev.clientX-r.left,ev.clientY-r.top)}tap=t};
   area.onpointermove=ev=>{if(!P.has(ev.pointerId))return;P.set(ev.pointerId,{x:ev.clientX,y:ev.clientY});
-    if(P.size===2){const [a,b]=[...P.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(d0){esc_=Math.min(6,Math.max(1,s0*d/d0));if(esc_===1){x=0;y=0}ap()}}
+    if(P.size===2){const [a,b]=[...P.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(d0){const r=area.getBoundingClientRect();zoom(Math.min(max,Math.max(1,s0*d/d0))/esc_,(a.x+b.x)/2-r.left,(a.y+b.y)/2-r.top)}}
     else if(esc_>1&&last){x+=ev.clientX-last.x;y+=ev.clientY-last.y;ap()}last={x:ev.clientX,y:ev.clientY}};
   area.onpointerup=area.onpointercancel=ev=>{P.delete(ev.pointerId);if(P.size<2)d0=0};
   Z.querySelector('.zm').onclick=ev=>{if(ev.target.classList.contains('zm'))Z.innerHTML=''}}
@@ -1975,7 +2000,7 @@ function docPedido(ped){const m=marca(),ls=lotesDe(ped.id).filter(l=>!l.rework),
   return pags}
 async function paraCinza(src){if(!src)return '';const im=new Image();im.src=src;await im.decode();const c=document.createElement('canvas');c.width=im.width;c.height=im.height;const g=c.getContext('2d');g.drawImage(im,0,0);const d=g.getImageData(0,0,c.width,c.height),a=d.data;
   for(let i=0;i<a.length;i+=4){const v=a[i]*.3+a[i+1]*.59+a[i+2]*.11;a[i]=a[i+1]=a[i+2]=v}g.putImageData(d,0,0);return c.toDataURL('image/jpeg',.85)}
-async function abreDoc(tipoDoc,id){const ped=pedById(id),ls=lotesDe(id).filter(l=>!l.rework);const cinza={};
+async function abreDoc(tipoDoc,id){const ped=pedById(id),ls=lotesDe(id).filter(l=>!l.rework);const cinza={};toast('Carregando as imagens…',false);await Promise.all(ls.map(pegaMock));document.getElementById('toast').innerHTML='';
   if(tipoDoc==='prod'){toast('Montando as fichas…',false);for(const l of ls)if(l.mock)try{cinza[l.id]=await paraCinza(mockGrande(l))}catch(e){}document.getElementById('toast').innerHTML=''}
   openSheet({t:'doc',tipo:tipoDoc,id,cinza,vias:2,mocks:true})}
 function paginasDoc(e){const ped=pedById(e.id),ls=lotesDe(e.id).filter(l=>!l.rework);
@@ -1988,6 +2013,7 @@ function sDoc(){const e=ui.sheet,ped=pedById(e.id),P=paginasDoc(e);
   ${e.tipo==='prod'?`<div class="linha-dep" style="margin-bottom:10px"><button class="depc" data-a="docVias" data-v="2" aria-pressed="${e.vias===2}">1ª e 2ª via</button><button class="depc" data-a="docVias" data-v="1" aria-pressed="${e.vias===1}">Só 1ª via</button><button class="depc" data-a="docMocks" aria-pressed="${e.mocks}">${ic('i-camisa')}Incluir mockups</button></div>`:''}
   <div class="acoes" style="margin-top:0"><button class="big go" data-a="docPdf">${ic('i-lista')}Baixar PDF (${P.length} ${P.length===1?'página':'páginas'})</button><button class="big neutro" data-a="docPrint">Imprimir</button></div>
   ${e.tipo==='pedido'?`<div class="linha-dep" style="margin:4px 0 12px">${ped.aprov?`<span class="imp-ok">${ic('i-check')}Cliente aprovou em ${dataCurta(ped.aprov.ts)}</span><button class="x" data-a="docAprov" data-id="${ped.id}">Desfazer</button>`:`<button class="depc" data-a="docAprov" data-id="${ped.id}">${ic('i-check')}Cliente aprovou este pedido</button>`}</div>`:''}
+  ${(()=>{const bx=lotesDe(e.id).filter(l=>!l.rework&&l.mock&&!(MOCKG[l.id]||(l.parent&&MOCKG[l.parent])));return bx.length?`<div class="aviso">${ic('i-alerta')}O mockup de ${bx.map(l=>esc(prod(l.prod).nome+' '+l.cor)).join(', ')} está só em tamanho pequeno e vai sair sem definição. Abra o pedido e toque em “Trocar mockup” com a imagem original.</div>`:''})()}
   <div class="docs">${P.map(h=>`<div class="a4wrap">${h}</div>`).join('')}</div>`}
 function ajustaA4(){document.querySelectorAll('.a4wrap').forEach(w=>{const k=w.clientWidth/794;const a=w.firstElementChild;if(a){a.style.transform=`scale(${k})`;w.style.height=(1123*k)+'px'}})}
 window.addEventListener('resize',ajustaA4);
@@ -2315,7 +2341,7 @@ const A={
   wCriar:()=>{const w=ui.sheet.w;snap();const id=String(state.seq++).padStart(4,'0');const lines=w.itens.map(it=>({prod:it.prod,cor:it.cor,cores2:JSON.parse(JSON.stringify(it.cores2||[])),tecido:it.tecido,opcoes:[...it.opcoes],pers:it.pers.map((x,j)=>({tipo:x.tipo,parte:x.parte,lado:x.lado,id:'pz'+j})),g:{...it.g},qtd:sum(sizesAll().map(s=>it.g[s]||0))}));
     const cl=garanteCliente(w.cliente,(w.cnpj||'').trim(),(w.contato||'').trim(),w.cli);
     state.pedidos.push({id,cli:cl.id,cliente:cl.nome,contato:(w.contato||'').trim(),cnpj:(w.cnpj||'').trim()||cl.cnpj||'',vendedor:w.vend,chegada:now(),entrega:w.entrega,vias:false,artePrep:false,arte:false,artes:{},materiais:calcMat(lines),concluido:null});
-    w.itens.forEach((it,i)=>{if(it.mockG)state.mockups.push({id:`${id}-${i+1}`,img:it.mockG})});lines.forEach((x,i)=>state.lotes.push({id:`${id}-${i+1}`,ped:id,mock:w.itens[i].mock||undefined,prod:x.prod,cor:x.cor,cores2:x.cores2,tecido:x.tecido,opcoes:x.opcoes,pers:x.pers,qtd:x.qtd,grade:x.g,desm:0,steps:{},rework:false,parent:null}));
+    w.itens.forEach((it,i)=>{if(it.mockG)guardaMockG(`${id}-${i+1}`,it.mockG)});lines.forEach((x,i)=>state.lotes.push({id:`${id}-${i+1}`,ped:id,mock:w.itens[i].mock||undefined,prod:x.prod,cor:x.cor,cores2:x.cores2,tecido:x.tecido,opcoes:x.opcoes,pers:x.pers,qtd:x.qtd,grade:x.g,desm:0,steps:{},rework:false,parent:null}));
     ui.tela='pedidos';ui.sheet={t:'pedido',id};commit();toast('Pedido criado')},
 };
 document.addEventListener('click',e=>{const z=e.target.closest('svg.mock[data-z]');if(z){e.preventDefault();e.stopPropagation();abreZoom(z.dataset.z);return}const b=e.target.closest('[data-a]');if(!b||b.disabled)return;const f=A[b.dataset.a];if(f){e.preventDefault();f(b.dataset)}});
@@ -2365,7 +2391,7 @@ function sQuem(){return `${voltar('Voltar')}<h1>Quem está usando este aparelho?
   <div class="eq-l">${state.pessoas.map(p=>`<button class="eq" data-a="quemSel" data-v="${p.id}" aria-pressed="${QUEM===p.id}">${av(p.id)}<span class="eq-t"><b>${esc(p.nome)}</b><span>${esc(papeisTxt(p))}</span></span>${QUEM===p.id?ic('i-check'):''}</button>`).join('')}</div>`}
 
 /* ================= nuvem (banco de dados compartilhado) ================= */
-const COLS=['tipos','pessoas','forn','produtos','pedidos','lotes','consertos','clientes','mockups'];
+const COLS=['tipos','pessoas','forn','produtos','pedidos','lotes','consertos','clientes'];
 const NV={db:null,modo:'local',st:'',Q:new Set(),acked:{},last:{},busy:false,subs:[],pendR:false,timer:null};
 const stab=v=>JSON.stringify(v,(k,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.keys(x).sort().reduce((o,k2)=>(o[k2]=x[k2],o),{}):x);
 const limpo=v=>JSON.parse(JSON.stringify(v));
@@ -2412,7 +2438,7 @@ async function nuvemLer(){const cs=[...COLS,'config','log'];const sn=await Promi
   sn.forEach((x,i)=>x.docs.forEach(d=>{if(d.exists)m[cs[i]+'/'+d.id]=limpo(d.data())}));return m}
 function nuvemAdotar(m){NV.acked=m;NV.last={};Object.entries(m).forEach(([p,v])=>NV.last[p]=stab(v));
   const st=normalizar(deDocs(m));if(!st.atrib)st.atrib={};state=st;NV.modo='nuvem';syncSt('ok');
-  try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}save();render();tick();nuvemOuvir()}
+  try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}save();render();tick();nuvemOuvir();mockPendentes()}
 async function nuvemConectar(){let db=null;try{db=await window.claude?.use?.('db')}catch(e){}
   if(!db){syncSt('local');return}NV.db=db;syncSt('salvando');
   try{const m=await nuvemLer();if(m['config/main']?.v)return nuvemAdotar(m);ui.inicio=true;syncSt('');render()}
@@ -2421,7 +2447,7 @@ async function nuvemIniciar(modo){const btns=document.querySelectorAll('[data-a=
   try{const l=await NV.db.doc('trava/inicio').acquire({holder:DEV,ttlMs:60000});const m=await nuvemLer();
     if(m['config/main']?.v||!l.acquired){ui.inicio=false;if(m['config/main']?.v)return nuvemAdotar(m);return setTimeout(nuvemConectar,3000)}
     if(modo==='vazia'){state.pedidos=[];state.lotes=[];state.consertos=[];state.log=[];state.atrib={};state.exemplo=false}else state.exemplo=true;
-    ui.inicio=false;NV.acked={};NV.last={};NV.modo='nuvem';save();render();tick();nuvemOuvir();toast('Pronto! Os dados agora ficam na nuvem',false)}
+    ui.inicio=false;NV.acked={};NV.last={};NV.modo='nuvem';save();render();tick();nuvemOuvir();mockPendentes();toast('Pronto! Os dados agora ficam na nuvem',false)}
   catch(e){btns.forEach(b=>b.disabled=false);toast('Sem conexão. Tente de novo.',false)}}
 function vInicio(){return `<div class="inicio"><span class="m-ic" style="width:72px;height:72px">${ic('i-fabrica')}</span><h1>Vamos começar</h1>
   <p>É a primeira vez que o sistema abre na nuvem. As máquinas, a equipe, os produtos e o estoque <b>deste aparelho</b> vão para a nuvem. Escolha como começar:</p>
