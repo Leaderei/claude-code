@@ -637,6 +637,14 @@ svg.prod.mock{cursor:zoom-in}
 .alrt-go{align-self:center;font-size:15px!important;font-weight:700;color:var(--blue)!important;white-space:nowrap}.g-link{cursor:pointer}.g-link:hover{background:var(--grey-soft)}
 @media (max-width:640px){.alrt{grid-template-columns:34px minmax(0,1fr)!important}.alrt-go{grid-column:2}}
 .pos-ed{border-top:1px solid var(--grey-soft);padding:8px 0;display:grid;gap:6px}.pos-ed b{font-size:17px}.pos-ed .novo-in{max-width:520px}
+
+/* v0.31: login */
+body.sem-login .nav,body.sem-login #sync{display:none}
+body.operacao .nb[data-t="cadastros"],body.operacao .nb[data-t="gestor"]{display:none}
+.login{max-width:440px;margin:6vh auto 0;background:var(--card);border:2px solid var(--line);border-radius:22px;padding:28px 24px;display:grid;gap:10px}
+.login h1{margin:8px 0 4px}.login .big{width:100%;margin-top:8px}.login .mk-word b{color:var(--ink)}.login .rotulo{margin:6px 0 0}
+.acs-novo{display:grid;grid-template-columns:1fr 1.3fr 1.2fr 1fr auto;gap:8px;margin-top:10px}
+@media (max-width:760px){.acs-novo{grid-template-columns:1fr}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1121,7 +1129,7 @@ function logExemplo(T){state.log=[];{const combos=[['Polo Amsterdã','Pregar man
     state.log.push({ts:T-2*DIA,por:'Helena',tipo:'troca',f:'levar',de:'roger',para:'layara',ped:'0412',cli:'Construtora Horizonte',step:'Levar para Parceiro DTF'});
     state.log.sort((a,b)=>a.ts-b.ts)}}
 const TESC0={conferir:30,vias:15,arte_prep:60,arte_aprov:240,arte_env:10,comprar:30,levar:60,entregar:60};
-const CFG0=()=>({posicoes:JSON.parse(JSON.stringify(POS0)),insV:1,marca:{...MARCA0},termos:TERMOS0.map(x=>[...x]),tamPadrao:{...TAM0},apelidos:{tecido:{},cor:{},prod:{},local:{},serv:{}},nomesV:1,alexV:1,expediente:JSON.parse(JSON.stringify(EXP0)),params:{...PAR},tEsc:{...TESC0},cats:JSON.parse(JSON.stringify(CATS)),fatorEsp:{XXG:1.15},pesos:{...PESO_PARTE},probs:JSON.parse(JSON.stringify(PROBS)),papeis:{...PAPEIS},partesExtra:[...PARTES_COR_EXTRA]});
+const CFG0=()=>({usersV:1,posicoes:JSON.parse(JSON.stringify(POS0)),insV:1,marca:{...MARCA0},termos:TERMOS0.map(x=>[...x]),tamPadrao:{...TAM0},apelidos:{tecido:{},cor:{},prod:{},local:{},serv:{}},nomesV:1,alexV:1,expediente:JSON.parse(JSON.stringify(EXP0)),params:{...PAR},tEsc:{...TESC0},cats:JSON.parse(JSON.stringify(CATS)),fatorEsp:{XXG:1.15},pesos:{...PESO_PARTE},probs:JSON.parse(JSON.stringify(PROBS)),papeis:{...PAPEIS},partesExtra:[...PARTES_COR_EXTRA]});
 function cfgDefaults(s){const d=CFG0();Object.keys(d).forEach(k=>{if(s[k]==null)s[k]=d[k]});Object.keys(TESC0).forEach(k=>{if(s.tEsc[k]==null)s.tEsc[k]=TESC0[k]});Object.keys(PAR).forEach(k=>{if(s.params[k]==null)s.params[k]=PAR[k]})}
 function seed(){seedN=7;const T=now();
   state={v:8,...CFG0(),cores:{...CORES},atrib:{},tipos:JSON.parse(JSON.stringify(TIPOS0)),pessoas:JSON.parse(JSON.stringify(PESSOAS0)),forn:JSON.parse(JSON.stringify(FORN0)),produtos:JSON.parse(JSON.stringify(PRODUTOS0)),pedidos:[],lotes:[],consertos:[],estoque:{...ESTOQUE},seq:421};
@@ -1165,7 +1173,8 @@ const chaveNome=n=>String(n||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'')
 const APELIDO={laiara:'layara',nilda:'anilda',leu:'leo'};
 function aplicaFotos(s){(s.pessoas||[]).forEach(p=>{const k0=chaveNome(p.nome),k=APELIDO[k0]||k0;if(FOTOS0[k]&&!(p.fotoOk||[]).includes(k)){if(!p.foto)p.foto=FOTOS0[k];p.fotoOk=[...(p.fotoOk||[]),k]}})}
 const NOMES_V1={'Léo':'Leu','Layara':'Laiara','Anilda':'Nilda'};
-function normalizar(s){if(!s.insV){(s.pedidos||[]).forEach(p=>{const come=(s.lotes||[]).some(l=>l.ped===p.id&&Object.keys(l.steps||{}).length);if(come||p.concluido)(p.materiais||[]).forEach(m=>m.conf=true)});(s.pessoas||[]).forEach(p=>{if((p.funcoes||[]).includes('comprar')&&!(p.funcoes||[]).includes('conferir'))p.funcoes.push('conferir')});s.insV=1}
+function normalizar(s){s.usuarios=s.usuarios||[];if(!s.usersV||!s.usuarios.length){if(!s.usuarios.some(u=>u.email===USER0.email)){const h=(s.pessoas||[]).find(p=>/^helena$/i.test((p.nome||'').trim()));s.usuarios.push({...USER0,pessoa:h?h.id:''})}s.usersV=1}
+if(!s.insV){(s.pedidos||[]).forEach(p=>{const come=(s.lotes||[]).some(l=>l.ped===p.id&&Object.keys(l.steps||{}).length);if(come||p.concluido)(p.materiais||[]).forEach(m=>m.conf=true)});(s.pessoas||[]).forEach(p=>{if((p.funcoes||[]).includes('comprar')&&!(p.funcoes||[]).includes('conferir'))p.funcoes.push('conferir')});s.insV=1}
 s.clientes=s.clientes||[];s.arquivos=s.arquivos||[];if(s.mockups&&s.mockups.length){s.mockups.forEach(m=>{if(m&&m.id&&m.img&&!MOCKG[m.id])guardaMockG(m.id,m.img)})}delete s.mockups;s.apelidos=s.apelidos||{};['tecido','cor','prod','local','serv'].forEach(k=>{if(!s.apelidos[k])s.apelidos[k]={}});
   (s.pedidos||[]).forEach(p=>{if(p.cli&&s.clientes.some(c=>c.id===p.cli))return;const c=acharCliente(s,p.cliente,p.cnpj);if(c){p.cli=c.id;if(!c.cnpj&&p.cnpj)c.cnpj=p.cnpj;if(!c.contato&&p.contato)c.contato=p.contato}else{const n={id:'c'+(s.clientes.length+1)+'-'+Math.random().toString(36).slice(2,6),nome:(p.cliente||'').trim(),cnpj:p.cnpj||'',contato:p.contato||'',apelidos:[]};s.clientes.push(n);p.cli=n.id}});if(!s.nomesV){(s.pessoas||[]).forEach(p=>{if(NOMES_V1[p.nome])p.nome=NOMES_V1[p.nome]});s.nomesV=1}if(!s.alexV){if(!(s.pessoas||[]).some(p=>chaveNome(p.nome)==='alexandra'))s.pessoas.push({id:'alexandra',nome:'Alexandra',papeis:['acab'],sabe:['arremate','embalagem'],melhor:[]});s.alexV=1}aplicaFotos(s);if(s.expediente&&!s.expediente.v2){if(!s.expediente.pausas.some(p=>hm(p.h)>=hm('11:00')&&hm(p.h)<=hm('13:00')))s.expediente.pausas.push({nome:'Almoço',h:'12:00',min:60});s.expediente.pausas.sort((a,b)=>hm(a.h)-hm(b.h));s.expediente.v2=true}s.log=s.log||[];s.pessoas=s.pessoas||[];s.consertos=s.consertos||[];s.cores={...CORES,...(s.cores||{})};const EXC={'0402':['Marcos Lima','12.345.678/0001-90'],'0409':['Juliana Prado','23.456.789/0001-01'],'0412':['Paulo Reis','34.567.890/0001-12'],'0415':['Carla Mendes','45.678.901/0001-23'],'0416':['Rafael Souza','56.789.012/0001-34'],'0419':['Renata Alves','78.901.234/0001-56'],'0418':['Teresa Nogueira','67.890.123/0001-45'],'0420':['Fernanda Rocha','89.012.345/0001-67']};s.pedidos.forEach(p=>{const x=EXC[p.id];p.contato=p.contato||(x?x[0]:'');p.cnpj=p.cnpj||(x?x[1]:'')});s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});const mg=x=>{if(x.parte==='Mangas'&&!x.lado)x.lado='esq'};s.produtos.forEach(p=>{(p.persPadrao||[]).forEach(mg);ajustaGola(p)});Object.entries({'Gola polo Marinho':260,'Gola polo Branca':120,'Gola polo Cinza':150,'Gola ribana Branca':300,'Gola ribana Preta':150}).forEach(([k,v])=>{if(s.estoque[k]==null)s.estoque[k]=v});s.lotes.forEach(l=>(l.pers||[]).forEach(mg));cfgDefaults(s);mockNaBib(s);return s}
 const nCli=x=>String(x||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
@@ -1250,7 +1259,7 @@ function vFabrica(){const P=plano(),esc_=tarefasEsc();
   const nTrab=P.us.filter(u=>P.uso[u.id]).length,nIni=P.us.filter(u=>!P.uso[u.id]&&P.plan[u.id]).length;
   const z=ui.fz||'maq';
   const zonas=[['maq','Máquinas','i-maquina',nIni],['fora','Fora','i-caminhao',foraN],['esc','Escritório','i-vias',esc_.length]];
-  return `${quemNome()||!state.pessoas.length?'':`<button class="faixa quem-f" data-a="quem">${ic('i-pessoas')}<span><b>Quem está usando este aparelho?</b> Toque para escolher seu nome.</span></button>`}${faixaHora(P)}<button class="ped-l" data-a="tela" data-t="pedidos"><span class="pl-t">Pedidos</span>${res||'<span class="pl-i">nenhum aberto</span>'}<span class="pl-go">›</span></button>
+  return `${quemNome()||usuarioAtual()||!state.pessoas.length?'':`<button class="faixa quem-f" data-a="quem">${ic('i-pessoas')}<span><b>Quem está usando este aparelho?</b> Toque para escolher seu nome.</span></button>`}${faixaHora(P)}<button class="ped-l" data-a="tela" data-t="pedidos"><span class="pl-t">Pedidos</span>${res||'<span class="pl-i">nenhum aberto</span>'}<span class="pl-go">›</span></button>
   <div class="zonas" role="tablist">${zonas.map(([k,n,i,c])=>`<button class="zona" role="tab" data-a="fz" data-v="${k}" aria-pressed="${z===k}">${ic(i)}<span>${n}</span>${c?`<em>${c}</em>`:''}</button>`).join('')}</div>
   ${z==='maq'?`<div class="agora"><span><b>${nIni}</b> para começar</span><span><b>${nTrab}</b> trabalhando</span></div>
   ${livres.length?`<div class="livres"><span class="t">Livres:</span>${livres.map(p=>`<span class="pl-p">${av(p.id,'s')}${esc(p.nome)}</span>`).join('')}</div>`:''}
@@ -1496,7 +1505,7 @@ const campoN=(lab,attr,val,suf)=>`<label class="aj-row"><span>${lab}</span><span
 function cAjustes(){const pr=state.params;
   return `${state.exemplo&&state.pedidos.length?`<div class="card" style="border-color:var(--atn)"><h2>Pedidos de exemplo</h2><p style="margin:0 0 12px;color:var(--ink2)">Quando terminar o treino, apague os pedidos de exemplo. Máquinas, equipe, produtos e estoque continuam.</p>
     ${ui.apagaEx?`<div class="aviso">${ic('i-alerta')}Isso apaga os pedidos de todos os aparelhos. Tem certeza?</div><div class="acoes"><button class="big" style="background:var(--red);color:#fff" data-a="apagaEx" data-ok="1">Sim, apagar</button><button class="big neutro" data-a="apagaExN">Não</button></div>`:`<button class="mbtn" data-a="apagaEx">Apagar pedidos de exemplo</button>`}</div>`:''}
-  <div class="card"><h2>Este aparelho</h2><div class="aj-row"><span>Quem usa: <b>${esc(quemNome()||'ninguém escolhido')}</b></span><button class="mbtn" data-a="quem">Trocar</button></div>
+  ${cardAcessos()}<div class="card"><h2>Este aparelho</h2><div class="aj-row"><span>Conectado como: <b>${esc(usuarioAtual()?.nome||'')}</b><br><small class="lido">${esc(usuarioAtual()?.email||'')}</small></span><button class="mbtn" data-a="sair">Sair</button></div>
     <div class="aj-row"><span>Dúvidas sobre o app</span><button class="mbtn" data-a="ajuda">${ic('i-duvida')}Como usar</button></div></div>
   <div class="card"><h2>Onde ficam os dados</h2><p style="margin:0;color:var(--ink2)">${NV.modo==='nuvem'?'Na nuvem: todos os aparelhos veem as mesmas informações ao mesmo tempo.':'Só neste aparelho. Abra pelo link do sistema para usar a nuvem.'}</p></div>
   <div class="card"><h2>Sua empresa nos documentos</h2><p class="dica" style="margin:-4px 0 8px">Aparece no Pedido enviado ao cliente e nas fichas.</p>
@@ -2148,6 +2157,36 @@ function pzArquivos(l,x){const ped=pedById(l.ped),cli=ped&&ped.cli;if(!cli)retur
   const linha=(k,a,rot)=>`<div class="pz-arq">${a?`${ehImg(a)||a.vis?`<button class="aq-v" data-a="arqVer" data-id="${a.id}">${arqThumb(a,'p')}</button>`:arqThumb(a,'p')}<span><b>${rot}:</b> ${esc(a.nome)}</span><button class="x azul" data-a="arqBaixar" data-id="${a.id}">Baixar</button><button class="x" data-a="pzArq" data-l="${l.id}" data-x="${x.id}" data-k="${k}">Trocar</button>`:`<button class="x azul" data-a="pzArq" data-l="${l.id}" data-x="${x.id}" data-k="${k}">${ic(k==='arte'?'i-arte':'i-bordado')}Pôr ${rot.toLowerCase()}</button>`}</div>`;
   return linha('arte',ar,'Arte')+(ehB||bd?linha('bord',bd,'Arquivo de bordado'):'')}
 
+/* ================= login ================= */
+const USER0={id:'u-helena',email:'helenanenimga67@gmail.com',nome:'Helena',perfil:'gestao',hash:null,salt:null};
+const PERFIS={gestao:'Gestão (acesso completo)',operacao:'Operação (Fábrica, Pedidos e Novo pedido)'};
+const normEmail=e=>String(e||'').trim().toLowerCase();
+let SESSAO=(()=>{try{return JSON.parse(localStorage.getItem('martins-sessao')||'null')}catch(e){return null}})();
+const usuarioAtual=()=>SESSAO&&state&&(state.usuarios||[]).find(u=>u.id===SESSAO.id&&normEmail(u.email)===normEmail(SESSAO.email))||null;
+const ehGestao=()=>usuarioAtual()?.perfil==='gestao';
+async function hashSenha(senha,salt){const enc=new TextEncoder();const k=await crypto.subtle.importKey('raw',enc.encode(senha),'PBKDF2',false,['deriveBits']);
+  const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:enc.encode(salt),iterations:150000,hash:'SHA-256'},k,256);return [...new Uint8Array(bits)].map(b=>b.toString(16).padStart(2,'0')).join('')}
+const novoSalt=()=>[...crypto.getRandomValues(new Uint8Array(16))].map(b=>b.toString(16).padStart(2,'0')).join('');
+function entrar(u){SESSAO={id:u.id,email:u.email,ts:now()};try{localStorage.setItem('martins-sessao',JSON.stringify(SESSAO))}catch(e){}ui.login=null;if(u.perfil!=='gestao'&&['cadastros','gestor'].includes(ui.tela))ui.tela='fabrica';render();tick();toast(`Olá, ${quemNome()||u.nome}!`,false)}
+function sair(){SESSAO=null;try{localStorage.removeItem('martins-sessao')}catch(e){}ui.sheet=null;ui.login={};render()}
+function vLogin(){const L=ui.login=ui.login||{};const u=L.passo==='criar'?(state.usuarios||[]).find(x=>normEmail(x.email)===normEmail(L.email)):null;const m=marca();
+  return `<div class="login">${logoMarca(false)}<h1>${L.passo==='criar'?'Primeiro acesso':'Entrar'}</h1>
+  ${L.passo==='criar'?`<p class="sub-l">Olá, <b>${esc(u?.nome||'')}</b>! Crie uma senha para <b>${esc(L.email)}</b>. Use pelo menos 6 letras ou números.</p>
+    <label class="rotulo" for="lgS1">Nova senha</label><input class="campo" id="lgS1" type="password" autocomplete="new-password">
+    <label class="rotulo" for="lgS2">Repita a senha</label><input class="campo" id="lgS2" type="password" autocomplete="new-password">
+    ${L.err?`<div class="aviso">${ic('i-alerta')}${esc(L.err)}</div>`:''}
+    <button class="big go" data-a="lgCriar">${ic('i-check')}Criar senha e entrar</button><button class="x azul" data-a="lgVoltar">Voltar</button>`
+  :`<label class="rotulo" for="lgE">E-mail</label><input class="campo" id="lgE" type="email" autocomplete="username" inputmode="email" value="${esc(L.email||'')}">
+    <label class="rotulo" for="lgS">Senha</label><input class="campo" id="lgS" type="password" autocomplete="current-password">
+    ${L.err?`<div class="aviso">${ic('i-alerta')}${esc(L.err)}</div>`:''}
+    <button class="big go" data-a="lgEntrar">${ic('i-check')}Entrar</button>
+    <p class="dica" style="margin:0">É o primeiro acesso? Digite só o e-mail e toque em Entrar.<br>Esqueceu a senha? Peça para a gestão redefinir em Cadastros › Ajustes › Acessos.</p>`}</div>`}
+function cardAcessos(){if(!ehGestao())return '';const us=state.usuarios||[];
+  return `<div class="card"><h2>Acessos ao sistema</h2><p class="dica" style="margin:-4px 0 8px">Quem pode entrar com e-mail e senha. No primeiro acesso, a própria pessoa cria a senha.</p>
+  ${us.map(u=>`<div class="aj-row acs"><span><b>${esc(u.nome)}</b><br><small class="lido">${esc(u.email)} · ${esc(PERFIS[u.perfil]||u.perfil)}${u.hash?'':' · ainda não criou a senha'}</small></span>
+    <span class="aq-b">${u.hash?`<button class="x azul" data-a="acsReset" data-id="${u.id}">Redefinir senha</button>`:''}<button class="x azul" data-a="acsPerfil" data-id="${u.id}">${u.perfil==='gestao'?'Mudar para operação':'Mudar para gestão'}</button>${u.id!==usuarioAtual()?.id?`<button class="x" data-a="acsRm" data-id="${u.id}">Tirar</button>`:''}</span></div>`).join('')}
+  <div class="acs-novo"><input class="campo" id="acsNome" placeholder="Nome"><input class="campo" id="acsEmail" type="email" placeholder="E-mail"><select class="campo" id="acsPerfil">${Object.entries(PERFIS).map(([k,n])=>`<option value="${k}" ${k==='operacao'?'selected':''}>${n}</option>`).join('')}</select><select class="campo" id="acsPes"><option value="">Pessoa da equipe (opcional)</option>${state.pessoas.map(p=>`<option value="${p.id}">${esc(p.nome)}</option>`).join('')}</select><button class="mbtn" data-a="acsAdd">${ic('i-mais')}Dar acesso</button></div></div>`}
+
 /* ================= painel do gestor ================= */
 const PERIODOS=[[1,'Hoje'],[7,'7 dias'],[30,'30 dias']];
 function gDesde(){const d=ui.gp||7;return d===1?sod(now()).getTime():now()-d*DIA}
@@ -2221,6 +2260,8 @@ function vGestor(){const aba=ui.gt||'agora',desde=gDesde(),per=ui.gp||7;
 const sheetId=s=>s.t+':'+(s.id||s.p||s.m||'');
 function render(){RC={};
   document.querySelectorAll('.nb[data-t]').forEach(b=>b.setAttribute('aria-current',b.dataset.t===ui.tela?'page':'false'));
+  const logado=!!usuarioAtual();document.body.classList.toggle('sem-login',!logado);document.body.classList.toggle('operacao',logado&&!ehGestao());
+  if(!logado){document.getElementById('app').innerHTML=vLogin();document.getElementById('sheet').innerHTML='';document.body.style.overflow='';return}
   document.getElementById('app').innerHTML=ui.inicio?vInicio():ui.tela==='gestor'?vGestor():ui.tela==='pedidos'?vPedidos():ui.tela==='cadastros'?vCadastros():vFabrica();
   const sh=document.getElementById('sheet');const s=ui.sheet;
   if(!s){sh.innerHTML='';document.body.style.overflow='';return}
@@ -2241,7 +2282,7 @@ function wRead(){const w=ui.sheet?.w;if(!w)return;const c=document.getElementByI
   const d=document.getElementById('wDt');if(d&&d.value){const[y,m,dd]=d.value.split('-').map(Number);w.entrega=new Date(y,m-1,dd,17).getTime()}}
 const togl=(a,v)=>{const i=a.indexOf(v);i<0?a.push(v):a.splice(i,1)};
 const A={
-  tela:d=>{ui.tela=d.t;ui.sheet=null;render();window.scrollTo(0,0)},
+  tela:d=>{if(['cadastros','gestor'].includes(d.t)&&!ehGestao())return;ui.tela=d.t;ui.sheet=null;render();window.scrollTo(0,0)},
   cad:d=>{ui.cad=d.k;render()},
   irEquipe:()=>{ui.tela='cadastros';ui.cad='equipe';ui.sheet=null;render();window.scrollTo(0,0)},
   fechar:()=>{const s=ui.sheet;if(s?.t==='etapa'){ui.sheet={t:'produto',p:s.p};return render()}if(s?.t==='prob'&&s.step>1){s.step--;return render()}if(s?.t==='novo'&&s.w.step>1){wRead();s.w.step--;s.w.err='';return render()}ui.sheet=null;render()},
@@ -2325,6 +2366,22 @@ const A={
   posRm:d=>{snap();state.posicoes={...(state.posicoes||POS0)};state.posicoes[d.pt]=[...state.posicoes[d.pt]];state.posicoes[d.pt].splice(+d.i,1);commit()},
   posAdd:d=>{const v=(document.getElementById('posN-'+d.pt)?.value||'').trim();if(!v)return;snap();state.posicoes={...(state.posicoes||POS0)};state.posicoes[d.pt]=[...(state.posicoes[d.pt]||[]),v];commit();toast(`${v} adicionada em ${d.pt}`)},
   posParte:()=>{const v=(document.getElementById('posNP')?.value||'').trim();if(!v)return;snap();state.posicoes={...(state.posicoes||POS0),[v]:[]};commit()},
+  lgEntrar:async()=>{const L=ui.login||(ui.login={});const e=normEmail(document.getElementById('lgE')?.value),sn=document.getElementById('lgS')?.value||'';L.email=e;L.err='';
+    const u=(state.usuarios||[]).find(x=>normEmail(x.email)===e);if(!u){L.err='E-mail não encontrado. Confira ou peça acesso para a gestão.';return render()}
+    if(!u.hash){L.passo='criar';return render()}
+    if(!sn){L.err='Digite a senha.';return render()}
+    if(await hashSenha(sn,u.salt)!==u.hash){L.err='Senha errada. Tente de novo.';return render()}entrar(u)},
+  lgCriar:async()=>{const L=ui.login;const a=document.getElementById('lgS1')?.value||'',b=document.getElementById('lgS2')?.value||'';L.err='';
+    if(a.length<6){L.err='A senha precisa ter pelo menos 6 letras ou números.';return render()}if(a!==b){L.err='As duas senhas estão diferentes.';return render()}
+    const u=(state.usuarios||[]).find(x=>normEmail(x.email)===normEmail(L.email));if(!u||u.hash)return;u.salt=novoSalt();u.hash=await hashSenha(a,u.salt);save();entrar(u)},
+  lgVoltar:()=>{ui.login={email:ui.login?.email};render()},
+  sair:()=>sair(),
+  acsAdd:()=>{if(!ehGestao())return;const n=document.getElementById('acsNome').value.trim(),e=normEmail(document.getElementById('acsEmail').value),pf=document.getElementById('acsPerfil').value,ps=document.getElementById('acsPes').value;
+    if(!n||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)){toast('Escreva o nome e um e-mail válido',false);return}if(state.usuarios.some(u=>normEmail(u.email)===e)){toast('Esse e-mail já tem acesso',false);return}
+    snap();state.usuarios.push({id:uid('u'),email:e,nome:n,perfil:pf,pessoa:ps,hash:null,salt:null});commit();toast(`${n} pode entrar. No primeiro acesso cria a senha.`)},
+  acsReset:d=>{if(!ehGestao())return;const u=state.usuarios.find(x=>x.id===d.id);snap();u.hash=null;u.salt=null;commit();toast(`${u.nome} vai criar uma senha nova no próximo acesso`)},
+  acsPerfil:d=>{if(!ehGestao())return;const u=state.usuarios.find(x=>x.id===d.id);if(u.id===usuarioAtual()?.id&&state.usuarios.filter(x=>x.perfil==='gestao').length<2){toast('Precisa ficar pelo menos uma pessoa na gestão',false);return}snap();u.perfil=u.perfil==='gestao'?'operacao':'gestao';commit()},
+  acsRm:d=>{if(!ehGestao())return;const u=state.usuarios.find(x=>x.id===d.id);snap();state.usuarios=state.usuarios.filter(x=>x.id!==d.id);commit();toast(`${u.nome} não tem mais acesso`)},
   quem:()=>openSheet({t:'quem'}),
   quemSel:d=>{quemSet(d.v);ui.sheet=null;render();tick();toast(`Pronto, este aparelho é de ${quemNome()}`,false)},
   inicio:d=>{nuvemIniciar(d.v)},
@@ -2528,7 +2585,7 @@ document.addEventListener('change',e=>{const t=e.target,d=t.dataset;if(!state)re
   else if(d.papel!=null){snap();state.papeis[d.papel]=t.value.trim()||state.papeis[d.papel];ok=true}
   if(ok){save();if(!d.est)render();toast('Salvo',true)}});
 document.addEventListener('input',e=>{if(e.target.id==='wCli'&&ui.sheet?.w){ui.sheet.w.cliente=e.target.value;ui.sheet.w.cli=null;const L=document.getElementById('wCliSug');if(L)L.innerHTML=sugClientes(e.target.value,null)}if(e.target.id==='estBusca'){ui.eq=e.target.value;const L=document.getElementById('estLista');if(L)L.innerHTML=listaEst()}if(e.target.id==='empBusca'){ui.eqc=e.target.value;const L=document.getElementById('empLista');if(L)L.innerHTML=listaEmpresas()}if(e.target.id==='pedBusca'){ui.pf.q=e.target.value;const L=document.getElementById('pedLista');if(L)L.innerHTML=listaPedidos()}if(e.target.id==='wCnpj'){const v=fmtCnpj(e.target.value);if(v!==e.target.value)e.target.value=v}});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ui.sheet)A.fechar();if(e.key==='Enter'&&(['eNome','eObs','pNome','pTec','xNome','wCont','wCnpj','pedBusca','estBusca'].includes(e.target.id)||e.target.closest?.('.card')&&e.target.tagName==='INPUT'))e.preventDefault();if(e.key==='Enter'&&e.target.id==='wCli'){e.preventDefault();A.wNext()}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&['lgE','lgS'].includes(e.target.id)){e.preventDefault();A.lgEntrar();return}if(e.key==='Enter'&&['lgS1','lgS2'].includes(e.target.id)){e.preventDefault();A.lgCriar();return}if(e.key==='Escape'&&ui.sheet)A.fechar();if(e.key==='Enter'&&(['eNome','eObs','pNome','pTec','xNome','wCont','wCnpj','pedBusca','estBusca'].includes(e.target.id)||e.target.closest?.('.card')&&e.target.tagName==='INPUT'))e.preventDefault();if(e.key==='Enter'&&e.target.id==='wCli'){e.preventDefault();A.wNext()}});
 function tick(){
   if(MOCK_PEND.size&&NV.modo==='nuvem')mockPendentes();
   document.querySelectorAll('[data-tl]').forEach(el=>{const l=lote(el.dataset.tl),x=l&&l.steps[el.dataset.ts];if(x)el.textContent=fDur(tempoUtil(x))});
@@ -2538,12 +2595,12 @@ function tick(){
 const DEV=(()=>{try{let d=localStorage.getItem('martins-dev');if(!d){d=Math.random().toString(36).slice(2,8);localStorage.setItem('martins-dev',d)}return d}catch(e){return 'x'+Math.random().toString(36).slice(2,6)}})();
 let QUEM=(()=>{try{return localStorage.getItem('martins-quem')||''}catch(e){return ''}})();
 function quemSet(id){QUEM=id;try{localStorage.setItem('martins-quem',id)}catch(e){}}
-const quemNome=()=>QUEM&&state&&pessoa(QUEM)?pNome(QUEM):'';
+const quemNome=()=>{const u=usuarioAtual();if(u)return (u.pessoa&&pessoa(u.pessoa)?pNome(u.pessoa):u.nome)||'';return QUEM&&state&&pessoa(QUEM)?pNome(QUEM):''};
 function sQuem(){return `${voltar('Voltar')}<h1>Quem está usando este aparelho?</h1><p class="sub-l">Toque no seu nome. Fica guardado neste celular.</p>
   <div class="eq-l">${state.pessoas.map(p=>`<button class="eq" data-a="quemSel" data-v="${p.id}" aria-pressed="${QUEM===p.id}">${av(p.id)}<span class="eq-t"><b>${esc(p.nome)}</b><span>${esc(papeisTxt(p))}</span></span>${QUEM===p.id?ic('i-check'):''}</button>`).join('')}</div>`}
 
 /* ================= nuvem (banco de dados compartilhado) ================= */
-const COLS=['tipos','pessoas','forn','produtos','pedidos','lotes','consertos','clientes','arquivos'];
+const COLS=['tipos','pessoas','forn','produtos','pedidos','lotes','consertos','clientes','arquivos','usuarios'];
 const NV={db:null,modo:'local',st:'',Q:new Set(),acked:{},last:{},busy:false,subs:[],pendR:false,timer:null};
 const stab=v=>JSON.stringify(v,(k,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.keys(x).sort().reduce((o,k2)=>(o[k2]=x[k2],o),{}):x);
 const limpo=v=>JSON.parse(JSON.stringify(v));

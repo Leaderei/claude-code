@@ -18,6 +18,7 @@ const nuvemMock=id=>{const m=store.get('mock/'+id);if(!m)return null;let s='';fo
   async function aparelho(nome,{nuvem=true,semIDB=false}={}){const ctx=await b.newContext({viewport:{width:1000,height:850}});
     if(nuvem){await ctx.exposeFunction('__dbop',dbop);await ctx.addInitScript(fake)}
     if(semIDB)await ctx.addInitScript(()=>{Object.defineProperty(window,'indexedDB',{get(){throw new Error('sem IndexedDB')}})});
+    await ctx.addInitScript(()=>{try{if(!localStorage.getItem('martins-sessao'))localStorage.setItem('martins-sessao',JSON.stringify({id:'u-helena',email:'helenanenimga67@gmail.com'}))}catch(e){}});
     const p=await ctx.newPage();p.on('pageerror',e=>erros.push(nome+': '+e.message));pages.push(p);await p.goto(APP);await p.waitForTimeout(900);const e=await p.$('text=Entendi');if(e)await e.click();return {ctx,p}}
   const zoomDe=async(p,ped,n)=>{await p.evaluate(x=>openSheet({t:'pedido',id:x}),ped);await p.waitForTimeout(300);await p.click(`.sheet svg.mock[data-z] >> nth=${n}`);await p.waitForTimeout(1500);
     const r=await p.$eval('.zm-area img',i=>({w:i.naturalWidth,src:i.src}));await p.click('[data-zm="x"]');return r};
