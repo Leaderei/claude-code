@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indique para o Servan</title>
+<meta name="description" content="Conhece alguém que combina com o Servan? Indique para a vaga na área comercial.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Conhece alguém que combina com o Servan?">
+<meta property="og:description" content="Sua indicação pode nos ajudar a encontrar a pessoa certa para crescer junto com o Servan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ==========================================================
+     IDENTIDADE VISUAL — trocar aqui pelas cores oficiais Servan
+     ========================================================== */
+  :root {
+    --brand: #0F3350;         /* cor principal (títulos, header) */
+    --brand-ink: #FFFFFF;     /* texto sobre a cor principal */
+    --accent: #1B8A8F;        /* botões, destaques */
+    --accent-hover: #146E72;
+    --bg: #F6F4EF;            /* fundo da página */
+    --surface: #FFFFFF;       /* cartões e formulário */
+    --text: #1C2530;
+    --muted: #5B6673;
+    --line: #DCD8CE;
+    --error: #B42318;
+    --radius: 14px;
+    --font-title: "Fraunces", Georgia, serif;
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  /* ===== CONFIG: URL do app da Web do Apps Script (ver LEIA-ME.md) ===== */
+</style>
+<script>
+  window.SERVAN_ENDPOINT = "COLE_AQUI_A_URL_DO_APPS_SCRIPT";
+</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+  header.hero { background: var(--brand); color: var(--brand-ink); padding: 28px 0 64px; }
+  .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 48px; min-height: 40px; }
+  .logo img { height: 40px; width: auto; display: block; }
+  .logo .wordmark { font-family: var(--font-title); font-size: 26px; font-weight: 600; letter-spacing: .04em; }
+  .logo .wordmark small { display: block; font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; opacity: .75; }
+  .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; opacity: .8; margin: 0 0 12px; }
+  h1 { font-family: var(--font-title); font-weight: 600; font-size: clamp(32px, 7vw, 48px); line-height: 1.1; margin: 0 0 20px; }
+  .hero p { font-size: 18px; opacity: .92; margin: 0 0 14px; max-width: 60ch; }
+  .btn {
+    display: inline-block; background: var(--accent); color: #fff; border: 0; cursor: pointer;
+    font: 600 16px/1 var(--font-body); padding: 17px 30px; border-radius: 999px; text-decoration: none;
+    transition: background .15s ease, transform .15s ease;
+  }
+  .btn:hover { background: var(--accent-hover); }
+  .btn:active { transform: translateY(1px); }
+  .btn:disabled { opacity: .6; cursor: wait; }
+  .hero .btn { margin-top: 18px; }
+
+  section { padding: 56px 0; }
+  h2 { font-family: var(--font-title); font-weight: 600; color: var(--brand); font-size: clamp(26px, 5vw, 34px); line-height: 1.2; margin: 0 0 16px; }
+  .intro p { margin: 0 0 14px; }
+  .note { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; margin-top: 22px; font-size: 15px; color: var(--muted); }
+  .note svg { flex: none; margin-top: 3px; color: var(--accent); }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px 22px; }
+  fieldset { border: 0; margin: 0 0 28px; padding: 0; }
+  legend { font-family: var(--font-title); font-size: 21px; font-weight: 600; color: var(--brand); margin-bottom: 14px; padding: 0; }
+  .field { margin-bottom: 16px; }
+  label { display: block; font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+  label .opt { font-weight: 400; color: var(--muted); }
+  input[type=text], input[type=email], input[type=tel], textarea, select {
+    width: 100%; font: 400 16px/1.4 var(--font-body); color: var(--text);
+    background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 13px 14px;
+  }
+  textarea { min-height: 110px; resize: vertical; }
+  input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  .row { display: grid; grid-template-columns: 1fr; gap: 0 14px; }
+  @media (min-width: 600px) { .row { grid-template-columns: 1fr 1fr; } .card { padding: 36px 34px; } }
+  .choices { display: flex; flex-wrap: wrap; gap: 10px; }
+  .choice { position: relative; }
+  .choice input { position: absolute; opacity: 0; inset: 0; }
+  .choice span { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px; font-size: 15px; cursor: pointer; background: #fff; }
+  .choice input:checked + span { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); }
+  .choice input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--muted); font-weight: 400; }
+  .consent input { margin-top: 4px; width: 18px; height: 18px; flex: none; accent-color: var(--accent); }
+  .hp { position: absolute; left: -9999px; }
+  .err { color: var(--error); font-size: 14px; margin: 8px 0 0; min-height: 1em; }
+  .submit { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+  @media (min-width: 600px) { .submit { align-items: flex-start; } }
+
+  .thanks { display: none; text-align: center; padding: 48px 22px; }
+  .thanks .check { width: 64px; height: 64px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; margin: 0 auto 18px; }
+  .thanks p { color: var(--muted); max-width: 46ch; margin: 0 auto 20px; }
+  .link-btn { background: none; border: 0; color: var(--accent); font: 600 15px var(--font-body); cursor: pointer; text-decoration: underline; }
+
+  footer { background: var(--brand); color: var(--brand-ink); padding: 40px 0; text-align: center; }
+  footer p { font-family: var(--font-title); font-size: 20px; margin: 0; }
+  footer small { display: block; margin-top: 10px; font-size: 13px; opacity: .7; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="logo">
+      <!-- Salve o logo oficial como logo-servan.png (versão clara/branca) na mesma pasta -->
+      <img src="logo-servan.png" alt="Servan" onerror="this.remove(); document.getElementById('wm').hidden=false;">
+      <div class="wordmark" id="wm" hidden>SERVAN<small>Anestesiologia</small></div>
+    </div>
+    <p class="eyebrow">Programa de indicação</p>
+    <h1>Conhece alguém que combina com o Servan?</h1>
+    <p>Estamos buscando uma nova profissional para integrar nosso time na área comercial.</p>
+    <p>Queremos encontrar alguém que tenha facilidade para se comunicar e criar boas relações. E quem melhor para nos ajudar nessa busca do que as pessoas que já fazem parte da nossa história?</p>
+    <a class="btn" href="#indicar">Indicar agora</a>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <h2>Sua indicação é importante</h2>
+    <p>Se você é sócio ou colaborador do Servan e conhece uma profissional em quem confia e que acredita ter esse perfil, queremos conhecê-la.</p>
+    <p>Preencha o formulário com a sua indicação. Nossa equipe dará continuidade ao processo de forma reservada e entrará em contato com a profissional indicada.</p>
+    <div class="note">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+      <span>As informações são tratadas com sigilo e usadas somente neste processo seletivo.</span>
+    </div>
+  </div>
+</section>
+
+<section id="indicar" style="padding-top:0">
+  <div class="wrap">
+    <div class="card">
+      <form id="form" novalidate>
+        <fieldset>
+          <legend>Seus dados</legend>
+          <div class="field">
+            <label for="ind_nome">Seu nome</label>
+            <input type="text" id="ind_nome" name="ind_nome" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label id="vinc_lbl">Você é</label>
+            <div class="choices" role="radiogroup" aria-labelledby="vinc_lbl">
+              <label class="choice"><input type="radio" name="ind_vinculo" value="Sócio(a)" required><span>Sócio(a)</span></label>
+              <label class="choice"><input type="radio" name="ind_vinculo" value="Colaborador(a)"><span>Colaborador(a)</span></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="ind_area">Área / setor <span class="opt">(opcional)</span></label>
+              <input type="text" id="ind_area" name="ind_area">
+            </div>
+            <div class="field">
+              <label for="ind_contato">Seu WhatsApp</label>
+              <input type="tel" id="ind_contato" name="ind_contato" autocomplete="tel" inputmode="tel" placeholder="(67) 9 0000-0000" required>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Profissional indicada</legend>
+          <div class="field">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" name="nome" required>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="whatsapp">WhatsApp</label>
+              <input type="tel" id="whatsapp" name="whatsapp" inputmode="tel" placeholder="(67) 9 0000-0000" required>
+            </div>
+            <div class="field">
+              <label for="email">E-mail <span class="opt">(opcional)</span></label>
+              <input type="email" id="email" name="email">
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="social">LinkedIn ou Instagram <span class="opt">(opcional)</span></label>
+              <input type="text" id="social" name="social" placeholder="link ou @perfil">
+            </div>
+            <div class="field">
+              <label for="atuacao">Onde trabalha hoje <span class="opt">(opcional)</span></label>
+              <input type="text" id="atuacao" name="atuacao" placeholder="empresa ou função">
+            </div>
+          </div>
+          <div class="field">
+            <label for="motivo">Por que ela combina com o Servan?</label>
+            <textarea id="motivo" name="motivo" placeholder="Como você a conhece, o que ela faz bem, como se relaciona com as pessoas…" required></textarea>
+          </div>
+          <div class="field">
+            <label id="sabe_lbl">Ela sabe que você está indicando?</label>
+            <div class="choices" role="radiogroup" aria-labelledby="sabe_lbl">
+              <label class="choice"><input type="radio" name="sabe" value="Sim" required><span>Sim</span></label>
+              <label class="choice"><input type="radio" name="sabe" value="Ainda não"><span>Ainda não</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label class="consent">
+            <input type="checkbox" name="consentimento" value="Sim" required>
+            <span>Confirmo que compartilho estes contatos apenas para este processo seletivo e que a profissional pode ser contatada pela equipe do Servan.</span>
+          </label>
+        </div>
+
+        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="submit">
+          <button class="btn" type="submit" id="send">Enviar indicação</button>
+          <p class="err" id="err" role="alert"></p>
+        </div>
+      </form>
+
+      <div class="thanks" id="thanks" aria-live="polite">
+        <div class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h2>Indicação recebida. Obrigado!</h2>
+        <p>Nossa equipe vai dar continuidade de forma reservada e entrará em contato com a profissional indicada.</p>
+        <button class="link-btn" type="button" id="again">Fazer outra indicação</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Sua indicação pode nos ajudar a encontrar a pessoa certa para crescer junto com o Servan.</p>
+    <small>Servan · Campo Grande/MS</small>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var form = document.getElementById('form');
+  var btn = document.getElementById('send');
+  var err = document.getElementById('err');
+  var thanks = document.getElementById('thanks');
+
+  function digits(v) { return (v || '').replace(/\D/g, ''); }
+
+  function validate() {
+    var missing = [];
+    form.querySelectorAll('[required]').forEach(function (el) {
+      if (el.type === 'radio') {
+        if (!form.querySelector('input[name="' + el.name + '"]:checked')) missing.push(el);
+      } else if (el.type === 'checkbox') {
+        if (!el.checked) missing.push(el);
+      } else if (!el.value.trim()) missing.push(el);
+    });
+    if (missing.length) { missing[0].focus(); return 'Preencha os campos obrigatórios.'; }
+    if (digits(form.ind_contato.value).length < 10 || digits(form.whatsapp.value).length < 10) {
+      return 'Confira os números de WhatsApp (com DDD).';
+    }
+    if (form.email.value && !/^\S+@\S+\.\S+$/.test(form.email.value)) return 'Confira o e-mail informado.';
+    return '';
+  }
+
+  function done() {
+    form.style.display = 'none';
+    thanks.style.display = 'block';
+    thanks.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function fail() {
+    btn.disabled = false; btn.textContent = 'Enviar indicação';
+    err.textContent = 'Não foi possível enviar agora. Tente novamente em instantes.';
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    err.textContent = '';
+    if (form.website.value) return; // honeypot anti-spam
+    var msg = validate();
+    if (msg) { err.textContent = msg; return; }
+
+    var data = {};
+    new FormData(form).forEach(function (v, k) { if (k !== 'website') data[k] = String(v).trim(); });
+
+    btn.disabled = true; btn.textContent = 'Enviando…';
+
+    // Servido pelo próprio Apps Script (doGet): usa google.script.run
+    if (window.google && google.script && google.script.run) {
+      google.script.run.withSuccessHandler(done).withFailureHandler(fail).salvarIndicacao(data);
+      return;
+    }
+    // Hospedado fora (Netlify, GitHub Pages etc.): POST para o app da Web
+    fetch(window.SERVAN_ENDPOINT, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(data) })
+      .then(done).catch(fail);
+  });
+
+  document.getElementById('again').addEventListener('click', function () {
+    form.reset(); btn.disabled = false; btn.textContent = 'Enviar indicação';
+    thanks.style.display = 'none'; form.style.display = 'block';
+    document.getElementById('indicar').scrollIntoView({ behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>
