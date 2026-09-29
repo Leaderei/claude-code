@@ -26,7 +26,7 @@ const conta=c=>list(c).length;
   console.log('3) Cópia de segurança diária');
   await B.waitForTimeout(3000);const bk=list('backup');ok(bk.some(x=>/^\d{4}-\d\d-\d\d$/.test(x.id)),'cópia do dia guardada na nuvem');
   console.log('4) Apagar só os exemplos');
-  await A.evaluate(()=>{ui.tela='cadastros';ui.cad='ajustes';render()});await A.click('[data-a=apagaEx]');await A.click('[data-a=apagaEx][data-ok="1"]');await A.waitForTimeout(3500);
+  await A.evaluate(()=>{ui.sheet=null;ui.tela='cadastros';ui.cad='ajustes';render()});await A.click('[data-a=apagaEx]');await A.click('[data-a=apagaEx][data-ok="1"]');await A.waitForTimeout(3500);
   ok(store.has('pedidos/'+real),'pedido real continua');ok(!store.has('pedidos/0412'),'pedido de exemplo saiu');
   ok(list('backup').some(x=>x.id.includes('antes-de-apagar-exemplos')),'cópia feita antes de apagar');ok(conta('lixeira')>=8,'apagados foram para a lixeira ('+conta('lixeira')+')');
   console.log('5) Restaurar da lixeira');
