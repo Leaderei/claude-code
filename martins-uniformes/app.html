@@ -1176,7 +1176,7 @@ const NOMES_V1={'Léo':'Leu','Layara':'Laiara','Anilda':'Nilda'};
 function normalizar(s){s.usuarios=s.usuarios||[];if(!s.usersV||!s.usuarios.length){if(!s.usuarios.some(u=>u.email===USER0.email)){const h=(s.pessoas||[]).find(p=>/^helena$/i.test((p.nome||'').trim()));s.usuarios.push({...USER0,pessoa:h?h.id:''})}s.usersV=1}
 if(!s.insV){(s.pedidos||[]).forEach(p=>{const come=(s.lotes||[]).some(l=>l.ped===p.id&&Object.keys(l.steps||{}).length);if(come||p.concluido)(p.materiais||[]).forEach(m=>m.conf=true)});(s.pessoas||[]).forEach(p=>{if((p.funcoes||[]).includes('comprar')&&!(p.funcoes||[]).includes('conferir'))p.funcoes.push('conferir')});s.insV=1}
 s.clientes=s.clientes||[];s.arquivos=s.arquivos||[];if(s.mockups&&s.mockups.length){s.mockups.forEach(m=>{if(m&&m.id&&m.img&&!MOCKG[m.id])guardaMockG(m.id,m.img)})}delete s.mockups;s.apelidos=s.apelidos||{};['tecido','cor','prod','local','serv'].forEach(k=>{if(!s.apelidos[k])s.apelidos[k]={}});
-  (s.pedidos||[]).forEach(p=>{if(p.cli&&s.clientes.some(c=>c.id===p.cli))return;const c=acharCliente(s,p.cliente,p.cnpj);if(c){p.cli=c.id;if(!c.cnpj&&p.cnpj)c.cnpj=p.cnpj;if(!c.contato&&p.contato)c.contato=p.contato}else{const n={id:'c'+(s.clientes.length+1)+'-'+Math.random().toString(36).slice(2,6),nome:(p.cliente||'').trim(),cnpj:p.cnpj||'',contato:p.contato||'',apelidos:[]};s.clientes.push(n);p.cli=n.id}});if(!s.nomesV){(s.pessoas||[]).forEach(p=>{if(NOMES_V1[p.nome])p.nome=NOMES_V1[p.nome]});s.nomesV=1}if(!s.alexV){if(!(s.pessoas||[]).some(p=>chaveNome(p.nome)==='alexandra'))s.pessoas.push({id:'alexandra',nome:'Alexandra',papeis:['acab'],sabe:['arremate','embalagem'],melhor:[]});s.alexV=1}aplicaFotos(s);if(s.expediente&&!s.expediente.v2){if(!s.expediente.pausas.some(p=>hm(p.h)>=hm('11:00')&&hm(p.h)<=hm('13:00')))s.expediente.pausas.push({nome:'Almoço',h:'12:00',min:60});s.expediente.pausas.sort((a,b)=>hm(a.h)-hm(b.h));s.expediente.v2=true}s.log=s.log||[];s.pessoas=s.pessoas||[];s.consertos=s.consertos||[];s.cores={...CORES,...(s.cores||{})};const EXC={'0402':['Marcos Lima','12.345.678/0001-90'],'0409':['Juliana Prado','23.456.789/0001-01'],'0412':['Paulo Reis','34.567.890/0001-12'],'0415':['Carla Mendes','45.678.901/0001-23'],'0416':['Rafael Souza','56.789.012/0001-34'],'0419':['Renata Alves','78.901.234/0001-56'],'0418':['Teresa Nogueira','67.890.123/0001-45'],'0420':['Fernanda Rocha','89.012.345/0001-67']};s.pedidos.forEach(p=>{const x=EXC[p.id];p.contato=p.contato||(x?x[0]:'');p.cnpj=p.cnpj||(x?x[1]:'')});s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});const mg=x=>{if(x.parte==='Mangas'&&!x.lado)x.lado='esq'};s.produtos.forEach(p=>{(p.persPadrao||[]).forEach(mg);ajustaGola(p)});Object.entries({'Gola polo Marinho':260,'Gola polo Branca':120,'Gola polo Cinza':150,'Gola ribana Branca':300,'Gola ribana Preta':150}).forEach(([k,v])=>{if(s.estoque[k]==null)s.estoque[k]=v});s.lotes.forEach(l=>(l.pers||[]).forEach(mg));cfgDefaults(s);mockNaBib(s);return s}
+  (s.pedidos||[]).forEach(p=>{if(p.cli&&s.clientes.some(c=>c.id===p.cli))return;const c=acharCliente(s,p.cliente,p.cnpj);if(c){p.cli=c.id;if(!c.cnpj&&p.cnpj)c.cnpj=p.cnpj;if(!c.contato&&p.contato)c.contato=p.contato}else{const n={id:'c-'+(nCli(p.cliente).replace(/\s+/g,'-').slice(0,60)||'sem-nome'),nome:(p.cliente||'').trim(),cnpj:p.cnpj||'',contato:p.contato||'',apelidos:[]};s.clientes.push(n);p.cli=n.id}});if(!s.nomesV){(s.pessoas||[]).forEach(p=>{if(NOMES_V1[p.nome])p.nome=NOMES_V1[p.nome]});s.nomesV=1}if(!s.alexV){if(!(s.pessoas||[]).some(p=>chaveNome(p.nome)==='alexandra'))s.pessoas.push({id:'alexandra',nome:'Alexandra',papeis:['acab'],sabe:['arremate','embalagem'],melhor:[]});s.alexV=1}aplicaFotos(s);if(s.expediente&&!s.expediente.v2){if(!s.expediente.pausas.some(p=>hm(p.h)>=hm('11:00')&&hm(p.h)<=hm('13:00')))s.expediente.pausas.push({nome:'Almoço',h:'12:00',min:60});s.expediente.pausas.sort((a,b)=>hm(a.h)-hm(b.h));s.expediente.v2=true}s.log=s.log||[];s.pessoas=s.pessoas||[];s.consertos=s.consertos||[];s.cores={...CORES,...(s.cores||{})};const EXC={'0402':['Marcos Lima','12.345.678/0001-90'],'0409':['Juliana Prado','23.456.789/0001-01'],'0412':['Paulo Reis','34.567.890/0001-12'],'0415':['Carla Mendes','45.678.901/0001-23'],'0416':['Rafael Souza','56.789.012/0001-34'],'0419':['Renata Alves','78.901.234/0001-56'],'0418':['Teresa Nogueira','67.890.123/0001-45'],'0420':['Fernanda Rocha','89.012.345/0001-67']};s.pedidos.forEach(p=>{const x=EXC[p.id];p.contato=p.contato||(x?x[0]:'');p.cnpj=p.cnpj||(x?x[1]:'')});s.pessoas.forEach(p=>{if(!p.papeis)p.papeis=p.papel?[p.papel]:[];delete p.papel});const mg=x=>{if(x.parte==='Mangas'&&!x.lado)x.lado='esq'};s.produtos.forEach(p=>{(p.persPadrao||[]).forEach(mg);ajustaGola(p)});Object.entries({'Gola polo Marinho':260,'Gola polo Branca':120,'Gola polo Cinza':150,'Gola ribana Branca':300,'Gola ribana Preta':150}).forEach(([k,v])=>{if(s.estoque[k]==null)s.estoque[k]=v});s.lotes.forEach(l=>(l.pers||[]).forEach(mg));cfgDefaults(s);juntaClientes(s);mockNaBib(s);return s}
 const nCli=x=>String(x||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 function acharCliente(st,nome,cnpj){const n=nCli(nome),d=String(cnpj||'').replace(/\D/g,'');return (st.clientes||[]).find(c=>(n&&(nCli(c.nome)===n||(c.apelidos||[]).includes(n)))||(d.length>=14&&String(c.cnpj||'').replace(/\D/g,'')===d))||null}
 const cliById=id=>(state.clientes||[]).find(c=>c.id===id);
@@ -1184,6 +1184,11 @@ const pedsDoCli=id=>state.pedidos.filter(p=>p.cli===id);
 function garanteCliente(nome,cnpj,contato,cliId){let c=cliId&&cliById(cliId)||acharCliente(state,nome,cnpj);
   if(!c){c={id:uid('c'),nome:nome.trim(),cnpj:cnpj||'',contato:contato||'',apelidos:[]};state.clientes.push(c)}
   else{if(!c.cnpj&&cnpj)c.cnpj=cnpj;if(!c.contato&&contato)c.contato=contato;const n=nCli(nome);if(n&&nCli(c.nome)!==n&&!(c.apelidos||[]).includes(n))(c.apelidos=c.apelidos||[]).push(n)}return c}
+function juntaClientes(s){const G={};(s.clientes||[]).forEach(c=>{const k=nCli(c.nome);(G[k]=G[k]||[]).push(c)});
+  Object.values(G).forEach(L=>{if(L.length<2)return;const usados=L.filter(c=>(s.pedidos||[]).some(p=>p.cli===c.id));const fica=usados[0]||L[0];
+    L.forEach(c=>{if(c===fica)return;(s.pedidos||[]).forEach(p=>{if(p.cli===c.id)p.cli=fica.id});(s.arquivos||[]).forEach(a=>{if(a.cli===c.id)a.cli=fica.id});
+      if(!fica.cnpj&&c.cnpj)fica.cnpj=c.cnpj;if(!fica.contato&&c.contato)fica.contato=c.contato;fica.apelidos=[...new Set([...(fica.apelidos||[]),...(c.apelidos||[])])]});
+    s.clientes=s.clientes.filter(c=>!L.includes(c)||c===fica)})}
 function mockNaBib(s){(s.lotes||[]).forEach(l=>{if(l.rework||!l.mock||l.mockArq)return;const p=(s.pedidos||[]).find(x=>x.id===l.ped);if(!p||!p.cli)return;const pr=(s.produtos||[]).find(x=>x.id===l.prod);const a={id:'a'+Date.now().toString(36)+Math.floor(Math.random()*1e4),cli:p.cli,tipo:'mockup',nome:`${pr?pr.nome:'Peça'} ${l.cor} · pedido ${l.ped}`,prev:l.mock,bin:l.id,ts:p.chegada||Date.now()};s.arquivos.push(a);l.mockArq=a.id})}
 function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===8&&s.pedidos){const semLog=!s.log;normalizar(s);state=s;if(semLog){seedN=11;logExemplo(now())}if(s.exemplo==null)s.exemplo=true;return}}catch(e){}seed();state.exemplo=true;normalizar(state)}
 
@@ -1503,9 +1508,9 @@ function cEstoque(){return `<div class="nota">O sistema usa estes números para 
   <p class="dica">Tecidos em metros; aviamentos e golas em unidades (elástico e cordão em metros).</p></div>`}
 const campoN=(lab,attr,val,suf)=>`<label class="aj-row"><span>${lab}</span><span class="aj-in"><input class="campo" type="number" step="any" ${attr} value="${val}">${suf?`<small>${suf}</small>`:''}</span></label>`;
 function cAjustes(){const pr=state.params;
-  return `${state.exemplo&&state.pedidos.length?`<div class="card" style="border-color:var(--atn)"><h2>Pedidos de exemplo</h2><p style="margin:0 0 12px;color:var(--ink2)">Quando terminar o treino, apague os pedidos de exemplo. Máquinas, equipe, produtos e estoque continuam.</p>
-    ${ui.apagaEx?`<div class="aviso">${ic('i-alerta')}Isso apaga os pedidos de todos os aparelhos. Tem certeza?</div><div class="acoes"><button class="big" style="background:var(--red);color:#fff" data-a="apagaEx" data-ok="1">Sim, apagar</button><button class="big neutro" data-a="apagaExN">Não</button></div>`:`<button class="mbtn" data-a="apagaEx">Apagar pedidos de exemplo</button>`}</div>`:''}
-  ${cardAcessos()}<div class="card"><h2>Este aparelho</h2><div class="aj-row"><span>Conectado como: <b>${esc(usuarioAtual()?.nome||'')}</b><br><small class="lido">${esc(usuarioAtual()?.email||'')}</small></span><button class="mbtn" data-a="sair">Sair</button></div>
+  return `${state.pedidos.some(p=>EXEMPLO_IDS.includes(p.id))?`<div class="card" style="border-color:var(--atn)"><h2>Pedidos de exemplo</h2><p style="margin:0 0 12px;color:var(--ink2)">Antes de começar com dados reais, apague os ${state.pedidos.filter(p=>EXEMPLO_IDS.includes(p.id)).length} pedidos de exemplo (e as empresas de exemplo). Pedidos reais, como os importados de fichas, continuam. Máquinas, equipe, produtos e estoque continuam.</p>
+    ${ui.apagaEx?`<div class="aviso">${ic('i-alerta')}Isso apaga só os pedidos de exemplo, em todos os aparelhos. Antes, uma cópia de segurança é guardada. Tem certeza?</div><div class="acoes"><button class="big" style="background:var(--red);color:#fff" data-a="apagaEx" data-ok="1">Sim, apagar</button><button class="big neutro" data-a="apagaExN">Não</button></div>`:`<button class="mbtn" data-a="apagaEx">Apagar pedidos de exemplo</button>`}</div>`:''}
+  ${cardAcessos()}${cardSeguranca()}<div class="card"><h2>Este aparelho</h2><div class="aj-row"><span>Conectado como: <b>${esc(usuarioAtual()?.nome||'')}</b><br><small class="lido">${esc(usuarioAtual()?.email||'')}</small></span><button class="mbtn" data-a="sair">Sair</button></div>
     <div class="aj-row"><span>Dúvidas sobre o app</span><button class="mbtn" data-a="ajuda">${ic('i-duvida')}Como usar</button></div></div>
   <div class="card"><h2>Onde ficam os dados</h2><p style="margin:0;color:var(--ink2)">${NV.modo==='nuvem'?'Na nuvem: todos os aparelhos veem as mesmas informações ao mesmo tempo.':'Só neste aparelho. Abra pelo link do sistema para usar a nuvem.'}</p></div>
   <div class="card"><h2>Sua empresa nos documentos</h2><p class="dica" style="margin:-4px 0 8px">Aparece no Pedido enviado ao cliente e nas fichas.</p>
@@ -2187,6 +2192,26 @@ function cardAcessos(){if(!ehGestao())return '';const us=state.usuarios||[];
     <span class="aq-b">${u.hash?`<button class="x azul" data-a="acsReset" data-id="${u.id}">Redefinir senha</button>`:''}<button class="x azul" data-a="acsPerfil" data-id="${u.id}">${u.perfil==='gestao'?'Mudar para operação':'Mudar para gestão'}</button>${u.id!==usuarioAtual()?.id?`<button class="x" data-a="acsRm" data-id="${u.id}">Tirar</button>`:''}</span></div>`).join('')}
   <div class="acs-novo"><input class="campo" id="acsNome" placeholder="Nome"><input class="campo" id="acsEmail" type="email" placeholder="E-mail"><select class="campo" id="acsPerfil">${Object.entries(PERFIS).map(([k,n])=>`<option value="${k}" ${k==='operacao'?'selected':''}>${n}</option>`).join('')}</select><select class="campo" id="acsPes"><option value="">Pessoa da equipe (opcional)</option>${state.pessoas.map(p=>`<option value="${p.id}">${esc(p.nome)}</option>`).join('')}</select><button class="mbtn" data-a="acsAdd">${ic('i-mais')}Dar acesso</button></div></div>`}
 
+/* ================= cópias de segurança ================= */
+const EXEMPLO_IDS=['0402','0409','0412','0415','0416','0418','0419','0420'];
+const hojeISO=()=>{const d=new Date();return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`};
+const snapshot=()=>JSON.stringify({...state,_app:'martins',_ts:now()});
+async function backupNuvem(nome){if(NV.modo!=='nuvem'||!NV.db)return false;const data=snapshot();const n=Math.ceil(data.length/PARTE);
+  try{for(let k=0;k<n;k++)await NV.db.doc(`backupp/${nome}~${k}`).set({d:data.slice(k*PARTE,(k+1)*PARTE)});await NV.db.doc(`backup/${nome}`).set({n,tam:data.length,ts:now(),por:quemNome()||'',pedidos:state.pedidos.length});return true}catch(e){return false}}
+async function backupDiario(){if(NV.modo!=='nuvem'||!NV.db)return;try{const hoje=hojeISO();const b=await NV.db.doc(`backup/${hoje}`).get();if(!b.exists)await backupNuvem(hoje);
+  const L=await NV.db.collection('backup').get();const lim=Date.now()-15*DIA;for(const d of L.docs){const v=d.data();if(v&&v.ts<lim&&/^\d{4}-\d\d-\d\d$/.test(d.id)){for(let k=0;k<(v.n||0);k++)await NV.db.doc(`backupp/${d.id}~${k}`).delete();await NV.db.doc(`backup/${d.id}`).delete()}}
+  const X=await NV.db.collection('lixeira').get();const lx=Date.now()-60*DIA;for(const d of X.docs){if((d.data()?.ts||0)<lx)await NV.db.doc(`lixeira/${d.id}`).delete()}}catch(e){}}
+async function lerBackup(nome){const m=await NV.db.doc(`backup/${nome}`).get();if(!m.exists)return null;const n=m.data().n;const ps=await Promise.all(Array.from({length:n},(_,k)=>NV.db.doc(`backupp/${nome}~${k}`).get()));if(ps.some(x=>!x.exists))return null;return JSON.parse(ps.map(x=>x.data().d).join(''))}
+async function restaurar(obj){if(!obj||!Array.isArray(obj.pedidos)||!Array.isArray(obj.produtos))throw new Error('arquivo inválido');await backupNuvem(`${hojeISO()}-antes-de-restaurar-${Date.now().toString(36)}`);
+  const {_app,_ts,...st}=obj;snap();state=normalizar(st);RC={};save();render();tick()}
+async function sSeg(){}
+function cardSeguranca(){if(!ehGestao())return '';return `<div class="card"><h2>Cópias de segurança</h2>
+  <p class="dica" style="margin:-4px 0 8px">Todo dia o sistema guarda uma cópia completa na nuvem (ficam as dos últimos 14 dias). Nada apagado some de vez: vai para a lixeira por 60 dias.</p>
+  <div class="linha-dep"><button class="mbtn" data-a="segAgora">${ic('i-check')}Fazer uma cópia agora</button><button class="mbtn neutro2" data-a="segBaixar">${ic('i-lista')}Baixar cópia em arquivo</button><label class="mbtn neutro2" style="cursor:pointer">${ic('i-mais')}Restaurar de um arquivo<input type="file" id="fSeg" accept="application/json,.json" hidden></label><button class="mbtn neutro2" data-a="segLista">Ver cópias e lixeira</button></div></div>`}
+function sSegLista(){const e=ui.sheet;return `${voltar()}<h1>Cópias e lixeira</h1>
+  <div class="card"><h2>Cópias na nuvem</h2>${e.bk?e.bk.length?e.bk.map(b=>`<div class="aj-row"><span><b>${esc(b.id)}</b><br><small class="lido">${dataCurta(b.ts)} ${tsHm(b.ts)} · ${b.pedidos??'?'} pedidos${b.por?' · '+esc(b.por):''}</small></span><button class="x azul" data-a="segRest" data-v="${esc(b.id)}">Restaurar</button></div>`).join(''):'<p class="dica">Nenhuma cópia ainda.</p>':'<p class="dica">Carregando…</p>'}</div>
+  <div class="card"><h2>Lixeira</h2><p class="dica" style="margin:-4px 0 8px">O que foi apagado nos últimos 60 dias.</p>${e.lx?e.lx.length?e.lx.map(x=>`<div class="aj-row"><span><b>${esc(({pedidos:'Pedido',lotes:'Peça do pedido',pessoas:'Pessoa',produtos:'Produto',clientes:'Empresa',arquivos:'Arquivo',tipos:'Máquina',forn:'Fornecedor',usuarios:'Acesso',consertos:'Conserto'})[x.col]||x.col)} ${esc(x.data?.nome||x.data?.cliente||x.id)}</b><br><small class="lido">apagado em ${dataCurta(x.ts)} ${tsHm(x.ts)}${x.por?' por '+esc(x.por):''}</small></span><button class="x azul" data-a="lixRest" data-v="${esc(x.doc)}">Restaurar</button></div>`).join(''):'<p class="dica">Lixeira vazia.</p>':'<p class="dica">Carregando…</p>'}</div>`}
+
 /* ================= painel do gestor ================= */
 const PERIODOS=[[1,'Hoje'],[7,'7 dias'],[30,'30 dias']];
 function gDesde(){const d=ui.gp||7;return d===1?sod(now()).getTime():now()-d*DIA}
@@ -2266,7 +2291,7 @@ function render(){RC={};
   const sh=document.getElementById('sheet');const s=ui.sheet;
   if(!s){sh.innerHTML='';document.body.style.overflow='';return}
   const old=sh.querySelector('.sheet'),keep=old&&old.dataset.id===sheetId(s)?{top:old.scrollTop,x:[...old.querySelectorAll('.fx-wrap')].map(e=>[e.dataset.k,e.scrollLeft])}:null;
-  const html=({tipo:sTipoEd,troca:sTroca,maq:sMaq,pedido:()=>sPedido(s.id),prob:sProblema,novo:sNovo,ajuda:sAjuda,produto:()=>sProduto(s.p),etapa:sEtapa,nprod:sNovoProd,pes:sPesEd,forn:sFornEd,quem:sQuem,he:sHE,imp:sImp,mock:sMock,cli:sCli,doc:sDoc,ins:sIns,arqPick:sArqPick}[s.t]||(()=>''))();
+  const html=({tipo:sTipoEd,troca:sTroca,maq:sMaq,pedido:()=>sPedido(s.id),prob:sProblema,novo:sNovo,ajuda:sAjuda,produto:()=>sProduto(s.p),etapa:sEtapa,nprod:sNovoProd,pes:sPesEd,forn:sFornEd,quem:sQuem,he:sHE,imp:sImp,mock:sMock,cli:sCli,doc:sDoc,ins:sIns,arqPick:sArqPick,seg:sSegLista}[s.t]||(()=>''))();
   sh.innerHTML=`<div class="sheet ${['pedido','produto'].includes(s.t)?'largo':''}" data-id="${esc(sheetId(s))}" role="dialog" aria-modal="true"><div class="wrap">${html}</div></div>`;document.body.style.overflow='hidden';
   if(keep){const n=sh.querySelector('.sheet');n.scrollTop=keep.top;keep.x.forEach(([k,x])=>{const e=n.querySelector(`.fx-wrap[data-k="${k}"]`);if(e)e.scrollLeft=x})}
   document.querySelectorAll('[aria-label]:not([title])').forEach(el=>el.title=el.getAttribute('aria-label'));
@@ -2382,10 +2407,24 @@ const A={
   acsReset:d=>{if(!ehGestao())return;const u=state.usuarios.find(x=>x.id===d.id);snap();u.hash=null;u.salt=null;commit();toast(`${u.nome} vai criar uma senha nova no próximo acesso`)},
   acsPerfil:d=>{if(!ehGestao())return;const u=state.usuarios.find(x=>x.id===d.id);if(u.id===usuarioAtual()?.id&&state.usuarios.filter(x=>x.perfil==='gestao').length<2){toast('Precisa ficar pelo menos uma pessoa na gestão',false);return}snap();u.perfil=u.perfil==='gestao'?'operacao':'gestao';commit()},
   acsRm:d=>{if(!ehGestao())return;const u=state.usuarios.find(x=>x.id===d.id);snap();state.usuarios=state.usuarios.filter(x=>x.id!==d.id);commit();toast(`${u.nome} não tem mais acesso`)},
+  segAgora:async()=>{toast('Guardando cópia…',false);const ok=await backupNuvem(`${hojeISO()}-manual-${tsHm(now()).replace(':','h')}`);toast(ok?'Cópia guardada na nuvem':'Sem nuvem agora. Use “Baixar cópia em arquivo”.',false)},
+  segBaixar:async()=>{const n=`Martins - copia de seguranca ${hojeISO()}.json`;await baixarBlob(n,new Blob([snapshot()],{type:'application/json'}))},
+  segLista:async()=>{openSheet({t:'seg',bk:null,lx:null});if(NV.modo!=='nuvem'){ui.sheet.bk=[];ui.sheet.lx=[];return render()}
+    try{const [B,X]=await Promise.all([NV.db.collection('backup').get(),NV.db.collection('lixeira').get()]);if(ui.sheet?.t!=='seg')return;
+      ui.sheet.bk=B.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.ts-a.ts);ui.sheet.lx=X.docs.map(d=>({doc:d.id,...d.data()})).sort((a,b)=>b.ts-a.ts).slice(0,80);render()}catch(e){ui.sheet.bk=[];ui.sheet.lx=[];render()}},
+  segRest:async d=>{if(!ui.segOk||ui.segOk!==d.v){ui.segOk=d.v;toast('Toque em Restaurar de novo para confirmar. O estado atual vira uma cópia antes.',false);return}ui.segOk=null;toast('Restaurando…',false);
+    try{const o=await lerBackup(d.v);await restaurar(o);ui.sheet=null;render();toast('Cópia restaurada',false)}catch(e){toast('Não consegui restaurar essa cópia',false)}},
+  lixRest:async d=>{try{const x=(await NV.db.doc(`lixeira/${d.v}`).get()).data();if(!x||!COLS.includes(x.col))return;const {_o,...ent}=x.data;snap();
+      if(!state[x.col].some(e=>(x.col==='consertos'?e.r:e.id)===(x.col==='consertos'?ent.r:ent.id)))state[x.col].push(ent);await NV.db.doc(`lixeira/${d.v}`).delete();commit();toast('Restaurado');A.segLista()}catch(e){toast('Não consegui restaurar',false)}},
   quem:()=>openSheet({t:'quem'}),
   quemSel:d=>{quemSet(d.v);ui.sheet=null;render();tick();toast(`Pronto, este aparelho é de ${quemNome()}`,false)},
   inicio:d=>{nuvemIniciar(d.v)},
-  apagaEx:d=>{if(!d.ok){ui.apagaEx=true;return render()}snap();state.pedidos=[];state.lotes=[];state.consertos=[];state.log=[];state.atrib={};state.exemplo=false;ui.apagaEx=false;commit();toast('Pedidos de exemplo apagados')},
+  apagaEx:async d=>{if(!d.ok){ui.apagaEx=true;return render()}await backupNuvem(`${hojeISO()}-antes-de-apagar-exemplos`);snap();const EX=new Set(EXEMPLO_IDS);
+    const exLotes=new Set(state.lotes.filter(l=>EX.has(l.ped)).map(l=>l.id));state.pedidos=state.pedidos.filter(p=>!EX.has(p.id));state.lotes=state.lotes.filter(l=>!exLotes.has(l.id));
+    state.consertos=state.consertos.filter(c=>!exLotes.has(c.l)&&!EX.has(c.ped));state.log=state.log.filter(e=>e.ped&&!EX.has(e.ped)&&!exLotes.has(e.l));
+    Object.keys(state.atrib||{}).forEach(k=>{if(EXEMPLO_IDS.some(id=>k.includes(':'+id+':')))delete state.atrib[k]});
+    const usados=new Set(state.pedidos.map(p=>p.cli));state.clientes=state.clientes.filter(c=>usados.has(c.id)||(state.arquivos||[]).some(a=>a.cli===c.id&&a.tipo!=='mockup'));
+    state.arquivos=(state.arquivos||[]).filter(a=>state.clientes.some(c=>c.id===a.cli));state.exemplo=false;ui.apagaEx=false;commit();toast('Exemplos apagados. Seus pedidos reais continuam.')},
   apagaExN:()=>{ui.apagaEx=false;render()},
   addPausa:()=>{snap();state.expediente.pausas.push({nome:'Pausa',h:'12:00',min:60});commit()},
   rmPausa:d=>{snap();state.expediente.pausas.splice(+d.i,1);commit()},
@@ -2551,6 +2590,7 @@ const A={
 };
 document.addEventListener('click',e=>{const z=e.target.closest('svg.mock[data-z]');if(z){e.preventDefault();e.stopPropagation();abreZoom(z.dataset.z);return}const b=e.target.closest('[data-a]');if(!b||b.disabled)return;const f=A[b.dataset.a];if(f){e.preventDefault();f(b.dataset)}});
 document.addEventListener('change',e=>{const t=e.target,d=t.dataset;if(!state)return;
+  if(t.id==='fSeg'&&t.files[0]){lerArq(t.files[0],true).then(async txt=>{try{await restaurar(JSON.parse(txt));toast('Cópia restaurada',false)}catch(e){toast('Esse arquivo não é uma cópia do sistema',false)}});return}
   if(t.id==='fArq'&&t.files.length){const fs=[...t.files],al=ui.arqAlvo;if(!al)return;(async()=>{toast('Guardando…',false);let ult=null;for(const fl of fs){try{ult=await arqSalvar(fl,al.cli,al.tipo)||ult}catch(er){toast(`Não consegui abrir ${fl.name}`,false)}}
       document.getElementById('toast').innerHTML='';if(!ult)return;snap();if(al.alvo){usaArq(ult,al.alvo);if(ui.sheet&&ui.sheet.t==='arqPick')ui.sheet=ui.sheet.volta||null}commit();toast(fs.length>1?`${fs.length} arquivos guardados na empresa`:'Arquivo guardado na empresa')})();return}
   if(t.id==='fImpF'&&t.files.length){importarFichas([...t.files]);return}
@@ -2604,13 +2644,13 @@ const COLS=['tipos','pessoas','forn','produtos','pedidos','lotes','consertos','c
 const NV={db:null,modo:'local',st:'',Q:new Set(),acked:{},last:{},busy:false,subs:[],pendR:false,timer:null};
 const stab=v=>JSON.stringify(v,(k,x)=>x&&typeof x==='object'&&!Array.isArray(x)?Object.keys(x).sort().reduce((o,k2)=>(o[k2]=x[k2],o),{}):x);
 const limpo=v=>JSON.parse(JSON.stringify(v));
-const semana=ts=>{const d=new Date(ts);d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return d.toISOString().slice(0,10)};
+const semana=ts=>{const d=new Date(ts-3*36e5);d.setUTCHours(0,0,0,0);d.setUTCDate(d.getUTCDate()-((d.getUTCDay()+6)%7));return d.toISOString().slice(0,10)};
 const idDoc=(k,it)=>String(k==='consertos'?it.r:it.id).replace(/[^A-Za-z0-9_\-.~:@+]/g,'_');
 function paraDocs(st){const m={},cfg={};
   Object.keys(st).forEach(k=>{if(COLS.includes(k))(st[k]||[]).forEach((it,i)=>{m[k+'/'+idDoc(k,it)]={...it,_o:i}});else if(k!=='log')cfg[k]=st[k]});
   m['config/main']=cfg;const b={};(st.log||[]).forEach(e=>{const key=semana(e.ts)+'_'+(e.dv||'x');(b[key]=b[key]||[]).push(e)});
   Object.entries(b).forEach(([k,v])=>m['log/'+k]={items:v});const out={};Object.entries(m).forEach(([p,v])=>out[p]=limpo(v));return out}
-function deDocs(m){const st={...(m['config/main']||{})};COLS.forEach(k=>st[k]=[]);st.log=[];
+function deDocs(m){const cfg=m['config/main']||{};const st=m['config/main']?{...cfg}:{v:8,estoque:{},cores:{...CORES},...CFG0()};if(st.seq==null){const nums=Object.keys(m).filter(k=>k.startsWith('pedidos/')).map(k=>parseInt(k.split('/')[1],10)).filter(n=>!isNaN(n));st.seq=nums.length?Math.max(...nums)+1:1}COLS.forEach(k=>st[k]=[]);st.log=[];
   Object.entries(m).forEach(([p,v])=>{const [c]=p.split('/');if(COLS.includes(c))st[c].push(v);else if(c==='log')st.log.push(...(v.items||[]))});
   COLS.forEach(k=>{st[k].sort((a,b)=>(a._o??0)-(b._o??0));st[k]=st[k].map(({_o,...r})=>r)});st.log.sort((a,b)=>a.ts-b.ts);return st}
 function difPatch(a,b){const p={};for(const k of Object.keys(a))if(!(k in b))return null;
@@ -2623,7 +2663,7 @@ function nuvemSalvar(){if(NV.modo!=='nuvem')return;const cur=paraDocs(state);con
   Object.keys(NV.last).forEach(p=>{if(!(p in cur))NV.Q.add(p)});NV.last=nl;nuvemEnviar()}
 async function nuvemEnviar(){if(NV.busy||!NV.db||!NV.Q.size)return;NV.busy=true;syncSt('salvando');let falhou=false;
   try{while(NV.Q.size){const p=NV.Q.values().next().value;const cur=paraDocs(state)[p];const ref=NV.db.doc(p);
-      try{if(!cur){await ref.delete();delete NV.acked[p]}
+      try{if(!cur){const [col,idd]=p.split('/');if(col!=='log'&&NV.acked[p]){await NV.db.doc(`lixeira/${col}~${idd}~${Date.now().toString(36)}`).set({col,id:idd,data:NV.acked[p],ts:now(),por:quemNome()||''})}await ref.delete();delete NV.acked[p]}
         else{const old=NV.acked[p];const pt=old?difPatch(old,cur):null;
           if(!old||pt===null)await ref.set(cur);else if(Object.keys(pt).length)await ref.update(pt);NV.acked[p]=cur}
         NV.Q.delete(p)}
@@ -2647,14 +2687,15 @@ async function nuvemLer(){try{const old=await NV.db.collection('mockups').get();
   sn.forEach((x,i)=>x.docs.forEach(d=>{if(d.exists)m[cs[i]+'/'+d.id]=limpo(d.data())}));return m}
 function nuvemAdotar(m){NV.acked=m;NV.last={};Object.entries(m).forEach(([p,v])=>NV.last[p]=stab(v));
   const st=normalizar(deDocs(m));if(!st.atrib)st.atrib={};state=st;NV.modo='nuvem';syncSt('ok');
-  try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}save();render();tick();nuvemOuvir();mockReparo()}
+  try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}save();render();tick();nuvemOuvir();mockReparo();setTimeout(backupDiario,4000)}
 async function nuvemConectar(){let db=null;try{db=await window.claude?.use?.('db')}catch(e){}
   if(!db){syncSt('local');return}NV.db=db;syncSt('salvando');
-  try{const m=await nuvemLer();if(m['config/main']?.v)return nuvemAdotar(m);ui.inicio=true;syncSt('');render()}
+  try{const m=await nuvemLer();if(m['config/main']?.v||Object.keys(m).some(k=>/^(pedidos|lotes|pessoas|produtos|clientes)\//.test(k)))return nuvemAdotar(m);ui.inicio=true;syncSt('');render()}
   catch(e){syncSt('off');setTimeout(nuvemConectar,8000)}}
 async function nuvemIniciar(modo){const btns=document.querySelectorAll('[data-a=inicio]');btns.forEach(b=>b.disabled=true);
   try{const l=await NV.db.doc('trava/inicio').acquire({holder:DEV,ttlMs:60000});const m=await nuvemLer();
-    if(m['config/main']?.v||!l.acquired){ui.inicio=false;if(m['config/main']?.v)return nuvemAdotar(m);return setTimeout(nuvemConectar,3000)}
+    const temDados=Object.keys(m).some(k=>/^(pedidos|lotes|pessoas|produtos|clientes)\//.test(k));
+    if(m['config/main']?.v||temDados||!l.acquired){ui.inicio=false;if(m['config/main']?.v||temDados)return nuvemAdotar(m);return setTimeout(nuvemConectar,3000)}
     if(modo==='vazia'){state.pedidos=[];state.lotes=[];state.consertos=[];state.log=[];state.atrib={};state.exemplo=false}else state.exemplo=true;
     ui.inicio=false;NV.acked={};NV.last={};NV.modo='nuvem';save();render();tick();nuvemOuvir();mockPendentes();toast('Pronto! Os dados agora ficam na nuvem',false)}
   catch(e){btns.forEach(b=>b.disabled=false);toast('Sem conexão. Tente de novo.',false)}}
