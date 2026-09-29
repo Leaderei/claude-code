@@ -637,6 +637,8 @@ svg.prod.mock{cursor:zoom-in}
 .alrt-go{align-self:center;font-size:15px!important;font-weight:700;color:var(--blue)!important;white-space:nowrap}.g-link{cursor:pointer}.g-link:hover{background:var(--grey-soft)}
 @media (max-width:640px){.alrt{grid-template-columns:34px minmax(0,1fr)!important}.alrt-go{grid-column:2}}
 .pos-ed{border-top:1px solid var(--grey-soft);padding:8px 0;display:grid;gap:6px}.pos-ed b{font-size:17px}.pos-ed .novo-in{max-width:520px}
+.zm-baixa{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#FFF4D6;color:#5A4200;border-radius:12px;margin:8px 12px 0;padding:10px 14px;font-size:16px}.zm-baixa[hidden]{display:none}.zm-baixa svg.ic{width:24px;height:24px}
+.mk-baixa{color:var(--atn-ink);font-size:14px;font-weight:700}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1373,7 +1375,7 @@ function prodLine(l,ped){const p=rp(l);
     const c=n===ss.length?'ok':fo?'fora':(and||n>0)?'and':'';return `<div class="tp ${c}"><span class="tc">${ic(c==='ok'?'i-check':c==='fora'?'i-caminhao':e.i)}</span>${e.nome}${ss.length>1&&c!=='ok'?`<small>${n} de ${ss.length}</small>`:''}</div>`}).join('');
   const ands=p.steps.filter(s=>stOf(l,s.id).st==='and'),fo=p.steps.filter(s=>stOf(l,s.id).st==='fora');
   const agora=loteDone(l)?'Pronto':fo.length?`No fornecedor: ${fo.map(s=>s.nome).join(', ')}`:ands.length?'Agora: '+ands.map(s=>`${s.nome} (${pNome(stOf(l,s.id).op)})`).join(', '):!liberado(ped)?'Esperando liberar o corte':'Esperando a próxima máquina';
-  return `<div class="prodbloco"><div class="prodline">${loteSvg(l)}<div><h3>${l.rework?`<span class="pill cons">${ic('i-conserto')}Conserto</span> `:''}${esc(p.nome)} · ${esc(modeloTxt(l))} · ${qtdEf(l)} peças</h3><div class="agora">${esc(agora)}</div>${l.obs?`<div class="obs-f">${ic('i-lista')}${esc(l.obs)}</div>`:''}${l.rework?'':`<button class="x azul" data-a="mockUm" data-l="${l.id}" style="margin:4px 0 8px;font-size:15px">${ic('i-camisa')}${l.mock?'Trocar mockup':'Pôr mockup'}</button>${ped.cli&&arqsDoCli(ped.cli,'mockup').filter(a=>a.id!==l.mockArq).length?` <button class="x azul" data-a="mockBib" data-l="${l.id}" style="margin:4px 0 8px;font-size:15px">Usar mockup já guardado</button>`:''}`}<div class="trilha">${et}</div></div></div>${fluxo(rotaV(l,ped),'L'+l.id,l,ped)}</div>`}
+  return `<div class="prodbloco"><div class="prodline">${loteSvg(l)}<div><h3>${l.rework?`<span class="pill cons">${ic('i-conserto')}Conserto</span> `:''}${esc(p.nome)} · ${esc(modeloTxt(l))} · ${qtdEf(l)} peças</h3><div class="agora">${esc(agora)}</div>${l.obs?`<div class="obs-f">${ic('i-lista')}${esc(l.obs)}</div>`:''}${l.rework?'':`<button class="x azul" data-a="mockUm" data-l="${l.id}" style="margin:4px 0 8px;font-size:15px">${ic('i-camisa')}${l.mock?'Trocar mockup':'Pôr mockup'}</button>${l.mock&&!mockChave(l)?` <span class="mk-baixa" data-mkb="${l.id}"></span>`:''}${ped.cli&&arqsDoCli(ped.cli,'mockup').filter(a=>a.id!==l.mockArq).length?` <button class="x azul" data-a="mockBib" data-l="${l.id}" style="margin:4px 0 8px;font-size:15px">Usar mockup já guardado</button>`:''}`}<div class="trilha">${et}</div></div></div>${fluxo(rotaV(l,ped),'L'+l.id,l,ped)}</div>`}
 
 /* ================= mapa de etapas ================= */
 const NW=200,NH=104,GX=48,GY=14;
@@ -1947,16 +1949,16 @@ function abreZoom(z){const [k,v]=[z.slice(0,1),z.slice(2)];let src='',tit='Mocku
   else if(k==='M'){const m=ui.sheet.itens[+v];src=m.g?.o||m.g||m.img;tit=m.nome}
   else if(k==='A'){const a=arqById(v);if(!a)return;src=a.prev;tit=a.nome;const kb=a.vis||(a.tipo==='mockup'?a.bin:null);if(kb)setTimeout(()=>pegaBin(kb).then(u=>{const im=document.querySelector('#zoom .zm-area img');if(u&&im&&im.dataset.k===undefined){im.dataset.k=1;im.dispatchEvent(new CustomEvent('trocar',{detail:u}))}}),0)}
   if(!src)return;const Z=document.getElementById('zoom');
-  Z.innerHTML=`<div class="zm" role="dialog" aria-modal="true" aria-label="${esc(tit)}"><div class="zm-bar"><b>${esc(tit)}</b><button class="zm-b" data-zm="-" aria-label="Diminuir">−</button><button class="zm-b" data-zm="0" aria-label="Tamanho normal">⤢</button><button class="zm-b" data-zm="+" aria-label="Aumentar">+</button><button class="zm-b zm-x" data-zm="x" aria-label="Fechar">×</button></div><div class="zm-area"><img alt="${esc(tit)}" draggable="false"></div><p class="zm-dica"><span class="zm-res"></span> Use + e −, dois dedos ou a rodinha do mouse. Arraste para mover.</p></div>`;
+  Z.innerHTML=`<div class="zm" role="dialog" aria-modal="true" aria-label="${esc(tit)}"><div class="zm-bar"><b>${esc(tit)}</b><button class="zm-b" data-zm="-" aria-label="Diminuir">−</button><button class="zm-b" data-zm="0" aria-label="Tamanho normal">⤢</button><button class="zm-b" data-zm="+" aria-label="Aumentar">+</button><button class="zm-b zm-x" data-zm="x" aria-label="Fechar">×</button></div><div class="zm-area"><img alt="${esc(tit)}" draggable="false"></div><div class="zm-baixa" hidden>${ic('i-alerta')}<span>Este mockup está só em miniatura (importado numa versão antiga do sistema) e por isso sem definição.</span>${lt?`<button class="mbtn" data-zm="novo">Enviar o arquivo original</button>`:''}</div><p class="zm-dica"><span class="zm-res"></span> Use + e −, dois dedos ou a rodinha do mouse. Arraste para mover.</p></div>`;
   const img=Z.querySelector('img'),area=Z.querySelector('.zm-area'),res=Z.querySelector('.zm-res');let base=1,esc_=1,x=0,y=0,max=6;
   const cabe=()=>{const r=area.getBoundingClientRect();base=Math.min(r.width/img.naturalWidth,r.height/img.naturalHeight,1);max=Math.max(3,Math.min(8,3/base))};
   const ap=()=>{const r=area.getBoundingClientRect(),w=img.naturalWidth*base*esc_,h=img.naturalHeight*base*esc_;const mx=Math.max(0,(w-r.width)/2),my=Math.max(0,(h-r.height)/2);x=Math.max(-mx,Math.min(mx,x));y=Math.max(-my,Math.min(my,y));
     img.style.width=w+'px';img.style.height=h+'px';img.style.left=((r.width-w)/2+x)+'px';img.style.top=((r.height-h)/2+y)+'px'};
   const zoom=(f,cx,cy)=>{const r=area.getBoundingClientRect();cx=cx??r.width/2;cy=cy??r.height/2;const n=Math.min(max,Math.max(1,esc_*f));const px=cx-r.width/2-x,py=cy-r.height/2-y;x-=px*(n/esc_-1);y-=py*(n/esc_-1);esc_=n;if(n===1){x=0;y=0}ap()};
-  const carrega=u=>{const i2=new Image();i2.onload=()=>{const keep=esc_;img.src=u;cabe();esc_=keep;ap();res.textContent=`${i2.naturalWidth} px ·`};i2.src=u};
+  const baixa=Z.querySelector('.zm-baixa');const carrega=u=>{const i2=new Image();i2.onload=()=>{const keep=esc_;img.src=u;cabe();esc_=keep;ap();res.textContent=`${i2.naturalWidth} px ·`;if(baixa)baixa.hidden=i2.naturalWidth>300};i2.src=u};
   carrega(src);if(lt)pegaMock(lt).then(()=>{const u=mockOrig(lt);if(u&&u!==src)carrega(u)});img.addEventListener('trocar',ev=>carrega(ev.detail));
   window.addEventListener('resize',()=>{if(img.naturalWidth){cabe();ap()}},{once:true});
-  Z.querySelectorAll('[data-zm]').forEach(b=>b.onclick=()=>{const v=b.dataset.zm;if(v==='x')Z.innerHTML='';else if(v==='0'){esc_=1;x=0;y=0;ap()}else zoom(v==='+'?1.6:1/1.6)});
+  Z.querySelectorAll('[data-zm]').forEach(b=>b.onclick=()=>{const v=b.dataset.zm;if(v==='x')Z.innerHTML='';else if(v==='novo'){Z.innerHTML='';A.mockUm({l:lt.id})}else if(v==='0'){esc_=1;x=0;y=0;ap()}else zoom(v==='+'?1.6:1/1.6)});
   area.onwheel=ev=>{ev.preventDefault();const r=area.getBoundingClientRect();zoom(ev.deltaY<0?1.2:1/1.2,ev.clientX-r.left,ev.clientY-r.top)};
   const P=new Map();let d0=0,s0=1,last=null,tap=0;
   area.onpointerdown=ev=>{area.setPointerCapture(ev.pointerId);P.set(ev.pointerId,{x:ev.clientX,y:ev.clientY});if(P.size===2){const [a,b]=[...P.values()];d0=Math.hypot(a.x-b.x,a.y-b.y);s0=esc_}last={x:ev.clientX,y:ev.clientY};
@@ -2068,6 +2070,7 @@ function sDoc(){const e=ui.sheet,ped=pedById(e.id),P=paginasDoc(e);
   ${e.tipo==='pedido'?`<div class="linha-dep" style="margin:4px 0 12px">${ped.aprov?`<span class="imp-ok">${ic('i-check')}Cliente aprovou em ${dataCurta(ped.aprov.ts)}</span><button class="x" data-a="docAprov" data-id="${ped.id}">Desfazer</button>`:`<button class="depc" data-a="docAprov" data-id="${ped.id}">${ic('i-check')}Cliente aprovou este pedido</button>`}</div>`:''}
   ${(()=>{const bx=lotesDe(e.id).filter(l=>!l.rework&&l.mock&&!(MOCKG[l.id]||(l.parent&&MOCKG[l.parent])));return bx.length?`<div class="aviso">${ic('i-alerta')}O mockup de ${bx.map(l=>esc(prod(l.prod).nome+' '+l.cor)).join(', ')} está só em tamanho pequeno e vai sair sem definição. Abra o pedido e toque em “Trocar mockup” com a imagem original.</div>`:''})()}
   <div class="docs">${P.map(h=>`<div class="a4wrap">${h}</div>`).join('')}</div>`}
+function marcaBaixa(){document.querySelectorAll('[data-mkb]').forEach(async el=>{const l=lote(el.dataset.mkb);await pegaMock(l);if(!mockChave(l))el.textContent='Sem o arquivo original: mockup sem definição'})}
 function ajustaA4(){document.querySelectorAll('.a4wrap').forEach(w=>{const k=w.clientWidth/794;const a=w.firstElementChild;if(a){a.style.transform=`scale(${k})`;w.style.height=(1123*k)+'px'}})}
 window.addEventListener('resize',ajustaA4);
 const LIBS={h2c:'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',pdf:'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'};
@@ -2223,7 +2226,7 @@ function render(){RC={};
   sh.innerHTML=`<div class="sheet ${['pedido','produto'].includes(s.t)?'largo':''}" data-id="${esc(sheetId(s))}" role="dialog" aria-modal="true"><div class="wrap">${html}</div></div>`;document.body.style.overflow='hidden';
   if(keep){const n=sh.querySelector('.sheet');n.scrollTop=keep.top;keep.x.forEach(([k,x])=>{const e=n.querySelector(`.fx-wrap[data-k="${k}"]`);if(e)e.scrollLeft=x})}
   document.querySelectorAll('[aria-label]:not([title])').forEach(el=>el.title=el.getAttribute('aria-label'));
-  ajustaA4();
+  ajustaA4();marcaBaixa();
   const f=document.getElementById('wCli');if(f&&!f.value)f.focus()}
 function snap(){undo=JSON.stringify(state)}
 function toast(msg,comDesfazer=true){const el=document.getElementById('toast');clearTimeout(toastT);
