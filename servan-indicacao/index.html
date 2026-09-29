@@ -312,6 +312,14 @@
       .then(done).catch(fail);
   });
 
+  // Links internos com rolagem via JS (funciona também dentro do Apps Script)
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
   document.querySelector('a[href="#privacidade"]').addEventListener('click', function () { document.getElementById('privacidade').open = true; });
 
   document.getElementById('again').addEventListener('click', function () {
