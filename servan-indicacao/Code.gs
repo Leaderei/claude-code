@@ -14,8 +14,6 @@ const COLUNAS = [
   ['Data/hora', (d) => new Date()],
   ['Quem indica — Nome', (d) => d.ind_nome],
   ['Quem indica — Vínculo', (d) => d.ind_vinculo],
-  ['Quem indica — Área', (d) => d.ind_area],
-  ['Quem indica — Contato', (d) => d.ind_contato],
   ['Indicada — Nome', (d) => d.nome],
   ['Indicada — WhatsApp', (d) => d.whatsapp],
   ['Indicada — E-mail', (d) => d.email],
@@ -38,7 +36,14 @@ function salvarIndicacao(d) {
   lock.waitLock(20000);
   try {
     const sh = SpreadsheetApp.openById(SHEET_ID).getSheets()[0];
-    if (sh.getLastRow() === 0) sh.appendRow(COLUNAS.map((c) => c[0]));
+    // Mantém o cabeçalho da linha 1 sempre igual a COLUNAS
+    const cab = COLUNAS.map((c) => c[0]);
+    const atual = sh.getLastRow() ? sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0] : [];
+    if (atual.join('|') !== cab.join('|')) {
+      if (atual.length > cab.length) sh.getRange(1, cab.length + 1, 1, atual.length - cab.length).clearContent();
+      sh.getRange(1, 1, 1, cab.length).setValues([cab]).setFontWeight('bold');
+      sh.setFrozenRows(1);
+    }
     // Prefixo ' evita que o Sheets interprete telefone/fórmula
     const linha = COLUNAS.map((c, i) => {
       const v = c[1](d);
@@ -72,5 +77,5 @@ function doGet() {
 
 // Rode 1x pelo editor para autorizar e testar (grava uma linha de teste)
 function testar() {
-  salvarIndicacao({ ind_nome: 'TESTE', ind_vinculo: 'Colaborador(a)', ind_contato: '67999999999', nome: 'TESTE — apagar', whatsapp: '67999999999', motivo: 'teste', sabe: 'Sim' });
+  salvarIndicacao({ ind_nome: 'TESTE', ind_vinculo: 'Colaborador(a)', nome: 'TESTE — apagar', whatsapp: '67999999999', motivo: 'teste', sabe: 'Sim' });
 }

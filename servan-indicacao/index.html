@@ -163,16 +163,6 @@
               <label class="choice"><input type="radio" name="ind_vinculo" value="Colaborador(a)"><span>Colaborador(a)</span></label>
             </div>
           </div>
-          <div class="row">
-            <div class="field">
-              <label for="ind_area">Área / setor <span class="opt">(opcional)</span></label>
-              <input type="text" id="ind_area" name="ind_area">
-            </div>
-            <div class="field">
-              <label for="ind_contato">Seu WhatsApp</label>
-              <input type="tel" id="ind_contato" name="ind_contato" autocomplete="tel" inputmode="tel" placeholder="(67) 9 0000-0000" required>
-            </div>
-          </div>
         </fieldset>
 
         <fieldset>
@@ -265,8 +255,8 @@
       } else if (!el.value.trim()) missing.push(el);
     });
     if (missing.length) { missing[0].focus(); return 'Preencha os campos obrigatórios.'; }
-    if (digits(form.ind_contato.value).length < 10 || digits(form.whatsapp.value).length < 10) {
-      return 'Confira os números de WhatsApp (com DDD).';
+    if (digits(form.whatsapp.value).length < 10) {
+      return 'Confira o WhatsApp da indicada (com DDD).';
     }
     if (form.email.value && !/^\S+@\S+\.\S+$/.test(form.email.value)) return 'Confira o e-mail informado.';
     return '';
