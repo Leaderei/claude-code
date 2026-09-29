@@ -1,5 +1,7 @@
 # LP Indicação Servan — colocar no ar (5 min)
 
+
+Link publicado (v1, 29/09/2026): https://script.google.com/macros/s/AKfycbweRllh4dYWvUQdYqBitd1mqfgvUgN57IZCG9IzhG-TDoAoUFZmK3RdpVadXjXfFO03Sw/exec
 Tudo está em um arquivo só: `Code.gs` (script + página).
 
 1. Abra a planilha "Servan — Indicações Vaga Comercial (LP)" → **Extensões → Apps Script**.
