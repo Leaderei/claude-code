@@ -98,6 +98,11 @@
   .choice input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
   .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--muted); font-weight: 400; }
   .consent input { margin-top: 4px; width: 18px; height: 18px; flex: none; accent-color: var(--accent); }
+  .privacy { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 18px; font-size: 14px; color: var(--muted); }
+  .privacy summary { cursor: pointer; font-weight: 600; color: var(--brand); }
+  .privacy ul { padding-left: 18px; margin: 8px 0 0; }
+  .privacy li { margin-bottom: 6px; }
+  .consent a, .privacy a { color: var(--accent); }
   .hp { position: absolute; left: -9999px; }
   .err { color: var(--error); font-size: 14px; margin: 8px 0 0; min-height: 1em; }
   .submit { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
@@ -128,7 +133,7 @@
   <div class="wrap">
     <p class="eyebrow">Programa de indicação</p>
     <h1>Conhece alguém que combina com o Servan?</h1>
-    <p>Estamos buscando uma nova profissional para integrar nosso time na área comercial.</p>
+    <p>Estamos buscando um novo talento para integrar nosso time na área comercial.</p>
     <p>Queremos encontrar alguém que tenha facilidade para se comunicar e criar boas relações. E quem melhor para nos ajudar nessa busca do que as pessoas que já fazem parte da nossa história?</p>
     <a class="btn" href="#indicar">Indicar agora</a>
   </div>
@@ -137,8 +142,8 @@
 <section class="intro">
   <div class="wrap">
     <h2>Sua indicação é importante</h2>
-    <p>Se você é sócio ou colaborador do Servan e conhece uma profissional em quem confia e que acredita ter esse perfil, queremos conhecê-la.</p>
-    <p>Preencha o formulário com a sua indicação. Nossa equipe dará continuidade ao processo de forma reservada e entrará em contato com a profissional indicada.</p>
+    <p>Se você é sócio ou colaborador do Servan e conhece alguém em quem confia e que acredita ter esse perfil, queremos conhecer essa pessoa.</p>
+    <p>Preencha o formulário com a sua indicação. Nossa equipe dará continuidade ao processo de forma reservada e entrará em contato com a pessoa indicada.</p>
     <div class="note">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
       <span>As informações são tratadas com sigilo e usadas somente neste processo seletivo.</span>
@@ -166,7 +171,7 @@
         </fieldset>
 
         <fieldset>
-          <legend>Profissional indicada</legend>
+          <legend>Pessoa indicada</legend>
           <div class="field">
             <label for="nome">Nome completo</label>
             <input type="text" id="nome" name="nome" required>
@@ -192,11 +197,11 @@
             </div>
           </div>
           <div class="field">
-            <label for="motivo">Por que ela combina com o Servan?</label>
-            <textarea id="motivo" name="motivo" placeholder="Como você a conhece, o que ela faz bem, como se relaciona com as pessoas…" required></textarea>
+            <label for="motivo">Por que essa pessoa combina com o Servan?</label>
+            <textarea id="motivo" name="motivo" placeholder="De onde vocês se conhecem, no que se destaca, como se relaciona com as pessoas…" required></textarea>
           </div>
           <div class="field">
-            <label id="sabe_lbl">Ela sabe que você está indicando?</label>
+            <label id="sabe_lbl">A pessoa sabe que você está indicando?</label>
             <div class="choices" role="radiogroup" aria-labelledby="sabe_lbl">
               <label class="choice"><input type="radio" name="sabe" value="Sim" required><span>Sim</span></label>
               <label class="choice"><input type="radio" name="sabe" value="Ainda não"><span>Ainda não</span></label>
@@ -207,7 +212,7 @@
         <div class="field">
           <label class="consent">
             <input type="checkbox" name="consentimento" value="Sim" required>
-            <span>Confirmo que compartilho estes contatos apenas para este processo seletivo e que a profissional pode ser contatada pela equipe do Servan.</span>
+            <span>Declaro que compartilho estes dados de boa-fé, somente para este processo seletivo, e estou ciente de que a pessoa indicada poderá ser contatada pela equipe do Servan. <a href="#privacidade">Como usamos os dados</a>.</span>
           </label>
         </div>
 
@@ -219,10 +224,22 @@
         </div>
       </form>
 
+      <details class="privacy" id="privacidade">
+        <summary>Como usamos os dados (LGPD)</summary>
+        <p>Os dados enviados aqui são usados <strong>exclusivamente</strong> para avaliar a indicação e, se houver interesse, convidar a pessoa indicada a participar do processo seletivo da área comercial do Servan.</p>
+        <ul>
+          <li><strong>Quem trata:</strong> Servan Anestesiologia, com apoio da consultoria que conduz o recrutamento.</li>
+          <li><strong>Transparência:</strong> no primeiro contato, a pessoa indicada é informada de onde vieram seus dados e pode pedir a exclusão a qualquer momento.</li>
+          <li><strong>Prazo:</strong> os dados são mantidos apenas até o encerramento do processo seletivo e depois excluídos.</li>
+          <li><strong>Seleção:</strong> a avaliação considera somente competências e experiência para a função, sem distinção de gênero, idade, raça, estado civil ou qualquer outra característica pessoal.</li>
+          <li><strong>Seus direitos:</strong> para acessar, corrigir ou excluir dados, fale com <a href="mailto:marketing@servan.com.br">marketing@servan.com.br</a>.</li>
+        </ul>
+      </details>
+
       <div class="thanks" id="thanks" aria-live="polite">
         <div class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
         <h2>Indicação recebida. Obrigado!</h2>
-        <p>Nossa equipe vai dar continuidade de forma reservada e entrará em contato com a profissional indicada.</p>
+        <p>Nossa equipe vai dar continuidade de forma reservada e entrará em contato com a pessoa indicada.</p>
         <button class="link-btn" type="button" id="again">Fazer outra indicação</button>
       </div>
     </div>
@@ -256,7 +273,7 @@
     });
     if (missing.length) { missing[0].focus(); return 'Preencha os campos obrigatórios.'; }
     if (digits(form.whatsapp.value).length < 10) {
-      return 'Confira o WhatsApp da indicada (com DDD).';
+      return 'Confira o WhatsApp da pessoa indicada (com DDD).';
     }
     if (form.email.value && !/^\S+@\S+\.\S+$/.test(form.email.value)) return 'Confira o e-mail informado.';
     return '';
@@ -294,6 +311,8 @@
     fetch(window.SERVAN_ENDPOINT, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(data) })
       .then(done).catch(fail);
   });
+
+  document.querySelector('a[href="#privacidade"]').addEventListener('click', function () { document.getElementById('privacidade').open = true; });
 
   document.getElementById('again').addEventListener('click', function () {
     form.reset(); btn.disabled = false; btn.textContent = 'Enviar indicação';
