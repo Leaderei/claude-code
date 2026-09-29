@@ -639,6 +639,7 @@ svg.prod.mock{cursor:zoom-in}
 .pos-ed{border-top:1px solid var(--grey-soft);padding:8px 0;display:grid;gap:6px}.pos-ed b{font-size:17px}.pos-ed .novo-in{max-width:520px}
 .zm-baixa{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#FFF4D6;color:#5A4200;border-radius:12px;margin:8px 12px 0;padding:10px 14px;font-size:16px}.zm-baixa[hidden]{display:none}.zm-baixa svg.ic{width:24px;height:24px}
 .mk-baixa{color:var(--atn-ink);font-size:14px;font-weight:700}
+.doc-baixa{align-items:flex-start}.doc-baixa .mbtn{display:inline-flex;align-items:center;gap:6px}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -2068,7 +2069,7 @@ function sDoc(){const e=ui.sheet,ped=pedById(e.id),P=paginasDoc(e);
   ${e.tipo==='prod'?`<div class="linha-dep" style="margin-bottom:10px"><button class="depc" data-a="docVias" data-v="2" aria-pressed="${e.vias===2}">1ª e 2ª via</button><button class="depc" data-a="docVias" data-v="1" aria-pressed="${e.vias===1}">Só 1ª via</button><button class="depc" data-a="docMocks" aria-pressed="${e.mocks}">${ic('i-camisa')}Incluir mockups</button></div>`:''}
   <div class="acoes" style="margin-top:0"><button class="big go" data-a="docPdf">${ic('i-lista')}Baixar PDF (${P.length} ${P.length===1?'página':'páginas'})</button><button class="big neutro" data-a="docPrint">Imprimir</button></div>
   ${e.tipo==='pedido'?`<div class="linha-dep" style="margin:4px 0 12px">${ped.aprov?`<span class="imp-ok">${ic('i-check')}Cliente aprovou em ${dataCurta(ped.aprov.ts)}</span><button class="x" data-a="docAprov" data-id="${ped.id}">Desfazer</button>`:`<button class="depc" data-a="docAprov" data-id="${ped.id}">${ic('i-check')}Cliente aprovou este pedido</button>`}</div>`:''}
-  ${(()=>{const bx=lotesDe(e.id).filter(l=>!l.rework&&l.mock&&!(MOCKG[l.id]||(l.parent&&MOCKG[l.parent])));return bx.length?`<div class="aviso">${ic('i-alerta')}O mockup de ${bx.map(l=>esc(prod(l.prod).nome+' '+l.cor)).join(', ')} está só em tamanho pequeno e vai sair sem definição. Abra o pedido e toque em “Trocar mockup” com a imagem original.</div>`:''})()}
+  ${(()=>{const bx=lotesDe(e.id).filter(l=>!l.rework&&l.mock&&!(MOCKG[l.id]||(l.parent&&MOCKG[l.parent])));return bx.length?`<div class="aviso doc-baixa">${ic('i-alerta')}<div><b>Mockup sem definição:</b> ${bx.length===1?'esta peça só tem':'estas peças só têm'} a miniatura guardada (importadas numa versão antiga). Envie o arquivo original para sair nítido:<div class="linha-dep" style="margin-top:8px">${bx.map(l=>`<button class="mbtn" data-a="docMockNovo" data-l="${l.id}">${ic('i-camisa')}${esc(prod(l.prod).nome+' '+l.cor)}</button>`).join('')}</div></div></div>`:''})()}
   <div class="docs">${P.map(h=>`<div class="a4wrap">${h}</div>`).join('')}</div>`}
 function marcaBaixa(){document.querySelectorAll('[data-mkb]').forEach(async el=>{const l=lote(el.dataset.mkb);await pegaMock(l);if(!mockChave(l))el.textContent='Sem o arquivo original: mockup sem definição'})}
 function ajustaA4(){document.querySelectorAll('.a4wrap').forEach(w=>{const k=w.clientWidth/794;const a=w.firstElementChild;if(a){a.style.transform=`scale(${k})`;w.style.height=(1123*k)+'px'}})}
@@ -2262,6 +2263,7 @@ const A={
   impMocks:()=>{const i=document.getElementById('fImpM');i.value='';i.click()},
   wMock:d=>{wRead();ui.mockK=null;ui.mockL=null;ui.mockW=+d.k;const i=document.getElementById('fImpM1');i.value='';i.click()},
   impMock:d=>{ui.mockW=null;ui.mockK=+d.k;ui.mockL=null;const i=document.getElementById('fImpM1');i.value='';i.click()},
+  docMockNovo:d=>{ui.docVolta={tipo:ui.sheet.tipo,id:ui.sheet.id};A.mockUm(d)},
   mockUm:d=>{ui.mockW=null;ui.mockK=null;ui.mockL=d.l;const i=document.getElementById('fImpM1');i.value='';i.click()},
   impG:d=>{ui.sheet.gi=+d.v;render()},
   impCli:d=>{const g=ui.sheet.grupos[ui.sheet.gi];g.cliId=d.v;g.cliNovo=false;render()},
@@ -2497,7 +2499,7 @@ document.addEventListener('change',e=>{const t=e.target,d=t.dataset;if(!state)re
       for(const f of fs){try{const m=await mockDeArquivo(f);out.push({img:m.p,g:m.g,nome:f.name})}catch(er){toast(`Não consegui abrir ${f.name}`,false)}}document.getElementById('toast').innerHTML='';if(!out.length)return;
       if(t.id==='fImpM1'&&ui.mockW!=null&&ui.sheet&&ui.sheet.t==='novo'){ui.sheet.w.itens[ui.mockW].mock=out[0].img;ui.sheet.w.itens[ui.mockW].mockG=out[0].g;ui.mockW=null;render();return}
       if(t.id==='fImpM1'&&ui.mockK!=null&&ui.sheet&&ui.sheet.t==='imp'){ui.sheet.grupos[ui.sheet.gi].itens[ui.mockK].mock=out[0].img;ui.sheet.grupos[ui.sheet.gi].itens[ui.mockK].mockG=out[0].g;render();return}
-      if(t.id==='fImpM1'&&ui.mockL){snap();setMock(lote(ui.mockL),out[0].img,out[0].g);commit();toast('Mockup salvo');return}
+      if(t.id==='fImpM1'&&ui.mockL){snap();setMock(lote(ui.mockL),out[0].img,out[0].g);commit();toast('Mockup salvo');if(ui.docVolta&&ui.sheet?.t==='doc'){const dv=ui.docVolta;ui.docVolta=null;abreDoc(dv.tipo,dv.id)}return}
       openSheet({t:'mock',itens:out.map(m=>({...m,alvo:null,sug:sugMock(m.nome)}))})})();return}
   if(t.dataset.imp&&ui.sheet&&ui.sheet.t==='imp'){const g=ui.sheet.grupos[ui.sheet.gi],k=t.dataset.imp;if(k==='cliente'){g.cliente=t.value;const ce=acharCliente(state,t.value,g.cnpj);g.cliId=ce?ce.id:null;g.cliCerto=!!ce;g.cliNovo=!ce;g.cliSug=[];render();return}if(k==='chegada'||k==='entrega'){if(!t.value){g[k]=null}else{const [y,m,dd]=t.value.split('-').map(Number);g[k]=new Date(y,m-1,dd,17).getTime();g[k==='chegada'?'chDeduz':'enDeduz']=false}render()}else g[k]=t.value;return}
   if(t.id==='fLogo'&&t.files[0]){lerURL(t.files[0]).then(async src=>{const im=new Image();im.src=src;await im.decode();const k=Math.min(1,400/im.width,200/im.height),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);snap();state.marca={...marca(),logo:c.toDataURL('image/png')};commit();toast('Logo salvo')});return}
