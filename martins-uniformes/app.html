@@ -636,6 +636,7 @@ svg.prod.mock{cursor:zoom-in}
 .alrt{width:100%;text-align:left;border:0;background:none;font:inherit;color:inherit;border-top:1px solid var(--grey-soft);grid-template-columns:34px minmax(0,1fr) auto!important}.alrt[data-a]{cursor:pointer}.alrt[data-a]:hover{background:var(--grey-soft)}
 .alrt-go{align-self:center;font-size:15px!important;font-weight:700;color:var(--blue)!important;white-space:nowrap}.g-link{cursor:pointer}.g-link:hover{background:var(--grey-soft)}
 @media (max-width:640px){.alrt{grid-template-columns:34px minmax(0,1fr)!important}.alrt-go{grid-column:2}}
+.pos-ed{border-top:1px solid var(--grey-soft);padding:8px 0;display:grid;gap:6px}.pos-ed b{font-size:17px}.pos-ed .novo-in{max-width:520px}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -995,7 +996,14 @@ function desc(p,id){const r=new Set([id]);let ch=true;while(ch){ch=false;p.steps
 function lv(p){const o={};topo(p).forEach(s=>o[s.id]=s.deps.length?1+Math.max(...s.deps.map(d=>o[d]??0)):0);return o}
 const filhos=(p,id)=>p.steps.filter(s=>s.deps.includes(id));
 const LADOS={esq:'Manga esquerda',dir:'Manga direita',ambas:'As duas mangas'};
-const localTxt=x=>x.parte==='Mangas'&&x.lado?LADOS[x.lado]:x.parte;
+const POS0={Frente:['Peito esquerdo','Centro do peito','Peito direito','Centro da frente','Canto inferior esquerdo','Canto inferior direito','Frente inteira'],
+  Costas:['Nuca','Centro alto das costas','Centro das costas','Canto inferior esquerdo','Canto inferior direito','Costas inteira'],
+  Mangas:['Ombro (parte alta)','Meio da manga','Perto da barra'],Gola:['Frente da gola','Atrás da gola'],Peitilho:['Peitilho'],
+  Traseiro:['Bolso traseiro esquerdo','Bolso traseiro direito','Centro do traseiro'],Pernas:['Coxa esquerda','Coxa direita','Canela esquerda','Canela direita'],Bolsos:['Bolso esquerdo','Bolso direito'],'Cós':['Frente do cós','Trás do cós']};
+const posDe=pt=>((typeof state!=='undefined'&&state&&state.posicoes)||POS0)[pt]||[];
+const localTxt=x=>{if(x.parte==='Mangas')return (x.lado?LADOS[x.lado]:'Mangas')+(x.pos?` · ${x.pos.toLowerCase()}`:'');if(!x.pos)return x.parte;
+  const a=String(x.pos).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase(),b=String(x.parte).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+  return a.includes(b)||/peito|nuca|bolso|coxa|canela|gola|cos\b/.test(a)?x.pos:`${x.parte} · ${x.pos.toLowerCase()}`};
 let RC={};
 const usa=(R,x)=>x.partes&&x.partes.length?x.partes:(R.partes||[]);
 function rota(p0,pers,opc,cores){pers=pers||[];opc=opc||[];
@@ -1113,7 +1121,7 @@ function logExemplo(T){state.log=[];{const combos=[['Polo Amsterdã','Pregar man
     state.log.push({ts:T-2*DIA,por:'Helena',tipo:'troca',f:'levar',de:'roger',para:'layara',ped:'0412',cli:'Construtora Horizonte',step:'Levar para Parceiro DTF'});
     state.log.sort((a,b)=>a.ts-b.ts)}}
 const TESC0={conferir:30,vias:15,arte_prep:60,arte_aprov:240,arte_env:10,comprar:30,levar:60,entregar:60};
-const CFG0=()=>({insV:1,marca:{...MARCA0},termos:TERMOS0.map(x=>[...x]),tamPadrao:{...TAM0},apelidos:{tecido:{},cor:{},prod:{},local:{},serv:{}},nomesV:1,alexV:1,expediente:JSON.parse(JSON.stringify(EXP0)),params:{...PAR},tEsc:{...TESC0},cats:JSON.parse(JSON.stringify(CATS)),fatorEsp:{XXG:1.15},pesos:{...PESO_PARTE},probs:JSON.parse(JSON.stringify(PROBS)),papeis:{...PAPEIS},partesExtra:[...PARTES_COR_EXTRA]});
+const CFG0=()=>({posicoes:JSON.parse(JSON.stringify(POS0)),insV:1,marca:{...MARCA0},termos:TERMOS0.map(x=>[...x]),tamPadrao:{...TAM0},apelidos:{tecido:{},cor:{},prod:{},local:{},serv:{}},nomesV:1,alexV:1,expediente:JSON.parse(JSON.stringify(EXP0)),params:{...PAR},tEsc:{...TESC0},cats:JSON.parse(JSON.stringify(CATS)),fatorEsp:{XXG:1.15},pesos:{...PESO_PARTE},probs:JSON.parse(JSON.stringify(PROBS)),papeis:{...PAPEIS},partesExtra:[...PARTES_COR_EXTRA]});
 function cfgDefaults(s){const d=CFG0();Object.keys(d).forEach(k=>{if(s[k]==null)s[k]=d[k]});Object.keys(TESC0).forEach(k=>{if(s.tEsc[k]==null)s.tEsc[k]=TESC0[k]});Object.keys(PAR).forEach(k=>{if(s.params[k]==null)s.params[k]=PAR[k]})}
 function seed(){seedN=7;const T=now();
   state={v:8,...CFG0(),cores:{...CORES},atrib:{},tipos:JSON.parse(JSON.stringify(TIPOS0)),pessoas:JSON.parse(JSON.stringify(PESSOAS0)),forn:JSON.parse(JSON.stringify(FORN0)),produtos:JSON.parse(JSON.stringify(PRODUTOS0)),pedidos:[],lotes:[],consertos:[],estoque:{...ESTOQUE},seq:421};
@@ -1356,7 +1364,7 @@ function sPedido(id){const ped=pedById(id),i=info(ped),mats=ped.materiais.filter
     ${mats.some(m=>m.st==='comprar'&&m.conf)?avisoEst():''}
     <div class="lib ${lib?'u-ok':'u-warn'}">${ic(lib?'i-check':'i-cadeado')}${lib?'Pode cortar':'Ainda não pode cortar'}</div></div>
   ${envs.length?`<div class="card"><h2>Arte para quem aplica</h2><p style="margin:0 0 6px;color:var(--ink2)">Cada personalização só começa quando a arte chegou em quem aplica.</p>${(()=>{const L=arqsDoPedido(ped);return L.length?`<button class="mbtn neutro2" data-a="arqsPed" data-id="${id}" style="margin:4px 0 8px">${ic('i-lista')}Baixar todos os arquivos (${L.length})</button>`:''})()}
-    ${envs.map(e=>{const fo=isExt(e.z)?fornDe(e.z.posto)[0]:null;const r=resp('arteEnv',{l:e.l.id,s:e.z.id});return `<div class="mat">${ic(tipo(e.z.posto).i)}<div><b>${esc(e.z.nome)} · ${esc(prod(e.l.prod).nome)} ${esc(e.l.cor)}</b><span>Para ${esc(fo?fo.nome:tipo(e.z.posto).nome)}${!e.ok&&r?' · '+esc(r):''}${(e.l.pers||[]).find(x=>x.id===e.z.id)?.desc?`<br>Arte: ${esc((e.l.pers||[]).find(x=>x.id===e.z.id).desc)}`:''}${(()=>{const x=(e.l.pers||[]).find(x=>x.id===e.z.id);if(!x)return '';const tm=tamTxt(x);return `<label class="tam-in">Tamanho: <input class="campo" data-tam="${e.l.id}|${x.id}" value="${esc(x.tam||'')}" placeholder="${esc(tm?tm.t:'ex.: 8 × 8 cm')}"></label>${pzArquivos(e.l,x)}`})()}</span></div>
+    ${envs.map(e=>{const fo=isExt(e.z)?fornDe(e.z.posto)[0]:null;const r=resp('arteEnv',{l:e.l.id,s:e.z.id});return `<div class="mat">${ic(tipo(e.z.posto).i)}<div><b>${esc(e.z.nome)} · ${esc(prod(e.l.prod).nome)} ${esc(e.l.cor)}</b><span>Para ${esc(fo?fo.nome:tipo(e.z.posto).nome)}${!e.ok&&r?' · '+esc(r):''}${(e.l.pers||[]).find(x=>x.id===e.z.id)?.desc?`<br>Arte: ${esc((e.l.pers||[]).find(x=>x.id===e.z.id).desc)}`:''}${(()=>{const x=(e.l.pers||[]).find(x=>x.id===e.z.id);if(!x)return '';const tm=tamTxt(x);return `<label class="tam-in">Posição: <select class="campo" data-pos="${e.l.id}|${x.id}"><option value="">${esc(x.parte==='Mangas'?(LADOS[x.lado]||'Mangas'):x.parte)} (sem detalhe)</option>${[...new Set([...posDe(x.parte),...(x.pos?[x.pos]:[])])].map(v=>`<option ${x.pos===v?'selected':''}>${esc(v)}</option>`).join('')}</select></label><label class="tam-in">Tamanho: <input class="campo" data-tam="${e.l.id}|${x.id}" value="${esc(x.tam||'')}" placeholder="${esc(tm?tm.t:'ex.: 8 × 8 cm')}"></label>${pzArquivos(e.l,x)}`})()}</span></div>
       ${e.ok?`<span class="pill u-ok">${ic('i-check')}Enviada</span>`:`<button class="mbtn" data-a="arteEnv" data-id="${id}" data-l="${e.l.id}" data-s="${e.z.id}" ${ped.arte?'':'disabled style="opacity:.4"'}>Enviei</button>`}</div>`}).join('')}</div>`:''}`}
   <div class="card"><h2>Peças e etapas</h2>${legendaStatus()}${i.ls.filter(l=>!l.rework).map(l=>prodLine(l,ped)+i.ls.filter(r=>r.parent===l.id&&!loteDone(r)).map(r=>prodLine(r,ped)).join('')).join('')}</div>`}
 const ETAPAS=[{nome:'Corte',i:'i-corte',g:['corte']},{nome:'Personalização',i:'i-estampa',g:['pers']},{nome:'Costura',i:'i-maquina',g:['costura']},{nome:'Arremate',i:'i-lupa',t:['arremate']},{nome:'Embalar',i:'i-caixa',t:['embalagem']}];
@@ -1491,6 +1499,9 @@ function cAjustes(){const pr=state.params;
   <div class="card"><h2>Informações importantes do Pedido</h2><p class="dica" style="margin:-4px 0 8px">Textos da página “Antes de aprovar” que vai para o cliente.</p>
     ${(state.termos||TERMOS0).map(([t,d],i)=>`<div class="termo-ed"><input class="campo" data-termo="${i}" data-k="0" value="${esc(t)}"><textarea class="campo" data-termo="${i}" data-k="1" rows="2">${esc(d)}</textarea><button class="x" data-a="termoRm" data-i="${i}">Tirar</button></div>`).join('')}
     <button class="mbtn" data-a="termoAdd">${ic('i-mais')}Adicionar informação</button></div>
+  <div class="card"><h2>Posições de personalização</h2><p class="dica" style="margin:-4px 0 8px">Os lugares que aparecem para escolher em cada parte da peça. Esquerdo e direito = de quem veste.</p>
+    ${Object.entries(state.posicoes||POS0).map(([pt,L])=>`<div class="pos-ed"><b>${esc(pt)}</b><div class="linha-dep">${L.map((v,i)=>`<span class="sk">${esc(v)} <button class="x" data-a="posRm" data-pt="${esc(pt)}" data-i="${i}" aria-label="Tirar ${esc(v)}">×</button></span>`).join('')}</div><div class="novo-in"><input class="campo" id="posN-${esc(pt)}" placeholder="Nova posição em ${esc(pt)}"><button class="mbtn" data-a="posAdd" data-pt="${esc(pt)}">Pôr</button></div></div>`).join('')}
+    <div class="novo-in" style="margin-top:8px"><input class="campo" id="posNP" placeholder="Outra parte da peça (ex.: Capuz)"><button class="mbtn" data-a="posParte">Pôr parte</button></div></div>
   <div class="card"><h2>Tamanho padrão das artes</h2><p class="dica" style="margin:-4px 0 8px">Usado quando o pedido não diz o tamanho. Aparece como “aproximado”.</p>
     ${Object.entries(state.tamPadrao||TAM0).map(([k,v])=>`<label class="aj-row"><span>${esc(k)}</span><input class="campo" data-tampad="${esc(k)}" value="${esc(v)}" style="max-width:200px"></label>`).join('')}</div>
   <div class="card"><h2>Nomes que o sistema aprendeu das fichas</h2><p class="dica" style="margin:-4px 0 8px">Quando a ficha usa outro nome para algo já cadastrado, você ensina uma vez e o sistema lembra.</p>
@@ -1577,7 +1588,7 @@ function sProduto(pid){const p=prod(pid);if(!p)return voltar();const key='P'+p.i
     <div class="novo-in"><input class="campo" id="avN" placeholder="Nome (ex.: Botão)" autocomplete="off"><input class="campo" id="avQ" type="number" step="0.1" min="0" value="1" aria-label="Quantidade por peça" style="max-width:110px"><select class="campo" id="avU" style="max-width:140px"><option value="un">unidades</option><option value="m">metros</option></select><button class="mbtn" data-a="addAv" data-p="${p.id}">Adicionar</button></div></div>
   <div class="card"><h2>Personalização padrão</h2><p class="dica" style="margin:0 0 10px">Já vem marcada no novo pedido. Em cada pedido dá para mudar.</p>
     <div class="linha-dep">${(p.persPadrao||[]).map((x,j)=>`<span class="depc">${ic(tipo(x.tipo).i)}${esc(tNome(x.tipo))} · ${esc(localTxt(x))}<button class="x" data-a="rmPp" data-p="${p.id}" data-j="${j}" aria-label="Tirar" style="padding:0 8px;margin-left:4px">×</button></span>`).join('')||'<span class="dica">Nenhuma</span>'}</div>
-    <div class="novo-in"><select class="campo" id="ppT">${state.tipos.filter(t=>t.grupo==='pers').map(t=>`<option value="${t.id}">${esc(tNome(t.id))}</option>`).join('')}</select><select class="campo" id="ppP">${(p.partes||[]).map(x=>`<option>${esc(x)}</option>`).join('')}</select><select class="campo" id="ppL"><option value="">Lado (se for manga)</option>${Object.entries(LADOS).map(([v,n])=>`<option value="${v}">${n}</option>`).join('')}</select><button class="mbtn" data-a="addPp" data-p="${p.id}">Adicionar</button></div></div>
+    <div class="novo-in"><select class="campo" id="ppT">${state.tipos.filter(t=>t.grupo==='pers').map(t=>`<option value="${t.id}">${esc(tNome(t.id))}</option>`).join('')}</select><select class="campo" id="ppP">${(p.partes||[]).map(x=>`<option>${esc(x)}</option>`).join('')}</select><select class="campo" id="ppL"><option value="">Lado (se for manga)</option>${Object.entries(LADOS).map(([v,n])=>`<option value="${v}">${n}</option>`).join('')}</select><input class="campo" id="ppPos" list="ppPosL" placeholder="Posição (ex.: Peito esquerdo)"><datalist id="ppPosL">${[...new Set((p.partes||[]).flatMap(posDe))].map(v=>`<option value="${esc(v)}">`).join('')}</datalist><button class="mbtn" data-a="addPp" data-p="${p.id}">Adicionar</button></div></div>
   <div class="card"><h2>Modelos</h2><p class="dica" style="margin:0 0 10px">Um modelo acrescenta uma etapa ao roteiro (ex.: Com zíper).</p>
     ${(p.opcoes||[]).map((o,j)=>`<div class="mat">${ic('i-mais')}<div><b>${esc(o.nome)}</b><span>Acrescenta: ${o.steps.map(z=>`${esc(z.nome)} (${esc(tNome(z.posto))}, ${nf(z.min)} min/pç)`).join(', ')}</span></div><button class="x" data-a="rmOpc" data-p="${p.id}" data-j="${j}">Tirar</button></div>`).join('')||'<p class="dica">Nenhum modelo.</p>'}
     <div class="rotulo">Novo modelo</div>
@@ -1692,7 +1703,9 @@ function sNovo(){const w=ui.sheet.w,passos=`<div class="passos">${[1,2,3,4].map(
         <button class="depc" data-a="wPadd" data-k="${k}">${ic('i-mais')}Adicionar</button></div>
         ${it.novaP?`<div class="card" style="margin:10px 0 0;background:var(--bg)"><div class="passo-n">Qual personalização?</div><div class="linha-dep">${state.tipos.filter(t=>t.grupo==='pers').map(t=>`<button class="depc" data-a="wPt" data-k="${k}" data-v="${t.id}" aria-pressed="${it.novaP.tipo===t.id}">${ic(t.i)}${esc(tNome(t.id))}</button>`).join('')}</div>
           <div class="passo-n" style="margin-top:12px">Em qual parte da peça?</div><div class="linha-dep">${(prod(it.prod).partes||[]).map(pp=>`<button class="depc" data-a="wPp" data-k="${k}" data-v="${esc(pp)}" aria-pressed="${it.novaP.parte===pp}">${esc(pp)}</button>`).join('')}</div>
-          ${it.novaP.parte==='Mangas'?`<div class="passo-n" style="margin-top:12px">Qual manga? <span style="font-weight:400">(lado de quem veste)</span></div><div class="linha-dep">${Object.entries(LADOS).map(([v,n])=>`<button class="depc" data-a="wPl" data-k="${k}" data-v="${v}">${n}</button>`).join('')}</div>`:''}</div>`:''}</div>
+          ${it.novaP.parte==='Mangas'?`<div class="passo-n" style="margin-top:12px">Qual manga? <span style="font-weight:400">(lado de quem veste)</span></div><div class="linha-dep">${Object.entries(LADOS).map(([v,n])=>`<button class="depc" data-a="wPl" data-k="${k}" data-v="${v}" aria-pressed="${it.novaP.lado===v}">${n}</button>`).join('')}</div>`:''}
+          ${it.novaP.parte&&(it.novaP.parte!=='Mangas'||it.novaP.lado)?`<div class="passo-n" style="margin-top:12px">Onde exatamente? <span style="font-weight:400">(esquerdo e direito = de quem veste)</span></div><div class="linha-dep">${posDe(it.novaP.parte).map(v=>`<button class="depc" data-a="wPos" data-k="${k}" data-v="${esc(v)}">${esc(v)}</button>`).join('')}</div>
+            <div class="novo-in" style="margin-top:8px"><input class="campo" id="wPosO${k}" placeholder="Outro lugar (ex.: 5 cm acima do bolso)" autocomplete="off"><button class="mbtn" data-a="wPosO" data-k="${k}">Usar</button></div>`:''}</div>`:''}</div>
       <div><div class="passo-n">Quantidade por tamanho</div>
         <div class="linha-dep" style="margin-bottom:10px">${state.cats.map(c=>{const n=sum(c.t.map(z=>it.g[z]||0));return `<button class="depc" data-a="wCat" data-k="${k}" data-v="${c.id}" aria-pressed="${catDe(it).id===c.id}">${c.nome} <small style="font-weight:400">${c.t[0]} a ${c.t[c.t.length-1]}</small>${n?` <span class="tagp" style="padding:0 8px">${n}</span>`:''}</button>`}).join('')}</div>
         <div class="tams">${catDe(it).t.map(s=>`<div class="tam"><b>${s}</b><button class="stp" data-a="wQ" data-k="${k}" data-s="${s}" data-d="-10" aria-label="Menos 10 no ${s}">−</button><input id="q${k}${s}" data-q="${k}" data-s="${s}" inputmode="numeric" value="${it.g[s]||0}" aria-label="Quantidade ${s}"><button class="stp" data-a="wQ" data-k="${k}" data-s="${s}" data-d="10" aria-label="Mais 10 no ${s}">+</button></div>`).join('')}</div>
@@ -1806,12 +1819,13 @@ const casaExato=(txt,lista)=>{const t=semAc(txt);const r=lista.filter(x=>semAc(x
 function prodPorApelido(txt){const id=state.apelidos?.prod?.[semAc(txt)];return id&&prod(id)?id:null}
 function sugereProd(txt){const w=new Set(semAc(txt).split(/[^a-z0-9]+/).filter(Boolean));const c=state.produtos.filter(p=>semAc(p.nome).split(/[^a-z0-9]+/).filter(Boolean).every(x=>w.has(x)));return c.length===1?c[0].id:null}
 const PARTE_DE={'peito':'Frente','peito esq':'Frente','peito dir':'Frente','frente':'Frente','costas':'Costas','nuca':'Costas','manga':'Mangas','mangas':'Mangas','gola':'Gola'};
-function lerLocal(rot,p){const t=semAc(rot).replace(/\s+/g,' ');const lado=/\besq/.test(t)?'esq':/\bdir/.test(t)?'dir':/ambas|as duas/.test(t)?'ambas':null;
+function lerLocal(rot,p){const t=semAc(rot).replace(/\s+/g,' ');{const ex=semAc(expAbrev(rot));const partes0=p?.partes||['Frente','Costas','Mangas','Gola'];const hits=partes0.flatMap(pt=>posDe(pt).filter(v=>semAc(v)===ex).map(v=>({parte:pt,pos:v})));if(hits.length===1)return {...hits[0],certo:true}}const lado=/\besq/.test(t)?'esq':/\bdir/.test(t)?'dir':/ambas|as duas/.test(t)?'ambas':null;
   const partes=p?.partes||['Frente','Costas','Mangas','Gola'];
   if(/^mangas?\b/.test(t)&&partes.includes('Mangas')&&lado)return {parte:'Mangas',lado,certo:true};
   const exato=partes.find(x=>semAc(x)===t);if(exato)return {parte:exato,certo:true};
   const k=Object.keys(PARTE_DE).find(k=>t.startsWith(k));const sug=k&&partes.includes(PARTE_DE[k])?PARTE_DE[k]:null;
-  return {parte:null,sug,lado:sug==='Mangas'?lado:null,certo:false}}
+  const ex=semAc(expAbrev(rot));const sp=sug?posDe(sug).find(v=>semAc(v)===ex||(ex.includes('peito')&&semAc(v).includes('peito')&&((/esq/.test(ex)&&/esq/.test(semAc(v)))||(/dir/.test(ex)&&/dir/.test(semAc(v)))))):null;
+  return {parte:null,sug,sugPos:sp||null,lado:sug==='Mangas'?lado:null,certo:false}}
 function montaItem(F,L){const txt=[F.modeloTxt,L.rot].filter(Boolean).join(' ');const it={fonte:F.arquivo,pag:F.pag,txt:F.produto+(L.rot?' · '+L.rot:''),prod:null,sugP:sugereProd(txt),tecido:null,tecTxt:F.tecidoTxt||'',cor:null,corTxt:F.corTxt||'',
     g:{...L.g},total:L.total,gOk:L.ok,gConf:false,pers:[],obs:(F.obsCorte&&!/^[x\-–—]$/i.test(F.obsCorte.trim()))?'Corte: '+F.obsCorte:'',mock:null};
   it.chaveP=semAc(txt);it.prod=prodPorApelido(txt);if(it.prod)it.prodAp=true;
@@ -1819,7 +1833,7 @@ function montaItem(F,L){const txt=[F.modeloTxt,L.rot].filter(Boolean).join(' ');
   const ext=state.tipos.filter(t=>t.externo||t.grupo==='pers');const tipoTxt=(F.persTxt||'').trim();const tipoOk=tipoTxt?casaExato(tipoTxt,ext.map(t=>t.nome)):null;const apS=state.apelidos.serv[semAc(tipoTxt)];const tId=tipoOk?ext.find(t=>t.nome===tipoOk).id:(apS&&tipo(apS)?apS:null);
   it.pers=(F.locais||[]).map(x=>({rot:x.rot,desc:x.txt,tipo:tId,tipoTxt,parte:null,lado:null,sug:null,conf:false}));if(it.prod)ajustaItemProd(it);return it}
 function ajustaItemProd(it){const p=prod(it.prod);if(!p)return;it.tecido=it.tecTxt?casaExato(it.tecTxt,p.tecidos||[]):null;it.tecNovo=false;it.tecAp=false;if(!it.tecido&&it.tecTxt){const a=state.apelidos.tecido[semAc(it.tecTxt)];if(a&&(p.tecidos||[]).includes(a)){it.tecido=a;it.tecAp=true}}if(!it.tecido&&(p.tecidos||[]).length===1&&!it.tecTxt)it.tecido=p.tecidos[0];
-  it.pers.forEach(x=>{const al=state.apelidos.local[semAc(x.rot)];if(al&&(p.partes||[]).includes(al.parte)){x.parte=al.parte;x.lado=al.lado||null;x.sug=null;x.conf=true;x.ap=true;return}const r=lerLocal(x.rot,p);x.parte=r.certo?r.parte:null;x.lado=r.certo?(r.lado||null):null;x.sug=r.certo?null:r.sug;x.sugLado=r.lado||null;x.conf=r.certo})}
+  it.pers.forEach(x=>{const al=state.apelidos.local[semAc(x.rot)];if(al&&(p.partes||[]).includes(al.parte)){x.parte=al.parte;x.lado=al.lado||null;x.pos=al.pos||null;x.sug=null;x.conf=true;x.ap=true;return}const r=lerLocal(x.rot,p);x.parte=r.certo?r.parte:null;x.lado=r.certo?(r.lado||null):null;x.pos=r.certo?(r.pos||null):null;x.sug=r.certo?null:r.sug;x.sugPos=r.sugPos||null;x.sugLado=r.lado||null;x.conf=r.certo})}
 async function importarFichas(files){toast('Lendo as fichas…',false);let fichas=[];
   try{for(const f of files)fichas.push(await lerFicha(f))}catch(e){toast('Não consegui abrir o leitor de PDF. Verifique a internet e tente de novo.',false);return}
   const G={};fichas.forEach(F=>{const k=F.num||('?'+(F.cliente||F.arquivo));(G[k]=G[k]||[]).push(F)});
@@ -1877,8 +1891,9 @@ function sImp(){const e=ui.sheet,g=e.grupos[e.gi];const pend=impPend(g),ext=stat
     ${!it.gOk&&sum(Object.values(it.g))?`<button class="depc" data-a="impGConf" data-k="${k}" aria-pressed="${it.gConf}" style="margin-top:8px">${ic('i-check')}Confirmo as quantidades (${sum(Object.values(it.g))} peças)</button>`:''}
     ${it.pers.length?`<div class="rotulo">Personalização</div>${it.pers.map((x,j)=>`<div class="imp-pz"><div><b>${esc(x.rot)}:</b> ${esc(x.desc)}</div>
       <div class="linha-dep">${okTag(!!x.tipo,x.tipo?'':'Qual serviço?')}${ext.map(t=>`<button class="depc" data-a="impPT" data-k="${k}" data-j="${j}" data-v="${t.id}" aria-pressed="${x.tipo===t.id}">${ic(t.i)}${esc(t.nome)}</button>`).join('')}</div>
-      ${p?`${x.sug&&!x.parte?`<button class="sug" data-a="impPP" data-k="${k}" data-j="${j}" data-v="${x.sug}" data-l="${x.sugLado||''}">“${esc(x.rot)}” parece ser <b>${esc(x.sug)}${x.sugLado?' · '+LADOS[x.sugLado]:''}</b>. Toque para confirmar</button>`:''}
-      <div class="linha-dep">${okTag(!!x.parte,x.parte?'':'Onde vai?')}${(p.partes||[]).map(pt=>pt==='Mangas'?['esq','dir','ambas'].map(ld=>`<button class="depc" data-a="impPP" data-k="${k}" data-j="${j}" data-v="Mangas" data-l="${ld}" aria-pressed="${x.parte==='Mangas'&&x.lado===ld}">${LADOS[ld]}</button>`).join(''):`<button class="depc" data-a="impPP" data-k="${k}" data-j="${j}" data-v="${esc(pt)}" aria-pressed="${x.parte===pt}">${esc(pt)}</button>`).join('')}</div>`:'<small class="lido">Escolha o produto para ver onde pode ir.</small>'}</div>`).join('')}`:''}
+      ${p?`${x.sug&&!x.parte?`<button class="sug" data-a="impPP" data-k="${k}" data-j="${j}" data-v="${x.sug}" data-l="${x.sugLado||''}" data-pos="${esc(x.sugPos||'')}">“${esc(x.rot)}” parece ser <b>${esc(x.sugPos?localTxt({parte:x.sug,lado:x.sugLado,pos:x.sugPos}):x.sug+(x.sugLado?' · '+LADOS[x.sugLado]:''))}</b>. Toque para confirmar</button>`:''}
+      <div class="linha-dep">${okTag(!!x.parte,x.parte?'':'Onde vai?')}${(p.partes||[]).map(pt=>pt==='Mangas'?['esq','dir','ambas'].map(ld=>`<button class="depc" data-a="impPP" data-k="${k}" data-j="${j}" data-v="Mangas" data-l="${ld}" aria-pressed="${x.parte==='Mangas'&&x.lado===ld}">${LADOS[ld]}</button>`).join(''):`<button class="depc" data-a="impPP" data-k="${k}" data-j="${j}" data-v="${esc(pt)}" aria-pressed="${x.parte===pt}">${esc(pt)}</button>`).join('')}</div>
+      ${x.parte&&posDe(x.parte).length?`<div class="linha-dep"><span class="lido" style="align-self:center">Onde exatamente:</span>${posDe(x.parte).map(v=>`<button class="depc" data-a="impPos" data-k="${k}" data-j="${j}" data-v="${esc(v)}" aria-pressed="${x.pos===v}">${esc(v)}</button>`).join('')}</div>`:''}`:'<small class="lido">Escolha o produto para ver onde pode ir.</small>'}</div>`).join('')}`:''}
     ${it.obs?`<p class="lido" style="margin:10px 0 0">${esc(it.obs)}</p>`:''}</div>`}).join('')}
   ${pend.length?`<div class="aviso">${ic('i-alerta')}Falta confirmar: ${esc(pend.slice(0,6).join(', '))}${pend.length>6?` e mais ${pend.length-6}`:''}.</div>`:''}
   <div class="acoes"><button class="big go" data-a="impCriar" ${pend.length?'disabled':''}>${ic('i-check')}Criar pedido ${esc(g.num||'')}</button></div>`}
@@ -1887,10 +1902,10 @@ function impCriar(){const e=ui.sheet,g=e.grupos[e.gi];if(impPend(g).length)retur
     if(it.tecNovo){if(!p.tecidos.some(t=>semAc(t)===semAc(it.tecido)))p.tecidos.push(it.tecido)}else if(it.tecTxt&&semAc(it.tecTxt)!==semAc(it.tecido)){Ap.tecido[semAc(it.tecTxt)]=it.tecido;if(!p.tecidos.includes(it.tecido))p.tecidos.push(it.tecido)}
     if(it.corNova){if(!state.cores[it.cor])state.cores[it.cor]='#9AA3AD'}else if(it.corTxt&&semAc(it.corTxt)!==semAc(it.cor))Ap.cor[semAc(it.corTxt)]=it.cor;
     if(it.chaveP&&!it.prodAp)Ap.prod[it.chaveP]=it.prod;
-    it.pers.forEach(x=>{if(!x.conf||x.ap===false)Ap.local[semAc(x.rot)]={parte:x.parte,lado:x.parte==='Mangas'?x.lado:null};if(x.tipoTxt&&!state.tipos.some(t=>semAc(t.nome)===semAc(x.tipoTxt)))Ap.serv[semAc(x.tipoTxt)]=x.tipo})});
+    it.pers.forEach(x=>{if(!x.conf||x.ap===false)Ap.local[semAc(x.rot)]={parte:x.parte,lado:x.parte==='Mangas'?x.lado:null,pos:x.pos||null};if(x.tipoTxt&&!state.tipos.some(t=>semAc(t.nome)===semAc(x.tipoTxt)))Ap.serv[semAc(x.tipoTxt)]=x.tipo})});
   const cl=g.cliNovo?garanteCliente(g.cliente,g.cnpj.trim(),g.contato.trim(),null):garanteCliente(g.cliente,g.cnpj.trim(),g.contato.trim(),g.cliId);
   const num=/^\d+$/.test(g.num)&&!pedById(g.num)?g.num:String(state.seq++).padStart(4,'0');if(/^\d+$/.test(num))state.seq=Math.max(state.seq,+num+1);
-  const lines=g.itens.map(it=>({prod:it.prod,cor:it.cor,cores2:[],tecido:it.tecido,opcoes:[],pers:it.pers.map((x,j)=>({tipo:x.tipo,parte:x.parte,lado:x.parte==='Mangas'?x.lado:undefined,desc:x.desc||undefined,rot:x.rot||undefined,id:'pz'+j})),g:{...it.g},qtd:sum(Object.values(it.g)),mock:it.mock,mockG:it.mockG,obs:it.obs}));
+  const lines=g.itens.map(it=>({prod:it.prod,cor:it.cor,cores2:[],tecido:it.tecido,opcoes:[],pers:it.pers.map((x,j)=>({tipo:x.tipo,parte:x.parte,lado:x.parte==='Mangas'?x.lado:undefined,pos:x.pos||undefined,desc:x.desc||undefined,rot:x.rot||undefined,id:'pz'+j})),g:{...it.g},qtd:sum(Object.values(it.g)),mock:it.mock,mockG:it.mockG,obs:it.obs}));
   state.pedidos.push({id:num,cli:cl.id,ficha:g.num||undefined,cliente:cl.nome,contato:g.contato.trim(),cnpj:g.cnpj.trim()||cl.cnpj||'',vendedor:g.vend,chegada:g.chegada||now(),entrega:g.entrega,vias:false,artePrep:false,arte:false,artes:{},materiais:calcMat(lines),concluido:null,fonte:'ficha'});
   lines.forEach((x,i)=>state.lotes.push({id:`${num}-${i+1}`,ped:num,prod:x.prod,cor:x.cor,cores2:[],tecido:x.tecido,opcoes:[],pers:x.pers,qtd:x.qtd,grade:x.g,desm:0,steps:{},rework:false,parent:null,mock:x.mock||undefined,obs:x.obs||undefined}));lines.forEach((x,i)=>{if(x.mockG)guardaMockG(`${num}-${i+1}`,x.mockG)});
   e.grupos.splice(e.gi,1);if(e.grupos.length){e.gi=0;commit();toast(`Pedido ${num} criado. Falta ${e.grupos.length}`)}else{ui.sheet={t:'pedido',id:num};ui.tela='pedidos';commit();toast(`Pedido ${num} criado`)}}
@@ -1966,13 +1981,15 @@ const TERMOS0=[
 const TAM0={Frente:'10 × 10 cm',Costas:'28 × 30 cm',Mangas:'7 × 5 cm',Gola:'5 × 2 cm',Peitilho:'4 × 4 cm'};
 const marca=()=>({...MARCA0,...(state.marca||{})});
 const expAbrev=t=>String(t||'').replace(/\besq\.?(?=\s|$)/gi,'esquerdo').replace(/\bdir\.?(?=\s|$)/gi,'direito').replace(/\s+/g,' ').trim();
-const posTxt=x=>{const base=x.parte==='Mangas'&&x.lado?LADOS[x.lado]:x.parte;if(x.parte==='Mangas')return base;const r=x.rot?expAbrev(x.rot):'';return r&&semAc(r)!==semAc(base)?`${r[0].toUpperCase()+r.slice(1)} (${base.toLowerCase()})`:base};
+const posTxt=x=>{if(x.pos||x.parte==='Mangas')return localTxt(x);const base=x.parte;const r=x.rot?expAbrev(x.rot):'';return r&&semAc(r)!==semAc(base)?`${r[0].toUpperCase()+r.slice(1)} (${base.toLowerCase()})`:base};
 const tamTxt=x=>x.tam?{t:x.tam,aprox:false}:(state.tamPadrao||TAM0)[x.parte]?{t:(state.tamPadrao||TAM0)[x.parte],aprox:true}:null;
 const gradeOrd=l=>sizesAll().filter(z=>(l.grade||{})[z]).map(z=>[z,l.grade[z]]);
 const dataLonga=ts=>ts?new Date(ts).toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'}):'—';
 const dataCurta=ts=>ts?new Date(ts).toLocaleDateString('pt-BR'):'—';
-function pontosPos(x,forma){const ml=['camisetaML','blusa','jaleco'].includes(forma),t=semAc(x.rot||''),out=[];
-  if(x.parte==='Mangas'){const L=ml?[[18,72],[102,72]]:[[24,38],[96,38]];if(x.lado!=='esq')out.push(['F',...L[0]]);if(x.lado!=='dir')out.push(['F',...L[1]])}
+function pontosPos(x,forma){const ml=['camisetaML','blusa','jaleco'].includes(forma),t=semAc(x.pos||x.rot||''),out=[];
+  if(x.pos&&x.parte==='Costas'){const P=/nuca/.test(t)?[60,24]:/alto/.test(t)?[60,36]:/inferior/.test(t)?[/esq/.test(t)?44:76,96]:/inteira/.test(t)?[60,62]:[60,56];out.push(['C',...P]);return out}
+  if(x.pos&&x.parte==='Frente'){const P=/peito/.test(t)?[/esq/.test(t)?72:/dir/.test(t)?48:60,40]:/inferior/.test(t)?[/esq/.test(t)?76:44,96]:/inteira/.test(t)?[60,62]:[60,60];out.push(['F',...P]);return out}
+  if(x.parte==='Mangas'){const L=ml?(/barra/.test(t)?[[12,88],[108,88]]:/ombro/.test(t)?[[26,40],[94,40]]:[[18,72],[102,72]]):(/ombro/.test(t)?[[28,30],[92,30]]:/barra/.test(t)?[[22,44],[98,44]]:[[24,38],[96,38]]);if(x.lado!=='esq')out.push(['F',...L[0]]);if(x.lado!=='dir')out.push(['F',...L[1]])}
   else if(x.parte==='Costas')out.push(['C',60,/nuca/.test(t)?24:50]);
   else if(x.parte==='Gola')out.push(['F',60,15]);
   else if(x.parte==='Peitilho')out.push(['F',60,32]);
@@ -2254,7 +2271,8 @@ const A={
   impCorNova:d=>{const g=ui.sheet.grupos[ui.sheet.gi],it=g.itens[+d.k];g.itens.forEach(o=>{if((o===it||!o.cor)&&semAc(o.corTxt)===semAc(it.corTxt)){o.corNova=true;o.cor=titulo(o.corTxt)}});render()},
   impGConf:d=>{const it=ui.sheet.grupos[ui.sheet.gi].itens[+d.k];it.gConf=!it.gConf;render()},
   impPT:d=>{ui.sheet.grupos[ui.sheet.gi].itens[+d.k].pers[+d.j].tipo=d.v;render()},
-  impPP:d=>{const g=ui.sheet.grupos[ui.sheet.gi],it=g.itens[+d.k],x=it.pers[+d.j];x.parte=d.v;x.ap=false;x.lado=d.v==='Mangas'?(d.l||'ambas'):null;g.itens.forEach(o=>{if(o.prod!==it.prod)return;o.pers.forEach(y=>{if(y!==x&&!y.parte&&semAc(y.rot)===semAc(x.rot)){y.parte=x.parte;y.lado=x.lado;y.ap=false}})});render()},
+  impPos:d=>{const x=ui.sheet.grupos[ui.sheet.gi].itens[+d.k].pers[+d.j];x.pos=x.pos===d.v?null:d.v;x.ap=false;render()},
+  impPP:d=>{const g=ui.sheet.grupos[ui.sheet.gi],it=g.itens[+d.k],x=it.pers[+d.j];const pp=x.parte;x.parte=d.v;x.ap=false;x.lado=d.v==='Mangas'?(d.l||'ambas'):null;x.pos=d.pos||(pp===d.v?x.pos:null)||null;g.itens.forEach(o=>{if(o.prod!==it.prod)return;o.pers.forEach(y=>{if(y!==x&&!y.parte&&semAc(y.rot)===semAc(x.rot)){y.parte=x.parte;y.lado=x.lado;y.pos=x.pos;y.ap=false}})});render()},
   impCriar:()=>impCriar(),
   mockAlvo:d=>{ui.sheet.itens[+d.i].alvo=d.v;render()},
   mockOk:()=>{snap();let n=0;ui.sheet.itens.forEach(m=>{const l=m.alvo&&lote(m.alvo);if(l){setMock(l,m.img,m.g);n++}});ui.sheet=null;commit();toast(`${n} ${n===1?'mockup salvo':'mockups salvos'}`)},
@@ -2297,6 +2315,9 @@ const A={
     else if(k==='fab'){ui.tela='fabrica';ui.fz=v;render();scrollTo(0,0)}
     else if(k==='cad'){ui.tela='cadastros';ui.cad=v;render();scrollTo(0,0)}
     else if(k==='pes'){ui.tela='cadastros';ui.cad='equipe';render();A.pesEd({id:v})}},
+  posRm:d=>{snap();state.posicoes={...(state.posicoes||POS0)};state.posicoes[d.pt]=[...state.posicoes[d.pt]];state.posicoes[d.pt].splice(+d.i,1);commit()},
+  posAdd:d=>{const v=(document.getElementById('posN-'+d.pt)?.value||'').trim();if(!v)return;snap();state.posicoes={...(state.posicoes||POS0)};state.posicoes[d.pt]=[...(state.posicoes[d.pt]||[]),v];commit();toast(`${v} adicionada em ${d.pt}`)},
+  posParte:()=>{const v=(document.getElementById('posNP')?.value||'').trim();if(!v)return;snap();state.posicoes={...(state.posicoes||POS0),[v]:[]};commit()},
   quem:()=>openSheet({t:'quem'}),
   quemSel:d=>{quemSet(d.v);ui.sheet=null;render();tick();toast(`Pronto, este aparelho é de ${quemNome()}`,false)},
   inicio:d=>{nuvemIniciar(d.v)},
@@ -2377,7 +2398,7 @@ const A={
   rmAv:d=>{const p=prod(d.p);snap();p.aviam.splice(+d.j,1);commit()},
   addAv:d=>{const n=(document.getElementById('avN')?.value||'').trim(),q=parseFloat((document.getElementById('avQ')?.value||'').replace(',','.')),u=document.getElementById('avU')?.value||'un';if(!n||isNaN(q)){toast('Escreva o nome e a quantidade',false);return}snap();prod(d.p).aviam.push([n,u,q]);commit();toast(`${n} adicionado`)},
   rmPp:d=>{const p=prod(d.p);snap();p.persPadrao.splice(+d.j,1);commit()},
-  addPp:d=>{const p=prod(d.p),t=document.getElementById('ppT')?.value,pt=document.getElementById('ppP')?.value,ld=document.getElementById('ppL')?.value;if(!t||!pt)return;if(pt==='Mangas'&&!ld){toast('Escolha o lado da manga',false);return}snap();p.persPadrao=p.persPadrao||[];p.persPadrao.push(pt==='Mangas'?{tipo:t,parte:pt,lado:ld}:{tipo:t,parte:pt});commit()},
+  addPp:d=>{const p=prod(d.p),t=document.getElementById('ppT')?.value,pt=document.getElementById('ppP')?.value,ld=document.getElementById('ppL')?.value;if(!t||!pt)return;if(pt==='Mangas'&&!ld){toast('Escolha o lado da manga',false);return}const pos=(document.getElementById('ppPos')?.value||'').trim()||undefined;snap();p.persPadrao=p.persPadrao||[];p.persPadrao.push(pt==='Mangas'?{tipo:t,parte:pt,lado:ld,pos}:{tipo:t,parte:pt,pos});commit()},
   rmOpc:d=>{const p=prod(d.p);snap();p.opcoes.splice(+d.j,1);commit()},
   addOpc:d=>{const p=prod(d.p),g=id=>(document.getElementById(id)?.value||'').trim(),n=g('opN'),en=g('opE'),m=g('opM'),a=g('opA'),pt=g('opP'),mi=parseFloat(g('opMin').replace(',','.'))||1;if(!n||!en){toast('Escreva o nome do modelo e da etapa',false);return}
     snap();p.opcoes=p.opcoes||[];p.opcoes.push({id:uid('o'),nome:n,aviam:[],steps:[{...S(uid('x'),en,m,[p.steps[0].id],mi,{partes:pt?[pt]:[]}),antes:a?[a]:[]}]});commit();toast(`Modelo ${n} adicionado`)},
@@ -2445,8 +2466,10 @@ const A={
   wPadd:d=>{wRead();ui.sheet.w.itens[+d.k].novaP={tipo:null};render()},
   wPrm:d=>{wRead();ui.sheet.w.itens[+d.k].pers.splice(+d.j,1);render()},
   wPt:d=>{wRead();ui.sheet.w.itens[+d.k].novaP.tipo=d.v;render()},
-  wPp:d=>{wRead();const it=ui.sheet.w.itens[+d.k];if(!it.novaP.tipo){ui.sheet.w.err='Escolha primeiro qual personalização';return render()}if(d.v==='Mangas'){it.novaP.parte='Mangas';ui.sheet.w.err='';return render()}it.pers.push({tipo:it.novaP.tipo,parte:d.v});it.novaP=null;ui.sheet.w.err='';render()},
-  wPl:d=>{wRead();const it=ui.sheet.w.itens[+d.k];if(!it.novaP?.tipo)return;it.pers.push({tipo:it.novaP.tipo,parte:'Mangas',lado:d.v});it.novaP=null;ui.sheet.w.err='';render()},
+  wPp:d=>{wRead();const it=ui.sheet.w.itens[+d.k];if(!it.novaP.tipo){ui.sheet.w.err='Escolha primeiro qual personalização';return render()}it.novaP.parte=d.v;it.novaP.lado=null;ui.sheet.w.err='';if(!posDe(d.v).length&&d.v!=='Mangas'){it.pers.push({tipo:it.novaP.tipo,parte:d.v});it.novaP=null}render()},
+  wPl:d=>{wRead();const it=ui.sheet.w.itens[+d.k];if(!it.novaP?.tipo)return;it.novaP.lado=d.v;render()},
+  wPos:d=>{wRead();const it=ui.sheet.w.itens[+d.k],n=it.novaP;if(!n?.parte)return;it.pers.push({tipo:n.tipo,parte:n.parte,lado:n.parte==='Mangas'?n.lado:undefined,pos:d.v});it.novaP=null;render()},
+  wPosO:d=>{const v=(document.getElementById('wPosO'+d.k)?.value||'').trim();wRead();const it=ui.sheet.w.itens[+d.k],n=it.novaP;if(!n?.parte||!v)return;it.pers.push({tipo:n.tipo,parte:n.parte,lado:n.parte==='Mangas'?n.lado:undefined,pos:v});it.novaP=null;render()},
   wRm:d=>{wRead();ui.sheet.w.itens.splice(+d.k,1);render()},
   wCor:d=>{wRead();ui.sheet.w.itens[+d.k].cor=d.c;render()},
   wQ:d=>{wRead();const g=ui.sheet.w.itens[+d.k].g;g[d.s]=Math.max(0,(g[d.s]||0)+(+d.d));render()},
@@ -2456,7 +2479,7 @@ const A={
     if(w.step===2){if(!w.itens.length)w.err='Toque em uma peça para adicionar';else if(w.itens.some(i=>!i.tecido))w.err='Escolha o tecido de cada peça';else if(w.itens.some(i=>i.pers.some(x=>x.parte==='Mangas'&&!x.lado)))w.err='Diga em qual manga vai a personalização';else if(w.itens.some(i=>!i.cor))w.err='Escolha a cor principal de cada peça';else if(w.itens.some(i=>i.novaC2))w.err='Confirme ou cancele a cor que está adicionando';else if(w.itens.some(i=>!sum(sizesAll().map(s=>i.g[s]||0))))w.err='Coloque a quantidade de cada peça'}
     if(w.step===3&&!w.entrega)w.err='Escolha a data de entrega';
     if(!w.err)w.step++;render();const e=document.querySelector('.sheet');if(e&&!w.err)e.scrollTop=0},
-  wCriar:()=>{const w=ui.sheet.w;snap();const id=String(state.seq++).padStart(4,'0');const lines=w.itens.map(it=>({prod:it.prod,cor:it.cor,cores2:JSON.parse(JSON.stringify(it.cores2||[])),tecido:it.tecido,opcoes:[...it.opcoes],pers:it.pers.map((x,j)=>({tipo:x.tipo,parte:x.parte,lado:x.lado,id:'pz'+j})),g:{...it.g},qtd:sum(sizesAll().map(s=>it.g[s]||0))}));
+  wCriar:()=>{const w=ui.sheet.w;snap();const id=String(state.seq++).padStart(4,'0');const lines=w.itens.map(it=>({prod:it.prod,cor:it.cor,cores2:JSON.parse(JSON.stringify(it.cores2||[])),tecido:it.tecido,opcoes:[...it.opcoes],pers:it.pers.map((x,j)=>({tipo:x.tipo,parte:x.parte,lado:x.lado,pos:x.pos,id:'pz'+j})),g:{...it.g},qtd:sum(sizesAll().map(s=>it.g[s]||0))}));
     const cl=garanteCliente(w.cliente,(w.cnpj||'').trim(),(w.contato||'').trim(),w.cli);
     state.pedidos.push({id,cli:cl.id,cliente:cl.nome,contato:(w.contato||'').trim(),cnpj:(w.cnpj||'').trim()||cl.cnpj||'',vendedor:w.vend,chegada:now(),entrega:w.entrega,vias:false,artePrep:false,arte:false,artes:{},materiais:calcMat(lines),concluido:null});
     w.itens.forEach((it,i)=>{if(it.mockG)guardaMockG(`${id}-${i+1}`,it.mockG)});lines.forEach((x,i)=>state.lotes.push({id:`${id}-${i+1}`,ped:id,mock:w.itens[i].mock||undefined,prod:x.prod,cor:x.cor,cores2:x.cores2,tecido:x.tecido,opcoes:x.opcoes,pers:x.pers,qtd:x.qtd,grade:x.g,desm:0,steps:{},rework:false,parent:null}));
@@ -2478,6 +2501,7 @@ document.addEventListener('change',e=>{const t=e.target,d=t.dataset;if(!state)re
   if(t.dataset.marca){snap();state.marca={...marca(),[t.dataset.marca]:t.value.trim()};save();toast('Salvo',false);return}
   if(t.dataset.termo!=null){snap();state.termos=(state.termos||TERMOS0).map(x=>[...x]);state.termos[+t.dataset.termo][+t.dataset.k]=t.value.trim();save();toast('Salvo',false);return}
   if(t.dataset.tampad){snap();state.tamPadrao={...(state.tamPadrao||TAM0),[t.dataset.tampad]:t.value.trim()};save();toast('Salvo',false);return}
+  if(t.dataset.pos!=null&&t.tagName==='SELECT'){const [lid,pid]=t.dataset.pos.split('|');const x=(lote(lid).pers||[]).find(y=>y.id===pid);if(x){snap();x.pos=t.value||undefined;commit();toast('Posição salva',false)}return}
   if(t.dataset.tam){const [lid,pid]=t.dataset.tam.split('|');const x=(lote(lid).pers||[]).find(y=>y.id===pid);if(x){snap();x.tam=t.value.trim()||undefined;save();toast('Tamanho salvo',false)}return}
   if(t.dataset.impg!=null&&ui.sheet&&ui.sheet.t==='imp'){const it=ui.sheet.grupos[ui.sheet.gi].itens[+t.dataset.impg];const v=parseInt(t.value)||0;if(v)it.g[t.dataset.z]=v;else delete it.g[t.dataset.z];it.gOk=false;it.gConf=false;render();return}
   if(t.id==='xFoto'&&t.files&&t.files[0]){eRead();const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const N=240,c=document.createElement('canvas');c.width=c.height=N;const m=Math.min(im.width,im.height);
