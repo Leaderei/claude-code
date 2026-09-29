@@ -15,17 +15,15 @@ Planilha: [Servan — Indicações Vaga Comercial (LP)](https://docs.google.com/
 
 **A) URL limpa (recomendado)** — Netlify Drop
 1. Em `index.html`, troque `COLE_AQUI_A_URL_DO_APPS_SCRIPT` pela URL `/exec`.
-2. Salve o logo da Servan (versão branca/clara, PNG) como `logo-servan.png` na mesma pasta.
-3. Arraste a pasta em https://app.netlify.com/drop → gera o link. Renomeie o subdomínio (ex.: `indique-servan.netlify.app`).
+2. Arraste a pasta em https://app.netlify.com/drop → gera o link. Renomeie o subdomínio (ex.: `indique-servan.netlify.app`).
 
 **B) Zero hospedagem** — o próprio Apps Script serve a página
 1. No Apps Script: **+ → HTML**, nome `index`, cole o conteúdo de `index.html`.
-2. Troque `src="logo-servan.png"` por uma URL pública do logo (sem isso aparece o texto "SERVAN").
-3. **Implantar → Gerenciar implantações → editar → Nova versão**. O link `/exec` já é a LP.
+2. **Implantar → Gerenciar implantações → editar → Nova versão**. O link `/exec` já é a LP.
    Limitação: o Google pode exibir uma faixa "criado por usuário do Apps Script" no topo.
 
-## 3. Ajustar identidade visual
-Cores e fontes ficam no topo do `index.html`, bloco `:root` (`--brand`, `--accent`, `--bg`). Troque pelos hex oficiais da Servan.
+## 3. Identidade visual
+Logo oficial já embutido no HTML. Paleta extraída do logo: petróleo `#18515C`, turquesa `#0A9DA3`, cinza `#5F605F` (bloco `:root` no topo do `index.html`).
 
 ## 4. Teste final
 Envie uma indicação pelo celular → confira a linha na planilha → apague.
