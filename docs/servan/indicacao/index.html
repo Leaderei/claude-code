@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indique para o Servan</title>
+<meta name="description" content="Conhece alguém que combina com o Servan? Indique para a vaga na área comercial.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Conhece alguém que combina com o Servan?">
+<meta property="og:image" content="https://leaderei.github.io/servan/indicacao/logo-servan.png">
+<meta property="og:description" content="Sua indicação pode nos ajudar a encontrar a pessoa certa para crescer junto com o Servan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="logo-servan.png">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="logo">
+      <img src="logo-servan.png" width="169" height="52" alt="Servan Anestesiologia">
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Programa de indicação</p>
+    <h1>Conhece alguém que combina com o Servan?</h1>
+    <p>Estamos buscando um novo talento para integrar nosso time na área comercial.</p>
+    <p>Queremos encontrar alguém que tenha facilidade para se comunicar e criar boas relações. E quem melhor para nos ajudar nessa busca do que as pessoas que já fazem parte da nossa história?</p>
+    <a class="btn" href="#indicar">Indicar agora</a>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <h2>Sua indicação é importante</h2>
+    <p>Se você é sócio ou colaborador do Servan e conhece alguém em quem confia e que acredita ter esse perfil, queremos conhecer essa pessoa.</p>
+    <p>Preencha o formulário com a sua indicação. Nossa equipe dará continuidade ao processo de forma reservada e entrará em contato com a pessoa indicada.</p>
+    <div class="note">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+      <span>As informações são tratadas com sigilo e usadas somente neste processo seletivo.</span>
+    </div>
+  </div>
+</section>
+
+<section id="indicar">
+  <div class="wrap">
+    <div class="card">
+      <form class="lead-form" data-endpoint="https://script.google.com/macros/s/AKfycbweRllh4dYWvUQdYqBitd1mqfgvUgN57IZCG9IzhG-TDoAoUFZmK3RdpVadXjXfFO03Sw/exec" data-success="thanks" novalidate>
+        <fieldset>
+          <legend>Seus dados</legend>
+          <div class="field">
+            <label for="ind_nome">Seu nome</label>
+            <input type="text" id="ind_nome" name="ind_nome" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label id="vinc_lbl">Você é</label>
+            <div class="choices" role="radiogroup" aria-labelledby="vinc_lbl">
+              <label class="choice"><input type="radio" name="ind_vinculo" value="Sócio(a)" required><span>Sócio(a)</span></label>
+              <label class="choice"><input type="radio" name="ind_vinculo" value="Colaborador(a)"><span>Colaborador(a)</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Pessoa indicada</legend>
+          <div class="field">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" name="nome" required>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="whatsapp">WhatsApp</label>
+              <input type="tel" id="whatsapp" name="whatsapp" inputmode="tel" placeholder="(67) 9 0000-0000" required>
+            </div>
+            <div class="field">
+              <label for="email">E-mail <span class="opt">(opcional)</span></label>
+              <input type="email" id="email" name="email">
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="social">LinkedIn ou Instagram <span class="opt">(opcional)</span></label>
+              <input type="text" id="social" name="social" placeholder="link ou @perfil">
+            </div>
+            <div class="field">
+              <label for="atuacao">Onde trabalha hoje <span class="opt">(opcional)</span></label>
+              <input type="text" id="atuacao" name="atuacao" placeholder="empresa ou função">
+            </div>
+          </div>
+          <div class="field">
+            <label for="motivo">Por que essa pessoa combina com o Servan?</label>
+            <textarea id="motivo" name="motivo" placeholder="De onde vocês se conhecem, no que se destaca, como se relaciona com as pessoas…" required></textarea>
+          </div>
+          <div class="field">
+            <label id="sabe_lbl">A pessoa sabe que você está indicando?</label>
+            <div class="choices" role="radiogroup" aria-labelledby="sabe_lbl">
+              <label class="choice"><input type="radio" name="sabe" value="Sim" required><span>Sim</span></label>
+              <label class="choice"><input type="radio" name="sabe" value="Ainda não"><span>Ainda não</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label class="consent">
+            <input type="checkbox" name="consentimento" value="Sim" required>
+            <span>Declaro que compartilho estes dados de boa-fé, somente para este processo seletivo, e estou ciente de que a pessoa indicada poderá ser contatada pela equipe do Servan. <a href="https://servan.com.br/politica-de-privacidade-e-cookies/" target="_blank" rel="noopener">Como usamos os dados</a>.</span>
+          </label>
+        </div>
+
+        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="submit">
+          <button class="btn" type="submit">Enviar indicação</button>
+          <p class="err" role="alert"></p>
+        </div>
+      </form>
+
+      <div class="thanks" id="thanks" aria-live="polite" hidden>
+        <div class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h2>Indicação recebida. Obrigado!</h2>
+        <p>Nossa equipe vai dar continuidade de forma reservada e entrará em contato com a pessoa indicada.</p>
+        <button class="link-btn" type="button" data-reset>Fazer outra indicação</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Sua indicação pode nos ajudar a encontrar a pessoa certa para crescer junto com o Servan.</p>
+    <small>Servan · Campo Grande/MS</small>
+  </div>
+</footer>
+
+<script src="../../assets/js/lead-form.js" defer></script>
+</body>
+</html>
