@@ -32,6 +32,10 @@ function salvarIndicacao(d) {
   if (d.website) return { ok: true }; // honeypot
   if (!d.ind_nome || !d.nome || !d.whatsapp) throw new Error('Campos obrigatórios ausentes');
 
+  // Evita linha duplicada quando a página reenvia após falha de rede
+  const cache = CacheService.getScriptCache();
+  if (d.envio_id && cache.get('envio_' + d.envio_id)) return { ok: true, duplicado: true };
+
   const lock = LockService.getScriptLock();
   lock.waitLock(20000);
   try {
@@ -51,6 +55,7 @@ function salvarIndicacao(d) {
       return typeof v === 'string' && /^[=+\-@0-9(]/.test(v) ? "'" + v.slice(0, 2000) : (v || '').toString().slice(0, 2000);
     });
     sh.appendRow(linha);
+    if (d.envio_id) cache.put('envio_' + d.envio_id, '1', 21600);
   } finally {
     lock.releaseLock();
   }
@@ -67,9 +72,20 @@ function doPost(e) {
   }
 }
 
-// O link antigo (/exec) agora só aponta para a página no GitHub Pages
+// GET /exec?health=1 -> teste de saúde usado pelo monitor do GitHub (não grava nada)
+// GET /exec            -> leva o link antigo para a página no GitHub Pages
 const URL_PAGINA = 'https://leaderei.github.io/pagina-aplicacao/servan/indicacao/';
-function doGet() {
+function doGet(e) {
+  if (e && e.parameter && e.parameter.health) {
+    let res;
+    try {
+      const sh = SpreadsheetApp.openById(SHEET_ID).getSheets()[0];
+      res = { ok: true, linhas: Math.max(sh.getLastRow() - 1, 0) };
+    } catch (err) {
+      res = { ok: false, erro: String(err) };
+    }
+    return ContentService.createTextOutput(JSON.stringify(res)).setMimeType(ContentService.MimeType.JSON);
+  }
   return HtmlService.createHtmlOutput(
     '<p style="font-family:sans-serif">A página mudou de endereço: ' +
     '<a href="' + URL_PAGINA + '" target="_top">clique aqui para indicar</a>.</p>' +
