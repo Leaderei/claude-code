@@ -117,7 +117,7 @@ const PAGINA = `<!doctype html>
   /* ===== CONFIG: URL do app da Web do Apps Script (ver LEIA-ME.md) ===== */
 </style>
 <script>
-  window.SERVAN_ENDPOINT = "COLE_AQUI_A_URL_DO_APPS_SCRIPT";
+  window.SERVAN_ENDPOINT = "https://script.google.com/macros/s/AKfycbweRllh4dYWvUQdYqBitd1mqfgvUgN57IZCG9IzhG-TDoAoUFZmK3RdpVadXjXfFO03Sw/exec";
 </script>
 <style>
   *, *::before, *::after { box-sizing: border-box; }
@@ -180,11 +180,7 @@ const PAGINA = `<!doctype html>
   .choice input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
   .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--muted); font-weight: 400; }
   .consent input { margin-top: 4px; width: 18px; height: 18px; flex: none; accent-color: var(--accent); }
-  .privacy { margin-top: 24px; border-top: 1px solid var(--line); padding-top: 18px; font-size: 14px; color: var(--muted); }
-  .privacy summary { cursor: pointer; font-weight: 600; color: var(--brand); }
-  .privacy ul { padding-left: 18px; margin: 8px 0 0; }
-  .privacy li { margin-bottom: 6px; }
-  .consent a, .privacy a { color: var(--accent); }
+  .consent a { color: var(--accent); }
   .hp { position: absolute; left: -9999px; }
   .err { color: var(--error); font-size: 14px; margin: 8px 0 0; min-height: 1em; }
   .submit { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
@@ -294,7 +290,7 @@ const PAGINA = `<!doctype html>
         <div class="field">
           <label class="consent">
             <input type="checkbox" name="consentimento" value="Sim" required>
-            <span>Declaro que compartilho estes dados de boa-fé, somente para este processo seletivo, e estou ciente de que a pessoa indicada poderá ser contatada pela equipe do Servan. <a href="#privacidade">Como usamos os dados</a>.</span>
+            <span>Declaro que compartilho estes dados de boa-fé, somente para este processo seletivo, e estou ciente de que a pessoa indicada poderá ser contatada pela equipe do Servan. <a href="https://servan.com.br/politica-de-privacidade-e-cookies/" target="_blank" rel="noopener">Como usamos os dados</a>.</span>
           </label>
         </div>
 
@@ -305,18 +301,6 @@ const PAGINA = `<!doctype html>
           <p class="err" id="err" role="alert"></p>
         </div>
       </form>
-
-      <details class="privacy" id="privacidade">
-        <summary>Como usamos os dados (LGPD)</summary>
-        <p>Os dados enviados aqui são usados <strong>exclusivamente</strong> para avaliar a indicação e, se houver interesse, convidar a pessoa indicada a participar do processo seletivo da área comercial do Servan.</p>
-        <ul>
-          <li><strong>Quem trata:</strong> Servan Anestesiologia, com apoio da consultoria que conduz o recrutamento.</li>
-          <li><strong>Transparência:</strong> no primeiro contato, a pessoa indicada é informada de onde vieram seus dados e pode pedir a exclusão a qualquer momento.</li>
-          <li><strong>Prazo:</strong> os dados são mantidos apenas até o encerramento do processo seletivo e depois excluídos.</li>
-          <li><strong>Seleção:</strong> a avaliação considera somente competências e experiência para a função, sem distinção de gênero, idade, raça, estado civil ou qualquer outra característica pessoal.</li>
-          <li><strong>Seus direitos:</strong> para acessar, corrigir ou excluir dados, fale com <a href="mailto:marketing@servan.com.br">marketing@servan.com.br</a>.</li>
-        </ul>
-      </details>
 
       <div class="thanks" id="thanks" aria-live="polite">
         <div class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
@@ -401,8 +385,6 @@ const PAGINA = `<!doctype html>
       if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
   });
-
-  document.querySelector('a[href="#privacidade"]').addEventListener('click', function () { document.getElementById('privacidade').open = true; });
 
   document.getElementById('again').addEventListener('click', function () {
     form.reset(); btn.disabled = false; btn.textContent = 'Enviar indicação';
