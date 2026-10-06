@@ -2,7 +2,7 @@
  * Servan — LP de indicação para vaga comercial
  * Recebe o formulário e grava na planilha "Servan — Indicações Vaga Comercial (LP)".
  *
- * Backend do formulário de https://leaderei.github.io/servan/indicacao/
+ * Backend do formulário de https://leaderei.github.io/pagina-aplicacao/servan/indicacao/
  * Fica em Extensões > Apps Script da planilha, implantado como App da Web
  * (Executar como: Eu · Acesso: Qualquer pessoa). A página faz POST para a URL /exec.
  */
@@ -68,7 +68,7 @@ function doPost(e) {
 }
 
 // O link antigo (/exec) agora só aponta para a página no GitHub Pages
-const URL_PAGINA = 'https://leaderei.github.io/servan/indicacao/';
+const URL_PAGINA = 'https://leaderei.github.io/pagina-aplicacao/servan/indicacao/';
 function doGet() {
   return HtmlService.createHtmlOutput(
     '<p style="font-family:sans-serif">A página mudou de endereço: ' +
