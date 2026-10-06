@@ -1,0 +1,96 @@
+/* ==========================================================
+     IDENTIDADE VISUAL SERVAN — cores extraídas do logo oficial
+     ========================================================== */
+  :root {
+    --brand: #18515C;         /* petróleo Servan (logo) */
+    --brand-ink: #FFFFFF;     /* texto sobre a cor principal */
+    --teal: #0A9DA3;          /* turquesa Servan (logo) — detalhes */
+    --accent: #0A858A;        /* turquesa escurecido p/ botões (contraste AA) */
+    --accent-hover: #18515C;
+    --bg: #F3F7F7;            /* fundo da página */
+    --surface: #FFFFFF;       /* cartões e formulário */
+    --text: #1F2A2D;
+    --muted: #5F605F;         /* cinza Servan (logo) */
+    --line: #D5E0E1;
+    --error: #B42318;
+    --radius: 14px;
+    --font-title: "Exo 2", "Segoe UI", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+  .topbar { background: var(--surface); border-bottom: 4px solid var(--teal); }
+  .topbar .wrap { padding-top: 16px; padding-bottom: 16px; }
+  .logo { display: flex; align-items: center; min-height: 44px; }
+  .logo img { height: 44px; width: auto; display: block; }
+  @media (min-width: 600px) { .logo img { height: 52px; } }
+  .logo .wordmark { font-family: var(--font-title); font-style: italic; font-size: 26px; font-weight: 700; letter-spacing: .04em; color: var(--brand); }
+  header.hero { background: var(--brand); color: var(--brand-ink); padding: 48px 0 64px; position: relative; overflow: hidden; }
+  header.hero::after { content: ""; position: absolute; right: -120px; top: -80px; width: 320px; height: 320px; border-radius: 50%; border: 48px solid var(--teal); opacity: .18; pointer-events: none; }
+  header.hero .wrap { position: relative; z-index: 1; }
+  .eyebrow { color: #7FD3D6; }
+  .logo .wordmark small { display: block; font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; opacity: .75; }
+  .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 12px; }
+  h1 { font-family: var(--font-title); font-weight: 700; font-size: clamp(32px, 7vw, 48px); line-height: 1.1; margin: 0 0 20px; }
+  .hero p { font-size: 18px; opacity: .92; margin: 0 0 14px; max-width: 60ch; }
+  .btn {
+    display: inline-block; background: var(--accent); color: #fff; border: 0; cursor: pointer;
+    font: 600 16px/1 var(--font-body); padding: 17px 30px; border-radius: 999px; text-decoration: none;
+    transition: background .15s ease, transform .15s ease;
+  }
+  .btn:hover { background: var(--accent-hover); }
+  .btn:active { transform: translateY(1px); }
+  .btn:disabled { opacity: .6; cursor: wait; }
+  .hero .btn { margin-top: 18px; }
+
+  section { padding: 56px 0; }
+  #indicar { padding-top: 0; }
+  h2 { font-family: var(--font-title); font-weight: 600; color: var(--brand); font-size: clamp(26px, 5vw, 34px); line-height: 1.2; margin: 0 0 16px; }
+  .intro p { margin: 0 0 14px; }
+  .note { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; margin-top: 22px; font-size: 15px; color: var(--muted); }
+  .note svg { flex: none; margin-top: 3px; color: var(--accent); }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px 22px; }
+  fieldset { border: 0; margin: 0 0 28px; padding: 0; }
+  legend { font-family: var(--font-title); font-size: 21px; font-weight: 600; color: var(--brand); margin-bottom: 14px; padding: 0; }
+  .field { margin-bottom: 16px; }
+  label { display: block; font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+  label .opt { font-weight: 400; color: var(--muted); }
+  input[type=text], input[type=email], input[type=tel], textarea, select {
+    width: 100%; font: 400 16px/1.4 var(--font-body); color: var(--text);
+    background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 13px 14px;
+  }
+  textarea { min-height: 110px; resize: vertical; }
+  input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  .row { display: grid; grid-template-columns: 1fr; gap: 0 14px; }
+  @media (min-width: 600px) { .row { grid-template-columns: 1fr 1fr; } .card { padding: 36px 34px; } }
+  .choices { display: flex; flex-wrap: wrap; gap: 10px; }
+  .choice { position: relative; }
+  .choice input { position: absolute; opacity: 0; inset: 0; }
+  .choice span { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px; font-size: 15px; cursor: pointer; background: #fff; }
+  .choice input:checked + span { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); }
+  .choice input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--muted); font-weight: 400; }
+  .consent input { margin-top: 4px; width: 18px; height: 18px; flex: none; accent-color: var(--accent); }
+  .consent a { color: var(--accent); }
+  .hp { position: absolute; left: -9999px; }
+  .err { color: var(--error); font-size: 14px; margin: 8px 0 0; min-height: 1em; }
+  .submit { display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+  @media (min-width: 600px) { .submit { align-items: flex-start; } }
+
+  .thanks { text-align: center; padding: 48px 22px; }
+  .thanks .check { width: 64px; height: 64px; border-radius: 50%; background: var(--teal); color: #fff; display: grid; place-items: center; margin: 0 auto 18px; }
+  .thanks p { color: var(--muted); max-width: 46ch; margin: 0 auto 20px; }
+  .link-btn { background: none; border: 0; color: var(--accent); font: 600 15px var(--font-body); cursor: pointer; text-decoration: underline; }
+
+  footer { background: var(--brand); color: var(--brand-ink); padding: 40px 0; text-align: center; }
+  footer p { font-family: var(--font-title); font-weight: 600; font-size: 20px; margin: 0; }
+  footer small { display: block; margin-top: 10px; font-size: 13px; opacity: .7; }
