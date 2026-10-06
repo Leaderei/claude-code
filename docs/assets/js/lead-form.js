@@ -40,6 +40,35 @@
     return '';
   }
 
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  /**
+   * Envio resiliente:
+   * 1) até 3 tentativas confirmadas (CORS: o Apps Script responde {"ok":true});
+   * 2) se o navegador bloquear a leitura da resposta, última tentativa em no-cors.
+   * Em falha, o formulário continua preenchido para a pessoa tentar de novo.
+   */
+  function send(endpoint, data) {
+    var body = data.toString();
+    var headers = { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' };
+    function attempt(n) {
+      return fetch(endpoint, { method: 'POST', headers: headers, body: body })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (j && j.ok) return true;
+          throw new Error((j && j.erro) || 'resposta inválida');
+        })
+        .catch(function (e) {
+          if (n < 3) return wait(n * 1500).then(function () { return attempt(n + 1); });
+          if (e instanceof TypeError) {
+            return fetch(endpoint, { method: 'POST', mode: 'no-cors', headers: headers, body: body });
+          }
+          throw e;
+        });
+    }
+    return attempt(1);
+  }
+
   function setup(form) {
     var btn = form.querySelector('[type="submit"]');
     var label = btn.textContent;
@@ -76,13 +105,11 @@
         if (k !== 'website') data.append(k, String(v).trim());
       });
       data.append('pagina', location.pathname);
+      data.append('envio_id', Date.now().toString(36) + Math.random().toString(36).slice(2, 8));
 
       btn.disabled = true;
       btn.textContent = MSG.sending;
-      // no-cors: o Apps Script não devolve CORS; a resposta é opaca
-      fetch(form.dataset.endpoint, { method: 'POST', mode: 'no-cors', body: data })
-        .then(done)
-        .catch(fail);
+      send(form.dataset.endpoint, data).then(done, fail);
     });
 
     if (success) {

@@ -24,3 +24,10 @@ apps-script/               ← backend de cada formulário (cola na planilha, n�
 4. Commit no `main` → no ar em ~1 min em `https://leaderei.github.io/pagina-aplicacao/<cliente>/<pagina>/`.
 
 Páginas têm `noindex` e `robots.txt` bloqueia buscadores: só acessa quem recebe o link.
+
+## Confiabilidade
+
+- **Envio confirmado:** `lead-form.js` só mostra "obrigado" quando o Apps Script responde `{"ok":true}`. Tenta 3 vezes; se falhar, mantém o formulário preenchido e pede para tentar de novo.
+- **Sem duplicidade:** cada envio leva um `envio_id`; o Apps Script ignora reenvios do mesmo id por 6h.
+- **Monitor:** `.github/workflows/monitor.yml` roda a cada 3h (página no ar + `?health=1` na planilha). Falhou → e-mail do GitHub para a conta Leaderei.
+- **Atenção:** o Apps Script roda com a conta de quem implantou (hoje: renan@leaderei.com.br). Se essa conta for desativada, o formulário para. O GitHub pausa monitores agendados após 60 dias sem commits no repositório.

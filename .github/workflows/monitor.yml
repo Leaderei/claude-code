@@ -1,0 +1,35 @@
+# Monitor das landing pages: confere a cada 3h se a página está no ar e se a
+# integração com a planilha responde. Se falhar, o GitHub envia e-mail de alerta.
+name: monitor
+on:
+  schedule:
+    - cron: '17 */3 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main, 'claude/**']
+    paths: ['docs/**', '.github/workflows/monitor.yml']
+
+jobs:
+  servan-indicacao:
+    runs-on: ubuntu-latest
+    env:
+      PAGINA: https://leaderei.github.io/pagina-aplicacao/servan/indicacao/
+      ENDPOINT: https://script.google.com/macros/s/AKfycbweRllh4dYWvUQdYqBitd1mqfgvUgN57IZCG9IzhG-TDoAoUFZmK3RdpVadXjXfFO03Sw/exec
+    steps:
+      - name: Página no ar
+        run: |
+          html=$(curl -fsS --retry 3 --retry-delay 10 "$PAGINA")
+          echo "$html" | grep -q 'class="lead-form"' || { echo "::error::Formulário não encontrado na página"; exit 1; }
+          echo "$html" | grep -qF "$ENDPOINT" || { echo "::error::Página não aponta para o endpoint esperado"; exit 1; }
+          curl -fsS --retry 3 -o /dev/null "${PAGINA%servan/indicacao/}assets/js/lead-form.js"
+          echo "Página e script OK"
+      - name: Integração com a planilha
+        run: |
+          body=$(curl -fsSL --retry 3 --retry-delay 10 "$ENDPOINT?health=1")
+          if echo "$body" | grep -q '"ok":true'; then
+            echo "Planilha OK: $body"
+          elif echo "$body" | grep -q '"ok":false'; then
+            echo "::error::Apps Script não acessa a planilha: $body"; exit 1
+          else
+            echo "::warning::Endpoint no ar, mas sem teste de saúde. Reimplante apps-script/servan-indicacao.gs."
+          fi
